@@ -43,59 +43,59 @@ var keycount = 0;
 
 //Girraffix
 var Wizzurd = new Image();
-Wizzurd.src = "grafix\wizzurd32.png";
+Wizzurd.src = "grafix/wizzurd32.png";
 
 //Ondmg
 var Wizzurd2 = new Image();
-Wizzurd2.src = "grafix\nega-wizzurd32.png";
+Wizzurd2.src = "grafix/nega-wizzurd32.png";
 
 //Enemy1
 var Lavaman = new Image();
-Lavaman.src = "grafix\Lavaman32.png";
+Lavaman.src = "grafix/Lavaman32.png";
 
 //Tenemy
 var Robo = new Image();
-Robo.src = "grafix\nicebot32.png";
+Robo.src = "grafix/nicebot32.png";
 
 //Evil Wizzurd
 var Sorcerorpng = new Image();
-Sorcerorpng.src = "grafix\poison-wizzurd32.png";
+Sorcerorpng.src = "grafix/poison-wizzurd32.png";
 
 //TinyWizard
 var BabyWizard = new Image();
-BabyWizard.src = "grafix\wizzurd16.png";
+BabyWizard.src = "grafix/wizzurd16.png";
 
 //Fire powerup
 var Firebox = new Image();
-Firebox.src = "grafix\redcube19.png";
+Firebox.src = "grafix/redcube19.png";
 
 //Ice powerup
 var Icebox = new Image();
-Icebox.src = "grafix\tealcube19.png";
+Icebox.src = "grafix/tealcube19.png";
 
 //Earth powerup
 var Earthbox = new Image();
-Earthbox.src = "grafix\greencube19.png";
+Earthbox.src = "grafix/greencube19.png";
 
 //lightning powerup
 var Thunderbox = new Image();
-Thunderbox.src = "grafix\bluecube19.png";
+Thunderbox.src = "grafix/bluecube19.png";
 
 //hlightning
 var hlightning = new Image();
-hlightning.src = "grafix\lightning-h.png";
+hlightning.src = "grafix/lightning-h.png";
 
 //vlightning
 var vlightning = new Image();
-vlightning.src = "grafix\lightning-v.png";
+vlightning.src = "grafix/lightning-v.png";
 
 //shlightning
 var shlightning = new Image();
-shlightning.src = "grafix\lightning-h.png";
+shlightning.src = "grafix/lightning-h.png";
 
 //svlightning
 var svlightning = new Image();
-svlightning.src = "grafix\lightning-v.png";
+svlightning.src = "grafix/lightning-v.png";
 
 //Score
 var score = 0;
