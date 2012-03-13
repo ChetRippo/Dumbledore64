@@ -416,7 +416,7 @@ var fireice = {
 			}
 			if(this.frame == 60){
 				for (E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed * 2;
+					AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
 				}
 				this.onScreen = 0;
 				this.state = 0;
