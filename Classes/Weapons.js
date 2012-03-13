@@ -126,13 +126,41 @@ var bullet4 = {
 	
 };
 
+// tinybullet: A basic tiny wizard attack
+var tinybullet = {
+	color: "red",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 4,
+	height: 3,
+	dir: "A",
+
+	// Spawn
+	shoot: function(dir, w, h){
+		this.dir = dir;
+		this.timeLeft = 60;
+		this.height = h;
+		this.width = w;
+		this.x = Bwizz.x;
+		this.y = Bwizz.y;
+	}
+};
+
 function drawBullet(B){
 	if (B.timeLeft > 0){
-		ctx.fillStyle = B.color;
-		ctx.fillRect(B.x - B.width / 2,
-		B.y - B.height / 2,
-		B.width, B.height);
-		if(B.dir == "WA" || B.dir == "SD"){
+		if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
+			ctx.fillStyle = B.color;
+			ctx.fillRect(B.x - B.width / 2,
+			B.y - B.height / 2,
+			B.width, B.height);
+		}
+		else if(B.dir == "WA" || B.dir == "SD"){
+			ctx.fillStyle = B.color;
+				ctx.fillRect(B.x - B.width / 2,
+				B.y - B.height / 2,
+				B.width, B.height);
 			ctx.fillRect(B.x + B.width / 2, B.y + B.height / 2, B.width, B.height);
 			ctx.fillRect(B.x + B.width / 2 + B.width, B.y + B.height / 2 + B.height, B.width, B.height);
 			ctx.fillRect(B.x + B.width / 2 + B.width + B.width,
@@ -140,7 +168,11 @@ function drawBullet(B){
 			ctx.fillRect(B.x + B.width / 2 + B.width + B.width + B.width,
 				B.y + B.height / 2 + B.height + B.height + B.height, B.width, B.height);
 		}
-		if(B.dir == "WD" || B.dir == "AS"){
+		else if(B.dir == "WD" || B.dir == "AS"){
+			ctx.fillStyle = B.color;
+				ctx.fillRect(B.x,
+				B.y - B.height / 2,
+				B.width, B.height);
 			ctx.fillRect(B.x + B.width, B.y - B.height - B.height / 2, B.width, B.height);
 			ctx.fillRect(B.x + B.width + B.width, B.y - B.height - B.height - B.height / 2, B.width, B.height);
 			ctx.fillRect(B.x + B.width + B.width + B.width,
@@ -206,6 +238,53 @@ function Bulletmove(B){
 		B.y -= B.speed;
 	}
 }
+
+// Increment
+function tBulletmove(B){
+	if(collision(B.dir, B, obstacle) || (collision(B.dir, B, obstacleA)) || (collision(B.dir, B, obstacleB))){
+		B.timeLeft = 0;
+	}
+	if(collision(B.dir, B, player)){
+		player.hp-=1;
+		hptimer = 30;
+	}
+	if (B.timeLeft > 0 && B.dir == "W"){
+		B.timeLeft--;
+		B.y -= B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "A"){
+		B.timeLeft--;
+		B.x -= B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "S"){
+		B.timeLeft--;
+		B.y += B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D"){
+		B.timeLeft--;
+		B.x += B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "WA"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y += B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "AS"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y -= B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "SD"){
+		B.timeLeft--;
+		B.x -= B.speed;
+		B.y -= B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "WD"){
+		B.timeLeft--;
+		B.x -= B.speed;
+		B.y += B.speed;
+	}
+}
 // Fire: Damages all enemies in radius
 var fire = {
 	color: "FF6600",
@@ -241,8 +320,8 @@ var fire = {
 			this.onScreen = 0;
 		}
 		else if(this.onScreen ==1){
-			this.width = 32 + (32*this.frame);
-			this.height = 32 + (32*this.frame);
+			this.width = 32 + (16*this.frame);
+			this.height = 32 + (16*this.frame);
 			this.frame++;
 			for (E in Enemies){
 				if(collision(Enemies[E].dir, Enemies[E], this)){
@@ -262,7 +341,7 @@ var fire = {
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 210;
+		this.cd = 300;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
@@ -1907,7 +1986,7 @@ var horil4 = {
 			ctx.globalAlpha = 1;
 			this.width = this.width + (32*this.frame);
 			this.frame++;
-			for(E in AllEnemiesil){
+			for(E in AllEnemies){
 				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					AllEnemies[E].speed = 0;
 				}
@@ -1948,7 +2027,7 @@ var horil5 = {
 			ctx.globalAlpha = 1;
 			this.width = this.width + (32*this.frame);
 			this.frame++;
-			for(E in AllEnemiesil){
+			for(E in AllEnemies){
 				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					AllEnemies[E].speed = 0;
 				}
@@ -1964,11 +2043,11 @@ var horil5 = {
 };
 var webhoril = {1: horil5, 2: horil4, 3: horil3, 4: horil2, 5: horil};
 var webvertil = {1: vertil5, 2: vertil4, 3: vertil3, 4: vertil2, 5: vertil};
-var AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror};
 var icelightning = {
 	color: "00CCFF",
 	cd: 0,
 	timeLeft: 0,
+	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz},
 	tick: function(){
 		if(this.cd>0){
 			this.cd-=1;
@@ -1987,88 +2066,101 @@ var icelightning = {
 			vertil3.split = 0;
 			vertil4.split = 0;
 			vertil5.split = 0;
+			horil.onScreen = 0;
+			horil2.onScreen = 0;
+			horil3.onScreen = 0;
+			horil4.onScreen = 0;
+			horil5.onScreen = 0;
+			vertil.onScreen = 0;
+			vertil2.onScreen = 0;
+			vertil3.onScreen = 0;
+			vertil4.onScreen = 0;
+			vertil5.onScreen = 0;
+			this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz};
 		}
 	},
 	// Slow all enemies in radius
 	effect: function(){
+	if(this.timeLeft>0){
 		for(A in webvertil){
-			for(E in AllEnemiesil){
-				if(collision(AllEnemiesil[E].dir, AllEnemiesil[E], webvertil[A])){
+			for(E in this.AllEnemiesil){
+				if(collision(this.AllEnemiesil[E].dir, this.AllEnemiesil[E], webvertil[A])){
 					//Spawn more webs
-					if(horil2.onScreen == 0 && horil5.split == 0){
-						horil2.x = AllEnemiesil[E].x;
-						horil2.y = AllEnemiesil[E].y;
+					if(horil2.onScreen == 0 && horil2.split == 0){
+						horil2.x = this.AllEnemiesil[E].x;
+						horil2.y = this.AllEnemiesil[E].y;
 						horil2.frame = 0;
 						horil2.onScreen = 1;
 						horil2.split = 1;
-						delete AllEnemiesil[E];
+						delete this.AllEnemiesil[E];
 					}
 					else if(horil3.onScreen == 0 && horil3.split == 0){
-						horil3.x = AllEnemiesil[E].x;
-						horil3.y = AllEnemiesil[E].y;
+						horil3.x = this.AllEnemiesil[E].x;
+						horil3.y = this.AllEnemiesil[E].y;
 						horil3.frame = 0;
 						horil3.onScreen = 1;
 						horil3.split = 1;
-						delete AllEnemiesil[E];
+						delete this.AllEnemiesil[E];
 					}
 					else if(horil4.onScreen == 0 && horil4.split == 0){
-						horil4.x = AllEnemiesil[E].x;
-						horil4.y = AllEnemiesil[E].y;
+						horil4.x = this.AllEnemiesil[E].x;
+						horil4.y = this.AllEnemiesil[E].y;
 						horil4.frame = 0;
 						horil4.onScreen = 1;
 						horil4.split = 1;
-						delete AllEnemiesil[E];
+						delete this.AllEnemiesil[E];
 					}
 					else if(horil5.onScreen == 0 && horil5.split == 0){
-						horil5.x = AllEnemiesil[E].x;
-						horil5.y = AllEnemiesil[E].y;
+						horil5.x = this.AllEnemiesil[E].x;
+						horil5.y = this.AllEnemiesil[E].y;
 						horil5.frame = 0;
 						horil5.onScreen = 1;
 						horil5.split = 1;
-						delete AllEnemiesil[E];
+						delete this.AllEnemiesil[E];
 					}
 				}
 			}
 		}
 		for(A in webhoril){
-			for(E in AllEnemiesil){
-				if(collision(AllEnemiesil[E].dir, AllEnemiesil[E], webhoril[A])){
+			for(E in this.AllEnemiesil){
+				if(collision(this.AllEnemiesil[E].dir, this.AllEnemiesil[E], webhoril[A])){
 					//Spawn more webs
 					if(vertil2.onScreen == 0 && vertil2.split == 0){
-						vertil2.x = AllEnemiesil[E].x;
-						vertil2.y = AllEnemiesil[E].y;
+						vertil2.x = this.AllEnemiesil[E].x;
+						vertil2.y = this.AllEnemiesil[E].y;
 						vertil2.frame = 0;
 						vertil2.onScreen = 1;
 						vertil2.split = 1;
-						delete AllEnemiesil[E];
+						delete this.AllEnemiesil[E];
 					}
 					else if(vertil3.onScreen == 0 && vertil3.split == 0){
-						vertil3.x = AllEnemiesil[E].x;
-						vertil3.y = AllEnemiesil[E].y;
+						vertil3.x = this.AllEnemiesil[E].x;
+						vertil3.y = this.AllEnemiesil[E].y;
 						vertil3.frame = 0;
 						vertil3.onScreen = 1;
 						vertil3.split = 1;
-						delete AllEnemiesil[E];
+						delete this.AllEnemiesil[E];
 					}
 					else if(vertil4.onScreen == 0 && vertil4.split == 0){
-						vertil4.x = AllEnemiesil[E].x;
-						vertil4.y = AllEnemiesil[E].y;
+						vertil4.x = this.AllEnemiesil[E].x;
+						vertil4.y = this.AllEnemiesil[E].y;
 						vertil4.frame = 0;
 						vertil4.onScreen = 1;
 						vertil4.split = 1;
-						delete AllEnemiesil[E];
+						delete this.AllEnemiesil[E];
 					}
 					else if(vertil5.onScreen == 0 && vertil5.split == 0){
-						vertil5.x = AllEnemiesil[E].x;
-						vertil5.y = AllEnemiesil[E].y;
+						vertil5.x = this.AllEnemiesil[E].x;
+						vertil5.y = this.AllEnemiesil[E].y;
 						vertil5.frame = 0;
 						vertil5.onScreen = 1;
 						vertil5.split = 1;
-						delete AllEnemiesil[E];
+						delete this.AllEnemiesil[E];
 					}
 				}
 			}
 		}
+	}
 	},
 		
 	// Spawn
@@ -2082,8 +2174,9 @@ var icelightning = {
 		horil.y = player.y
 		horil.frame = 0;
 		horil.onScreen = 1;
-		this.cd = 900;
-		this.timeLeft = 450;
+		this.cd = 600;
+		this.timeLeft = 300;
+		this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz};
 	}
 	}
 	

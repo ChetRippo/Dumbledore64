@@ -139,6 +139,87 @@ var TenemyB = {
 	}
 };
 
+// Baby Wizard :]
+var Bwizz = {
+	x: 2000,
+	y: 0,
+	width: 16,
+	height: 16,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	respawn: 1500,
+	dir: "W",
+	rp: 1000,
+	onScreen: 0,
+	cd: 30,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
+	},
+	fire: function(){
+		if(this.cd<= 0 && this.movement == true){
+			if(this.dir == "W" || this.dir == "S"){
+				tinybullet.shoot(this.dir, 2, 16);
+				this.cd = 150;
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				tinybullet.shoot(this.dir, 16, 2);
+				this.cd = 150;
+			}
+			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
+				tinybullet.shoot(this.dir, 2, 2);
+				this.cd = 150;
+			}
+		}
+		else{
+			this.cd-=1;
+		}
+	}
+};
+/*
+// Baby Maker 5000
+var Spawner = {
+	x: 2000,
+	y: 0,
+	width: 64,
+	height: 64,
+	speed: 2,
+	speed2: 1,
+	dirct: 0,
+	respawn: 2000,
+	dir: "W",
+	rp: 2000,
+	onScreen: 0,
+	cd: 30,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
+	},
+	fire: function(){
+		if(this.cd<= 0){
+			if(this.dir == "W" || this.dir == "S"){
+				tinybullet.shoot(this.dir, 2, 16);
+				this.cd = 150;
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				tinybullet.shoot(this.dir, 16, 2);
+				this.cd = 150;
+			}
+			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
+				tinybullet.shoot(this.dir, 2, 2);
+				this.cd = 150;
+			}
+		}
+		else{
+			this.cd-=1;
+		}
+	}
+};
+*/
+
 // Sorceror
 var Sorceror = {
 	x: 2000,
@@ -154,8 +235,10 @@ var Sorceror = {
 	hptimer: 0,
 	movement: false,
 	cd: 0,
+	spawned: 60,
 	rp: 900,
 	onScreen: 0,
+	reverse: 0,
 	// Draws the enemy on the canvas when called
 	draw: function(){
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
@@ -261,6 +344,8 @@ var Sorceror = {
 			this.hp = 3;
 			this.onScreen = 1;
 			this.cd = 0;
+			this.reverse = 0;
+			this.spawned = 60;
 			if((Math.floor(Math.random() * 3) + 1) == 1){
 				this.spell = "Fire";
 			}
@@ -317,6 +402,9 @@ var Sorceror = {
 		}
 	},
 	AI: function(){
+		if(this.spawned > 0){
+			this.spawned-=1;
+		}
 		if(this.hptimer > 0){
 			this.hptimer-=1;
 		}
@@ -334,19 +422,28 @@ var Sorceror = {
 			if((Math.abs(xdiff) < 128) && (Math.abs(ydiff) < 128) && this.cd <= 0){
 				this.cast();
 			}
+			if(this.cd <= 0){
+				this.reverse = 0;
+			}
 			else if(!(this.cd <= 0)){
 				this.cd-=1;
+				this.reverse = 1;
 			}
 		}
 		else if(this.spell == "Lightning"){
 			if(this.y <= player.y + sLightning.hheight/2 && this.y >= player.y){
 				this.cast();
 			}
+			if(this.cd <= 0){
+				this.reverse = 0;
+			}
 			else if(!(this.cd <= 0)){
 				this.cd-=1;
+				this.reverse = 1;
 			}
 		}
-		if(collision(this.dir, this, obstacle) || collision(this.dir, this, obstacleA) || collision(this.dir, this, obstacleB)){
+		if(collision(this.dir, this, obstacle) || collision(this.dir, this, obstacleA) || collision(this.dir, this, obstacleB) || 
+			(this.spawned <=0 && this.x <= 8) || (this.spawned<=0&&this.x >= 792) || (this.spawned<=0&&this.y <= 8) || (this.spawned<=0&&this.y >= 570)){
 			if(this.dir == "W"){
 				this.dir = "D";
 				this.dirct = 20;
@@ -394,28 +491,68 @@ var Sorceror = {
 		}
 		else if(this.dirct == 0){
 			if(xdiff < 4 && ydiff < 4){
-				this.dir = "SD";
+				if(this.reverse == 0){
+					this.dir = "SD";
+				}
+				else{	
+					this.dir = "WA";
+				}
 			}
 			else if(xdiff < 4 && ydiff > 4){
-				this.dir = "WD";
+				if(this.reverse == 0){
+					this.dir = "WD";
+				}
+				else{
+					this.dir = "AS";
+				}
 			}
 			else if(xdiff > 4 && ydiff < 4){
-				this.dir = "AS";
+				if(this.reverse == 0){
+					this.dir = "AS";
+				}
+				else{
+					this.dir = "WD";
+				}
 			}
 			else if (xdiff > 4 && ydiff > 4){
-				this.dir = "WA";
+				if(this.reverse == 0){
+					this.dir = "WA";
+				}
+				else{
+					this.dir = "SD";
+				}
 			}
 			else if (xdiff == 4 && ydiff > 4){
-				this.dir = "S";
+				if(this.reverse == 0){
+					this.dir = "S";
+				}
+				else{
+					this.dir = "W";
+				}
 			}
 			else if(xdiff == 4 && ydiff < 4){
-				this.dir = "W";
+				if(this.reverse == 0){
+					this.dir = "W";
+				}
+				else{
+					this.dir = "S";
+				}
 			}
 			else if(xdiff < 4 && ydiff == 4){
-				this.dir = "A";
+				if(this.reverse == 0){
+					this.dir = "A";
+				}
+				else{
+					this.dir = "D";
+				}
 			}
 			else{
-				this.dir = "D";
+				if(this.reverse == 0){
+					this.dir = "D";
+				}
+				else{
+					this.dir = "A";
+				}
 			}
 		}
 		else{
@@ -424,8 +561,8 @@ var Sorceror = {
 	}
 };
 
-var Enemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB};
-var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror};
+var Enemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Bwizz};
+var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz};
 
 // onHit: Paramaterized
 // Hit by bullet

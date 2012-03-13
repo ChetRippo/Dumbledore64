@@ -14,23 +14,15 @@
 
 */
 /*
-	Version 0.3.4 Changes:
-		-Supports up to 4 score markers now
-		-Kirby style element combinations. Supports fire, ice, fire + ice, fire + fire, ice + ice
-		-Added Earth element and all earth combos (earth, earth + earth, earth + ice, earth + fire)
-		-Organized into separate files
-		-Fixed pickup bugs
-		-Added enemy Sorceror, casts fire or ice
-		-Fixed some collision bugs
-		-"Q" button drops most recently obtained spell
-		-Fixed Frozen Fireball boundaries and bug where enemies weren't slowed
-		-Thunder moves
-		
+	Version 0.3.5 Changes:
+		-Random bugfixes (Frozen Web, Diagonal shooting, etc.)
+		-Sorceror now runs away after casting fire or lightning
+		-Boxes now give points when you have full spell slots
+		-Spell Balancing
+		-Added tiny enemy that shoots tiny laser
 	TODO:
 		-Spells IP
-		-More enemies and AI IP - Sorceror run when spell on cd
-		-Fix diagonal shots WD AS
-		-Fix Frozen Web redos
+		-More enemies and AI IP
 */
 
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
@@ -68,6 +60,10 @@ Robo.src = "grafix\\nicebot32.png";
 //Evil Wizzurd
 var Sorcerorpng = new Image();
 Sorcerorpng.src = "grafix\\poison-wizzurd32.png";
+
+//TinyWizard
+var BabyWizard = new Image();
+BabyWizard.src = "grafix\\wizzurd16.png";
 
 //Fire powerup
 var Firebox = new Image();
@@ -154,7 +150,8 @@ var player = {
 		|| collision(EnemyA.dir, EnemyA, this) || collision(EnemyB.dir, EnemyB, this) || collision(this.dir, this, EnemyB)
 		|| collision(this.dir, this, EnemyC)  || collision(EnemyC.dir, EnemyC, this) || collision(Tenemy.dir, Tenemy, this)
 		|| collision(this.dir, this, Tenemy) || collision(TenemyA.dir, TenemyA, this) || collision(this.dir, this, TenemyA)
-		|| collision(TenemyB.dir, TenemyB, this) || collision(this.dir, this, TenemyB) || collision(Sorceror.dir, Sorceror, this) || collision(this.dir, this, Sorceror)){
+		|| collision(TenemyB.dir, TenemyB, this) || collision(this.dir, this, TenemyB) || collision(Sorceror.dir, Sorceror, this) || collision(this.dir, this, Sorceror)
+		|| collision(Bwizz.dir, Bwizz, this) || collision(this.dir, this, Bwizz)){
 		this.hp-=1;
 		hptimer = 30;
 	}
@@ -296,6 +293,38 @@ var blueCube = {
 // If you pick it up
 function pickup(C){
 	if(collision(player.dir, player, C)){
+		if((spell1 != "N/A") && (spell2 != "N/A")){
+			if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
+				marker4.points = "25";
+				marker4.mult = 1;
+				marker4.x = player.x;
+				marker4.y = player.y;
+				marker4.timeLeft = 20;
+			}
+			else if(marker.x != -100 && marker2.x != -100){
+				marker3.points = "25";
+				marker3.mult = 1;
+				marker3.x = player.x;
+				marker3.y = player.y;
+				marker3.timeLeft = 20;
+			}
+			else if(marker.x != -100){
+				marker2.points = "25";
+				marker2.mult = 1;
+				marker2.x = player.x;
+				marker2.y = player.y;
+				marker2.timeLeft = 20;
+			}
+			else{
+				marker.points = "25";
+				marker.mult = 1;
+				marker.x = player.x;
+				marker.y = player.y;
+				marker.timeLeft = 20;
+			}
+			score+=25;
+			currpts = "25";
+		}
 		C.onHit();
 	}
 }
@@ -907,6 +936,17 @@ setInterval(function(){
 		Sorceror.spawn();
 		Sorceror.AI();
 		move(Sorceror);
+		
+		Bwizz.draw();
+		AI(Bwizz);
+		move(Bwizz);
+		Bwizz.fire();
+		//Will be different
+		spawn(Bwizz);
+		
+		//Bwizz bullet
+		tBulletmove(tinybullet);
+		drawBullet(tinybullet);
 		
 		drawMarker(marker);
 		moveMarker(marker);
