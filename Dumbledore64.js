@@ -51,7 +51,7 @@ Wizzurd2.src = "grafix/nega-wizzurd32.png";
 
 //Enemy1
 var Lavaman = new Image();
-Lavaman.src = "grafix/Lavaman32.png";
+Lavaman.src = "grafix/lavaman32.png";
 
 //Tenemy
 var Robo = new Image();
