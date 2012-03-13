@@ -1,0 +1,34 @@
+
+	Version 0.3.4 Changes:
+		-Supports up to 4 score markers now
+		-Kirby style element combinations. Supports fire, ice, fire + ice, fire + fire, ice + ice
+		-Added Earth element and all earth combos (earth, earth + earth, earth + ice, earth + fire)
+		-Organized into separate files
+		-Fixed pickup bugs
+		-Added enemy Sorceror, casts fire or ice
+		-Fixed some collision bugs
+		-"Q" button drops most recently obtained spell
+		-Fixed Frozen Fireball boundaries and bug where enemies weren't slowed
+		-Thunder moves
+
+**********************************************************************************************************
+
+Have you ever wanted to be just like Dumbledore? Well now you can with this AMAZING wizard simulator!
+Originally released for the Nintendo 64, this lifetime classic is now available at your leisure! All you need to do is click on the html!
+It's that simple!
+
+
+Controls:
+W: Move up
+A: Move left
+S: Move down
+D: move right
+
+Arrow keys: Shoot Dumblebeam
+
+Spacebar: Use spell
+
+Q: Drop most recently obtained spell
+
+How to play: Kill enemies! Acquire points! Pick up boxes to get elements! Each element corresponds to a unique spell,
+and you can combine up to 2 elements for MORE unique spells!!!
