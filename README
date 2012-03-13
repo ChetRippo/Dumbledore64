@@ -1,15 +1,10 @@
 
-	Version 0.3.4 Changes:
-		-Supports up to 4 score markers now
-		-Kirby style element combinations. Supports fire, ice, fire + ice, fire + fire, ice + ice
-		-Added Earth element and all earth combos (earth, earth + earth, earth + ice, earth + fire)
-		-Organized into separate files
-		-Fixed pickup bugs
-		-Added enemy Sorceror, casts fire or ice
-		-Fixed some collision bugs
-		-"Q" button drops most recently obtained spell
-		-Fixed Frozen Fireball boundaries and bug where enemies weren't slowed
-		-Thunder moves
+Version 0.3.5 Changes:
+	-Random bugfixes (Frozen Web, Diagonal shooting, etc.)
+	-Sorceror now runs away after casting fire or lightning
+	-Boxes now give points when you have full spell slots
+	-Spell Balancing
+	-Added tiny enemy that shoots tiny laser
 
 **********************************************************************************************************
 
