@@ -1,10 +1,8 @@
 
-Version 0.3.5 Changes:
-	-Random bugfixes (Frozen Web, Diagonal shooting, etc.)
-	-Sorceror now runs away after casting fire or lightning
-	-Boxes now give points when you have full spell slots
-	-Spell Balancing
-	-Added tiny enemy that shoots tiny laser
+Version 0.3.6 Changes:
+		-Added Menus
+		-Modified Sorceror AI
+		-Added High Scores
 
 **********************************************************************************************************
 

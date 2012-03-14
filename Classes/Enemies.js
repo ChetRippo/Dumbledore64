@@ -411,7 +411,7 @@ var Sorceror = {
 		var xdiff = player.x - this.x;
 		var ydiff = player.y - this.y;
 		if(this.spell == "Ice"){
-			if(this.x > 0 && this.y > 0 && this.cd <=0){
+			if(this.x > 32 && this.y > 32 && this.x < 768 && this.y < 560 && this.cd <=0){
 				this.cast();
 			}
 			else if(!(this.cd <=0)){
@@ -419,7 +419,8 @@ var Sorceror = {
 			}
 		}
 		else if(this.spell == "Fire"){
-			if((Math.abs(xdiff) < 128) && (Math.abs(ydiff) < 128) && this.cd <= 0){
+			if((Math.abs(xdiff) < 128) && (Math.abs(ydiff) < 128) && this.cd <= 0
+				&& this.x > 32 && this.x < 768 && this.y > 32 && this.y < 560){
 				this.cast();
 			}
 			if(this.cd <= 0){
@@ -431,7 +432,8 @@ var Sorceror = {
 			}
 		}
 		else if(this.spell == "Lightning"){
-			if(this.y <= player.y + sLightning.hheight/2 && this.y >= player.y){
+			if(this.y <= player.y + sLightning.hheight/2 && this.y >= player.y && this.y> 32 && this.y < 560
+				&& this.x > 32 && this.x < 768){
 				this.cast();
 			}
 			if(this.cd <= 0){

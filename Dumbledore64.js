@@ -14,24 +14,87 @@
 
 */
 /*
-	Version 0.3.5 Changes:
-		-Random bugfixes (Frozen Web, Diagonal shooting, etc.)
-		-Sorceror now runs away after casting fire or lightning
-		-Boxes now give points when you have full spell slots
-		-Spell Balancing
-		-Added tiny enemy that shoots tiny laser
+	Version 0.3.6 Changes:
+		-Added Menus
+		-Modified Sorceror AI
+		-Added High Scores
 	TODO:
 		-Spells IP
 		-More enemies and AI IP
+		-Back button in high scores
+		-High Score access in main menu
 */
 
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
+
 // Canvas, Frames per Second, KeysDown, Global vars
 var canvas = document.createElement("canvas");
 canvas.width = 800;
 canvas.height = 576;
 document.body.appendChild(canvas);
 var ctx = canvas.getContext("2d");
+var cX = new Number();
+var cY = new Number();
+var hX = new Number();
+var hY = new Number();
+var STATE = 0;
+var nu = 0;
+var hs = 0;
+canvas.addEventListener("mousedown", getPosition, false);
+canvas.addEventListener("mousemove", getPositionhover, false);
+
+var highscore1 = $.jStorage.get("highscore1");
+if(!highscore1){
+		var highscore1 = 0;
+		$.jStorage.set("highscore1",highscore1);}
+var highscore2 = $.jStorage.get("highscore2");
+if(!highscore2){
+		var highscore2 = 0;
+		$.jStorage.set("highscore2",highscore2);}
+var highscore3 = $.jStorage.get("highscore3");
+if(!highscore3){
+		var highscore3 = 0;
+		$.jStorage.set("highscore3",highscore3);}
+var highscore4 = $.jStorage.get("highscore4");
+if(!highscore4){
+		var highscore4 = 0;
+		$.jStorage.set("highscore4",highscore4);}
+var highscore5 = $.jStorage.get("highscore5");
+if(!highscore5){
+		var highscore5 = 0;
+		$.jStorage.set("highscore5",highscore5);}
+
+function getPosition(event){
+    if (event.x != undefined && event.y != undefined){
+         cX = event.x;
+         cY = event.y;
+        }
+        else // Firefox method to get the position
+        {
+          cX = event.clientX + document.body.scrollLeft +
+              document.documentElement.scrollLeft;
+          cY = event.clientY + document.body.scrollTop +
+              document.documentElement.scrollTop;
+        }
+        cX -= canvas.offsetLeft;
+        cY -= canvas.offsetTop;
+}
+function getPositionhover(event){
+    if (event.x != undefined && event.y != undefined){
+		 hX = event.x;
+         hY = event.y;
+        }
+        else // Firefox method to get the position
+        {
+		  hX = event.clientX + document.body.scrollLeft +
+              document.documentElement.scrollLeft;
+          hY = event.clientY + document.body.scrollTop +
+              document.documentElement.scrollTop;
+        }
+		hX -= canvas.offsetLeft;
+        hY -= canvas.offsetTop;
+}
+
 var FPS = 30;
 var keysDown = {};
 var cd = 0;
@@ -107,7 +170,106 @@ var currpts = 0;
 addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
 addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
 
-
+//------------------------------------------------- Menu ----------------------------------------------------------------------------//
+var Menu = {
+	x: canvas.width/2,
+	y: canvas.height/2,
+	width: 150,
+	height: 30,
+	draw: function(){
+		ctx.fillStyle = "black";
+		ctx.font = "18pt Arial";
+		ctx.fillText("New Game", this.x-this.width/2, this.y-this.height/2);
+		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + this.height);
+		ctx.fillText("Credits", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
+		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y && hY>=this.y-this.height*7/6){
+			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6, this.width, this.height);
+		}		
+		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y && cY>=this.y-this.height*7/6){
+			STATE = 1;
+		}
+		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + this.height && hY>=this.y-this.height*7/6 + this.height){
+			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + this.height, this.width, this.height);
+		}		
+		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + this.height&& cY>=this.y-this.height*7/6 + this.height){
+			STATE = 2;
+		}
+		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + 2*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
+			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 2*this.height, this.width, this.height);
+		}		
+		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 2*this.height&& cY>=this.y-this.height*7/6 + 2*this.height){
+			STATE = 3;
+		}
+	}
+};
+var Info = {
+	x: canvas.width/25,
+	y: canvas.height/8,
+	width: 20,
+	height: 20,
+	bx: 400-50,
+	by: 560,
+	draw: function(){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Have you ever wanted to be just like Dumbledore?", this.x-this.width/2, this.y-this.height/2); 
+		ctx.fillText("Well now you can with this AMAZING wizard simulator!", this.x-this.width/2, this.y+2*this.height/2);
+		ctx.fillText("Originally released for the Nintendo 64,", this.x-this.width/2, this.y+5*this.height/2);
+		ctx.fillText("this lifetime classic is now available at your leisure!",  this.x-this.width/2, this.y+8*this.height/2);
+		ctx.fillStyle = "black";
+		ctx.fillText("Controls:", this.x-this.width/2, this.y+11*this.height/2);
+		ctx.fillText("W: Move up", this.x-this.width/2, this.y+14*this.height/2);
+		ctx.fillText("A: Move left", this.x-this.width/2, this.y+17*this.height/2);
+		ctx.fillText("S: Move down", this.x-this.width/2, this.y+20*this.height/2);
+		ctx.fillText("D: move right", this.x-this.width/2, this.y+23*this.height/2);
+		ctx.fillText("Arrow keys: Shoot Dumblebeam", this.x-this.width/2, this.y+26*this.height/2);
+		ctx.fillText("Spacebar: Use spell", this.x-this.width/2, this.y+29*this.height/2);
+		ctx.fillText("Q: Drop most recently obtained spell", this.x-this.width/2, this.y+32*this.height/2);
+		ctx.fillStyle = "black";
+		ctx.fillText("How to play: ", this.x-this.width/2, this.y+35*this.height/2);
+		ctx.fillText("Kill enemies! Acquire points! Pick up boxes to get elements!", this.x-this.width/2, this.y+38*this.height/2);
+		ctx.fillText("Each element corresponds to a unique spell, and you can combine", this.x-this.width/2, this.y+41*this.height/2);
+		ctx.fillText("up to 2 elements for MORE unique spells!!!", this.x-this.width/2, this.y+44*this.height/2);
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Back", this.bx, this.by);
+		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
+			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
+		}		
+		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			STATE = 0;
+		}
+}
+};
+var Credits = {
+	x: 300,
+	y: canvas.height/8,
+	width: 20,
+	height: 20,
+	bx: 400-50,
+	by: 560,
+	draw: function(){
+		ctx.fillStyle = "black";
+		ctx.font = "18pt Arial";
+		ctx.fillText("Credits", this.x, this.y-this.height/2); 
+		ctx.font = "16pt Arial";
+		ctx.fillText("Creator/Developer:", this.x-this.width/2, this.y+4*this.height/2);
+		ctx.fillText("Brett Davis", this.x-this.width/2, this.y+7*this.height/2);
+		ctx.fillText("Art:",  this.x-this.width/2, this.y+12*this.height/2);
+		ctx.fillText("Kyle Fleischer", this.x-this.width/2, this.y+15*this.height/2);
+		ctx.fillText("Sound and Javascript Master:", this.x-this.width/2, this.y+20*this.height/2);
+		ctx.fillText("Dave Gedarovich", this.x-this.width/2, this.y+23*this.height/2);
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Back", this.bx, this.by);
+		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
+			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
+		}		
+		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			STATE = 0;
+		}
+}
+};
 //------------------------------------------------- Player --------------------------------------------------------------------------//
 // Player
 var player = {
@@ -776,7 +938,71 @@ function gameOver(){
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "black";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Score: " + score, 400, 288);
+	ctx.fillText("Score: " + score, 400, 144);
+	if(highscore1 < score && nu == 1){
+		$.jStorage.set("highscore5",highscore4);
+		highscore5 = highscore4;
+		$.jStorage.set("highscore4",highscore3);
+		highscore4 = highscore3;
+		$.jStorage.set("highscore3",highscore2);
+		highscore3 = highscore2;
+		$.jStorage.set("highscore2",highscore1);
+		highscore2 = highscore1;
+		$.jStorage.set("highscore1",score);
+		highscore1 = score;
+		hs = 1;
+		nu = 0;
+	}
+	else if(highscore2 < score && nu == 1){
+		$.jStorage.set("highscore5",highscore4);
+		highscore5 = highscore4;
+		$.jStorage.set("highscore4",highscore3);
+		highscore4 = highscore3;
+		$.jStorage.set("highscore3",highscore2);
+		highscore3 = highscore2;
+		$.jStorage.set("highscore2",score);
+		highscore2 = score;
+		hs = 1;
+		nu = 0;
+	}
+	else if(highscore3 < score && nu == 1){
+		$.jStorage.set("highscore5",highscore4);
+		highscore5 = highscore4;
+		$.jStorage.set("highscore4",highscore3);
+		highscore4 = highscore3;
+		$.jStorage.set("highscore3",score);
+		highscore3 = score;
+		hs = 1;
+		nu = 0;
+	}
+	else if(highscore4 < score && nu == 1){
+		$.jStorage.set("highscore5",highscore4);
+		highscore5 = highscore4;
+		$.jStorage.set("highscore4",score);
+		highscore4 = score;
+		hs = 1;
+		nu = 0;
+	}
+	else if(highscore5 < score && nu == 1){
+		$.jStorage.set("highscore5",score);
+		highscore5 = score;
+		hs = 1;
+		nu = 0;
+	}
+	if(hs == 1){
+		ctx.fillStyle = "red";
+		ctx.font = "18pt Arial";
+		ctx.fillText("New High Score!!", 400, 64);
+	}
+	ctx.fillStyle = "black";
+	ctx.font = "18pt Arial";
+	ctx.fillText("High Scores:", 400, 208);
+	ctx.fillText("1st: " + highscore1, 400, 240);
+	ctx.fillText("2nd: " + highscore2, 400, 272);
+	ctx.fillText("3rd: " + highscore3, 400, 304);
+	ctx.fillText("4th: " + highscore4, 400, 336);
+	ctx.fillText("5th: " + highscore5, 400, 368);
+		
 }
 
 // Big-Bang
@@ -784,188 +1010,203 @@ setInterval(function(){
 	// Clear the canvas so things won't be repeated if moved
 	clear();
 	// Get the key actions
-	if(player.hp <= 0){
+	if(STATE == 0){
+		Menu.draw();
+	}
+	else if(STATE == 2){
+		Info.draw();
+	}
+	else if(STATE == 3){
+		Credits.draw();
+	}
+	else if(STATE == 4){
 		gameOver();
 	}
-	else{
-		keys();
-		multiply();
-		SCORE();
-		// Calling the draw functions
-		player.draw();
-		player.onhit();
-		
-		redCube.draw();
-		pickup(redCube);
-		
-		tealCube.draw();
-		pickup(tealCube);
-		
-		blueCube.draw();
-		pickup(blueCube);
-		
-		greenCube.draw();
-		pickup(greenCube);
-		
-		obstacle.draw();
-		obstacleA.draw();
-		obstacleB.draw();
-		UI();
-		
-		drawBullet(bullet);
-		Bulletmove(bullet);
-		
-		drawBullet(bullet2);
-		Bulletmove(bullet2);
-		
-		drawBullet(bullet3);
-		Bulletmove(bullet3);
-		
-		drawBullet(bullet4);
-		Bulletmove(bullet4);
-		
-		fire.draw();
-		fire.move();
-		fire2.draw();
-		fire2.move();
-		
-		fireice.draw();
-		fireice.move();
-		
-		ice.draw();
-		ice.move();
-		ice.effect();
-		ice2.draw();
-		ice2.move();
-		ice2.effect();
-		
-		earth.draw();
-		earth.move();
-		earth2.draw();
-		earth2.move();
-		
-		iceheal.tick();
-		fireheal.tick();
-		lightningheal.tick();
-		
-		lightning.draw();
-		lightning.effect();
-		
-		lightning12.draw();
-		lightning12.effect();
-		
-		lightning2.draw();
-		lightning2.effect();
-		
-		lightning22.draw();
-		lightning22.effect();
-		
-		lightning23.draw();
-		lightning23.effect();
-		
-		firelightning.draw();
-		firelightning.effect();
-		firelightningf1.draw();
-		firelightningf1.move();
-		firelightningf2.draw();
-		firelightningf2.move();
-		firelightningf3.draw();
-		firelightningf3.move();
-		firelightningf4.draw();
-		firelightningf4.move();
-		
-		icelightning.tick();
-		icelightning.effect();
-		horil.draw();
-		vertil.draw();
-		horil2.draw();
-		vertil2.draw();
-		horil3.draw();
-		vertil3.draw();
-		horil4.draw();
-		vertil4.draw();
-		horil5.draw();
-		vertil5.draw();
-		
-		sIce.draw();
-		sIce.move();
-		sIce.effect();
-		
-		sFire.draw();
-		sFire.move();
-		
-		sLightning.draw();
-		sLightning.effect();
-		
-		Enemy.draw();
-		spawn(Enemy);
-		AI(Enemy);
-		move(Enemy);
-		
-		EnemyA.draw();
-		spawn(EnemyA);
-		AI(EnemyA);
-		move(EnemyA);
-		
-		EnemyB.draw();
-		spawn(EnemyB);
-		AI(EnemyB);
-		move(EnemyB);
-		
-		EnemyC.draw();
-		spawn(EnemyC);
-		AI(EnemyC);
-		move(EnemyC);
-		
-		Tenemy.draw();
-		spawn(Tenemy);
-		AI(Tenemy);
-		move(Tenemy);
-	
-		TenemyA.draw();
-		spawn(TenemyA);
-		AI(TenemyA);
-		move(TenemyA);
-		
-		TenemyB.draw();
-		spawn(TenemyB);
-		AI(TenemyB);
-		move(TenemyB);
-		
-		Sorceror.draw();
-		Sorceror.spawn();
-		Sorceror.AI();
-		move(Sorceror);
-		
-		Bwizz.draw();
-		AI(Bwizz);
-		move(Bwizz);
-		Bwizz.fire();
-		//Will be different
-		spawn(Bwizz);
-		
-		//Bwizz bullet
-		tBulletmove(tinybullet);
-		drawBullet(tinybullet);
-		
-		drawMarker(marker);
-		moveMarker(marker);
-		
-		drawMarker(marker2);
-		moveMarker(marker2);
-		
-		drawMarker(marker3);
-		moveMarker(marker3);
-		
-		drawMarker(marker4);
-		moveMarker(marker4);
-			
-		// Cooldown calculation
-		if(cd <= 0){
-			cd = cd;
+	else if(STATE == 1){
+		if(player.hp <= 0){
+			STATE = 4;
+			nu = 1;
 		}
 		else{
-			cd--;
+			keys();
+			multiply();
+			SCORE();
+			// Calling the draw functions
+			player.draw();
+			player.onhit();
+		
+			redCube.draw();
+			pickup(redCube);
+		
+			tealCube.draw();
+			pickup(tealCube);
+		
+			blueCube.draw();
+			pickup(blueCube);
+		
+			greenCube.draw();
+			pickup(greenCube);
+		
+			obstacle.draw();
+			obstacleA.draw();
+			obstacleB.draw();
+			UI();
+			
+			drawBullet(bullet);
+			Bulletmove(bullet);
+			
+			drawBullet(bullet2);
+			Bulletmove(bullet2);
+			
+			drawBullet(bullet3);
+			Bulletmove(bullet3);
+		
+			drawBullet(bullet4);
+			Bulletmove(bullet4);
+		
+			fire.draw();
+			fire.move();
+			fire2.draw();
+			fire2.move();
+		
+			fireice.draw();
+			fireice.move();
+		
+			ice.draw();
+			ice.move();
+			ice.effect();
+			ice2.draw();
+			ice2.move();
+			ice2.effect();
+		
+			earth.draw();
+			earth.move();
+			earth2.draw();
+			earth2.move();
+		
+			iceheal.tick();
+			fireheal.tick();
+			lightningheal.tick();
+		
+			lightning.draw();
+			lightning.effect();
+		
+			lightning12.draw();
+			lightning12.effect();
+		
+			lightning2.draw();
+			lightning2.effect();
+		
+			lightning22.draw();
+			lightning22.effect();
+		
+			lightning23.draw();
+			lightning23.effect();
+		
+			firelightning.draw();
+			firelightning.effect();
+			firelightningf1.draw();
+			firelightningf1.move();
+			firelightningf2.draw();
+			firelightningf2.move();
+			firelightningf3.draw();
+			firelightningf3.move();
+			firelightningf4.draw();
+			firelightningf4.move();
+		
+			icelightning.tick();
+			icelightning.effect();
+			horil.draw();
+			vertil.draw();
+			horil2.draw();
+			vertil2.draw();
+			horil3.draw();
+			vertil3.draw();
+			horil4.draw();
+			vertil4.draw();
+			horil5.draw();
+			vertil5.draw();
+		
+			sIce.draw();
+			sIce.move();
+			sIce.effect();
+			
+			sFire.draw();
+			sFire.move();
+			
+			sLightning.draw();
+			sLightning.effect();
+			
+			Enemy.draw();
+			spawn(Enemy);
+			AI(Enemy);
+			move(Enemy);
+			
+			EnemyA.draw();
+			spawn(EnemyA);
+			AI(EnemyA);
+			move(EnemyA);
+		
+			EnemyB.draw();
+			spawn(EnemyB);
+			AI(EnemyB);
+			move(EnemyB);
+		
+			EnemyC.draw();
+			spawn(EnemyC);
+			AI(EnemyC);
+			move(EnemyC);
+		
+			Tenemy.draw();
+			spawn(Tenemy);
+			AI(Tenemy);
+			move(Tenemy);
+	
+			TenemyA.draw();
+			spawn(TenemyA);
+			AI(TenemyA);
+			move(TenemyA);
+		
+			TenemyB.draw();
+			spawn(TenemyB);
+			AI(TenemyB);
+			move(TenemyB);
+		
+			Sorceror.draw();
+			Sorceror.spawn();
+			Sorceror.AI();
+			move(Sorceror);
+		
+			Bwizz.draw();
+			AI(Bwizz);
+			move(Bwizz);
+			Bwizz.fire();
+			//Will be different
+			spawn(Bwizz);
+		
+			//Bwizz bullet
+			tBulletmove(tinybullet);
+			drawBullet(tinybullet);
+		
+			drawMarker(marker);
+			moveMarker(marker);
+		
+			drawMarker(marker2);
+			moveMarker(marker2);
+		
+			drawMarker(marker3);
+			moveMarker(marker3);
+		
+			drawMarker(marker4);
+			moveMarker(marker4);
+			
+			// Cooldown calculation
+			if(cd <= 0){
+				cd = cd;
+			}
+			else{
+				cd--;
+			}
 		}
 	}
 	// End of function, match it up with frames per second defined top
