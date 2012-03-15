@@ -1,8 +1,8 @@
 
-Version 0.3.6 Changes:
-		-Added Menus
-		-Modified Sorceror AI
-		-Added High Scores
+Version 0.4.0 Changes:
+	-Back button in high scores
+	-High Score access in main menu
+	-Added Air element (Forms Air, Air + Air, Air + Ice, Air + Fire, Air + Lightning, Air + Earth)
 
 **********************************************************************************************************
 

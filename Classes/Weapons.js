@@ -285,139 +285,6 @@ function tBulletmove(B){
 		B.y += B.speed;
 	}
 }
-// Fire: Damages all enemies in radius
-var fire = {
-	color: "FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 32,
-	height: 32,
-	frame: 0,
-	cd: 0,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = 1;
-		}
-	},
-	
-	move: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		if(this.frame == 20){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.height = 32;
-			this.onScreen = 0;
-		}
-		else if(this.onScreen ==1){
-			this.width = 32 + (16*this.frame);
-			this.height = 32 + (16*this.frame);
-			this.frame++;
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(collision(Sorceror.dir, Sorceror, this)){
-					Sorceror.onHit();
-				}
-			}
-		}
-	},
-		
-	// Spawn
-	shoot: function(){
-	if(this.cd == 0){
-		this.height = 32;
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.cd = 300;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-	else{
-		return 0;
-	}
-	}
-	
-};
-
-// Fire2: Damages all enemies in radius
-var fire2 = {
-	color: "FF6600",
-	x: -1000,
-	y: -200,
-	timeLeft: 0,
-	width: 32,
-	height: 32,
-	frame: 0,
-	cd: 0,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = 1;
-		}
-	},
-	
-	move: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		if(this.frame == 20){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.height = 32;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 32 + (32*this.frame);
-			this.height = 32 + (32*this.frame);
-			this.frame++;
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(collision(Sorceror.dir, Sorceror, this)){
-					Sorceror.onHit();
-				}
-			}
-		}
-	},
-		
-	// Spawn
-	shoot: function(){
-	if(this.cd == 0){
-		this.height = 32;
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.cd = 420;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-	else{
-		return 0;
-	}
-	}
-	
-};
 
 // Frozen Fireball: Fires a projectile. On hitting an obstacle or wall it explodes forming an ice field.
 var fireice = {
@@ -567,200 +434,6 @@ var fireice = {
 	
 };
 
-// Ice: Slows all enemies by halving their speed
-var ice = {
-	color: "00CCFF",
-	timeLeft: 0,
-	width: 32,
-	height: 32,
-	x: -100,
-	y: -200,
-	frame: 0,
-	cd: 0,
-	onScreen: 0,
-	end: false,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
-		}
-	},
-	
-	move: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		if(this.frame == 150 && this.onScreen == 1){
-			this.width = 32;
-			this.height = 32;
-			this.x = -200;
-			this.y = -100;
-			this.onScreen = 0;
-			this.end = true;
-		}
-		else if(this.onScreen == 1){
-			this.width = this.width + (32*this.frame);
-			this.height = this.height + (32*this.frame);
-			this.frame++;
-		}
-	},
-	// Slow all enemies in radius
-	effect: function(){
-		if(this.onScreen == 1){
-			for (E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2;
-			}
-		}
-		else if(this.end == true){
-			for (E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed*2;
-			}
-			this.frame = 0;
-			this.end = false;
-		}
-	},
-		
-	// Spawn
-	shoot: function(){
-	if(this.cd == 0){
-		this.height = 32;
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.cd = 510;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-	else{
-		return 0;
-	}
-	}
-	
-};
-
-// Ice2: Slows all enemies by halving their speed
-var ice2 = {
-	color: "00CCFF",
-	timeLeft: 0,
-	width: 32,
-	height: 32,
-	x: -100,
-	y: -200,
-	frame: 0,
-	cd: 0,
-	onScreen: 0,
-	end: false,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
-		}
-	},
-	
-	move: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		if(this.frame == 300 && this.onScreen == 1){
-			this.width = 32;
-			this.height = 32;
-			this.x = -200;
-			this.y = -100;
-			this.onScreen = 0;
-			this.end = true;
-		}
-		else if(this.onScreen == 1){
-			this.width = this.width + (32*this.frame);
-			this.height = this.height + (32*this.frame);
-			this.frame++;
-		}
-	},
-	// Slow all enemies in radius
-	effect: function(){
-		if(this.onScreen == 1){
-			for (E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2;
-			}
-		}
-		else if(this.end == true){
-			for (E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed*2;
-			}
-			this.frame = 0;
-			this.end = false;
-		}
-	},
-		
-	// Spawn
-	shoot: function(){
-	if(this.cd == 0){
-		this.height = 32;
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.cd = 510;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-	else{
-		return 0;
-	}
-	}
-	
-};
-
-// Earth: Heals player hp by 1
-var earth = {
-	color: "33CC00",
-	timeLeft: 0,
-	x: -100,
-	y: -200,
-	cd: 0,
-	speed: 4,
-
-	draw: function(){
-		if(this.timeLeft == 0){
-			this.x = -100;
-			this.y = -200;
-		}
-		else{
-			ctx.fillStyle = this.color;
-			ctx.font = "18pt Arial";
-			ctx.fillText("+1", this.x, this.y);
-		}	
-	},
-	
-	move: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		if(this.timeLeft > 0){
-			this.y -= this.speed;
-			this.timeLeft--;}
-	},
-	// Spawn
-	shoot: function(){
-	if(this.cd == 0){
-		this.x = player.x;
-		this.y = player.y;
-		this.cd = 900;
-		this.timeLeft = 15;
-		if(player.hp < 3){
-			player.hp+=1;
-		}
-	}
-	else{
-		return 0;
-	}
-	}	
-};
-
 // Fire and Heal: Heals user by 1 and casts Fire
 var fireheal = {
 	cd: 0,
@@ -807,447 +480,6 @@ var iceheal = {
 			return 0;
 		}
 	}	
-};
-
-// Earth2: Heals player hp by 2
-var earth2 = {
-	color: "33CC00",
-	timeLeft: 0,
-	x: -100,
-	y: -200,
-	cd: 0,
-	speed: 4,
-
-	draw: function(){
-		if(this.timeLeft == 0){
-			this.x = -100;
-			this.y = -200;
-		}
-		else{
-			ctx.fillStyle = this.color;
-			ctx.font = "18pt Arial";
-			ctx.fillText("+2", this.x, this.y);
-		}	
-	},
-	
-	move: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		if(this.timeLeft > 0){
-			this.y -= this.speed;
-			this.timeLeft--;}
-	},
-	// Spawn
-	shoot: function(){
-	if(this.cd == 0){
-		this.x = player.x;
-		this.y = player.y;
-		this.cd = 900;
-		this.timeLeft = 15;
-		if(player.hp < 2){
-			player.hp+=2;
-		}
-		else if(player.hp < 3){
-			player.hp+=1;
-		}
-	}
-	else{
-		return 0;
-	}
-	}	
-};
-
-// Lightning: Creates a small web of lightning
-var lightning = {
-	timeLeft: 0,
-	vwidth: 32,
-	vheight: 800,
-	hwidth: 800,
-	hheight: 32,
-	hx: 400,
-	hy: -2000,
-	vx: -2000,
-	vy: 288,
-	cd: 0,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
-			if(this.vx != -2000){
-				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
-			}
-		}
-	},
-	effect: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		if(this.onScreen == 1){
-			if(this.timeLeft <= 0){
-				this.onScreen = 0;
-				this.vx = -2000;
-				this.hy = -2000
-			}
-			else{
-				this.timeLeft-=1;
-			}
-			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
-						if(lightning12.hy == -2000){
-							lightning12.hy = Enemies[E].y;
-							lightning12.shoot();
-						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						if(lightning12.hy == -2000){
-							lightning12.hy = Sorceror.y;
-							lightning12.shoot();
-						}
-						Sorceror.onHit();
-					}
-				}
-			}
-			
-			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Enemies[E].x
-						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-				}			
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-	if(this.cd == 0){
-		this.hx = 400;
-		this.vx = -2000;
-		this.hy = player.y;
-		this.cd = 450;
-		this.onScreen = 1;
-		this.timeLeft = 120;
-	}
-	else{
-		return 0;
-	}
-	}
-	
-};
-
-// Lightning1-2: Creates a small web of lightning
-var lightning12 = {
-	timeLeft: 0,
-	vwidth: 32,
-	vheight: 800,
-	hwidth: 800,
-	hheight: 32,
-	hx: 400,
-	hy: -2000,
-	vx: -2000,
-	vy: 288,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
-			if(this.vx != -2000){
-				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
-			}
-		}
-	},
-	effect: function(){
-		if(this.onScreen == 1){
-			if(this.timeLeft <= 0){
-				this.onScreen = 0;
-				this.vx = -2000;
-				this.hy = -2000;
-			}
-			else{
-				this.timeLeft-=1;
-			}
-			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						Sorceror.onHit();
-					}
-				}
-			}
-			
-			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Enemies[E].x
-						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-				}			
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.hx = 400;
-		this.vx = -2000;
-		this.onScreen = 1;
-		this.timeLeft = 120;
-	}
-};
-// Lightning2: Creates a large web of lightning
-var lightning2 = {
-	timeLeft: 0,
-	vwidth: 32,
-	vheight: 800,
-	hwidth: 800,
-	hheight: 32,
-	hx: 400,
-	hy: -2000,
-	vx: -2000,
-	vy: 288,
-	cd: 0,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
-			if(this.vx != -2000){
-				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
-			}
-		}
-	},
-	effect: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		if(this.onScreen == 1){
-			if(this.timeLeft <= 0){
-				this.onScreen = 0;
-				this.vx = -2000;
-				this.hy = -2000;
-			}
-			else{
-				this.timeLeft-=1;
-			}
-			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
-						if(lightning22.hy == -2000){
-							lightning22.hy = Enemies[E].y;
-							lightning22.shoot();
-						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						if(lightning22.hy == -2000){
-							lightning22.hy = Sorceror.y;
-							lightning22.shoot();
-						}
-						Sorceror.onHit();
-					}
-				}
-			}
-			
-			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Enemies[E].x
-						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-				}			
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-	if(this.cd == 0){
-		this.hx = 400;
-		this.vx = -2000;
-		this.hy = player.y;
-		this.cd = 900;
-		this.onScreen = 1;
-		this.timeLeft = 240;
-	}
-	else{
-		return 0;
-	}
-	}
-	
-};
-
-// Lightning2-2: Creates a small web of lightning
-var lightning22 = {
-	timeLeft: 0,
-	vwidth: 32,
-	vheight: 800,
-	hwidth: 800,
-	hheight: 32,
-	hx: 400,
-	hy: -2000,
-	vx: -2000,
-	vy: 288,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
-			if(this.vx != -2000){
-				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
-			}
-		}
-	},
-	effect: function(){
-		if(this.onScreen == 1){
-			if(this.timeLeft <= 0){
-				this.onScreen = 0;
-				this.vx = -2000;
-				this.hy = -2000;
-			}
-			else{
-				this.timeLeft-=1;
-			}
-			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
-						if(lightning23.hy == -2000){
-							lightning23.hy = Enemies[E].y;
-							lightning23.shoot();
-						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						if(lightning23.hy == -2000){
-							lightning23.hy = Sorceror.y;
-							lightning23.shoot();
-						}
-						Sorceror.onHit();
-					}
-				}
-			}
-			
-			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Enemies[E].x
-						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-				}			
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.hx = 400;
-		this.vx = -2000;
-		this.onScreen = 1;
-		this.timeLeft = 240;
-	}
-};
-// Lightning2-3: Creates a small web of lightning
-var lightning23 = {
-	timeLeft: 0,
-	vwidth: 32,
-	vheight: 800,
-	hwidth: 800,
-	hheight: 32,
-	htime: 0,
-	hx: 400,
-	hy: -2000,
-	vx: -2000,
-	vy: 288,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
-			if(this.vx != -2000){
-				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
-			}
-		}
-	},
-	effect: function(){
-		if(this.onScreen == 1){
-			if(this.timeLeft <= 0){
-				this.onScreen = 0;
-				this.vx = -2000;
-				this.hy = -2000;
-			}
-			else{
-				this.timeLeft-=1;
-			}
-			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						Sorceror.onHit();
-					}
-				}
-			}
-			
-			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Enemies[E].x
-						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-				}			
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.hx = 400;
-		this.vx = -2000;
-		this.onScreen = 1;
-		this.timeLeft = 240;
-	}
 };
 
 // Lightning and Heal: Heals user by 1 and casts Lightning
@@ -2181,6 +1413,481 @@ var icelightning = {
 	}
 	
 };
+
+// Fire Wave: Damages all enemies in front of the player
+var airfire = {
+	color1: "FF6600",
+	color2: "990000",
+	x: -100,
+	y: -200,
+	ox: -100,
+	oy: -200,
+	width: 32,
+	height: 8,
+	hwidth: 8,
+	hheight: 32,
+	frame: 0,
+	cd: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.frame/2 == Math.round(this.frame/2)){
+				ctx.fillStyle = this.color1;
+			}
+			else{
+				ctx.fillStyle = this.color2;
+			}
+			ctx.fillRect(this.ox - player.width / 2,
+				this.oy - player.height / 2,
+				player.width, player.height);
+			if(this.dir == "W" || this.dir == "S"){
+				ctx.fillRect(this.x - this.width / 2,
+				this.y - this.height / 2,
+				this.width, this.height);
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				ctx.fillRect(this.x - this.hwidth / 2,
+				this.y - this.hheight / 2,
+				this.hwidth, this.hheight);
+			}
+		}
+	},
+	effect: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(this.frame == 5){
+			airfire12.x = this.ox;
+			airfire12.y = this.oy;
+			airfire12.shoot();
+		}
+		if(this.frame == 10){
+			airfire13.x = this.ox;
+			airfire13.y = this.oy;
+			airfire13.shoot();
+		}
+		if(this.frame == 30){
+			this.x = -100;
+			this.y = -200;
+			this.width = 32;
+			this.onScreen = 0;
+			this.height = 8;
+			this.hwidth = 8;
+			this.frame = 0;
+			this.hheight = 32;
+		}
+		else if(this.onScreen ==1){
+			if(this.dir == "S" || this.dir == "W"){
+				this.width = 32 + (4*this.frame);
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				this.hheight = 32 + (4*this.frame);
+			}
+			this.frame++;
+			if (this.dir == "W"){
+				this.y -= this.speed;
+			}
+			else if (this.dir == "A"){
+				this.x -= this.speed;
+			}
+			else if (this.dir == "S"){
+				this.y += this.speed;
+			}
+			else if (this.dir == "D"){
+				this.x += this.speed;
+			}
+			for (E in Enemies){
+				if(collision(Enemies[E].dir, Enemies[E], this)){
+					onHit(Enemies[E], Enemies[E].rp);
+				}
+			}
+			if(collision(Sorceror.dir, Sorceror, this)){
+				Sorceror.onHit();
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+	if(this.cd == 0){
+		this.width = 32;
+		this.x = player.x;
+		this.y = player.y;
+		this.ox = player.x;
+		this.oy = player.y;
+		this.dir = player.dir;
+		this.cd = 60;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+	else{
+		return 0;
+	}
+	}
+};
+var airfire12 = {
+	color1: "FF6600",
+	color2: "990000",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	hwidth: 8,
+	hheight: 32,
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.frame/2 == Math.round(this.frame/2)){
+				ctx.fillStyle = this.color1;
+			}
+			else{
+				ctx.fillStyle = this.color2;
+			}
+			if(this.dir == "W" || this.dir == "S"){
+				ctx.fillRect(this.x - this.width / 2,
+				this.y - this.height / 2,
+				this.width, this.height);
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				ctx.fillRect(this.x - this.hwidth / 2,
+				this.y - this.hheight / 2,
+				this.hwidth, this.hheight);
+			}
+		}
+	},
+	effect: function(){
+		if(this.frame == 30){
+			this.x = -100;
+			this.y = -200;
+			this.width = 32;
+			this.onScreen = 0;
+			this.height = 8;
+			this.hwidth = 8;
+			this.hheight = 32;
+			this.frame = 0;
+			for(E in AllEnemies){
+				AllEnemies[E].speed = AllEnemies[E].speed2*2;
+			}
+		}
+		else if(this.onScreen ==1){
+			if(this.dir == "S" || this.dir == "W"){
+				this.width = 32 + (4*this.frame);
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				this.hheight = 32 + (4*this.frame);
+			}
+			this.frame++;
+			if (this.dir == "W"){
+				this.y -= this.speed;
+			}
+			else if (this.dir == "A"){
+				this.x -= this.speed;
+			}
+			else if (this.dir == "S"){
+				this.y += this.speed;
+			}
+			else if (this.dir == "D"){
+				this.x += this.speed;
+			}
+			for (E in Enemies){
+				if(collision(Enemies[E].dir, Enemies[E], this)){
+					onHit(Enemies[E], Enemies[E].rp);
+				}
+			}
+			if(collision(Sorceror.dir, Sorceror, this)){
+				Sorceror.onHit();
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.width = 32;
+		this.dir = airfire.dir;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+
+var airfire13 = {
+	color1: "FF6600",
+	color2: "990000",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	hwidth: 8,
+	hheight: 32,
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.frame/2 == Math.round(this.frame/2)){
+				ctx.fillStyle = this.color1;
+			}
+			else{
+				ctx.fillStyle = this.color2;
+			}
+			if(this.dir == "W" || this.dir == "S"){
+				ctx.fillRect(this.x - this.width / 2,
+				this.y - this.height / 2,
+				this.width, this.height);
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				ctx.fillRect(this.x - this.hwidth / 2,
+				this.y - this.hheight / 2,
+				this.hwidth, this.hheight);
+			}
+		}
+	},
+	effect: function(){
+		if(this.frame == 30){
+			this.x = -100;
+			this.y = -200;
+			this.width = 32;
+			this.onScreen = 0;
+			this.height = 8;
+			this.hwidth = 8;
+			this.hheight = 32;
+			this.frame = 0;
+			for(E in AllEnemies){
+				AllEnemies[E].speed = AllEnemies[E].speed2*2;
+			}
+		}
+		else if(this.onScreen ==1){
+			if(this.dir == "S" || this.dir == "W"){
+				this.width = 32 + (4*this.frame);
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				this.hheight = 32 + (4*this.frame);
+			}
+			this.frame++;
+			if (this.dir == "W"){
+				this.y -= this.speed;
+			}
+			else if (this.dir == "A"){
+				this.x -= this.speed;
+			}
+			else if (this.dir == "S"){
+				this.y += this.speed;
+			}
+			else if (this.dir == "D"){
+				this.x += this.speed;
+			}
+			for (E in Enemies){
+				if(collision(Enemies[E].dir, Enemies[E], this)){
+					onHit(Enemies[E], Enemies[E].rp);
+				}
+			}
+			if(collision(Sorceror.dir, Sorceror, this)){
+				Sorceror.onHit();
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.width = 32;
+		this.dir = airfire.dir;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+
+// Maelstrom: Slows all enemies on screen and creates a storm around the player
+var airice = {
+	color1: "3300CC",
+	color2: "33CCCC",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 64,
+	height: 64,
+	cd: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			if(this.timeLeft/2 != Math.round(this.timeLeft/2)){
+				ctx.fillStyle = this.color1;
+			}
+			else{
+				ctx.fillStyle = this.color2;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	effect: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(this.timeLeft == 0){
+			this.onScreen = 0;
+			ice.cd = 0;
+		}
+		else if(this.timeLeft<=30){
+			this.height+=4;
+			this.width+=4;
+		}
+		else if(this.timeLeft<=60){
+			this.height-=4;
+			this.width-=4;
+		}
+		else if(this.timeLeft<=90){
+			this.height+=4;
+			this.width+=4;
+		}
+		else if(this.timeLeft <= 120){
+			this.height-=4;
+			this.width-=4;
+		}
+		else{
+			this.height+=4;
+			this.width+=4;
+		}
+		if(this.timeLeft != 0){
+			this.timeLeft-=1;
+			this.x = player.x;
+			this.y = player.y;
+			for (E in Enemies){
+				if(collision(Enemies[E].dir, Enemies[E], this)){
+					onHit(Enemies[E], Enemies[E].rp);
+				}
+				if(collision(Sorceror.dir, Sorceror, this)){
+					Sorceror.onHit();
+				}
+			}
+		}	
+	},
+		
+	// Spawn
+	shoot: function(){
+	if(this.cd == 0){
+		this.x = player.x;
+		this.y = player.y;
+		this.cd = 600;
+		this.onScreen = 1;
+		this.timeLeft = 150;
+		ice.cd = 0;
+		ice.shoot();
+	}
+	else{
+		return 0;
+	}
+	}
+	
+};
+// Gust and Heal: Heals user by 1 and casts Gust
+var airearth = {
+	cd: 0,
+	tick: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+	},
+	shoot: function(){
+		if(this.cd == 0){
+			this.cd = 450;
+			air.cd = 0;
+			earth.cd = 0;
+			air.shoot();
+			earth.shoot();
+			air.cd = 0;
+			earth.cd = 0;
+		}
+		else{
+			return 0;
+		}
+	}	
+};
+// Thunderstorm: Creates a Thunderstorm on the map
+var airlightning = {
+	timeLeft: 0,
+	vwidth: 32,
+	vheight: 800,
+	hwidth: 800,
+	hheight: 32,
+	hx: 400,
+	hy: -2000,
+	vx: -2000,
+	vy: 288,
+	cd: 0,
+	onScreen: 0,
+	LonScreen: 0,
+	frame: 0,
+	
+	draw: function(){
+		if(this.LonScreen == 1){
+			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+			ctx.drawImage(vlightning, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+				this.LonScreen = 0;
+		}
+	},
+	effect: function(){
+		this.frame++;
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(spell != "Thunderstorm"){
+			this.onScreen = 0;
+		}
+		if(this.onScreen == 1 && spell == "Thunderstorm"){
+			if(this.frame/30 == Math.round(this.frame/30)){
+				this.LonScreen = 1;
+				this.timeLeft-=1;
+				var STRIKEx = Math.floor(Math.random() * 736) + 64;
+				var STRIKEy = Math.floor(Math.random() * 512) + 64;
+				this.hy = STRIKEy;
+				this.vx = STRIKEx;
+			}
+			else{
+				this.vx = -2000;
+				this.hy = -2000;
+			}
+			for (E in Enemies){
+				if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
+					onHit(Enemies[E], Enemies[E].rp);
+				}
+				if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
+					Sorceror.onHit();
+				}
+			}			
+			for (E in Enemies){
+				if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+					onHit(Enemies[E], Enemies[E].rp);
+				}
+				if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
+					Sorceror.onHit();
+				}
+			}			
+		}
+	},
+	// Spawn
+	shoot: function(){
+	if(this.cd == 0){
+		this.cd = 60;
+		this.onScreen = 1;
+		this.timeLeft = 360;
+		this.frame = 0;
+		air.cd = 0;
+		air.shoot();
+		air.cd = 0;
+	}
+	else{
+		return 0;
+	}
+	}
+	
+};
 //-------------------------------------------------------------- Enemy Spells -------------------------------------------------------//
 // sIce: Slows player down by halving speed
 var sIce = {
@@ -2191,7 +1898,6 @@ var sIce = {
 	x: -100,
 	y: -200,
 	frame: 0,
-	cd: 0,
 	onScreen: 0,
 	end: false,
 	
@@ -2205,9 +1911,6 @@ var sIce = {
 	},
 	
 	move: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
 		if(this.frame == 150){
 			this.width = 32;
 			this.height = 32;
@@ -2236,20 +1939,13 @@ var sIce = {
 		
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.height = 32;
 		this.width = 32;
 		this.x = Sorceror.x;
 		this.y = Sorceror.y;
-		this.cd = 510;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
-	else{
-		return 0;
-	}
-	}
-	
 };
 
 // sFire: Damages player if in radius
@@ -2261,7 +1957,6 @@ var sFire = {
 	width: 32,
 	height: 32,
 	frame: 0,
-	cd: 0,
 	onScreen: 0,
 	
 	draw: function(){
@@ -2276,9 +1971,6 @@ var sFire = {
 	},
 	
 	move: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
 		if(this.frame == 10){
 			this.x = -100;
 			this.y = -200;
@@ -2301,20 +1993,13 @@ var sFire = {
 		
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.height = 32;
 		this.width = 32;
 		this.x = Sorceror.x;
 		this.y = Sorceror.y;
-		this.cd = 600;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
-	else{
-		return 0;
-	}
-	}
-	
 };
 
 // sLightning: Creates a small web of lightning
@@ -2328,7 +2013,6 @@ var sLightning = {
 	hy: -2000,
 	vx: -2000,
 	vy: 288,
-	cd: 0,
 	onScreen: 0,
 	
 	draw: function(){
@@ -2340,9 +2024,6 @@ var sLightning = {
 		}
 	},
 	effect: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
 		if(this.onScreen == 1){
 			if(this.timeLeft <= 0){
 				this.onScreen = 0;
@@ -2357,7 +2038,6 @@ var sLightning = {
 						hptimer = 30;
 					}
 				}
-				
 			}
 			if(this.hy != -2000){
 				if(player.y <= this.hy + this.hheight && player.y >= this.hy){
@@ -2374,16 +2054,14 @@ var sLightning = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.hx = 400;
 		this.hy = Sorceror.y;
-		this.cd = 450;
 		this.onScreen = 1;
 		this.timeLeft = 150;
 	}
-	else{
-		return 0;
-	}
-	}
-	
 };
+
+//--------------------------------------------------------------- Spell Array -------------------------------------------------------//
+var Weapons = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: tinybullet, 6: fire, 7: fire2, 8: ice, 9: ice2, 10: fireice, 
+				11: earth, 12: earth2, 13: lightning, 14: lightning2, 15: icelightning, 16: firelightning, 17: sFire, 18: sIce, 19: sLightning,
+				20: air, 21: air2, 22: airfire, 23: airice, 24: airlightning};

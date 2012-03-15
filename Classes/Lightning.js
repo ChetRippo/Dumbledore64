@@ -1,0 +1,391 @@
+// Lightning: Creates a small web of lightning
+var lightning = {
+	timeLeft: 0,
+	vwidth: 32,
+	vheight: 800,
+	hwidth: 800,
+	hheight: 32,
+	hx: 400,
+	hy: -2000,
+	vx: -2000,
+	vy: 288,
+	cd: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
+			if(this.vx != -2000){
+				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
+			}
+		}
+	},
+	effect: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(this.onScreen == 1){
+			if(this.timeLeft <= 0){
+				this.onScreen = 0;
+				this.vx = -2000;
+				this.hy = -2000
+			}
+			else{
+				this.timeLeft-=1;
+			}
+			if(this.vx != -2000){
+				for (E in Enemies){
+					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
+						if(lightning12.hy == -2000){
+							lightning12.hy = Enemies[E].y;
+							lightning12.shoot();
+						}
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
+						if(lightning12.hy == -2000){
+							lightning12.hy = Sorceror.y;
+							lightning12.shoot();
+						}
+						Sorceror.onHit();
+					}
+				}
+			}
+			
+			if(this.hy != -2000){
+				for (E in Enemies){
+					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Enemies[E].x
+						}
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Sorceror.x
+						}
+						Sorceror.onHit();
+					}
+				}			
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+	if(this.cd == 0){
+		this.hx = 400;
+		this.vx = -2000;
+		this.hy = player.y;
+		this.cd = 450;
+		this.onScreen = 1;
+		this.timeLeft = 120;
+	}
+	else{
+		return 0;
+	}
+	}
+	
+};
+
+// Lightning1-2: Creates a small web of lightning
+var lightning12 = {
+	timeLeft: 0,
+	vwidth: 32,
+	vheight: 800,
+	hwidth: 800,
+	hheight: 32,
+	hx: 400,
+	hy: -2000,
+	vx: -2000,
+	vy: 288,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
+			if(this.vx != -2000){
+				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
+			}
+		}
+	},
+	effect: function(){
+		if(this.onScreen == 1){
+			if(this.timeLeft <= 0){
+				this.onScreen = 0;
+				this.vx = -2000;
+				this.hy = -2000;
+			}
+			else{
+				this.timeLeft-=1;
+			}
+			if(this.vx != -2000){
+				for (E in Enemies){
+					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
+						Sorceror.onHit();
+					}
+				}
+			}
+			
+			if(this.hy != -2000){
+				for (E in Enemies){
+					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Enemies[E].x
+						}
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Sorceror.x
+						}
+						Sorceror.onHit();
+					}
+				}			
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.hx = 400;
+		this.vx = -2000;
+		this.onScreen = 1;
+		this.timeLeft = 120;
+	}
+};
+// Lightning2: Creates a large web of lightning
+var lightning2 = {
+	timeLeft: 0,
+	vwidth: 32,
+	vheight: 800,
+	hwidth: 800,
+	hheight: 32,
+	hx: 400,
+	hy: -2000,
+	vx: -2000,
+	vy: 288,
+	cd: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
+			if(this.vx != -2000){
+				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
+			}
+		}
+	},
+	effect: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(this.onScreen == 1){
+			if(this.timeLeft <= 0){
+				this.onScreen = 0;
+				this.vx = -2000;
+				this.hy = -2000;
+			}
+			else{
+				this.timeLeft-=1;
+			}
+			if(this.vx != -2000){
+				for (E in Enemies){
+					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
+						if(lightning22.hy == -2000){
+							lightning22.hy = Enemies[E].y;
+							lightning22.shoot();
+						}
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
+						if(lightning22.hy == -2000){
+							lightning22.hy = Sorceror.y;
+							lightning22.shoot();
+						}
+						Sorceror.onHit();
+					}
+				}
+			}
+			
+			if(this.hy != -2000){
+				for (E in Enemies){
+					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Enemies[E].x
+						}
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Sorceror.x
+						}
+						Sorceror.onHit();
+					}
+				}			
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+	if(this.cd == 0){
+		this.hx = 400;
+		this.vx = -2000;
+		this.hy = player.y;
+		this.cd = 900;
+		this.onScreen = 1;
+		this.timeLeft = 240;
+	}
+	else{
+		return 0;
+	}
+	}
+	
+};
+
+// Lightning2-2: Creates a small web of lightning
+var lightning22 = {
+	timeLeft: 0,
+	vwidth: 32,
+	vheight: 800,
+	hwidth: 800,
+	hheight: 32,
+	hx: 400,
+	hy: -2000,
+	vx: -2000,
+	vy: 288,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
+			if(this.vx != -2000){
+				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
+			}
+		}
+	},
+	effect: function(){
+		if(this.onScreen == 1){
+			if(this.timeLeft <= 0){
+				this.onScreen = 0;
+				this.vx = -2000;
+				this.hy = -2000;
+			}
+			else{
+				this.timeLeft-=1;
+			}
+			if(this.vx != -2000){
+				for (E in Enemies){
+					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
+						if(lightning23.hy == -2000){
+							lightning23.hy = Enemies[E].y;
+							lightning23.shoot();
+						}
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
+						if(lightning23.hy == -2000){
+							lightning23.hy = Sorceror.y;
+							lightning23.shoot();
+						}
+						Sorceror.onHit();
+					}
+				}
+			}
+			
+			if(this.hy != -2000){
+				for (E in Enemies){
+					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Enemies[E].x
+						}
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Sorceror.x
+						}
+						Sorceror.onHit();
+					}
+				}			
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.hx = 400;
+		this.vx = -2000;
+		this.onScreen = 1;
+		this.timeLeft = 240;
+	}
+};
+// Lightning2-3: Creates a small web of lightning
+var lightning23 = {
+	timeLeft: 0,
+	vwidth: 32,
+	vheight: 800,
+	hwidth: 800,
+	hheight: 32,
+	htime: 0,
+	hx: 400,
+	hy: -2000,
+	vx: -2000,
+	vy: 288,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy);
+			if(this.vx != -2000){
+				ctx.drawImage(vlightning, this.vx, this.vy - this.vheight/2);
+			}
+		}
+	},
+	effect: function(){
+		if(this.onScreen == 1){
+			if(this.timeLeft <= 0){
+				this.onScreen = 0;
+				this.vx = -2000;
+				this.hy = -2000;
+			}
+			else{
+				this.timeLeft-=1;
+			}
+			if(this.vx != -2000){
+				for (E in Enemies){
+					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
+						Sorceror.onHit();
+					}
+				}
+			}
+			
+			if(this.hy != -2000){
+				for (E in Enemies){
+					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Enemies[E].x
+						}
+						onHit(Enemies[E], Enemies[E].rp);
+					}
+					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Sorceror.x
+						}
+						Sorceror.onHit();
+					}
+				}			
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.hx = 400;
+		this.vx = -2000;
+		this.onScreen = 1;
+		this.timeLeft = 240;
+	}
+};

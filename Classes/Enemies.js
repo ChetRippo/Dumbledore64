@@ -10,6 +10,7 @@ var Enemy = {
 	speed2: 2,
 	dirct: 0,
 	respawn: 1,
+	origrp: 1,
 	rp: 100,
 	onScreen: 0,
 	movement: false,
@@ -30,6 +31,7 @@ var EnemyA = {
 	speed: 4,
 	speed2: 2,
 	respawn: 250,
+	origrp: 250,
 	rp: 100,
 	onScreen: 0,
 	movement: false,
@@ -50,6 +52,7 @@ var EnemyB = {
 	speed: 4,
 	speed2: 2,
 	respawn: 125,
+	origrp: 125,
 	rp: 100,
 	onScreen: 0,
 	movement: false,
@@ -70,6 +73,7 @@ var EnemyC = {
 	speed: 4,
 	speed2: 2,
 	respawn: 300,
+	origrp: 300,
 	rp: 100,
 	onScreen: 0,
 	movement: false,
@@ -90,6 +94,7 @@ var Tenemy = {
 	speed2: 4,
 	dirct: 0,
 	respawn: 600,
+	origrp: 600,
 	rp: 300,
 	onScreen: 0,
 	movement: false,
@@ -110,6 +115,7 @@ var TenemyA = {
 	speed2: 4,
 	dirct: 0,
 	respawn: 1200,
+	origrp: 1200,
 	rp: 300,
 	onScreen: 0,
 	movement: false,
@@ -130,6 +136,7 @@ var TenemyB = {
 	speed2: 4,
 	dirct: 0,
 	respawn: 1800,
+	origrp: 1800,
 	rp: 300,
 	onScreen: 0,
 	movement: false,
@@ -149,6 +156,7 @@ var Bwizz = {
 	speed2: 2,
 	dirct: 0,
 	respawn: 1500,
+	origrp: 1500,
 	dir: "W",
 	rp: 1000,
 	onScreen: 0,
@@ -230,6 +238,7 @@ var Sorceror = {
 	speed2: 2,
 	dirct: 0,
 	respawn: 1200,
+	origrp: 1200,
 	spell: "Ice",
 	hp: 3,
 	hptimer: 0,
@@ -589,6 +598,11 @@ function onHit(E, rs){
 		blueCube.x = E.x;
 		blueCube.y = E.y;
 		blueCube.timeLeft = 90;
+	}
+	else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100){
+		greyCube.x = E.x;
+		greyCube.y = E.y;
+		greyCube.timeLeft = 90;
 	}
 	if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 		marker4.points = "50";
