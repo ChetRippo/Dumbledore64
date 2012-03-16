@@ -43,6 +43,9 @@ var fire = {
 				if(collision(Sorceror.dir, Sorceror, this)){
 					Sorceror.onHit();
 				}
+				if(collision(Spawner.dir, Spawner, this)){
+					Spawner.onHit();
+				}
 			}
 		}
 	},
@@ -50,11 +53,12 @@ var fire = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 300;
+		this.cd = 150;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
@@ -110,6 +114,9 @@ var fire2 = {
 				if(collision(Sorceror.dir, Sorceror, this)){
 					Sorceror.onHit();
 				}
+				if(collision(Spawner.dir, Spawner, this)){
+					Spawner.onHit();
+				}
 			}
 		}
 	},
@@ -117,11 +124,12 @@ var fire2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 420;
+		this.cd = 300;
 		this.frame = 0;
 		this.onScreen = 1;
 	}

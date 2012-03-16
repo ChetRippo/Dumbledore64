@@ -30,9 +30,10 @@ var earth = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Pickup.play();
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 900;
+		this.cd = 1020;
 		this.timeLeft = 15;
 		if(player.hp < 3){
 			player.hp+=1;
@@ -75,9 +76,10 @@ var earth2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Pickup.play();
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 900;
+		this.cd = 1020;
 		this.timeLeft = 15;
 		if(player.hp < 2){
 			player.hp+=2;

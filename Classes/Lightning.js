@@ -49,6 +49,13 @@ var lightning = {
 						}
 						Sorceror.onHit();
 					}
+					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
+						if(lightning12.hy == -2000){
+							lightning12.hy = Spawner.y;
+							lightning12.shoot();
+						}
+						Spawner.onHit();
+					}
 				}
 			}
 			
@@ -66,6 +73,12 @@ var lightning = {
 						}
 						Sorceror.onHit();
 					}
+					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Spawner.x
+						}
+						Spawner.onHit();
+					}
 				}			
 			}
 		}
@@ -73,10 +86,11 @@ var lightning = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;
 		this.hy = player.y;
-		this.cd = 450;
+		this.cd = 300;
 		this.onScreen = 1;
 		this.timeLeft = 120;
 	}
@@ -126,6 +140,9 @@ var lightning12 = {
 					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
 						Sorceror.onHit();
 					}
+					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
+						Spawner.onHit();
+					}
 				}
 			}
 			
@@ -143,12 +160,19 @@ var lightning12 = {
 						}
 						Sorceror.onHit();
 					}
+					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Spawner.x
+						}
+						Spawner.onHit();
+					}
 				}			
 			}
 		}
 	},
 	// Spawn
 	shoot: function(){
+		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;
 		this.onScreen = 1;
@@ -206,6 +230,13 @@ var lightning2 = {
 						}
 						Sorceror.onHit();
 					}
+					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
+						if(lightning22.hy == -2000){
+							lightning22.hy = Spawner.y;
+							lightning22.shoot();
+						}
+						Spawner.onHit();
+					}
 				}
 			}
 			
@@ -223,6 +254,12 @@ var lightning2 = {
 						}
 						Sorceror.onHit();
 					}
+					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Spawner.x
+						}
+						Spawner.onHit();
+					}
 				}			
 			}
 		}
@@ -230,10 +267,11 @@ var lightning2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;
 		this.hy = player.y;
-		this.cd = 900;
+		this.cd = 600;
 		this.onScreen = 1;
 		this.timeLeft = 240;
 	}
@@ -291,6 +329,13 @@ var lightning22 = {
 						}
 						Sorceror.onHit();
 					}
+					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
+						if(lightning23.hy == -2000){
+							lightning23.hy = Spawner.y;
+							lightning23.shoot();
+						}
+						Spawner.onHit();
+					}
 				}
 			}
 			
@@ -308,12 +353,19 @@ var lightning22 = {
 						}
 						Sorceror.onHit();
 					}
+					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Spawner.x
+						}
+						Spawner.onHit();
+					}
 				}			
 			}
 		}
 	},
 	// Spawn
 	shoot: function(){
+		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;
 		this.onScreen = 1;
@@ -360,6 +412,9 @@ var lightning23 = {
 					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
 						Sorceror.onHit();
 					}
+					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
+						Spawner.onHit();
+					}
 				}
 			}
 			
@@ -377,12 +432,19 @@ var lightning23 = {
 						}
 						Sorceror.onHit();
 					}
+					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
+						if(this.vx == -2000){
+							this.vx = Spawner.x
+						}
+						Spawner.onHit();
+					}
 				}			
 			}
 		}
 	},
 	// Spawn
 	shoot: function(){
+		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;
 		this.onScreen = 1;

@@ -1,8 +1,17 @@
 
-Version 0.4.0 Changes:
-	-Back button in high scores
-	-High Score access in main menu
-	-Added Air element (Forms Air, Air + Air, Air + Ice, Air + Fire, Air + Lightning, Air + Earth)
+Version 0.4.1 Changes:
+		-Bug Fixes:
+			-Fixed ice1 having no cooldown
+			-Fixed Maelstrom getting bigger with each cast
+		-Buffed many spells by shortening cooldowns
+		-Nerfed Earth2
+		-Added spell element markers for when a box is picked up
+		-Added "E" button. Drops spell 2, Q only drops spell 1. 
+			Makes it easier to get the spell the player is after
+		-Added 'Spawner' Enemy. Spawns 1 16x16 enemy every 3 seconds for a max of 4
+			Has 5 hp.
+		-Removed 1 fast enemy
+		-Added Sound Effects
 
 **********************************************************************************************************
 
