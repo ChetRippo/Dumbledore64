@@ -95,7 +95,7 @@ var Tenemy = {
 	dirct: 0,
 	respawn: 600,
 	origrp: 600,
-	rp: 300,
+	rp: 600,
 	onScreen: 0,
 	movement: false,
 	// Draws the enemy on the canvas when called
@@ -103,7 +103,7 @@ var Tenemy = {
 		ctx.drawImage(Robo, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
-
+//DISABLED
 // Triangle Enemy 2
 var TenemyA = {
 	color: "00FFFF",
@@ -114,8 +114,8 @@ var TenemyA = {
 	speed: 8,
 	speed2: 4,
 	dirct: 0,
-	respawn: 1200,
-	origrp: 1200,
+	respawn: -1,
+	origrp: -1,
 	rp: 300,
 	onScreen: 0,
 	movement: false,
@@ -137,7 +137,7 @@ var TenemyB = {
 	dirct: 0,
 	respawn: 1800,
 	origrp: 1800,
-	rp: 300,
+	rp: 600,
 	onScreen: 0,
 	movement: false,
 	// Draws the enemy on the canvas when called
@@ -155,12 +155,12 @@ var Bwizz = {
 	speed: 4,
 	speed2: 2,
 	dirct: 0,
-	respawn: 1500,
-	origrp: 1500,
+	respawn: -1,
+	origrp: -1,
 	dir: "W",
-	rp: 1000,
+	rp: -1,
 	onScreen: 0,
-	cd: 30,
+	cd: 15,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
@@ -169,16 +169,16 @@ var Bwizz = {
 	fire: function(){
 		if(this.cd<= 0 && this.movement == true){
 			if(this.dir == "W" || this.dir == "S"){
-				tinybullet.shoot(this.dir, 2, 16);
-				this.cd = 150;
+				tinybullet.shoot(this.dir, 4, 16);
+				this.cd = 45;
 			}
 			else if(this.dir == "A" || this.dir == "D"){
-				tinybullet.shoot(this.dir, 16, 2);
-				this.cd = 150;
+				tinybullet.shoot(this.dir, 16, 4);
+				this.cd = 45;
 			}
 			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
-				tinybullet.shoot(this.dir, 2, 2);
-				this.cd = 150;
+				tinybullet.shoot(this.dir, 4, 4);
+				this.cd = 45;
 			}
 		}
 		else{
@@ -186,8 +186,128 @@ var Bwizz = {
 		}
 	}
 };
-/*
-// Baby Maker 5000
+// Baby Wizard :]
+var Bwizz2 = {
+	x: 2000,
+	y: 0,
+	width: 16,
+	height: 16,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	respawn: -1,
+	origrp: -1,
+	dir: "W",
+	rp: -1,
+	onScreen: 0,
+	cd: 15,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
+	},
+	fire: function(){
+		if(this.cd<= 0 && this.movement == true){
+			if(this.dir == "W" || this.dir == "S"){
+				tinybullet2.shoot(this.dir, 4, 16);
+				this.cd = 45;
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				tinybullet2.shoot(this.dir, 16, 4);
+				this.cd = 45;
+			}
+			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
+				tinybullet2.shoot(this.dir, 4, 4);
+				this.cd = 45;
+			}
+		}
+		else{
+			this.cd-=1;
+		}
+	}
+};
+// Baby Wizard :]
+var Bwizz3 = {
+	x: 2000,
+	y: 0,
+	width: 16,
+	height: 16,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	respawn: -1,
+	origrp: -1,
+	dir: "W",
+	rp: -1,
+	onScreen: 0,
+	cd: 15,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
+	},
+	fire: function(){
+		if(this.cd<= 0 && this.movement == true){
+			if(this.dir == "W" || this.dir == "S"){
+				tinybullet3.shoot(this.dir, 4, 16);
+				this.cd = 45;
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				tinybullet3.shoot(this.dir, 16, 4);
+				this.cd = 45;
+			}
+			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
+				tinybullet3.shoot(this.dir, 4, 4);
+				this.cd = 45;
+			}
+		}
+		else{
+			this.cd-=1;
+		}
+	}
+};
+// Baby Wizard :]
+var Bwizz4 = {
+	x: 2000,
+	y: 0,
+	width: 16,
+	height: 16,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	respawn: -1,
+	origrp: -1,
+	dir: "W",
+	rp: -1,
+	onScreen: 0,
+	cd: 15,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
+	},
+	fire: function(){
+		if(this.cd<= 0 && this.movement == true){
+			if(this.dir == "W" || this.dir == "S"){
+				tinybullet4.shoot(this.dir, 4, 16);
+				this.cd = 45;
+			}
+			else if(this.dir == "A" || this.dir == "D"){
+				tinybullet4.shoot(this.dir, 16, 4);
+				this.cd = 45;
+			}
+			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
+				tinybullet4.shoot(this.dir, 4, 4);
+				this.cd = 45;
+			}
+		}
+		else{
+			this.cd-=1;
+		}
+	}
+};
+
+// PORTAL TO HELL
 var Spawner = {
 	x: 2000,
 	y: 0,
@@ -196,37 +316,173 @@ var Spawner = {
 	speed: 2,
 	speed2: 1,
 	dirct: 0,
+	hp: 5,
+	hptimer: 0,
 	respawn: 2000,
+	origrp: 2000,
 	dir: "W",
 	rp: 2000,
 	onScreen: 0,
-	cd: 30,
+	cd: 60,
+	color: "yellow",
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.hptimer >0){
+			this.hptimer-=1;
+		}
+		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+			ctx.fillStyle = "white";
+		}
+		else{
+			ctx.fillStyle = this.color;
+		}
+		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillStyle = "red";
+		if(this.hp == 5){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x -(this.width/2) + 52, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		if(this.hp == 4){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		if(this.hp == 3){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 2){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else{
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
 	},
 	fire: function(){
+	if(this.onScreen == 1){
 		if(this.cd<= 0){
-			if(this.dir == "W" || this.dir == "S"){
-				tinybullet.shoot(this.dir, 2, 16);
-				this.cd = 150;
+			if(Bwizz.onScreen == 0){
+				SpawnerSpawn.play();
+				Bwizz.onScreen = 1;
+				Bwizz.x = this.x-this.width/2;
+				Bwizz.y = this.y-this.height/2;
+				Bwizz.movement = true;
+				Bwizz.cd = 15;
+				this.cd = 90;
 			}
-			else if(this.dir == "A" || this.dir == "D"){
-				tinybullet.shoot(this.dir, 16, 2);
-				this.cd = 150;
+			else if(Bwizz2.onScreen == 0){
+				SpawnerSpawn.play();
+				Bwizz2.onScreen = 1;
+				Bwizz2.x = this.x-this.width/2;
+				Bwizz2.y = this.y-this.height/2;
+				Bwizz2.movement = true;
+				Bwizz2.cd = 15;
+				this.cd = 90;
 			}
-			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
-				tinybullet.shoot(this.dir, 2, 2);
-				this.cd = 150;
+			else if(Bwizz3.onScreen == 0){
+				SpawnerSpawn.play();
+				Bwizz3.onScreen = 1;
+				Bwizz3.x = this.x-this.width/2;
+				Bwizz3.y = this.y-this.height/2;
+				Bwizz3.movement = true;
+				Bwizz3.cd = 15;
+				this.cd = 90;
+			}
+			else if(Bwizz4.onScreen == 0){
+				SpawnerSpawn.play();
+				Bwizz4.onScreen = 1;
+				Bwizz4.x = this.x-this.width/2;
+				Bwizz4.y = this.y-this.height/2;
+				Bwizz4.movement = true;
+				Bwizz4.cd = 15;
+				this.cd = 90;
 			}
 		}
 		else{
 			this.cd-=1;
 		}
 	}
+	},
+	onHit: function(){
+		if(!(this.hptimer > 0)){
+			this.hp-=1;
+			if(this.hp < 1){
+				Killed.play();
+			}
+			else{
+				onDmg.play();
+			}
+			this.hptimer = 30;
+			if(this.hp < 1){
+				this.onScreen = 0;
+				if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100){
+					redCube.x = this.x;
+					redCube.y = this.y;
+					redCube.timeLeft = 90;
+				}
+				else if(((Math.floor(Math.random() * 10) + 1) == 7) && tealCube.x == -100){
+					tealCube.x = this.x;
+					tealCube.y = this.y;
+					tealCube.timeLeft = 90;
+				}
+				else if(((Math.floor(Math.random() * 10) + 1) == 7) && greenCube.x == -100){
+					greenCube.x = this.x;
+					greenCube.y = this.y;
+					greenCube.timeLeft = 90;
+				}
+				else if(((Math.floor(Math.random() * 10) + 1) == 7) && blueCube.x == -100){
+					blueCube.x = this.x;
+					blueCube.y = this.y;
+					blueCube.timeLeft = 90;
+				}
+				if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
+					marker4.points = "500";
+					marker4.mult = multiplier;
+					marker4.x = this.x;
+					marker4.y = this.y;
+					marker4.timeLeft = 20;
+				}
+				else if(marker.x != -100 && marker2.x != -100){
+					marker3.points = "500";
+					marker3.mult = multiplier;
+					marker3.x = this.x;
+					marker3.y = this.y;
+					marker3.timeLeft = 20;
+				}
+				else if(marker.x != -100){
+					marker2.points = "500";
+					marker2.mult = multiplier;
+					marker2.x = this.x;
+					marker2.y = this.y;
+					marker2.timeLeft = 20;
+				}
+				else{
+					marker.points = "500";
+					marker.mult = multiplier;
+					marker.x = this.x;
+					marker.y = this.y;
+					marker.timeLeft = 20;
+				}
+				this.x = -500;
+				this.y = -500;
+				this.respawn = 2400;
+				this.hp = 5;
+				this.movement = false;
+				score+=(500 * multiplier);
+				currpts = "500";
+				multiplier++;
+				multtimer = 50;
+			}
+		}
+	}
 };
-*/
 
 // Sorceror
 var Sorceror = {
@@ -272,7 +528,9 @@ var Sorceror = {
 	},
 	onHit: function(){
 		if(!(this.hptimer > 0)){
+			Killed.play();
 			this.hp-=1;
+			onDmg.play();
 			this.hptimer = 30;
 			if(this.hp < 1){
 				this.onScreen = 0;
@@ -572,13 +830,14 @@ var Sorceror = {
 	}
 };
 
-var Enemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Bwizz};
-var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz};
+var Enemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Bwizz, 9: Bwizz2, 10: Bwizz3, 11: Bwizz4};
+var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz, 10: Bwizz2, 11: Bwizz3, 12: Bwizz4, 13: Spawner};
 
 // onHit: Paramaterized
 // Hit by bullet
 function onHit(E, rs){
 	E.onScreen = 0;
+	Killed.play();
 	if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100){
 		redCube.x = E.x;
 		redCube.y = E.y;

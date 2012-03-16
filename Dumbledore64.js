@@ -14,14 +14,34 @@
 
 */
 /*
-	Version 0.4.0 Changes:
-		-Back button in high scores
-		-High Score access in main menu
-		-Added Air element (Forms Air, Air + Air, Air + Ice, Air + Fire, Air + Lightning, Air + Earth)
+	Version 0.4.1 Changes:
+		-Bug Fixes:
+			-Fixed ice1 having no cooldown
+			-Fixed Maelstrom getting bigger with each cast
+		-Buffed many spells by shortening cooldowns
+		-Nerfed Earth2
+		-Added spell element markers for when a box is picked up
+		-Added "E" button. Drops spell 2, Q only drops spell 1. 
+			Makes it easier to get the spell the player is after
+		-Added 'Spawner' Enemy. Spawns 1 16x16 enemy every 3 seconds for a max of 4
+			Has 5 hp.
+		-Removed 1 fast enemy
+		-Added Sound Effects
+		
 	TODO:
-		-Spells IP
-		-More enemies and AI IP
+		-Spells
+			-Mystic (Purple)
+				-Passive Buffs? / Teleporting?
+			-Dark (Black)
+				-HP Steal?
+		-More enemies and AI
+			-Enemy that builds obstacles
+			-Improve AI
 		-Cooldown Reduction on box pickup
+		-Breakable Obstacles **IP BOT**
+		-Sound Effects **IP MID**
+		-Optimization/Code Minifier
+		-Maybe make spells have limited casts?
 */
 
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
@@ -39,9 +59,28 @@ var hY = new Number();
 var STATE = 0;
 var nu = 0;
 var hs = 0;
+// Mouse listeners
 canvas.addEventListener("mousedown", getPosition, false);
 canvas.addEventListener("mousemove", getPositionhover, false);
+var FPS = 30;
+var keysDown = {};
+var cd = 0;
+var hptimer = 0;
+var spell1 = "N/A";
+var spell2 = "N/A";
+var spell = "N/A";
+var keycount = 0;
+//Score
+var score = 0;
+var muliplier = 1;
+var multtimer = 0;
+var currpts = 0;
+// Key Listeners
+addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
+addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
 
+
+//-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 var highscore1 = $.jStorage.get("highscore1");
 if(!highscore1){
 		var highscore1 = 0;
@@ -62,7 +101,7 @@ var highscore5 = $.jStorage.get("highscore5");
 if(!highscore5){
 		var highscore5 = 0;
 		$.jStorage.set("highscore5",highscore5);}
-
+//---------------------------------------------------------------- Mouse Posn -------------------------------------------------------//
 function getPosition(event){
     if (event.x != undefined && event.y != undefined){
          cX = event.x;
@@ -93,16 +132,7 @@ function getPositionhover(event){
 		hX -= canvas.offsetLeft;
         hY -= canvas.offsetTop;
 }
-
-var FPS = 30;
-var keysDown = {};
-var cd = 0;
-var hptimer = 0;
-var spell1 = "N/A";
-var spell2 = "N/A";
-var spell = "N/A";
-var keycount = 0;
-
+//------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //Girraffix
 var Wizzurd = new Image();
 Wizzurd.src = "grafix/wizzurd32.png";
@@ -114,6 +144,10 @@ Wizzurd2.src = "grafix/nega-wizzurd32.png";
 //Enemy1
 var Lavaman = new Image();
 Lavaman.src = "grafix/lavaman32.png";
+
+//Enemy1-2
+var Knight = new Image();
+Knight.src = "grafix/Knightman32.png";
 
 //Tenemy
 var Robo = new Image();
@@ -163,15 +197,36 @@ shlightning.src = "grafix/lightning-h.png";
 var svlightning = new Image();
 svlightning.src = "grafix/lightning-v.png";
 
-//Score
-var score = 0;
-var muliplier = 1;
-var multtimer = 0;
-var currpts = 0;
+//--------------------------------------------------- Sounds ------------------------------------------------------------------------//
+//Dumblebeam
+var Beam = new Audio("Sounds/beep low.wav");
 
-// Key Listeners
-addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
-addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
+//Enemy Dead
+var Killed = new Audio("Sounds/short zap low.wav");
+
+//Pickup
+var Pickup = new Audio("Sounds/beep boop.wav");
+
+//Fire
+var Explosion = new Audio("Sounds/divebomb super low.wav");
+
+//Ice
+var Frozen = new Audio("Sounds/pulse beam.wav");
+
+//Fire Wave
+var Fwave = new Audio("Sounds/divebomb mid.wav");
+
+//Thunder
+var Thunder = new Audio("Sounds/hard laser.wav");
+
+//Wind
+var Wind = new Audio("Sounds/divebomb low.wav");
+
+//Ondmg
+var onDmg = new Audio("Sounds/short zap.wav");
+
+//SpawnerSpawn
+var SpawnerSpawn = new Audio("Sounds/beep boop low.wav");
 
 //------------------------------------------------- Menu ----------------------------------------------------------------------------//
 var Menu = {
@@ -325,6 +380,7 @@ var player = {
 		|| collision(TenemyB.dir, TenemyB, this) || collision(this.dir, this, TenemyB) || collision(Sorceror.dir, Sorceror, this) || collision(this.dir, this, Sorceror)
 		|| collision(Bwizz.dir, Bwizz, this) || collision(this.dir, this, Bwizz)){
 		this.hp-=1;
+		onDmg.play();
 		hptimer = 30;
 	}
 	else{
@@ -356,9 +412,45 @@ var redCube = {
 	onHit: function(){
 		if(spell1 == "N/A"){
 			spell1 = "Fire";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Fire";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Fire";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Fire";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		else if(spell2 == "N/A"){
 			spell2 = "Fire";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Fire";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Fire";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Fire";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		this.x = -100;
 		this.y = -200;
@@ -388,9 +480,45 @@ var tealCube = {
 	onHit: function(){
 		if(spell1 == "N/A"){
 			spell1 = "Ice";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Ice";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Ice";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Ice";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		else if(spell2 == "N/A"){
 			spell2 = "Ice";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Ice";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Ice";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Ice";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		this.x = -100;
 		this.y = -200;
@@ -420,9 +548,45 @@ var greenCube = {
 	onHit: function(){
 		if(spell1 == "N/A"){
 			spell1 = "Earth";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Earth";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Earth";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Earth";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		else if(spell2 == "N/A"){
 			spell2 = "Earth";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Earth";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Earth";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Earth";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		this.x = -100;
 		this.y = -200;
@@ -452,9 +616,45 @@ var blueCube = {
 	onHit: function(){
 		if(spell1 == "N/A"){
 			spell1 = "Lightning";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Lightning";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Lightning";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Lightning";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		else if(spell2 == "N/A"){
 			spell2 = "Lightning";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Lightning";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Lightning";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Lightning";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		this.x = -100;
 		this.y = -200;
@@ -484,9 +684,45 @@ var greyCube = {
 	onHit: function(){
 		if(spell1 == "N/A"){
 			spell1 = "Air";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Air";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Air";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Air";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		else if(spell2 == "N/A"){
 			spell2 = "Air";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Air";
+				typemarker3.x = player.x;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Air";
+				typemarker2.x = player.x;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Air";
+				typemarker.x = player.x;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
 		}
 		this.x = -100;
 		this.y = -200;
@@ -529,6 +765,7 @@ function pickup(C){
 			score+=25;
 			currpts = "25";
 		}
+		Pickup.play();
 		C.onHit();
 	}
 }
@@ -680,6 +917,60 @@ var marker4 = {
 	mult: 1
 };
 
+var typemarker = {
+	color: "00FF00",
+	speed: 4,
+	timeLeft: 0,
+	x: -100,
+	y: -100,
+	text: "",
+};
+
+var typemarker2 = {
+	color: "00FF00",
+	speed: 4,
+	timeLeft: 0,
+	x: -100,
+	y: -100,
+	text: "",
+};
+
+var typemarker3 = {
+	color: "00FF00",
+	speed: 4,
+	timeLeft: 0,
+	x: -100,
+	y: -100,
+	text: "",
+};
+
+function drawtypeMarker(M){
+	if(M.timeLeft == 0){
+		M.x = -100;
+		M.y = -100;
+	}
+	if (M.timeLeft != 0){
+		if(M.text == "+ Air"){
+			M.color = "D0D0D0";
+		}
+		else if(M.text == "+ Fire"){
+			M.color = "CC0000";
+		}
+		else if(M.text == "+ Ice"){
+			M.color = "00FFFF";
+		}
+		else if(M.text == "+ Lightning"){
+			M.color = "0000CC";
+		}
+		else if(M.text == "+ Earth"){
+			M.color = "33FF00";
+		}
+	ctx.fillStyle = M.color;
+	ctx.font = "32pt Arial";
+	ctx.fillText(M.text, M.x, M.y);
+	}
+}
+
 function drawMarker(M){
 	if(M.timeLeft == 0){
 		M.x = -100;
@@ -748,6 +1039,23 @@ function UI(){
 			spell = "Lightning";
 		}	
 		if(spell1 == "Air"){
+			spell = "Gust";
+		}			
+	}
+	if(spell1 == "N/A" && spell2 != "N/A"){
+		if(spell2 == "Fire"){
+			spell = "Fire";
+		}
+		if(spell2 == "Ice"){
+			spell = "Ice";
+		}
+		if(spell2 == "Earth"){
+			spell = "Earth Heal";
+		}
+		if(spell2 == "Lightning"){
+			spell = "Lightning";
+		}	
+		if(spell2 == "Air"){
 			spell = "Gust";
 		}			
 	}
@@ -903,8 +1211,9 @@ function UI(){
 	}
 	ctx.fillStyle = "black";
 	ctx.font = "16pt Arial";
-	ctx.fillText("Q: Drop Spell", 576, 544);
-	ctx.fillText("Spacebar: Use spell", 576, 512);
+	ctx.fillText("Q: Drop Spell 1", 576, 528);
+	ctx.fillText("E: Drop Spell 2", 576, 560);
+	ctx.fillText("Spacebar: Use spell", 576, 496);
 }
 
 function SCORE(){
@@ -960,19 +1269,18 @@ var keys = function(){
 	if (39 in keysDown){
 		bullet.shoot("D", 4, 32);
 	}
-	if(81 in keysDown && keycount <=0){
+	if(81 in keysDown){
+		if(spell1 != "N/A"){
+			spell1 = "N/A";
+			spell = spell2;
+		}
+	}
+	if(69 in keysDown){
 		if(spell2 != "N/A"){
 			spell2 = "N/A";
 			spell = spell1;
-			keycount = 30;
-		}
-		else if(spell1 != "N/A"){
-			spell1 = "N/A";
-			spell = "N/A";
-			keycount = 30;
 		}
 	}
-	keycount-=1;
 	if(32 in keysDown && spell1 != "N/A" && spell2 == "N/A"){
 		if(spell1 == "Fire"){
 			fire.shoot();
@@ -987,6 +1295,23 @@ var keys = function(){
 			lightning.shoot();
 		}
 		if(spell1 == "Air"){
+			air.shoot();
+		}
+	}
+	if(32 in keysDown && spell2 != "N/A" && spell1 == "N/A"){
+		if(spell2 == "Fire"){
+			fire.shoot();
+		}
+		if(spell2 == "Ice"){
+			ice.shoot();
+		}
+		if(spell2 == "Earth"){
+			earth.shoot();
+		}
+		if(spell2 == "Lightning"){
+			lightning.shoot();
+		}
+		if(spell2 == "Air"){
 			air.shoot();
 		}
 	}
@@ -1047,7 +1372,6 @@ function reset(){
 	spell1 = "N/A";
 	spell2 = "N/A";
 	spell = "N/A";
-	keycount = 0;
 	score = 0;
 	muliplier = 1;
 	multtimer = 0;
@@ -1065,6 +1389,9 @@ function reset(){
 	Sorceror.hp = 1;
 	Sorceror.hptimer = 0;
 	Sorceror.onHit();
+	Spawner.hp = 1;
+	Spawner.hptimer = 0;
+	Spawner.onHit();
 	for (E in AllEnemies){
 		AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
 		AllEnemies[E].onScreen = 0;
@@ -1074,6 +1401,9 @@ function reset(){
 	Sorceror.hp = 3;
 	Sorceror.hptimer = 0;
 	Sorceror.cd = 0;
+	Spawner.hp = 5;
+	Spawner.hptimer = 0;
+	Spawner.cd = 0;
 	for (W in Weapons){
 		Weapons[W].timeLeft = 0;
 		Weapons[W].onScreen = 0;
@@ -1402,16 +1732,40 @@ setInterval(function(){
 			Sorceror.AI();
 			move(Sorceror);
 		
+			Spawner.draw();
+			AI(Spawner);
+			Spawner.fire();
+			move(Spawner);
+			spawn(Spawner);
 			Bwizz.draw();
 			AI(Bwizz);
 			move(Bwizz);
 			Bwizz.fire();
-			//Will be different
-			spawn(Bwizz);
+			Bwizz2.draw();
+			AI(Bwizz2);
+			move(Bwizz2);
+			Bwizz2.fire();
+			Bwizz3.draw();
+			AI(Bwizz3);
+			move(Bwizz3);
+			Bwizz3.fire();
+			Bwizz4.draw();
+			AI(Bwizz4);
+			move(Bwizz4);
+			Bwizz4.fire();
 		
 			//Bwizz bullet
 			tBulletmove(tinybullet);
 			drawBullet(tinybullet);
+			
+			tBulletmove(tinybullet2);
+			drawBullet(tinybullet2);
+			
+			tBulletmove(tinybullet3);
+			drawBullet(tinybullet3);
+			
+			tBulletmove(tinybullet4);
+			drawBullet(tinybullet4);
 		
 			drawMarker(marker);
 			moveMarker(marker);
@@ -1424,6 +1778,15 @@ setInterval(function(){
 		
 			drawMarker(marker4);
 			moveMarker(marker4);
+			
+			drawtypeMarker(typemarker);
+			moveMarker(typemarker);
+		
+			drawtypeMarker(typemarker2);
+			moveMarker(typemarker2);
+		
+			drawtypeMarker(typemarker3);
+			moveMarker(typemarker3);
 			
 			// Cooldown calculation
 			if(cd <= 0){

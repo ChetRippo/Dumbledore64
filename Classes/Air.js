@@ -116,6 +116,7 @@ var air = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Wind.play();
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
@@ -355,6 +356,7 @@ var air2 = {
 	// Spawn
 	shoot: function(){
 		if(this.cd == 0){
+			Wind.play();
 			air2right.shoot();
 			air2left.shoot();
 			air2up.shoot();

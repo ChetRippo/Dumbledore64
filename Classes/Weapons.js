@@ -25,6 +25,7 @@ var bullet = {
 		bullet2.shoot(dir, h, w);
 	}
 	if(cd == 0){
+		Beam.play();
 		this.dir = dir;
 		this.timeLeft = 60;
 		this.height = h;
@@ -53,6 +54,7 @@ var bullet2 = {
 	// Spawn
 	shoot: function(dir, h, w){
 	if(cd == 0){
+		Beam.play();
 		this.dir = dir;
 		this.timeLeft = 60;
 		this.height = h;
@@ -82,6 +84,7 @@ var bullet3 = {
 	// Spawn
 	shoot: function(dir, h, w){
 	if(cd == 0){
+		Beam.play();
 		this.dir = dir;
 		this.timeLeft = 60;
 		this.height = h;
@@ -111,6 +114,7 @@ var bullet4 = {
 	// Spawn
 	shoot: function(dir, h, w){
 	if(cd == 0){
+		Beam.play();
 		this.dir = dir;
 		this.timeLeft = 60;
 		this.height = h;
@@ -145,6 +149,69 @@ var tinybullet = {
 		this.width = w;
 		this.x = Bwizz.x;
 		this.y = Bwizz.y;
+	}
+};
+// tinybullet: A basic tiny wizard attack
+var tinybullet2 = {
+	color: "red",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 4,
+	height: 3,
+	dir: "A",
+
+	// Spawn
+	shoot: function(dir, w, h){
+		this.dir = dir;
+		this.timeLeft = 60;
+		this.height = h;
+		this.width = w;
+		this.x = Bwizz2.x;
+		this.y = Bwizz2.y;
+	}
+};
+// tinybullet: A basic tiny wizard attack
+var tinybullet3 = {
+	color: "red",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 4,
+	height: 3,
+	dir: "A",
+
+	// Spawn
+	shoot: function(dir, w, h){
+		this.dir = dir;
+		this.timeLeft = 60;
+		this.height = h;
+		this.width = w;
+		this.x = Bwizz3.x;
+		this.y = Bwizz3.y;
+	}
+};
+// tinybullet: A basic tiny wizard attack
+var tinybullet4 = {
+	color: "red",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 4,
+	height: 3,
+	dir: "A",
+
+	// Spawn
+	shoot: function(dir, w, h){
+		this.dir = dir;
+		this.timeLeft = 60;
+		this.height = h;
+		this.width = w;
+		this.x = Bwizz4.x;
+		this.y = Bwizz4.y;
 	}
 };
 
@@ -201,6 +268,10 @@ function Bulletmove(B){
 		B.timeLeft = 0;
 		Sorceror.onHit();
 	}
+	if(collision(B.dir, B, Spawner)){
+		B.timeLeft = 0;
+		Spawner.onHit();
+	}
 	if (B.timeLeft > 0 && B.dir == "W"){
 		B.timeLeft--;
 		B.y -= B.speed;
@@ -245,8 +316,12 @@ function tBulletmove(B){
 		B.timeLeft = 0;
 	}
 	if(collision(B.dir, B, player)){
-		player.hp-=1;
-		hptimer = 30;
+		if(hptimer > 0){
+			onDmg.play();
+			player.hp-=1;
+			hptimer = 30;
+		}
+		B.timeLeft = 0;
 	}
 	if (B.timeLeft > 0 && B.dir == "W"){
 		B.timeLeft--;
@@ -373,6 +448,7 @@ var fireice = {
 			if(collision(this.dir, this, obstacle) || (collision(this.dir, this, obstacleA)) || (collision(this.dir, this, obstacleB)
 				|| this.x <= 32 || this.x >= 768 || this.y <= 32 || this.y >= 544)){
 				this.state = 1;
+				Fwave.play();
 			}
 			for (E in Enemies){
 				if(collision(Enemies[E].dir, Enemies[E], this)){
@@ -380,6 +456,9 @@ var fireice = {
 				}
 				if(collision(Sorceror.dir, Sorceror, this)){
 					Sorceror.onHit();
+				}
+				if(collision(Spawner.dir, Spawner, this)){
+					Spawner.onHit();
 				}
 			}
 			if (this.dir == "W"){
@@ -416,6 +495,7 @@ var fireice = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Frozen.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = player.x;
@@ -444,6 +524,7 @@ var fireheal = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
+			Explosion.play();
 			this.cd = 600;
 			fire.cd = 0;
 			earth.cd = 0;
@@ -468,6 +549,7 @@ var iceheal = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
+			Frozen.play();
 			this.cd = 600;
 			ice.cd = 0;
 			earth.cd = 0;
@@ -492,6 +574,7 @@ var lightningheal = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
+			Thunder.play();
 			this.cd = 600;
 			lightning.cd = 0;
 			earth.cd = 0;
@@ -631,12 +714,35 @@ var firelightning = {
 						firelightningf4.shoot();
 					}
 				}
+				if(Spawner.y <= player.y + this.hheight && Spawner.y >= player.y && Spawner.onScreen == 1){
+					if(firelightningf1.x == -1000){
+						firelightningf1.x = Spawner.x;
+						firelightningf1.y = Spawner.y;
+						firelightningf1.shoot();
+					}
+					else if(firelightningf2.x == -1000){
+						firelightningf2.x = Spawner.x;
+						firelightningf2.y = Spawner.y;
+						firelightningf2.shoot();
+					}
+					else if(firelightningf3.x == -1000){
+						firelightningf3.x = Spawner.x;
+						firelightningf3.y = Spawner.y;
+						firelightningf3.shoot();
+					}
+					else if(firelightningf4.x == -1000){
+						firelightningf4.x = Spawner.x;
+						firelightningf4.y = Spawner.y;
+						firelightningf4.shoot();
+					}
+				}
 			}			
 		}
 	},
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Thunder.play();
 		this.hx = 400;
 		this.vx = player.x;
 		this.hy = player.y;
@@ -690,12 +796,16 @@ var firelightningf1 = {
 				if(collision(Sorceror.dir, Sorceror, this)){
 					Sorceror.onHit();
 				}
+				if(collision(Spawner.dir, Spawner, this)){
+					Spawner.onHit();
+				}
 			}
 		}
 	},
 		
 	// Spawn
 	shoot: function(){
+		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.frame = 0;
@@ -743,12 +853,16 @@ var firelightningf2 = {
 				if(collision(Sorceror.dir, Sorceror, this)){
 					Sorceror.onHit();
 				}
+				if(collision(Spawner.dir, Spawner, this)){
+					Spawner.onHit();
+				}
 			}
 		}
 	},
 		
 	// Spawn
 	shoot: function(){
+		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.frame = 0;
@@ -797,12 +911,16 @@ var firelightningf3 = {
 				if(collision(Sorceror.dir, Sorceror, this)){
 					Sorceror.onHit();
 				}
+				if(collision(Spawner.dir, Spawner, this)){
+					Spawner.onHit();
+				}
 			}
 		}
 	},
 		
 	// Spawn
 	shoot: function(){
+		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.frame = 0;
@@ -850,11 +968,15 @@ var firelightningf4 = {
 				if(collision(Sorceror.dir, Sorceror, this)){
 					Sorceror.onHit();
 				}
+				if(collision(Spawner.dir, Spawner, this)){
+					Spawner.onHit();
+				}
 			}
 		}
 	},
 	// Spawn
 	shoot: function(){
+		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.frame = 0;
@@ -1398,6 +1520,7 @@ var icelightning = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Fwave.play();
 		vertil.x = player.x
 		vertil.y = player.y
 		vertil.frame = 0;
@@ -1406,7 +1529,7 @@ var icelightning = {
 		horil.y = player.y
 		horil.frame = 0;
 		horil.onScreen = 1;
-		this.cd = 600;
+		this.cd = 450;
 		this.timeLeft = 300;
 		this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz};
 	}
@@ -1506,11 +1629,15 @@ var airfire = {
 			if(collision(Sorceror.dir, Sorceror, this)){
 				Sorceror.onHit();
 			}
+			if(collision(Spawner.dir, Spawner, this)){
+				Spawner.onHit();
+			}
 		}
 	},
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Fwave.play();
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
@@ -1601,6 +1728,9 @@ var airfire12 = {
 			if(collision(Sorceror.dir, Sorceror, this)){
 				Sorceror.onHit();
 			}
+			if(collision(Spawner.dir, Spawner, this)){
+				Spawner.onHit();
+			}
 		}
 	},
 	// Spawn
@@ -1687,6 +1817,9 @@ var airfire13 = {
 			if(collision(Sorceror.dir, Sorceror, this)){
 				Sorceror.onHit();
 			}
+			if(collision(Spawner.dir, Spawner, this)){
+				Spawner.onHit();
+			}
 		}
 	},
 	// Spawn
@@ -1730,7 +1863,7 @@ var airice = {
 		if(this.cd > 0){
 			this.cd-=1;
 		}
-		if(this.timeLeft == 0){
+		if(this.timeLeft == 0 && this.onScreen == 1){
 			this.onScreen = 0;
 			ice.cd = 0;
 		}
@@ -1765,6 +1898,9 @@ var airice = {
 				if(collision(Sorceror.dir, Sorceror, this)){
 					Sorceror.onHit();
 				}
+				if(collision(Spawner.dir, Spawner, this)){
+					Spawner.onHit();
+				}
 			}
 		}	
 	},
@@ -1772,9 +1908,13 @@ var airice = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Fwave.play();
+		Frozen.play();
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 600;
+		this.cd = 450;
+		this.width = 64;
+		this.height = 64;
 		this.onScreen = 1;
 		this.timeLeft = 150;
 		ice.cd = 0;
@@ -1796,6 +1936,7 @@ var airearth = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
+			Wind.play();
 			this.cd = 450;
 			air.cd = 0;
 			earth.cd = 0;
@@ -1827,6 +1968,7 @@ var airlightning = {
 	
 	draw: function(){
 		if(this.LonScreen == 1){
+			Thunder.play();
 			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy - this.hheight/2);
 			ctx.drawImage(vlightning, this.vx-this.vwidth/2, this.vy - this.vheight/2);
 				this.LonScreen = 0;
@@ -1860,6 +2002,9 @@ var airlightning = {
 				if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
 					Sorceror.onHit();
 				}
+				if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
+					Spawner.onHit();
+				}
 			}			
 			for (E in Enemies){
 				if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
@@ -1867,6 +2012,9 @@ var airlightning = {
 				}
 				if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
 					Sorceror.onHit();
+				}
+				if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
+					Spawner.onHit();
 				}
 			}			
 		}
@@ -1939,6 +2087,7 @@ var sIce = {
 		
 	// Spawn
 	shoot: function(){
+		Frozen.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = Sorceror.x;
@@ -1985,6 +2134,7 @@ var sFire = {
 			if(contained(player, this)){
 				if(hptimer <= 0){
 					player.hp-=1;
+					onDmg.play();
 					hptimer = 30;
 				}
 			}
@@ -1993,6 +2143,7 @@ var sFire = {
 		
 	// Spawn
 	shoot: function(){
+		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = Sorceror.x;
@@ -2035,6 +2186,7 @@ var sLightning = {
 				if(player.x >= this.vx && player.x <= this.vx + this.vwidth){
 					if(hptimer <= 0){
 						player.hp-=1;
+						onDmg.play();
 						hptimer = 30;
 					}
 				}
@@ -2046,6 +2198,7 @@ var sLightning = {
 					}
 					if(hptimer <= 0){
 						player.hp-=1;
+						onDmg.play();
 						hptimer = 30;
 					}
 				}			
@@ -2054,6 +2207,7 @@ var sLightning = {
 	},
 	// Spawn
 	shoot: function(){
+		Thunder.play();
 		this.hx = 400;
 		this.hy = Sorceror.y;
 		this.onScreen = 1;

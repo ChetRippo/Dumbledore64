@@ -57,11 +57,12 @@ var ice = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Frozen.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 510;
+		this.cd = 450;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
@@ -131,11 +132,12 @@ var ice2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Frozen.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 510;
+		this.cd = 450;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
