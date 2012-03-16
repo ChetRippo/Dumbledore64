@@ -66,8 +66,8 @@ var FPS = 30;
 var keysDown = {};
 var cd = 0;
 var hptimer = 0;
-var spell1 = "Earth";
-var spell2 = "Earth";
+var spell1 = "N/A";
+var spell2 = "N/A";
 var spell = "N/A";
 var keycount = 0;
 //Score
