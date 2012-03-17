@@ -200,35 +200,25 @@ svlightning.src = "grafix/lightning-v.png";
 
 //--------------------------------------------------- Sounds ------------------------------------------------------------------------//
 //Dumblebeam
-var Beam = new Audio("Sounds/beeplow.wav");
-Beam.ContentType = ".wav";
+var Beam = new Audio("Sounds/beeplow.mp3");
 //Enemy Dead
-var Killed = new Audio("Sounds/shortzaplow.wav");
-Killed.ContentType = ".wav";
+var Killed = new Audio("Sounds/shortzaplow.mp3");
 //Pickup
-var Pickup = new Audio("Sounds/beepboop.wav");
-Pickup.ContentType = ".wav";
+var Pickup = new Audio("Sounds/beepboop.mp3");
 //Fire
-var Explosion = new Audio("Sounds/divebombsuperlow.wav");
-Explosion.ContentType = ".wav";
+var Explosion = new Audio("Sounds/divebombsuperlow.mp3");
 //Ice
-var Frozen = new Audio("Sounds/pulsebeam.wav");
-Frozen.ContentType = ".wav";
+var Frozen = new Audio("Sounds/pulsebeam.mp3");
 //Fire Wave
-var Fwave = new Audio("Sounds/divebombmid.wav");
-Fwave.ContentType = ".wav";
+var Fwave = new Audio("Sounds/divebombmid.mp3");
 //Thunder
-var Thunder = new Audio("Sounds/hardlaser.wav");
-Thunder.ContentType = ".wav";
+var Thunder = new Audio("Sounds/hardlaser.mp3");
 //Wind
-var Wind = new Audio("Sounds/divebomblow.wav");
-Wind.ContentType = ".wav";
+var Wind = new Audio("Sounds/divebomblow.mp3");
 //Ondmg
-var onDmg = new Audio("Sounds/shortzap.wav");
-onDmg.ContentType = ".wav";
+var onDmg = new Audio("Sounds/shortzap.mp3");
 //SpawnerSpawn
-var SpawnerSpawn = new Audio("Sounds/beepbooplow.wav");
-SpawnerSpawn.ContentType = ".wav";
+var SpawnerSpawn = new Audio("Sounds/beepbooplow.mp3");
 //------------------------------------------------- Menu ----------------------------------------------------------------------------//
 var Menu = {
 	x: canvas.width/2,
