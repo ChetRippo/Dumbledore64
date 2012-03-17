@@ -201,34 +201,34 @@ svlightning.src = "grafix/lightning-v.png";
 //--------------------------------------------------- Sounds ------------------------------------------------------------------------//
 //Dumblebeam
 var Beam = new Audio("Sounds/beeplow.wav");
-
+Beam.ContentType = ".wav";
 //Enemy Dead
-var Killed = new Audio("Sounds/shortzap low.wav");
-
+var Killed = new Audio("Sounds/shortzaplow.wav");
+Killed.ContentType = ".wav";
 //Pickup
 var Pickup = new Audio("Sounds/beepboop.wav");
-
+Pickup.ContentType = ".wav";
 //Fire
 var Explosion = new Audio("Sounds/divebombsuperlow.wav");
-
+Explosion.ContentType = ".wav";
 //Ice
 var Frozen = new Audio("Sounds/pulsebeam.wav");
-
+Frozen.ContentType = ".wav";
 //Fire Wave
 var Fwave = new Audio("Sounds/divebombmid.wav");
-
+Fwave.ContentType = ".wav";
 //Thunder
 var Thunder = new Audio("Sounds/hardlaser.wav");
-
+Thunder.ContentType = ".wav";
 //Wind
 var Wind = new Audio("Sounds/divebomblow.wav");
-
+Wind.ContentType = ".wav";
 //Ondmg
 var onDmg = new Audio("Sounds/shortzap.wav");
-
+onDmg.ContentType = ".wav";
 //SpawnerSpawn
 var SpawnerSpawn = new Audio("Sounds/beepbooplow.wav");
-
+SpawnerSpawn.ContentType = ".wav";
 //------------------------------------------------- Menu ----------------------------------------------------------------------------//
 var Menu = {
 	x: canvas.width/2,
