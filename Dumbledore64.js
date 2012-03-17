@@ -200,25 +200,25 @@ svlightning.src = "grafix/lightning-v.png";
 
 //--------------------------------------------------- Sounds ------------------------------------------------------------------------//
 //Dumblebeam
-var Beam = new Audio("Sounds/beeplow.mp3");
+var Beam = document.getElementsByTagName("audio")[0];
 //Enemy Dead
-var Killed = new Audio("Sounds/shortzaplow.mp3");
+var Killed = document.getElementsByTagName("audio")[1];
 //Pickup
-var Pickup = new Audio("Sounds/beepboop.mp3");
+var Pickup = document.getElementsByTagName("audio")[2];
 //Fire
-var Explosion = new Audio("Sounds/divebombsuperlow.mp3");
+var Explosion = document.getElementsByTagName("audio")[3];
 //Ice
-var Frozen = new Audio("Sounds/pulsebeam.mp3");
+var Frozen = document.getElementsByTagName("audio")[4];
 //Fire Wave
-var Fwave = new Audio("Sounds/divebombmid.mp3");
+var Fwave = document.getElementsByTagName("audio")[5];
 //Thunder
-var Thunder = new Audio("Sounds/hardlaser.mp3");
+var Thunder = document.getElementsByTagName("audio")[6];
 //Wind
-var Wind = new Audio("Sounds/divebomblow.mp3");
+var Wind = document.getElementsByTagName("audio")[7];
 //Ondmg
-var onDmg = new Audio("Sounds/shortzap.mp3");
+var onDmg = document.getElementsByTagName("audio")[8];
 //SpawnerSpawn
-var SpawnerSpawn = new Audio("Sounds/beepbooplow.mp3");
+var SpawnerSpawn = document.getElementsByTagName("audio")[9];
 //------------------------------------------------- Menu ----------------------------------------------------------------------------//
 var Menu = {
 	x: canvas.width/2,
