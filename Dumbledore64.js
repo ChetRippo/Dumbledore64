@@ -27,6 +27,7 @@
 			Has 5 hp.
 		-Removed 1 fast enemy
 		-Added Sound Effects
+		-Added Favicon
 		
 	TODO:
 		-Spells
@@ -199,34 +200,34 @@ svlightning.src = "grafix/lightning-v.png";
 
 //--------------------------------------------------- Sounds ------------------------------------------------------------------------//
 //Dumblebeam
-var Beam = new Audio("Sounds/beep low.wav");
+var Beam = new Audio("Sounds/beeplow.wav");
 
 //Enemy Dead
-var Killed = new Audio("Sounds/short zap low.wav");
+var Killed = new Audio("Sounds/shortzap low.wav");
 
 //Pickup
-var Pickup = new Audio("Sounds/beep boop.wav");
+var Pickup = new Audio("Sounds/beepboop.wav");
 
 //Fire
-var Explosion = new Audio("Sounds/divebomb super low.wav");
+var Explosion = new Audio("Sounds/divebombsuperlow.wav");
 
 //Ice
-var Frozen = new Audio("Sounds/pulse beam.wav");
+var Frozen = new Audio("Sounds/pulsebeam.wav");
 
 //Fire Wave
-var Fwave = new Audio("Sounds/divebomb mid.wav");
+var Fwave = new Audio("Sounds/divebombmid.wav");
 
 //Thunder
-var Thunder = new Audio("Sounds/hard laser.wav");
+var Thunder = new Audio("Sounds/hardlaser.wav");
 
 //Wind
-var Wind = new Audio("Sounds/divebomb low.wav");
+var Wind = new Audio("Sounds/divebomblow.wav");
 
 //Ondmg
-var onDmg = new Audio("Sounds/short zap.wav");
+var onDmg = new Audio("Sounds/shortzap.wav");
 
 //SpawnerSpawn
-var SpawnerSpawn = new Audio("Sounds/beep boop low.wav");
+var SpawnerSpawn = new Audio("Sounds/beepbooplow.wav");
 
 //------------------------------------------------- Menu ----------------------------------------------------------------------------//
 var Menu = {
