@@ -16,13 +16,12 @@ var Enemy = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavaman, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Hudge, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
 
 // Enemy 2
 var EnemyA = {
-	color: "red",
 	x: -500,
 	y: -500,
 	width: 32,
@@ -37,13 +36,12 @@ var EnemyA = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavaman, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
 
 // Enemy 3
 var EnemyB = {
-	color: "red",
 	x: -500,
 	y: -500,
 	width: 32,
@@ -58,13 +56,12 @@ var EnemyB = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavaman, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Hudge, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
 
 // Enemy 4
 var EnemyC = {
-	color: "red",
 	x: -500,
 	y: -500,
 	width: 32,
@@ -79,13 +76,12 @@ var EnemyC = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavaman, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
 
 // Triangle Enemy 1
 var Tenemy = {
-	color: "00FFFF",
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -100,13 +96,11 @@ var Tenemy = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Robo, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Globbly, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
-//DISABLED
 // Triangle Enemy 2
 var TenemyA = {
-	color: "00FFFF",
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -114,20 +108,19 @@ var TenemyA = {
 	speed: 8,
 	speed2: 4,
 	dirct: 0,
-	respawn: -1,
-	origrp: -1,
-	rp: 300,
+	respawn: 2400,
+	origrp: 2400,
+	rp: 600,
 	onScreen: 0,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Robo, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Globbly, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
 
 // Triangle Enemy 3
 var TenemyB = {
-	color: "00FFFF",
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -142,10 +135,10 @@ var TenemyB = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Robo, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Globbly, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
-
+/*
 // Baby Wizard :]
 var Bwizz = {
 	x: 2000,
@@ -306,7 +299,81 @@ var Bwizz4 = {
 		}
 	}
 };
+*/
 
+// Lavaman
+var Lavaman = {
+	x: 500,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	respawn: -1,
+	origrp: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+	}
+};
+var Lavaman2 = {
+	x: 500,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	respawn: -1,
+	origrp: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+	}
+};
+var Lavaman3 = {
+	x: 500,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	respawn: -1,
+	origrp: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+	}
+};
+var Lavaman4 = {
+	x: 500,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	respawn: -1,
+	origrp: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+	}
+};
 // PORTAL TO HELL
 var Spawner = {
 	x: 2000,
@@ -324,7 +391,6 @@ var Spawner = {
 	rp: 2000,
 	onScreen: 0,
 	cd: 60,
-	color: "yellow",
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
@@ -333,11 +399,11 @@ var Spawner = {
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white";
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
 		else{
-			ctx.fillStyle = this.color;
+			ctx.drawImage(Splavaman, this.x - this.width / 2, this.y - this.height / 2);
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.fillStyle = "red";
 		if(this.hp == 5){
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
@@ -368,40 +434,40 @@ var Spawner = {
 	fire: function(){
 	if(this.onScreen == 1){
 		if(this.cd<= 0){
-			if(Bwizz.onScreen == 0){
+			if(Lavaman.onScreen == 0){
 				SpawnerSpawn.play();
-				Bwizz.onScreen = 1;
-				Bwizz.x = this.x-this.width/2;
-				Bwizz.y = this.y-this.height/2;
-				Bwizz.movement = true;
-				Bwizz.cd = 15;
+				Lavaman.onScreen = 1;
+				Lavaman.x = this.x-this.width/2;
+				Lavaman.y = this.y-this.height/2;
+				Lavaman.movement = true;
+				Lavaman.cd = 15;
 				this.cd = 90;
 			}
-			else if(Bwizz2.onScreen == 0){
+			else if(Lavaman2.onScreen == 0){
 				SpawnerSpawn.play();
-				Bwizz2.onScreen = 1;
-				Bwizz2.x = this.x-this.width/2;
-				Bwizz2.y = this.y-this.height/2;
-				Bwizz2.movement = true;
-				Bwizz2.cd = 15;
+				Lavaman2.onScreen = 1;
+				Lavaman2.x = this.x-this.width/2;
+				Lavaman2.y = this.y-this.height/2;
+				Lavaman2.movement = true;
+				Lavaman2.cd = 15;
 				this.cd = 90;
 			}
-			else if(Bwizz3.onScreen == 0){
+			else if(Lavaman3.onScreen == 0){
 				SpawnerSpawn.play();
-				Bwizz3.onScreen = 1;
-				Bwizz3.x = this.x-this.width/2;
-				Bwizz3.y = this.y-this.height/2;
-				Bwizz3.movement = true;
-				Bwizz3.cd = 15;
+				Lavaman3.onScreen = 1;
+				Lavaman3.x = this.x-this.width/2;
+				Lavaman3.y = this.y-this.height/2;
+				Lavaman3.movement = true;
+				Lavaman3.cd = 15;
 				this.cd = 90;
 			}
-			else if(Bwizz4.onScreen == 0){
+			else if(Lavaman4.onScreen == 0){
 				SpawnerSpawn.play();
-				Bwizz4.onScreen = 1;
-				Bwizz4.x = this.x-this.width/2;
-				Bwizz4.y = this.y-this.height/2;
-				Bwizz4.movement = true;
-				Bwizz4.cd = 15;
+				Lavaman4.onScreen = 1;
+				Lavaman4.x = this.x-this.width/2;
+				Lavaman4.y = this.y-this.height/2;
+				Lavaman4.movement = true;
+				Lavaman4.cd = 15;
 				this.cd = 90;
 			}
 		}
@@ -437,10 +503,10 @@ var Spawner = {
 					greenCube.y = this.y;
 					greenCube.timeLeft = 90;
 				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && blueCube.x == -100){
-					blueCube.x = this.x;
-					blueCube.y = this.y;
-					blueCube.timeLeft = 90;
+				else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100){
+					yellowCube.x = this.x;
+					yellowCube.y = this.y;
+					yellowCube.timeLeft = 90;
 				}
 				if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 					marker4.points = "500";
@@ -549,10 +615,10 @@ var Sorceror = {
 					greenCube.y = this.y;
 					greenCube.timeLeft = 90;
 				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && blueCube.x == -100){
-					blueCube.x = this.x;
-					blueCube.y = this.y;
-					blueCube.timeLeft = 90;
+				else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100){
+					yellowCube.x = this.x;
+					yellowCube.y = this.y;
+					yellowCube.timeLeft = 90;
 				}
 				if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 					marker4.points = "100";
@@ -830,12 +896,29 @@ var Sorceror = {
 	}
 };
 
-var Enemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Bwizz, 9: Bwizz2, 10: Bwizz3, 11: Bwizz4};
-var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz, 10: Bwizz2, 11: Bwizz3, 12: Bwizz4, 13: Spawner};
+var Enemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Lavaman, 9: Lavaman2, 10: Lavaman3, 11: Lavaman4};
+var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
 
 // onHit: Paramaterized
 // Hit by bullet
 function onHit(E, rs){
+	if(E.speed2*2 == 8){
+		if(Globblyfire.onScreen == 1 && Globblyfire2.onScreen == 1){
+			Globblyfire3.x = E.x;
+			Globblyfire3.y = E.y;
+			Globblyfire3.shoot();
+		}
+		else if(Globblyfire.onScreen == 1){
+			Globblyfire2.x = E.x;
+			Globblyfire2.y = E.y;
+			Globblyfire2.shoot();
+		}
+		else{
+			Globblyfire.x = E.x;
+			Globblyfire.y = E.y;
+			Globblyfire.shoot();
+		}
+	}
 	E.onScreen = 0;
 	Killed.play();
 	if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100){
@@ -853,10 +936,10 @@ function onHit(E, rs){
 		greenCube.y = E.y;
 		greenCube.timeLeft = 90;
 	}
-	else if(((Math.floor(Math.random() * 10) + 1) == 7) && blueCube.x == -100){
-		blueCube.x = E.x;
-		blueCube.y = E.y;
-		blueCube.timeLeft = 90;
+	else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100){
+		yellowCube.x = E.x;
+		yellowCube.y = E.y;
+		yellowCube.timeLeft = 90;
 	}
 	else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100){
 		greyCube.x = E.x;
