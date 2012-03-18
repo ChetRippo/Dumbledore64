@@ -596,17 +596,40 @@ var firelightning = {
 	vheight: 800,
 	hwidth: 800,
 	hheight: 32,
+	hstate: 0,
+	vstate: 0,
 	hx: 400,
 	hy: -2000,
 	vx: -2000,
 	vy: 288,
 	cd: 0,
 	onScreen: 0,
-	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(hlightning, this.hx - this.hwidth/2, player.y - this.hheight/2);
-			ctx.drawImage(vlightning, player.x-this.vwidth/2, this.vy - this.vheight/2);
+			if(this.hstate == 0){
+				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, player.y - this.hheight/2);
+				this.hstate+=1;
+			}
+			else if(this.hstate == 1){
+				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, player.y - this.hheight/2);
+				this.hstate+=1;
+			}
+			else if(this.hstate == 2){
+				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, player.y - this.hheight/2);
+				this.hstate=0;
+			}
+			if(this.vstate == 0){
+					ctx.drawImage(vlightning1, player.x-this.vwidth/2, this.vy - this.vheight/2);
+					this.vstate+=1;
+			}
+			else if(this.vstate == 1){
+					ctx.drawImage(vlightning2, player.x-this.vwidth/2, this.vy - this.vheight/2);
+					this.vstate+=1;
+			}
+			else if(this.vstate == 2){
+					ctx.drawImage(vlightning3, player.x-this.vwidth/2, this.vy - this.vheight/2);
+					this.vstate=0;
+			}
 		}
 	},
 	effect: function(){
@@ -1401,7 +1424,7 @@ var icelightning = {
 	color: "00CCFF",
 	cd: 0,
 	timeLeft: 0,
-	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz},
+	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner},
 	tick: function(){
 		if(this.cd>0){
 			this.cd-=1;
@@ -1430,7 +1453,7 @@ var icelightning = {
 			vertil3.onScreen = 0;
 			vertil4.onScreen = 0;
 			vertil5.onScreen = 0;
-			this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz};
+			this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
 		}
 	},
 	// Slow all enemies in radius
@@ -1531,7 +1554,7 @@ var icelightning = {
 		horil.onScreen = 1;
 		this.cd = 450;
 		this.timeLeft = 300;
-		this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Bwizz};
+		this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
 	}
 	}
 	
@@ -1957,6 +1980,8 @@ var airlightning = {
 	vheight: 800,
 	hwidth: 800,
 	hheight: 32,
+	hstate: 0,
+	vstate: 0,
 	hx: 400,
 	hy: -2000,
 	vx: -2000,
@@ -1969,9 +1994,35 @@ var airlightning = {
 	draw: function(){
 		if(this.LonScreen == 1){
 			Thunder.play();
-			ctx.drawImage(hlightning, this.hx - this.hwidth/2, this.hy - this.hheight/2);
-			ctx.drawImage(vlightning, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+			if(this.vstate == 3 || this.hstate == 3){
+				this.hstate = 0;
+				this.vstate = 0;
 				this.LonScreen = 0;
+			}
+			if(this.hstate == 0){
+				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				this.hstate+=1;
+			}
+			else if(this.hstate == 1){
+				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				this.hstate+=1;
+			}
+			else if(this.hstate == 2){
+				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				this.hstate+=1;
+			}
+			if(this.vstate == 0){
+				ctx.drawImage(vlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+				this.vstate+=1;
+			}
+			else if(this.vstate == 1){
+				ctx.drawImage(vlightning2, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+				this.vstate+=1;
+			}
+			else if(this.vstate == 2){
+				ctx.drawImage(vlightning3, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+				this.vstate+=1;
+			}
 		}
 	},
 	effect: function(){
@@ -2037,6 +2088,168 @@ var airlightning = {
 	
 };
 //-------------------------------------------------------------- Enemy Spells -------------------------------------------------------//
+// Globblyfire: Damages player if in radius
+var Globblyfire = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (16*this.frame);
+			this.height = 16 + (16*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+// Globblyfire2: Damages player if in radius
+var Globblyfire2 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (16*this.frame);
+			this.height = 16 + (16*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+// Globblyfire: Damages player if in radius
+var Globblyfire3 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (16*this.frame);
+			this.height = 16 + (16*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+
+
+
 // sIce: Slows player down by halving speed
 var sIce = {
 	color: "00CCFF",
@@ -2160,6 +2373,8 @@ var sLightning = {
 	vheight: 800,
 	hwidth: 800,
 	hheight: 32,
+	hstate: 0,
+	vstate: 0,
 	hx: 400,
 	hy: -2000,
 	vx: -2000,
@@ -2168,9 +2383,31 @@ var sLightning = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(shlightning, this.hx - this.hwidth/2, this.hy);
+			if(this.hstate == 0){
+				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				this.hstate+=1;
+			}
+			else if(this.hstate == 1){
+				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				this.hstate+=1;
+			}
+			else if(this.hstate == 2){
+				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				this.hstate=0;
+			}
 			if(this.vx != -2000){
-				ctx.drawImage(svlightning, this.vx, this.vy - this.vheight/2);
+				if(this.vstate == 0){
+					ctx.drawImage(vlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+					this.vstate+=1;
+				}
+				else if(this.vstate == 1){
+					ctx.drawImage(vlightning2, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+					this.vstate+=1;
+				}
+				else if(this.vstate == 2){
+					ctx.drawImage(vlightning3, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+					this.vstate=0;
+				}
 			}
 		}
 	},

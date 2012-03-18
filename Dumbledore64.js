@@ -14,21 +14,18 @@
 
 */
 /*
-	Version 0.4.1 Changes:
-		-Bug Fixes:
-			-Fixed ice1 having no cooldown
-			-Fixed Maelstrom getting bigger with each cast
-		-Buffed many spells by shortening cooldowns
-		-Nerfed Earth2
-		-Added spell element markers for when a box is picked up
-		-Added "E" button. Drops spell 2, Q only drops spell 1. 
-			Makes it easier to get the spell the player is after
-		-Added 'Spawner' Enemy. Spawns 1 16x16 enemy every 3 seconds for a max of 4
-			Has 5 hp.
-		-Removed 1 fast enemy
-		-Added Sound Effects
+	Version 0.4.2 Changes:
+		-Added Lightning Animation
+		-Added a menu graphic
+		-Added new box graphics
+		-Added new enemy sprites
+		-Globbly enemy now explodes on hit
 		
 	TODO:
+		-Bugs
+			-Fix ice skills glitch
+			-Fix Sound Effects for all browsers
+			-Fix Sorceror AI
 		-Spells
 			-Mystic (Purple)
 				-Passive Buffs? / Teleporting?
@@ -38,14 +35,11 @@
 			-Enemy that builds obstacles
 			-Improve AI
 		-Cooldown Reduction on box pickup
-		-Breakable Obstacles **IP BOT**
-		-Sound Effects **IP MID**
+		-Breakable Obstacles
 		-Optimization/Code Minifier
 		-Maybe make spells have limited casts?
 */
-
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
-
 // Canvas, Frames per Second, KeysDown, Global vars
 var canvas = document.createElement("canvas");
 canvas.width = 800;
@@ -78,8 +72,6 @@ var currpts = 0;
 // Key Listeners
 addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
 addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
-
-
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 var highscore1 = $.jStorage.get("highscore1");
 if(!highscore1){
@@ -135,99 +127,84 @@ function getPositionhover(event){
 //------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //Girraffix
 var Wizzurd = new Image();
-Wizzurd.src = "grafix\\wizzurd32.png";
-
+Wizzurd.src = "grafix/wizzurd32.png";
 //Ondmg
 var Wizzurd2 = new Image();
-Wizzurd2.src = "grafix\\nega-wizzurd32.png";
-
-//Enemy1
-var Lavaman = new Image();
-Lavaman.src = "grafix\\lavaman32.png";
-
-//Enemy1-2
-var Knight = new Image();
-Knight.src = "grafix\\Knightman32.png";
-
+Wizzurd2.src = "grafix/nega-wizzurd32.png";
+//Lavaman
+var Lavamanpic = new Image();
+Lavamanpic.src = "grafix/lavaman32.png";
 //Tenemy
-var Robo = new Image();
-Robo.src = "grafix\\nicebot32.png";
-
+var Globbly = new Image();
+Globbly.src = "grafix/cre.globbly32.png";
+//Enemy1
+var Hudge = new Image();
+Hudge.src = "grafix/cre.hudge32.png";
+//Enemy2
+var Pikkit = new Image();
+Pikkit.src = "grafix/cre.pikkit32.png";
+//Spawner
+var Splavaman = new Image();
+Splavaman.src = "grafix/lavaman64.png";
 //Evil Wizzurd
 var Sorcerorpng = new Image();
-Sorcerorpng.src = "grafix\\poison-wizzurd32.png";
-
+Sorcerorpng.src = "grafix/poison-wizzurd32.png";
 //TinyWizard
 var BabyWizard = new Image();
-BabyWizard.src = "grafix\\wizzurd16.png";
-
+BabyWizard.src = "grafix/wizzurd16.png";
 //Fire powerup
 var Firebox = new Image();
-Firebox.src = "grafix\\redcube19.png";
-
+Firebox.src = "grafix/ele.fire32.png";
 //Ice powerup
 var Icebox = new Image();
-Icebox.src = "grafix\\tealcube19.png";
-
+Icebox.src = "grafix/ele.ice32.png";
 //Earth powerup
 var Earthbox = new Image();
-Earthbox.src = "grafix\\greencube19.png";
-
+Earthbox.src = "grafix/ele.earth32.png";
 //lightning powerup
 var Thunderbox = new Image();
-Thunderbox.src = "grafix\\bluecube19.png";
-
-//lightning powerup
+Thunderbox.src = "grafix/ele.zap32.png";
+//Air powerup
 var Windbox = new Image();
-Windbox.src = "grafix\\greycube19.png";
-
+Windbox.src = "grafix/ele.air32.png";
 //hlightning
-var hlightning = new Image();
-hlightning.src = "grafix\\lightning-h.png";
-
+var hlightning1 = new Image();
+hlightning1.src = "grafix/lightning-h1.png";
+var hlightning2 = new Image();
+hlightning2.src = "grafix/lightning-h2.png";
+var hlightning3 = new Image();
+hlightning3.src = "grafix/lightning-h3.png";
 //vlightning
-var vlightning = new Image();
-vlightning.src = "grafix\\lightning-v.png";
-
-//shlightning
-var shlightning = new Image();
-shlightning.src = "grafix\\lightning-h.png";
-
-//svlightning
-var svlightning = new Image();
-svlightning.src = "grafix\\lightning-v.png";
-
+var vlightning1 = new Image();
+vlightning1.src = "grafix/lightning-v1.png";
+var vlightning2 = new Image();
+vlightning2.src = "grafix/lightning-v2.png";
+var vlightning3 = new Image();
+vlightning3.src = "grafix/lightning-v3.png";
+//Buttons
+var newGame = new Image();
+newGame.src = "grafix/butt.newgame.png";
 //--------------------------------------------------- Sounds ------------------------------------------------------------------------//
 //Dumblebeam
-var Beam = new Audio("Sounds\\beep low.wav");
-
+var Beam = document.getElementsByTagName("audio")[0];
 //Enemy Dead
-var Killed = new Audio("Sounds\\short zap low.wav");
-
+var Killed = document.getElementsByTagName("audio")[1];
 //Pickup
-var Pickup = new Audio("Sounds\\beep boop.wav");
-
+var Pickup = document.getElementsByTagName("audio")[2];
 //Fire
-var Explosion = new Audio("Sounds\\divebomb super low.wav");
-
+var Explosion = document.getElementsByTagName("audio")[3];
 //Ice
-var Frozen = new Audio("Sounds\\pulse beam.wav");
-
+var Frozen = document.getElementsByTagName("audio")[4];
 //Fire Wave
-var Fwave = new Audio("Sounds\\divebomb mid.wav");
-
+var Fwave = document.getElementsByTagName("audio")[5];
 //Thunder
-var Thunder = new Audio("Sounds\\hard laser.wav");
-
+var Thunder = document.getElementsByTagName("audio")[6];
 //Wind
-var Wind = new Audio("Sounds\\divebomb low.wav");
-
+var Wind = document.getElementsByTagName("audio")[7];
 //Ondmg
-var onDmg = new Audio("Sounds\\short zap.wav");
-
+var onDmg = document.getElementsByTagName("audio")[8];
 //SpawnerSpawn
-var SpawnerSpawn = new Audio("Sounds\\beep boop low.wav");
-
+var SpawnerSpawn = document.getElementsByTagName("audio")[9];
 //------------------------------------------------- Menu ----------------------------------------------------------------------------//
 var Menu = {
 	x: canvas.width/2,
@@ -237,14 +214,14 @@ var Menu = {
 	draw: function(){
 		ctx.fillStyle = "black";
 		ctx.font = "18pt Arial";
-		ctx.fillText("New Game", this.x-this.width/2, this.y-this.height/2);
+		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-2*this.height);
 		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + this.height);
 		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
 		ctx.fillText("Credits", this.x-this.width/2, this.y-this.height/2 + 3*this.height);
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y && hY>=this.y-this.height*7/6){
-			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6, this.width, this.height);
+		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width/2 && hY <= this.y && hY>=this.y-2*this.height){
+			ctx.strokeRect(this.x-this.width*4/5, this.y-this.height*2, 3*this.width/2, 4*this.height/2);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y && cY>=this.y-this.height*7/6){
+		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y && cY>=this.y-2*this.height){
 			STATE = 1;
 		}
 		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + this.height && hY>=this.y-this.height*7/6 + this.height){
@@ -378,7 +355,8 @@ var player = {
 		|| collision(this.dir, this, EnemyC)  || collision(EnemyC.dir, EnemyC, this) || collision(Tenemy.dir, Tenemy, this)
 		|| collision(this.dir, this, Tenemy) || collision(TenemyA.dir, TenemyA, this) || collision(this.dir, this, TenemyA)
 		|| collision(TenemyB.dir, TenemyB, this) || collision(this.dir, this, TenemyB) || collision(Sorceror.dir, Sorceror, this) || collision(this.dir, this, Sorceror)
-		|| collision(Bwizz.dir, Bwizz, this) || collision(this.dir, this, Bwizz)){
+		|| collision(Lavaman.dir, Lavaman, this) || collision(this.dir, this, Lavaman)|| collision(Lavaman2.dir, Lavaman2, this) || collision(this.dir, this, Lavaman2)
+		|| collision(Lavaman3.dir, Lavaman3, this) || collision(this.dir, this, Lavaman3)|| collision(Lavaman4.dir, Lavaman4, this) || collision(this.dir, this, Lavaman4)){
 		this.hp-=1;
 		onDmg.play();
 		hptimer = 30;
@@ -394,8 +372,8 @@ var player = {
 var redCube = {
 	x: -100,
 	y: -200,
-	width: 19,
-	height: 19,
+	width: 32,
+	height: 32,
 	timeLeft: 0,
 	
 	draw: function(){
@@ -462,8 +440,8 @@ var redCube = {
 var tealCube = {
 	x: -100,
 	y: -200,
-	width: 19,
-	height: 19,
+	width: 32,
+	height: 32,
 	timeLeft: 0,
 	
 	draw: function(){
@@ -530,8 +508,8 @@ var tealCube = {
 var greenCube = {
 	x: -100,
 	y: -200,
-	width: 19,
-	height: 19,
+	width: 32,
+	height: 32,
 	timeLeft: 0,
 	
 	draw: function(){
@@ -595,11 +573,11 @@ var greenCube = {
 };
 
 // Thunder drop
-var blueCube = {
+var yellowCube = {
 	x: -100,
 	y: -200,
-	width: 19,
-	height: 19,
+	width: 32,
+	height: 32,
 	timeLeft: 0,
 	
 	draw: function(){
@@ -666,8 +644,8 @@ var blueCube = {
 var greyCube = {
 	x: -100,
 	y: -200,
-	width: 19,
-	height: 19,
+	width: 32,
+	height: 32,
 	timeLeft: 0,
 	
 	draw: function(){
@@ -960,7 +938,7 @@ function drawtypeMarker(M){
 			M.color = "00FFFF";
 		}
 		else if(M.text == "+ Lightning"){
-			M.color = "0000CC";
+			M.color = "yellow";
 		}
 		else if(M.text == "+ Earth"){
 			M.color = "33FF00";
@@ -1417,7 +1395,7 @@ function reset(){
 	redCube.timeLeft = 0;
 	tealCube.timeLeft = 0;
 	greenCube.timeLeft = 0;
-	blueCube.timeLeft = 0;
+	yellowCube.timeLeft = 0;
 	greyCube.timeLeft = 0;
 }
 
@@ -1547,8 +1525,8 @@ setInterval(function(){
 			tealCube.draw();
 			pickup(tealCube);
 		
-			blueCube.draw();
-			pickup(blueCube);
+			yellowCube.draw();
+			pickup(yellowCube);
 			
 			greyCube.draw();
 			pickup(greyCube);
@@ -1726,7 +1704,14 @@ setInterval(function(){
 			spawn(TenemyB);
 			AI(TenemyB);
 			move(TenemyB);
-		
+			
+			Globblyfire.draw();
+			Globblyfire.move();
+			Globblyfire2.draw();
+			Globblyfire2.move();
+			Globblyfire3.draw();
+			Globblyfire3.move();
+			
 			Sorceror.draw();
 			Sorceror.spawn();
 			Sorceror.AI();
@@ -1737,7 +1722,19 @@ setInterval(function(){
 			Spawner.fire();
 			move(Spawner);
 			spawn(Spawner);
-			Bwizz.draw();
+			Lavaman.draw();
+			AI(Lavaman);
+			move(Lavaman);
+			Lavaman2.draw();
+			AI(Lavaman2);
+			move(Lavaman2);
+			Lavaman3.draw();
+			AI(Lavaman3);
+			move(Lavaman3);
+			Lavaman4.draw();
+			AI(Lavaman4);
+			move(Lavaman4);
+			/*Bwizz.draw();
 			AI(Bwizz);
 			move(Bwizz);
 			Bwizz.fire();
@@ -1766,7 +1763,7 @@ setInterval(function(){
 			
 			tBulletmove(tinybullet4);
 			drawBullet(tinybullet4);
-		
+		*/
 			drawMarker(marker);
 			moveMarker(marker);
 		

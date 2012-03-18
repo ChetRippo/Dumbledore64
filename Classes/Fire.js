@@ -37,13 +37,13 @@ var fire = {
 			this.height = 32 + (16*this.frame);
 			this.frame++;
 			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
+				if(contained(Enemies[E], this)){
 					onHit(Enemies[E], Enemies[E].rp);
 				}
-				if(collision(Sorceror.dir, Sorceror, this)){
+				if(contained(Sorceror, this)){
 					Sorceror.onHit();
 				}
-				if(collision(Spawner.dir, Spawner, this)){
+				if(contained(Spawner, this)){
 					Spawner.onHit();
 				}
 			}
@@ -108,13 +108,13 @@ var fire2 = {
 			this.height = 32 + (32*this.frame);
 			this.frame++;
 			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
+				if(contained(Enemies[E], this)){
 					onHit(Enemies[E], Enemies[E].rp);
 				}
-				if(collision(Sorceror.dir, Sorceror, this)){
+				if(contained(Sorceror, this)){
 					Sorceror.onHit();
 				}
-				if(collision(Spawner.dir, Spawner, this)){
+				if(contained(Spawner, this)){
 					Spawner.onHit();
 				}
 			}
