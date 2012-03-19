@@ -14,18 +14,18 @@
 
 */
 /*
-	Version 0.4.2 Changes:
-		-Added Lightning Animation
-		-Added a menu graphic
-		-Added new box graphics
-		-Added new enemy sprites
-		-Globbly enemy now explodes on hit
-		
+	Version 0.4.3 Changes:
+		-Fixed Frozen Web bug. Ice spells should all be fixed now
+		-Added to Enemy AI
+		-Hudge enemies now have a flipped version when they move left
+		-Moved player spawn to center
+		-Moved one obstacle closer to center
+		-Modded HUD to show element symbols instead of all text
+		-Earth now takes 1 second to cast, during which you cannot move
+		-Added casting bar
 	TODO:
 		-Bugs
-			-Fix ice skills glitch
-			-Fix Sound Effects for all browsers
-			-Fix Sorceror AI
+			-Fix Sound Effects for all browsers (not in FF 11?)
 		-Spells
 			-Mystic (Purple)
 				-Passive Buffs? / Teleporting?
@@ -33,11 +33,11 @@
 				-HP Steal?
 		-More enemies and AI
 			-Enemy that builds obstacles
-			-Improve AI
 		-Cooldown Reduction on box pickup
 		-Breakable Obstacles
 		-Optimization/Code Minifier
 		-Maybe make spells have limited casts?
+		-Sound plays on reset
 */
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
 // Canvas, Frames per Second, KeysDown, Global vars
@@ -63,6 +63,8 @@ var hptimer = 0;
 var spell1 = "N/A";
 var spell2 = "N/A";
 var spell = "N/A";
+var spell1pic = "N/A";
+var spell2pic = "N/A";
 var keycount = 0;
 //Score
 var score = 0;
@@ -133,13 +135,15 @@ var Wizzurd2 = new Image();
 Wizzurd2.src = "grafix/nega-wizzurd32.png";
 //Lavaman
 var Lavamanpic = new Image();
-Lavamanpic.src = "grafix/lavaman32.png";
+Lavamanpic.src = "grafix/cre.firesprite32.png";
 //Tenemy
 var Globbly = new Image();
 Globbly.src = "grafix/cre.globbly32.png";
-//Enemy1
-var Hudge = new Image();
-Hudge.src = "grafix/cre.hudge32.png";
+//Hudge
+var HudgeL = new Image();
+HudgeL.src = "grafix/cre.hudge.l32.png";
+var HudgeR = new Image();
+HudgeR.src = "grafix/cre.hudge.r32.png";
 //Enemy2
 var Pikkit = new Image();
 Pikkit.src = "grafix/cre.pikkit32.png";
@@ -167,6 +171,9 @@ Thunderbox.src = "grafix/ele.zap32.png";
 //Air powerup
 var Windbox = new Image();
 Windbox.src = "grafix/ele.air32.png";
+// Particle
+var particle = new Image();
+particle.src = "grafix/particle.png";
 //hlightning
 var hlightning1 = new Image();
 hlightning1.src = "grafix/lightning-h1.png";
@@ -315,8 +322,8 @@ var Credits = {
 //------------------------------------------------- Player --------------------------------------------------------------------------//
 // Player
 var player = {
-	x: 320,
-	y: 128,
+	x: 400,
+	y: 256,
 	width: 32,
 	height: 32,
 	speed: 8,
@@ -366,7 +373,38 @@ var player = {
 	}
 	}
 };
-
+//Casting Bar
+var castingBar = {
+	x: player.x - player.width/2,
+	y: player.y + player.height/2,
+	width: player.width,
+	height: player.height/4,
+	width2: 0,
+	onScreen: 0,
+	cast: 0,
+	castmax: 0,
+	draw: function(){
+		this.x = player.x - player.width/2;
+		this.y = player.y + player.height/2;
+		if(this.onScreen == 1){
+			ctx.fillStyle = "0404B4";
+			ctx.strokeStyle = "black";
+			ctx.strokeRect(this.x, this.y, this.width, this.height);
+			ctx.fillRect(this.x + 2, this.y + 2, this.width2, this.height - 2);
+		}
+	},
+	tick: function(){
+		if(this.cast > 0){
+			player.speed = 0;
+			this.cast-=1;
+			this.width2 = this.cast/this.castmax * this.width;
+		}
+		else{
+			player.speed = 8;
+			this.onScreen = 0;
+		}
+	}
+}
 //---------------------------------------------- Pickups ----------------------------------------------------------------------------//
 // Fire drop
 var redCube = {
@@ -767,7 +805,7 @@ var obstacle = {
 // Obstacle 2
 var obstacleA = {
 	color: "green",
-	x: 128,
+	x: 256,
 	y: 128,
 	width: 128,
 	height: 64,
@@ -1082,10 +1120,56 @@ function UI(){
 	if((spell1 == "Lightning" && spell2 == "Air") || (spell2 == "Lightning" && spell1 == "Air")){
 		spell = "Thunderstorm";
 	}
+	if(spell1 == "Fire"){
+		spell1pic = Firebox;
+	}
+	else if(spell1 == "Ice"){
+		spell1pic = Icebox;
+	}
+	else if(spell1 == "Earth"){
+		spell1pic = Earthbox;
+	}
+	else if(spell1 == "Lightning"){
+		spell1pic = Thunderbox;
+	}
+	else if(spell1 == "Air"){
+		spell1pic = Windbox;
+	}
+	else{
+		spell1pic = "N/A";
+	}
+	if(spell2 == "Fire"){
+		spell2pic = Firebox;
+	}
+	else if(spell2 == "Ice"){
+		spell2pic = Icebox;
+	}
+	else if(spell2 == "Earth"){
+		spell2pic = Earthbox;
+	}
+	else if(spell2 == "Lightning"){
+		spell2pic = Thunderbox;
+	}
+	else if(spell2 == "Air"){
+		spell2pic = Windbox;
+	}
+	else{
+		spell2pic = "N/A";
+	}
 	// Text
 	ctx.fillStyle = "black";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Spell: " + spell1 + " + " + spell2 + " = " + spell, 32, 512);
+	ctx.fillText("Spell:", 32, 512);
+	ctx.strokeStyle = "000000";
+	ctx.strokeRect(92, 476, 32, 48);
+	ctx.strokeRect(124, 476, 32, 48);
+	if(spell1pic != "N/A"){
+		ctx.drawImage(spell1pic, 90, 484);
+	}
+	if(spell2pic != "N/A"){
+		ctx.drawImage(spell2pic, 122, 484);
+	}
+	ctx.fillText("= " + spell, 160, 512);
 	// Recharge
 	if(spell == "Fire"){
 		ctx.fillStyle = "black";
@@ -1359,7 +1443,21 @@ function reset(){
 	player.speed = 8;
 	player.hp = 3;
 	player.dir = "W";
-	
+	Globblyfire.x = -100;
+	Globblyfire.y = -200;
+	Globblyfire.width = 16;
+	Globblyfire.height = 16;
+	Globblyfire.onScreen = 0;
+	Globblyfire2.x = -100;
+	Globblyfire2.y = -200;
+	Globblyfire2.width = 16;
+	Globblyfire2.height = 16;
+	Globblyfire2.onScreen = 0;
+	Globblyfire3.x = -100;
+	Globblyfire3.y = -200;
+	Globblyfire3.width = 16;
+	Globblyfire3.height = 16;
+	Globblyfire3.onScreen = 0;
 	
 	for(E in Enemies){
 		onHit(Enemies[E], Enemies[E].rp);
@@ -1734,36 +1832,7 @@ setInterval(function(){
 			Lavaman4.draw();
 			AI(Lavaman4);
 			move(Lavaman4);
-			/*Bwizz.draw();
-			AI(Bwizz);
-			move(Bwizz);
-			Bwizz.fire();
-			Bwizz2.draw();
-			AI(Bwizz2);
-			move(Bwizz2);
-			Bwizz2.fire();
-			Bwizz3.draw();
-			AI(Bwizz3);
-			move(Bwizz3);
-			Bwizz3.fire();
-			Bwizz4.draw();
-			AI(Bwizz4);
-			move(Bwizz4);
-			Bwizz4.fire();
-		
-			//Bwizz bullet
-			tBulletmove(tinybullet);
-			drawBullet(tinybullet);
 			
-			tBulletmove(tinybullet2);
-			drawBullet(tinybullet2);
-			
-			tBulletmove(tinybullet3);
-			drawBullet(tinybullet3);
-			
-			tBulletmove(tinybullet4);
-			drawBullet(tinybullet4);
-		*/
 			drawMarker(marker);
 			moveMarker(marker);
 		
@@ -1784,6 +1853,9 @@ setInterval(function(){
 		
 			drawtypeMarker(typemarker3);
 			moveMarker(typemarker3);
+			
+			castingBar.draw();
+			castingBar.tick();
 			
 			// Cooldown calculation
 			if(cd <= 0){

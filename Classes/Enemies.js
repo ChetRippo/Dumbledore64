@@ -1,6 +1,6 @@
 //--------------------------------------------- Enemies -----------------------------------------------------------------------------//
 
-// Enemy 1
+// Enemy 1 - Hudge
 var Enemy = {
 	x: 500,
 	y: -400,
@@ -9,18 +9,33 @@ var Enemy = {
 	speed: 4,
 	speed2: 2,
 	dirct: 0,
+	dir: "W",
 	respawn: 1,
 	origrp: 1,
 	rp: 100,
+	LR: "",
 	onScreen: 0,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Hudge, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 
-// Enemy 2
+// Enemy 2 - Pikkit
 var EnemyA = {
 	x: -500,
 	y: -500,
@@ -31,6 +46,7 @@ var EnemyA = {
 	speed2: 2,
 	respawn: 250,
 	origrp: 250,
+	dir: "W",
 	rp: 100,
 	onScreen: 0,
 	movement: false,
@@ -40,7 +56,7 @@ var EnemyA = {
 	}
 };
 
-// Enemy 3
+// Enemy 3 - Hudge
 var EnemyB = {
 	x: -500,
 	y: -500,
@@ -52,15 +68,30 @@ var EnemyB = {
 	respawn: 125,
 	origrp: 125,
 	rp: 100,
+	dir: "W",
+	LR: "",
 	onScreen: 0,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Hudge, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 
-// Enemy 4
+// Enemy 4 - Pikkit
 var EnemyC = {
 	x: -500,
 	y: -500,
@@ -70,6 +101,7 @@ var EnemyC = {
 	speed: 4,
 	speed2: 2,
 	respawn: 300,
+	dir: "W",
 	origrp: 300,
 	rp: 100,
 	onScreen: 0,
@@ -80,7 +112,7 @@ var EnemyC = {
 	}
 };
 
-// Triangle Enemy 1
+// Fast Enemy - Globbly
 var Tenemy = {
 	x: 2000,
 	y: 0,
@@ -89,6 +121,7 @@ var Tenemy = {
 	speed: 8,
 	speed2: 4,
 	dirct: 0,
+	dir: "W",
 	respawn: 600,
 	origrp: 600,
 	rp: 600,
@@ -99,7 +132,7 @@ var Tenemy = {
 		ctx.drawImage(Globbly, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
-// Triangle Enemy 2
+// Fast Enemy 2 - Globbly
 var TenemyA = {
 	x: 2000,
 	y: 0,
@@ -108,6 +141,7 @@ var TenemyA = {
 	speed: 8,
 	speed2: 4,
 	dirct: 0,
+	dir: "W",
 	respawn: 2400,
 	origrp: 2400,
 	rp: 600,
@@ -119,7 +153,7 @@ var TenemyA = {
 	}
 };
 
-// Triangle Enemy 3
+// Fast Enemy 3 - Globbly
 var TenemyB = {
 	x: 2000,
 	y: 0,
@@ -128,6 +162,7 @@ var TenemyB = {
 	speed: 8,
 	speed2: 4,
 	dirct: 0,
+	dir: "W",
 	respawn: 1800,
 	origrp: 1800,
 	rp: 600,
@@ -138,168 +173,6 @@ var TenemyB = {
 		ctx.drawImage(Globbly, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
-/*
-// Baby Wizard :]
-var Bwizz = {
-	x: 2000,
-	y: 0,
-	width: 16,
-	height: 16,
-	speed: 4,
-	speed2: 2,
-	dirct: 0,
-	respawn: -1,
-	origrp: -1,
-	dir: "W",
-	rp: -1,
-	onScreen: 0,
-	cd: 15,
-	movement: false,
-	// Draws the enemy on the canvas when called
-	draw: function(){
-		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
-	},
-	fire: function(){
-		if(this.cd<= 0 && this.movement == true){
-			if(this.dir == "W" || this.dir == "S"){
-				tinybullet.shoot(this.dir, 4, 16);
-				this.cd = 45;
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				tinybullet.shoot(this.dir, 16, 4);
-				this.cd = 45;
-			}
-			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
-				tinybullet.shoot(this.dir, 4, 4);
-				this.cd = 45;
-			}
-		}
-		else{
-			this.cd-=1;
-		}
-	}
-};
-// Baby Wizard :]
-var Bwizz2 = {
-	x: 2000,
-	y: 0,
-	width: 16,
-	height: 16,
-	speed: 4,
-	speed2: 2,
-	dirct: 0,
-	respawn: -1,
-	origrp: -1,
-	dir: "W",
-	rp: -1,
-	onScreen: 0,
-	cd: 15,
-	movement: false,
-	// Draws the enemy on the canvas when called
-	draw: function(){
-		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
-	},
-	fire: function(){
-		if(this.cd<= 0 && this.movement == true){
-			if(this.dir == "W" || this.dir == "S"){
-				tinybullet2.shoot(this.dir, 4, 16);
-				this.cd = 45;
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				tinybullet2.shoot(this.dir, 16, 4);
-				this.cd = 45;
-			}
-			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
-				tinybullet2.shoot(this.dir, 4, 4);
-				this.cd = 45;
-			}
-		}
-		else{
-			this.cd-=1;
-		}
-	}
-};
-// Baby Wizard :]
-var Bwizz3 = {
-	x: 2000,
-	y: 0,
-	width: 16,
-	height: 16,
-	speed: 4,
-	speed2: 2,
-	dirct: 0,
-	respawn: -1,
-	origrp: -1,
-	dir: "W",
-	rp: -1,
-	onScreen: 0,
-	cd: 15,
-	movement: false,
-	// Draws the enemy on the canvas when called
-	draw: function(){
-		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
-	},
-	fire: function(){
-		if(this.cd<= 0 && this.movement == true){
-			if(this.dir == "W" || this.dir == "S"){
-				tinybullet3.shoot(this.dir, 4, 16);
-				this.cd = 45;
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				tinybullet3.shoot(this.dir, 16, 4);
-				this.cd = 45;
-			}
-			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
-				tinybullet3.shoot(this.dir, 4, 4);
-				this.cd = 45;
-			}
-		}
-		else{
-			this.cd-=1;
-		}
-	}
-};
-// Baby Wizard :]
-var Bwizz4 = {
-	x: 2000,
-	y: 0,
-	width: 16,
-	height: 16,
-	speed: 4,
-	speed2: 2,
-	dirct: 0,
-	respawn: -1,
-	origrp: -1,
-	dir: "W",
-	rp: -1,
-	onScreen: 0,
-	cd: 15,
-	movement: false,
-	// Draws the enemy on the canvas when called
-	draw: function(){
-		ctx.drawImage(BabyWizard, this.x - this.width / 2, this.y - this.height / 2);
-	},
-	fire: function(){
-		if(this.cd<= 0 && this.movement == true){
-			if(this.dir == "W" || this.dir == "S"){
-				tinybullet4.shoot(this.dir, 4, 16);
-				this.cd = 45;
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				tinybullet4.shoot(this.dir, 16, 4);
-				this.cd = 45;
-			}
-			else if(this.dir == "WA" || this.dir == "SD" || this.dir == "WD" || this.dir == "AS"){
-				tinybullet4.shoot(this.dir, 4, 4);
-				this.cd = 45;
-			}
-		}
-		else{
-			this.cd-=1;
-		}
-	}
-};
-*/
 
 // Lavaman
 var Lavaman = {
@@ -310,6 +183,7 @@ var Lavaman = {
 	speed: 4,
 	speed2: 2,
 	dirct: 0,
+	dir: "W",
 	respawn: -1,
 	origrp: -1,
 	rp: -1,
@@ -328,6 +202,7 @@ var Lavaman2 = {
 	speed: 4,
 	speed2: 2,
 	dirct: 0,
+	dir: "W",
 	respawn: -1,
 	origrp: -1,
 	rp: -1,
@@ -346,6 +221,7 @@ var Lavaman3 = {
 	speed: 4,
 	speed2: 2,
 	dirct: 0,
+	dir: "W",
 	respawn: -1,
 	origrp: -1,
 	rp: -1,
@@ -364,6 +240,7 @@ var Lavaman4 = {
 	speed: 4,
 	speed2: 2,
 	dirct: 0,
+	dir: "W",
 	respawn: -1,
 	origrp: -1,
 	rp: -1,
@@ -441,7 +318,7 @@ var Spawner = {
 				Lavaman.y = this.y-this.height/2;
 				Lavaman.movement = true;
 				Lavaman.cd = 15;
-				this.cd = 90;
+				this.cd = 60;
 			}
 			else if(Lavaman2.onScreen == 0){
 				SpawnerSpawn.play();
@@ -450,7 +327,7 @@ var Spawner = {
 				Lavaman2.y = this.y-this.height/2;
 				Lavaman2.movement = true;
 				Lavaman2.cd = 15;
-				this.cd = 90;
+				this.cd = 60;
 			}
 			else if(Lavaman3.onScreen == 0){
 				SpawnerSpawn.play();
@@ -459,7 +336,7 @@ var Spawner = {
 				Lavaman3.y = this.y-this.height/2;
 				Lavaman3.movement = true;
 				Lavaman3.cd = 15;
-				this.cd = 90;
+				this.cd = 60;
 			}
 			else if(Lavaman4.onScreen == 0){
 				SpawnerSpawn.play();
@@ -468,7 +345,7 @@ var Spawner = {
 				Lavaman4.y = this.y-this.height/2;
 				Lavaman4.movement = true;
 				Lavaman4.cd = 15;
-				this.cd = 90;
+				this.cd = 60;
 			}
 		}
 		else{
@@ -569,7 +446,6 @@ var Sorceror = {
 	spawned: 60,
 	rp: 900,
 	onScreen: 0,
-	reverse: 0,
 	// Draws the enemy on the canvas when called
 	draw: function(){
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
@@ -677,7 +553,6 @@ var Sorceror = {
 			this.hp = 3;
 			this.onScreen = 1;
 			this.cd = 0;
-			this.reverse = 0;
 			this.spawned = 60;
 			if((Math.floor(Math.random() * 3) + 1) == 1){
 				this.spell = "Fire";
@@ -756,12 +631,8 @@ var Sorceror = {
 				&& this.x > 32 && this.x < 768 && this.y > 32 && this.y < 560){
 				this.cast();
 			}
-			if(this.cd <= 0){
-				this.reverse = 0;
-			}
 			else if(!(this.cd <= 0)){
 				this.cd-=1;
-				this.reverse = 1;
 			}
 		}
 		else if(this.spell == "Lightning"){
@@ -769,16 +640,11 @@ var Sorceror = {
 				&& this.x > 32 && this.x < 768){
 				this.cast();
 			}
-			if(this.cd <= 0){
-				this.reverse = 0;
-			}
 			else if(!(this.cd <= 0)){
 				this.cd-=1;
-				this.reverse = 1;
 			}
 		}
-		if(collision(this.dir, this, obstacle) || collision(this.dir, this, obstacleA) || collision(this.dir, this, obstacleB) || 
-			(this.spawned <=0 && this.x <= 8) || (this.spawned<=0&&this.x >= 792) || (this.spawned<=0&&this.y <= 8) || (this.spawned<=0&&this.y >= 570)){
+		if(collision(this.dir, this, obstacle) || collision(this.dir, this, obstacleA) || collision(this.dir, this, obstacleB)){
 			if(this.dir == "W"){
 				this.dir = "D";
 				this.dirct = 20;
@@ -802,92 +668,52 @@ var Sorceror = {
 			else if(this.dir == "WD"){
 				this.dir = "W";
 				this.dirct = 20;
-				this.x+=this.speed;
-				this.y-=this.speed;
+				this.x-=this.speed;
+				this.y+=this.speed;
 			}
 			else if(this.dir == "WA"){
 				this.dir = "A";
 				this.dirct = 20;
-				this.x-=this.speed;
-				this.y-=this.speed;
+				this.x+=this.speed;
+				this.y+=this.speed;
 			}
 			else if(this.dir == "AS"){
 				this.dir = "S";
 				this.dirct = 20;
-				this.x-=this.speed;
-				this.y+=this.speed;
+				this.x+=this.speed;
+				this.y-=this.speed;
 			}
 			else if(this.dir == "SD"){
 				this.dir = "D";
 				this.dirct = 20;
-				this.x+=this.speed;
-				this.y+=this.speed;
+				this.x-=this.speed;
+				this.y-=this.speed;
 			}
 		}
 		else if(this.dirct == 0){
 			if(xdiff < 4 && ydiff < 4){
-				if(this.reverse == 0){
-					this.dir = "SD";
-				}
-				else{	
-					this.dir = "WA";
-				}
+				this.dir = "WA";
 			}
 			else if(xdiff < 4 && ydiff > 4){
-				if(this.reverse == 0){
-					this.dir = "WD";
-				}
-				else{
-					this.dir = "AS";
-				}
+				this.dir = "AS";
 			}
 			else if(xdiff > 4 && ydiff < 4){
-				if(this.reverse == 0){
-					this.dir = "AS";
-				}
-				else{
-					this.dir = "WD";
-				}
+				this.dir = "WD";
 			}
 			else if (xdiff > 4 && ydiff > 4){
-				if(this.reverse == 0){
-					this.dir = "WA";
-				}
-				else{
-					this.dir = "SD";
-				}
+				this.dir = "SD";
 			}
 			else if (xdiff == 4 && ydiff > 4){
-				if(this.reverse == 0){
-					this.dir = "S";
-				}
-				else{
-					this.dir = "W";
-				}
+				this.dir = "S";
 			}
 			else if(xdiff == 4 && ydiff < 4){
-				if(this.reverse == 0){
-					this.dir = "W";
-				}
-				else{
-					this.dir = "S";
-				}
+				this.dir = "W";
 			}
 			else if(xdiff < 4 && ydiff == 4){
-				if(this.reverse == 0){
-					this.dir = "A";
-				}
-				else{
-					this.dir = "D";
-				}
+				this.dir = "A";
 			}
 			else{
-				if(this.reverse == 0){
-					this.dir = "D";
-				}
-				else{
-					this.dir = "A";
-				}
+				this.dir = "D";
 			}
 		}
 		else{
@@ -1005,23 +831,23 @@ function move(E){
 		}
 		if(E.dir == "AS" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
 			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
-			E.y-=E.speed;
-			E.x+=E.speed;
+			E.y+=E.speed;
+			E.x-=E.speed;
 		}
 		if(E.dir == "WA" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
 			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
-			E.y+=E.speed;
-			E.x+=E.speed;
+			E.y-=E.speed;
+			E.x-=E.speed;
 		}
 		if(E.dir == "WD" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
 			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
-			E.y+=E.speed;
-			E.x-=E.speed;
+			E.y-=E.speed;
+			E.x+=E.speed;
 		}
 		if(E.dir == "SD" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
 			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
-			E.y-=E.speed;
-			E.x-=E.speed;
+			E.y+=E.speed;
+			E.x+=E.speed;
 		}
 	}	
 }
@@ -1078,16 +904,16 @@ function AI(E){
 		}
 		else if(E.dirct == 0){
 			if(xdiff < 4 && ydiff < 4){
-				E.dir = "SD";
+				E.dir = "WA";
 			}
 			else if(xdiff < 4 && ydiff > 4){
-				E.dir = "WD";
-			}
-			else if(xdiff > 4 && ydiff < 4){
 				E.dir = "AS";
 			}
+			else if(xdiff > 4 && ydiff < 4){
+				E.dir = "WD";
+			}
 			else if (xdiff > 4 && ydiff > 4){
-				E.dir = "WA";
+				E.dir = "SD";
 			}
 			else if (xdiff == 4 && ydiff > 4){
 				E.dir = "S";

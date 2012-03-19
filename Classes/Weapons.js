@@ -130,91 +130,6 @@ var bullet4 = {
 	
 };
 
-// tinybullet: A basic tiny wizard attack
-var tinybullet = {
-	color: "red",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	speed: 16,
-	width: 4,
-	height: 3,
-	dir: "A",
-
-	// Spawn
-	shoot: function(dir, w, h){
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = Bwizz.x;
-		this.y = Bwizz.y;
-	}
-};
-// tinybullet: A basic tiny wizard attack
-var tinybullet2 = {
-	color: "red",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	speed: 16,
-	width: 4,
-	height: 3,
-	dir: "A",
-
-	// Spawn
-	shoot: function(dir, w, h){
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = Bwizz2.x;
-		this.y = Bwizz2.y;
-	}
-};
-// tinybullet: A basic tiny wizard attack
-var tinybullet3 = {
-	color: "red",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	speed: 16,
-	width: 4,
-	height: 3,
-	dir: "A",
-
-	// Spawn
-	shoot: function(dir, w, h){
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = Bwizz3.x;
-		this.y = Bwizz3.y;
-	}
-};
-// tinybullet: A basic tiny wizard attack
-var tinybullet4 = {
-	color: "red",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	speed: 16,
-	width: 4,
-	height: 3,
-	dir: "A",
-
-	// Spawn
-	shoot: function(dir, w, h){
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = Bwizz4.x;
-		this.y = Bwizz4.y;
-	}
-};
-
 function drawBullet(B){
 	if (B.timeLeft > 0){
 		if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
@@ -307,57 +222,6 @@ function Bulletmove(B){
 		B.timeLeft--;
 		B.x += B.speed;
 		B.y -= B.speed;
-	}
-}
-
-// Increment
-function tBulletmove(B){
-	if(collision(B.dir, B, obstacle) || (collision(B.dir, B, obstacleA)) || (collision(B.dir, B, obstacleB))){
-		B.timeLeft = 0;
-	}
-	if(collision(B.dir, B, player)){
-		if(hptimer > 0){
-			onDmg.play();
-			player.hp-=1;
-			hptimer = 30;
-		}
-		B.timeLeft = 0;
-	}
-	if (B.timeLeft > 0 && B.dir == "W"){
-		B.timeLeft--;
-		B.y -= B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "A"){
-		B.timeLeft--;
-		B.x -= B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "S"){
-		B.timeLeft--;
-		B.y += B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "D"){
-		B.timeLeft--;
-		B.x += B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "WA"){
-		B.timeLeft--;
-		B.x += B.speed;
-		B.y += B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "AS"){
-		B.timeLeft--;
-		B.x += B.speed;
-		B.y -= B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "SD"){
-		B.timeLeft--;
-		B.x -= B.speed;
-		B.y -= B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "WD"){
-		B.timeLeft--;
-		B.x -= B.speed;
-		B.y += B.speed;
 	}
 }
 
@@ -1018,15 +882,19 @@ var vertil = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1040,12 +908,6 @@ var vertil = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1059,15 +921,19 @@ var vertil2 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1081,12 +947,6 @@ var vertil2 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1100,15 +960,19 @@ var vertil3 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1122,12 +986,6 @@ var vertil3 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1141,15 +999,19 @@ var vertil4 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1163,12 +1025,6 @@ var vertil4 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1182,15 +1038,19 @@ var vertil5 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1205,12 +1065,6 @@ var vertil5 = {
 				}
 			}
 		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
-		}
 	}	
 };
 var horil = {
@@ -1223,15 +1077,19 @@ var horil = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1245,12 +1103,6 @@ var horil = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1264,15 +1116,19 @@ var horil2 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1286,12 +1142,6 @@ var horil2 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1305,15 +1155,19 @@ var horil3 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1327,12 +1181,6 @@ var horil3 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1346,15 +1194,19 @@ var horil4 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1368,12 +1220,6 @@ var horil4 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1385,17 +1231,21 @@ var horil5 = {
 	x: -2000,
 	y: -2000,
 	frame: 0,
-	end: false,
 	onScreen: 0,
 	split: 0,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1409,12 +1259,6 @@ var horil5 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1453,6 +1297,16 @@ var icelightning = {
 			vertil3.onScreen = 0;
 			vertil4.onScreen = 0;
 			vertil5.onScreen = 0;
+			horil.frame = 240;
+			horil2.frame = 240;
+			horil3.frame = 240;
+			horil4.frame = 240;
+			horil5.frame = 240;
+			vertil.frame = 240;
+			vertil2.frame = 240;
+			vertil3.frame = 240;
+			vertil4.frame = 240;
+			vertil5.frame = 240;
 			this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
 		}
 	},
@@ -2453,6 +2307,6 @@ var sLightning = {
 };
 
 //--------------------------------------------------------------- Spell Array -------------------------------------------------------//
-var Weapons = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: tinybullet, 6: fire, 7: fire2, 8: ice, 9: ice2, 10: fireice, 
-				11: earth, 12: earth2, 13: lightning, 14: lightning2, 15: icelightning, 16: firelightning, 17: sFire, 18: sIce, 19: sLightning,
-				20: air, 21: air2, 22: airfire, 23: airice, 24: airlightning};
+var Weapons = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: fire, 6: fire2, 7: ice, 8: ice2, 9: fireice, 10: earth, 
+				11: earth2, 12: lightning, 13: lightning2, 14: icelightning, 15: firelightning, 16: sFire, 17: sIce, 18: sLightning, 19: air,
+				20: air2, 21: airfire, 22: airice, 23: airlightning};
