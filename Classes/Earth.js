@@ -31,9 +31,12 @@ var earth = {
 		if(this.timeLeft > 0 && this.cast == 0){
 			this.y -= this.speed;
 			this.timeLeft--;
-			if(player.hp < 3 && this.used == 0){
-				player.hp+=1;
+			if(this.used == 0){
+				if(player.hp < 3){
+					player.hp+=1;
+				}
 				this.used = 1;
+				Pickup.play();
 			}
 		}
 			
@@ -41,7 +44,6 @@ var earth = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Pickup.play();
 		this.x = player.x;
 		this.y = player.y;
 		this.cd = 1020;
@@ -98,6 +100,7 @@ var earth2 = {
 					player.hp+=1;
 				}
 				this.used = 1;
+				Pickup.play();
 			}
 		}
 			
@@ -105,7 +108,6 @@ var earth2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Pickup.play();
 		this.x = player.x;
 		this.y = player.y;
 		this.cd = 1020;

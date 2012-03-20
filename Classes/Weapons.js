@@ -1307,6 +1307,11 @@ var icelightning = {
 			vertil3.frame = 240;
 			vertil4.frame = 240;
 			vertil5.frame = 240;
+			for (E in AllEnemies){
+				if(AllEnemies[E].speed == 0){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
 			this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
 		}
 	},

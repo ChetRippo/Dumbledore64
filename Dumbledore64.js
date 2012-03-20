@@ -26,6 +26,9 @@
 	TODO:
 		-Bugs
 			-Fix Sound Effects for all browsers (not in FF 11?)
+			-Sound plays on reset <---Next
+			-Move globblyFires on reset<----Next
+			-For loop in player collision
 		-Spells
 			-Mystic (Purple)
 				-Passive Buffs? / Teleporting?
@@ -33,11 +36,10 @@
 				-HP Steal?
 		-More enemies and AI
 			-Enemy that builds obstacles
-		-Cooldown Reduction on box pickup
 		-Breakable Obstacles
 		-Optimization/Code Minifier
-		-Maybe make spells have limited casts?
-		-Sound plays on reset
+		-Add casting times, subtract recharges<----Next
+		-Put in LR wizzurd<----Next
 */
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
 // Canvas, Frames per Second, KeysDown, Global vars
@@ -381,7 +383,7 @@ var castingBar = {
 	height: player.height/4,
 	width2: 0,
 	onScreen: 0,
-	cast: 0,
+	cast: -1,
 	castmax: 0,
 	draw: function(){
 		this.x = player.x - player.width/2;
@@ -399,7 +401,8 @@ var castingBar = {
 			this.cast-=1;
 			this.width2 = this.cast/this.castmax * this.width;
 		}
-		else{
+		if(this.cast == 0){
+			this.cast-=1;
 			player.speed = 8;
 			this.onScreen = 0;
 		}

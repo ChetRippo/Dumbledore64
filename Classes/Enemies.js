@@ -555,10 +555,10 @@ var Sorceror = {
 			this.cd = 0;
 			this.spawned = 60;
 			if((Math.floor(Math.random() * 3) + 1) == 1){
-				this.spell = "Fire";
+				this.spell = "Ice";
 			}
 			else if((Math.floor(Math.random() * 3) + 1) == 2){
-				this.spell = "Ice";
+				this.spell = "Fire";
 			}
 			else{
 				this.spell = "Lightning";
@@ -637,7 +637,7 @@ var Sorceror = {
 		}
 		else if(this.spell == "Lightning"){
 			if(this.y <= player.y + sLightning.hheight/2 && this.y >= player.y && this.y> 32 && this.y < 560
-				&& this.x > 32 && this.x < 768){
+				&& this.x > 32 && this.x < 768 && this.cd <= 0){
 				this.cast();
 			}
 			else if(!(this.cd <= 0)){
