@@ -2,6 +2,7 @@
 
 // Enemy 1 - Hudge
 var Enemy = {
+	type: 0,
 	x: 500,
 	y: -400,
 	width: 32,
@@ -37,6 +38,7 @@ var Enemy = {
 
 // Enemy 2 - Pikkit
 var EnemyA = {
+	type: 0,
 	x: -500,
 	y: -500,
 	width: 32,
@@ -58,6 +60,7 @@ var EnemyA = {
 
 // Enemy 3 - Hudge
 var EnemyB = {
+	type: 0,
 	x: -500,
 	y: -500,
 	width: 32,
@@ -93,6 +96,7 @@ var EnemyB = {
 
 // Enemy 4 - Pikkit
 var EnemyC = {
+	type: 0,
 	x: -500,
 	y: -500,
 	width: 32,
@@ -114,6 +118,7 @@ var EnemyC = {
 
 // Fast Enemy - Globbly
 var Tenemy = {
+	type: 0,
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -134,6 +139,7 @@ var Tenemy = {
 };
 // Fast Enemy 2 - Globbly
 var TenemyA = {
+	type: 0,
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -155,6 +161,7 @@ var TenemyA = {
 
 // Fast Enemy 3 - Globbly
 var TenemyB = {
+	type: 0,
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -176,6 +183,7 @@ var TenemyB = {
 
 // Lavaman
 var Lavaman = {
+	type: 0,
 	x: 500,
 	y: -400,
 	width: 32,
@@ -195,6 +203,7 @@ var Lavaman = {
 	}
 };
 var Lavaman2 = {
+	type: 0,
 	x: 500,
 	y: -400,
 	width: 32,
@@ -214,6 +223,7 @@ var Lavaman2 = {
 	}
 };
 var Lavaman3 = {
+	type: 0,
 	x: 500,
 	y: -400,
 	width: 32,
@@ -233,6 +243,7 @@ var Lavaman3 = {
 	}
 };
 var Lavaman4 = {
+	type: 0,
 	x: 500,
 	y: -400,
 	width: 32,
@@ -253,6 +264,7 @@ var Lavaman4 = {
 };
 // PORTAL TO HELL
 var Spawner = {
+	type: 2,
 	x: 2000,
 	y: 0,
 	width: 64,
@@ -429,6 +441,7 @@ var Spawner = {
 
 // Sorceror
 var Sorceror = {
+	type: 1,
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -546,179 +559,86 @@ var Sorceror = {
 			sLightning.shoot();
 		}
 		this.cd = 300;
+	}
+};
+var treeWizz = {
+	type: -1,
+	x: 500,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	respawn: -1,
+	origrp: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	cd: 90,
+	width2: 0,
+	height2: 0,
+	deadtrees: 0,
+	herp: 0,
+	frame: 0,
+	draw: function(){
+		ctx.drawImage(TWizzurd, this.x - this.width / 2, this.y - this.height / 2);
 	},
 	spawn: function(){
-		if(this.respawn == 0){
-			this.movement = true;
-			this.hp = 3;
-			this.onScreen = 1;
-			this.cd = 0;
-			this.spawned = 60;
-			if((Math.floor(Math.random() * 3) + 1) == 1){
-				this.spell = "Ice";
-			}
-			else if((Math.floor(Math.random() * 3) + 1) == 2){
-				this.spell = "Fire";
-			}
-			else{
-				this.spell = "Lightning";
-			}
-			var spawnPoint = Math.floor(Math.random() * 8) + 1;
-			if(spawnPoint == 1){
-				this.x = 0;
-				this.y = 0;
-				this.respawn-=1;
-			}
-			else if(spawnPoint == 2){
-				this.x = 400;
-				this.y = 0;
-				this.respawn-=1;
-			}
-			else if(spawnPoint == 3){
-				this.x = 800;
-				this.y = 0;
-				this.respawn-=1;
-			}
-			else if(spawnPoint == 4){
-				this.x = 0;
-				this.y = 288;
-				this.respawn-=1;
-			}
-			else if(spawnPoint == 5){
-				this.x = 800;
-				this.y = 288;
-				this.respawn-=1;
-			}
-			else if(spawnPoint == 6){
-				this.x = 0;
-				this.y = 576;
-				this.respawn-=1;
-			}
-			else if(spawnPoint == 7){
-				this.x = 400;
-				this.y = 576;
-				this.respawn-=1;
-			}
-			else{
-				this.x = 800;
-				this.y = 576;
-				this.respawn-=1;
-			}			
+		if(this.cd > 0 && this.onScreen == 1){
+			this.cd-=1;
 		}
 		else{
-			this.respawn-=1;
+			for(O in obstacle1){
+				if(obstacle1[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			for(O in obstacle2){
+				if(obstacle2[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			for(O in obstacle3){
+				if(obstacle3[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			this.herp = this.deadtrees;
+			this.deadtrees = 0;
+			if(this.herp >= 10 && this.onScreen == 0){
+				this.respawn = 0;
+				spawn(this);
+				this.herp = 0;
+			}
 		}
 	},
-	AI: function(){
-		if(this.spawned > 0){
-			this.spawned-=1;
+	grow: function(){
+	if(this.onScreen == 1){
+		if(this.frame <= 60){ 
+			ctx.globalAlpha = 0.25;
+			ctx.fillStyle = "006600";
+			ctx.fillRect(this.x-this.width2/2, this.y-this.height2/2, this.width2, this.height2);
+			this.frame++;
+			this.width2 = this.width2 + this.frame*8;
+			this.height2 = this.height2 + this.frame*8;
+			ctx.globalAlpha = 1;
 		}
-		if(this.hptimer > 0){
-			this.hptimer-=1;
+		if(this.frame > 60){
+			rePlant();
+			SpawnerSpawn.play();
+			this.frame = 0;
+			this.x = 2000;
+			this.y = 2000;
+			this.respawn = -1;
+			this.movement = false;
+			this.onScreen = 0;
+			this.cd = 90;
+			this.width2 = 0;
+			this.height2 = 0;
 		}
-		var xdiff = player.x - this.x;
-		var ydiff = player.y - this.y;
-		if(this.spell == "Ice"){
-			if(this.x > 32 && this.y > 32 && this.x < 768 && this.y < 560 && this.cd <=0){
-				this.cast();
-			}
-			else if(!(this.cd <=0)){
-				this.cd-=1;
-			}
-		}
-		else if(this.spell == "Fire"){
-			if((Math.abs(xdiff) < 128) && (Math.abs(ydiff) < 128) && this.cd <= 0
-				&& this.x > 32 && this.x < 768 && this.y > 32 && this.y < 560){
-				this.cast();
-			}
-			else if(!(this.cd <= 0)){
-				this.cd-=1;
-			}
-		}
-		else if(this.spell == "Lightning"){
-			if(this.y <= player.y + sLightning.hheight/2 && this.y >= player.y && this.y> 32 && this.y < 560
-				&& this.x > 32 && this.x < 768 && this.cd <= 0){
-				this.cast();
-			}
-			else if(!(this.cd <= 0)){
-				this.cd-=1;
-			}
-		}
-		if(collision(this.dir, this, obstacle) || collision(this.dir, this, obstacleA) || collision(this.dir, this, obstacleB)){
-			if(this.dir == "W"){
-				this.dir = "D";
-				this.dirct = 20;
-				this.y-=this.speed;
-			}
-			else if(this.dir == "A"){
-				this.dir = "W";
-				this.dirct = 20;
-				this.x+=this.speed;
-			}
-			else if(this.dir == "S"){
-				this.dir = "A";
-				this.dirct = 20;
-				this.y+=this.speed;
-			}
-			else if(this.dir == "D"){
-				this.dir = "S";
-				this.dirct = 20;
-				this.x-=this.speed;
-			}
-			else if(this.dir == "WD"){
-				this.dir = "W";
-				this.dirct = 20;
-				this.x-=this.speed;
-				this.y+=this.speed;
-			}
-			else if(this.dir == "WA"){
-				this.dir = "A";
-				this.dirct = 20;
-				this.x+=this.speed;
-				this.y+=this.speed;
-			}
-			else if(this.dir == "AS"){
-				this.dir = "S";
-				this.dirct = 20;
-				this.x+=this.speed;
-				this.y-=this.speed;
-			}
-			else if(this.dir == "SD"){
-				this.dir = "D";
-				this.dirct = 20;
-				this.x-=this.speed;
-				this.y-=this.speed;
-			}
-		}
-		else if(this.dirct == 0){
-			if(xdiff < 4 && ydiff < 4){
-				this.dir = "WA";
-			}
-			else if(xdiff < 4 && ydiff > 4){
-				this.dir = "AS";
-			}
-			else if(xdiff > 4 && ydiff < 4){
-				this.dir = "WD";
-			}
-			else if (xdiff > 4 && ydiff > 4){
-				this.dir = "SD";
-			}
-			else if (xdiff == 4 && ydiff > 4){
-				this.dir = "S";
-			}
-			else if(xdiff == 4 && ydiff < 4){
-				this.dir = "W";
-			}
-			else if(xdiff < 4 && ydiff == 4){
-				this.dir = "A";
-			}
-			else{
-				this.dir = "D";
-			}
-		}
-		else{
-			this.dirct-=1;
-		}
+	}
 	}
 };
 
@@ -813,39 +733,39 @@ function onHit(E, rs){
 // Enemy move paramaterized
 function move(E){
 	if(E.movement == true){
-		if(E.dir == "W" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
-			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
+		if(E.dir == "W" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
 			E.y-=E.speed;
 		}
-		if(E.dir == "A" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
-			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
+		if(E.dir == "A" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
 			E.x-=E.speed;
 		}
-		if(E.dir == "S" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
-			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
+		if(E.dir == "S" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
 			E.y+=E.speed;
 		}
-		if(E.dir == "D" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
-			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
+		if(E.dir == "D" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
 			E.x+=E.speed;
 		}
-		if(E.dir == "AS" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
-			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
+		if(E.dir == "AS" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
 			E.y+=E.speed;
 			E.x-=E.speed;
 		}
-		if(E.dir == "WA" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
-			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
+		if(E.dir == "WA" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
 			E.y-=E.speed;
 			E.x-=E.speed;
 		}
-		if(E.dir == "WD" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
-			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
+		if(E.dir == "WD" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
 			E.y-=E.speed;
 			E.x+=E.speed;
 		}
-		if(E.dir == "SD" && !(collision(E.dir, E, obstacle)) && !(collision(E.dir, E, obstacleA))
-			&& !(collision(E.dir, E, obstacleB)) && !(collision(E.dir, E, player))){
+		if(E.dir == "SD" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
 			E.y+=E.speed;
 			E.x+=E.speed;
 		}
@@ -856,53 +776,131 @@ function move(E){
 function AI(E){
 		var xdiff = player.x - E.x;
 		var ydiff = player.y - E.y;
-		if(collision(E.dir, E, obstacle) || collision(E.dir, E, obstacleA) || collision(E.dir, E, obstacleB)){
-			if(E.dir == "W"){
-				E.dir = "D";
-				E.dirct = 20;
-				E.y-=E.speed;
+		if(E.type == -1 && E.cd == 0){
+			E.grow();
+		}
+		if(E.type == -1 && E.dirct == 0){
+			var quadrant = 0;
+			var q1dir = {1: "S", 2: "D", 3: "SD"};
+			var q2dir = {1: "S", 2: "A", 3: "AS"};
+			var q3dir = {1: "W", 2: "D", 3: "WD"};
+			var q4dir = {1: "W", 2: "A", 3: "WA"};
+			var alldir = {1: "W", 2: "A", 3: "S", 4: "D", 5: "WA", 6: "WD", 7: "AS", 8: "SD"};
+			E.dirct = 15;
+			var numbz = Math.floor(Math.random() * 3) + 1;
+			var allnumbz = Math.floor(Math.random() * 8) + 1;
+			if(E.x > 224 && E.x < 576 && E.y > 128 && E.y < 348){
+				quadrant = 5;
 			}
-			else if(E.dir == "A"){
-				E.dir = "W";
-				E.dirct = 20;
-				E.x+=E.speed;
+			else if(E.x <= 400 && E.y <= 238){
+				quadrant = 1;
 			}
-			else if(E.dir == "S"){
-				E.dir = "A";
-				E.dirct = 20;
-				E.y+=E.speed;
+			else if(E.x > 400 && E.y <= 238){
+				quadrant = 2;
 			}
-			else if(E.dir == "D"){
-				E.dir = "S";
-				E.dirct = 20;
-				E.x-=E.speed;
+			else if(E.x <= 400 && E.y > 238){
+				quadrant = 3;
 			}
-			else if(E.dir == "WD"){
-				E.dir = "W";
-				E.dirct = 20;
-				E.x+=E.speed;
-				E.y-=E.speed;
+			else if(E.x > 400 && E.y > 238){
+				quadrant = 4;
 			}
-			else if(E.dir == "WA"){
-				E.dir = "A";
-				E.dirct = 20;
-				E.x-=E.speed;
-				E.y-=E.speed;
+			if(quadrant == 1){
+				E.dir = q1dir[numbz];
 			}
-			else if(E.dir == "AS"){
-				E.dir = "S";
-				E.dirct = 20;
-				E.x-=E.speed;
-				E.y+=E.speed;
+			else if(quadrant == 2){
+				E.dir = q2dir[numbz];
 			}
-			else if(E.dir == "SD"){
-				E.dir = "D";
-				E.dirct = 20;
-				E.x+=E.speed;
-				E.y+=E.speed;
+			else if(quadrant == 3){
+				E.dir = q3dir[numbz];
+			}
+			else if(quadrant == 4){
+				E.dir = q4dir[numbz];
+			}
+			else if(quadrant == 5){
+				E.dir = alldir[allnumbz];
 			}
 		}
-		else if(E.dirct == 0){
+		if(E.type == 1){
+			if(E.spawned > 0){
+				E.spawned-=1;
+			}
+			if(E.hptimer > 0){
+				E.hptimer-=1;
+			}
+			if(E.spell == "Ice"){
+				if(E.x > 32 && E.y > 32 && E.x < 768 && E.y < 560 && E.cd <=0){
+					E.cast();
+				}
+				else if(!(E.cd <=0)){
+					E.cd-=1;
+				}
+			}
+			else if(E.spell == "Fire"){
+				if((Math.abs(xdiff) < 128) && (Math.abs(ydiff) < 128) && E.cd <= 0
+					&& E.x > 32 && E.x < 768 && E.y > 32 && E.y < 560){
+					E.cast();
+				}
+				else if(!(E.cd <= 0)){
+					E.cd-=1;
+				}
+			}
+			else if(E.spell == "Lightning"){
+				if(E.y <= player.y + sLightning.hheight/2 && E.y >= player.y && E.y> 32 && E.y < 560
+					&& E.x > 32 && E.x < 768 && E.cd <= 0){
+					E.cast();
+				}
+				else if(!(E.cd <= 0)){
+					E.cd-=1;
+				}	
+			}
+		}
+		if(obsCollision(obstacle1, E, E.dir) || obsCollision(obstacle2, E, E.dir) || obsCollision(obstacle3, E, E.dir)){
+			if(E.dir == "W"){
+				E.dirct = 20;
+				E.y+=2*E.speed;
+				E.dir = "D";
+			}
+			else if(E.dir == "A"){
+				E.dirct = 20;
+				E.x+=E.speed;
+				E.dir = "W";
+			}
+			else if(E.dir == "S"){
+				E.dirct = 20;
+				E.y-=2*E.speed;
+				E.dir = "A";
+			}
+			else if(E.dir == "D"){
+				E.dirct = 20;
+				E.x-=E.speed;
+				E.dir = "S";
+			}
+			else if(E.dir == "WD"){
+				E.dirct = 20;
+				E.x+=E.speed;
+				E.y-=E.speed;
+				E.dir = "W";
+			}
+			else if(E.dir == "WA"){
+				E.dirct = 20;
+				E.x-=E.speed;
+				E.y-=E.speed;
+				E.dir = "A";
+			}
+			else if(E.dir == "AS"){
+				E.dirct = 20;
+				E.x-=E.speed;
+				E.y+=E.speed;
+				E.dir = "S";
+			}
+			else if(E.dir == "SD"){
+				E.dirct = 20;
+				E.x+=E.speed;
+				E.y+=E.speed;
+				E.dir = "D";
+			}
+		}
+		else if(E.dirct == 0 && E.type != -1){
 			if(xdiff < 4 && ydiff < 4){
 				E.dir = "WA";
 			}
@@ -934,6 +932,25 @@ function AI(E){
 }
 
 function spawn(E){
+	if(E.type == 1){
+		if(E.respawn == 0){
+			E.movement = true;
+			E.hp = 3;
+			E.onScreen = 1;
+			E.cd = 0;
+			E.spawned = 60;
+			var SpellType = Math.floor(Math.random() * 3) + 1;
+			if(SpellType == 1){
+				E.spell = "Ice";
+			}
+			else if(SpellType == 2){
+				E.spell = "Fire";
+			}
+			else{
+				E.spell = "Lightning";
+			}
+		}
+	}
 	if(E.respawn == 0){
 		E.movement = true;
 		var spawnPoint = Math.floor(Math.random() * 8) + 1;

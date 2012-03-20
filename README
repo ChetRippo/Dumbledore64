@@ -1,13 +1,15 @@
 
-Version 0.4.3 Changes:
-		-Fixed Frozen Web bug. Ice spells should all be fixed now
-		-Added to Enemy AI
-		-Hudge enemies now have a flipped version when they move left
-		-Moved player spawn to center
-		-Moved one obstacle closer to center
-		-Modded HUD to show element symbols instead of all text
-		-Earth now takes 1 second to cast, during which you cannot move
-		-Added casting bar
+Version 0.4.4 Changes(3/20/2012):
+		-Optimized some code
+		-Bug fix: Moved globbly explosions on reset
+		-Added flipped version of wizzurd (based on direction)
+		-Split obstacles into 32 by 32 blocks
+		-Added tree graphic
+		-Obstacles now breakable in 3 hits (not with lightning)
+		-Added casting times to some spells
+		-Made fire and inferno look nicer
+		-Added tree wizard. Does not interact with player.
+			Replants all trees if dead trees add up to 10
 
 **********************************************************************************************************
 

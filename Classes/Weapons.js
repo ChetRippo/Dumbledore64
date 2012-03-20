@@ -34,9 +34,6 @@ var bullet = {
 		this.y = player.y;
 		cd = 20;
 	}
-	else{
-		return 0;
-	}
 	}
 };
 
@@ -62,9 +59,6 @@ var bullet2 = {
 		this.x = player.x;
 		this.y = player.y;
 		cd = 20;
-	}
-	else{
-		return 0;
 	}
 	}
 	
@@ -93,9 +87,6 @@ var bullet3 = {
 		this.y = player.y;
 		cd = 20;
 	}
-	else{
-		return 0;
-	}
 	}
 	
 };
@@ -122,9 +113,6 @@ var bullet4 = {
 		this.x = player.x;
 		this.y = player.y;
 		cd = 20;
-	}
-	else{
-		return 0;
 	}
 	}
 	
@@ -170,8 +158,23 @@ function drawBullet(B){
 }
 // Increment
 function Bulletmove(B){
-	if(collision(B.dir, B, obstacle) || (collision(B.dir, B, obstacleA)) || (collision(B.dir, B, obstacleB))){
-		B.timeLeft = 0;
+	for(O in obstacle1){
+		if(collision(B.dir, B, obstacle1[O])){
+			obsHit(obstacle1[O]);
+			B.timeLeft = 0;
+		}
+	}
+	for(O in obstacle2){
+		if(collision(B.dir, B, obstacle2[O])){
+			obsHit(obstacle2[O]);
+			B.timeLeft = 0;
+		}
+	}
+	for(O in obstacle3){
+		if(collision(B.dir, B, obstacle3[O])){
+			obsHit(obstacle3[O]);
+			B.timeLeft = 0;
+		}
 	}
 	for (E in Enemies){
 		if(collision(B.dir, B, Enemies[E])){
@@ -309,10 +312,25 @@ var fireice = {
 			}
 		}
 		else if(this.onScreen == 1 && this.state == 0){
-			if(collision(this.dir, this, obstacle) || (collision(this.dir, this, obstacleA)) || (collision(this.dir, this, obstacleB)
+			if(obsCollision(obstacle1, this, this.dir) || (obsCollision(obstacle2, this, this.dir)) || (obsCollision(obstacle3, this, this.dir)
 				|| this.x <= 32 || this.x >= 768 || this.y <= 32 || this.y >= 544)){
 				this.state = 1;
 				Fwave.play();
+			}
+			for(O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for(O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for(O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
 			}
 			for (E in Enemies){
 				if(collision(Enemies[E].dir, Enemies[E], this)){
@@ -396,6 +414,7 @@ var fireheal = {
 			earth.shoot();
 			fire.cd = 0;
 			earth.cd = 0;
+			fire.cast = 30;
 		}
 		else{
 			return 0;
@@ -421,6 +440,7 @@ var iceheal = {
 			earth.shoot();
 			ice.cd = 0;
 			earth.cd = 0;
+			ice.cast = 30;
 		}
 		else{
 			return 0;
@@ -446,6 +466,7 @@ var lightningheal = {
 			earth.shoot();
 			lightning.cd = 0;
 			earth.cd = 0;
+			lightning.cast = 30;
 		}
 		else{
 			return 0;
@@ -468,6 +489,7 @@ var firelightning = {
 	vy: 288,
 	cd: 0,
 	onScreen: 0,
+	cast: 0,
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.hstate == 0){
@@ -501,7 +523,13 @@ var firelightning = {
 			this.cd-=1;
 			this.vx = player.x;
 		}
-		if(this.onScreen == 1){
+		if(this.timeLeft > 0 && this.cast == 0){
+			this.onScreen = 1;
+		}
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		else if(this.onScreen == 1){
 			if(this.timeLeft <= 0){
 				this.onScreen = 0;
 				this.vx = -2000;
@@ -634,11 +662,11 @@ var firelightning = {
 		this.vx = player.x;
 		this.hy = player.y;
 		this.cd = 900;
-		this.onScreen = 1;
 		this.timeLeft = 210;
-	}
-	else{
-		return 0;
+		this.cast = 45;
+		castingBar.onScreen = 1;
+		castingBar.cast = 45;
+		castingBar.castmax = 45;
 	}
 	}
 	
@@ -685,6 +713,21 @@ var firelightningf1 = {
 				}
 				if(collision(Spawner.dir, Spawner, this)){
 					Spawner.onHit();
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}
@@ -742,6 +785,21 @@ var firelightningf2 = {
 				}
 				if(collision(Spawner.dir, Spawner, this)){
 					Spawner.onHit();
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}
@@ -802,6 +860,21 @@ var firelightningf3 = {
 					Spawner.onHit();
 				}
 			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 		
@@ -857,6 +930,21 @@ var firelightningf4 = {
 				}
 				if(collision(Spawner.dir, Spawner, this)){
 					Spawner.onHit();
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}
@@ -1514,6 +1602,21 @@ var airfire = {
 			if(collision(Spawner.dir, Spawner, this)){
 				Spawner.onHit();
 			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 	// Spawn
@@ -1613,6 +1716,21 @@ var airfire12 = {
 			if(collision(Spawner.dir, Spawner, this)){
 				Spawner.onHit();
 			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 	// Spawn
@@ -1702,6 +1820,21 @@ var airfire13 = {
 			if(collision(Spawner.dir, Spawner, this)){
 				Spawner.onHit();
 			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 	// Spawn
@@ -1724,9 +1857,10 @@ var airice = {
 	height: 64,
 	cd: 0,
 	onScreen: 0,
+	cast: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			ctx.globalAlpha = 0.5;
 			if(this.timeLeft/2 != Math.round(this.timeLeft/2)){
 				ctx.fillStyle = this.color1;
@@ -1745,31 +1879,34 @@ var airice = {
 		if(this.cd > 0){
 			this.cd-=1;
 		}
+		if(this.cast > 0){
+			this.cast-=1;
+		}
 		if(this.timeLeft == 0 && this.onScreen == 1){
 			this.onScreen = 0;
 			ice.cd = 0;
 		}
-		else if(this.timeLeft<=30){
+		else if(this.timeLeft<=30 && this.cast == 0){
 			this.height+=4;
 			this.width+=4;
 		}
-		else if(this.timeLeft<=60){
+		else if(this.timeLeft<=60 && this.cast == 0){
 			this.height-=4;
 			this.width-=4;
 		}
-		else if(this.timeLeft<=90){
+		else if(this.timeLeft<=90 && this.cast == 0){
 			this.height+=4;
 			this.width+=4;
 		}
-		else if(this.timeLeft <= 120){
+		else if(this.timeLeft <= 120 && this.cast == 0){
 			this.height-=4;
 			this.width-=4;
 		}
-		else{
+		else if(this.cast == 0){
 			this.height+=4;
 			this.width+=4;
 		}
-		if(this.timeLeft != 0){
+		if(this.timeLeft != 0 && this.cast == 0){
 			this.timeLeft-=1;
 			this.x = player.x;
 			this.y = player.y;
@@ -1782,6 +1919,21 @@ var airice = {
 				}
 				if(collision(Spawner.dir, Spawner, this)){
 					Spawner.onHit();
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}	
@@ -1799,14 +1951,15 @@ var airice = {
 		this.height = 64;
 		this.onScreen = 1;
 		this.timeLeft = 150;
+		castingBar.onScreen = 1;
+		castingBar.cast = 30;
+		castingBar.castmax = 30;
+		this.cast = 30;
 		ice.cd = 0;
+		ice.cast = 30;
 		ice.shoot();
 	}
-	else{
-		return 0;
 	}
-	}
-	
 };
 // Gust and Heal: Heals user by 1 and casts Gust
 var airearth = {
@@ -1826,9 +1979,7 @@ var airearth = {
 			earth.shoot();
 			air.cd = 0;
 			earth.cd = 0;
-		}
-		else{
-			return 0;
+			air.cast = 30;
 		}
 	}	
 };
@@ -1988,6 +2139,21 @@ var Globblyfire = {
 					hptimer = 30;
 				}
 			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 		
@@ -2041,6 +2207,21 @@ var Globblyfire2 = {
 					hptimer = 30;
 				}
 			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 		
@@ -2092,6 +2273,21 @@ var Globblyfire3 = {
 					player.hp-=1;
 					onDmg.play();
 					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}

@@ -10,9 +10,10 @@ var ice = {
 	cd: 0,
 	onScreen: 0,
 	end: false,
+	cast: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast ==0){
 			ctx.globalAlpha = 0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
@@ -24,6 +25,9 @@ var ice = {
 		if(this.cd > 0){
 			this.cd-=1;
 		}
+		if(this.cast > 0){
+			this.cast-=1;
+		}
 		if(this.frame == 150 && this.onScreen == 1){
 			this.width = 32;
 			this.height = 32;
@@ -32,7 +36,7 @@ var ice = {
 			this.onScreen = 0;
 			this.end = true;
 		}
-		else if(this.onScreen == 1){
+		else if(this.onScreen == 1 && this.cast == 0){
 			this.width = this.width + (32*this.frame);
 			this.height = this.height + (32*this.frame);
 			this.frame++;
@@ -40,7 +44,7 @@ var ice = {
 	},
 	// Slow all enemies in radius
 	effect: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			for (E in AllEnemies){
 				AllEnemies[E].speed = AllEnemies[E].speed2;
 			}
@@ -66,11 +70,7 @@ var ice = {
 		this.frame = 0;
 		this.onScreen = 1;
 	}
-	else{
-		return 0;
 	}
-	}
-	
 };
 
 // Ice2: Slows all enemies by halving their speed

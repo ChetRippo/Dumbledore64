@@ -13,9 +13,10 @@ var lightning = {
 	vstate: 0,
 	cd: 0,
 	onScreen: 0,
+	cast: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			if(this.hstate == 0){
 				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy);
 				this.hstate+=1;
@@ -48,7 +49,10 @@ var lightning = {
 		if(this.cd > 0){
 			this.cd-=1;
 		}
-		if(this.onScreen == 1){
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		if(this.onScreen == 1 && this.cast == 0){
 			if(this.timeLeft <= 0){
 				this.onScreen = 0;
 				this.vx = -2000;
