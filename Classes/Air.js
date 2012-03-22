@@ -13,9 +13,10 @@ var air = {
 	cd: 0,
 	speed: 16,
 	onScreen: 0,
+	cast: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			ctx.globalAlpha = 0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.ox - player.width / 2,
@@ -37,6 +38,9 @@ var air = {
 	effect: function(){
 		if(this.cd > 0){
 			this.cd-=1;
+		}
+		if(this.cast > 0){
+			this.cast-=1;
 		}
 		if(this.frame == 5){
 			air12.x = this.ox;
@@ -61,7 +65,7 @@ var air = {
 				AllEnemies[E].speed = AllEnemies[E].speed2*2;
 			}
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.cast == 0){
 			if(this.dir == "S" || this.dir == "W"){
 				this.width = 32 + (4*this.frame);
 			}

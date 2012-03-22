@@ -6,13 +6,18 @@ var earth = {
 	y: -200,
 	cd: 0,
 	speed: 4,
+	cast: 0,
+	used: 0,
 
 	draw: function(){
 		if(this.timeLeft == 0){
 			this.x = -100;
 			this.y = -200;
 		}
-		else{
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		if(this.cast == 0 && this.timeLeft > 0){
 			ctx.fillStyle = this.color;
 			ctx.font = "18pt Arial";
 			ctx.fillText("+1", this.x, this.y);
@@ -23,21 +28,31 @@ var earth = {
 		if(this.cd > 0){
 			this.cd-=1;
 		}
-		if(this.timeLeft > 0){
+		if(this.timeLeft > 0 && this.cast == 0){
 			this.y -= this.speed;
-			this.timeLeft--;}
+			this.timeLeft--;
+			if(this.used == 0){
+				if(player.hp < 3){
+					player.hp+=1;
+				}
+				this.used = 1;
+				Pickup.play();
+			}
+		}
+			
 	},
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Pickup.play();
 		this.x = player.x;
 		this.y = player.y;
 		this.cd = 1020;
+		this.cast = 30;
 		this.timeLeft = 15;
-		if(player.hp < 3){
-			player.hp+=1;
-		}
+		castingBar.onScreen = 1;
+		castingBar.cast = 30;
+		castingBar.castmax = 30;
+		this.used = 0;
 	}
 	else{
 		return 0;
@@ -52,13 +67,18 @@ var earth2 = {
 	y: -200,
 	cd: 0,
 	speed: 4,
-
+	cast: 0,
+	used: 0,
+	
 	draw: function(){
 		if(this.timeLeft == 0){
 			this.x = -100;
 			this.y = -200;
 		}
-		else{
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		if(this.cast == 0 && this.timeLeft > 0){
 			ctx.fillStyle = this.color;
 			ctx.font = "18pt Arial";
 			ctx.fillText("+2", this.x, this.y);
@@ -69,24 +89,34 @@ var earth2 = {
 		if(this.cd > 0){
 			this.cd-=1;
 		}
-		if(this.timeLeft > 0){
+		if(this.timeLeft > 0 && this.cast == 0){
 			this.y -= this.speed;
-			this.timeLeft--;}
+			this.timeLeft--;
+			if(this.used == 0){
+				if(player.hp < 2){
+					player.hp+=2;
+				}
+				if(player.hp < 3){
+					player.hp+=1;
+				}
+				this.used = 1;
+				Pickup.play();
+			}
+		}
+			
 	},
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Pickup.play();
 		this.x = player.x;
 		this.y = player.y;
 		this.cd = 1020;
+		this.cast = 30;
 		this.timeLeft = 15;
-		if(player.hp < 2){
-			player.hp+=2;
-		}
-		else if(player.hp < 3){
-			player.hp+=1;
-		}
+		castingBar.onScreen = 1;
+		castingBar.cast = 30;
+		castingBar.castmax = 30;
+		this.used = 0;
 	}
 	else{
 		return 0;

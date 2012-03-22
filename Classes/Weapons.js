@@ -32,10 +32,12 @@ var bullet = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		cd = 20;
-	}
-	else{
-		return 0;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else{
+			cd = 20;
+		}
 	}
 	}
 };
@@ -61,10 +63,12 @@ var bullet2 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		cd = 20;
-	}
-	else{
-		return 0;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else{
+			cd = 20;
+		}
 	}
 	}
 	
@@ -91,10 +95,12 @@ var bullet3 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		cd = 20;
-	}
-	else{
-		return 0;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else{
+			cd = 20;
+		}
 	}
 	}
 	
@@ -121,110 +127,40 @@ var bullet4 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		cd = 20;
-	}
-	else{
-		return 0;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else{
+			cd = 20;
+		}
 	}
 	}
 	
 };
 
-// tinybullet: A basic tiny wizard attack
-var tinybullet = {
-	color: "red",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	speed: 16,
-	width: 4,
-	height: 3,
-	dir: "A",
-
-	// Spawn
-	shoot: function(dir, w, h){
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = Bwizz.x;
-		this.y = Bwizz.y;
-	}
-};
-// tinybullet: A basic tiny wizard attack
-var tinybullet2 = {
-	color: "red",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	speed: 16,
-	width: 4,
-	height: 3,
-	dir: "A",
-
-	// Spawn
-	shoot: function(dir, w, h){
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = Bwizz2.x;
-		this.y = Bwizz2.y;
-	}
-};
-// tinybullet: A basic tiny wizard attack
-var tinybullet3 = {
-	color: "red",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	speed: 16,
-	width: 4,
-	height: 3,
-	dir: "A",
-
-	// Spawn
-	shoot: function(dir, w, h){
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = Bwizz3.x;
-		this.y = Bwizz3.y;
-	}
-};
-// tinybullet: A basic tiny wizard attack
-var tinybullet4 = {
-	color: "red",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	speed: 16,
-	width: 4,
-	height: 3,
-	dir: "A",
-
-	// Spawn
-	shoot: function(dir, w, h){
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = Bwizz4.x;
-		this.y = Bwizz4.y;
-	}
-};
-
 function drawBullet(B){
 	if (B.timeLeft > 0){
-		if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
+		if(spell == "Explosive Shots"){
+			ctx.fillStyle = "CC0000";
+		}
+		else if(spell == "Ice Shots"){
+			ctx.fillStyle = "66CCFF";
+		}
+		else if(spell == "Conductive Shots"){
+			ctx.fillStyle = "FFFF00";
+		}
+		else if(spell == "Homing Shots"){
+			ctx.fillStyle = "FF00FF";
+		}
+		else{
 			ctx.fillStyle = B.color;
+		}
+		if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
 			ctx.fillRect(B.x - B.width / 2,
 			B.y - B.height / 2,
 			B.width, B.height);
 		}
 		else if(B.dir == "WA" || B.dir == "SD"){
-			ctx.fillStyle = B.color;
 				ctx.fillRect(B.x - B.width / 2,
 				B.y - B.height / 2,
 				B.width, B.height);
@@ -236,7 +172,6 @@ function drawBullet(B){
 				B.y + B.height / 2 + B.height + B.height + B.height, B.width, B.height);
 		}
 		else if(B.dir == "WD" || B.dir == "AS"){
-			ctx.fillStyle = B.color;
 				ctx.fillRect(B.x,
 				B.y - B.height / 2,
 				B.width, B.height);
@@ -255,21 +190,522 @@ function drawBullet(B){
 }
 // Increment
 function Bulletmove(B){
-	if(collision(B.dir, B, obstacle) || (collision(B.dir, B, obstacleA)) || (collision(B.dir, B, obstacleB))){
-		B.timeLeft = 0;
+	if(spell == "Homing Shots"){
+		var closest = "";
+		var cdist = 2000;
+		for (E in AllEnemies){
+			var distance = Math.sqrt(((B.x - AllEnemies[E].x)*(B.x - AllEnemies[E].x)) + ((B.y - AllEnemies[E].y)*(B.y - AllEnemies[E].y)));
+			if(distance < cdist){
+				cdist = distance;
+				closest = AllEnemies[E];
+			}
+		}
+		var xdifference = closest.x - B.x;
+		var ydifference = closest.y - B.y;
+		if(closest.x < 8 || closest.y < 8 || closest.x > 792 || closest.y > 568){
+			B.dir = B.dir;
+		}
+		else{
+			if(xdifference < 4 && ydifference < 4){
+				B.dir = "WA";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if(xdifference < 4 && ydifference > 4){
+				B.dir = "AS";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if(xdifference > 4 && ydifference < 4){
+				B.dir = "WD";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if (xdifference > 4 && ydifference > 4){
+				B.dir = "SD";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if (xdifference == 4 && ydifference > 4){
+				B.dir = "S";
+				B.width = 4;
+				B.height = 32;
+			}
+			else if(xdifference == 4 && ydifference < 4){
+				B.dir = "W";
+				B.width = 4;
+				B.height = 32;
+			}
+			else if(xdifference < 4 && ydifference == 4){
+				B.dir = "A";
+				B.width = 32;
+				B.height = 4;
+			}
+			else{
+				B.dir = "D";
+				B.width = 32;
+				B.height = 4;
+			}
+		}
+	}
+	if(spell != "Homing Shots"){
+		for(O in obstacle1){
+			if(collision(B.dir, B, obstacle1[O])){
+				obsHit(obstacle1[O]);
+				if(spell == "Conductive Shots"){
+					if(B.dir == "W" || B.dir == "S"){
+						B.width = 32;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "A";
+						}
+						else{
+							B.dir = "D";
+						}
+					}
+					else if(B.dir == "A" || B.dir == "D"){
+						B.width = 4;
+						B.height = 32;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "W";
+						}
+						else{
+							B.dir = "S";
+						}
+					}
+					else if(B.dir == "WD" || B.dir == "AS"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WA";
+						}
+						else{
+							B.dir = "SD";
+						}
+					}
+					else if(B.dir == "WA" || B.dir == "SD"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WD";
+						}
+						else{
+							B.dir = "AS";
+						}
+					}
+				}
+				else{
+					B.timeLeft = 0;
+				}
+			}
+		}
+		for(O in obstacle2){
+			if(collision(B.dir, B, obstacle2[O])){
+				obsHit(obstacle2[O]);
+				if(spell == "Conductive Shots"){
+					if(B.dir == "W" || B.dir == "S"){
+						B.width = 32;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "A";
+						}
+						else{
+							B.dir = "D";
+						}
+					}
+					else if(B.dir == "A" || B.dir == "D"){
+						B.width = 4;
+						B.height = 32;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "W";
+						}
+						else{
+							B.dir = "S";
+						}
+					}
+					else if(B.dir == "WD" || B.dir == "AS"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WA";
+						}
+						else{
+							B.dir = "SD";
+						}
+					}
+					else if(B.dir == "WA" || B.dir == "SD"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WD";
+						}
+						else{
+							B.dir = "AS";
+						}
+					}
+				}
+				else{
+					B.timeLeft = 0;
+				}
+			}
+		}
+		for(O in obstacle3){
+			if(collision(B.dir, B, obstacle3[O])){
+				obsHit(obstacle3[O]);
+				if(spell == "Conductive Shots"){
+					if(B.dir == "W" || B.dir == "S"){
+						B.width = 32;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "A";
+						}
+						else{
+							B.dir = "D";
+						}
+					}
+					else if(B.dir == "A" || B.dir == "D"){
+						B.width = 4;
+						B.height = 32;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "W";
+						}
+						else{
+							B.dir = "S";
+						}
+					}
+					else if(B.dir == "WD" || B.dir == "AS"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WA";
+						}
+						else{
+							B.dir = "SD";
+						}
+					}
+					else if(B.dir == "WA" || B.dir == "SD"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WD";
+						}
+						else{
+							B.dir = "AS";
+						}
+					}
+				}
+				else{
+					B.timeLeft = 0;
+				}
+			}
+		}
 	}
 	for (E in Enemies){
 		if(collision(B.dir, B, Enemies[E])){
-			B.timeLeft = 0;
+			if(spell == "Explosive Shots"){
+				if(Mfire.onScreen == 0){
+					Mfire.onScreen = 1;
+					Mfire.frame = 0;
+					Mfire.x = B.x;
+					Mfire.y = B.y;
+				}
+				else if(Mfire2.onScreen == 0){
+					Mfire2.onScreen = 1;
+					Mfire2.frame = 0;
+					Mfire2.x = B.x;
+					Mfire2.y = B.y;
+				}
+				else if(Mfire3.onScreen == 0){
+					Mfire3.onScreen = 1;
+					Mfire3.frame = 0;
+					Mfire3.x = B.x;
+					Mfire3.y = B.y;
+				}
+				else if(Mfire4.onScreen == 0){
+					Mfire4.onScreen = 1;
+					Mfire4.frame = 0;
+					Mfire4.x = B.x;
+					Mfire4.y = B.y;
+				}
+				B.timeLeft = 0;
+			}
+			else if(spell == "Ice Shots"){
+				if(Mice.onScreen == 0){
+					Mice.onScreen = 1;
+					Mice.frame = 0;
+					Mice.x = B.x;
+					Mice.y = B.y;
+				}
+				else if(Mice2.onScreen == 0){
+					Mice2.onScreen = 1;
+					Mice2.frame = 0;
+					Mice2.x = B.x;
+					Mice2.y = B.y;
+				}
+				else if(Mice3.onScreen == 0){
+					Mice3.onScreen = 1;
+					Mice3.frame = 0;
+					Mice3.x = B.x;
+					Mice3.y = B.y;
+				}
+				else if(Mice4.onScreen == 0){
+					Mice4.onScreen = 1;
+					Mice4.frame = 0;
+					Mice4.x = B.x;
+					Mice4.y = B.y;
+				}
+				B.timeLeft = 0;
+			}
+			else if(spell == "Conductive Shots"){
+				if(B.dir == "W" || B.dir == "S"){
+					B.width = 32;
+					B.height = 4;
+					if(Math.floor(Math.random() * 2) + 1 == 2){
+						B.dir = "A";
+					}
+					else{
+						B.dir = "D";
+					}
+				}
+				else if(B.dir == "A" || B.dir == "D"){
+					B.width = 4;
+					B.height = 32;
+					if(Math.floor(Math.random() * 2) + 1 == 2){
+						B.dir = "W";
+					}
+					else{
+						B.dir = "S";
+					}
+				}
+				else if(B.dir == "WD" || B.dir == "AS"){
+					B.width = 4;
+					B.height = 4;
+					if(Math.floor(Math.random() * 2) + 1 == 2){
+						B.dir = "WA";
+					}
+					else{
+						B.dir = "SD";
+					}
+				}
+				else if(B.dir == "WA" || B.dir == "SD"){
+					B.width = 4;
+					B.height = 4;
+					if(Math.floor(Math.random() * 2) + 1 == 2){
+						B.dir = "WD";
+					}
+					else{
+						B.dir = "AS";
+					}
+				}
+			}
+			else{
+				B.timeLeft = 0;
+			}
 			onHit(Enemies[E], Enemies[E].rp);
 		}
 	}
 	if(collision(B.dir, B, Sorceror)){
-		B.timeLeft = 0;
+		if(spell == "Explosive Shots"){
+			if(Mfire.onScreen == 0){
+				Mfire.onScreen = 1;
+				Mfire.frame = 0;
+				Mfire.x = B.x;
+				Mfire.y = B.y;
+			}
+			else if(Mfire2.onScreen == 0){
+				Mfire2.onScreen = 1;
+				Mfire2.frame = 0;
+				Mfire2.x = B.x;
+				Mfire2.y = B.y;
+			}
+			else if(Mfire3.onScreen == 0){
+				Mfire3.onScreen = 1;
+				Mfire3.frame = 0;
+				Mfire3.x = B.x;
+				Mfire3.y = B.y;
+			}
+			else if(Mfire4.onScreen == 0){
+				Mfire4.onScreen = 1;
+				Mfire4.frame = 0;
+				Mfire4.x = B.x;
+				Mfire4.y = B.y;
+			}
+			B.timeLeft = 0;
+		}
+		else if(spell == "Ice Shots"){
+			if(Mice.onScreen == 0){
+				Mice.onScreen = 1;
+				Mice.frame = 0;
+				Mice.x = B.x;
+				Mice.y = B.y;
+			}
+			else if(Mice2.onScreen == 0){
+				Mice2.onScreen = 1;
+				Mice2.frame = 0;
+				Mice2.x = B.x;
+				Mice2.y = B.y;
+			}
+			else if(Mice3.onScreen == 0){
+				Mice3.onScreen = 1;
+				Mice3.frame = 0;
+				Mice3.x = B.x;
+				Mice3.y = B.y;
+			}
+			else if(Mice4.onScreen == 0){
+				Mice4.onScreen = 1;
+				Mice4.frame = 0;
+				Mice4.x = B.x;
+				Mice4.y = B.y;
+			}
+			B.timeLeft = 0;
+		}
+		else if(spell == "Conductive Shots"){
+			if(B.dir == "W" || B.dir == "S"){
+				B.width = 32;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "A";
+				}
+				else{
+					B.dir = "D";
+				}
+			}
+			else if(B.dir == "A" || B.dir == "D"){
+				B.width = 4;
+				B.height = 32;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "W";
+				}
+				else{
+					B.dir = "S";
+				}
+			}
+			else if(B.dir == "WD" || B.dir == "AS"){
+				B.width = 4;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "WA";
+				}
+				else{
+					B.dir = "SD";
+				}
+			}
+			else if(B.dir == "WA" || B.dir == "SD"){
+				B.width = 4;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "WD";
+				}
+				else{
+					B.dir = "AS";
+				}
+			}
+		}
+		else{
+			B.timeLeft = 0;
+		}
 		Sorceror.onHit();
 	}
 	if(collision(B.dir, B, Spawner)){
-		B.timeLeft = 0;
+		if(spell == "Explosive Shots"){
+			if(Mfire.onScreen == 0){
+				Mfire.onScreen = 1;
+				Mfire.frame = 0;
+				Mfire.x = B.x;
+				Mfire.y = B.y;
+			}
+			else if(Mfire2.onScreen == 0){
+				Mfire2.onScreen = 1;
+				Mfire2.frame = 0;
+				Mfire2.x = B.x;
+				Mfire2.y = B.y;
+			}
+			else if(Mfire3.onScreen == 0){
+				Mfire3.onScreen = 1;
+				Mfire3.frame = 0;
+				Mfire3.x = B.x;
+				Mfire3.y = B.y;
+			}
+			else if(Mfire4.onScreen == 0){
+				Mfire4.onScreen = 1;
+				Mfire4.frame = 0;
+				Mfire4.x = B.x;
+				Mfire4.y = B.y;
+			}
+			B.timeLeft = 0;
+		}
+		else if(spell == "Ice Shots"){
+			if(Mice.onScreen == 0){
+				Mice.onScreen = 1;
+				Mice.frame = 0;
+				Mice.x = B.x;
+				Mice.y = B.y;
+			}
+			else if(Mice2.onScreen == 0){
+				Mice2.onScreen = 1;
+				Mice2.frame = 0;
+				Mice2.x = B.x;
+				Mice2.y = B.y;
+			}
+			else if(Mice3.onScreen == 0){
+				Mice3.onScreen = 1;
+				Mice3.frame = 0;
+				Mice3.x = B.x;
+				Mice3.y = B.y;
+			}
+			else if(Mice4.onScreen == 0){
+				Mice4.onScreen = 1;
+				Mice4.frame = 0;
+				Mice4.x = B.x;
+				Mice4.y = B.y;
+			}
+			B.timeLeft = 0;
+		}
+		else if(spell == "Conductive Shots"){
+			if(B.dir == "W" || B.dir == "S"){
+				B.width = 32;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "A";
+				}
+				else{
+					B.dir = "D";
+				}
+			}
+			else if(B.dir == "A" || B.dir == "D"){
+				B.width = 4;
+				B.height = 32;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "W";
+				}
+				else{
+					B.dir = "S";
+				}
+			}
+			else if(B.dir == "WD" || B.dir == "AS"){
+				B.width = 4;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "WA";
+				}
+				else{
+					B.dir = "SD";
+				}
+			}
+			else if(B.dir == "WA" || B.dir == "SD"){
+				B.width = 4;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "WD";
+				}
+				else{
+					B.dir = "AS";
+				}
+			}
+		}
+		else{
+			B.timeLeft = 0;
+		}
 		Spawner.onHit();
 	}
 	if (B.timeLeft > 0 && B.dir == "W"){
@@ -307,57 +743,6 @@ function Bulletmove(B){
 		B.timeLeft--;
 		B.x += B.speed;
 		B.y -= B.speed;
-	}
-}
-
-// Increment
-function tBulletmove(B){
-	if(collision(B.dir, B, obstacle) || (collision(B.dir, B, obstacleA)) || (collision(B.dir, B, obstacleB))){
-		B.timeLeft = 0;
-	}
-	if(collision(B.dir, B, player)){
-		if(hptimer > 0){
-			onDmg.play();
-			player.hp-=1;
-			hptimer = 30;
-		}
-		B.timeLeft = 0;
-	}
-	if (B.timeLeft > 0 && B.dir == "W"){
-		B.timeLeft--;
-		B.y -= B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "A"){
-		B.timeLeft--;
-		B.x -= B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "S"){
-		B.timeLeft--;
-		B.y += B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "D"){
-		B.timeLeft--;
-		B.x += B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "WA"){
-		B.timeLeft--;
-		B.x += B.speed;
-		B.y += B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "AS"){
-		B.timeLeft--;
-		B.x += B.speed;
-		B.y -= B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "SD"){
-		B.timeLeft--;
-		B.x -= B.speed;
-		B.y -= B.speed;
-	}
-	else if (B.timeLeft > 0 && B.dir == "WD"){
-		B.timeLeft--;
-		B.x -= B.speed;
-		B.y += B.speed;
 	}
 }
 
@@ -445,10 +830,25 @@ var fireice = {
 			}
 		}
 		else if(this.onScreen == 1 && this.state == 0){
-			if(collision(this.dir, this, obstacle) || (collision(this.dir, this, obstacleA)) || (collision(this.dir, this, obstacleB)
+			if(obsCollision(obstacle1, this, this.dir) || (obsCollision(obstacle2, this, this.dir)) || (obsCollision(obstacle3, this, this.dir)
 				|| this.x <= 32 || this.x >= 768 || this.y <= 32 || this.y >= 544)){
 				this.state = 1;
 				Fwave.play();
+			}
+			for(O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for(O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for(O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
 			}
 			for (E in Enemies){
 				if(collision(Enemies[E].dir, Enemies[E], this)){
@@ -532,6 +932,7 @@ var fireheal = {
 			earth.shoot();
 			fire.cd = 0;
 			earth.cd = 0;
+			fire.cast = 30;
 		}
 		else{
 			return 0;
@@ -557,6 +958,7 @@ var iceheal = {
 			earth.shoot();
 			ice.cd = 0;
 			earth.cd = 0;
+			ice.cast = 30;
 		}
 		else{
 			return 0;
@@ -582,6 +984,7 @@ var lightningheal = {
 			earth.shoot();
 			lightning.cd = 0;
 			earth.cd = 0;
+			lightning.cast = 30;
 		}
 		else{
 			return 0;
@@ -604,6 +1007,7 @@ var firelightning = {
 	vy: 288,
 	cd: 0,
 	onScreen: 0,
+	cast: 0,
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.hstate == 0){
@@ -637,7 +1041,13 @@ var firelightning = {
 			this.cd-=1;
 			this.vx = player.x;
 		}
-		if(this.onScreen == 1){
+		if(this.timeLeft > 0 && this.cast == 0){
+			this.onScreen = 1;
+		}
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		else if(this.onScreen == 1){
 			if(this.timeLeft <= 0){
 				this.onScreen = 0;
 				this.vx = -2000;
@@ -770,11 +1180,11 @@ var firelightning = {
 		this.vx = player.x;
 		this.hy = player.y;
 		this.cd = 900;
-		this.onScreen = 1;
 		this.timeLeft = 210;
-	}
-	else{
-		return 0;
+		this.cast = 45;
+		castingBar.onScreen = 1;
+		castingBar.cast = 45;
+		castingBar.castmax = 45;
 	}
 	}
 	
@@ -821,6 +1231,21 @@ var firelightningf1 = {
 				}
 				if(collision(Spawner.dir, Spawner, this)){
 					Spawner.onHit();
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}
@@ -878,6 +1303,21 @@ var firelightningf2 = {
 				}
 				if(collision(Spawner.dir, Spawner, this)){
 					Spawner.onHit();
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}
@@ -938,6 +1378,21 @@ var firelightningf3 = {
 					Spawner.onHit();
 				}
 			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 		
@@ -995,6 +1450,21 @@ var firelightningf4 = {
 					Spawner.onHit();
 				}
 			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 	// Spawn
@@ -1018,15 +1488,19 @@ var vertil = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1040,12 +1514,6 @@ var vertil = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1059,15 +1527,19 @@ var vertil2 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1081,12 +1553,6 @@ var vertil2 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1100,15 +1566,19 @@ var vertil3 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1122,12 +1592,6 @@ var vertil3 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1141,15 +1605,19 @@ var vertil4 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1163,12 +1631,6 @@ var vertil4 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1182,15 +1644,19 @@ var vertil5 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1205,12 +1671,6 @@ var vertil5 = {
 				}
 			}
 		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
-		}
 	}	
 };
 var horil = {
@@ -1223,15 +1683,19 @@ var horil = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1245,12 +1709,6 @@ var horil = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1264,15 +1722,19 @@ var horil2 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1286,12 +1748,6 @@ var horil2 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1305,15 +1761,19 @@ var horil3 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1327,12 +1787,6 @@ var horil3 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1346,15 +1800,19 @@ var horil4 = {
 	frame: 0,
 	onScreen: 0,
 	split: 0,
-	end: false,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1368,12 +1826,6 @@ var horil4 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1385,17 +1837,21 @@ var horil5 = {
 	x: -2000,
 	y: -2000,
 	frame: 0,
-	end: false,
 	onScreen: 0,
 	split: 0,
 	draw: function(){
 		if(this.frame == 240){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
+			this.frame = 0;
 			this.onScreen = 0;
 			this.x = -2000;
 			this.y = -2000;
 			this.width = 16;
 			this.height = 16;
-			this.end = true;
 		}
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.25;
@@ -1409,12 +1865,6 @@ var horil5 = {
 					AllEnemies[E].speed = 0;
 				}
 			}
-		}
-		if(this.end == true){
-			for(E in AllEnemies){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-			this.end = false;
 		}
 	}	
 };
@@ -1453,6 +1903,21 @@ var icelightning = {
 			vertil3.onScreen = 0;
 			vertil4.onScreen = 0;
 			vertil5.onScreen = 0;
+			horil.frame = 240;
+			horil2.frame = 240;
+			horil3.frame = 240;
+			horil4.frame = 240;
+			horil5.frame = 240;
+			vertil.frame = 240;
+			vertil2.frame = 240;
+			vertil3.frame = 240;
+			vertil4.frame = 240;
+			vertil5.frame = 240;
+			for (E in AllEnemies){
+				if(AllEnemies[E].speed == 0){
+					AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				}
+			}
 			this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
 		}
 	},
@@ -1655,6 +2120,21 @@ var airfire = {
 			if(collision(Spawner.dir, Spawner, this)){
 				Spawner.onHit();
 			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 	// Spawn
@@ -1754,6 +2234,21 @@ var airfire12 = {
 			if(collision(Spawner.dir, Spawner, this)){
 				Spawner.onHit();
 			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 	// Spawn
@@ -1843,6 +2338,21 @@ var airfire13 = {
 			if(collision(Spawner.dir, Spawner, this)){
 				Spawner.onHit();
 			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 	// Spawn
@@ -1865,10 +2375,11 @@ var airice = {
 	height: 64,
 	cd: 0,
 	onScreen: 0,
+	cast: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+		if(this.onScreen == 1 && this.cast == 0){
+			ctx.globalAlpha = 0.25;
 			if(this.timeLeft/2 != Math.round(this.timeLeft/2)){
 				ctx.fillStyle = this.color1;
 			}
@@ -1878,7 +2389,6 @@ var airice = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
 		}
 	},
 	
@@ -1886,31 +2396,35 @@ var airice = {
 		if(this.cd > 0){
 			this.cd-=1;
 		}
+		if(this.cast > 0){
+			this.cast-=1;
+		}
 		if(this.timeLeft == 0 && this.onScreen == 1){
 			this.onScreen = 0;
 			ice.cd = 0;
+			ctx.globalAlpha = 1;
 		}
-		else if(this.timeLeft<=30){
+		else if(this.timeLeft<=30 && this.cast == 0){
 			this.height+=4;
 			this.width+=4;
 		}
-		else if(this.timeLeft<=60){
+		else if(this.timeLeft<=60 && this.cast == 0){
 			this.height-=4;
 			this.width-=4;
 		}
-		else if(this.timeLeft<=90){
+		else if(this.timeLeft<=90 && this.cast == 0){
 			this.height+=4;
 			this.width+=4;
 		}
-		else if(this.timeLeft <= 120){
+		else if(this.timeLeft <= 120 && this.cast == 0){
 			this.height-=4;
 			this.width-=4;
 		}
-		else{
+		else if(this.cast == 0){
 			this.height+=4;
 			this.width+=4;
 		}
-		if(this.timeLeft != 0){
+		if(this.timeLeft != 0 && this.cast == 0){
 			this.timeLeft-=1;
 			this.x = player.x;
 			this.y = player.y;
@@ -1923,6 +2437,21 @@ var airice = {
 				}
 				if(collision(Spawner.dir, Spawner, this)){
 					Spawner.onHit();
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}	
@@ -1940,14 +2469,15 @@ var airice = {
 		this.height = 64;
 		this.onScreen = 1;
 		this.timeLeft = 150;
+		castingBar.onScreen = 1;
+		castingBar.cast = 30;
+		castingBar.castmax = 30;
+		this.cast = 30;
 		ice.cd = 0;
+		ice.cast = 30;
 		ice.shoot();
 	}
-	else{
-		return 0;
 	}
-	}
-	
 };
 // Gust and Heal: Heals user by 1 and casts Gust
 var airearth = {
@@ -1967,9 +2497,7 @@ var airearth = {
 			earth.shoot();
 			air.cd = 0;
 			earth.cd = 0;
-		}
-		else{
-			return 0;
+			air.cast = 30;
 		}
 	}	
 };
@@ -2087,6 +2615,31 @@ var airlightning = {
 	}
 	
 };
+// Teleport and Heal: Heals user by 1 and casts Ice
+var mysticearth = {
+	cd: 0,
+	tick: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+	},
+	shoot: function(){
+		if(this.cd == 0){
+			Frozen.play();
+			this.cd = 300;
+			mystic.cd = 0;
+			earth.cd = 0;
+			mystic.shoot();
+			earth.shoot();
+			mystic.cd = 0;
+			earth.cd = 0;
+			mystic.cast = 30;
+		}
+		else{
+			return 0;
+		}
+	}	
+};
 //-------------------------------------------------------------- Enemy Spells -------------------------------------------------------//
 // Globblyfire: Damages player if in radius
 var Globblyfire = {
@@ -2127,6 +2680,21 @@ var Globblyfire = {
 					player.hp-=1;
 					onDmg.play();
 					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}
@@ -2182,6 +2750,21 @@ var Globblyfire2 = {
 					hptimer = 30;
 				}
 			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
 		}
 	},
 		
@@ -2233,6 +2816,21 @@ var Globblyfire3 = {
 					player.hp-=1;
 					onDmg.play();
 					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
 				}
 			}
 		}
@@ -2453,6 +3051,6 @@ var sLightning = {
 };
 
 //--------------------------------------------------------------- Spell Array -------------------------------------------------------//
-var Weapons = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: tinybullet, 6: fire, 7: fire2, 8: ice, 9: ice2, 10: fireice, 
-				11: earth, 12: earth2, 13: lightning, 14: lightning2, 15: icelightning, 16: firelightning, 17: sFire, 18: sIce, 19: sLightning,
-				20: air, 21: air2, 22: airfire, 23: airice, 24: airlightning};
+var Weapons = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: fire, 6: fire2, 7: ice, 8: ice2, 9: fireice, 10: earth, 
+				11: earth2, 12: lightning, 13: lightning2, 14: icelightning, 15: firelightning, 16: sFire, 17: sIce, 18: sLightning, 19: air,
+				20: air2, 21: airfire, 22: airice, 23: airlightning};

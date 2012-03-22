@@ -14,30 +14,34 @@
 
 */
 /*
-	Version 0.4.2 Changes:
-		-Added Lightning Animation
-		-Added a menu graphic
-		-Added new box graphics
-		-Added new enemy sprites
-		-Globbly enemy now explodes on hit
+	Version 0.4.6 Changes(3/22/2012):
+		-Added prototype background
+		-Made Ice, Ice2, and Maelstrom effects crazier
+		-Put grey background in high score menu
 		
 	TODO:
-		-Bugs
-			-Fix ice skills glitch
-			-Fix Sound Effects for all browsers
-			-Fix Sorceror AI
+		-Bugs/small shit <-------- Next
+			-Sound plays on reset
+			-Make Thunderstorm more clear
+			-Sounds play before cast on cast bar spells
+			-Sounds for tree hit
 		-Spells
-			-Mystic (Purple)
-				-Passive Buffs? / Teleporting?
 			-Dark (Black)
 				-HP Steal?
+			-Water (Blue) <-------- Next
+				-Particle shield?
+			-Summon (?)
+				-Minions
 		-More enemies and AI
-			-Enemy that builds obstacles
-			-Improve AI
-		-Cooldown Reduction on box pickup
-		-Breakable Obstacles
-		-Optimization/Code Minifier
-		-Maybe make spells have limited casts?
+			-Wizards that change terrain?
+			-Bosses? Dependent on terrain
+			-Each boss kill gives + 1 max hp?
+		-Terrain
+			-Different levels, at the end of each is a boss
+			-During battle terrain gradually changes to new level
+			-Each level has its own element drops and enemies
+				Forest = Earth(rare), Water, Air?
+			-Special events that can change to other levels (such as tree wizzurd summon)
 */
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
 // Canvas, Frames per Second, KeysDown, Global vars
@@ -63,7 +67,8 @@ var hptimer = 0;
 var spell1 = "N/A";
 var spell2 = "N/A";
 var spell = "N/A";
-var keycount = 0;
+var spell1pic = "N/A";
+var spell2pic = "N/A";
 //Score
 var score = 0;
 var muliplier = 1;
@@ -126,20 +131,29 @@ function getPositionhover(event){
 }
 //------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //Girraffix
-var Wizzurd = new Image();
-Wizzurd.src = "grafix/wizzurd32.png";
+var WizzurdL = new Image();
+WizzurdL.src = "grafix/wizzurd.l32.png";
+var WizzurdR = new Image();
+WizzurdR.src = "grafix/wizzurd.r32.png";
 //Ondmg
 var Wizzurd2 = new Image();
 Wizzurd2.src = "grafix/nega-wizzurd32.png";
+//Environment
+var Tree = new Image();
+Tree.src = "grafix/obj.tree32.png";
+var backGround1 = new Image();
+backGround1.src = "grafix/bkg1.png";
 //Lavaman
 var Lavamanpic = new Image();
-Lavamanpic.src = "grafix/lavaman32.png";
+Lavamanpic.src = "grafix/cre.firesprite32.png";
 //Tenemy
 var Globbly = new Image();
 Globbly.src = "grafix/cre.globbly32.png";
-//Enemy1
-var Hudge = new Image();
-Hudge.src = "grafix/cre.hudge32.png";
+//Hudge
+var HudgeL = new Image();
+HudgeL.src = "grafix/cre.hudge.l32.png";
+var HudgeR = new Image();
+HudgeR.src = "grafix/cre.hudge.r32.png";
 //Enemy2
 var Pikkit = new Image();
 Pikkit.src = "grafix/cre.pikkit32.png";
@@ -149,9 +163,12 @@ Splavaman.src = "grafix/lavaman64.png";
 //Evil Wizzurd
 var Sorcerorpng = new Image();
 Sorcerorpng.src = "grafix/poison-wizzurd32.png";
-//TinyWizard
-var BabyWizard = new Image();
-BabyWizard.src = "grafix/wizzurd16.png";
+//Tree Wizzurd
+var TWizzurd = new Image();
+TWizzurd.src = "grafix/treewizzurd32.png";
+//Monochrome Wizzurd
+var MonoWizzurd = new Image();
+MonoWizzurd.src = "grafix/bw-wizzurd32.png";
 //Fire powerup
 var Firebox = new Image();
 Firebox.src = "grafix/ele.fire32.png";
@@ -167,6 +184,12 @@ Thunderbox.src = "grafix/ele.zap32.png";
 //Air powerup
 var Windbox = new Image();
 Windbox.src = "grafix/ele.air32.png";
+//Mystic powerup
+var Mysticbox = new Image();
+Mysticbox.src = "grafix/ele.dev32.png";
+// Particle
+var particle = new Image();
+particle.src = "grafix/particle.png";
 //hlightning
 var hlightning1 = new Image();
 hlightning1.src = "grafix/lightning-h1.png";
@@ -215,6 +238,8 @@ var Menu = {
 		ctx.fillStyle = "black";
 		ctx.font = "18pt Arial";
 		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-2*this.height);
+		ctx.fillText("Version 0.4.6: March 22 2012", this.x-3*this.width/3, this.y+6*this.height);
+		ctx.fillText("Dumbledore64", this.x-2*this.width/3, this.y-6*this.height);
 		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + this.height);
 		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
 		ctx.fillText("Credits", this.x-this.width/2, this.y-this.height/2 + 3*this.height);
@@ -315,13 +340,15 @@ var Credits = {
 //------------------------------------------------- Player --------------------------------------------------------------------------//
 // Player
 var player = {
-	x: 320,
-	y: 128,
+	x: 400,
+	y: 256,
 	width: 32,
 	height: 32,
 	speed: 8,
 	hp: 3,
+	dmg: false,
 	dir: "W",
+	LR: "",
 	// Draws the player on the canvas when called
 	draw: function(){
 		// Flash if the player has been hit
@@ -329,8 +356,20 @@ var player = {
 			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2);
 		}
 		else{
-			// /2 To make x and y coordinates at player's center
-			ctx.drawImage(Wizzurd, this.x - this.width/2, this.y - this.height/2);		
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				ctx.drawImage(WizzurdL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(WizzurdR, this.x - this.width / 2, this.y - this.height / 2);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(WizzurdL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else{
+				ctx.drawImage(WizzurdR, this.x - this.width / 2, this.y - this.height / 2);
+			}
 		}
 		ctx.fillStyle = "red";
 		if(this.hp == 3){
@@ -350,23 +389,57 @@ var player = {
 	if(hptimer > 0){
 		hptimer-=1;
 	}
-	else if(collision(this.dir, this, Enemy) || collision(this.dir, this, EnemyA) || collision(Enemy.dir, Enemy, this)
-		|| collision(EnemyA.dir, EnemyA, this) || collision(EnemyB.dir, EnemyB, this) || collision(this.dir, this, EnemyB)
-		|| collision(this.dir, this, EnemyC)  || collision(EnemyC.dir, EnemyC, this) || collision(Tenemy.dir, Tenemy, this)
-		|| collision(this.dir, this, Tenemy) || collision(TenemyA.dir, TenemyA, this) || collision(this.dir, this, TenemyA)
-		|| collision(TenemyB.dir, TenemyB, this) || collision(this.dir, this, TenemyB) || collision(Sorceror.dir, Sorceror, this) || collision(this.dir, this, Sorceror)
-		|| collision(Lavaman.dir, Lavaman, this) || collision(this.dir, this, Lavaman)|| collision(Lavaman2.dir, Lavaman2, this) || collision(this.dir, this, Lavaman2)
-		|| collision(Lavaman3.dir, Lavaman3, this) || collision(this.dir, this, Lavaman3)|| collision(Lavaman4.dir, Lavaman4, this) || collision(this.dir, this, Lavaman4)){
-		this.hp-=1;
-		onDmg.play();
-		hptimer = 30;
-	}
 	else{
-		this.hp = this.hp;
+		for(E in AllEnemies){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])){
+				onDmg.play();
+				this.dmg = true;
+			}
+		}
+		if(this.dmg == true){
+			this.hp-=1;
+			hptimer = 30;
+			this.dmg = false;
+		}
+		else{
+			this.hp = this.hp;
+		}
 	}
 	}
 };
-
+//----------------------------------------------- Casting Bar -----------------------------------------------------------------------//
+var castingBar = {
+	x: player.x - player.width/2,
+	y: player.y + player.height/2,
+	width: player.width,
+	height: player.height/4,
+	width2: 0,
+	onScreen: 0,
+	cast: -1,
+	castmax: 0,
+	draw: function(){
+		this.x = player.x - player.width/2;
+		this.y = player.y + player.height/2;
+		if(this.onScreen == 1){
+			ctx.fillStyle = "0404B4";
+			ctx.strokeStyle = "black";
+			ctx.strokeRect(this.x, this.y, this.width, this.height);
+			ctx.fillRect(this.x + 2, this.y + 2, this.width2, this.height - 2);
+		}
+	},
+	tick: function(){
+		if(this.cast > 0){
+			player.speed = 0;
+			this.cast-=1;
+			this.width2 = this.cast/this.castmax * this.width;
+		}
+		if(this.cast == 0){
+			this.cast-=1;
+			player.speed = 8;
+			this.onScreen = 0;
+		}
+	}
+}
 //---------------------------------------------- Pickups ----------------------------------------------------------------------------//
 // Fire drop
 var redCube = {
@@ -392,19 +465,19 @@ var redCube = {
 			spell1 = "Fire";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Fire";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Fire";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Fire";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -413,19 +486,19 @@ var redCube = {
 			spell2 = "Fire";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Fire";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Fire";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Fire";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -460,19 +533,19 @@ var tealCube = {
 			spell1 = "Ice";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Ice";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Ice";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Ice";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -481,19 +554,19 @@ var tealCube = {
 			spell2 = "Ice";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Ice";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Ice";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Ice";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -528,19 +601,19 @@ var greenCube = {
 			spell1 = "Earth";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Earth";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Earth";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Earth";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -549,19 +622,19 @@ var greenCube = {
 			spell2 = "Earth";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Earth";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Earth";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Earth";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -596,19 +669,19 @@ var yellowCube = {
 			spell1 = "Lightning";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Lightning";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Lightning";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Lightning";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -617,19 +690,19 @@ var yellowCube = {
 			spell2 = "Lightning";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Lightning";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Lightning";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Lightning";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -664,19 +737,19 @@ var greyCube = {
 			spell1 = "Air";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Air";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Air";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Air";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -685,19 +758,87 @@ var greyCube = {
 			spell2 = "Air";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Air";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Air";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Air";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
+
+// Mystic drop
+var purpleCube = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(Mysticbox, this.x - this.width / 2, this.y - this.height / 2);
+			this.timeLeft-=1;
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = "Mystic";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Mystic";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Mystic";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Mystic";
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = "Mystic";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Mystic";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Mystic";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Mystic";
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -747,52 +888,6 @@ function pickup(C){
 		C.onHit();
 	}
 }
-	
-//------------------------------------------------- Map -----------------------------------------------------------------------------//
-// Obstacle
-var obstacle = {
-	color: "green",
-	x: 512,
-	y: 352,
-	width: 64,
-	height: 128,
-	// Draws the object on the canvas when called
-	draw: function(){
-		ctx.fillStyle = this.color;
-		// Using width/2 and height/2 so the x and y coordinates are at the object's center
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-	}
-};
-
-// Obstacle 2
-var obstacleA = {
-	color: "green",
-	x: 128,
-	y: 128,
-	width: 128,
-	height: 64,
-	// Draws the object on the canvas when called
-	draw: function(){
-		ctx.fillStyle = this.color;
-		// Using width/2 and height/2 so the x and y coordinates are at the object's center
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-	}
-};
-
-// Obstacle 3
-var obstacleB = {
-	color: "green",
-	x: 704,
-	y: 256,
-	width: 32,
-	height: 128,
-	// Draws the object on the canvas when called
-	draw: function(){
-		ctx.fillStyle = this.color;
-		// Using width/2 and height/2 so the x and y coordinates are at the object's center
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-	}
-};
 
 // Collision detection
 function collision(dir, one, two){
@@ -943,6 +1038,9 @@ function drawtypeMarker(M){
 		else if(M.text == "+ Earth"){
 			M.color = "33FF00";
 		}
+		else if(M.text == "+ Mystic"){
+			M.color = "BF00FF";
+		}
 	ctx.fillStyle = M.color;
 	ctx.font = "32pt Arial";
 	ctx.fillText(M.text, M.x, M.y);
@@ -997,8 +1095,13 @@ var clear = function(){
 // Border
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
-ctx.fillStyle = "grey";
-ctx.fillRect(4, 4, canvas.width - 4, canvas.height - 4);
+	if(STATE != 1){
+		ctx.fillStyle = "grey";
+		ctx.fillRect(4, 4, canvas.width-4, canvas.height-4);
+	}
+	else{
+		ctx.drawImage(backGround1, 0, 0);
+	}
 };
 
 function UI(){
@@ -1018,6 +1121,9 @@ function UI(){
 		}	
 		if(spell1 == "Air"){
 			spell = "Gust";
+		}
+		if(spell1 == "Mystic"){
+			spell = "Teleport";
 		}			
 	}
 	if(spell1 == "N/A" && spell2 != "N/A"){
@@ -1035,7 +1141,10 @@ function UI(){
 		}	
 		if(spell2 == "Air"){
 			spell = "Gust";
-		}			
+		}
+		if(spell2 == "Mystic"){
+			spell = "Teleport";
+		}		
 	}
 	if(spell1 == "Fire" && spell2 == "Fire"){
 		spell = "Inferno";
@@ -1082,10 +1191,80 @@ function UI(){
 	if((spell1 == "Lightning" && spell2 == "Air") || (spell2 == "Lightning" && spell1 == "Air")){
 		spell = "Thunderstorm";
 	}
+	if(spell1 == "Mystic" && spell2 == "Mystic"){
+		spell = "Mirage";
+	}
+	if((spell1 == "Fire" && spell2 == "Mystic") || (spell2 == "Fire" && spell1 == "Mystic")){
+		spell = "Explosive Shots";
+	}
+	if((spell1 == "Ice" && spell2 == "Mystic") || (spell2 == "Ice" && spell1 == "Mystic")){
+		spell = "Ice Shots";
+	}
+	if((spell1 == "Earth" && spell2 == "Mystic") || (spell2 == "Earth" && spell1 == "Mystic")){
+		spell = "Teleport and Heal";
+	}
+	if((spell1 == "Lightning" && spell2 == "Mystic") || (spell2 == "Lightning" && spell1 == "Mystic")){
+		spell = "Conductive Shots";
+	}
+	if((spell1 == "Air" && spell2 == "Mystic") || (spell2 == "Air" && spell1 == "Mystic")){
+		spell = "Homing Shots";
+	}
+	if(spell1 == "Fire"){
+		spell1pic = Firebox;
+	}
+	else if(spell1 == "Ice"){
+		spell1pic = Icebox;
+	}
+	else if(spell1 == "Earth"){
+		spell1pic = Earthbox;
+	}
+	else if(spell1 == "Lightning"){
+		spell1pic = Thunderbox;
+	}
+	else if(spell1 == "Air"){
+		spell1pic = Windbox;
+	}
+	else if(spell1 == "Mystic"){
+		spell1pic = Mysticbox;
+	}
+	else{
+		spell1pic = "N/A";
+	}
+	if(spell2 == "Fire"){
+		spell2pic = Firebox;
+	}
+	else if(spell2 == "Ice"){
+		spell2pic = Icebox;
+	}
+	else if(spell2 == "Earth"){
+		spell2pic = Earthbox;
+	}
+	else if(spell2 == "Lightning"){
+		spell2pic = Thunderbox;
+	}
+	else if(spell2 == "Air"){
+		spell2pic = Windbox;
+	}
+	else if(spell2 == "Mystic"){
+		spell2pic = Mysticbox;
+	}
+	else{
+		spell2pic = "N/A";
+	}
 	// Text
 	ctx.fillStyle = "black";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Spell: " + spell1 + " + " + spell2 + " = " + spell, 32, 512);
+	ctx.fillText("Spell:", 32, 512);
+	ctx.strokeStyle = "000000";
+	ctx.strokeRect(92, 476, 32, 48);
+	ctx.strokeRect(124, 476, 32, 48);
+	if(spell1pic != "N/A"){
+		ctx.drawImage(spell1pic, 90, 484);
+	}
+	if(spell2pic != "N/A"){
+		ctx.drawImage(spell2pic, 122, 484);
+	}
+	ctx.fillText("= " + spell, 160, 512);
 	// Recharge
 	if(spell == "Fire"){
 		ctx.fillStyle = "black";
@@ -1187,6 +1366,41 @@ function UI(){
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airlightning.cd/30) + "s", 32, 544);
 	}
+	else if(spell == "Teleport"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Mirage"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic2.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Teleport and Heal"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mysticearth.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Explosive Shots"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Ice Shots"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Conductive Shots"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Homing Shots"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
 	ctx.fillStyle = "black";
 	ctx.font = "16pt Arial";
 	ctx.fillText("Q: Drop Spell 1", 576, 528);
@@ -1203,23 +1417,35 @@ function SCORE(){
 //--------------------------------------------- Keys and Activation -----------------------------------------------------------------//
 // Key bindings
 var keys = function(){
-	if (87 in keysDown && player.y - player.speed > 4 && !(collision("W", player, obstacle)) && !(collision("W", player, obstacleA))
-		&& !(collision("W", player, obstacleB))){
-	player.y-=player.speed; 
-	player.dir = "W";
+	if (87 in keysDown){
+		player.dir = "W";
 	}
-	if (65 in keysDown && player.x - player.speed > 4 && !(collision("A", player, obstacle)) && !(collision("A", player, obstacleA))
-		&& !(collision("A", player, obstacleB))){
+	if (65 in keysDown){
+		player.dir = "A";
+	}
+	if (83 in keysDown){
+		player.dir = "S";
+	}
+	if (68 in keysDown){
+		player.dir = "D";
+	}
+	if (87 in keysDown && player.y - player.speed > 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
+		&& !(obsCollision(obstacle3, player, player.dir))){
+		player.y-=player.speed; 
+		player.dir = "W";
+	}
+	if (65 in keysDown && player.x - player.speed > 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
+		&& !(obsCollision(obstacle3, player, player.dir))){
 		player.x-=player.speed;
 		player.dir = "A";
 	}
-	if (83 in keysDown && player.y + player.speed < canvas.height - 4 && !(collision("S", player, obstacle)) && !(collision("S", player, obstacleA))
-		&& !(collision("S", player, obstacleB))){
+	if (83 in keysDown && player.y + player.speed < canvas.height - 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
+		&& !(obsCollision(obstacle3, player, player.dir))){
 		player.y+=player.speed;
 		player.dir = "S";
 	}
-	if (68 in keysDown && player.x + player.speed < canvas.width - 4 && !(collision("D", player, obstacle)) && !(collision("D", player, obstacleA))
-		&& !(collision("D", player, obstacleB))){
+	if (68 in keysDown && player.x + player.speed < canvas.width - 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
+		&& !(obsCollision(obstacle3, player, player.dir))){
 		player.x+=player.speed;
 		player.dir = "D";
 	}
@@ -1275,6 +1501,9 @@ var keys = function(){
 		if(spell1 == "Air"){
 			air.shoot();
 		}
+		if(spell1 == "Mystic"){
+			mystic.shoot();
+		}
 	}
 	if(32 in keysDown && spell2 != "N/A" && spell1 == "N/A"){
 		if(spell2 == "Fire"){
@@ -1291,6 +1520,9 @@ var keys = function(){
 		}
 		if(spell2 == "Air"){
 			air.shoot();
+		}
+		if(spell2 == "Mystic"){
+			mystic.shoot();
 		}
 	}
 	if(32 in keysDown && spell1 != "N/A" && spell2 != "N/A"){
@@ -1339,6 +1571,24 @@ var keys = function(){
 		if((spell1 == "Air" && spell2 == "Earth") || (spell2 == "Air" && spell1 == "Earth")){
 			airearth.shoot();
 		}
+		if(spell1 == "Mystic" && spell2 == "Mystic"){
+			mystic2.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Earth") || (spell2 == "Mystic" && spell1 == "Earth")){
+			mysticearth.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Fire") || (spell2 == "Mystic" && spell1 == "Fire")){
+			mystic.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Ice") || (spell2 == "Mystic" && spell1 == "Ice")){
+			mystic.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Lightning") || (spell2 == "Mystic" && spell1 == "Lightning")){
+			mystic.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Air") || (spell2 == "Mystic" && spell1 == "Air")){
+			mystic.shoot();
+		}
 	}
 };
 // Reset all Global Variables
@@ -1354,13 +1604,11 @@ function reset(){
 	muliplier = 1;
 	multtimer = 0;
 	currpts = 0;
-	player.x = 320;
-	player.y = 128;
+	player.x = 400;
+	player.y = 256;
 	player.speed = 8;
 	player.hp = 3;
 	player.dir = "W";
-	
-	
 	for(E in Enemies){
 		onHit(Enemies[E], Enemies[E].rp);
 	}
@@ -1386,6 +1634,21 @@ function reset(){
 		Weapons[W].timeLeft = 0;
 		Weapons[W].onScreen = 0;
 	}
+	Globblyfire.x = -100;
+	Globblyfire.y = -200;
+	Globblyfire.width = 16;
+	Globblyfire.height = 16;
+	Globblyfire.onScreen = 0;
+	Globblyfire2.x = -100;
+	Globblyfire2.y = -200;
+	Globblyfire2.width = 16;
+	Globblyfire2.height = 16;
+	Globblyfire2.onScreen = 0;
+	Globblyfire3.x = -100;
+	Globblyfire3.y = -200;
+	Globblyfire3.width = 16;
+	Globblyfire3.height = 16;
+	Globblyfire3.onScreen = 0;
 	score = 0;
 	multiplier = 1;
 	marker.timeLeft = 0;
@@ -1397,6 +1660,7 @@ function reset(){
 	greenCube.timeLeft = 0;
 	yellowCube.timeLeft = 0;
 	greyCube.timeLeft = 0;
+	rePlant();
 }
 
 // Game Over
@@ -1410,6 +1674,8 @@ function gameOver(){
 	var width = 20;
 	var height = 20;
 	multiplier = 1;
+	ctx.fillStyle = "grey";
+	ctx.fillRect(4, 4, canvas.width-4, canvas.height-4);
 	if(STATE != 5){
 		ctx.fillText("Score: " + score, 400, 144);
 	}
@@ -1533,10 +1799,16 @@ setInterval(function(){
 		
 			greenCube.draw();
 			pickup(greenCube);
+			
+			purpleCube.draw();
+			pickup(purpleCube);
 		
-			obstacle.draw();
-			obstacleA.draw();
-			obstacleB.draw();
+			drawObstacle(obstacle1);
+			drawObstacle(obstacle2);
+			drawObstacle(obstacle3);
+			obsTick(obstacle1);
+			obsTick(obstacle2);
+			obsTick(obstacle3);
 			UI();
 			
 			drawBullet(bullet);
@@ -1659,6 +1931,32 @@ setInterval(function(){
 			
 			airlightning.draw();
 			airlightning.effect();
+			
+			mystic.move();
+			mystic.draw();
+			Mfire.draw();
+			Mfire.move();
+			Mfire2.draw();
+			Mfire2.move();
+			Mfire3.draw();
+			Mfire3.move();
+			Mfire4.draw();
+			Mfire4.move();
+			Mice.draw();
+			Mice.move();
+			Mice2.draw();
+			Mice2.move();
+			Mice3.draw();
+			Mice3.move();
+			Mice4.draw();
+			Mice4.move();
+			mysticearth.tick();
+			mystic2.draw();
+			mystic2.move();
+			Illusion.draw();
+			Illusion.shoot();
+			IllusionBlast.draw();
+			IllusionBlast.move();
 		
 			sIce.draw();
 			sIce.move();
@@ -1670,100 +1968,25 @@ setInterval(function(){
 			sLightning.draw();
 			sLightning.effect();
 			
-			Enemy.draw();
-			spawn(Enemy);
-			AI(Enemy);
-			move(Enemy);
-			
-			EnemyA.draw();
-			spawn(EnemyA);
-			AI(EnemyA);
-			move(EnemyA);
-		
-			EnemyB.draw();
-			spawn(EnemyB);
-			AI(EnemyB);
-			move(EnemyB);
-		
-			EnemyC.draw();
-			spawn(EnemyC);
-			AI(EnemyC);
-			move(EnemyC);
-		
-			Tenemy.draw();
-			spawn(Tenemy);
-			AI(Tenemy);
-			move(Tenemy);
-	
-			TenemyA.draw();
-			spawn(TenemyA);
-			AI(TenemyA);
-			move(TenemyA);
-		
-			TenemyB.draw();
-			spawn(TenemyB);
-			AI(TenemyB);
-			move(TenemyB);
-			
+			for(E in AllEnemies){
+				AllEnemies[E].draw();
+				move(AllEnemies[E]);
+				AI(AllEnemies[E]);
+				spawn(AllEnemies[E]);
+			}
+			treeWizz.spawn();
+			AI(treeWizz);
+			move(treeWizz);
+			treeWizz.draw();
 			Globblyfire.draw();
 			Globblyfire.move();
 			Globblyfire2.draw();
 			Globblyfire2.move();
 			Globblyfire3.draw();
 			Globblyfire3.move();
-			
-			Sorceror.draw();
-			Sorceror.spawn();
-			Sorceror.AI();
-			move(Sorceror);
 		
-			Spawner.draw();
-			AI(Spawner);
 			Spawner.fire();
-			move(Spawner);
-			spawn(Spawner);
-			Lavaman.draw();
-			AI(Lavaman);
-			move(Lavaman);
-			Lavaman2.draw();
-			AI(Lavaman2);
-			move(Lavaman2);
-			Lavaman3.draw();
-			AI(Lavaman3);
-			move(Lavaman3);
-			Lavaman4.draw();
-			AI(Lavaman4);
-			move(Lavaman4);
-			/*Bwizz.draw();
-			AI(Bwizz);
-			move(Bwizz);
-			Bwizz.fire();
-			Bwizz2.draw();
-			AI(Bwizz2);
-			move(Bwizz2);
-			Bwizz2.fire();
-			Bwizz3.draw();
-			AI(Bwizz3);
-			move(Bwizz3);
-			Bwizz3.fire();
-			Bwizz4.draw();
-			AI(Bwizz4);
-			move(Bwizz4);
-			Bwizz4.fire();
-		
-			//Bwizz bullet
-			tBulletmove(tinybullet);
-			drawBullet(tinybullet);
 			
-			tBulletmove(tinybullet2);
-			drawBullet(tinybullet2);
-			
-			tBulletmove(tinybullet3);
-			drawBullet(tinybullet3);
-			
-			tBulletmove(tinybullet4);
-			drawBullet(tinybullet4);
-		*/
 			drawMarker(marker);
 			moveMarker(marker);
 		
@@ -1784,6 +2007,9 @@ setInterval(function(){
 		
 			drawtypeMarker(typemarker3);
 			moveMarker(typemarker3);
+			
+			castingBar.draw();
+			castingBar.tick();
 			
 			// Cooldown calculation
 			if(cd <= 0){
