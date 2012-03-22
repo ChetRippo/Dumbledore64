@@ -32,7 +32,12 @@ var bullet = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		cd = 20;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else{
+			cd = 20;
+		}
 	}
 	}
 };
@@ -58,7 +63,12 @@ var bullet2 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		cd = 20;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else{
+			cd = 20;
+		}
 	}
 	}
 	
@@ -85,7 +95,12 @@ var bullet3 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		cd = 20;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else{
+			cd = 20;
+		}
 	}
 	}
 	
@@ -112,7 +127,12 @@ var bullet4 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		cd = 20;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else{
+			cd = 20;
+		}
 	}
 	}
 	
@@ -120,14 +140,27 @@ var bullet4 = {
 
 function drawBullet(B){
 	if (B.timeLeft > 0){
-		if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
+		if(spell == "Explosive Shots"){
+			ctx.fillStyle = "CC0000";
+		}
+		else if(spell == "Ice Shots"){
+			ctx.fillStyle = "66CCFF";
+		}
+		else if(spell == "Conductive Shots"){
+			ctx.fillStyle = "FFFF00";
+		}
+		else if(spell == "Homing Shots"){
+			ctx.fillStyle = "FF00FF";
+		}
+		else{
 			ctx.fillStyle = B.color;
+		}
+		if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
 			ctx.fillRect(B.x - B.width / 2,
 			B.y - B.height / 2,
 			B.width, B.height);
 		}
 		else if(B.dir == "WA" || B.dir == "SD"){
-			ctx.fillStyle = B.color;
 				ctx.fillRect(B.x - B.width / 2,
 				B.y - B.height / 2,
 				B.width, B.height);
@@ -139,7 +172,6 @@ function drawBullet(B){
 				B.y + B.height / 2 + B.height + B.height + B.height, B.width, B.height);
 		}
 		else if(B.dir == "WD" || B.dir == "AS"){
-			ctx.fillStyle = B.color;
 				ctx.fillRect(B.x,
 				B.y - B.height / 2,
 				B.width, B.height);
@@ -158,36 +190,522 @@ function drawBullet(B){
 }
 // Increment
 function Bulletmove(B){
-	for(O in obstacle1){
-		if(collision(B.dir, B, obstacle1[O])){
-			obsHit(obstacle1[O]);
-			B.timeLeft = 0;
+	if(spell == "Homing Shots"){
+		var closest = "";
+		var cdist = 2000;
+		for (E in AllEnemies){
+			var distance = Math.sqrt(((B.x - AllEnemies[E].x)*(B.x - AllEnemies[E].x)) + ((B.y - AllEnemies[E].y)*(B.y - AllEnemies[E].y)));
+			if(distance < cdist){
+				cdist = distance;
+				closest = AllEnemies[E];
+			}
+		}
+		var xdifference = closest.x - B.x;
+		var ydifference = closest.y - B.y;
+		if(closest.x < 8 || closest.y < 8 || closest.x > 792 || closest.y > 568){
+			B.dir = B.dir;
+		}
+		else{
+			if(xdifference < 4 && ydifference < 4){
+				B.dir = "WA";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if(xdifference < 4 && ydifference > 4){
+				B.dir = "AS";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if(xdifference > 4 && ydifference < 4){
+				B.dir = "WD";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if (xdifference > 4 && ydifference > 4){
+				B.dir = "SD";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if (xdifference == 4 && ydifference > 4){
+				B.dir = "S";
+				B.width = 4;
+				B.height = 32;
+			}
+			else if(xdifference == 4 && ydifference < 4){
+				B.dir = "W";
+				B.width = 4;
+				B.height = 32;
+			}
+			else if(xdifference < 4 && ydifference == 4){
+				B.dir = "A";
+				B.width = 32;
+				B.height = 4;
+			}
+			else{
+				B.dir = "D";
+				B.width = 32;
+				B.height = 4;
+			}
 		}
 	}
-	for(O in obstacle2){
-		if(collision(B.dir, B, obstacle2[O])){
-			obsHit(obstacle2[O]);
-			B.timeLeft = 0;
+	if(spell != "Homing Shots"){
+		for(O in obstacle1){
+			if(collision(B.dir, B, obstacle1[O])){
+				obsHit(obstacle1[O]);
+				if(spell == "Conductive Shots"){
+					if(B.dir == "W" || B.dir == "S"){
+						B.width = 32;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "A";
+						}
+						else{
+							B.dir = "D";
+						}
+					}
+					else if(B.dir == "A" || B.dir == "D"){
+						B.width = 4;
+						B.height = 32;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "W";
+						}
+						else{
+							B.dir = "S";
+						}
+					}
+					else if(B.dir == "WD" || B.dir == "AS"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WA";
+						}
+						else{
+							B.dir = "SD";
+						}
+					}
+					else if(B.dir == "WA" || B.dir == "SD"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WD";
+						}
+						else{
+							B.dir = "AS";
+						}
+					}
+				}
+				else{
+					B.timeLeft = 0;
+				}
+			}
 		}
-	}
-	for(O in obstacle3){
-		if(collision(B.dir, B, obstacle3[O])){
-			obsHit(obstacle3[O]);
-			B.timeLeft = 0;
+		for(O in obstacle2){
+			if(collision(B.dir, B, obstacle2[O])){
+				obsHit(obstacle2[O]);
+				if(spell == "Conductive Shots"){
+					if(B.dir == "W" || B.dir == "S"){
+						B.width = 32;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "A";
+						}
+						else{
+							B.dir = "D";
+						}
+					}
+					else if(B.dir == "A" || B.dir == "D"){
+						B.width = 4;
+						B.height = 32;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "W";
+						}
+						else{
+							B.dir = "S";
+						}
+					}
+					else if(B.dir == "WD" || B.dir == "AS"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WA";
+						}
+						else{
+							B.dir = "SD";
+						}
+					}
+					else if(B.dir == "WA" || B.dir == "SD"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WD";
+						}
+						else{
+							B.dir = "AS";
+						}
+					}
+				}
+				else{
+					B.timeLeft = 0;
+				}
+			}
+		}
+		for(O in obstacle3){
+			if(collision(B.dir, B, obstacle3[O])){
+				obsHit(obstacle3[O]);
+				if(spell == "Conductive Shots"){
+					if(B.dir == "W" || B.dir == "S"){
+						B.width = 32;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "A";
+						}
+						else{
+							B.dir = "D";
+						}
+					}
+					else if(B.dir == "A" || B.dir == "D"){
+						B.width = 4;
+						B.height = 32;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "W";
+						}
+						else{
+							B.dir = "S";
+						}
+					}
+					else if(B.dir == "WD" || B.dir == "AS"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WA";
+						}
+						else{
+							B.dir = "SD";
+						}
+					}
+					else if(B.dir == "WA" || B.dir == "SD"){
+						B.width = 4;
+						B.height = 4;
+						if(Math.floor(Math.random() * 2) + 1 == 2){
+							B.dir = "WD";
+						}
+						else{
+							B.dir = "AS";
+						}
+					}
+				}
+				else{
+					B.timeLeft = 0;
+				}
+			}
 		}
 	}
 	for (E in Enemies){
 		if(collision(B.dir, B, Enemies[E])){
-			B.timeLeft = 0;
+			if(spell == "Explosive Shots"){
+				if(Mfire.onScreen == 0){
+					Mfire.onScreen = 1;
+					Mfire.frame = 0;
+					Mfire.x = B.x;
+					Mfire.y = B.y;
+				}
+				else if(Mfire2.onScreen == 0){
+					Mfire2.onScreen = 1;
+					Mfire2.frame = 0;
+					Mfire2.x = B.x;
+					Mfire2.y = B.y;
+				}
+				else if(Mfire3.onScreen == 0){
+					Mfire3.onScreen = 1;
+					Mfire3.frame = 0;
+					Mfire3.x = B.x;
+					Mfire3.y = B.y;
+				}
+				else if(Mfire4.onScreen == 0){
+					Mfire4.onScreen = 1;
+					Mfire4.frame = 0;
+					Mfire4.x = B.x;
+					Mfire4.y = B.y;
+				}
+				B.timeLeft = 0;
+			}
+			else if(spell == "Ice Shots"){
+				if(Mice.onScreen == 0){
+					Mice.onScreen = 1;
+					Mice.frame = 0;
+					Mice.x = B.x;
+					Mice.y = B.y;
+				}
+				else if(Mice2.onScreen == 0){
+					Mice2.onScreen = 1;
+					Mice2.frame = 0;
+					Mice2.x = B.x;
+					Mice2.y = B.y;
+				}
+				else if(Mice3.onScreen == 0){
+					Mice3.onScreen = 1;
+					Mice3.frame = 0;
+					Mice3.x = B.x;
+					Mice3.y = B.y;
+				}
+				else if(Mice4.onScreen == 0){
+					Mice4.onScreen = 1;
+					Mice4.frame = 0;
+					Mice4.x = B.x;
+					Mice4.y = B.y;
+				}
+				B.timeLeft = 0;
+			}
+			else if(spell == "Conductive Shots"){
+				if(B.dir == "W" || B.dir == "S"){
+					B.width = 32;
+					B.height = 4;
+					if(Math.floor(Math.random() * 2) + 1 == 2){
+						B.dir = "A";
+					}
+					else{
+						B.dir = "D";
+					}
+				}
+				else if(B.dir == "A" || B.dir == "D"){
+					B.width = 4;
+					B.height = 32;
+					if(Math.floor(Math.random() * 2) + 1 == 2){
+						B.dir = "W";
+					}
+					else{
+						B.dir = "S";
+					}
+				}
+				else if(B.dir == "WD" || B.dir == "AS"){
+					B.width = 4;
+					B.height = 4;
+					if(Math.floor(Math.random() * 2) + 1 == 2){
+						B.dir = "WA";
+					}
+					else{
+						B.dir = "SD";
+					}
+				}
+				else if(B.dir == "WA" || B.dir == "SD"){
+					B.width = 4;
+					B.height = 4;
+					if(Math.floor(Math.random() * 2) + 1 == 2){
+						B.dir = "WD";
+					}
+					else{
+						B.dir = "AS";
+					}
+				}
+			}
+			else{
+				B.timeLeft = 0;
+			}
 			onHit(Enemies[E], Enemies[E].rp);
 		}
 	}
 	if(collision(B.dir, B, Sorceror)){
-		B.timeLeft = 0;
+		if(spell == "Explosive Shots"){
+			if(Mfire.onScreen == 0){
+				Mfire.onScreen = 1;
+				Mfire.frame = 0;
+				Mfire.x = B.x;
+				Mfire.y = B.y;
+			}
+			else if(Mfire2.onScreen == 0){
+				Mfire2.onScreen = 1;
+				Mfire2.frame = 0;
+				Mfire2.x = B.x;
+				Mfire2.y = B.y;
+			}
+			else if(Mfire3.onScreen == 0){
+				Mfire3.onScreen = 1;
+				Mfire3.frame = 0;
+				Mfire3.x = B.x;
+				Mfire3.y = B.y;
+			}
+			else if(Mfire4.onScreen == 0){
+				Mfire4.onScreen = 1;
+				Mfire4.frame = 0;
+				Mfire4.x = B.x;
+				Mfire4.y = B.y;
+			}
+			B.timeLeft = 0;
+		}
+		else if(spell == "Ice Shots"){
+			if(Mice.onScreen == 0){
+				Mice.onScreen = 1;
+				Mice.frame = 0;
+				Mice.x = B.x;
+				Mice.y = B.y;
+			}
+			else if(Mice2.onScreen == 0){
+				Mice2.onScreen = 1;
+				Mice2.frame = 0;
+				Mice2.x = B.x;
+				Mice2.y = B.y;
+			}
+			else if(Mice3.onScreen == 0){
+				Mice3.onScreen = 1;
+				Mice3.frame = 0;
+				Mice3.x = B.x;
+				Mice3.y = B.y;
+			}
+			else if(Mice4.onScreen == 0){
+				Mice4.onScreen = 1;
+				Mice4.frame = 0;
+				Mice4.x = B.x;
+				Mice4.y = B.y;
+			}
+			B.timeLeft = 0;
+		}
+		else if(spell == "Conductive Shots"){
+			if(B.dir == "W" || B.dir == "S"){
+				B.width = 32;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "A";
+				}
+				else{
+					B.dir = "D";
+				}
+			}
+			else if(B.dir == "A" || B.dir == "D"){
+				B.width = 4;
+				B.height = 32;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "W";
+				}
+				else{
+					B.dir = "S";
+				}
+			}
+			else if(B.dir == "WD" || B.dir == "AS"){
+				B.width = 4;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "WA";
+				}
+				else{
+					B.dir = "SD";
+				}
+			}
+			else if(B.dir == "WA" || B.dir == "SD"){
+				B.width = 4;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "WD";
+				}
+				else{
+					B.dir = "AS";
+				}
+			}
+		}
+		else{
+			B.timeLeft = 0;
+		}
 		Sorceror.onHit();
 	}
 	if(collision(B.dir, B, Spawner)){
-		B.timeLeft = 0;
+		if(spell == "Explosive Shots"){
+			if(Mfire.onScreen == 0){
+				Mfire.onScreen = 1;
+				Mfire.frame = 0;
+				Mfire.x = B.x;
+				Mfire.y = B.y;
+			}
+			else if(Mfire2.onScreen == 0){
+				Mfire2.onScreen = 1;
+				Mfire2.frame = 0;
+				Mfire2.x = B.x;
+				Mfire2.y = B.y;
+			}
+			else if(Mfire3.onScreen == 0){
+				Mfire3.onScreen = 1;
+				Mfire3.frame = 0;
+				Mfire3.x = B.x;
+				Mfire3.y = B.y;
+			}
+			else if(Mfire4.onScreen == 0){
+				Mfire4.onScreen = 1;
+				Mfire4.frame = 0;
+				Mfire4.x = B.x;
+				Mfire4.y = B.y;
+			}
+			B.timeLeft = 0;
+		}
+		else if(spell == "Ice Shots"){
+			if(Mice.onScreen == 0){
+				Mice.onScreen = 1;
+				Mice.frame = 0;
+				Mice.x = B.x;
+				Mice.y = B.y;
+			}
+			else if(Mice2.onScreen == 0){
+				Mice2.onScreen = 1;
+				Mice2.frame = 0;
+				Mice2.x = B.x;
+				Mice2.y = B.y;
+			}
+			else if(Mice3.onScreen == 0){
+				Mice3.onScreen = 1;
+				Mice3.frame = 0;
+				Mice3.x = B.x;
+				Mice3.y = B.y;
+			}
+			else if(Mice4.onScreen == 0){
+				Mice4.onScreen = 1;
+				Mice4.frame = 0;
+				Mice4.x = B.x;
+				Mice4.y = B.y;
+			}
+			B.timeLeft = 0;
+		}
+		else if(spell == "Conductive Shots"){
+			if(B.dir == "W" || B.dir == "S"){
+				B.width = 32;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "A";
+				}
+				else{
+					B.dir = "D";
+				}
+			}
+			else if(B.dir == "A" || B.dir == "D"){
+				B.width = 4;
+				B.height = 32;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "W";
+				}
+				else{
+					B.dir = "S";
+				}
+			}
+			else if(B.dir == "WD" || B.dir == "AS"){
+				B.width = 4;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "WA";
+				}
+				else{
+					B.dir = "SD";
+				}
+			}
+			else if(B.dir == "WA" || B.dir == "SD"){
+				B.width = 4;
+				B.height = 4;
+				if(Math.floor(Math.random() * 2) + 1 == 2){
+					B.dir = "WD";
+				}
+				else{
+					B.dir = "AS";
+				}
+			}
+		}
+		else{
+			B.timeLeft = 0;
+		}
 		Spawner.onHit();
 	}
 	if (B.timeLeft > 0 && B.dir == "W"){
@@ -2096,6 +2614,31 @@ var airlightning = {
 	}
 	}
 	
+};
+// Teleport and Heal: Heals user by 1 and casts Ice
+var mysticearth = {
+	cd: 0,
+	tick: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+	},
+	shoot: function(){
+		if(this.cd == 0){
+			Frozen.play();
+			this.cd = 300;
+			mystic.cd = 0;
+			earth.cd = 0;
+			mystic.shoot();
+			earth.shoot();
+			mystic.cd = 0;
+			earth.cd = 0;
+			mystic.cast = 30;
+		}
+		else{
+			return 0;
+		}
+	}	
 };
 //-------------------------------------------------------------- Enemy Spells -------------------------------------------------------//
 // Globblyfire: Damages player if in radius

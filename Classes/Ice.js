@@ -147,3 +147,200 @@ var ice2 = {
 	}
 	
 };
+//----------------------------------------------------------- Mystic Ice Shots ------------------------------------------------------//
+var Mice = {
+	color: "00CCFF",
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.25;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame <= 10 && this.onScreen == 1){
+			this.width = this.width + 2*this.frame;
+			this.height = this.height + 2*this.frame;
+			this.frame++;
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+					AllEnemies[E].speed = AllEnemies[E].speed2;
+				}
+			}
+		}
+		else if(this.frame < 45 && this.onScreen == 1){
+			this.frame++;
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+					AllEnemies[E].speed = AllEnemies[E].speed2;
+				}
+			}
+		}
+		if(this.frame >= 45 && this.onScreen == 1){
+			for (E in AllEnemies){
+				AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
+			}
+			this.onScreen = 0;
+			this.frame = 0;
+			this.width = 32;
+			this.height = 32;
+		}
+	}
+};
+var Mice2 = {
+	color: "00CCFF",
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.25;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame <= 10 && this.onScreen == 1){
+			this.width = this.width + 2*this.frame;
+			this.height = this.height + 2*this.frame;
+			this.frame++;
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+					AllEnemies[E].speed = AllEnemies[E].speed2;
+				}
+			}
+		}
+		else if(this.frame < 45 && this.onScreen == 1){
+			this.frame++;
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+					AllEnemies[E].speed = AllEnemies[E].speed2;
+				}
+			}
+		}
+		if(this.frame >= 45 && this.onScreen == 1){
+			for (E in AllEnemies){
+				AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
+			}
+			this.onScreen = 0;
+			this.frame = 0;
+			this.width = 32;
+			this.height = 32;
+		}
+	}
+};
+var Mice3 = {
+	color: "00CCFF",
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.25;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame <= 10 && this.onScreen == 1){
+			this.width = this.width + 2*this.frame;
+			this.height = this.height + 2*this.frame;
+			this.frame++;
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+					AllEnemies[E].speed = AllEnemies[E].speed2;
+				}
+			}
+		}
+		else if(this.frame < 45 && this.onScreen == 1){
+			this.frame++;
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+					AllEnemies[E].speed = AllEnemies[E].speed2;
+				}
+			}
+		}
+		if(this.frame >= 45 && this.onScreen == 1){
+			for (E in AllEnemies){
+				AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
+			}
+			this.onScreen = 0;
+			this.frame = 0;
+			this.width = 32;
+			this.height = 32;
+		}
+	}
+};
+var Mice4 = {
+	color: "00CCFF",
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.25;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame <= 10 && this.onScreen == 1){
+			this.width = this.width + 2*this.frame;
+			this.height = this.height + 2*this.frame;
+			this.frame++;
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+					AllEnemies[E].speed = AllEnemies[E].speed2;
+				}
+			}
+		}
+		else if(this.frame < 45 && this.onScreen == 1){
+			this.frame++;
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+					AllEnemies[E].speed = AllEnemies[E].speed2;
+				}
+			}
+		}
+		if(this.frame >= 45 && this.onScreen == 1){
+			for (E in AllEnemies){
+				AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
+			}
+			this.onScreen = 0;
+			this.frame = 0;
+			this.width = 32;
+			this.height = 32;
+		}
+	}
+};

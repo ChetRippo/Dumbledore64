@@ -397,6 +397,16 @@ var Spawner = {
 					yellowCube.y = this.y;
 					yellowCube.timeLeft = 90;
 				}
+				else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100){
+					greyCube.x = E.x;
+					greyCube.y = E.y;
+					greyCube.timeLeft = 90;
+				}
+				else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100){
+					purpleCube.x = E.x;
+					purpleCube.y = E.y;
+					purpleCube.timeLeft = 90;
+				}
 				if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 					marker4.points = "500";
 					marker4.mult = multiplier;
@@ -508,6 +518,16 @@ var Sorceror = {
 					yellowCube.x = this.x;
 					yellowCube.y = this.y;
 					yellowCube.timeLeft = 90;
+				}
+				else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100){
+					greyCube.x = E.x;
+					greyCube.y = E.y;
+					greyCube.timeLeft = 90;
+				}
+				else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100){
+					purpleCube.x = E.x;
+					purpleCube.y = E.y;
+					purpleCube.timeLeft = 90;
 				}
 				if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 					marker4.points = "100";
@@ -692,6 +712,11 @@ function onHit(E, rs){
 		greyCube.y = E.y;
 		greyCube.timeLeft = 90;
 	}
+	else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100){
+		purpleCube.x = E.x;
+		purpleCube.y = E.y;
+		purpleCube.timeLeft = 90;
+	}
 	if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 		marker4.points = "50";
 		marker4.mult = multiplier;
@@ -734,38 +759,38 @@ function onHit(E, rs){
 function move(E){
 	if(E.movement == true){
 		if(E.dir == "W" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			E.y-=E.speed;
 		}
 		if(E.dir == "A" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			E.x-=E.speed;
 		}
 		if(E.dir == "S" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			E.y+=E.speed;
 		}
 		if(E.dir == "D" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			E.x+=E.speed;
 		}
 		if(E.dir == "AS" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			E.y+=E.speed;
 			E.x-=E.speed;
 		}
 		if(E.dir == "WA" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			E.y-=E.speed;
 			E.x-=E.speed;
 		}
 		if(E.dir == "WD" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			E.y-=E.speed;
 			E.x+=E.speed;
 		}
 		if(E.dir == "SD" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player))){
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			E.y+=E.speed;
 			E.x+=E.speed;
 		}
@@ -773,9 +798,13 @@ function move(E){
 }
 
 // Enemy AI
-function AI(E){
+function AI(E){		
 		var xdiff = player.x - E.x;
 		var ydiff = player.y - E.y;
+		if(Illusion.onScreen == 1){
+			xdiff = Illusion.x - E.x;
+			ydiff = Illusion.y - E.y;
+		}
 		if(E.type == -1 && E.cd == 0){
 			E.grow();
 		}

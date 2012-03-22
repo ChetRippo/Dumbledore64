@@ -14,39 +14,31 @@
 
 */
 /*
-	Version 0.4.4 Changes(3/20/2012):
-		-Optimized some code
-		-Bug fix: Moved globbly explosions on reset
-		-Added flipped version of wizzurd (based on direction)
-		-Split obstacles into 32 by 32 blocks
-		-Added tree graphic
-		-Obstacles now breakable in 3 hits (not with lightning)
-		-Added casting times to some spells
-		-Made fire and inferno look nicer
-		-Added tree wizard. Does not interact with player.
-			Replants all trees if dead trees add up to 10
+	Version 0.4.5 Changes(3/21/2012):
+		-Added Mystic element:
+			-Mystic = Teleport
+			-Mystic + Fire = Explosive Shots
+			-Mystic + Ice = Ice Shots
+			-Mystic + Earth = Teleport and Heal
+			-Mystic + Lightning = Conductive Shots
+			-Mystic + Air = Homing Shots
+			-Mystic + Mystic = Mirage
+		-Added to menu
+		-Fixed some bug, don't remember what it was :I
 		
 	TODO:
 		-Bugs
-			-Fix Sound Effects for all browsers (not in FF 11?)
 			-Sound plays on reset
 			-Make Thunderstorm more clear
 			-Sounds play before cast on cast bar spells
 		-Spells
-			-Mystic (Purple)<-------------IP
-				-Mystic: Teleport<------IP
-				-Mystic + Mystic: Grand Illusion
-				-Mystic + Air: Mystic Shots
-				-Mystic + Fire: Explosive Shots
-				-Mystic + Ice: Ice Shots
-				-Mystic + Earth: Heal Teleport
-				-Mystic + Lightning: Bouncing Shots
 			-Dark (Black)
 				-HP Steal?
 			-Water (Blue)
 				-Particle shield?
 		-More enemies and AI
 		-Sounds for tree hit
+		-Up Ice animation
 */
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
 // Canvas, Frames per Second, KeysDown, Global vars
@@ -74,7 +66,6 @@ var spell2 = "N/A";
 var spell = "N/A";
 var spell1pic = "N/A";
 var spell2pic = "N/A";
-var keycount = 0;
 //Score
 var score = 0;
 var muliplier = 1;
@@ -170,6 +161,9 @@ Sorcerorpng.src = "grafix/poison-wizzurd32.png";
 //Tree Wizzurd
 var TWizzurd = new Image();
 TWizzurd.src = "grafix/treewizzurd32.png";
+//Monochrome Wizzurd
+var MonoWizzurd = new Image();
+MonoWizzurd.src = "grafix/bw-wizzurd32.png";
 //Fire powerup
 var Firebox = new Image();
 Firebox.src = "grafix/ele.fire32.png";
@@ -185,6 +179,9 @@ Thunderbox.src = "grafix/ele.zap32.png";
 //Air powerup
 var Windbox = new Image();
 Windbox.src = "grafix/ele.air32.png";
+//Mystic powerup
+var Mysticbox = new Image();
+Mysticbox.src = "grafix/ele.dev32.png";
 // Particle
 var particle = new Image();
 particle.src = "grafix/particle.png";
@@ -236,6 +233,8 @@ var Menu = {
 		ctx.fillStyle = "black";
 		ctx.font = "18pt Arial";
 		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-2*this.height);
+		ctx.fillText("Version 0.4.5: March 21 2012", this.x-3*this.width/3, this.y+6*this.height);
+		ctx.fillText("Dumbledore64", this.x-2*this.width/3, this.y-6*this.height);
 		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + this.height);
 		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
 		ctx.fillText("Credits", this.x-this.width/2, this.y-this.height/2 + 3*this.height);
@@ -403,7 +402,7 @@ var player = {
 	}
 	}
 };
-//Casting Bar
+//----------------------------------------------- Casting Bar -----------------------------------------------------------------------//
 var castingBar = {
 	x: player.x - player.width/2,
 	y: player.y + player.height/2,
@@ -461,19 +460,19 @@ var redCube = {
 			spell1 = "Fire";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Fire";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Fire";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Fire";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -482,19 +481,19 @@ var redCube = {
 			spell2 = "Fire";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Fire";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Fire";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Fire";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -529,19 +528,19 @@ var tealCube = {
 			spell1 = "Ice";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Ice";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Ice";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Ice";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -550,19 +549,19 @@ var tealCube = {
 			spell2 = "Ice";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Ice";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Ice";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Ice";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -597,19 +596,19 @@ var greenCube = {
 			spell1 = "Earth";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Earth";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Earth";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Earth";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -618,19 +617,19 @@ var greenCube = {
 			spell2 = "Earth";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Earth";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Earth";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Earth";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -665,19 +664,19 @@ var yellowCube = {
 			spell1 = "Lightning";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Lightning";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Lightning";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Lightning";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -686,19 +685,19 @@ var yellowCube = {
 			spell2 = "Lightning";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Lightning";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Lightning";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Lightning";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -733,19 +732,19 @@ var greyCube = {
 			spell1 = "Air";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Air";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Air";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Air";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -754,19 +753,87 @@ var greyCube = {
 			spell2 = "Air";
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ Air";
-				typemarker3.x = player.x;
+				typemarker3.x = player.x-player.width*2;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+ Air";
-				typemarker2.x = player.x;
+				typemarker2.x = player.x-player.width*2;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+ Air";
-				typemarker.x = player.x;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
+
+// Mystic drop
+var purpleCube = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(Mysticbox, this.x - this.width / 2, this.y - this.height / 2);
+			this.timeLeft-=1;
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = "Mystic";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Mystic";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Mystic";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Mystic";
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = "Mystic";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Mystic";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Mystic";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Mystic";
+				typemarker.x = player.x-player.width*2;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -966,6 +1033,9 @@ function drawtypeMarker(M){
 		else if(M.text == "+ Earth"){
 			M.color = "33FF00";
 		}
+		else if(M.text == "+ Mystic"){
+			M.color = "BF00FF";
+		}
 	ctx.fillStyle = M.color;
 	ctx.font = "32pt Arial";
 	ctx.fillText(M.text, M.x, M.y);
@@ -1041,6 +1111,9 @@ function UI(){
 		}	
 		if(spell1 == "Air"){
 			spell = "Gust";
+		}
+		if(spell1 == "Mystic"){
+			spell = "Teleport";
 		}			
 	}
 	if(spell1 == "N/A" && spell2 != "N/A"){
@@ -1058,7 +1131,10 @@ function UI(){
 		}	
 		if(spell2 == "Air"){
 			spell = "Gust";
-		}			
+		}
+		if(spell2 == "Mystic"){
+			spell = "Teleport";
+		}		
 	}
 	if(spell1 == "Fire" && spell2 == "Fire"){
 		spell = "Inferno";
@@ -1105,6 +1181,24 @@ function UI(){
 	if((spell1 == "Lightning" && spell2 == "Air") || (spell2 == "Lightning" && spell1 == "Air")){
 		spell = "Thunderstorm";
 	}
+	if(spell1 == "Mystic" && spell2 == "Mystic"){
+		spell = "Mirage";
+	}
+	if((spell1 == "Fire" && spell2 == "Mystic") || (spell2 == "Fire" && spell1 == "Mystic")){
+		spell = "Explosive Shots";
+	}
+	if((spell1 == "Ice" && spell2 == "Mystic") || (spell2 == "Ice" && spell1 == "Mystic")){
+		spell = "Ice Shots";
+	}
+	if((spell1 == "Earth" && spell2 == "Mystic") || (spell2 == "Earth" && spell1 == "Mystic")){
+		spell = "Teleport and Heal";
+	}
+	if((spell1 == "Lightning" && spell2 == "Mystic") || (spell2 == "Lightning" && spell1 == "Mystic")){
+		spell = "Conductive Shots";
+	}
+	if((spell1 == "Air" && spell2 == "Mystic") || (spell2 == "Air" && spell1 == "Mystic")){
+		spell = "Homing Shots";
+	}
 	if(spell1 == "Fire"){
 		spell1pic = Firebox;
 	}
@@ -1119,6 +1213,9 @@ function UI(){
 	}
 	else if(spell1 == "Air"){
 		spell1pic = Windbox;
+	}
+	else if(spell1 == "Mystic"){
+		spell1pic = Mysticbox;
 	}
 	else{
 		spell1pic = "N/A";
@@ -1137,6 +1234,9 @@ function UI(){
 	}
 	else if(spell2 == "Air"){
 		spell2pic = Windbox;
+	}
+	else if(spell2 == "Mystic"){
+		spell2pic = Mysticbox;
 	}
 	else{
 		spell2pic = "N/A";
@@ -1256,6 +1356,41 @@ function UI(){
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airlightning.cd/30) + "s", 32, 544);
 	}
+	else if(spell == "Teleport"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Mirage"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic2.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Teleport and Heal"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mysticearth.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Explosive Shots"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Ice Shots"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Conductive Shots"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Homing Shots"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
 	ctx.fillStyle = "black";
 	ctx.font = "16pt Arial";
 	ctx.fillText("Q: Drop Spell 1", 576, 528);
@@ -1356,6 +1491,9 @@ var keys = function(){
 		if(spell1 == "Air"){
 			air.shoot();
 		}
+		if(spell1 == "Mystic"){
+			mystic.shoot();
+		}
 	}
 	if(32 in keysDown && spell2 != "N/A" && spell1 == "N/A"){
 		if(spell2 == "Fire"){
@@ -1372,6 +1510,9 @@ var keys = function(){
 		}
 		if(spell2 == "Air"){
 			air.shoot();
+		}
+		if(spell2 == "Mystic"){
+			mystic.shoot();
 		}
 	}
 	if(32 in keysDown && spell1 != "N/A" && spell2 != "N/A"){
@@ -1419,6 +1560,24 @@ var keys = function(){
 		}
 		if((spell1 == "Air" && spell2 == "Earth") || (spell2 == "Air" && spell1 == "Earth")){
 			airearth.shoot();
+		}
+		if(spell1 == "Mystic" && spell2 == "Mystic"){
+			mystic2.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Earth") || (spell2 == "Mystic" && spell1 == "Earth")){
+			mysticearth.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Fire") || (spell2 == "Mystic" && spell1 == "Fire")){
+			mystic.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Ice") || (spell2 == "Mystic" && spell1 == "Ice")){
+			mystic.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Lightning") || (spell2 == "Mystic" && spell1 == "Lightning")){
+			mystic.shoot();
+		}
+		if((spell1 == "Mystic" && spell2 == "Air") || (spell2 == "Mystic" && spell1 == "Air")){
+			mystic.shoot();
 		}
 	}
 };
@@ -1628,6 +1787,9 @@ setInterval(function(){
 		
 			greenCube.draw();
 			pickup(greenCube);
+			
+			purpleCube.draw();
+			pickup(purpleCube);
 		
 			drawObstacle(obstacle1);
 			drawObstacle(obstacle2);
@@ -1757,6 +1919,32 @@ setInterval(function(){
 			
 			airlightning.draw();
 			airlightning.effect();
+			
+			mystic.move();
+			mystic.draw();
+			Mfire.draw();
+			Mfire.move();
+			Mfire2.draw();
+			Mfire2.move();
+			Mfire3.draw();
+			Mfire3.move();
+			Mfire4.draw();
+			Mfire4.move();
+			Mice.draw();
+			Mice.move();
+			Mice2.draw();
+			Mice2.move();
+			Mice3.draw();
+			Mice3.move();
+			Mice4.draw();
+			Mice4.move();
+			mysticearth.tick();
+			mystic2.draw();
+			mystic2.move();
+			Illusion.draw();
+			Illusion.shoot();
+			IllusionBlast.draw();
+			IllusionBlast.move();
 		
 			sIce.draw();
 			sIce.move();
