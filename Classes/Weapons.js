@@ -2379,7 +2379,7 @@ var airice = {
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = 0.25;
 			if(this.timeLeft/2 != Math.round(this.timeLeft/2)){
 				ctx.fillStyle = this.color1;
 			}
@@ -2389,7 +2389,6 @@ var airice = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
 		}
 	},
 	
@@ -2403,6 +2402,7 @@ var airice = {
 		if(this.timeLeft == 0 && this.onScreen == 1){
 			this.onScreen = 0;
 			ice.cd = 0;
+			ctx.globalAlpha = 1;
 		}
 		else if(this.timeLeft<=30 && this.cast == 0){
 			this.height+=4;

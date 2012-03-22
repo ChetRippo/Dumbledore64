@@ -1,13 +1,31 @@
 
-Version 0.4.5 Changes(3/21/2012):
-		-Added Mystic element:
-			-Mystic = Teleport
-			-Mystic + Fire = Explosive Shots
-			-Mystic + Ice = Ice Shots
-			-Mystic + Earth = Teleport and Heal
-			-Mystic + Lightning = Conductive Shots
-			-Mystic + Air = Homing Shots
-			-Mystic + Mystic = Mirage
+Version 0.4.6 Changes(3/22/2012):
+		-Added prototype background
+		-Made Ice, Ice2, and Maelstrom effects crazier
+		-Put grey background in high score menu
+TODO:
+		-Bugs/small shit <------- Next
+			-Sound plays on reset
+			-Make Thunderstorm more clear
+			-Sounds play before cast on cast bar spells
+			-Sounds for tree hit
+		-Spells
+			-Dark (Black)
+				-HP Steal?
+			-Water (Blue) <------- Next
+				-Particle shield?
+			-Summon (?)
+				-Minions
+		-More enemies and AI
+			-Wizards that change terrain?
+			-Bosses? Dependent on terrain
+			-Each boss kill gives + 1 max hp?
+		-Terrain
+			-Different levels, at the end of each is a boss
+			-During battle terrain gradually changes to new level
+			-Each level has its own element drops and enemies
+				Forest = Earth(rare), Water, Air?
+			-Special events that can change to other levels (such as tree wizzurd summon)
 
 **********************************************************************************************************
 

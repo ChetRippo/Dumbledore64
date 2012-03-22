@@ -14,31 +14,34 @@
 
 */
 /*
-	Version 0.4.5 Changes(3/21/2012):
-		-Added Mystic element:
-			-Mystic = Teleport
-			-Mystic + Fire = Explosive Shots
-			-Mystic + Ice = Ice Shots
-			-Mystic + Earth = Teleport and Heal
-			-Mystic + Lightning = Conductive Shots
-			-Mystic + Air = Homing Shots
-			-Mystic + Mystic = Mirage
-		-Added to menu
-		-Fixed some bug, don't remember what it was :I
+	Version 0.4.6 Changes(3/22/2012):
+		-Added prototype background
+		-Made Ice, Ice2, and Maelstrom effects crazier
+		-Put grey background in high score menu
 		
 	TODO:
-		-Bugs
+		-Bugs/small shit <-------- Next
 			-Sound plays on reset
 			-Make Thunderstorm more clear
 			-Sounds play before cast on cast bar spells
+			-Sounds for tree hit
 		-Spells
 			-Dark (Black)
 				-HP Steal?
-			-Water (Blue)
+			-Water (Blue) <-------- Next
 				-Particle shield?
+			-Summon (?)
+				-Minions
 		-More enemies and AI
-		-Sounds for tree hit
-		-Up Ice animation
+			-Wizards that change terrain?
+			-Bosses? Dependent on terrain
+			-Each boss kill gives + 1 max hp?
+		-Terrain
+			-Different levels, at the end of each is a boss
+			-During battle terrain gradually changes to new level
+			-Each level has its own element drops and enemies
+				Forest = Earth(rare), Water, Air?
+			-Special events that can change to other levels (such as tree wizzurd summon)
 */
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
 // Canvas, Frames per Second, KeysDown, Global vars
@@ -138,6 +141,8 @@ Wizzurd2.src = "grafix/nega-wizzurd32.png";
 //Environment
 var Tree = new Image();
 Tree.src = "grafix/obj.tree32.png";
+var backGround1 = new Image();
+backGround1.src = "grafix/bkg1.png";
 //Lavaman
 var Lavamanpic = new Image();
 Lavamanpic.src = "grafix/cre.firesprite32.png";
@@ -233,7 +238,7 @@ var Menu = {
 		ctx.fillStyle = "black";
 		ctx.font = "18pt Arial";
 		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-2*this.height);
-		ctx.fillText("Version 0.4.5: March 21 2012", this.x-3*this.width/3, this.y+6*this.height);
+		ctx.fillText("Version 0.4.6: March 22 2012", this.x-3*this.width/3, this.y+6*this.height);
 		ctx.fillText("Dumbledore64", this.x-2*this.width/3, this.y-6*this.height);
 		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + this.height);
 		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
@@ -1090,8 +1095,13 @@ var clear = function(){
 // Border
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
-ctx.fillStyle = "grey";
-ctx.fillRect(4, 4, canvas.width - 4, canvas.height - 4);
+	if(STATE != 1){
+		ctx.fillStyle = "grey";
+		ctx.fillRect(4, 4, canvas.width-4, canvas.height-4);
+	}
+	else{
+		ctx.drawImage(backGround1, 0, 0);
+	}
 };
 
 function UI(){
@@ -1664,6 +1674,8 @@ function gameOver(){
 	var width = 20;
 	var height = 20;
 	multiplier = 1;
+	ctx.fillStyle = "grey";
+	ctx.fillRect(4, 4, canvas.width-4, canvas.height-4);
 	if(STATE != 5){
 		ctx.fillText("Score: " + score, 400, 144);
 	}

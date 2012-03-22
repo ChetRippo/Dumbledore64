@@ -14,10 +14,9 @@ var ice = {
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast ==0){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = 0.1;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
 		}
 	},
 	
@@ -35,6 +34,7 @@ var ice = {
 			this.y = -100;
 			this.onScreen = 0;
 			this.end = true;
+			ctx.globalAlpha = 1;
 		}
 		else if(this.onScreen == 1 && this.cast == 0){
 			this.width = this.width + (32*this.frame);
@@ -88,10 +88,9 @@ var ice2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = 0.1;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
 		}
 	},
 	
@@ -106,6 +105,7 @@ var ice2 = {
 			this.y = -100;
 			this.onScreen = 0;
 			this.end = true;
+			ctx.globalAlpha = 1;
 		}
 		else if(this.onScreen == 1){
 			this.width = this.width + (32*this.frame);
