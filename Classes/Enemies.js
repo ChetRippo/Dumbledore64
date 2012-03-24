@@ -14,6 +14,7 @@ var Enemy = {
 	respawn: 1,
 	origrp: 1,
 	rp: 100,
+	pts: 50,
 	LR: "",
 	onScreen: 0,
 	movement: false,
@@ -48,6 +49,7 @@ var EnemyA = {
 	speed2: 2,
 	respawn: 250,
 	origrp: 250,
+	pts: 50,
 	dir: "W",
 	rp: 100,
 	onScreen: 0,
@@ -70,6 +72,7 @@ var EnemyB = {
 	speed2: 2,
 	respawn: 125,
 	origrp: 125,
+	pts: 50,
 	rp: 100,
 	dir: "W",
 	LR: "",
@@ -105,6 +108,7 @@ var EnemyC = {
 	speed: 4,
 	speed2: 2,
 	respawn: 300,
+	pts: 50,
 	dir: "W",
 	origrp: 300,
 	rp: 100,
@@ -129,6 +133,7 @@ var Tenemy = {
 	dir: "W",
 	respawn: 600,
 	origrp: 600,
+	pts: 50,
 	rp: 600,
 	onScreen: 0,
 	movement: false,
@@ -150,6 +155,7 @@ var TenemyA = {
 	dir: "W",
 	respawn: 2400,
 	origrp: 2400,
+	pts: 50,
 	rp: 600,
 	onScreen: 0,
 	movement: false,
@@ -172,6 +178,7 @@ var TenemyB = {
 	dir: "W",
 	respawn: 1800,
 	origrp: 1800,
+	pts: 50,
 	rp: 600,
 	onScreen: 0,
 	movement: false,
@@ -194,6 +201,7 @@ var Lavaman = {
 	dir: "W",
 	respawn: -1,
 	origrp: -1,
+	pts: 50,
 	rp: -1,
 	onScreen: 0,
 	movement: false,
@@ -214,6 +222,7 @@ var Lavaman2 = {
 	dir: "W",
 	respawn: -1,
 	origrp: -1,
+	pts: 50,
 	rp: -1,
 	onScreen: 0,
 	movement: false,
@@ -234,6 +243,7 @@ var Lavaman3 = {
 	dir: "W",
 	respawn: -1,
 	origrp: -1,
+	pts: 50,
 	rp: -1,
 	onScreen: 0,
 	movement: false,
@@ -254,6 +264,7 @@ var Lavaman4 = {
 	dir: "W",
 	respawn: -1,
 	origrp: -1,
+	pts: 50,
 	rp: -1,
 	onScreen: 0,
 	movement: false,
@@ -278,6 +289,7 @@ var Spawner = {
 	origrp: 2000,
 	dir: "W",
 	rp: 2000,
+	pts: 500,
 	onScreen: 0,
 	cd: 60,
 	movement: false,
@@ -364,88 +376,6 @@ var Spawner = {
 			this.cd-=1;
 		}
 	}
-	},
-	onHit: function(){
-		if(!(this.hptimer > 0)){
-			this.hp-=1;
-			if(this.hp < 1){
-				Killed.play();
-			}
-			else{
-				onDmg.play();
-			}
-			this.hptimer = 30;
-			if(this.hp < 1){
-				this.onScreen = 0;
-				if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100){
-					redCube.x = this.x;
-					redCube.y = this.y;
-					redCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && tealCube.x == -100){
-					tealCube.x = this.x;
-					tealCube.y = this.y;
-					tealCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && greenCube.x == -100){
-					greenCube.x = this.x;
-					greenCube.y = this.y;
-					greenCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100){
-					yellowCube.x = this.x;
-					yellowCube.y = this.y;
-					yellowCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100){
-					greyCube.x = E.x;
-					greyCube.y = E.y;
-					greyCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100){
-					purpleCube.x = E.x;
-					purpleCube.y = E.y;
-					purpleCube.timeLeft = 90;
-				}
-				if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
-					marker4.points = "500";
-					marker4.mult = multiplier;
-					marker4.x = this.x;
-					marker4.y = this.y;
-					marker4.timeLeft = 20;
-				}
-				else if(marker.x != -100 && marker2.x != -100){
-					marker3.points = "500";
-					marker3.mult = multiplier;
-					marker3.x = this.x;
-					marker3.y = this.y;
-					marker3.timeLeft = 20;
-				}
-				else if(marker.x != -100){
-					marker2.points = "500";
-					marker2.mult = multiplier;
-					marker2.x = this.x;
-					marker2.y = this.y;
-					marker2.timeLeft = 20;
-				}
-				else{
-					marker.points = "500";
-					marker.mult = multiplier;
-					marker.x = this.x;
-					marker.y = this.y;
-					marker.timeLeft = 20;
-				}
-				this.x = -500;
-				this.y = -500;
-				this.respawn = 2400;
-				this.hp = 5;
-				this.movement = false;
-				score+=(500 * multiplier);
-				currpts = "500";
-				multiplier++;
-				multtimer = 50;
-			}
-		}
 	}
 };
 
@@ -465,9 +395,10 @@ var Sorceror = {
 	hp: 3,
 	hptimer: 0,
 	movement: false,
+	pts: 100,
 	cd: 0,
 	spawned: 60,
-	rp: 900,
+	rp: 1200,
 	onScreen: 0,
 	// Draws the enemy on the canvas when called
 	draw: function(){
@@ -489,83 +420,6 @@ var Sorceror = {
 		}
 		else{
 			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
-	},
-	onHit: function(){
-		if(!(this.hptimer > 0)){
-			Killed.play();
-			this.hp-=1;
-			onDmg.play();
-			this.hptimer = 30;
-			if(this.hp < 1){
-				this.onScreen = 0;
-				if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100){
-					redCube.x = this.x;
-					redCube.y = this.y;
-					redCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && tealCube.x == -100){
-					tealCube.x = this.x;
-					tealCube.y = this.y;
-					tealCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && greenCube.x == -100){
-					greenCube.x = this.x;
-					greenCube.y = this.y;
-					greenCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100){
-					yellowCube.x = this.x;
-					yellowCube.y = this.y;
-					yellowCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100){
-					greyCube.x = E.x;
-					greyCube.y = E.y;
-					greyCube.timeLeft = 90;
-				}
-				else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100){
-					purpleCube.x = E.x;
-					purpleCube.y = E.y;
-					purpleCube.timeLeft = 90;
-				}
-				if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
-					marker4.points = "100";
-					marker4.mult = multiplier;
-					marker4.x = this.x;
-					marker4.y = this.y;
-					marker4.timeLeft = 20;
-				}
-				else if(marker.x != -100 && marker2.x != -100){
-					marker3.points = "100";
-					marker3.mult = multiplier;
-					marker3.x = this.x;
-					marker3.y = this.y;
-					marker3.timeLeft = 20;
-				}
-				else if(marker.x != -100){
-					marker2.points = "100";
-					marker2.mult = multiplier;
-					marker2.x = this.x;
-					marker2.y = this.y;
-					marker2.timeLeft = 20;
-				}
-				else{
-					marker.points = "100";
-					marker.mult = multiplier;
-					marker.x = this.x;
-					marker.y = this.y;
-					marker.timeLeft = 20;
-				}
-				this.x = -500;
-				this.y = -500;
-				this.respawn = 2400;
-				this.movement = false;
-				score+=(100 * multiplier);
-				currpts = "100";
-				multiplier++;
-				multtimer = 50;
-			}
 		}
 	},
 	cast: function(){
@@ -597,19 +451,101 @@ var treeWizz = {
 	onScreen: 0,
 	movement: false,
 	cd: 90,
+	hp: 10,
+	hptimer: 0,
 	width2: 0,
 	height2: 0,
 	deadtrees: 0,
 	herp: 0,
 	frame: 0,
+	pts: 1000,
+	spawned: 0,
 	draw: function(){
-		ctx.drawImage(TWizzurd, this.x - this.width / 2, this.y - this.height / 2);
+		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(TWizzurd, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		ctx.fillStyle = "006600";
+		if(this.hp == 10){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x -(this.width/2) + 52, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 9){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x -(this.width/2) + 52, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 8){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x -(this.width/2) + 52, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 7){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x -(this.width/2) + 52, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 6){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x -(this.width/2) + 52, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 5){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x -(this.width/2) + 52, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 4){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 3){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 2){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else{
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
 	},
 	spawn: function(){
+		if(this.hptimer > 0){
+			this.hptimer-=1;
+		}
 		if(this.cd > 0 && this.onScreen == 1){
 			this.cd-=1;
 		}
-		else{
+		else if(this.spawned == 0){
 			for(O in obstacle1){
 				if(obstacle1[O].hp == 0){
 					this.deadtrees+=1;
@@ -627,8 +563,9 @@ var treeWizz = {
 			}
 			this.herp = this.deadtrees;
 			this.deadtrees = 0;
-			if(this.herp >= 10 && this.onScreen == 0){
+			if(this.herp >= 10 && this.onScreen == 0){ //FLAG
 				this.respawn = 0;
+				this.spawned = 1;
 				spawn(this);
 				this.herp = 0;
 			}
@@ -636,125 +573,229 @@ var treeWizz = {
 	},
 	grow: function(){
 	if(this.onScreen == 1){
-		if(this.frame <= 60){ 
-			ctx.globalAlpha = 0.25;
-			ctx.fillStyle = "006600";
-			ctx.fillRect(this.x-this.width2/2, this.y-this.height2/2, this.width2, this.height2);
-			this.frame++;
-			this.width2 = this.width2 + this.frame*8;
-			this.height2 = this.height2 + this.frame*8;
-			ctx.globalAlpha = 1;
+		this.cd = 90;
+		rootStrike.x = -2000;
+		rootStrike.y = -2000;
+		rootStrike.onScreen = 0;
+		rootStrike.movement = false;
+		rootStrike.hp = 2;
+		rootStrike2.x = -2000;
+		rootStrike2.y = -2000;
+		rootStrike2.onScreen = 0;
+		rootStrike2.movement = false;
+		rootStrike2.hp = 2;
+		rootStrike3.x = -2000;
+		rootStrike3.y = -2000;
+		rootStrike3.onScreen = 0;
+		rootStrike3.hp = 2;
+		rootStrike3.movement = false;
+		rootStrike4.x = -2000;
+		rootStrike4.y = -2000;
+		rootStrike4.onScreen = 0;
+		rootStrike4.movement = false;
+		rootStrike4.hp = 2;
+		for(R in roots11){
+			roots11[R].onScreen = 0;
+			roots11[R].movement = false;
+			roots11[R].x = -500;
+			roots11[R].y = -500;
 		}
-		if(this.frame > 60){
-			rePlant();
-			SpawnerSpawn.play();
-			this.frame = 0;
-			this.x = 2000;
-			this.y = 2000;
-			this.respawn = -1;
-			this.movement = false;
-			this.onScreen = 0;
-			this.cd = 90;
-			this.width2 = 0;
-			this.height2 = 0;
+		for(R in roots12){
+			roots12[R].onScreen = 0;
+			roots12[R].movement = false;
+			roots12[R].x = -500;
+			roots12[R].y = -500;
+		}
+		for(R in roots13){
+			roots13[R].onScreen = 0;
+			roots13[R].movement = false;
+			roots13[R].x = -500;
+			roots13[R].y = -500;
+		}
+		for(R in roots14){
+			roots14[R].onScreen = 0;
+			roots14[R].movement = false;
+			roots14[R].x = -500;
+			roots14[R].y = -500;
+		}
+		var attack = Math.floor(Math.random() * 5) + 1;
+		if(attack == 1 || attack == 4){
+			Fwave.play();
+			rootStrike.x = this.x;
+			rootStrike.y = this.y - 64;
+			rootStrike.onScreen = 1;
+			rootStrike.movement = true;
+			rootStrike.hp = 2;
+			rootStrike2.x = this.x;
+			rootStrike2.y = this.y + 64;
+			rootStrike2.onScreen = 1;
+			rootStrike2.movement = true;
+			rootStrike2.hp = 2;
+			rootStrike3.x = this.x - 64;
+			rootStrike3.y = this.y;
+			rootStrike3.onScreen = 1;
+			rootStrike3.hp = 2;
+			rootStrike3.movement = true;
+			rootStrike4.x = this.x + 64;
+			rootStrike4.y = this.y;
+			rootStrike4.onScreen = 1;
+			rootStrike4.movement = true;
+			rootStrike4.hp = 2;
+		}
+		if(attack == 2 || attack == 5){
+			rootBlastW.shoot();
+			rootBlastA.shoot();
+			rootBlastS.shoot();
+			rootBlastD.shoot();
+		}
+		if(attack == 3 && this.hp < 10){
+			LeafHeal.shoot();
 		}
 	}
 	}
 };
-
-var Enemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Lavaman, 9: Lavaman2, 10: Lavaman3, 11: Lavaman4};
-var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
-
-// onHit: Paramaterized
-// Hit by bullet
-function onHit(E, rs){
-	if(E.speed2*2 == 8){
-		if(Globblyfire.onScreen == 1 && Globblyfire2.onScreen == 1){
-			Globblyfire3.x = E.x;
-			Globblyfire3.y = E.y;
-			Globblyfire3.shoot();
+var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner,
+					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4};
+function onHit(E){
+	var deadz = false;
+	if(E.type == 0){
+		deadz = true;
+		if(E.speed2*2 == 8){
+			if(Globblyfire.onScreen == 1 && Globblyfire2.onScreen == 1){
+				Globblyfire3.x = E.x;
+				Globblyfire3.y = E.y;
+				Globblyfire3.shoot();
+			}
+			else if(Globblyfire.onScreen == 1){
+				Globblyfire2.x = E.x;
+				Globblyfire2.y = E.y;
+				Globblyfire2.shoot();
+			}
+			else{
+				Globblyfire.x = E.x;
+				Globblyfire.y = E.y;
+				Globblyfire.shoot();
+			}
 		}
-		else if(Globblyfire.onScreen == 1){
-			Globblyfire2.x = E.x;
-			Globblyfire2.y = E.y;
-			Globblyfire2.shoot();
+	}
+	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == -2 || E.type == -3 || E.type == -4 || E.type == -5){
+		if(!(E.hptimer > 0)){
+			E.hp-=1;
+			E.hptimer = 30;
+			if(E.hp < 1){
+				Killed.play();
+				deadz = true;
+				if(E.type == -2){
+					for(R in roots11){
+						roots11[R].onScreen = 0;
+						roots11[R].movement = false;
+						roots11[R].x = -500;
+						roots11[R].y = -500;
+					}
+				}
+				if(E.type == -3){
+					for(R in roots12){
+						roots12[R].onScreen = 0;
+						roots12[R].movement = false;
+						roots12[R].x = -500;
+						roots12[R].y = -500;
+					}
+				}
+				if(E.type == -4){
+					for(R in roots13){
+						roots13[R].onScreen = 0;
+						roots13[R].movement = false;
+						roots13[R].x = -500;
+						roots13[R].y = -500;
+					}
+				}
+				if(E.type == -5){
+					for(R in roots14){
+						roots14[R].onScreen = 0;
+						roots14[R].movement = false;
+						roots14[R].x = -500;
+						roots14[R].y = -500;
+					}
+				}
+					
+			}
+			else{
+				onDmg.play();
+			}
+		}
+	}
+	if(deadz == true){
+		deadz = false;
+		E.onScreen = 0;
+		Killed.play();
+		if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100){
+			redCube.x = E.x;
+			redCube.y = E.y;
+			redCube.timeLeft = 90;
+		}
+		else if(((Math.floor(Math.random() * 10) + 1) == 7) && tealCube.x == -100){
+			tealCube.x = E.x;
+			tealCube.y = E.y;
+			tealCube.timeLeft = 90;
+		}
+		else if(((Math.floor(Math.random() * 10) + 1) == 7) && greenCube.x == -100){
+			greenCube.x = E.x;
+			greenCube.y = E.y;
+			greenCube.timeLeft = 90;
+		}
+		else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100){
+			yellowCube.x = E.x;
+			yellowCube.y = E.y;
+			yellowCube.timeLeft = 90;
+		}
+		else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100){
+			greyCube.x = E.x;
+			greyCube.y = E.y;
+			greyCube.timeLeft = 90;
+		}
+		else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100){
+			purpleCube.x = E.x;
+			purpleCube.y = E.y;
+			purpleCube.timeLeft = 90;
+		}
+		if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
+			marker4.points = E.pts;
+			marker4.mult = multiplier;
+			marker4.x = E.x;
+			marker4.y = E.y;
+			marker4.timeLeft = 20;
+		}
+		else if(marker.x != -100 && marker2.x != -100){
+			marker3.points = "" + E.pts;
+			marker3.mult = multiplier;
+			marker3.x = E.x;
+			marker3.y = E.y;
+			marker3.timeLeft = 20;
+		}
+		else if(marker.x != -100){
+			marker2.points = "" + E.pts;
+			marker2.mult = multiplier;
+			marker2.x = E.x;
+			marker2.y = E.y;
+			marker2.timeLeft = 20;
 		}
 		else{
-			Globblyfire.x = E.x;
-			Globblyfire.y = E.y;
-			Globblyfire.shoot();
+			marker.points = "" + E.pts;
+			marker.mult = multiplier;
+			marker.x = E.x;
+			marker.y = E.y;
+			marker.timeLeft = 20;
 		}
+		E.x = -500;
+		E.y = -500;
+		E.respawn = E.rp;
+		E.movement = false;
+		E.onScreen = 0;
+		score+=(E.pts * multiplier);
+		multiplier++;
+		multtimer = 50;
 	}
-	E.onScreen = 0;
-	Killed.play();
-	if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100){
-		redCube.x = E.x;
-		redCube.y = E.y;
-		redCube.timeLeft = 90;
-	}
-	else if(((Math.floor(Math.random() * 10) + 1) == 7) && tealCube.x == -100){
-		tealCube.x = E.x;
-		tealCube.y = E.y;
-		tealCube.timeLeft = 90;
-	}
-	else if(((Math.floor(Math.random() * 10) + 1) == 7) && greenCube.x == -100){
-		greenCube.x = E.x;
-		greenCube.y = E.y;
-		greenCube.timeLeft = 90;
-	}
-	else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100){
-		yellowCube.x = E.x;
-		yellowCube.y = E.y;
-		yellowCube.timeLeft = 90;
-	}
-	else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100){
-		greyCube.x = E.x;
-		greyCube.y = E.y;
-		greyCube.timeLeft = 90;
-	}
-	else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100){
-		purpleCube.x = E.x;
-		purpleCube.y = E.y;
-		purpleCube.timeLeft = 90;
-	}
-	if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
-		marker4.points = "50";
-		marker4.mult = multiplier;
-		marker4.x = E.x;
-		marker4.y = E.y;
-		marker4.timeLeft = 20;
-	}
-	else if(marker.x != -100 && marker2.x != -100){
-		marker3.points = "50";
-		marker3.mult = multiplier;
-		marker3.x = E.x;
-		marker3.y = E.y;
-		marker3.timeLeft = 20;
-	}
-	else if(marker.x != -100){
-		marker2.points = "50";
-		marker2.mult = multiplier;
-		marker2.x = E.x;
-		marker2.y = E.y;
-		marker2.timeLeft = 20;
-	}
-	else{
-		marker.points = "50";
-		marker.mult = multiplier;
-		marker.x = E.x;
-		marker.y = E.y;
-		marker.timeLeft = 20;
-	}
-	E.x = -500;
-	E.y = -500;
-	E.respawn = rs;
-	E.movement = false;
-	score+=(50 * multiplier);
-	currpts = "50";
-	multiplier++;
-	multtimer = 50;
 }
-
 // Enemy move paramaterized
 function move(E){
 	if(E.movement == true){
@@ -796,7 +837,6 @@ function move(E){
 		}
 	}	
 }
-
 // Enemy AI
 function AI(E){		
 		var xdiff = player.x - E.x;
@@ -942,13 +982,13 @@ function AI(E){
 			else if (xdiff > 4 && ydiff > 4){
 				E.dir = "SD";
 			}
-			else if (xdiff == 4 && ydiff > 4){
+			else if (xdiff <= 4 && ydiff > 4){
 				E.dir = "S";
 			}
-			else if(xdiff == 4 && ydiff < 4){
+			else if(xdiff <= 4 && ydiff < 4){
 				E.dir = "W";
 			}
-			else if(xdiff < 4 && ydiff == 4){
+			else if(xdiff < 4 && ydiff <= 4){
 				E.dir = "A";
 			}
 			else{
@@ -961,6 +1001,7 @@ function AI(E){
 }
 
 function spawn(E){
+if(treeWizz.onScreen != 1){
 	if(E.type == 1){
 		if(E.respawn == 0){
 			E.movement = true;
@@ -1035,4 +1076,5 @@ function spawn(E){
 	else{
 		E.respawn-=1;
 	}
+}
 }

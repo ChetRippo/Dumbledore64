@@ -1,18 +1,21 @@
 
-Version 0.4.6 Changes(3/22/2012):
-		-Added prototype background
-		-Made Ice, Ice2, and Maelstrom effects crazier
-		-Put grey background in high score menu
-TODO:
-		-Bugs/small shit <------- Next
+Version 0.4.7 Changes(3/23/2012):
+		-Optimization
+		-Bug Fixes:
+			-Enemies moving at half speed vertically
+			-Tree Wizard attacks were completely bugged
+		-Turned tree wizard into a boss. Kill 10 trees and he shows up.
+			Attacks with a leaf storm, root strike, and can cast earth heal.
+			Has 10 HP.
+		
+	TODO:
+		-Bugs/small shit
 			-Sound plays on reset
-			-Make Thunderstorm more clear
 			-Sounds play before cast on cast bar spells
-			-Sounds for tree hit
 		-Spells
 			-Dark (Black)
 				-HP Steal?
-			-Water (Blue) <------- Next
+			++Water (Blue)
 				-Particle shield?
 			-Summon (?)
 				-Minions
@@ -20,12 +23,14 @@ TODO:
 			-Wizards that change terrain?
 			-Bosses? Dependent on terrain
 			-Each boss kill gives + 1 max hp?
+			+Tree Wizard: Fancy up spells, especially root strike. Add max HP up at defeat. Maybe random power ups?
+				Maybe get bigger every once in a while? Maybe immovable on root strike?
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
-			-Special events that can change to other levels (such as tree wizzurd summon)
+			+++Special events that can change to other levels (such as tree wizzurd summon)
 
 **********************************************************************************************************
 

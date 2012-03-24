@@ -400,8 +400,8 @@ function Bulletmove(B){
 			}
 		}
 	}
-	for (E in Enemies){
-		if(collision(B.dir, B, Enemies[E])){
+	for (E in AllEnemies){
+		if(collision(B.dir, B, AllEnemies[E])){
 			if(spell == "Explosive Shots"){
 				if(Mfire.onScreen == 0){
 					Mfire.onScreen = 1;
@@ -501,212 +501,8 @@ function Bulletmove(B){
 			else{
 				B.timeLeft = 0;
 			}
-			onHit(Enemies[E], Enemies[E].rp);
+			onHit(AllEnemies[E]);
 		}
-	}
-	if(collision(B.dir, B, Sorceror)){
-		if(spell == "Explosive Shots"){
-			if(Mfire.onScreen == 0){
-				Mfire.onScreen = 1;
-				Mfire.frame = 0;
-				Mfire.x = B.x;
-				Mfire.y = B.y;
-			}
-			else if(Mfire2.onScreen == 0){
-				Mfire2.onScreen = 1;
-				Mfire2.frame = 0;
-				Mfire2.x = B.x;
-				Mfire2.y = B.y;
-			}
-			else if(Mfire3.onScreen == 0){
-				Mfire3.onScreen = 1;
-				Mfire3.frame = 0;
-				Mfire3.x = B.x;
-				Mfire3.y = B.y;
-			}
-			else if(Mfire4.onScreen == 0){
-				Mfire4.onScreen = 1;
-				Mfire4.frame = 0;
-				Mfire4.x = B.x;
-				Mfire4.y = B.y;
-			}
-			B.timeLeft = 0;
-		}
-		else if(spell == "Ice Shots"){
-			if(Mice.onScreen == 0){
-				Mice.onScreen = 1;
-				Mice.frame = 0;
-				Mice.x = B.x;
-				Mice.y = B.y;
-			}
-			else if(Mice2.onScreen == 0){
-				Mice2.onScreen = 1;
-				Mice2.frame = 0;
-				Mice2.x = B.x;
-				Mice2.y = B.y;
-			}
-			else if(Mice3.onScreen == 0){
-				Mice3.onScreen = 1;
-				Mice3.frame = 0;
-				Mice3.x = B.x;
-				Mice3.y = B.y;
-			}
-			else if(Mice4.onScreen == 0){
-				Mice4.onScreen = 1;
-				Mice4.frame = 0;
-				Mice4.x = B.x;
-				Mice4.y = B.y;
-			}
-			B.timeLeft = 0;
-		}
-		else if(spell == "Conductive Shots"){
-			if(B.dir == "W" || B.dir == "S"){
-				B.width = 32;
-				B.height = 4;
-				if(Math.floor(Math.random() * 2) + 1 == 2){
-					B.dir = "A";
-				}
-				else{
-					B.dir = "D";
-				}
-			}
-			else if(B.dir == "A" || B.dir == "D"){
-				B.width = 4;
-				B.height = 32;
-				if(Math.floor(Math.random() * 2) + 1 == 2){
-					B.dir = "W";
-				}
-				else{
-					B.dir = "S";
-				}
-			}
-			else if(B.dir == "WD" || B.dir == "AS"){
-				B.width = 4;
-				B.height = 4;
-				if(Math.floor(Math.random() * 2) + 1 == 2){
-					B.dir = "WA";
-				}
-				else{
-					B.dir = "SD";
-				}
-			}
-			else if(B.dir == "WA" || B.dir == "SD"){
-				B.width = 4;
-				B.height = 4;
-				if(Math.floor(Math.random() * 2) + 1 == 2){
-					B.dir = "WD";
-				}
-				else{
-					B.dir = "AS";
-				}
-			}
-		}
-		else{
-			B.timeLeft = 0;
-		}
-		Sorceror.onHit();
-	}
-	if(collision(B.dir, B, Spawner)){
-		if(spell == "Explosive Shots"){
-			if(Mfire.onScreen == 0){
-				Mfire.onScreen = 1;
-				Mfire.frame = 0;
-				Mfire.x = B.x;
-				Mfire.y = B.y;
-			}
-			else if(Mfire2.onScreen == 0){
-				Mfire2.onScreen = 1;
-				Mfire2.frame = 0;
-				Mfire2.x = B.x;
-				Mfire2.y = B.y;
-			}
-			else if(Mfire3.onScreen == 0){
-				Mfire3.onScreen = 1;
-				Mfire3.frame = 0;
-				Mfire3.x = B.x;
-				Mfire3.y = B.y;
-			}
-			else if(Mfire4.onScreen == 0){
-				Mfire4.onScreen = 1;
-				Mfire4.frame = 0;
-				Mfire4.x = B.x;
-				Mfire4.y = B.y;
-			}
-			B.timeLeft = 0;
-		}
-		else if(spell == "Ice Shots"){
-			if(Mice.onScreen == 0){
-				Mice.onScreen = 1;
-				Mice.frame = 0;
-				Mice.x = B.x;
-				Mice.y = B.y;
-			}
-			else if(Mice2.onScreen == 0){
-				Mice2.onScreen = 1;
-				Mice2.frame = 0;
-				Mice2.x = B.x;
-				Mice2.y = B.y;
-			}
-			else if(Mice3.onScreen == 0){
-				Mice3.onScreen = 1;
-				Mice3.frame = 0;
-				Mice3.x = B.x;
-				Mice3.y = B.y;
-			}
-			else if(Mice4.onScreen == 0){
-				Mice4.onScreen = 1;
-				Mice4.frame = 0;
-				Mice4.x = B.x;
-				Mice4.y = B.y;
-			}
-			B.timeLeft = 0;
-		}
-		else if(spell == "Conductive Shots"){
-			if(B.dir == "W" || B.dir == "S"){
-				B.width = 32;
-				B.height = 4;
-				if(Math.floor(Math.random() * 2) + 1 == 2){
-					B.dir = "A";
-				}
-				else{
-					B.dir = "D";
-				}
-			}
-			else if(B.dir == "A" || B.dir == "D"){
-				B.width = 4;
-				B.height = 32;
-				if(Math.floor(Math.random() * 2) + 1 == 2){
-					B.dir = "W";
-				}
-				else{
-					B.dir = "S";
-				}
-			}
-			else if(B.dir == "WD" || B.dir == "AS"){
-				B.width = 4;
-				B.height = 4;
-				if(Math.floor(Math.random() * 2) + 1 == 2){
-					B.dir = "WA";
-				}
-				else{
-					B.dir = "SD";
-				}
-			}
-			else if(B.dir == "WA" || B.dir == "SD"){
-				B.width = 4;
-				B.height = 4;
-				if(Math.floor(Math.random() * 2) + 1 == 2){
-					B.dir = "WD";
-				}
-				else{
-					B.dir = "AS";
-				}
-			}
-		}
-		else{
-			B.timeLeft = 0;
-		}
-		Spawner.onHit();
 	}
 	if (B.timeLeft > 0 && B.dir == "W"){
 		B.timeLeft--;
@@ -850,15 +646,9 @@ var fireice = {
 					obsHit(obstacle3[O]);
 				}
 			}
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(collision(Sorceror.dir, Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(collision(Spawner.dir, Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			if (this.dir == "W"){
@@ -1056,116 +846,50 @@ var firelightning = {
 			else{
 				this.timeLeft-=1;
 			}
-			for (E in Enemies){
-				if(Enemies[E].x >= player.x && Enemies[E].x <= player.x + this.vwidth && Enemies[E].onScreen == 1){
+			for (E in AllEnemies){
+				if(AllEnemies[E].x >= player.x && AllEnemies[E].x <= player.x + this.vwidth && AllEnemies[E].onScreen == 1){
 					if(firelightningf1.x == -1000){
-						firelightningf1.x = Enemies[E].x;
-						firelightningf1.y = Enemies[E].y;
+						firelightningf1.x = AllEnemies[E].x;
+						firelightningf1.y = AllEnemies[E].y;
 						firelightningf1.shoot();
 					}
 					else if(firelightningf2.x == -1000){
-						firelightningf2.x = Enemies[E].x;
-						firelightningf2.y = Enemies[E].y;
+						firelightningf2.x = AllEnemies[E].x;
+						firelightningf2.y = AllEnemies[E].y;
 						firelightningf2.shoot();
 					}
 					else if(firelightningf3.x == -1000){
-						firelightningf3.x = Enemies[E].x;
-						firelightningf3.y = Enemies[E].y;
+						firelightningf3.x = AllEnemies[E].x;
+						firelightningf3.y = AllEnemies[E].y;
 						firelightningf3.shoot();
 					}
 					else if(firelightningf4.x == -1000){
-						firelightningf4.x = Enemies[E].x;
-						firelightningf4.y = Enemies[E].y;
-						firelightningf4.shoot();
-					}
-				}
-				if(Sorceror.x >= player.x && Sorceror.x <= player.x + this.vwidth && Sorceror.onScreen == 1){
-					if(firelightningf1.x == -1000){
-						firelightningf1.x = Sorceror.x;
-						firelightningf1.y = Sorceror.y;
-						firelightningf1.shoot();
-					}
-					else if(firelightningf2.x == -1000){
-						firelightningf2.x = Sorceror.x;
-						firelightningf2.y = Sorceror.y;
-						firelightningf2.shoot();
-					}
-					else if(firelightningf3.x == -1000){
-						firelightningf3.x = Sorceror.x;
-						firelightningf3.y = Sorceror.y;
-						firelightningf3.shoot();
-					}
-					else if(firelightningf4.x == -1000){
-						firelightningf4.x = Sorceror.x;
-						firelightningf4.y = Sorceror.y;
+						firelightningf4.x = AllEnemies[E].x;
+						firelightningf4.y = AllEnemies[E].y;
 						firelightningf4.shoot();
 					}
 				}
 			}			
-			for (E in Enemies){
-				if(Enemies[E].y <= player.y + this.hheight && Enemies[E].y >= player.y && Enemies[E].onScreen == 1){
+			for (E in AllEnemies){
+				if(AllEnemies[E].y <= player.y + this.hheight && AllEnemies[E].y >= player.y && AllEnemies[E].onScreen == 1){
 					if(firelightningf1.x == -1000){
-						firelightningf1.x = Enemies[E].x;
-						firelightningf1.y = Enemies[E].y;
+						firelightningf1.x = AllEnemies[E].x;
+						firelightningf1.y = AllEnemies[E].y;
 						firelightningf1.shoot();
 					}
 					else if(firelightningf2.x == -1000){
-						firelightningf2.x = Enemies[E].x;
-						firelightningf2.y = Enemies[E].y;
+						firelightningf2.x = AllEnemies[E].x;
+						firelightningf2.y = AllEnemies[E].y;
 						firelightningf2.shoot();
 					}
 					else if(firelightningf3.x == -1000){
-						firelightningf3.x = Enemies[E].x;
-						firelightningf3.y = Enemies[E].y;
+						firelightningf3.x = AllEnemies[E].x;
+						firelightningf3.y = AllEnemies[E].y;
 						firelightningf3.shoot();
 					}
 					else if(firelightningf4.x == -1000){
-						firelightningf4.x = Enemies[E].x;
-						firelightningf4.y = Enemies[E].y;
-						firelightningf4.shoot();
-					}
-				}
-				if(Sorceror.y <= player.y + this.hheight && Sorceror.y >= player.y && Sorceror.onScreen == 1){
-					if(firelightningf1.x == -1000){
-						firelightningf1.x = Sorceror.x;
-						firelightningf1.y = Sorceror.y;
-						firelightningf1.shoot();
-					}
-					else if(firelightningf2.x == -1000){
-						firelightningf2.x = Sorceror.x;
-						firelightningf2.y = Sorceror.y;
-						firelightningf2.shoot();
-					}
-					else if(firelightningf3.x == -1000){
-						firelightningf3.x = Sorceror.x;
-						firelightningf3.y = Sorceror.y;
-						firelightningf3.shoot();
-					}
-					else if(firelightningf4.x == -1000){
-						firelightningf4.x = Sorceror.x;
-						firelightningf4.y = Sorceror.y;
-						firelightningf4.shoot();
-					}
-				}
-				if(Spawner.y <= player.y + this.hheight && Spawner.y >= player.y && Spawner.onScreen == 1){
-					if(firelightningf1.x == -1000){
-						firelightningf1.x = Spawner.x;
-						firelightningf1.y = Spawner.y;
-						firelightningf1.shoot();
-					}
-					else if(firelightningf2.x == -1000){
-						firelightningf2.x = Spawner.x;
-						firelightningf2.y = Spawner.y;
-						firelightningf2.shoot();
-					}
-					else if(firelightningf3.x == -1000){
-						firelightningf3.x = Spawner.x;
-						firelightningf3.y = Spawner.y;
-						firelightningf3.shoot();
-					}
-					else if(firelightningf4.x == -1000){
-						firelightningf4.x = Spawner.x;
-						firelightningf4.y = Spawner.y;
+						firelightningf4.x = AllEnemies[E].x;
+						firelightningf4.y = AllEnemies[E].y;
 						firelightningf4.shoot();
 					}
 				}
@@ -1222,15 +946,9 @@ var firelightningf1 = {
 			this.width = 32 + (16*this.frame);
 			this.height = 32 + (16*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(collision(Sorceror.dir, Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(collision(Spawner.dir, Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -1294,15 +1012,9 @@ var firelightningf2 = {
 			this.width = 32 + (16*this.frame);
 			this.height = 32 + (16*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(collision(Sorceror.dir, Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(collision(Spawner.dir, Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -1367,15 +1079,9 @@ var firelightningf3 = {
 			this.width = 32 + (16*this.frame);
 			this.height = 32 + (16*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(collision(Sorceror.dir, Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(collision(Spawner.dir, Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -1439,15 +1145,9 @@ var firelightningf4 = {
 			this.width = 32 + (16*this.frame);
 			this.height = 32 + (16*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(collision(Sorceror.dir, Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(collision(Spawner.dir, Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -1874,6 +1574,7 @@ var icelightning = {
 	color: "00CCFF",
 	cd: 0,
 	timeLeft: 0,
+	end: false,
 	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner},
 	tick: function(){
 		if(this.cd>0){
@@ -1881,8 +1582,11 @@ var icelightning = {
 		}
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
+			if(this.timeLeft == 0){
+				this.end = true;
+			}
 		}
-		else if(this.timeLeft<=0){
+		else if(this.timeLeft<=0 && this.end == true){
 			horil.split = 0;
 			horil2.split = 0;
 			horil3.split = 0;
@@ -1913,6 +1617,7 @@ var icelightning = {
 			vertil3.frame = 240;
 			vertil4.frame = 240;
 			vertil5.frame = 240;
+			this.end = false;
 			for (E in AllEnemies){
 				if(AllEnemies[E].speed == 0){
 					AllEnemies[E].speed = AllEnemies[E].speed2*2;
@@ -2109,16 +1814,10 @@ var airfire = {
 			else if (this.dir == "D"){
 				this.x += this.speed;
 			}
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
-			}
-			if(collision(Sorceror.dir, Sorceror, this)){
-				Sorceror.onHit();
-			}
-			if(collision(Spawner.dir, Spawner, this)){
-				Spawner.onHit();
 			}
 			for (O in obstacle1){
 				if(collision(this.dir, this, obstacle1[O])){
@@ -2223,16 +1922,10 @@ var airfire12 = {
 			else if (this.dir == "D"){
 				this.x += this.speed;
 			}
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
-			}
-			if(collision(Sorceror.dir, Sorceror, this)){
-				Sorceror.onHit();
-			}
-			if(collision(Spawner.dir, Spawner, this)){
-				Spawner.onHit();
 			}
 			for (O in obstacle1){
 				if(collision(this.dir, this, obstacle1[O])){
@@ -2327,16 +2020,10 @@ var airfire13 = {
 			else if (this.dir == "D"){
 				this.x += this.speed;
 			}
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
-			}
-			if(collision(Sorceror.dir, Sorceror, this)){
-				Sorceror.onHit();
-			}
-			if(collision(Spawner.dir, Spawner, this)){
-				Spawner.onHit();
 			}
 			for (O in obstacle1){
 				if(collision(this.dir, this, obstacle1[O])){
@@ -2428,15 +2115,9 @@ var airice = {
 			this.timeLeft-=1;
 			this.x = player.x;
 			this.y = player.y;
-			for (E in Enemies){
-				if(collision(Enemies[E].dir, Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(collision(Sorceror.dir, Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(collision(Spawner.dir, Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -2508,8 +2189,6 @@ var airlightning = {
 	vheight: 800,
 	hwidth: 800,
 	hheight: 32,
-	hstate: 0,
-	vstate: 0,
 	hx: 400,
 	hy: -2000,
 	vx: -2000,
@@ -2522,35 +2201,9 @@ var airlightning = {
 	draw: function(){
 		if(this.LonScreen == 1){
 			Thunder.play();
-			if(this.vstate == 3 || this.hstate == 3){
-				this.hstate = 0;
-				this.vstate = 0;
-				this.LonScreen = 0;
-			}
-			if(this.hstate == 0){
-				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
-				this.hstate+=1;
-			}
-			else if(this.hstate == 1){
-				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy - this.hheight/2);
-				this.hstate+=1;
-			}
-			else if(this.hstate == 2){
-				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy - this.hheight/2);
-				this.hstate+=1;
-			}
-			if(this.vstate == 0){
-				ctx.drawImage(vlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
-				this.vstate+=1;
-			}
-			else if(this.vstate == 1){
-				ctx.drawImage(vlightning2, this.vx-this.vwidth/2, this.vy - this.vheight/2);
-				this.vstate+=1;
-			}
-			else if(this.vstate == 2){
-				ctx.drawImage(vlightning3, this.vx-this.vwidth/2, this.vy - this.vheight/2);
-				this.vstate+=1;
-			}
+			this.LonScreen = 0;
+			ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+			ctx.drawImage(vlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
 		}
 	},
 	effect: function(){
@@ -2574,26 +2227,14 @@ var airlightning = {
 				this.vx = -2000;
 				this.hy = -2000;
 			}
-			for (E in Enemies){
-				if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-					Sorceror.onHit();
-				}
-				if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
+					onHit(AllEnemies[E]);
 				}
 			}			
-			for (E in Enemies){
-				if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-					Sorceror.onHit();
-				}
-				if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
+					onHit(AllEnemies[E]);
 				}
 			}			
 		}
@@ -2640,416 +2281,6 @@ var mysticearth = {
 		}
 	}	
 };
-//-------------------------------------------------------------- Enemy Spells -------------------------------------------------------//
-// Globblyfire: Damages player if in radius
-var Globblyfire = {
-	color: "FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = 1;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
-	// Spawn
-	shoot: function(){
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-// Globblyfire2: Damages player if in radius
-var Globblyfire2 = {
-	color: "FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = 1;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
-	// Spawn
-	shoot: function(){
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-// Globblyfire: Damages player if in radius
-var Globblyfire3 = {
-	color: "FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = 1;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
-	// Spawn
-	shoot: function(){
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-
-
-
-// sIce: Slows player down by halving speed
-var sIce = {
-	color: "00CCFF",
-	timeLeft: 0,
-	width: 32,
-	height: 32,
-	x: -100,
-	y: -200,
-	frame: 0,
-	onScreen: 0,
-	end: false,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 150){
-			this.width = 32;
-			this.height = 32;
-			this.x = -200;
-			this.y = -100;
-			this.onScreen = 0;
-			this.end = true;
-		}
-		else{
-			this.width = this.width + (32*this.frame);
-			this.height = this.height + (32*this.frame);
-			this.frame++;
-		}
-	},
-	// Slow all enemies in radius
-	effect: function(){
-		if(this.onScreen == 1){
-			player.speed = 4;
-		}
-		else if(this.end == true){
-			player.speed = 8;
-			this.frame = 0;
-			this.end = false;
-		}
-	},
-		
-	// Spawn
-	shoot: function(){
-		Frozen.play();
-		this.height = 32;
-		this.width = 32;
-		this.x = Sorceror.x;
-		this.y = Sorceror.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-
-// sFire: Damages player if in radius
-var sFire = {
-	color: "FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 32,
-	height: 32,
-	frame: 0,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = 1;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.height = 32;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 32 + (32*this.frame);
-			this.height = 32 + (32*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-		}
-	},
-		
-	// Spawn
-	shoot: function(){
-		Explosion.play();
-		this.height = 32;
-		this.width = 32;
-		this.x = Sorceror.x;
-		this.y = Sorceror.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-
-// sLightning: Creates a small web of lightning
-var sLightning = {
-	timeLeft: 0,
-	vwidth: 32,
-	vheight: 800,
-	hwidth: 800,
-	hheight: 32,
-	hstate: 0,
-	vstate: 0,
-	hx: 400,
-	hy: -2000,
-	vx: -2000,
-	vy: 288,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			if(this.hstate == 0){
-				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
-				this.hstate+=1;
-			}
-			else if(this.hstate == 1){
-				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy - this.hheight/2);
-				this.hstate+=1;
-			}
-			else if(this.hstate == 2){
-				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy - this.hheight/2);
-				this.hstate=0;
-			}
-			if(this.vx != -2000){
-				if(this.vstate == 0){
-					ctx.drawImage(vlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
-					this.vstate+=1;
-				}
-				else if(this.vstate == 1){
-					ctx.drawImage(vlightning2, this.vx-this.vwidth/2, this.vy - this.vheight/2);
-					this.vstate+=1;
-				}
-				else if(this.vstate == 2){
-					ctx.drawImage(vlightning3, this.vx-this.vwidth/2, this.vy - this.vheight/2);
-					this.vstate=0;
-				}
-			}
-		}
-	},
-	effect: function(){
-		if(this.onScreen == 1){
-			if(this.timeLeft <= 0){
-				this.onScreen = 0;
-			}
-			else{
-				this.timeLeft-=1;
-			}
-			if(this.vx != -2000){
-				if(player.x >= this.vx && player.x <= this.vx + this.vwidth){
-					if(hptimer <= 0){
-						player.hp-=1;
-						onDmg.play();
-						hptimer = 30;
-					}
-				}
-			}
-			if(this.hy != -2000){
-				if(player.y <= this.hy + this.hheight && player.y >= this.hy){
-					if(this.vx == -2000){
-						this.vx = player.x
-					}
-					if(hptimer <= 0){
-						player.hp-=1;
-						onDmg.play();
-						hptimer = 30;
-					}
-				}			
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		Thunder.play();
-		this.hx = 400;
-		this.hy = Sorceror.y;
-		this.onScreen = 1;
-		this.timeLeft = 150;
-	}
-};
-
 //--------------------------------------------------------------- Spell Array -------------------------------------------------------//
 var Weapons = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: fire, 6: fire2, 7: ice, 8: ice2, 9: fireice, 10: earth, 
 				11: earth2, 12: lightning, 13: lightning2, 14: icelightning, 15: firelightning, 16: sFire, 17: sIce, 18: sLightning, 19: air,

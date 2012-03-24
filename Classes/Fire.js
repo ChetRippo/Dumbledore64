@@ -45,15 +45,9 @@ var fire = {
 			this.width = 32 + (16*this.frame);
 			this.height = 32 + (16*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -132,15 +126,9 @@ var fire2 = {
 			this.width = 32 + (32*this.frame);
 			this.height = 32 + (32*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -215,15 +203,9 @@ var Mfire = {
 			this.width = 32 + (8*this.frame);
 			this.height = 32 + (8*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -283,15 +265,9 @@ var Mfire2 = {
 			this.width = 32 + (8*this.frame);
 			this.height = 32 + (8*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -351,15 +327,9 @@ var Mfire3 = {
 			this.width = 32 + (8*this.frame);
 			this.height = 32 + (8*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -419,15 +389,9 @@ var Mfire4 = {
 			this.width = 32 + (8*this.frame);
 			this.height = 32 + (8*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){

@@ -62,50 +62,24 @@ var lightning = {
 				this.timeLeft-=1;
 			}
 			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
+				for (E in AllEnemies){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
 						if(lightning12.hy == -2000){
-							lightning12.hy = Enemies[E].y;
+							lightning12.hy = AllEnemies[E].y;
 							lightning12.shoot();
 						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						if(lightning12.hy == -2000){
-							lightning12.hy = Sorceror.y;
-							lightning12.shoot();
-						}
-						Sorceror.onHit();
-					}
-					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
-						if(lightning12.hy == -2000){
-							lightning12.hy = Spawner.y;
-							lightning12.shoot();
-						}
-						Spawner.onHit();
+						onHit(AllEnemies[E]);
 					}
 				}
 			}
 			
 			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+				for (E in AllEnemies){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
 						if(this.vx == -2000){
-							this.vx = Enemies[E].x
+							this.vx = AllEnemies[E].x
 						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Spawner.x
-						}
-						Spawner.onHit();
+						onHit(AllEnemies[E]);
 					}
 				}			
 			}
@@ -185,38 +159,19 @@ var lightning12 = {
 				this.timeLeft-=1;
 			}
 			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						Sorceror.onHit();
-					}
-					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
-						Spawner.onHit();
+				for (E in AllEnemies){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
+						onHit(AllEnemies[E]);
 					}
 				}
 			}
-			
 			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+				for (E in AllEnemies){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
 						if(this.vx == -2000){
-							this.vx = Enemies[E].x
+							this.vx = AllEnemies[E].x
 						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Spawner.x
-						}
-						Spawner.onHit();
+						onHit(AllEnemies[E]);
 					}
 				}			
 			}
@@ -291,50 +246,23 @@ var lightning2 = {
 				this.timeLeft-=1;
 			}
 			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
+				for (E in AllEnemies){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
 						if(lightning22.hy == -2000){
-							lightning22.hy = Enemies[E].y;
+							lightning22.hy = AllEnemies[E].y;
 							lightning22.shoot();
 						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						if(lightning22.hy == -2000){
-							lightning22.hy = Sorceror.y;
-							lightning22.shoot();
-						}
-						Sorceror.onHit();
-					}
-					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
-						if(lightning22.hy == -2000){
-							lightning22.hy = Spawner.y;
-							lightning22.shoot();
-						}
-						Spawner.onHit();
+						onHit(AllEnemies[E]);
 					}
 				}
 			}
-			
 			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+				for (E in AllEnemies){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
 						if(this.vx == -2000){
-							this.vx = Enemies[E].x
+							this.vx = AllEnemies[E].x
 						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Spawner.x
-						}
-						Spawner.onHit();
+						onHit(AllEnemies[E]);
 					}
 				}			
 			}
@@ -414,50 +342,23 @@ var lightning22 = {
 				this.timeLeft-=1;
 			}
 			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
+				for (E in AllEnemies){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
 						if(lightning23.hy == -2000){
-							lightning23.hy = Enemies[E].y;
+							lightning23.hy = AllEnemies[E].y;
 							lightning23.shoot();
 						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						if(lightning23.hy == -2000){
-							lightning23.hy = Sorceror.y;
-							lightning23.shoot();
-						}
-						Sorceror.onHit();
-					}
-					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
-						if(lightning23.hy == -2000){
-							lightning23.hy = Spawner.y;
-							lightning23.shoot();
-						}
-						Spawner.onHit();
+						onHit(AllEnemies[E]);
 					}
 				}
 			}
-			
 			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+				for (E in AllEnemies){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
 						if(this.vx == -2000){
-							this.vx = Enemies[E].x
+							this.vx = AllEnemies[E].x
 						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Spawner.x
-						}
-						Spawner.onHit();
+						onHit(AllEnemies[E]);
 					}
 				}			
 			}
@@ -529,38 +430,19 @@ var lightning23 = {
 				this.timeLeft-=1;
 			}
 			if(this.vx != -2000){
-				for (E in Enemies){
-					if(Enemies[E].x >= this.vx && Enemies[E].x <= this.vx + this.vwidth && Enemies[E].onScreen == 1){
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.x >= this.vx && Sorceror.x <= this.vx + this.vwidth && Sorceror.onScreen == 1){
-						Sorceror.onHit();
-					}
-					if(Spawner.x >= this.vx && Spawner.x <= this.vx + this.vwidth && Spawner.onScreen == 1){
-						Spawner.onHit();
+				for (E in AllEnemies){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
+						onHit(AllEnemies[E]);
 					}
 				}
 			}
-			
 			if(this.hy != -2000){
-				for (E in Enemies){
-					if(Enemies[E].y <= this.hy + this.hheight && Enemies[E].y >= this.hy && Enemies[E].onScreen == 1){
+				for (E in AllEnemies){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
 						if(this.vx == -2000){
-							this.vx = Enemies[E].x
+							this.vx = AllEnemies[E].x
 						}
-						onHit(Enemies[E], Enemies[E].rp);
-					}
-					if(Sorceror.y <= this.hy + this.hheight && Sorceror.y >= this.hy && Sorceror.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Sorceror.x
-						}
-						Sorceror.onHit();
-					}
-					if(Spawner.y <= this.hy + this.hheight && Spawner.y >= this.hy && Spawner.onScreen == 1){
-						if(this.vx == -2000){
-							this.vx = Spawner.x
-						}
-						Spawner.onHit();
+						onHit(AllEnemies[E]);
 					}
 				}			
 			}

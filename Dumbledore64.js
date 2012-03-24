@@ -14,21 +14,24 @@
 
 */
 /*
-	Version 0.4.6 Changes(3/22/2012):
-		-Added prototype background
-		-Made Ice, Ice2, and Maelstrom effects crazier
-		-Put grey background in high score menu
+	Version 0.4.7 Changes(3/23/2012):
+		-Optimization
+		-Bug Fixes:
+			-Enemies moving at half speed vertically
+			-Tree Wizard attacks were completely bugged
+		-Turned tree wizard into a boss. Kill 10 trees and he shows up.
+			Attacks with a leaf storm, root strike, and can cast earth heal.
+			Has 10 HP.
 		
 	TODO:
-		-Bugs/small shit <-------- Next
+		-Bugs/small shit
 			-Sound plays on reset
-			-Make Thunderstorm more clear
 			-Sounds play before cast on cast bar spells
-			-Sounds for tree hit
+			+roots dont disappear on death
 		-Spells
 			-Dark (Black)
 				-HP Steal?
-			-Water (Blue) <-------- Next
+			++Water (Blue)
 				-Particle shield?
 			-Summon (?)
 				-Minions
@@ -36,12 +39,14 @@
 			-Wizards that change terrain?
 			-Bosses? Dependent on terrain
 			-Each boss kill gives + 1 max hp?
+			+Tree Wizard: Fancy up spells, especially root strike. Add max HP up at defeat. Maybe random power ups?
+				Maybe get bigger every once in a while? Maybe immovable on root strike?
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
-			-Special events that can change to other levels (such as tree wizzurd summon)
+			+++Special events that can change to other levels (such as tree wizzurd summon)
 */
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
 // Canvas, Frames per Second, KeysDown, Global vars
@@ -73,62 +78,9 @@ var spell2pic = "N/A";
 var score = 0;
 var muliplier = 1;
 var multtimer = 0;
-var currpts = 0;
 // Key Listeners
 addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
 addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
-//-------------------------------------------------------------- Library Storage ----------------------------------------------------//
-var highscore1 = $.jStorage.get("highscore1");
-if(!highscore1){
-		var highscore1 = 0;
-		$.jStorage.set("highscore1",highscore1);}
-var highscore2 = $.jStorage.get("highscore2");
-if(!highscore2){
-		var highscore2 = 0;
-		$.jStorage.set("highscore2",highscore2);}
-var highscore3 = $.jStorage.get("highscore3");
-if(!highscore3){
-		var highscore3 = 0;
-		$.jStorage.set("highscore3",highscore3);}
-var highscore4 = $.jStorage.get("highscore4");
-if(!highscore4){
-		var highscore4 = 0;
-		$.jStorage.set("highscore4",highscore4);}
-var highscore5 = $.jStorage.get("highscore5");
-if(!highscore5){
-		var highscore5 = 0;
-		$.jStorage.set("highscore5",highscore5);}
-//---------------------------------------------------------------- Mouse Posn -------------------------------------------------------//
-function getPosition(event){
-    if (event.x != undefined && event.y != undefined){
-         cX = event.x;
-         cY = event.y;
-        }
-        else // Firefox method to get the position
-        {
-          cX = event.clientX + document.body.scrollLeft +
-              document.documentElement.scrollLeft;
-          cY = event.clientY + document.body.scrollTop +
-              document.documentElement.scrollTop;
-        }
-        cX -= canvas.offsetLeft;
-        cY -= canvas.offsetTop;
-}
-function getPositionhover(event){
-    if (event.x != undefined && event.y != undefined){
-		 hX = event.x;
-         hY = event.y;
-        }
-        else // Firefox method to get the position
-        {
-		  hX = event.clientX + document.body.scrollLeft +
-              document.documentElement.scrollLeft;
-          hY = event.clientY + document.body.scrollTop +
-              document.documentElement.scrollTop;
-        }
-		hX -= canvas.offsetLeft;
-        hY -= canvas.offsetTop;
-}
 //------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //Girraffix
 var WizzurdL = new Image();
@@ -228,6 +180,58 @@ var Wind = document.getElementsByTagName("audio")[7];
 var onDmg = document.getElementsByTagName("audio")[8];
 //SpawnerSpawn
 var SpawnerSpawn = document.getElementsByTagName("audio")[9];
+//-------------------------------------------------------------- Library Storage ----------------------------------------------------//
+var highscore1 = $.jStorage.get("highscore1");
+if(!highscore1){
+		var highscore1 = 0;
+		$.jStorage.set("highscore1",highscore1);}
+var highscore2 = $.jStorage.get("highscore2");
+if(!highscore2){
+		var highscore2 = 0;
+		$.jStorage.set("highscore2",highscore2);}
+var highscore3 = $.jStorage.get("highscore3");
+if(!highscore3){
+		var highscore3 = 0;
+		$.jStorage.set("highscore3",highscore3);}
+var highscore4 = $.jStorage.get("highscore4");
+if(!highscore4){
+		var highscore4 = 0;
+		$.jStorage.set("highscore4",highscore4);}
+var highscore5 = $.jStorage.get("highscore5");
+if(!highscore5){
+		var highscore5 = 0;
+		$.jStorage.set("highscore5",highscore5);}
+//---------------------------------------------------------------- Mouse Posn -------------------------------------------------------//
+function getPosition(event){
+    if (event.x != undefined && event.y != undefined){
+         cX = event.x;
+         cY = event.y;
+        }
+        else // Firefox method to get the position
+        {
+          cX = event.clientX + document.body.scrollLeft +
+              document.documentElement.scrollLeft;
+          cY = event.clientY + document.body.scrollTop +
+              document.documentElement.scrollTop;
+        }
+        cX -= canvas.offsetLeft;
+        cY -= canvas.offsetTop;
+}
+function getPositionhover(event){
+    if (event.x != undefined && event.y != undefined){
+		 hX = event.x;
+         hY = event.y;
+        }
+        else // Firefox method to get the position
+        {
+		  hX = event.clientX + document.body.scrollLeft +
+              document.documentElement.scrollLeft;
+          hY = event.clientY + document.body.scrollTop +
+              document.documentElement.scrollTop;
+        }
+		hX -= canvas.offsetLeft;
+        hY -= canvas.offsetTop;
+}
 //------------------------------------------------- Menu ----------------------------------------------------------------------------//
 var Menu = {
 	x: canvas.width/2,
@@ -238,7 +242,7 @@ var Menu = {
 		ctx.fillStyle = "black";
 		ctx.font = "18pt Arial";
 		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-2*this.height);
-		ctx.fillText("Version 0.4.6: March 22 2012", this.x-3*this.width/3, this.y+6*this.height);
+		ctx.fillText("Version 0.4.7: March 23 2012", this.x-3*this.width/3, this.y+6*this.height);
 		ctx.fillText("Dumbledore64", this.x-2*this.width/3, this.y-6*this.height);
 		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + this.height);
 		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
@@ -436,6 +440,37 @@ var castingBar = {
 		if(this.cast == 0){
 			this.cast-=1;
 			player.speed = 8;
+			this.onScreen = 0;
+		}
+	}
+}
+var TreecastingBar = {
+	x: treeWizz.x - treeWizz.width/2,
+	y: treeWizz.y + treeWizz.height/2,
+	width: treeWizz.width,
+	height: treeWizz.height/4,
+	width2: 0,
+	onScreen: 0,
+	cast: -1,
+	castmax: 0,
+	draw: function(){
+		this.x = treeWizz.x - treeWizz.width/2;
+		this.y = treeWizz.y + treeWizz.height/2;
+		if(this.onScreen == 1){
+			ctx.fillStyle = "0404B4";
+			ctx.strokeStyle = "black";
+			ctx.strokeRect(this.x, this.y, this.width, this.height);
+			ctx.fillRect(this.x + 2, this.y + 2, this.width2, this.height - 2);
+		}
+	},
+	tick: function(){
+		if(this.cast > 0){
+			treeWizz.speed = 0;
+			this.cast-=1;
+			this.width2 = this.cast/this.castmax * this.width;
+		}
+		if(this.cast == 0){
+			treeWizz.speed = 4;
 			this.onScreen = 0;
 		}
 	}
@@ -882,13 +917,12 @@ function pickup(C){
 				marker.timeLeft = 20;
 			}
 			score+=25;
-			currpts = "25";
 		}
 		Pickup.play();
 		C.onHit();
 	}
 }
-
+//------------------------------------------------- Collision Detection -------------------------------------------------------------//
 // Collision detection
 function collision(dir, one, two){
 	if(dir == "W"){
@@ -948,7 +982,7 @@ function contained(a, b){
 		return false;
 	}
 }
-
+//------------------------------------------------- Point and Element Markers -------------------------------------------------------//
 // Fancyness
 var marker = {
 	color: "00FF00",
@@ -1039,7 +1073,7 @@ function drawtypeMarker(M){
 			M.color = "33FF00";
 		}
 		else if(M.text == "+ Mystic"){
-			M.color = "BF00FF";
+			M.color = "663399";
 		}
 	ctx.fillStyle = M.color;
 	ctx.font = "32pt Arial";
@@ -1079,7 +1113,7 @@ function moveMarker(M){
 		M.y -= M.speed;
 		M.timeLeft--;}
 	}
-
+//------------------------------------------------- Keep Track of Score Multiplier --------------------------------------------------//
 //Multiply
 var multiply = function(){
 	if(multtimer <= 0){
@@ -1089,8 +1123,8 @@ var multiply = function(){
 		multtimer-=1;
 	}
 }
+//------------------------------------------------- Clear Canvas Each Frame ---------------------------------------------------------//
 // Clear the canvas - draw a white rectangle over everything
-
 var clear = function(){
 // Border
 ctx.fillStyle = "white";
@@ -1103,7 +1137,7 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.drawImage(backGround1, 0, 0);
 	}
 };
-
+//-------------------------------------------------- HUD and Spell Calculation ------------------------------------------------------//
 function UI(){
 	//Calculate spell
 	if(spell2 == "N/A"){
@@ -1407,7 +1441,7 @@ function UI(){
 	ctx.fillText("E: Drop Spell 2", 576, 560);
 	ctx.fillText("Spacebar: Use spell", 576, 496);
 }
-
+//----------------------------------------------------- Score -----------------------------------------------------------------------//
 function SCORE(){
 	ctx.fillStyle = "black";
 	ctx.font = "18pt Arial";
@@ -1591,7 +1625,7 @@ var keys = function(){
 		}
 	}
 };
-// Reset all Global Variables
+//--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
 	nu = 0;
 	hs = 0;
@@ -1603,25 +1637,18 @@ function reset(){
 	score = 0;
 	muliplier = 1;
 	multtimer = 0;
-	currpts = 0;
 	player.x = 400;
 	player.y = 256;
 	player.speed = 8;
 	player.hp = 3;
 	player.dir = "W";
-	for(E in Enemies){
-		onHit(Enemies[E], Enemies[E].rp);
-	}
 	Sorceror.hp = 1;
 	Sorceror.hptimer = 0;
-	Sorceror.onHit();
 	Spawner.hp = 1;
 	Spawner.hptimer = 0;
-	Spawner.onHit();
-	for (E in AllEnemies){
+	for(E in AllEnemies){
+		onHit(AllEnemies[E]);
 		AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
-		AllEnemies[E].onScreen = 0;
-		AllEnemies[E].movement = false;
 		AllEnemies[E].respawn = AllEnemies[E].origrp;
 	}
 	Sorceror.hp = 3;
@@ -1662,8 +1689,7 @@ function reset(){
 	greyCube.timeLeft = 0;
 	rePlant();
 }
-
-// Game Over
+//-------------------------------------------------------------- Game Over ----------------------------------------------------------//
 function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -1754,12 +1780,9 @@ function gameOver(){
 		STATE = 0;
 	}	
 }
-
-// Big-Bang
+//---------------------------------------------------------- Big-Bang ---------------------------------------------------------------//
 setInterval(function(){
-	// Clear the canvas so things won't be repeated if moved
 	clear();
-	// Get the key actions
 	if(STATE == 0){
 		Menu.draw();
 	}
@@ -1781,7 +1804,7 @@ setInterval(function(){
 			keys();
 			multiply();
 			SCORE();
-			// Calling the draw functions
+			
 			player.draw();
 			player.onhit();
 		
@@ -1968,16 +1991,26 @@ setInterval(function(){
 			sLightning.draw();
 			sLightning.effect();
 			
+			rootBlastW.draw();
+			rootBlastW.effect();
+			rootBlastA.draw();
+			rootBlastA.effect();
+			rootBlastS.draw();
+			rootBlastS.effect();
+			rootBlastD.draw();
+			rootBlastD.effect();
+			LeafHeal.draw();
+			LeafHeal.move();
+			for(R in roots1){
+				roots1[R].draw();
+			}
+			treeWizz.spawn();
 			for(E in AllEnemies){
 				AllEnemies[E].draw();
 				move(AllEnemies[E]);
 				AI(AllEnemies[E]);
 				spawn(AllEnemies[E]);
 			}
-			treeWizz.spawn();
-			AI(treeWizz);
-			move(treeWizz);
-			treeWizz.draw();
 			Globblyfire.draw();
 			Globblyfire.move();
 			Globblyfire2.draw();
@@ -2010,6 +2043,8 @@ setInterval(function(){
 			
 			castingBar.draw();
 			castingBar.tick();
+			TreecastingBar.draw();
+			TreecastingBar.tick();
 			
 			// Cooldown calculation
 			if(cd <= 0){
@@ -2020,5 +2055,4 @@ setInterval(function(){
 			}
 		}
 	}
-	// End of function, match it up with frames per second defined top
 }, 1000/FPS);

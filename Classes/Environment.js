@@ -245,6 +245,7 @@ function obsHit(O){
 		O.x = 2000;
 		O.y = 2000;
 	}
+	Killed.play();
 }
 function rePlant(){
 	for(Z in obstacle1){
