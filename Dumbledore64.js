@@ -199,7 +199,7 @@ Mysticbox5.src = "grafix/ele.dev32.5.png";
 var Mystics = {1: Mysticbox, 2: Mysticbox2, 3: Mysticbox3, 4: Mysticbox4, 5: Mysticbox5};
 //Hp up
 var maxUP = new Image();
-maxUP.src = "grafix/cube.green19.png";
+maxUP.src = "grafix/pup.treeheart32.png";
 // Particle
 var particle = new Image();
 particle.src = "grafix/particle.png";
