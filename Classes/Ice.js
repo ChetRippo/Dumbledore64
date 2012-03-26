@@ -14,7 +14,7 @@ var ice = {
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast ==0){
-			ctx.globalAlpha = 0.1;
+			ctx.globalAlpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
 		}
@@ -88,7 +88,7 @@ var ice2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.1;
+			ctx.globalAlpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
 		}

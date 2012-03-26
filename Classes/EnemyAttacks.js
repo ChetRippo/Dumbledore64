@@ -453,7 +453,7 @@ var rootBlastW = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Wind.play();
+		multiLaser.play();
 		this.width = 32;
 		this.x = treeWizz.x;
 		this.y = treeWizz.y;
@@ -514,7 +514,7 @@ var rootBlastA = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Wind.play();
+		multiLaser.play();
 		this.width = 32;
 		this.x = treeWizz.x;
 		this.y = treeWizz.y;
@@ -577,7 +577,7 @@ var rootBlastS = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Wind.play();
+		multiLaser.play();
 		this.width = 32;
 		this.x = treeWizz.x;
 		this.y = treeWizz.y;
@@ -638,7 +638,7 @@ var rootBlastD = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Wind.play();
+		multiLaser.play();
 		this.width = 32;
 		this.x = treeWizz.x;
 		this.y = treeWizz.y;
@@ -2078,6 +2078,10 @@ var LeafHeal = {
 				if(treeWizz.hp < 10){
 					treeWizz.hp+=1;
 				}
+				treeWizz.height+=8;
+				treeWizz.width+=8;
+				treeWizz.speed+=2;
+				treeWizz.speed2 = treeWizz.speed/2;
 				this.used = 1;
 				Pickup.play();
 			}

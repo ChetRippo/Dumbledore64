@@ -32,7 +32,7 @@ var earth = {
 			this.y -= this.speed;
 			this.timeLeft--;
 			if(this.used == 0){
-				if(player.hp < 3){
+				if(player.hp < player.maxhp){
 					player.hp+=1;
 				}
 				this.used = 1;
@@ -93,10 +93,10 @@ var earth2 = {
 			this.y -= this.speed;
 			this.timeLeft--;
 			if(this.used == 0){
-				if(player.hp < 2){
+				if(player.hp < player.maxhp-1){
 					player.hp+=2;
 				}
-				if(player.hp < 3){
+				if(player.hp < player.maxhp){
 					player.hp+=1;
 				}
 				this.used = 1;

@@ -1,12 +1,16 @@
 
-Version 0.4.7 Changes(3/23/2012):
-		-Optimization
-		-Bug Fixes:
-			-Enemies moving at half speed vertically
-			-Tree Wizard attacks were completely bugged
-		-Turned tree wizard into a boss. Kill 10 trees and he shows up.
-			Attacks with a leaf storm, root strike, and can cast earth heal.
-			Has 10 HP.
+Version 0.4.8 Changes(3/26/2012):
+		-Balancing
+			-Lowered score multiplier timer
+			-Reduced Tree wizzurd HP to 6
+		-Bug Fixes
+			-Fixed bug with spawner spawning with 1 hp
+			-Fixed enemy movement bug, would glitch when moving up or down
+		-Added some more sound effects
+		-Tree wizard grows bigger and moves faster on each heal
+		-Made Ice moves have cooler effects by accident
+		-Made +1 max hp item appear on tree wizard's death. Has a crazy pickup effect.
+		-Put small effect on Ice powerup box
 		
 	TODO:
 		-Bugs/small shit
@@ -20,11 +24,9 @@ Version 0.4.7 Changes(3/23/2012):
 			-Summon (?)
 				-Minions
 		-More enemies and AI
-			-Wizards that change terrain?
-			-Bosses? Dependent on terrain
-			-Each boss kill gives + 1 max hp?
-			+Tree Wizard: Fancy up spells, especially root strike. Add max HP up at defeat. Maybe random power ups?
-				Maybe get bigger every once in a while? Maybe immovable on root strike?
+			-Bosses
+			-Thief enemy
+			+Tree Wizard: Maybe random power ups?
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level

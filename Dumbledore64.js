@@ -14,20 +14,23 @@
 
 */
 /*
-	Version 0.4.7 Changes(3/23/2012):
-		-Optimization
-		-Bug Fixes:
-			-Enemies moving at half speed vertically
-			-Tree Wizard attacks were completely bugged
-		-Turned tree wizard into a boss. Kill 10 trees and he shows up.
-			Attacks with a leaf storm, root strike, and can cast earth heal.
-			Has 10 HP.
+	Version 0.4.8 Changes(3/26/2012):
+		-Balancing
+			-Lowered score multiplier timer
+			-Reduced Tree wizzurd HP to 6
+		-Bug Fixes
+			-Fixed bug with spawner spawning with 1 hp
+			-Fixed enemy movement bug, would glitch when moving up or down
+		-Added some more sound effects
+		-Tree wizard grows bigger and moves faster on each heal
+		-Made Ice moves have cooler effects by accident
+		-Made +1 max hp item appear on tree wizard's death. Has a crazy pickup effect.
+		-Put small effect on Ice powerup box
 		
 	TODO:
 		-Bugs/small shit
 			-Sound plays on reset
 			-Sounds play before cast on cast bar spells
-			+roots dont disappear on death
 		-Spells
 			-Dark (Black)
 				-HP Steal?
@@ -36,11 +39,9 @@
 			-Summon (?)
 				-Minions
 		-More enemies and AI
-			-Wizards that change terrain?
-			-Bosses? Dependent on terrain
-			-Each boss kill gives + 1 max hp?
-			+Tree Wizard: Fancy up spells, especially root strike. Add max HP up at defeat. Maybe random power ups?
-				Maybe get bigger every once in a while? Maybe immovable on root strike?
+			-Bosses
+			-Thief enemy
+			+Tree Wizard: Maybe random power ups?
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
@@ -78,6 +79,9 @@ var spell2pic = "N/A";
 var score = 0;
 var muliplier = 1;
 var multtimer = 0;
+//colors
+var colorz = {1: "D0D0D0", 2: "CC0000", 3: "00FFFF", 4: "yellow", 5: "33FF00", 6: "663399"};
+var colorNum = 1;
 // Key Listeners
 addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
 addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
@@ -123,25 +127,99 @@ var MonoWizzurd = new Image();
 MonoWizzurd.src = "grafix/bw-wizzurd32.png";
 //Fire powerup
 var Firebox = new Image();
-Firebox.src = "grafix/ele.fire32.png";
+Firebox.src = "grafix/ele.fire32.1.png";
+var Firebox2 = new Image();
+Firebox2.src = "grafix/ele.fire32.2.png";
+var Firebox3 = new Image();
+Firebox3.src = "grafix/ele.fire32.3.png";
+var Firebox4 = new Image();
+Firebox4.src = "grafix/ele.fire32.4.png";
+var Firebox5 = new Image();
+Firebox5.src = "grafix/ele.fire32.5.png";
+var Fires = {1: Firebox, 2: Firebox2, 3: Firebox3, 4: Firebox4, 5: Firebox5};
 //Ice powerup
 var Icebox = new Image();
-Icebox.src = "grafix/ele.ice32.png";
+Icebox.src = "grafix/ele.ice32.1.png";
+var Icebox2 = new Image();
+Icebox2.src = "grafix/ele.ice32.2.png";
+var Icebox3 = new Image();
+Icebox3.src = "grafix/ele.ice32.3.png";
+var Icebox4 = new Image();
+Icebox4.src = "grafix/ele.ice32.4.png";
+var Icebox5 = new Image();
+Icebox5.src = "grafix/ele.ice32.5.png";
+var Ices = {1: Icebox, 2: Icebox2, 3: Icebox3, 4: Icebox4, 5: Icebox5};
 //Earth powerup
 var Earthbox = new Image();
-Earthbox.src = "grafix/ele.earth32.png";
+Earthbox.src = "grafix/ele.earth32.1.png";
+var Earthbox2 = new Image();
+Earthbox2.src = "grafix/ele.earth32.2.png";
+var Earthbox3 = new Image();
+Earthbox3.src = "grafix/ele.earth32.3.png";
+var Earthbox4 = new Image();
+Earthbox4.src = "grafix/ele.earth32.4.png";
+var Earthbox5 = new Image();
+Earthbox5.src = "grafix/ele.earth32.5.png";
+var Earths = {1: Earthbox, 2: Earthbox2, 3: Earthbox3, 4: Earthbox4, 5: Earthbox5};
 //lightning powerup
 var Thunderbox = new Image();
-Thunderbox.src = "grafix/ele.zap32.png";
+Thunderbox.src = "grafix/ele.zap32.1.png";
+var Thunderbox2 = new Image();
+Thunderbox2.src = "grafix/ele.zap32.2.png";
+var Thunderbox3 = new Image();
+Thunderbox3.src = "grafix/ele.zap32.3.png";
+var Thunderbox4 = new Image();
+Thunderbox4.src = "grafix/ele.zap32.4.png";
+var Thunderbox5 = new Image();
+Thunderbox5.src = "grafix/ele.zap32.5.png";
+var Thunders = {1: Thunderbox, 2: Thunderbox2, 3: Thunderbox3, 4: Thunderbox4, 5: Thunderbox5};
 //Air powerup
 var Windbox = new Image();
-Windbox.src = "grafix/ele.air32.png";
+Windbox.src = "grafix/ele.air32.1.png";
+var Windbox2 = new Image();
+Windbox2.src = "grafix/ele.air32.2.png";
+var Windbox3 = new Image();
+Windbox3.src = "grafix/ele.air32.3.png";
+var Windbox4 = new Image();
+Windbox4.src = "grafix/ele.air32.4.png";
+var Windbox5 = new Image();
+Windbox5.src = "grafix/ele.air32.5.png";
+var Winds = {1: Windbox, 2: Windbox2, 3: Windbox3, 4: Windbox4, 5: Windbox5};
 //Mystic powerup
 var Mysticbox = new Image();
-Mysticbox.src = "grafix/ele.dev32.png";
+Mysticbox.src = "grafix/ele.dev32.1.png";
+var Mysticbox2 = new Image();
+Mysticbox2.src = "grafix/ele.dev32.2.png";
+var Mysticbox3 = new Image();
+Mysticbox3.src = "grafix/ele.dev32.3.png";
+var Mysticbox4 = new Image();
+Mysticbox4.src = "grafix/ele.dev32.4.png";
+var Mysticbox5 = new Image();
+Mysticbox5.src = "grafix/ele.dev32.5.png";
+var Mystics = {1: Mysticbox, 2: Mysticbox2, 3: Mysticbox3, 4: Mysticbox4, 5: Mysticbox5};
+//Hp up
+var maxUP = new Image();
+maxUP.src = "grafix/cube.green19.png";
 // Particle
 var particle = new Image();
 particle.src = "grafix/particle.png";
+var particle1 = new Image();
+particle1.src = "grafix/particle1.png";
+var particle2 = new Image();
+particle2.src = "grafix/particle2.png";
+var particle3 = new Image();
+particle3.src = "grafix/particle3.png";
+var particle4 = new Image();
+particle4.src = "grafix/particle4.png";
+var particle5 = new Image();
+particle5.src = "grafix/particle5.png";
+var particle6 = new Image();
+particle6.src = "grafix/particle6.png";
+var particle7 = new Image();
+particle7.src = "grafix/particle7.png";
+var particle8 = new Image();
+particle8.src = "grafix/particle8.png";
+var colorParticles = {1: particle1, 2: particle2, 3: particle3, 4: particle4, 5: particle5, 6: particle6, 7: particle7, 8: particle8};
 //hlightning
 var hlightning1 = new Image();
 hlightning1.src = "grafix/lightning-h1.png";
@@ -180,6 +258,16 @@ var Wind = document.getElementsByTagName("audio")[7];
 var onDmg = document.getElementsByTagName("audio")[8];
 //SpawnerSpawn
 var SpawnerSpawn = document.getElementsByTagName("audio")[9];
+var zapLaser = document.getElementsByTagName("audio")[10];
+var Plucky = document.getElementsByTagName("audio")[11];
+var multiLaser = document.getElementsByTagName("audio")[12];
+var midBoop = document.getElementsByTagName("audio")[13];
+var lowDouble = document.getElementsByTagName("audio")[14];
+var lowBomb = document.getElementsByTagName("audio")[15];
+var highDouble = document.getElementsByTagName("audio")[16];
+var flatBoop = document.getElementsByTagName("audio")[17];
+var fastbeepsLow = document.getElementsByTagName("audio")[18];
+var fastbeepsHigh = document.getElementsByTagName("audio")[19];
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 var highscore1 = $.jStorage.get("highscore1");
 if(!highscore1){
@@ -242,7 +330,7 @@ var Menu = {
 		ctx.fillStyle = "black";
 		ctx.font = "18pt Arial";
 		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-2*this.height);
-		ctx.fillText("Version 0.4.7: March 23 2012", this.x-3*this.width/3, this.y+6*this.height);
+		ctx.fillText("Version 0.4.8: March 26 2012", this.x-3*this.width/3, this.y+6*this.height);
 		ctx.fillText("Dumbledore64", this.x-2*this.width/3, this.y-6*this.height);
 		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + this.height);
 		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
@@ -251,24 +339,28 @@ var Menu = {
 			ctx.strokeRect(this.x-this.width*4/5, this.y-this.height*2, 3*this.width/2, 4*this.height/2);
 		}		
 		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y && cY>=this.y-2*this.height){
+			fastbeepsLow.play();
 			STATE = 1;
 		}
 		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + this.height && hY>=this.y-this.height*7/6 + this.height){
 			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + this.height, this.width, this.height);
 		}		
 		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + this.height&& cY>=this.y-this.height*7/6 + this.height){
+			fastbeepsLow.play();
 			STATE = 2;
 		}
 		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + 2*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 2*this.height, this.width, this.height);
 		}		
 		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 2*this.height&& cY>=this.y-this.height*7/6 + 2*this.height){
+			fastbeepsLow.play();
 			STATE = 5;
 		}
 		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + 3*this.height && hY>=this.y-this.height*7/6 + 3*this.height){
 			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 3*this.height, this.width, this.height);
 		}		
 		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 3*this.height&& cY>=this.y-this.height*7/6 + 3*this.height){
+			fastbeepsLow.play();
 			STATE = 3;
 		}
 	}
@@ -308,6 +400,7 @@ var Info = {
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
 		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			fastbeepsLow.play();
 			STATE = 0;
 		}
 }
@@ -337,6 +430,7 @@ var Credits = {
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
 		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			fastbeepsLow.play();
 			STATE = 0;
 		}
 }
@@ -349,7 +443,9 @@ var player = {
 	width: 32,
 	height: 32,
 	speed: 8,
+	speed2: 2,
 	hp: 3,
+	maxhp: 3,
 	dmg: false,
 	dir: "W",
 	LR: "",
@@ -376,7 +472,27 @@ var player = {
 			}
 		}
 		ctx.fillStyle = "red";
-		if(this.hp == 3){
+		if(this.hp == 6){
+			ctx.fillStyle = "006600";
+			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+		}
+		else if(this.hp == 5){
+			ctx.fillStyle = "006600";
+			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+		}
+		else if(this.hp == 4){
+			ctx.fillStyle = "006600";
+			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+		}
+		else if(this.hp == 3){
 			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
@@ -470,456 +586,9 @@ var TreecastingBar = {
 			this.width2 = this.cast/this.castmax * this.width;
 		}
 		if(this.cast == 0){
-			treeWizz.speed = 4;
+			treeWizz.speed = treeWizz.speed2*2;
 			this.onScreen = 0;
 		}
-	}
-}
-//---------------------------------------------- Pickups ----------------------------------------------------------------------------//
-// Fire drop
-var redCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Firebox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Fire";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Fire";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Fire";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Fire";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Fire";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Fire";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Fire";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Fire";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Ice drop
-var tealCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Icebox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Ice";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Ice";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Ice";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Ice";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Ice";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Ice";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Ice";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Ice";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Earth drop
-var greenCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Earthbox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Earth";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Earth";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Earth";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Earth";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Earth";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Earth";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Earth";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Earth";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Thunder drop
-var yellowCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Thunderbox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Lightning";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Lightning";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Lightning";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Lightning";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Lightning";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Lightning";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Lightning";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Lightning";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Wind drop
-var greyCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Windbox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Air";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Air";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Air";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Air";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Air";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Air";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Air";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Air";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Mystic drop
-var purpleCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Mysticbox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Mystic";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Mystic";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Mystic";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Mystic";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Mystic";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Mystic";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Mystic";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Mystic";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-	
-// If you pick it up
-function pickup(C){
-	if(collision(player.dir, player, C)){
-		if((spell1 != "N/A") && (spell2 != "N/A")){
-			if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
-				marker4.points = "25";
-				marker4.mult = 1;
-				marker4.x = player.x;
-				marker4.y = player.y;
-				marker4.timeLeft = 20;
-			}
-			else if(marker.x != -100 && marker2.x != -100){
-				marker3.points = "25";
-				marker3.mult = 1;
-				marker3.x = player.x;
-				marker3.y = player.y;
-				marker3.timeLeft = 20;
-			}
-			else if(marker.x != -100){
-				marker2.points = "25";
-				marker2.mult = 1;
-				marker2.x = player.x;
-				marker2.y = player.y;
-				marker2.timeLeft = 20;
-			}
-			else{
-				marker.points = "25";
-				marker.mult = 1;
-				marker.x = player.x;
-				marker.y = player.y;
-				marker.timeLeft = 20;
-			}
-			score+=25;
-		}
-		Pickup.play();
-		C.onHit();
 	}
 }
 //------------------------------------------------- Collision Detection -------------------------------------------------------------//
@@ -1050,7 +719,6 @@ var typemarker3 = {
 	y: -100,
 	text: "",
 };
-
 function drawtypeMarker(M){
 	if(M.timeLeft == 0){
 		M.x = -100;
@@ -1075,6 +743,13 @@ function drawtypeMarker(M){
 		else if(M.text == "+ Mystic"){
 			M.color = "663399";
 		}
+		else if(M.text == "+ Max Hp"){
+			M.color = colorz[colorNum];
+			colorNum++;
+			if(colorNum > 6){
+				colorNum = 1;
+			}
+		}
 	ctx.fillStyle = M.color;
 	ctx.font = "32pt Arial";
 	ctx.fillText(M.text, M.x, M.y);
@@ -1085,6 +760,7 @@ function drawMarker(M){
 	if(M.timeLeft == 0){
 		M.x = -100;
 		M.y = -100;
+		M.speed = 4;
 	}
 	if (M.timeLeft != 0){
 		if(M.mult == 1){
@@ -1127,8 +803,10 @@ var multiply = function(){
 // Clear the canvas - draw a white rectangle over everything
 var clear = function(){
 // Border
+if(ctx.globalAlpha == 1){
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
 	if(STATE != 1){
 		ctx.fillStyle = "grey";
 		ctx.fillRect(4, 4, canvas.width-4, canvas.height-4);
@@ -1646,11 +1324,19 @@ function reset(){
 	Sorceror.hptimer = 0;
 	Spawner.hp = 1;
 	Spawner.hptimer = 0;
+	treeWizz.hp = 1;
+	treeWizz.hptimer = 0;
 	for(E in AllEnemies){
 		onHit(AllEnemies[E]);
 		AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
 		AllEnemies[E].respawn = AllEnemies[E].origrp;
 	}
+	treeWizz.hp = 6;
+	treeWizz.spawned = 0;
+	treeWizz.speed = 4;
+	treeWizz.speed2 = 2;
+	treeWizz.width = 32;
+	treeWizz.height = 32;
 	Sorceror.hp = 3;
 	Sorceror.hptimer = 0;
 	Sorceror.cd = 0;
@@ -1778,6 +1464,7 @@ function gameOver(){
 		score = 0;
 		reset();
 		STATE = 0;
+		fastbeepsLow.play();
 	}	
 }
 //---------------------------------------------------------- Big-Bang ---------------------------------------------------------------//
@@ -1825,7 +1512,16 @@ setInterval(function(){
 			
 			purpleCube.draw();
 			pickup(purpleCube);
-		
+			
+			hpUp.draw();
+			pickup(hpUp);
+			for(H in hpParticles){
+				hpParticles[H].draw();
+				hpParticles[H].onHit();
+				HpMove(hpParticles[H]);
+				HpAi(hpParticles[H]);
+			}
+			
 			drawObstacle(obstacle1);
 			drawObstacle(obstacle2);
 			drawObstacle(obstacle3);

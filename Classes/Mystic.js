@@ -162,7 +162,7 @@ var mystic = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Frozen.play();
+		fastbeepsHigh.play();
 		this.height = 32;
 		this.width = 32;
 		this.draaw = 1;
@@ -343,7 +343,7 @@ var mystic2 = {
 		
 	shoot: function(){
 	if(this.cd == 0){
-		Frozen.play();
+		fastbeepsHigh.play();
 		this.height = 32;
 		this.width = 32;
 		this.draaw = 1;
