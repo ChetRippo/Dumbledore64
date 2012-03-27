@@ -14,40 +14,49 @@
 
 */
 /*
-	Version 0.4.8 Changes(3/26/2012):
-		-Balancing
-			-Lowered score multiplier timer
-			-Reduced Tree wizzurd HP to 6
-		-Bug Fixes
-			-Fixed bug with spawner spawning with 1 hp
-			-Fixed enemy movement bug, would glitch when moving up or down
-		-Added some more sound effects
-		-Tree wizard grows bigger and moves faster on each heal
-		-Made Ice moves have cooler effects by accident
-		-Made +1 max hp item appear on tree wizard's death. Has a crazy pickup effect.
-		-Put small effect on Ice powerup box
+	Version 0.4.9 Changes(3/27/2012):
+		-Bug Fixes:
+			-Fixed Earth2 bug where it would fully heal no matter what
+				the max hp is
+			-Fixed bug where on spells with casting bars the sound would play early
+			-Fixed bug where hitting "back" to play again wouldn't load enemies
+		-Balancing:
+			-Added 10 seconds to Lightning2 recharge
+		-Added 'E' button to 'How to Play' menu
+		-Changed Dave's credit title
+		-Made half the water moves (Not implemented yet)
 		
 	TODO:
 		-Bugs/small shit
 			-Sound plays on reset
-			-Sounds play before cast on cast bar spells
+			-Some effects don't disappear on reset
+			-Make homing shots slower but less cd
+			-Make water shield expand on second space?
+			-Add bubble colors
+			-Put daves treewizz animation in
+			-Put daves tree hp animation in
+			-Put daves globbly animation in
+			-Put in extra hearts?
+			-water and fire orbs don't explode on hitting an enemy
 		-Spells
 			-Dark (Black)
 				-HP Steal?
-			++Water (Blue)
-				-Particle shield?
+			+Water (Blue)
+				-Water + Earth: Bubble Shield and Heal
+				-Water + Lightning: Zap Trap
+				-Water + Air: Bubble Blast
+				-Water + Mystic: Bubblebeam
 			-Summon (?)
 				-Minions
 		-More enemies and AI
-			-Bosses
+			-Bosses: Maybe random power ups?
 			-Thief enemy
-			+Tree Wizard: Maybe random power ups?
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
-			+++Special events that can change to other levels (such as tree wizzurd summon)
+			++Special events that can change to other levels (such as tree wizzurd summon)
 */
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
 // Canvas, Frames per Second, KeysDown, Global vars
@@ -197,6 +206,18 @@ Mysticbox4.src = "grafix/ele.dev32.4.png";
 var Mysticbox5 = new Image();
 Mysticbox5.src = "grafix/ele.dev32.5.png";
 var Mystics = {1: Mysticbox, 2: Mysticbox2, 3: Mysticbox3, 4: Mysticbox4, 5: Mysticbox5};
+//Water powerup
+var Waterbox = new Image();
+Waterbox.src = "grafix/ele.water32.1.png";
+var Waterbox2 = new Image();
+Waterbox2.src = "grafix/ele.water32.2.png";
+var Waterbox3 = new Image();
+Waterbox3.src = "grafix/ele.water32.3.png";
+var Waterbox4 = new Image();
+Waterbox4.src = "grafix/ele.water32.4.png";
+var Waterbox5 = new Image();
+Waterbox5.src = "grafix/ele.water32.5.png";
+var Waters = {1: Waterbox, 2: Waterbox2, 3: Waterbox3, 4: Waterbox4, 5: Waterbox5};
 //Hp up
 var maxUP = new Image();
 maxUP.src = "grafix/pup.treeheart32.png";
@@ -220,6 +241,15 @@ particle7.src = "grafix/particle7.png";
 var particle8 = new Image();
 particle8.src = "grafix/particle8.png";
 var colorParticles = {1: particle1, 2: particle2, 3: particle3, 4: particle4, 5: particle5, 6: particle6, 7: particle7, 8: particle8};
+//Bubble
+var Bubble = new Image();
+Bubble.src = "grafix/bubble16.png";
+var FireBubble = new Image();
+FireBubble.src = "grafix/firebubble16.png";
+var IceBubble = new Image();
+IceBubble.src = "grafix/icebubble16.png";
+var MysticBubble = new Image();
+MysticBubble.src = "grafix/mysticbubble16.png";
 //hlightning
 var hlightning1 = new Image();
 hlightning1.src = "grafix/lightning-h1.png";
@@ -330,7 +360,7 @@ var Menu = {
 		ctx.fillStyle = "black";
 		ctx.font = "18pt Arial";
 		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-2*this.height);
-		ctx.fillText("Version 0.4.8: March 26 2012", this.x-3*this.width/3, this.y+6*this.height);
+		ctx.fillText("Version 0.4.9: March 27 2012", this.x-3*this.width/3, this.y+6*this.height);
 		ctx.fillText("Dumbledore64", this.x-2*this.width/3, this.y-6*this.height);
 		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + this.height);
 		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
@@ -387,12 +417,13 @@ var Info = {
 		ctx.fillText("D: move right", this.x-this.width/2, this.y+23*this.height/2);
 		ctx.fillText("Arrow keys: Shoot Dumblebeam", this.x-this.width/2, this.y+26*this.height/2);
 		ctx.fillText("Spacebar: Use spell", this.x-this.width/2, this.y+29*this.height/2);
-		ctx.fillText("Q: Drop most recently obtained spell", this.x-this.width/2, this.y+32*this.height/2);
+		ctx.fillText("Q: Drop Element 1", this.x-this.width/2, this.y+32*this.height/2);
+		ctx.fillText("E: Drop Element 2", this.x-this.width/2, this.y+35*this.height/2);
 		ctx.fillStyle = "black";
-		ctx.fillText("How to play: ", this.x-this.width/2, this.y+35*this.height/2);
-		ctx.fillText("Kill enemies! Acquire points! Pick up boxes to get elements!", this.x-this.width/2, this.y+38*this.height/2);
-		ctx.fillText("Each element corresponds to a unique spell, and you can combine", this.x-this.width/2, this.y+41*this.height/2);
-		ctx.fillText("up to 2 elements for MORE unique spells!!!", this.x-this.width/2, this.y+44*this.height/2);
+		ctx.fillText("How to play: ", this.x-this.width/2, this.y+38*this.height/2);
+		ctx.fillText("Kill enemies! Acquire points! Pick up boxes to get elements!", this.x-this.width/2, this.y+41*this.height/2);
+		ctx.fillText("Each element corresponds to a unique spell, and you can combine", this.x-this.width/2, this.y+44*this.height/2);
+		ctx.fillText("up to 2 elements for MORE unique spells!!!", this.x-this.width/2, this.y+47*this.height/2);
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Back", this.bx, this.by);
@@ -421,7 +452,7 @@ var Credits = {
 		ctx.fillText("Brett Davis", this.x-this.width/2, this.y+7*this.height/2);
 		ctx.fillText("Art:",  this.x-this.width/2, this.y+12*this.height/2);
 		ctx.fillText("Kyle Fleischer", this.x-this.width/2, this.y+15*this.height/2);
-		ctx.fillText("Sound and Javascript Master:", this.x-this.width/2, this.y+20*this.height/2);
+		ctx.fillText("Music and Sound", this.x-this.width/2, this.y+20*this.height/2);
 		ctx.fillText("Dave Gedarovich", this.x-this.width/2, this.y+23*this.height/2);
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
@@ -836,7 +867,10 @@ function UI(){
 		}
 		if(spell1 == "Mystic"){
 			spell = "Teleport";
-		}			
+		}
+		if(spell1 == "Water"){
+			spell = "Bubble Shield";
+		}		
 	}
 	if(spell1 == "N/A" && spell2 != "N/A"){
 		if(spell2 == "Fire"){
@@ -856,7 +890,10 @@ function UI(){
 		}
 		if(spell2 == "Mystic"){
 			spell = "Teleport";
-		}		
+		}
+		if(spell2 == "Water"){
+			spell = "Bubble Shield";
+		}
 	}
 	if(spell1 == "Fire" && spell2 == "Fire"){
 		spell = "Inferno";
@@ -921,6 +958,27 @@ function UI(){
 	if((spell1 == "Air" && spell2 == "Mystic") || (spell2 == "Air" && spell1 == "Mystic")){
 		spell = "Homing Shots";
 	}
+	if(spell1 == "Water" && spell2 == "Water"){
+		spell = "Heavy Bubble Shield";
+	}
+	if((spell1 == "Water" && spell2 == "Fire") || (spell2 == "Water" && spell1 == "Fire")){
+		spell = "Explosive Orbs";
+	}
+	if((spell1 == "Water" && spell2 == "Ice") || (spell2 == "Water" && spell1 == "Ice")){
+		spell = "Frozen Orbs";
+	}
+	if((spell1 == "Water" && spell2 == "Earth") || (spell2 == "Water" && spell1 == "Earth")){
+		spell = "Bubble Shield and Heal";
+	}
+	if((spell1 == "Water" && spell2 == "Lightning") || (spell2 == "Water" && spell1 == "Lightning")){
+		spell = "Zap Trap";
+	}
+	if((spell1 == "Water" && spell2 == "Air") || (spell2 == "Water" && spell1 == "Air")){
+		spell = "Bubble Blast";
+	}
+	if((spell1 == "Water" && spell2 == "Mystic") || (spell2 == "Water" && spell1 == "Mystic")){
+		spell = "Bubblebeam";
+	}
 	if(spell1 == "Fire"){
 		spell1pic = Firebox;
 	}
@@ -939,6 +997,9 @@ function UI(){
 	else if(spell1 == "Mystic"){
 		spell1pic = Mysticbox;
 	}
+	else if(spell1 == "Water"){
+		spell1pic = Waterbox;
+	}	
 	else{
 		spell1pic = "N/A";
 	}
@@ -959,6 +1020,9 @@ function UI(){
 	}
 	else if(spell2 == "Mystic"){
 		spell2pic = Mysticbox;
+	}
+	else if(spell2 == "Water"){
+		spell2pic = Waterbox;
 	}
 	else{
 		spell2pic = "N/A";
@@ -1113,6 +1177,46 @@ function UI(){
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
 	}
+	else if(spell == "Bubble Shield"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(Water.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Heavy Bubble Shield"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(Water.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Explosive Orbs"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterfire.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Frozen Orbs"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterfire.cd2/30) + "s", 32, 544);
+	}
+	else if(spell == "Bubble Shield and Heal"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterearth.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Zap Trap"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterlightning.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Bubble Blast"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterair.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Bubblebeam"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(watermystic.cd/30) + "s", 32, 544);
+	}
 	ctx.fillStyle = "black";
 	ctx.font = "16pt Arial";
 	ctx.fillText("Q: Drop Spell 1", 576, 528);
@@ -1143,22 +1247,42 @@ var keys = function(){
 	}
 	if (87 in keysDown && player.y - player.speed > 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
 		&& !(obsCollision(obstacle3, player, player.dir))){
-		player.y-=player.speed; 
+		player.y-=player.speed;
+		for(W in bubbleRotate){
+			if(bubbleRotate[W].onScreen == 1){
+				bubbleRotate[W].y-=player.speed;
+			}
+		}
 		player.dir = "W";
 	}
 	if (65 in keysDown && player.x - player.speed > 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
 		&& !(obsCollision(obstacle3, player, player.dir))){
 		player.x-=player.speed;
+		for(W in bubbleRotate){
+			if(bubbleRotate[W].onScreen == 1){
+				bubbleRotate[W].x-=player.speed;
+			}
+		}
 		player.dir = "A";
 	}
 	if (83 in keysDown && player.y + player.speed < canvas.height - 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
 		&& !(obsCollision(obstacle3, player, player.dir))){
 		player.y+=player.speed;
+		for(W in bubbleRotate){
+			if(bubbleRotate[W].onScreen == 1){
+				bubbleRotate[W].y+=player.speed;
+			}
+		}
 		player.dir = "S";
 	}
 	if (68 in keysDown && player.x + player.speed < canvas.width - 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
 		&& !(obsCollision(obstacle3, player, player.dir))){
 		player.x+=player.speed;
+		for(W in bubbleRotate){
+			if(bubbleRotate[W].onScreen == 1){
+				bubbleRotate[W].x+=player.speed;
+			}
+		}
 		player.dir = "D";
 	}
 	if (37 in keysDown && 38 in keysDown){
@@ -1216,6 +1340,9 @@ var keys = function(){
 		if(spell1 == "Mystic"){
 			mystic.shoot();
 		}
+		if(spell1 == "Water"){
+			Water.shoot();
+		}
 	}
 	if(32 in keysDown && spell2 != "N/A" && spell1 == "N/A"){
 		if(spell2 == "Fire"){
@@ -1235,6 +1362,9 @@ var keys = function(){
 		}
 		if(spell2 == "Mystic"){
 			mystic.shoot();
+		}
+		if(spell2 == "Water"){
+			Water.shoot();
 		}
 	}
 	if(32 in keysDown && spell1 != "N/A" && spell2 != "N/A"){
@@ -1301,6 +1431,27 @@ var keys = function(){
 		if((spell1 == "Mystic" && spell2 == "Air") || (spell2 == "Mystic" && spell1 == "Air")){
 			mystic.shoot();
 		}
+		if(spell1 == "Water" && spell2 == "Water"){
+			Water.shoot();
+		}
+		if((spell1 == "Water" && spell2 == "Earth") || (spell2 == "Water" && spell1 == "Earth")){
+			waterearth.shoot();
+		}
+		if((spell1 == "Water" && spell2 == "Fire") || (spell2 == "Water" && spell1 == "Fire")){
+			waterfire.shoot();
+		}
+		if((spell1 == "Water" && spell2 == "Ice") || (spell2 == "Water" && spell1 == "Ice")){
+			waterfire.shoot();
+		}
+		if((spell1 == "Water" && spell2 == "Lightning") || (spell2 == "Water" && spell1 == "Lightning")){
+			waterlightning.shoot();
+		}
+		if((spell1 == "Water" && spell2 == "Air") || (spell2 == "Water" && spell1 == "Air")){
+			waterair.shoot();
+		}
+		if((spell1 == "Water" && spell2 == "Mystic") || (spell2 == "Water" && spell1 == "Mystic")){
+			watermystic.shoot();
+		}
 	}
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
@@ -1319,11 +1470,13 @@ function reset(){
 	player.y = 256;
 	player.speed = 8;
 	player.hp = 3;
+	player.maxhp = 3;
 	player.dir = "W";
 	Sorceror.hp = 1;
 	Sorceror.hptimer = 0;
 	Spawner.hp = 1;
 	Spawner.hptimer = 0;
+	rePlant();
 	treeWizz.hp = 1;
 	treeWizz.hptimer = 0;
 	for(E in AllEnemies){
@@ -1346,6 +1499,7 @@ function reset(){
 	for (W in Weapons){
 		Weapons[W].timeLeft = 0;
 		Weapons[W].onScreen = 0;
+		Weapons[W].cd = 0;
 	}
 	Globblyfire.x = -100;
 	Globblyfire.y = -200;
@@ -1373,7 +1527,9 @@ function reset(){
 	greenCube.timeLeft = 0;
 	yellowCube.timeLeft = 0;
 	greyCube.timeLeft = 0;
-	rePlant();
+	purpleCube.timeLeft = 0;
+	hpUp.x = -100;
+	hpUp.y = -200;
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
 function gameOver(){
@@ -1676,7 +1832,23 @@ setInterval(function(){
 			Illusion.shoot();
 			IllusionBlast.draw();
 			IllusionBlast.move();
-		
+			
+			for(W in bubbleRotate){
+				bubbleRotate[W].draw();
+				bubbleRotate[W].effect();
+			}
+			for(W in waterFires){
+				waterFires[W].draw();
+				waterFires[W].effect();
+			}
+			for(W in WFires){
+				WFires[W].draw();
+				WFires[W].move();
+			}
+			for(I in IBubbles){
+				IBubbles[I].draw();
+				IBubbles[I].move();
+			}
 			sIce.draw();
 			sIce.move();
 			sIce.effect();

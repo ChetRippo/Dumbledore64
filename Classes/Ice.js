@@ -11,9 +11,14 @@ var ice = {
 	onScreen: 0,
 	end: false,
 	cast: 0,
+	used: 0,
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast ==0){
+			if(this.used == 0){
+				Frozen.play();
+				this.used = 1;
+			}
 			ctx.globalAlpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
@@ -61,7 +66,6 @@ var ice = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Frozen.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = player.x;
@@ -69,6 +73,7 @@ var ice = {
 		this.cd = 450;
 		this.frame = 0;
 		this.onScreen = 1;
+		this.used = 0;
 	}
 	}
 };

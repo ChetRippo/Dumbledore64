@@ -96,7 +96,7 @@ var earth2 = {
 				if(player.hp < player.maxhp-1){
 					player.hp+=2;
 				}
-				if(player.hp < player.maxhp){
+				else if(player.hp < player.maxhp){
 					player.hp+=1;
 				}
 				this.used = 1;

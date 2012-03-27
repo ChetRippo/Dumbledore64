@@ -10,9 +10,14 @@ var fire = {
 	cd: 0,
 	onScreen: 0,
 	cast: 0,
+	used: 0,
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
+			if(this.used == 0){
+				Explosion.play();
+				this.used = 1;
+			}
 			ctx.globalAlpha = 0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
@@ -71,7 +76,6 @@ var fire = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = player.x;
@@ -79,6 +83,7 @@ var fire = {
 		this.cd = 150;
 		this.frame = 0;
 		this.onScreen = 1;
+		this.used = 0;
 	}
 	}
 };

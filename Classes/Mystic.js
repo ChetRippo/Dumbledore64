@@ -16,11 +16,16 @@ var mystic = {
 	draaw: 0,
 	frame: 0,
 	cast: 0,
+	used: 0,
 	
 	draw: function(){
 		if(this.draaw == 1 && this.cast <= 0){
 			ctx.fillStyle = this.color;
 			ctx.globalAlpha = 0.25;
+			if(this.used == 0){
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
 			if(this.frame < 4){
 				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
 				ctx.fillRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
@@ -162,7 +167,6 @@ var mystic = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		fastbeepsHigh.play();
 		this.height = 32;
 		this.width = 32;
 		this.draaw = 1;
@@ -171,6 +175,7 @@ var mystic = {
 		this.cd = 60;
 		this.loop = 2;
 		this.onScreen = 1;
+		this.used = 0;
 	}
 	}
 };

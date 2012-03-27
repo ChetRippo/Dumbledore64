@@ -1,38 +1,47 @@
 
-Version 0.4.8 Changes(3/26/2012):
-		-Balancing
-			-Lowered score multiplier timer
-			-Reduced Tree wizzurd HP to 6
-		-Bug Fixes
-			-Fixed bug with spawner spawning with 1 hp
-			-Fixed enemy movement bug, would glitch when moving up or down
-		-Added some more sound effects
-		-Tree wizard grows bigger and moves faster on each heal
-		-Made Ice moves have cooler effects by accident
-		-Made +1 max hp item appear on tree wizard's death. Has a crazy pickup effect.
-		-Put small effect on Ice powerup box
+Version 0.4.9 Changes(3/27/2012):
+		-Bug Fixes:
+			-Fixed Earth2 bug where it would fully heal no matter what
+				the max hp is
+			-Fixed bug where on spells with casting bars the sound would play early
+			-Fixed bug where hitting "back" to play again wouldn't load enemies
+		-Balancing:
+			-Added 10 seconds to Lightning2 recharge
+		-Added 'E' button to 'How to Play' menu
+		-Changed Dave's credit title
+		-Made half the water moves (Not implemented yet)
 		
 	TODO:
 		-Bugs/small shit
 			-Sound plays on reset
-			-Sounds play before cast on cast bar spells
+			-Some effects don't disappear on reset
+			-Make homing shots slower but less cd
+			-Make water shield expand on second space?
+			-Add bubble colors
+			-Put daves treewizz animation in
+			-Put daves tree hp animation in
+			-Put daves globbly animation in
+			-Put in extra hearts?
+			-water and fire orbs don't explode on hitting an enemy
 		-Spells
 			-Dark (Black)
 				-HP Steal?
-			++Water (Blue)
-				-Particle shield?
+			+Water (Blue)
+				-Water + Earth: Bubble Shield and Heal
+				-Water + Lightning: Zap Trap
+				-Water + Air: Bubble Blast
+				-Water + Mystic: Bubblebeam
 			-Summon (?)
 				-Minions
 		-More enemies and AI
-			-Bosses
+			-Bosses: Maybe random power ups?
 			-Thief enemy
-			+Tree Wizard: Maybe random power ups?
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
-			+++Special events that can change to other levels (such as tree wizzurd summon)
+			++Special events that can change to other levels (such as tree wizzurd summon)
 
 **********************************************************************************************************
 

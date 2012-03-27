@@ -14,9 +14,14 @@ var lightning = {
 	cd: 0,
 	onScreen: 0,
 	cast: 0,
+	used: 0,
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
+			if(this.used == 0){
+				Thunder.play();
+				this.used = 1;
+			}
 			if(this.hstate == 0){
 				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy);
 				this.hstate+=1;
@@ -88,16 +93,13 @@ var lightning = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;
 		this.hy = player.y;
 		this.cd = 300;
 		this.onScreen = 1;
 		this.timeLeft = 120;
-	}
-	else{
-		return 0;
+		this.used = 0;
 	}
 	}
 	
@@ -275,7 +277,7 @@ var lightning2 = {
 		this.hx = 400;
 		this.vx = -2000;
 		this.hy = player.y;
-		this.cd = 600;
+		this.cd = 900;
 		this.onScreen = 1;
 		this.timeLeft = 240;
 	}
