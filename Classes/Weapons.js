@@ -714,7 +714,6 @@ var fireheal = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
-			Explosion.play();
 			this.cd = 600;
 			fire.cd = 0;
 			earth.cd = 0;
@@ -740,7 +739,6 @@ var iceheal = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
-			Frozen.play();
 			this.cd = 600;
 			ice.cd = 0;
 			earth.cd = 0;
@@ -766,7 +764,6 @@ var lightningheal = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
-			Thunder.play();
 			this.cd = 600;
 			lightning.cd = 0;
 			earth.cd = 0;
@@ -2180,7 +2177,6 @@ var airearth = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
-			Wind.play();
 			this.cd = 450;
 			air.cd = 0;
 			earth.cd = 0;
@@ -2260,9 +2256,6 @@ var airlightning = {
 		air.shoot();
 		air.cd = 0;
 	}
-	else{
-		return 0;
-	}
 	}
 	
 };
@@ -2276,7 +2269,6 @@ var mysticearth = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
-			Frozen.play();
 			this.cd = 300;
 			mystic.cd = 0;
 			earth.cd = 0;
@@ -2285,9 +2277,6 @@ var mysticearth = {
 			mystic.cd = 0;
 			earth.cd = 0;
 			mystic.cast = 30;
-		}
-		else{
-			return 0;
 		}
 	}	
 };

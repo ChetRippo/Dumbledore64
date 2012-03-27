@@ -30,13 +30,12 @@
 		-Bugs/small shit
 			-Sound plays on reset
 			-Some effects don't disappear on reset
+			-Sound on cast bar is still bugged. Two sounds in teleport
 			-Make homing shots slower but less cd
 			-Make water shield expand on second space?
-			-Add bubble colors
 			-Put daves treewizz animation in
 			-Put daves tree hp animation in
 			-Put daves globbly animation in
-			-Put in extra hearts?
 			-water and fire orbs don't explode on hitting an enemy
 		-Spells
 			-Dark (Black)
