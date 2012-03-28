@@ -135,11 +135,16 @@ var Tenemy = {
 	origrp: 600,
 	pts: 50,
 	rp: 600,
+	frame: 1,
 	onScreen: 0,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Globbly, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Globblys[this.frame], this.x - this.width / 2, this.y - this.height / 2);
+		this.frame+=1;
+		if(this.frame > 8){
+			this.frame = 1;
+		}
 	}
 };
 // Fast Enemy 2 - Globbly
@@ -157,11 +162,16 @@ var TenemyA = {
 	origrp: 2400,
 	pts: 50,
 	rp: 600,
+	frame: 1,
 	onScreen: 0,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Globbly, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Globblys[this.frame], this.x - this.width / 2, this.y - this.height / 2);
+		this.frame+=1;
+		if(this.frame > 8){
+			this.frame = 1;
+		}
 	}
 };
 
@@ -180,11 +190,16 @@ var TenemyB = {
 	origrp: 1800,
 	pts: 50,
 	rp: 600,
+	frame: 1,
 	onScreen: 0,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Globbly, this.x - this.width / 2, this.y - this.height / 2);
+		ctx.drawImage(Globblys[this.frame], this.x - this.width / 2, this.y - this.height / 2);
+		this.frame+=1;
+		if(this.frame > 8){
+			this.frame = 1;
+		}
 	}
 };
 
@@ -460,12 +475,17 @@ var treeWizz = {
 	frame: 0,
 	pts: 1000,
 	spawned: 0,
+	index: 1,
 	draw: function(){
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
 		else{
-			ctx.drawImage(TWizzurd, this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.drawImage(Treewizzez[this.index], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			this.index++;
+			if(this.index > 8){
+				this.index = 1;
+			}
 		}
 		ctx.fillStyle = "006600";
 		if(this.hp == 6){
@@ -753,6 +773,11 @@ function onHit(E){
 				purpleCube.x = E.x;
 				purpleCube.y = E.y;
 				purpleCube.timeLeft = 90;
+			}
+			else if(((Math.floor(Math.random() * 10) + 1) == 7) && blueCube.x == -100){
+				blueCube.x = E.x;
+				blueCube.y = E.y;
+				blueCube.timeLeft = 90;
 			}
 			if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 				marker4.points = E.pts;

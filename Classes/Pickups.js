@@ -509,6 +509,90 @@ var purpleCube = {
 		this.timeLeft = 0;
 	}
 };
+// Water drop
+var blueCube = {
+	type: 1,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	index: 1,
+	stage: "up",
+	
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(Waters[this.index], this.x-this.width/2, this.y-this.height/2);
+			this.timeLeft-=1;
+			if(this.stage == "up"){
+				this.index++;
+			}
+			else{
+				this.index-=1;
+			}
+			if(this.index == 6){
+				this.index = 5;
+				this.stage = "down";
+			}
+			else if(this.index == 0){
+				this.index = 1;
+				this.stage = "up";
+			}
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = "Water";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Water";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Water";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Water";
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = "Water";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Water";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Water";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Water";
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
 // hpUp drop
 var hpUp = {
 	type: 0,

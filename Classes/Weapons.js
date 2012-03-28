@@ -1,4 +1,4 @@
-//--------------------------------------------- Weapons -----------------------------------------------------------------------------//
+//--------------------------------------------- Bullet Stuff -----------------------------------------------------------------------------//
 // Bullet: A basic attack
 var bullet = {
 	color: "blue",
@@ -14,6 +14,36 @@ var bullet = {
 	shoot: function(dir, h, w){	
 	if(!(this.x == -100) && !(this.y == -200) && cd == 0
 		&& !(bullet2.x == -100) && !(bullet2.y == -200)
+		&& !(bullet3.x == -100) && !(bullet3.y == -200)
+		&& !(bullet4.x == -100) && !(bullet4.y == -200)
+		&& !(bullet5.x == -100) && !(bullet5.y == -200)
+		&& !(bullet6.x == -100) && !(bullet6.y == -200)
+		&& !(bullet7.x == -100) && !(bullet7.y == -200)){
+		bullet8.shoot(dir, h, w);
+	}
+	else if(!(this.x == -100) && !(this.y == -200) && cd == 0
+		&& !(bullet2.x == -100) && !(bullet2.y == -200)
+		&& !(bullet3.x == -100) && !(bullet3.y == -200)
+		&& !(bullet4.x == -100) && !(bullet4.y == -200)
+		&& !(bullet5.x == -100) && !(bullet5.y == -200)
+		&& !(bullet6.x == -100) && !(bullet6.y == -200)){
+		bullet7.shoot(dir, h, w);
+	}
+	else if(!(this.x == -100) && !(this.y == -200) && cd == 0
+		&& !(bullet2.x == -100) && !(bullet2.y == -200)
+		&& !(bullet3.x == -100) && !(bullet3.y == -200)
+		&& !(bullet4.x == -100) && !(bullet4.y == -200)
+		&& !(bullet5.x == -100) && !(bullet5.y == -200)){
+		bullet6.shoot(dir, h, w);
+	}
+	else if(!(this.x == -100) && !(this.y == -200) && cd == 0
+		&& !(bullet2.x == -100) && !(bullet2.y == -200)
+		&& !(bullet3.x == -100) && !(bullet3.y == -200)
+		&& !(bullet4.x == -100) && !(bullet4.y == -200)){
+		bullet5.shoot(dir, h, w);
+	}
+	else if(!(this.x == -100) && !(this.y == -200) && cd == 0
+		&& !(bullet2.x == -100) && !(bullet2.y == -200)
 		&& !(bullet3.x == -100) && !(bullet3.y == -200)){
 		bullet4.shoot(dir, h, w);
 	}
@@ -24,7 +54,7 @@ var bullet = {
 	else if(!(this.x == -100) && !(this.y == -200) && cd == 0){
 		bullet2.shoot(dir, h, w);
 	}
-	if(cd == 0){
+	else if(cd == 0){
 		Beam.play();
 		this.dir = dir;
 		this.timeLeft = 60;
@@ -34,6 +64,23 @@ var bullet = {
 		this.y = player.y;
 		if(spell == "Homing Shots"){
 			cd = 40;
+		}
+		if(spell == "Bubblebeam"){
+			cd = 20;
+			this.height = 16;
+			this.width = 16;
+			bullet11.dir = "D" + this.dir;
+			bullet11.timeLeft = 60;
+			bullet11.height = 16;
+			bullet11.width = 16;
+			bullet11.x = player.x;
+			bullet11.y = player.y;
+			bullet12.dir = "D2" + this.dir;
+			bullet12.timeLeft = 60;
+			bullet12.height = 16;
+			bullet12.width = 16;
+			bullet12.x = player.x;
+			bullet12.y = player.y;
 		}
 		else{
 			cd = 20;
@@ -65,6 +112,23 @@ var bullet2 = {
 		this.y = player.y;
 		if(spell == "Homing Shots"){
 			cd = 40;
+		}
+		else if(spell == "Bubblebeam"){
+			cd = 20;
+			this.height = 16;
+			this.width = 16;
+			bullet21.dir = "D" + this.dir;
+			bullet21.timeLeft = 60;
+			bullet21.height = 16;
+			bullet21.width = 16;
+			bullet21.x = player.x;
+			bullet21.y = player.y;
+			bullet22.dir = "D2" + this.dir;
+			bullet22.timeLeft = 60;
+			bullet22.height = 16;
+			bullet22.width = 16;
+			bullet22.x = player.x;
+			bullet22.y = player.y;
 		}
 		else{
 			cd = 20;
@@ -98,12 +162,28 @@ var bullet3 = {
 		if(spell == "Homing Shots"){
 			cd = 40;
 		}
+		else if(spell == "Bubblebeam"){
+			cd = 20;
+			this.height = 16;
+			this.width = 16;
+			bullet31.dir = "D" + this.dir;
+			bullet31.timeLeft = 60;
+			bullet31.height = 16;
+			bullet31.width = 16;
+			bullet31.x = player.x;
+			bullet31.y = player.y;
+			bullet32.dir = "D2" + this.dir;
+			bullet32.timeLeft = 60;
+			bullet32.height = 16;
+			bullet32.width = 16;
+			bullet32.x = player.x;
+			bullet32.y = player.y;
+		}
 		else{
 			cd = 20;
 		}
 	}
 	}
-	
 };
 
 // Bullet: A basic attack
@@ -130,6 +210,23 @@ var bullet4 = {
 		if(spell == "Homing Shots"){
 			cd = 40;
 		}
+		else if(spell == "Bubblebeam"){
+			cd = 20;
+			this.height = 16;
+			this.width = 16;
+			bullet41.dir = "D" + this.dir;
+			bullet41.timeLeft = 60;
+			bullet41.height = 16;
+			bullet41.width = 16;
+			bullet41.x = player.x;
+			bullet41.y = player.y;
+			bullet42.dir = "D2" + this.dir;
+			bullet42.timeLeft = 60;
+			bullet42.height = 16;
+			bullet42.width = 16;
+			bullet42.x = player.x;
+			bullet42.y = player.y;
+		}
 		else{
 			cd = 20;
 		}
@@ -137,7 +234,340 @@ var bullet4 = {
 	}
 	
 };
+var bullet5 = {
+	color: "blue",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 8,
+	height: 6,
+	dir: "A",
 
+	// Spawn
+	shoot: function(dir, h, w){
+	if(cd == 0){
+		Beam.play();
+		this.dir = dir;
+		this.timeLeft = 60;
+		this.height = h;
+		this.width = w;
+		this.x = player.x;
+		this.y = player.y;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else if(spell == "Bubblebeam"){
+			cd = 20;
+			this.height = 16;
+			this.width = 16;
+			bullet51.dir = "D" + this.dir;
+			bullet51.timeLeft = 60;
+			bullet51.height = 16;
+			bullet51.width = 16;
+			bullet51.x = player.x;
+			bullet51.y = player.y;
+			bullet52.dir = "D2" + this.dir;
+			bullet52.timeLeft = 60;
+			bullet52.height = 16;
+			bullet52.width = 16;
+			bullet52.x = player.x;
+			bullet52.y = player.y;
+		}
+		else{
+			cd = 20;
+		}
+	}
+	}
+	
+};
+var bullet6 = {
+	color: "blue",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 8,
+	height: 6,
+	dir: "A",
+
+	// Spawn
+	shoot: function(dir, h, w){
+	if(cd == 0){
+		Beam.play();
+		this.dir = dir;
+		this.timeLeft = 60;
+		this.height = h;
+		this.width = w;
+		this.x = player.x;
+		this.y = player.y;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else if(spell == "Bubblebeam"){
+			cd = 20;
+			this.height = 16;
+			this.width = 16;
+			bullet61.dir = "D" + this.dir;
+			bullet61.timeLeft = 60;
+			bullet61.height = 16;
+			bullet61.width = 16;
+			bullet61.x = player.x;
+			bullet61.y = player.y;
+			bullet62.dir = "D2" + this.dir;
+			bullet62.timeLeft = 60;
+			bullet62.height = 16;
+			bullet62.width = 16;
+			bullet62.x = player.x;
+			bullet62.y = player.y;
+		}
+		else{
+			cd = 20;
+		}
+	}
+	}
+	
+};
+var bullet7 = {
+	color: "blue",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 8,
+	height: 6,
+	dir: "A",
+
+	// Spawn
+	shoot: function(dir, h, w){
+	if(cd == 0){
+		Beam.play();
+		this.dir = dir;
+		this.timeLeft = 60;
+		this.height = h;
+		this.width = w;
+		this.x = player.x;
+		this.y = player.y;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else if(spell == "Bubblebeam"){
+			cd = 20;
+			this.height = 16;
+			this.width = 16;
+			bullet71.dir = "D" + this.dir;
+			bullet71.timeLeft = 60;
+			bullet71.height = 16;
+			bullet71.width = 16;
+			bullet71.x = player.x;
+			bullet71.y = player.y;
+			bullet72.dir = "D2" + this.dir;
+			bullet72.timeLeft = 60;
+			bullet72.height = 16;
+			bullet72.width = 16;
+			bullet72.x = player.x;
+			bullet72.y = player.y;
+		}
+		else{
+			cd = 20;
+		}
+	}
+	}
+	
+};
+var bullet8 = {
+	color: "blue",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 8,
+	height: 6,
+	dir: "A",
+
+	// Spawn
+	shoot: function(dir, h, w){
+	if(cd == 0){
+		Beam.play();
+		this.dir = dir;
+		this.timeLeft = 60;
+		this.height = h;
+		this.width = w;
+		this.x = player.x;
+		this.y = player.y;
+		if(spell == "Homing Shots"){
+			cd = 40;
+		}
+		else if(spell == "Bubblebeam"){
+			cd = 20;
+			this.height = 16;
+			this.width = 16;
+			bullet81.dir = "D" + this.dir;
+			bullet81.timeLeft = 60;
+			bullet81.height = 16;
+			bullet81.width = 16;
+			bullet81.x = player.x;
+			bullet81.y = player.y;
+			bullet82.dir = "D2" + this.dir;
+			bullet82.timeLeft = 60;
+			bullet82.height = 16;
+			bullet82.width = 16;
+			bullet82.x = player.x;
+			bullet82.y = player.y;
+		}
+		else{
+			cd = 20;
+		}
+	}
+	}
+};
+var bullet11 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet12 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet21 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet22 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet31 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet32 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet41 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet42 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet51 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet52 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet61 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet62 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet71 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet72 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet81 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var bullet82 = {
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	speed: 16,
+	width: 16,
+	height: 16,
+	dir: "A"
+};
+var Bullets = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: bullet5, 6: bullet6, 7: bullet7, 8: bullet8, 9: bullet11, 10: bullet12,
+				11: bullet21, 12: bullet22, 13: bullet31, 14: bullet32, 15: bullet41, 16: bullet42, 17: bullet51, 18: bullet52, 19: bullet61, 20: bullet62,
+				21: bullet71, 22: bullet72, 23: bullet81, 24: bullet82};
 function drawBullet(B){
 	if (B.timeLeft > 0){
 		if(spell == "Explosive Shots"){
@@ -152,41 +582,46 @@ function drawBullet(B){
 		else if(spell == "Homing Shots"){
 			ctx.fillStyle = "FF00FF";
 		}
-		else{
+		else if(spell != "Bubblebeam"){
 			ctx.fillStyle = B.color;
 		}
-		if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
-			ctx.fillRect(B.x - B.width / 2,
-			B.y - B.height / 2,
-			B.width, B.height);
+		if(spell == "Bubblebeam"){
+			ctx.drawImage(MysticBubble, B.x-B.width/2, B.y-B.height/2);
 		}
-		else if(B.dir == "WA" || B.dir == "SD"){
+		else{
+			if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
 				ctx.fillRect(B.x - B.width / 2,
 				B.y - B.height / 2,
 				B.width, B.height);
-			ctx.fillRect(B.x + B.width / 2, B.y + B.height / 2, B.width, B.height);
-			ctx.fillRect(B.x + B.width / 2 + B.width, B.y + B.height / 2 + B.height, B.width, B.height);
-			ctx.fillRect(B.x + B.width / 2 + B.width + B.width,
-				B.y + B.height / 2 + B.height + B.height, B.width, B.height);
-			ctx.fillRect(B.x + B.width / 2 + B.width + B.width + B.width,
-				B.y + B.height / 2 + B.height + B.height + B.height, B.width, B.height);
-		}
-		else if(B.dir == "WD" || B.dir == "AS"){
-				ctx.fillRect(B.x,
-				B.y - B.height / 2,
-				B.width, B.height);
-			ctx.fillRect(B.x + B.width, B.y - B.height - B.height / 2, B.width, B.height);
-			ctx.fillRect(B.x + B.width + B.width, B.y - B.height - B.height - B.height / 2, B.width, B.height);
-			ctx.fillRect(B.x + B.width + B.width + B.width,
-				B.y - B.height - B.height - B.height - B.height / 2, B.width, B.height);
-			ctx.fillRect(B.x + B.width + B.width + B.width + B.width,
-				B.y - B.height - B.height - B.height - B.height - B.height / 2, B.width, B.height);
+			}
+			else if(B.dir == "WA" || B.dir == "SD"){
+					ctx.fillRect(B.x - B.width / 2,
+					B.y - B.height / 2,
+					B.width, B.height);
+				ctx.fillRect(B.x + B.width / 2, B.y + B.height / 2, B.width, B.height);
+				ctx.fillRect(B.x + B.width / 2 + B.width, B.y + B.height / 2 + B.height, B.width, B.height);
+				ctx.fillRect(B.x + B.width / 2 + B.width + B.width,
+					B.y + B.height / 2 + B.height + B.height, B.width, B.height);
+				ctx.fillRect(B.x + B.width / 2 + B.width + B.width + B.width,
+					B.y + B.height / 2 + B.height + B.height + B.height, B.width, B.height);
+			}
+			else if(B.dir == "WD" || B.dir == "AS"){
+					ctx.fillRect(B.x,
+					B.y - B.height / 2,
+					B.width, B.height);
+				ctx.fillRect(B.x + B.width, B.y - B.height - B.height / 2, B.width, B.height);
+				ctx.fillRect(B.x + B.width + B.width, B.y - B.height - B.height - B.height / 2, B.width, B.height);
+				ctx.fillRect(B.x + B.width + B.width + B.width,
+					B.y - B.height - B.height - B.height - B.height / 2, B.width, B.height);
+				ctx.fillRect(B.x + B.width + B.width + B.width + B.width,
+					B.y - B.height - B.height - B.height - B.height - B.height / 2, B.width, B.height);
+			}
 		}
 	}
 	else{
 		B.x = -100;
 		B.y = -200;
-		}
+	}
 }
 // Increment
 function Bulletmove(B){
@@ -540,8 +975,88 @@ function Bulletmove(B){
 		B.x += B.speed;
 		B.y -= B.speed;
 	}
+	else if (B.timeLeft > 0 && B.dir == "DW"){
+		B.timeLeft--;
+		B.x -= B.speed/2;
+		B.y -= B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2W"){
+		B.timeLeft--;
+		B.x += B.speed/2;
+		B.y -= B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DA"){
+		B.timeLeft--;
+		B.x -= B.speed;
+		B.y -= B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2A"){
+		B.timeLeft--;
+		B.x -= B.speed;
+		B.y += B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DS"){
+		B.timeLeft--;
+		B.x -= B.speed/2;
+		B.y += B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2S"){
+		B.timeLeft--;
+		B.x += B.speed/2;
+		B.y += B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DD"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y -= B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2D"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y += B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DWD"){
+		B.timeLeft--;
+		B.x += B.speed/2;
+		B.y -= B.speed/4;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2WD"){
+		B.timeLeft--;
+		B.x += B.speed/4;
+		B.y -= B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DWA"){
+		B.timeLeft--;
+		B.x -= B.speed/2;
+		B.y -= B.speed/4;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2WA"){
+		B.timeLeft--;
+		B.x -= B.speed/4;
+		B.y -= B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DSD"){
+		B.timeLeft--;
+		B.x += B.speed/2;
+		B.y += B.speed/4;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2SD"){
+		B.timeLeft--;
+		B.x += B.speed/4;
+		B.y += B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DAS"){
+		B.timeLeft--;
+		B.x -= B.speed/2;
+		B.y += B.speed/4;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2AS"){
+		B.timeLeft--;
+		B.x -= B.speed/4;
+		B.y += B.speed/2;
+	}
 }
-
+// ------------------------------------------------------ Spell Combos ---------------------------------------------------------------//
 // Frozen Fireball: Fires a projectile. On hitting an obstacle or wall it explodes forming an ice field.
 var fireice = {
 	color1: "FF6600",
@@ -2333,6 +2848,7 @@ var waterfire = {
 						Wfire.x = this.x;
 						Wfire.y = this.y;
 						Wfire.onScreen = 1;
+						Wfire.shoot();
 					}	
 					else if(spell == "Frozen Orbs"){
 						IBubble.x = this.x;
@@ -2351,6 +2867,7 @@ var waterfire = {
 					Wfire.x = this.x;
 					Wfire.y = this.y;
 					Wfire.onScreen = 1;
+					Wfire.shoot();
 				}
 				else if(spell == "Frozen Orbs"){
 					IBubble.x = this.x;
@@ -2426,6 +2943,7 @@ var waterfire2 = {
 						Wfire2.x = this.x;
 						Wfire2.y = this.y;
 						Wfire2.onScreen = 1;
+						Wfire2.shoot();
 					}	
 					else if(spell == "Frozen Orbs"){
 						IBubble2.x = this.x;
@@ -2444,6 +2962,7 @@ var waterfire2 = {
 					Wfire2.x = this.x;
 					Wfire2.y = this.y;
 					Wfire2.onScreen = 1;
+					Wfire2.shoot();
 				}
 				else if(spell == "Frozen Orbs"){
 					IBubble2.x = this.x;
@@ -2500,6 +3019,7 @@ var waterfire3 = {
 						Wfire3.x = this.x;
 						Wfire3.y = this.y;
 						Wfire3.onScreen = 1;
+						Wfire3.shoot();
 					}	
 					else if(spell == "Frozen Orbs"){
 						IBubble3.x = this.x;
@@ -2518,6 +3038,7 @@ var waterfire3 = {
 					Wfire3.x = this.x;
 					Wfire3.y = this.y;
 					Wfire3.onScreen = 1;
+					Wfire3.shoot();
 				}
 				else if(spell == "Frozen Orbs"){
 					IBubble3.x = this.x;
@@ -2574,6 +3095,7 @@ var waterfire4 = {
 						Wfire4.x = this.x;
 						Wfire4.y = this.y;
 						Wfire4.onScreen = 1;
+						Wfire4.shoot();
 					}	
 					else if(spell == "Frozen Orbs"){
 						IBubble4.x = this.x;
@@ -2592,6 +3114,7 @@ var waterfire4 = {
 					Wfire4.x = this.x;
 					Wfire4.y = this.y;
 					Wfire4.onScreen = 1;
+					Wfire4.shoot();
 				}
 				else if(spell == "Frozen Orbs"){
 					IBubble4.x = this.x;
@@ -2648,6 +3171,7 @@ var waterfire5 = {
 						Wfire5.x = this.x;
 						Wfire5.y = this.y;
 						Wfire5.onScreen = 1;
+						Wfire5.shoot();
 					}	
 					else if(spell == "Frozen Orbs"){
 						IBubble5.x = this.x;
@@ -2666,6 +3190,7 @@ var waterfire5 = {
 					Wfire5.x = this.x;
 					Wfire5.y = this.y;
 					Wfire5.onScreen = 1;
+					Wfire5.shoot();
 				}
 				else if(spell == "Frozen Orbs"){
 					IBubble5.x = this.x;
@@ -2722,6 +3247,7 @@ var waterfire6 = {
 						Wfire6.x = this.x;
 						Wfire6.y = this.y;
 						Wfire6.onScreen = 1;
+						Wfire6.shoot();
 					}	
 					else if(spell == "Frozen Orbs"){
 						IBubble6.x = this.x;
@@ -2740,6 +3266,7 @@ var waterfire6 = {
 					Wfire6.x = this.x;
 					Wfire6.y = this.y;
 					Wfire6.onScreen = 1;
+					Wfire6.shoot();
 				}
 				else if(spell == "Frozen Orbs"){
 					IBubble6.x = this.x;
@@ -2796,6 +3323,7 @@ var waterfire7 = {
 						Wfire7.x = this.x;
 						Wfire7.y = this.y;
 						Wfire7.onScreen = 1;
+						Wfire7.shoot();
 					}	
 					else if(spell == "Frozen Orbs"){
 						IBubble7.x = this.x;
@@ -2814,6 +3342,7 @@ var waterfire7 = {
 					Wfire7.x = this.x;
 					Wfire7.y = this.y;
 					Wfire7.onScreen = 1;
+					Wfire7.shoot();
 				}
 				else if(spell == "Frozen Orbs"){
 					IBubble7.x = this.x;
@@ -2870,6 +3399,7 @@ var waterfire8 = {
 						Wfire8.x = this.x;
 						Wfire8.y = this.y;
 						Wfire8.onScreen = 1;
+						Wfire8.shoot();
 					}	
 					else if(spell == "Frozen Orbs"){
 						IBubble8.x = this.x;
@@ -2888,6 +3418,7 @@ var waterfire8 = {
 					Wfire8.x = this.x;
 					Wfire8.y = this.y;
 					Wfire8.onScreen = 1;
+					Wfire8.shoot();
 				}
 				else if(spell == "Frozen Orbs"){
 					IBubble8.x = this.x;
@@ -3898,6 +4429,713 @@ var IBubble8 = {
 	}
 };
 var IBubbles = {1: IBubble, 2: IBubble2, 3: IBubble3, 4: IBubble4, 5: IBubble5, 6: IBubble6, 7: IBubble7, 8: IBubble8};
+// Shield and Heal: Heals user by 1 and casts Bubble Shield
+var waterearth = {
+	cd: 0,
+	tick: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+	},
+	shoot: function(){
+		if(this.cd == 0){
+			this.cd = 1020;
+			water.cd = 0;
+			earth.cd = 0;
+			water.shoot();
+			earth.shoot();
+			water.cd = 0;
+			earth.cd = 0;
+			water.cast = 30;
+		}
+	}	
+};
+// Water Blast: Shoots out an array of bubbles that damage enemies. They return to the caster.
+var waterair = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	cd: 0,
+	onScreen: 0,
+	frame: 0,
+	mode: 0,
+	
+	draw: function(){
+		this.x = player.x;
+		this.y = player.y;
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(this.frame > 5 && this.mode == 2){
+			this.mode = 0;
+			this.frame = 0;
+			this.width = 32;
+			this.height = 32;
+			this.onScreen = 0;
+		}
+		else if(this.frame > 5){
+			this.width = 32;
+			this.height = 32;
+			this.mode++;
+			this.frame = 0;
+		}
+		if(this.onScreen == 1){
+			ctx.strokeStyle = "E8E8E8";
+			ctx.strokeRect(this.x-this.width/2, this.y - this.height/2, this.width, this.height);
+			this.frame++;
+			this.width = this.width + (8*this.frame);
+			this.height = this.height + (8*this.frame);
+		}
+	},
+	shoot: function(){
+		if(this.cd == 0){
+			for(W in wairParticles){
+				wairParticles[W].onScreen = 1;
+				wairParticles[W].x = this.x;
+				wairParticles[W].y = this.y;
+				wairParticles[W].dir = wairParticles[W].mdir;
+			}
+			this.cd = 150;
+			this.frame = 0;
+			this.onScreen = 1;
+		}
+	}
+};	
+var wairParticleW = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	dir: "W",
+	mdir: "W",
+	speed: 12,
+	dirct: 15,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+		}
+	},
+	onHit: function(){
+	if(this.onScreen == 1){
+		if(collision(this.dir, this, player) && this.dirct == 0){
+			this.x = -100;
+			this.y = -200;
+			this.dir = "W";
+			this.dirct = 15;
+			this.onScreen = 0;
+		}
+		for(E in AllEnemies){
+			if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				onHit(AllEnemies[E]);
+			}
+		}
+		for(O in obstacle1){
+			if(collision(this.dir, this, obstacle1[O])){
+				obsHit(obstacle1[O]);
+			}
+		}
+		for(O in obstacle2){
+			if(collision(this.dir, this, obstacle2[O])){
+				obsHit(obstacle2[O]);
+			}
+		}
+		for(O in obstacle3){
+			if(collision(this.dir, this, obstacle3[O])){
+				obsHit(obstacle3[O]);
+			}
+		}
+	}
+	}
+};	
+var wairParticleA = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	dir: "A",
+	mdir: "A",
+	speed: 12,
+	dirct: 15,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+		}
+	},
+	onHit: function(){
+	if(this.onScreen == 1){
+		if(collision(this.dir, this, player) && this.dirct == 0){
+			this.x = -100;
+			this.y = -200;
+			this.dir = "A";
+			this.dirct = 15;
+			this.onScreen = 0;
+		}
+		for(E in AllEnemies){
+			if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				onHit(AllEnemies[E]);
+			}
+		}
+		for(O in obstacle1){
+			if(collision(this.dir, this, obstacle1[O])){
+				obsHit(obstacle1[O]);
+			}
+		}
+		for(O in obstacle2){
+			if(collision(this.dir, this, obstacle2[O])){
+				obsHit(obstacle2[O]);
+			}
+		}
+		for(O in obstacle3){
+			if(collision(this.dir, this, obstacle3[O])){
+				obsHit(obstacle3[O]);
+			}
+		}
+	}
+	}
+};	
+var wairParticleS = {
+	type: 0,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	dir: "S",
+	mdir: "S",
+	speed: 12,
+	dirct: 15,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+		}
+	},
+	onHit: function(){
+	if(this.onScreen == 1){
+		if(collision(this.dir, this, player) && this.dirct == 0){
+			this.x = -100;
+			this.y = -200;
+			this.dir = "A";
+			this.dirct = 15;
+			this.onScreen = 0;
+		}
+		for(E in AllEnemies){
+			if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				onHit(AllEnemies[E]);
+			}
+		}
+		for(O in obstacle1){
+			if(collision(this.dir, this, obstacle1[O])){
+				obsHit(obstacle1[O]);
+			}
+		}
+		for(O in obstacle2){
+			if(collision(this.dir, this, obstacle2[O])){
+				obsHit(obstacle2[O]);
+			}
+		}
+		for(O in obstacle3){
+			if(collision(this.dir, this, obstacle3[O])){
+				obsHit(obstacle3[O]);
+			}
+		}
+	}
+	}
+};	
+var wairParticleD = {
+	type: 0,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	dir: "D",
+	mdir: "D",
+	speed: 12,
+	dirct: 15,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+		}
+	},
+	onHit: function(){
+	if(this.onScreen == 1){
+		if(collision(this.dir, this, player) && this.dirct == 0){
+			this.x = -100;
+			this.y = -200;
+			this.dir = "A";
+			this.dirct = 15;
+			this.onScreen = 0;
+		}
+		for(E in AllEnemies){
+			if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				onHit(AllEnemies[E]);
+			}
+		}
+		for(O in obstacle1){
+			if(collision(this.dir, this, obstacle1[O])){
+				obsHit(obstacle1[O]);
+			}
+		}
+		for(O in obstacle2){
+			if(collision(this.dir, this, obstacle2[O])){
+				obsHit(obstacle2[O]);
+			}
+		}
+		for(O in obstacle3){
+			if(collision(this.dir, this, obstacle3[O])){
+				obsHit(obstacle3[O]);
+			}
+		}
+	}
+	}
+};	
+var wairParticleWA = {
+	type: 0,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	dir: "WA",
+	mdir: "WA",
+	speed: 12,
+	dirct: 15,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+		}
+	},
+	onHit: function(){
+	if(this.onScreen == 1){
+		if(collision(this.dir, this, player) && this.dirct == 0){
+			this.x = -100;
+			this.y = -200;
+			this.dir = "A";
+			this.dirct = 15;
+			this.onScreen = 0;
+		}
+		for(E in AllEnemies){
+			if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				onHit(AllEnemies[E]);
+			}
+		}
+		for(O in obstacle1){
+			if(collision(this.dir, this, obstacle1[O])){
+				obsHit(obstacle1[O]);
+			}
+		}
+		for(O in obstacle2){
+			if(collision(this.dir, this, obstacle2[O])){
+				obsHit(obstacle2[O]);
+			}
+		}
+		for(O in obstacle3){
+			if(collision(this.dir, this, obstacle3[O])){
+				obsHit(obstacle3[O]);
+			}
+		}
+	}
+	}
+};	
+var wairParticleWD = {
+	type: 0,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	dir: "WD",
+	mdir: "WD",
+	speed: 12,
+	dirct: 15,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+		}
+	},
+	onHit: function(){
+	if(this.onScreen == 1){
+		if(collision(this.dir, this, player) && this.dirct == 0){
+			this.x = -100;
+			this.y = -200;
+			this.dir = "A";
+			this.dirct = 15;
+			this.onScreen = 0;
+		}
+		for(E in AllEnemies){
+			if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				onHit(AllEnemies[E]);
+			}
+		}
+		for(O in obstacle1){
+			if(collision(this.dir, this, obstacle1[O])){
+				obsHit(obstacle1[O]);
+			}
+		}
+		for(O in obstacle2){
+			if(collision(this.dir, this, obstacle2[O])){
+				obsHit(obstacle2[O]);
+			}
+		}
+		for(O in obstacle3){
+			if(collision(this.dir, this, obstacle3[O])){
+				obsHit(obstacle3[O]);
+			}
+		}
+	}
+	}
+};	
+var wairParticleAS = {
+	type: 0,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	dir: "AS",
+	mdir: "AS",
+	speed: 12,
+	dirct: 15,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+		}
+	},
+	onHit: function(){
+	if(this.onScreen == 1){
+		if(collision(this.dir, this, player) && this.dirct == 0){
+			this.x = -100;
+			this.y = -200;
+			this.dir = "A";
+			this.dirct = 15;
+			this.onScreen = 0;
+		}
+		for(E in AllEnemies){
+			if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				onHit(AllEnemies[E]);
+			}
+		}
+		for(O in obstacle1){
+			if(collision(this.dir, this, obstacle1[O])){
+				obsHit(obstacle1[O]);
+			}
+		}
+		for(O in obstacle2){
+			if(collision(this.dir, this, obstacle2[O])){
+				obsHit(obstacle2[O]);
+			}
+		}
+		for(O in obstacle3){
+			if(collision(this.dir, this, obstacle3[O])){
+				obsHit(obstacle3[O]);
+			}
+		}
+	}
+	}
+};	
+var wairParticleSD = {
+	type: 0,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	dir: "SD",
+	mdir: "SD",
+	speed: 12,
+	dirct: 15,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+		}
+	},
+	onHit: function(){
+	if(this.onScreen == 1){
+		if(collision(this.dir, this, player) && this.dirct == 0){
+			this.x = -100;
+			this.y = -200;
+			this.dir = "A";
+			this.dirct = 15;
+			this.onScreen = 0;
+		}
+		for(E in AllEnemies){
+			if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				onHit(AllEnemies[E]);
+			}
+		}
+		for(O in obstacle1){
+			if(collision(this.dir, this, obstacle1[O])){
+				obsHit(obstacle1[O]);
+			}
+		}
+		for(O in obstacle2){
+			if(collision(this.dir, this, obstacle2[O])){
+				obsHit(obstacle2[O]);
+			}
+		}
+		for(O in obstacle3){
+			if(collision(this.dir, this, obstacle3[O])){
+				obsHit(obstacle3[O]);
+			}
+		}
+	}
+	}
+};	
+var wairParticles = {1: wairParticleW, 2: wairParticleA, 3: wairParticleS, 4: wairParticleD, 5: wairParticleWA, 6: wairParticleWD, 7: wairParticleAS, 8: wairParticleSD};
+var waterlightning = {	
+	onScreen: 0,
+	cd: 0,
+	frame: 0,
+	tick: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(this.onScreen == 1){
+			this.frame++;
+			if(this.frame == 1){
+				Wpool.onScreen = 1;
+				Wpool.timeLeft = 300;
+				Wpool.x = player.x;
+				Wpool.y = player.y;
+			}
+			if(this.frame == 90){
+				Wpool2.onScreen = 1;
+				Wpool2.timeLeft = 300;
+				Wpool2.x = player.x;
+				Wpool2.y = player.y;
+			}
+			if(this.frame == 180){
+				Wpool3.onScreen = 1;
+				Wpool3.timeLeft = 300;
+				Wpool3.x = player.x;
+				Wpool3.y = player.y;
+			}
+			if(Wpool.onScreen == 0 && Wpool2.onScreen == 0 && Wpool3.onScreen == 0){
+				this.onScreen = 0;
+			}
+		}
+	},
+	shoot: function(){
+		if(this.cd == 0){
+			this.onScreen = 1;
+			this.cd = 1200;
+			this.frame = 0;
+		}
+	}
+};
+var Wpool = {
+	color: "0000FF",
+	color2: "FFFF00",
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	frame: 0,
+	onScreen: 0,
+	charged: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.charged == 1){
+				if(this.frame/2 != Math.round(this.frame/2)){
+					ctx.fillStyle = this.color2;
+				}
+				else{
+					ctx.fillStyle = this.color;
+				}
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.globalAlpha = 0.25;
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	move: function(){
+		if(contained(player, this)){
+			this.charged = 1;
+		}
+		else{
+			this.charged = 0;
+		}
+		if(this.frame <= 10 && this.onScreen == 1){
+			this.width = this.width + 2*this.frame;
+			this.height = this.height + 2*this.frame;
+			this.frame++;
+			if(this.charged == 1){
+				for (E in AllEnemies){
+					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+						onHit(AllEnemies[E]);
+					}
+				}
+			}
+		}
+		else if(this.frame < 300 && this.onScreen == 1){
+			this.frame++;
+			if(this.charged == 1){
+				for (E in AllEnemies){
+					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+						onHit(AllEnemies[E]);
+					}
+				}
+			}
+		}
+		if(this.frame >= 300 && this.onScreen == 1){
+			this.onScreen = 0;
+			this.frame = 0;
+			this.width = 32;
+			this.height = 32;
+			this.charged = 0;
+		}
+	}
+};
+var Wpool2 = {
+	color: "0000FF",
+	color2: "FFFF00",
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	frame: 0,
+	onScreen: 0,
+	charged: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.charged == 1){
+				if(this.frame/2 != Math.round(this.frame/2)){
+					ctx.fillStyle = this.color2;
+				}
+				else{
+					ctx.fillStyle = this.color;
+				}
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.globalAlpha = 0.25;
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	move: function(){
+		if(contained(player, this)){
+			this.charged = 1;
+		}
+		else{
+			this.charged = 0;
+		}
+		if(this.frame <= 10 && this.onScreen == 1){
+			this.width = this.width + 2*this.frame;
+			this.height = this.height + 2*this.frame;
+			this.frame++;
+			if(this.charged == 1){
+				for (E in AllEnemies){
+					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+						onHit(AllEnemies[E]);
+					}
+				}
+			}
+		}
+		else if(this.frame < 300 && this.onScreen == 1){
+			this.frame++;
+			if(this.charged == 1){
+				for (E in AllEnemies){
+					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+						onHit(AllEnemies[E]);
+					}
+				}
+			}
+		}
+		if(this.frame >= 300 && this.onScreen == 1){
+			this.onScreen = 0;
+			this.frame = 0;
+			this.width = 32;
+			this.height = 32;
+			this.charged = 0;
+		}
+	}
+};
+var Wpool3 = {
+	color: "0000FF",
+	color2: "FFFF00",
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	frame: 0,
+	onScreen: 0,
+	charged: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.charged == 1){
+				if(this.frame/2 != Math.round(this.frame/2)){
+					ctx.fillStyle = this.color2;
+				}
+				else{
+					ctx.fillStyle = this.color;
+				}
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.globalAlpha = 0.25;
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	move: function(){
+		if(contained(player, this)){
+			this.charged = 1;
+		}
+		else{
+			this.charged = 0;
+		}
+		if(this.frame <= 10 && this.onScreen == 1){
+			this.width = this.width + 2*this.frame;
+			this.height = this.height + 2*this.frame;
+			this.frame++;
+			if(this.charged == 1){
+				for (E in AllEnemies){
+					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+						onHit(AllEnemies[E]);
+					}
+				}
+			}
+		}
+		else if(this.frame < 300 && this.onScreen == 1){
+			this.frame++;
+			if(this.charged == 1){
+				for (E in AllEnemies){
+					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+						onHit(AllEnemies[E]);
+					}
+				}
+			}
+		}
+		if(this.frame >= 300 && this.onScreen == 1){
+			this.onScreen = 0;
+			this.frame = 0;
+			this.width = 32;
+			this.height = 32;
+			this.charged = 0;
+		}
+	}
+};
+var Wpools = {1: Wpool, 2: Wpool2, 3: Wpool3};
 //--------------------------------------------------------------- Spell Array -------------------------------------------------------//
 var Weapons = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: fire, 6: fire2, 7: ice, 8: ice2, 9: fireice, 10: earth, 
 				11: earth2, 12: lightning, 13: lightning2, 14: icelightning, 15: firelightning, 16: sFire, 17: sIce, 18: sLightning, 19: air,

@@ -1,41 +1,40 @@
 
-Version 0.4.9 Changes(3/27/2012):
-		-Bug Fixes:
-			-Fixed Earth2 bug where it would fully heal no matter what
-				the max hp is
-			-Fixed bug where on spells with casting bars the sound would play early
-			-Fixed bug where hitting "back" to play again wouldn't load enemies
-		-Balancing:
-			-Added 10 seconds to Lightning2 recharge
-		-Added 'E' button to 'How to Play' menu
-		-Changed Dave's credit title
-		-Made half the water moves (Not implemented yet)
+Version 0.5.0 Changes(3/28/2012):
+		-Put in tree pictures for when their health is 2 and 1
+		-Put in an animation for the globbly, now it flashes
+		-Put in a small animation on the Tree Wizzurd
+		-Added in Water element
+			-Water = Bubble Shield
+			-Water + Water = Heavy Bubble Shield
+			-Water + Fire = Explosive Orbs
+			-Water + Ice = Frozen Orbs
+			-Water + Earth = Bubble Shield + Heal
+			-Water + Lightning = Zap Trap
+			-Water + Air = Bubble Blast
+			-Water + Mystic = Bubblebeam
 		
 	TODO:
 		-Bugs/small shit
 			-Sound plays on reset
 			-Some effects don't disappear on reset
-			-Make homing shots slower but less cd
-			-Make water shield expand on second space?
-			-Add bubble colors
-			-Put daves treewizz animation in
-			-Put daves tree hp animation in
-			-Put daves globbly animation in
-			-Put in extra hearts?
-			-water and fire orbs don't explode on hitting an enemy
+			-Make homing shots slower but less cd?
+			+water and fire orbs don't explode on hitting an enemy
+			+Make fire and ice shots explode on obstacle contact
+			-Bubblebeam diagonals are weird
+			-Maybe balance zap trap
+			-Put in zap animation
+			+Water sounds
+		-Optimize
+			-Arrays for pickups, old spells (frozen web), etc.
+			-Reset button stuff
 		-Spells
 			-Dark (Black)
 				-HP Steal?
-			+Water (Blue)
-				-Water + Earth: Bubble Shield and Heal
-				-Water + Lightning: Zap Trap
-				-Water + Air: Bubble Blast
-				-Water + Mystic: Bubblebeam
 			-Summon (?)
 				-Minions
 		-More enemies and AI
-			-Bosses: Maybe random power ups?
-			-Thief enemy
+			++Bosses: Maybe random power ups?
+			++Thief enemy
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level

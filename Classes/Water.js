@@ -1,4 +1,4 @@
-var Water = {
+var water = {
 	x: -100,
 	y: -200,
 	width: 16,
@@ -32,23 +32,24 @@ var Water = {
 				bubbleRotate[B].onScreen = 0;
 				bubbleRotate[B].x = -100;
 				bubbleRotate[B].y = -200;
+				bubbleRotate[B].used = 0;
 			}
 		}
 		if(this.cast > 0){
 			this.cast-=1;
 		}
-		if(this.cast == 0 && this.onScreen == 1 && Water12.used == 0 && Water13.used == 0){
-			Water12.shoot();
-			Water13.shoot();
-			Water14.shoot();
-			if(spell == "Heavy Bubble Shield"){
-				Water21.shoot();
-				Water22.shoot();
-				Water23.shoot();
-				Water24.shoot();
+		if(this.cast == 0 && this.onScreen == 1 && water12.used == 0 && water13.used == 0 && water14.used == 0){
+			water12.shoot();
+			water13.shoot();
+			water14.shoot();
+			if(spell == "Heavy Bubble Shield" && water21.used == 0 && water22.used == 0 && water23.used == 0 && water24.used == 0){
+				water21.shoot();
+				water22.shoot();
+				water23.shoot();
+				water24.shoot();
 			}
 		}
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			HpMove(this);
 			if(this.x == player.x - 48 && this.y == player.y){
 				this.dir = "WD";
@@ -81,24 +82,25 @@ var Water = {
 		this.cd = 1020;
 		this.onScreen = 1;
 		this.used = 0;
+		for(W in bubbleRotate){
+			W.used = 0;
+		}
 		this.timeLeft = 600;
 	}
 	}
 };
-var Water12 = {
+var water12 = {
 	x: -100,
 	y: -200,
 	width: 16,
 	height: 16,
-	cd: 0,
 	speed: 4,
 	onScreen: 0,
-	cast: 0,
 	used: 0,
 	dir: "",
 	
 	draw: function(){
-		if(this.onScreen == 1 && this.cast == 0){
+		if(this.onScreen == 1){
 			if(this.used == 0){
 				this.used = 1;
 			}
@@ -106,9 +108,6 @@ var Water12 = {
 		}
 	},
 	effect: function(){
-		if(this.cast > 0){
-			this.cast-=1;
-		}
 		if(this.onScreen == 1){
 			HpMove(this);
 			if(this.x == player.x - 48 && this.y == player.y){
@@ -135,29 +134,25 @@ var Water12 = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.x = player.x;
 		this.y = player.y - 48;
 		this.dir = "SD";
 		this.onScreen = 1;
 		this.used = 0;
 	}
-	}
 };
-var Water13 = {
+var water13 = {
 	x: -100,
 	y: -200,
 	width: 16,
 	height: 16,
-	cd: 0,
 	speed: 4,
 	onScreen: 0,
-	cast: 0,
 	used: 0,
 	dir: "",
 	
 	draw: function(){
-		if(this.onScreen == 1 && this.cast == 0){
+		if(this.onScreen == 1){
 			if(this.used == 0){
 				this.used = 1;
 			}
@@ -165,9 +160,6 @@ var Water13 = {
 		}
 	},
 	effect: function(){
-		if(this.cast > 0){
-			this.cast-=1;
-		}
 		if(this.onScreen == 1){
 			HpMove(this);
 			if(this.x == player.x - 48 && this.y == player.y){
@@ -194,29 +186,25 @@ var Water13 = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.x = player.x + 48;
 		this.y = player.y;
 		this.dir = "AS";
 		this.onScreen = 1;
 		this.used = 0;
 	}
-	}
 };
-var Water14 = {
+var water14 = {
 	x: -100,
 	y: -200,
 	width: 16,
 	height: 16,
-	cd: 0,
 	speed: 4,
 	onScreen: 0,
-	cast: 0,
 	used: 0,
 	dir: "",
 	
 	draw: function(){
-		if(this.onScreen == 1 && this.cast == 0){
+		if(this.onScreen == 1){
 			if(this.used == 0){
 				this.used = 1;
 			}
@@ -224,9 +212,6 @@ var Water14 = {
 		}
 	},
 	effect: function(){
-		if(this.cast > 0){
-			this.cast-=1;
-		}
 		if(this.onScreen == 1){
 			HpMove(this);
 			if(this.x == player.x - 48 && this.y == player.y){
@@ -253,29 +238,25 @@ var Water14 = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.x = player.x;
 		this.y = player.y + 48;
 		this.dir = "WA";
 		this.onScreen = 1;
 		this.used = 0;
 	}
-	}
 };
-var Water21 = {
+var water21 = {
 	x: -100,
 	y: -200,
 	width: 16,
 	height: 16,
-	cd: 0,
 	speed: 4,
 	onScreen: 0,
-	cast: 0,
 	used: 0,
 	dir: "",
 	
 	draw: function(){
-		if(this.onScreen == 1 && this.cast == 0){
+		if(this.onScreen == 1){
 			if(this.used == 0){
 				this.used = 1;
 			}
@@ -283,9 +264,6 @@ var Water21 = {
 		}
 	},
 	effect: function(){
-		if(this.cast > 0){
-			this.cast-=1;
-		}
 		if(this.onScreen == 1){
 			HpMove(this);
 			if(this.x == player.x - 48 && this.y == player.y){
@@ -312,29 +290,25 @@ var Water21 = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.x = player.x + 24;
 		this.y = player.y + 24;
 		this.dir = "AS";
 		this.onScreen = 1;
 		this.used = 0;
 	}
-	}
 };
-var Water22 = {
+var water22 = {
 	x: -100,
 	y: -200,
 	width: 16,
 	height: 16,
-	cd: 0,
 	speed: 4,
 	onScreen: 0,
-	cast: 0,
 	used: 0,
 	dir: "",
 	
 	draw: function(){
-		if(this.onScreen == 1 && this.cast == 0){
+		if(this.onScreen == 1){
 			if(this.used == 0){
 				this.used = 1;
 			}
@@ -342,9 +316,6 @@ var Water22 = {
 		}
 	},
 	effect: function(){
-		if(this.cast > 0){
-			this.cast-=1;
-		}
 		if(this.onScreen == 1){
 			HpMove(this);
 			if(this.x == player.x - 48 && this.y == player.y){
@@ -371,29 +342,25 @@ var Water22 = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.x = player.x - 24;
 		this.y = player.y + 24;
 		this.dir = "WA";
 		this.onScreen = 1;
 		this.used = 0;
 	}
-	}
 };
-var Water23 = {
+var water23 = {
 	x: -100,
 	y: -200,
 	width: 16,
 	height: 16,
-	cd: 0,
 	speed: 4,
 	onScreen: 0,
-	cast: 0,
 	used: 0,
 	dir: "",
 	
 	draw: function(){
-		if(this.onScreen == 1 && this.cast == 0){
+		if(this.onScreen == 1){
 			if(this.used == 0){
 				this.used = 1;
 			}
@@ -401,9 +368,6 @@ var Water23 = {
 		}
 	},
 	effect: function(){
-		if(this.cast > 0){
-			this.cast-=1;
-		}
 		if(this.onScreen == 1){
 			HpMove(this);
 			if(this.x == player.x - 48 && this.y == player.y){
@@ -430,29 +394,25 @@ var Water23 = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.x = player.x + 24;
 		this.y = player.y - 24;
 		this.dir = "SD";
 		this.onScreen = 1;
 		this.used = 0;
 	}
-	}
 };
-var Water24 = {
+var water24 = {
 	x: -100,
 	y: -200,
 	width: 16,
 	height: 16,
-	cd: 0,
 	speed: 4,
 	onScreen: 0,
-	cast: 0,
 	used: 0,
 	dir: "",
 	
 	draw: function(){
-		if(this.onScreen == 1 && this.cast == 0){
+		if(this.onScreen == 1){
 			if(this.used == 0){
 				this.used = 1;
 			}
@@ -460,9 +420,6 @@ var Water24 = {
 		}
 	},
 	effect: function(){
-		if(this.cast > 0){
-			this.cast-=1;
-		}
 		if(this.onScreen == 1){
 			HpMove(this);
 			if(this.x == player.x - 48 && this.y == player.y){
@@ -489,13 +446,11 @@ var Water24 = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
 		this.x = player.x - 24;
 		this.y = player.y - 24;
 		this.dir = "WD";
 		this.onScreen = 1;
 		this.used = 0;
 	}
-	}
 };
-var bubbleRotate = {1: Water, 2: Water12, 3: Water13, 4: Water14, 5: Water21, 6: Water22, 7: Water23, 8: Water24};
+var bubbleRotate = {1: water, 2: water12, 3: water13, 4: water14, 5: water21, 6: water22, 7: water23, 8: water24};

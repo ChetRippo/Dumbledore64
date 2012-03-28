@@ -213,7 +213,15 @@ function drawObstacle(O){
 				ctx.fillRect(O[Z].x - O[Z].width / 2, O[Z].y - O[Z].height / 2, O[Z].width, O[Z].height);
 			}
 			else{
-				ctx.drawImage(Tree, O[Z].x - O[Z].width/2, O[Z].y - O[Z].height/2);
+				if(O[Z].hp == 3){
+					ctx.drawImage(Tree, O[Z].x - O[Z].width/2, O[Z].y - O[Z].height/2);
+				}
+				else if(O[Z].hp == 2){
+					ctx.drawImage(Tree2, O[Z].x - O[Z].width/2, O[Z].y - O[Z].height/2);
+				}
+				else if(O[Z].hp == 1){
+					ctx.drawImage(Tree3, O[Z].x - O[Z].width/2, O[Z].y - O[Z].height/2);
+				}
 			}
 		}
 	}
@@ -239,7 +247,7 @@ function obsTick(O){
 function obsHit(O){
 	if(O.hptimer <= 0){
 		O.hp-=1;
-		O.hptimer = 30;
+		O.hptimer = 20;
 	}
 	if(O.hp == 0){
 		O.x = 2000;
