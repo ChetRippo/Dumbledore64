@@ -1,17 +1,11 @@
 
-Version 0.5.0 Changes(3/28/2012):
-		-Put in tree pictures for when their health is 2 and 1
-		-Put in an animation for the globbly, now it flashes
-		-Put in a small animation on the Tree Wizzurd
-		-Added in Water element
-			-Water = Bubble Shield
-			-Water + Water = Heavy Bubble Shield
-			-Water + Fire = Explosive Orbs
-			-Water + Ice = Frozen Orbs
-			-Water + Earth = Bubble Shield + Heal
-			-Water + Lightning = Zap Trap
-			-Water + Air = Bubble Blast
-			-Water + Mystic = Bubblebeam
+Version 0.5.1 Changes(3/29/2012):
+		-Put in pause button. P for pause
+		-Tweaked the menus slightly
+		-Added Options menu, lets you toggle sound
+		-Updated tree pictures
+		-Changed menu color settings
+		-Added title picture
 		
 	TODO:
 		-Bugs/small shit

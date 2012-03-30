@@ -14,7 +14,7 @@ var water = {
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
 			if(this.used == 0){
-				//Wind.play();
+				midBoop.play();
 				this.used = 1;
 			}
 			ctx.drawImage(Bubble, this.x-this.width/2, this.y-this.height/2);
