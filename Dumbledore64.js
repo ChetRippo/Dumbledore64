@@ -14,25 +14,26 @@
 
 */
 /*
-	Version 0.5.1 Changes(3/29/2012):
-		-Put in pause button. P for pause
-		-Tweaked the menus slightly
-		-Added Options menu, lets you toggle sound
-		-Updated tree pictures
-		-Changed menu color settings
-		-Added title picture
+	Version 0.5.2 Changes(3/30/2012):
+		-Added random tree generation, removed a few trees
+		-Added control display to options menu
+		-Updated level change effect from forest to jungle
+		-Reskinned pikkit in jungle
+		-Added animated giant trees in jungle
 		
 	TODO:
 		-Bugs/small shit
-			-Sound plays on reset
-			-Some effects don't disappear on reset
-			-Make homing shots slower but less cd?
+			+Sound plays on reset
+			+Some effects don't disappear on reset
+			+Make homing shots slower but less cd?
 			+water and fire orbs don't explode on hitting an enemy
 			+Make fire and ice shots explode on obstacle contact
-			-Bubblebeam diagonals are weird
-			-Maybe balance zap trap
-			-Put in zap animation
+			+Bubblebeam diagonals are weird
+			+Maybe balance zap trap
+			+Put in zap animation
 			+Water sounds
+			+Long sounds and music
+			+Sounds for transition
 		-Optimize
 			-Arrays for pickups, old spells (frozen web), etc.
 			-Reset button stuff
@@ -42,14 +43,13 @@
 			-Summon (?)
 				-Minions
 		-More enemies and AI
-			++Bosses: Maybe random power ups?
-			++Thief enemy
+			-Bosses: Maybe random power ups?
+			+Thief enemy
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
-			++Special events that can change to other levels (such as tree wizzurd summon)
 */
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
 // Canvas, Frames per Second, KeysDown, Global vars
@@ -90,6 +90,9 @@ var colorNum = 1;
 // Key Listeners
 addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
 addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
+// Environment
+var planted = false;
+var jungleAni = false;
 //------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //Girraffix
 var WizzurdL = new Image();
@@ -113,6 +116,25 @@ var Tree3 = new Image();
 Tree3.src = "grafix/objects/tree/health.1.png";
 var backGround1 = new Image();
 backGround1.src = "grafix/background/grass1.png";
+var backGround2 = new Image();
+backGround2.src = "grafix/background/jungle1.png";
+//Jungle
+var Jtree1 = new Image();
+Jtree1.src = "grafix/objects/jungle.tree/sprout1.png";
+var Jtree2 = new Image();
+Jtree2.src = "grafix/objects/jungle.tree/grow1.png";
+var Jtree3 = new Image();
+Jtree3.src = "grafix/objects/jungle.tree/grow2.png";
+var Jtree4 = new Image();
+Jtree4.src = "grafix/objects/jungle.tree/grow3.png";
+var Jtree5 = new Image();
+Jtree5.src = "grafix/objects/jungle.tree/grow4.png";
+var Jtree6 = new Image();
+Jtree6.src = "grafix/objects/jungle.tree/grow5.png";
+var Jtree7 = new Image();
+Jtree7.src = "grafix/objects/jungle.tree/trunk.png";
+var JungleTrees = {0: Jtree1, 1: Jtree2, 2: Jtree3, 3: Jtree4, 4: Jtree5, 5: Jtree6, 6: Jtree7}; 
+var jungleIndex = 0;
 //Lavaman
 var Lavamanpic = new Image();
 Lavamanpic.src = "grafix/creatures/firesprite/firesprite.l1.png";
@@ -142,6 +164,8 @@ HudgeR.src = "grafix/creatures/hudge/hudge.r1.png";
 //Enemy2
 var Pikkit = new Image();
 Pikkit.src = "grafix/creatures/pikkit/pikkit.l1.png";
+var humpDump = new Image();
+humpDump.src = "grafix/creatures/humpdump/humpdump.r1.png";
 //Spawner
 var Splavaman = new Image();
 Splavaman.src = "grafix/creatures/lavaman/lavaman.l1.png";
@@ -385,7 +409,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-this.height);
-		ctx.fillText("Version 0.5.1: March 29 2012", this.x-3*this.width/3, this.y+7*this.height);
+		ctx.fillText("Version 0.5.2: March 30 2012", this.x-3*this.width/3, this.y+7*this.height);
 		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
 		ctx.fillText("Options", this.x-this.width/2, this.y-this.height/2 + 3*this.height);
 		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 4*this.height);
@@ -485,7 +509,7 @@ var Credits = {
 		ctx.fillText("Brett Davis", this.x-this.width/2, this.y+7*this.height/2);
 		ctx.fillText("Art:",  this.x-this.width/2, this.y+12*this.height/2);
 		ctx.fillText("Kyle Fleischer", this.x-this.width/2, this.y+15*this.height/2);
-		ctx.fillText("Music and Sound", this.x-this.width/2, this.y+20*this.height/2);
+		ctx.fillText("Music and Sound:", this.x-this.width/2, this.y+20*this.height/2);
 		ctx.fillText("Dave Gedarovich", this.x-this.width/2, this.y+23*this.height/2);
 		ctx.fillText("Back", this.bx, this.by);
 		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
@@ -503,12 +527,11 @@ var Pause = {
 	width: 800,
 	height: 576,
 	draw: function(){
-		ctx.fillStyle = "black";
-		ctx.font = "18pt Arial";
-		ctx.fillText("-Paused-", this.x-64, this.y-32);
-		ctx.globalAlpha = 0.5;
-		ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
 		ctx.globalAlpha = 1;
+		ctx.fillStyle = "white";
+		ctx.font = "18pt Arial";
+		ctx.drawImage(menuBack, this.x-this.width/2, this.y-this.height/2);
+		ctx.fillText("-Paused-", this.x-64, this.y-32);
 	}
 };
 var Options = {
@@ -518,6 +541,7 @@ var Options = {
 	height: 20,
 	bx: 400-50,
 	by: 560,
+	dispControls: true,
 	vol: true,
 	draw: function(){
 		ctx.fillStyle = "white";
@@ -587,6 +611,28 @@ var Options = {
 			fastbeepsLow.volume=0;
 			fastbeepsHigh.volume=0;
 		}
+		if(hX >= this.x-20 && hX <=this.x + this.width*10 && hY <= this.y+7*this.height/2 && hY>=this.y+2*this.height/2){
+			ctx.strokeRect(this.x-20, this.y + 2.5*this.height, this.width * 12, this.height+10);
+		}		
+		if(cX >= this.x-20 && cX <=this.x + this.width*10 && cY <= this.y+7*this.height/2 && cY>=this.y+2*this.height/2){
+			fastbeepsLow.play();
+			if(this.dispControls == false){
+				this.dispControls = true;
+				cX = 0;
+				cY = 0;
+			}
+			else if(this.dispControls == true){
+				this.dispControls = false;
+				cX = 0;
+				cY = 0;
+			}
+		}
+		if(this.dispControls == true){
+			ctx.fillText("Display Controls: Yes", this.x-this.width/2, this.y+7*this.height/2);
+		}
+		if(this.dispControls == false){
+			ctx.fillText("Display Controls: No", this.x-this.width/2, this.y+7*this.height/2);
+		}
 		ctx.fillText("Back", this.bx, this.by);
 		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
@@ -635,20 +681,20 @@ var player = {
 		}
 		ctx.fillStyle = "red";
 		if(this.hp == 6){
-			ctx.fillStyle = "006600";
+			ctx.fillStyle = "yellow";
 			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 		}
 		else if(this.hp == 5){
-			ctx.fillStyle = "006600";
+			ctx.fillStyle = "yellow";
 			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 		}
 		else if(this.hp == 4){
-			ctx.fillStyle = "006600";
+			ctx.fillStyle = "yellow";
 			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
@@ -975,11 +1021,14 @@ if(ctx.globalAlpha == 1){
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
-	if(STATE != 1){
+	if(STATE != 1 && STATE != "Jungle"){
 		ctx.drawImage(menuBack, 4, 4);
 	}
-	else{
+	else if(STATE == 1){
 		ctx.drawImage(backGround1, 0, 0);
+	}
+	else if(STATE == "Jungle"){
+		ctx.drawImage(backGround2, 0, 0);
 	}
 };
 //-------------------------------------------------- HUD and Spell Calculation ------------------------------------------------------//
@@ -1355,9 +1404,12 @@ function UI(){
 	}
 	ctx.fillStyle = "black";
 	ctx.font = "16pt Arial";
-	ctx.fillText("Q: Drop Spell 1", 576, 528);
-	ctx.fillText("E: Drop Spell 2", 576, 560);
-	ctx.fillText("Spacebar: Use spell", 576, 496);
+	if(Options.dispControls == true){
+		ctx.fillText("Q: Drop Spell 1", 576, 496);
+		ctx.fillText("E: Drop Spell 2", 576, 528);
+		ctx.fillText("Spacebar: Use spell", 576, 464);
+		ctx.fillText("P: Pause", 576, 560);
+	}
 }
 //----------------------------------------------------- Score -----------------------------------------------------------------------//
 function SCORE(){
@@ -1629,6 +1681,7 @@ var keys = function(){
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
+	planted = false;
 	nu = 0;
 	hs = 0;
 	cd = 0;
@@ -1776,7 +1829,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.1: March 29 2012", 244, 96);
+	ctx.fillText("Version 0.5.2: March 30 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	ctx.fillText("1st: " + highscore1, 308, 240);
 	ctx.fillText("2nd: " + highscore2, 308, 272);
@@ -1817,7 +1870,7 @@ setInterval(function(){
 	else if(STATE == 6){
 		Options.draw();
 	}
-	else if(STATE == 1){
+	else if(STATE == 1 || STATE == "Jungle"){
 		if(player.hp <= 0){
 			STATE = 4;
 			nu = 1;
@@ -1825,11 +1878,12 @@ setInterval(function(){
 		else{
 			keys();
 			multiply();
-			SCORE();
 			
 			player.draw();
 			player.onhit();
-		
+			
+			rePlant();
+			
 			redCube.draw();
 			pickup(redCube);
 		
@@ -1859,14 +1913,6 @@ setInterval(function(){
 				HpMove(hpParticles[H]);
 				HpAi(hpParticles[H]);
 			}
-			
-			drawObstacle(obstacle1);
-			drawObstacle(obstacle2);
-			drawObstacle(obstacle3);
-			obsTick(obstacle1);
-			obsTick(obstacle2);
-			obsTick(obstacle3);
-			UI();
 			
 			for(B in Bullets){
 				drawBullet(Bullets[B]);
@@ -2075,6 +2121,17 @@ setInterval(function(){
 			Globblyfire3.move();
 		
 			Spawner.fire();
+			for(O in allObs){
+				drawObstacle(allObs[O]);
+				obsTick(allObs[O]);
+			}
+			if(STATE == "Jungle" && jungleIndex != 12 && jungleAni == true){
+				jungleIndex+=1;
+			}
+			TwizEffect.draw();
+			
+			UI();
+			SCORE();
 			
 			drawMarker(marker);
 			moveMarker(marker);

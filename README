@@ -1,23 +1,24 @@
 
-Version 0.5.1 Changes(3/29/2012):
-		-Put in pause button. P for pause
-		-Tweaked the menus slightly
-		-Added Options menu, lets you toggle sound
-		-Updated tree pictures
-		-Changed menu color settings
-		-Added title picture
+Version 0.5.2 Changes(3/30/2012):
+		-Added random tree generation, removed a few trees
+		-Added control display to options menu
+		-Updated level change effect from forest to jungle
+		-Reskinned pikkit in jungle
+		-Added animated giant trees in jungle
 		
 	TODO:
 		-Bugs/small shit
-			-Sound plays on reset
-			-Some effects don't disappear on reset
-			-Make homing shots slower but less cd?
+			+Sound plays on reset
+			+Some effects don't disappear on reset
+			+Make homing shots slower but less cd?
 			+water and fire orbs don't explode on hitting an enemy
 			+Make fire and ice shots explode on obstacle contact
-			-Bubblebeam diagonals are weird
-			-Maybe balance zap trap
-			-Put in zap animation
+			+Bubblebeam diagonals are weird
+			+Maybe balance zap trap
+			+Put in zap animation
 			+Water sounds
+			+Long sounds and music
+			+Sounds for transition
 		-Optimize
 			-Arrays for pickups, old spells (frozen web), etc.
 			-Reset button stuff
@@ -27,14 +28,13 @@ Version 0.5.1 Changes(3/29/2012):
 			-Summon (?)
 				-Minions
 		-More enemies and AI
-			++Bosses: Maybe random power ups?
-			++Thief enemy
+			-Bosses: Maybe random power ups?
+			+Thief enemy
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
-			++Special events that can change to other levels (such as tree wizzurd summon)
 
 **********************************************************************************************************
 

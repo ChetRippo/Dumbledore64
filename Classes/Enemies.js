@@ -56,7 +56,12 @@ var EnemyA = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
+		if(STATE == 1){
+			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(STATE == "Jungle"){
+			ctx.drawImage(humpDump, this.x-this.width/2, this.y - this.height/2);
+		}
 	}
 };
 
@@ -116,7 +121,12 @@ var EnemyC = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
+		if(STATE == 1){
+			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(STATE == "Jungle"){
+			ctx.drawImage(humpDump, this.x-this.width/2, this.y - this.height/2);
+		}
 	}
 };
 
@@ -487,7 +497,7 @@ var treeWizz = {
 				this.index = 1;
 			}
 		}
-		ctx.fillStyle = "006600";
+		ctx.fillStyle = "yellow";
 		if(this.hp == 6){
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
@@ -637,6 +647,26 @@ var treeWizz = {
 	}
 	}
 };
+var TwizEffect = {
+	x: 500,
+	y: -400,
+	width: 32,
+	height: 32,
+	onScreen: 0,
+	frame: 0,
+	played: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = "228b22";
+			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+			this.width = this.width + 8*this.frame;
+			this.height = this.height + 8*this.frame;
+			this.frame++;
+			ctx.globalAlpha = 1;
+		}
+	}
+};
 var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner,
 					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4};
 function onHit(E){
@@ -742,6 +772,12 @@ function onHit(E){
 		if(E.type == -1){
 			hpUp.x = E.x;
 			hpUp.y = E.y;
+			TwizEffect.x = E.x;
+			TwizEffect.y = E.y;
+			hpUp.boss = "treeW";
+			STATE = "Jungle";
+			planted = false;
+			TwizEffect.onScreen = 1;
 		}
 		else{
 			if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100){

@@ -600,9 +600,12 @@ var hpUp = {
 	y: -200,
 	width: 32,
 	height: 32,
+	boss: "treeW",
 	
 	draw: function(){
+		if(this.boss == "treeW"){
 			ctx.drawImage(maxUP, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	},
 	onHit: function(){
 		if(typemarker.x != -100 && typemarker2.x != -100){
@@ -645,6 +648,12 @@ var hpUp = {
 		hpParticleAS.y = this.y+16;
 		hpParticleSD.x = this.x+16;
 		hpParticleSD.y = this.y+16;
+		TwizEffect.x = 500;
+		TwizEffect.y = -400;
+		TwizEffect.width = 0;
+		TwizEffect.height = 0;
+		TwizEffect.onScreen = 0;
+		TwizEffect.frame = 0;
 		this.x = -100;
 		this.y = -200;
 	}
@@ -913,6 +922,10 @@ var hpParticleSD = {
 		if(counter == 8){
 			ctx.globalAlpha = 1;
 			player.speed = player.speed2*4;
+			if(hpUp.boss == "treeW"){
+				jungleAni = true;
+			}
+			counter = 0;
 		}
 		if(collision(this.dir, this, player) && this.dirct == 0){
 			this.x = -100;
