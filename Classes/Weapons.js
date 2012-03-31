@@ -4454,8 +4454,6 @@ var waterearth = {
 var waterair = {
 	x: -100,
 	y: -200,
-	width: 32,
-	height: 32,
 	cd: 0,
 	onScreen: 0,
 	frame: 0,
@@ -4466,26 +4464,6 @@ var waterair = {
 		this.y = player.y;
 		if(this.cd > 0){
 			this.cd-=1;
-		}
-		if(this.frame > 5 && this.mode == 2){
-			this.mode = 0;
-			this.frame = 0;
-			this.width = 32;
-			this.height = 32;
-			this.onScreen = 0;
-		}
-		else if(this.frame > 5){
-			this.width = 32;
-			this.height = 32;
-			this.mode++;
-			this.frame = 0;
-		}
-		if(this.onScreen == 1){
-			ctx.strokeStyle = "E8E8E8";
-			ctx.strokeRect(this.x-this.width/2, this.y - this.height/2, this.width, this.height);
-			this.frame++;
-			this.width = this.width + (8*this.frame);
-			this.height = this.height + (8*this.frame);
 		}
 	},
 	shoot: function(){

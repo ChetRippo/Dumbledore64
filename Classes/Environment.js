@@ -226,6 +226,7 @@ function obsHit(O){
 function rePlant(){
 	if(STATE == 1 && planted == false){
 		for(Z in obstacle1){
+			obstacle1[Z].width = 32;
 			obstacle1[Z].x = (Math.floor(Math.random() * 18) + 4)*32;
 			obstacle1[Z].y = (Math.floor(Math.random() * 12) + 4)*32;
 			obstacle1[Z].hp = 3;
@@ -235,6 +236,7 @@ function rePlant(){
 			}
 		}
 		for(Z in obstacle2){
+			obstacle2[Z].width = 32;
 			obstacle2[Z].x = (Math.floor(Math.random() * 18) + 4)*32;
 			obstacle2[Z].y = (Math.floor(Math.random() * 12) + 4)*32;
 			obstacle2[Z].hp = 3;
@@ -244,6 +246,7 @@ function rePlant(){
 			}
 		}
 		for(Z in obstacle3){
+			obstacle3[Z].width = 32;
 			obstacle3[Z].x = (Math.floor(Math.random() * 18) + 4)*32;
 			obstacle3[Z].y = (Math.floor(Math.random() * 12) + 4)*32;
 			obstacle3[Z].hp = 3;

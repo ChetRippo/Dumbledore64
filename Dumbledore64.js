@@ -20,15 +20,13 @@
 		-Updated level change effect from forest to jungle
 		-Reskinned pikkit in jungle
 		-Added animated giant trees in jungle
+		-High score back button reloads the page, so no more tediousness for now
+		-Changed Bubble Blast animation
 		
 	TODO:
 		-Bugs/small shit
-			+Sound plays on reset
-			+Some effects don't disappear on reset
-			+Make homing shots slower but less cd?
 			+water and fire orbs don't explode on hitting an enemy
 			+Make fire and ice shots explode on obstacle contact
-			+Bubblebeam diagonals are weird
 			+Maybe balance zap trap
 			+Put in zap animation
 			+Water sounds
@@ -75,8 +73,8 @@ var FPS = 30;
 var keysDown = {};
 var cd = 0;
 var hptimer = 0;
-var spell1 = "N/A";
-var spell2 = "N/A";
+var spell1 = "Water";
+var spell2 = "Fire";
 var spell = "N/A";
 var spell1pic = "N/A";
 var spell2pic = "N/A";
@@ -1681,6 +1679,7 @@ var keys = function(){
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
+/*
 	planted = false;
 	nu = 0;
 	hs = 0;
@@ -1756,7 +1755,8 @@ function reset(){
 	purpleCube.timeLeft = 0;
 	hpUp.x = -100;
 	hpUp.y = -200;
-	ctx.globalAlpha = 1;
+	ctx.globalAlpha = 1;*/
+	window.location.reload();
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
 function gameOver(){

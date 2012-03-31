@@ -5,15 +5,13 @@ Version 0.5.2 Changes(3/30/2012):
 		-Updated level change effect from forest to jungle
 		-Reskinned pikkit in jungle
 		-Added animated giant trees in jungle
+		-High score back button reloads the page, so no more tediousness for now
+		-Changed Bubble Blast animation
 		
 	TODO:
 		-Bugs/small shit
-			+Sound plays on reset
-			+Some effects don't disappear on reset
-			+Make homing shots slower but less cd?
 			+water and fire orbs don't explode on hitting an enemy
 			+Make fire and ice shots explode on obstacle contact
-			+Bubblebeam diagonals are weird
 			+Maybe balance zap trap
 			+Put in zap animation
 			+Water sounds
