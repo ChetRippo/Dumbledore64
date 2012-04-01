@@ -36,6 +36,7 @@ var Globblyfire = {
 			if(contained(player, this)){
 				if(hptimer <= 0){
 					player.hp-=1;
+					onDmg.currentTime=0;
 					onDmg.play();
 					hptimer = 30;
 				}
@@ -60,6 +61,7 @@ var Globblyfire = {
 		
 	// Spawn
 	shoot: function(){
+		Explosion.currentTime=0;
 		Explosion.play();
 		this.height = 16;
 		this.width = 16;
@@ -104,6 +106,7 @@ var Globblyfire2 = {
 			if(contained(player, this)){
 				if(hptimer <= 0){
 					player.hp-=1;
+					onDmg.currentTime=0;
 					onDmg.play();
 					hptimer = 30;
 				}
@@ -128,6 +131,7 @@ var Globblyfire2 = {
 		
 	// Spawn
 	shoot: function(){
+		Explosion.currentTime=0;
 		Explosion.play();
 		this.height = 16;
 		this.width = 16;
@@ -172,6 +176,7 @@ var Globblyfire3 = {
 			if(contained(player, this)){
 				if(hptimer <= 0){
 					player.hp-=1;
+					onDmg.currentTime=0;
 					onDmg.play();
 					hptimer = 30;
 				}
@@ -196,6 +201,7 @@ var Globblyfire3 = {
 		
 	// Spawn
 	shoot: function(){
+		Explosion.currentTime=0;
 		Explosion.play();
 		this.height = 16;
 		this.width = 16;
@@ -253,6 +259,7 @@ var sIce = {
 		
 	// Spawn
 	shoot: function(){
+		Frozen.currentTime=0;
 		Frozen.play();
 		this.height = 32;
 		this.width = 32;
@@ -299,6 +306,7 @@ var sFire = {
 			if(contained(player, this)){
 				if(hptimer <= 0){
 					player.hp-=1;
+					onDmg.currentTime=0;
 					onDmg.play();
 					hptimer = 30;
 				}
@@ -308,6 +316,7 @@ var sFire = {
 		
 	// Spawn
 	shoot: function(){
+		Explosion.currentTime=0;
 		Explosion.play();
 		this.height = 32;
 		this.width = 32;
@@ -374,6 +383,7 @@ var sLightning = {
 				if(player.x >= this.vx && player.x <= this.vx + this.vwidth){
 					if(hptimer <= 0){
 						player.hp-=1;
+						onDmg.currentTime=0;
 						onDmg.play();
 						hptimer = 30;
 					}
@@ -386,6 +396,7 @@ var sLightning = {
 					}
 					if(hptimer <= 0){
 						player.hp-=1;
+						onDmg.currentTime=0;
 						onDmg.play();
 						hptimer = 30;
 					}
@@ -395,6 +406,7 @@ var sLightning = {
 	},
 	// Spawn
 	shoot: function(){
+		Thunder.currentTime=0;
 		Thunder.play();
 		this.hx = 400;
 		this.hy = Sorceror.y;
@@ -453,6 +465,7 @@ var rootBlastW = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		multiLaser.currentTime=0;
 		multiLaser.play();
 		this.width = 32;
 		this.x = treeWizz.x;
@@ -514,6 +527,7 @@ var rootBlastA = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		multiLaser.currentTime=0;
 		multiLaser.play();
 		this.width = 32;
 		this.x = treeWizz.x;
@@ -577,6 +591,7 @@ var rootBlastS = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		multiLaser.currentTime=0;
 		multiLaser.play();
 		this.width = 32;
 		this.x = treeWizz.x;
@@ -638,6 +653,7 @@ var rootBlastD = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		multiLaser.currentTime=0;
 		multiLaser.play();
 		this.width = 32;
 		this.x = treeWizz.x;
@@ -2083,6 +2099,7 @@ var LeafHeal = {
 				treeWizz.speed+=2;
 				treeWizz.speed2 = treeWizz.speed/2;
 				this.used = 1;
+				Pickup.currentTime=0;
 				Pickup.play();
 			}
 		}

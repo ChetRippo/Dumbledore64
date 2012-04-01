@@ -15,6 +15,7 @@ var fire = {
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
 			if(this.used == 0){
+				Explosion.currentTime=0;
 				Explosion.play();
 				this.used = 1;
 			}
@@ -157,6 +158,7 @@ var fire2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Explosion.currentTime=0;
 		Explosion.play();
 		this.height = 32;
 		this.width = 32;

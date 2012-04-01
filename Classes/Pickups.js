@@ -631,6 +631,7 @@ var hpUp = {
 		}
 		player.maxhp+=1;
 		player.hp = player.maxhp;
+		Frozen.currentTime=0;
 		Frozen.play();
 		hpParticleW.x = this.x;
 		hpParticleW.y = this.y- 20;
@@ -924,6 +925,8 @@ var hpParticleSD = {
 			player.speed = player.speed2*4;
 			if(hpUp.boss == "treeW"){
 				jungleAni = true;
+				radiofailure.currentTime=0;
+				radiofailure.play();
 			}
 			counter = 0;
 		}
@@ -1039,6 +1042,7 @@ function pickup(C){
 				score+=25;
 			}
 		}
+		Pickup.currentTime=0;
 		Pickup.play();
 		C.onHit();
 	}

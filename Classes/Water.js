@@ -14,6 +14,7 @@ var water = {
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
 			if(this.used == 0){
+				midBoop.currentTime=0;
 				midBoop.play();
 				this.used = 1;
 			}

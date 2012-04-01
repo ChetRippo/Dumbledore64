@@ -3,7 +3,7 @@
 // Enemy 1 - Hudge
 var Enemy = {
 	type: 0,
-	x: 500,
+	x: 9000,
 	y: -400,
 	width: 32,
 	height: 32,
@@ -40,8 +40,8 @@ var Enemy = {
 // Enemy 2 - Pikkit
 var EnemyA = {
 	type: 0,
-	x: -500,
-	y: -500,
+	x: -9000,
+	y: -9000,
 	width: 32,
 	height: 32,
 	dirct: 0,
@@ -68,8 +68,8 @@ var EnemyA = {
 // Enemy 3 - Hudge
 var EnemyB = {
 	type: 0,
-	x: -500,
-	y: -500,
+	x: -9000,
+	y: -9000,
 	width: 32,
 	height: 32,
 	dirct: 0,
@@ -105,8 +105,8 @@ var EnemyB = {
 // Enemy 4 - Pikkit
 var EnemyC = {
 	type: 0,
-	x: -500,
-	y: -500,
+	x: -9000,
+	y: -9000,
 	width: 32,
 	height: 32,
 	dirct: 0,
@@ -216,7 +216,7 @@ var TenemyB = {
 // Lavaman
 var Lavaman = {
 	type: 0,
-	x: 500,
+	x: 9000,
 	y: -400,
 	width: 32,
 	height: 32,
@@ -237,7 +237,7 @@ var Lavaman = {
 };
 var Lavaman2 = {
 	type: 0,
-	x: 500,
+	x: 9000,
 	y: -400,
 	width: 32,
 	height: 32,
@@ -258,7 +258,7 @@ var Lavaman2 = {
 };
 var Lavaman3 = {
 	type: 0,
-	x: 500,
+	x: 9000,
 	y: -400,
 	width: 32,
 	height: 32,
@@ -279,7 +279,7 @@ var Lavaman3 = {
 };
 var Lavaman4 = {
 	type: 0,
-	x: 500,
+	x: 9000,
 	y: -400,
 	width: 32,
 	height: 32,
@@ -361,6 +361,7 @@ var Spawner = {
 	if(this.onScreen == 1){
 		if(this.cd<= 0){
 			if(Lavaman.onScreen == 0){
+				SpawnerSpawn.currentTime=0;
 				SpawnerSpawn.play();
 				Lavaman.onScreen = 1;
 				Lavaman.x = this.x-this.width/2;
@@ -370,6 +371,7 @@ var Spawner = {
 				this.cd = 60;
 			}
 			else if(Lavaman2.onScreen == 0){
+				SpawnerSpawn.currentTime=0;
 				SpawnerSpawn.play();
 				Lavaman2.onScreen = 1;
 				Lavaman2.x = this.x-this.width/2;
@@ -379,6 +381,7 @@ var Spawner = {
 				this.cd = 60;
 			}
 			else if(Lavaman3.onScreen == 0){
+				SpawnerSpawn.currentTime=0;
 				SpawnerSpawn.play();
 				Lavaman3.onScreen = 1;
 				Lavaman3.x = this.x-this.width/2;
@@ -388,6 +391,7 @@ var Spawner = {
 				this.cd = 60;
 			}
 			else if(Lavaman4.onScreen == 0){
+				SpawnerSpawn.currentTime=0;
 				SpawnerSpawn.play();
 				Lavaman4.onScreen = 1;
 				Lavaman4.x = this.x-this.width/2;
@@ -462,7 +466,7 @@ var Sorceror = {
 };
 var treeWizz = {
 	type: -1,
-	x: 500,
+	x: 9000,
 	y: -400,
 	width: 32,
 	height: 32,
@@ -590,29 +594,30 @@ var treeWizz = {
 		for(R in roots11){
 			roots11[R].onScreen = 0;
 			roots11[R].movement = false;
-			roots11[R].x = -500;
-			roots11[R].y = -500;
+			roots11[R].x = -9000;
+			roots11[R].y = -9000;
 		}
 		for(R in roots12){
 			roots12[R].onScreen = 0;
 			roots12[R].movement = false;
-			roots12[R].x = -500;
-			roots12[R].y = -500;
+			roots12[R].x = -9000;
+			roots12[R].y = -9000;
 		}
 		for(R in roots13){
 			roots13[R].onScreen = 0;
 			roots13[R].movement = false;
-			roots13[R].x = -500;
-			roots13[R].y = -500;
+			roots13[R].x = -9000;
+			roots13[R].y = -9000;
 		}
 		for(R in roots14){
 			roots14[R].onScreen = 0;
 			roots14[R].movement = false;
-			roots14[R].x = -500;
-			roots14[R].y = -500;
+			roots14[R].x = -9000;
+			roots14[R].y = -9000;
 		}
 		var attack = Math.floor(Math.random() * 5) + 1;
 		if(attack == 1 || attack == 4){
+			Fwave.currentTime=0;
 			Fwave.play();
 			rootStrike.x = this.x;
 			rootStrike.y = this.y - 64;
@@ -657,6 +662,11 @@ var TwizEffect = {
 	played: 0,
 	draw: function(){
 		if(this.onScreen == 1){
+			if(this.played == 0){
+				this.played = 1;
+				trailingbeeps.currentTime=0;
+				trailingbeeps.play();
+			}
 			ctx.globalAlpha = 0.5;
 			ctx.fillStyle = "228b22";
 			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
@@ -696,6 +706,7 @@ function onHit(E){
 			E.hp-=1;
 			E.hptimer = 30;
 			if(E.hp < 1){
+				Killed.currentTime=0;
 				Killed.play();
 				deadz = true;
 				if(E.type == 2){
@@ -710,8 +721,8 @@ function onHit(E){
 					for(R in roots11){
 						roots11[R].onScreen = 0;
 						roots11[R].movement = false;
-						roots11[R].x = -500;
-						roots11[R].y = -500;
+						roots11[R].x = -9000;
+						roots11[R].y = -9000;
 					}
 				}
 				if(E.type == -3 || E.type == -1){
@@ -723,8 +734,8 @@ function onHit(E){
 					for(R in roots12){
 						roots12[R].onScreen = 0;
 						roots12[R].movement = false;
-						roots12[R].x = -500;
-						roots12[R].y = -500;
+						roots12[R].x = -9000;
+						roots12[R].y = -9000;
 					}
 				}
 				if(E.type == -4 || E.type == -1){
@@ -736,8 +747,8 @@ function onHit(E){
 					for(R in roots13){
 						roots13[R].onScreen = 0;
 						roots13[R].movement = false;
-						roots13[R].x = -500;
-						roots13[R].y = -500;
+						roots13[R].x = -9000;
+						roots13[R].y = -9000;
 					}
 				}
 				if(E.type == -5 || E.type == -1){
@@ -749,8 +760,8 @@ function onHit(E){
 					for(R in roots14){
 						roots14[R].onScreen = 0;
 						roots14[R].movement = false;
-						roots14[R].x = -500;
-						roots14[R].y = -500;
+						roots14[R].x = -9000;
+						roots14[R].y = -9000;
 					}
 				}
 				if(E.type == -1){
@@ -761,6 +772,7 @@ function onHit(E){
 				}	
 			}
 			else{
+				onDmg.currentTime=0;
 				onDmg.play();
 			}
 		}
@@ -768,12 +780,14 @@ function onHit(E){
 	if(deadz == true){
 		deadz = false;
 		E.onScreen = 0;
+		Killed.currentTime=0;
 		Killed.play();
 		if(E.type == -1){
 			hpUp.x = E.x;
 			hpUp.y = E.y;
 			TwizEffect.x = E.x;
 			TwizEffect.y = E.y;
+			TwizEffect.played = 0;
 			hpUp.boss = "treeW";
 			STATE = "Jungle";
 			planted = false;
@@ -844,8 +858,8 @@ function onHit(E){
 				marker.timeLeft = 20;
 			}
 		}
-		E.x = -500;
-		E.y = -500;
+		E.x = -9000;
+		E.y = -9000;
 		E.respawn = E.rp;
 		E.movement = false;
 		E.onScreen = 0;

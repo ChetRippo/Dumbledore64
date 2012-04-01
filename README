@@ -1,25 +1,29 @@
 
-Version 0.5.2 Changes(3/30/2012):
+Version 0.5.2 Changes(4/1/2012):
+		-Bug Fixes:
+			-Obstacle Collision detection is much better
+			-Made sound reset on play, so it does not clip
+			-High score back button reloads the page, so no more tediousness for now
+			-Explosive Shots and Ice Shots now release their effects on obstacles
+			-Can no longer hit the enemy spawns off screen for max points
+			-Fire and Ice orbs now explode on hitting enemies
+		-Balancing:
+			-Zap Trap now drops pools in 2 second intervals
+			-Zap Trap drops a total of 5 pools
 		-Added random tree generation, removed a few trees
 		-Added control display to options menu
 		-Updated level change effect from forest to jungle
 		-Reskinned pikkit in jungle
 		-Added animated giant trees in jungle
-		-High score back button reloads the page, so no more tediousness for now
 		-Changed Bubble Blast animation
+		-Added in water sound effects
+		-Added in music
+		-Trees grow at random times now for the jungle level
+		-Added music to options menu
 		
 	TODO:
-		-Bugs/small shit
-			+water and fire orbs don't explode on hitting an enemy
-			+Make fire and ice shots explode on obstacle contact
-			+Maybe balance zap trap
-			+Put in zap animation
-			+Water sounds
-			+Long sounds and music
-			+Sounds for transition
-		-Optimize
-			-Arrays for pickups, old spells (frozen web), etc.
-			-Reset button stuff
+		+Optimize
+			+Arrays for pickups, old spells (frozen web), etc.
 		-Spells
 			-Dark (Black)
 				-HP Steal?

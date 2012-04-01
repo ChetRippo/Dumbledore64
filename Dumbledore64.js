@@ -14,27 +14,31 @@
 
 */
 /*
-	Version 0.5.2 Changes(3/30/2012):
+	Version 0.5.2 Changes(4/1/2012):
+		-Bug Fixes:
+			-Obstacle Collision detection is much better
+			-Made sound reset on play, so it does not clip
+			-High score back button reloads the page, so no more tediousness for now
+			-Explosive Shots and Ice Shots now release their effects on obstacles
+			-Can no longer hit the enemy spawns off screen for max points
+			-Fire and Ice orbs now explode on hitting enemies
+		-Balancing:
+			-Zap Trap now drops pools in 2 second intervals
+			-Zap Trap drops a total of 5 pools
 		-Added random tree generation, removed a few trees
 		-Added control display to options menu
 		-Updated level change effect from forest to jungle
 		-Reskinned pikkit in jungle
 		-Added animated giant trees in jungle
-		-High score back button reloads the page, so no more tediousness for now
 		-Changed Bubble Blast animation
+		-Added in water sound effects
+		-Added in music
+		-Trees grow at random times now for the jungle level
+		-Added music to options menu
 		
 	TODO:
-		-Bugs/small shit
-			+water and fire orbs don't explode on hitting an enemy
-			+Make fire and ice shots explode on obstacle contact
-			+Maybe balance zap trap
-			+Put in zap animation
-			+Water sounds
-			+Long sounds and music
-			+Sounds for transition
-		-Optimize
-			-Arrays for pickups, old spells (frozen web), etc.
-			-Reset button stuff
+		+Optimize
+			+Arrays for pickups, old spells (frozen web), etc.
 		-Spells
 			-Dark (Black)
 				-HP Steal?
@@ -343,6 +347,26 @@ var highDouble = document.getElementsByTagName("audio")[16];
 var flatBoop = document.getElementsByTagName("audio")[17];
 var fastbeepsLow = document.getElementsByTagName("audio")[18];
 var fastbeepsHigh = document.getElementsByTagName("audio")[19];
+//Longsounds
+var hum = document.getElementsByTagName("audio")[20];
+var longfuzz = document.getElementsByTagName("audio")[21];
+var longlaser = document.getElementsByTagName("audio")[22];
+var longpew = document.getElementsByTagName("audio")[23];
+var longpulse = document.getElementsByTagName("audio")[24];
+var lowpulse = document.getElementsByTagName("audio")[25];
+var radiofailure = document.getElementsByTagName("audio")[26];
+var trailingbeeps = document.getElementsByTagName("audio")[27];
+var AllSounds = {1: Beam, 2: Killed, 3: Pickup, 4: Explosion, 5: Frozen, 6: Fwave, 7: Thunder, 8: Wind, 9: onDmg, 10: SpawnerSpawn,
+				11: zapLaser, 12: Plucky, 13: multiLaser, 14: midBoop, 15: lowDouble, 16: lowBomb, 17: highDouble, 18: flatBoop, 19: fastbeepsLow, 20: fastbeepsHigh,
+				21: hum, 22: longfuzz, 23: longlaser, 24: longpew, 25: longpulse, 26: lowpulse, 27: radiofailure, 28: trailingbeeps};
+//Music
+var Spells = document.getElementsByTagName("audio")[28];
+var OverwhelmedByGoblins = document.getElementsByTagName("audio")[29];
+var Story = document.getElementsByTagName("audio")[30];
+var BadWizards = document.getElementsByTagName("audio")[31];
+var DumblebeatsNormal = document.getElementsByTagName("audio")[32];
+var DumblebeatsFading = document.getElementsByTagName("audio")[33];
+var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: Story, 4: BadWizards, 5: DumblebeatsNormal, 6: DumblebeatsFading};
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 var highscore1 = $.jStorage.get("highscore1");
 if(!highscore1){
@@ -407,7 +431,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-this.height);
-		ctx.fillText("Version 0.5.2: March 30 2012", this.x-3*this.width/3, this.y+7*this.height);
+		ctx.fillText("Version 0.5.2: April 1 2012", this.x-3*this.width/3, this.y+7*this.height);
 		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
 		ctx.fillText("Options", this.x-this.width/2, this.y-this.height/2 + 3*this.height);
 		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 4*this.height);
@@ -416,6 +440,7 @@ var Menu = {
 			ctx.strokeRect(this.x-this.width*4/5, this.y-this.height, 3*this.width/2, 4*this.height/2);
 		}		
 		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y + this.height && cY>=this.y-this.height){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 1;
 		}
@@ -423,6 +448,7 @@ var Menu = {
 			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 2*this.height, this.width, this.height);
 		}		
 		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 2*this.height && cY>=this.y-this.height*7/6 + 2*this.height){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 2;
 		}
@@ -430,6 +456,7 @@ var Menu = {
 			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 4*this.height, this.width, this.height);
 		}		
 		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 4*this.height&& cY>=this.y-this.height*7/6 + 4*this.height){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 5;
 		}
@@ -438,6 +465,7 @@ var Menu = {
 			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 3*this.height, this.width, this.height);
 		}		
 		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 3*this.height&& cY>=this.y-this.height*7/6 + 3*this.height){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 6;
 		}
@@ -445,6 +473,7 @@ var Menu = {
 			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 5*this.height, this.width, this.height);
 		}		
 		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 5*this.height&& cY>=this.y-this.height*7/6 + 5*this.height){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 3;
 		}
@@ -485,6 +514,7 @@ var Info = {
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
 		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 0;
 		}
@@ -509,11 +539,13 @@ var Credits = {
 		ctx.fillText("Kyle Fleischer", this.x-this.width/2, this.y+15*this.height/2);
 		ctx.fillText("Music and Sound:", this.x-this.width/2, this.y+20*this.height/2);
 		ctx.fillText("Dave Gedarovich", this.x-this.width/2, this.y+23*this.height/2);
+		ctx.fillText("Jack Van Oudenaren", this.x-this.width/2, this.y+26*this.height/2);
 		ctx.fillText("Back", this.bx, this.by);
 		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
 		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 0;
 		}
@@ -541,6 +573,7 @@ var Options = {
 	by: 560,
 	dispControls: true,
 	vol: true,
+	Music: true,
 	draw: function(){
 		ctx.fillStyle = "white";
 		ctx.font = "18pt Arial";
@@ -551,6 +584,7 @@ var Options = {
 			ctx.strokeRect(this.x-20, this.y + this.height, this.width * 6, this.height+10);
 		}		
 		if(cX >= this.x-20 && cX <=this.x + this.width*4 && cY <= this.y+5*this.height/2 && cY>=this.y+this.height/2){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			if(this.vol == false){
 				this.vol = true;
@@ -565,54 +599,48 @@ var Options = {
 		}
 		if(this.vol == true){
 			ctx.fillText("Sound: On", this.x-this.width/2, this.y+4*this.height/2);
-			Beam.volume=0.8;
-			Killed.volume=0.8;
-			Pickup.volume=0.8;
-			Explosion.volume=0.8;
-			Frozen.volume=0.8;
-			Fwave.volume=0.8;
-			Thunder.volume=0.8;
-			Wind.volume=0.8;
-			onDmg.volume=0.8;
-			SpawnerSpawn.volume=0.8;
-			zapLaser.volume=0.8;
-			Plucky.volume=0.8;
-			multiLaser.volume=0.8;
-			midBoop.volume=0.8;
-			lowDouble.volume=0.8;
-			lowBomb.volume=0.8;
-			highDouble.volume=0.8;
-			flatBoop.volume=0.8;
-			fastbeepsLow.volume=0.8;
-			fastbeepsHigh.volume=0.8;
+			for(S in AllSounds){
+				AllSounds[S].volume=0.8;
+			}
 		}
 		if(this.vol == false){
 			ctx.fillText("Sound: Off", this.x-this.width/2, this.y+4*this.height/2);
-			Beam.volume=0;
-			Killed.volume=0;
-			Pickup.volume=0;
-			Explosion.volume=0;
-			Frozen.volume=0;
-			Fwave.volume=0;
-			Thunder.volume=0;
-			Wind.volume=0;
-			onDmg.volume=0;
-			SpawnerSpawn.volume=0;
-			zapLaser.volume=0;
-			Plucky.volume=0;
-			multiLaser.volume=0;
-			midBoop.volume=0;
-			lowDouble.volume=0;
-			lowBomb.volume=0;
-			highDouble.volume=0;
-			flatBoop.volume=0;
-			fastbeepsLow.volume=0;
-			fastbeepsHigh.volume=0;
+			for(S in AllSounds){
+				AllSounds[S].volume=0;
+			}
 		}
-		if(hX >= this.x-20 && hX <=this.x + this.width*10 && hY <= this.y+7*this.height/2 && hY>=this.y+2*this.height/2){
-			ctx.strokeRect(this.x-20, this.y + 2.5*this.height, this.width * 12, this.height+10);
+		if(hX >= this.x-20 && hX <=this.x + this.width*5 && hY <= this.y+7*this.height/2 && hY>=this.y+4*this.height/2){
+			ctx.strokeRect(this.x-20, this.y + 2.5*this.height, this.width * 6, this.height+10);
 		}		
-		if(cX >= this.x-20 && cX <=this.x + this.width*10 && cY <= this.y+7*this.height/2 && cY>=this.y+2*this.height/2){
+		if(cX >= this.x-20 && cX <=this.x + this.width*5 && cY <= this.y+7*this.height/2 && cY>=this.y+4*this.height/2){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			if(this.Music == false){
+				this.Music = true;
+				cX = 0;
+				cY = 0;
+			}
+			else if(this.Music == true){
+				this.Music = false;
+				cX = 0;
+				cY = 0;
+			}
+		}
+		if(this.Music == true){
+			ctx.fillText("Music: On", this.x-this.width/2, this.y+7*this.height/2);
+		}
+		if(this.Music == false){
+			ctx.fillText("Music: Off", this.x-this.width/2, this.y+7*this.height/2);
+			for(M in AllMusic){
+				AllMusic[M].currentTime=0;
+				AllMusic[M].pause();
+			}
+		}
+		if(hX >= this.x-20 && hX <=this.x + this.width*10 && hY <= this.y+10*this.height/2 && hY>=this.y+7*this.height/2){
+			ctx.strokeRect(this.x-20, this.y + 4*this.height, this.width * 12, this.height+10);
+		}		
+		if(cX >= this.x-20 && cX <=this.x + this.width*10 && cY <= this.y+10*this.height/2 && cY>=this.y+7*this.height/2){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			if(this.dispControls == false){
 				this.dispControls = true;
@@ -626,16 +654,17 @@ var Options = {
 			}
 		}
 		if(this.dispControls == true){
-			ctx.fillText("Display Controls: Yes", this.x-this.width/2, this.y+7*this.height/2);
+			ctx.fillText("Display Controls: Yes", this.x-this.width/2, this.y+10*this.height/2);
 		}
 		if(this.dispControls == false){
-			ctx.fillText("Display Controls: No", this.x-this.width/2, this.y+7*this.height/2);
+			ctx.fillText("Display Controls: No", this.x-this.width/2, this.y+10*this.height/2);
 		}
 		ctx.fillText("Back", this.bx, this.by);
 		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
 		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 0;
 		}
@@ -718,6 +747,7 @@ var player = {
 	else{
 		for(E in AllEnemies){
 			if(collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])){
+				onDmg.currentTime=0;
 				onDmg.play();
 				this.dmg = true;
 			}
@@ -1430,6 +1460,10 @@ var keys = function(){
 		}
 	}
 	else{
+		var Up = true;
+		var Down = true;
+		var Left = true;
+		var Right = true;
 		if (80 in keysDown && keytimer == 0){
 			preSTATE = STATE;
 			STATE = "PAUSE";
@@ -1447,8 +1481,35 @@ var keys = function(){
 		if (68 in keysDown){
 			player.dir = "D";
 		}
-		if (87 in keysDown && player.y - player.speed > 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
-			&& !(obsCollision(obstacle3, player, player.dir))){
+		if(87 in keysDown){
+			for(O in ObsList){
+				if(collision("W", player, ObsList[O])){
+					Up = false;
+				}
+			}
+		}
+		if(68 in keysDown){
+			for(O in ObsList){
+				if(collision("D", player, ObsList[O])){
+					Right = false;
+				}
+			}
+		}
+		if(83 in keysDown){
+			for(O in ObsList){
+				if(collision("S", player, ObsList[O])){
+					Down = false;
+				}
+			}
+		}
+		if(65 in keysDown){
+			for(O in ObsList){
+				if(collision("A", player, ObsList[O])){
+					Left = false;
+				}
+			}
+		}
+		if (87 in keysDown && player.y - player.speed > 4 && Up == true){
 			player.y-=player.speed;
 			for(W in bubbleRotate){
 				if(bubbleRotate[W].onScreen == 1){
@@ -1462,8 +1523,7 @@ var keys = function(){
 			}
 			player.dir = "W";
 		}
-		if (65 in keysDown && player.x - player.speed > 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
-			&& !(obsCollision(obstacle3, player, player.dir))){
+		if (65 in keysDown && player.x - player.speed > 4 && Left == true){
 			player.x-=player.speed;
 			for(W in bubbleRotate){
 				if(bubbleRotate[W].onScreen == 1){
@@ -1477,8 +1537,7 @@ var keys = function(){
 			}
 			player.dir = "A";
 		}
-		if (83 in keysDown && player.y + player.speed < canvas.height - 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
-			&& !(obsCollision(obstacle3, player, player.dir))){
+		if (83 in keysDown && player.y + player.speed < canvas.height - 4 && Down == true){
 			player.y+=player.speed;
 			for(W in bubbleRotate){
 				if(bubbleRotate[W].onScreen == 1){
@@ -1492,8 +1551,7 @@ var keys = function(){
 			}
 			player.dir = "S";
 		}
-		if (68 in keysDown && player.x + player.speed < canvas.width - 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
-			&& !(obsCollision(obstacle3, player, player.dir))){
+		if (68 in keysDown && player.x + player.speed < canvas.width - 4 && Right == true){
 			player.x+=player.speed;
 			for(W in bubbleRotate){
 				if(bubbleRotate[W].onScreen == 1){
@@ -1829,7 +1887,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.2: March 30 2012", 244, 96);
+	ctx.fillText("Version 0.5.2: April 1 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	ctx.fillText("1st: " + highscore1, 308, 240);
 	ctx.fillText("2nd: " + highscore2, 308, 272);
@@ -1845,12 +1903,55 @@ function gameOver(){
 		score = 0;
 		reset();
 		STATE = 0;
+		fastbeepsLow.currentTime=0;
 		fastbeepsLow.play();
 	}	
+}
+//---------------------------------------------------------- Music Player -----------------------------------------------------------//
+function MusicPlayer(){
+if(Options.Music==true){
+	if(STATE == 1 && treeWizz.onScreen == 0){
+		DumblebeatsNormal.currentTime=0;
+		Spells.currentTime=0;
+		DumblebeatsNormal.pause();
+		Spells.pause();
+		BadWizards.currentTime=0;
+		BadWizards.pause();
+		OverwhelmedByGoblins.play();
+	}
+	else if(STATE == "Jungle"){
+		OverwhelmedByGoblins.currentTime=0;
+		Spells.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		BadWizards.currentTime=0;
+		BadWizards.pause();
+		DumblebeatsNormal.play();
+	}
+	else if(treeWizz.onScreen==1){
+		OverwhelmedByGoblins.currentTime=0;
+		Spells.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.currentTime=0;
+		DumblebeatsNormal.pause();
+		BadWizards.play();
+	}
+	else{
+		DumblebeatsNormal.currentTime=0;
+		DumblebeatsNormal.pause();
+		OverwhelmedByGoblins.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		BadWizards.currentTime=0;
+		BadWizards.pause();
+		Spells.play();
+	}
+}
 }
 //---------------------------------------------------------- Big-Bang ---------------------------------------------------------------//
 setInterval(function(){
 	clear();
+	MusicPlayer();
 	if(STATE == 0){
 		Menu.draw();
 	}
@@ -2125,8 +2226,15 @@ setInterval(function(){
 				drawObstacle(allObs[O]);
 				obsTick(allObs[O]);
 			}
-			if(STATE == "Jungle" && jungleIndex != 12 && jungleAni == true){
-				jungleIndex+=1;
+			if(STATE == "Jungle" && jungleAni == true){
+				for(O in obstacle1){
+					if(obstacle1[O].growTimer > 0){
+						obstacle1[O].growTimer-=1;
+					}
+					else if(obstacle1[O].index<12){
+						obstacle1[O].index+=1;
+					}
+				}
 			}
 			TwizEffect.draw();
 			

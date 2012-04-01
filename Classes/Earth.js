@@ -36,6 +36,7 @@ var earth = {
 					player.hp+=1;
 				}
 				this.used = 1;
+				Pickup.currentTime=0;
 				Pickup.play();
 			}
 		}
@@ -100,6 +101,7 @@ var earth2 = {
 					player.hp+=1;
 				}
 				this.used = 1;
+				Pickup.currentTime=0;
 				Pickup.play();
 			}
 		}

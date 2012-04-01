@@ -19,6 +19,7 @@ var air = {
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
 			if(this.used == 0){
+				Wind.currentTime=0;
 				Wind.play();
 				this.used = 1;
 			}
@@ -362,6 +363,7 @@ var air2 = {
 	// Spawn
 	shoot: function(){
 		if(this.cd == 0){
+			Wind.currentTime=0;
 			Wind.play();
 			air2right.shoot();
 			air2left.shoot();

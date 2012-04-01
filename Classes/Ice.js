@@ -16,6 +16,7 @@ var ice = {
 	draw: function(){
 		if(this.onScreen == 1 && this.cast ==0){
 			if(this.used == 0){
+				Frozen.currentTime=0;
 				Frozen.play();
 				this.used = 1;
 			}
@@ -137,6 +138,7 @@ var ice2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Frozen.currentTime=0;
 		Frozen.play();
 		this.height = 32;
 		this.width = 32;

@@ -8,7 +8,9 @@ var obstacle11 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1,
+	growTimer: Math.floor(Math.random() * 60)
 };
 var obstacle12 = {
 	x: 544,
@@ -18,7 +20,9 @@ var obstacle12 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1,
+	growTimer: Math.floor(Math.random() * 60)
 };
 var obstacle13 = {
 	x: 512,
@@ -28,7 +32,9 @@ var obstacle13 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1,
+	growTimer: Math.floor(Math.random() * 60)
 };
 var obstacle14 = {
 	x: 544,
@@ -38,7 +44,9 @@ var obstacle14 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1,
+	growTimer: Math.floor(Math.random() * 60)
 };
 var obstacle15 = {
 	x: 512,
@@ -48,7 +56,9 @@ var obstacle15 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1,
+	growTimer: Math.floor(Math.random() * 60)
 };
 var obstacle16 = {
 	x: 544,
@@ -58,7 +68,9 @@ var obstacle16 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1,
+	growTimer: Math.floor(Math.random() * 60)
 };
 var obstacle17 = {
 	x: 512,
@@ -68,7 +80,9 @@ var obstacle17 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1,
+	growTimer: Math.floor(Math.random() * 60)
 };
 var obstacle18 = {
 	x: 544,
@@ -78,7 +92,9 @@ var obstacle18 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1,
+	growTimer: Math.floor(Math.random() * 60)
 };
 // Obstacle 2: 128 by 64, at 256 128
 var obstacle21 = {
@@ -89,7 +105,8 @@ var obstacle21 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1
 };
 var obstacle22 = {
 	x: 288,
@@ -99,7 +116,8 @@ var obstacle22 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1
 };
 var obstacle23 = {
 	x: 320,
@@ -109,7 +127,8 @@ var obstacle23 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1
 };
 var obstacle24 = {
 	x: 352,
@@ -119,7 +138,8 @@ var obstacle24 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1
 };
 // Obstacle 3: 32 by 128, at 704 256
 var obstacle31 = {
@@ -130,7 +150,8 @@ var obstacle31 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1
 };
 var obstacle32 = {
 	x: 704,
@@ -140,7 +161,8 @@ var obstacle32 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1
 };
 var obstacle33 = {
 	x: 704,
@@ -150,7 +172,8 @@ var obstacle33 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1
 };
 var obstacle34 = {
 	x: 704,
@@ -160,11 +183,14 @@ var obstacle34 = {
 	width: 32,
 	height: 32,
 	hp: 3,
-	hptimer: 0
+	hptimer: 0,
+	index: 1
 };
 var obstacle1 = {1: obstacle11, 2: obstacle12, 3: obstacle13, 4: obstacle14, 5: obstacle15, 6: obstacle16, 7: obstacle17, 8: obstacle18};
 var obstacle2 = {1: obstacle21, 2: obstacle22, 3: obstacle23, 4: obstacle24};
 var obstacle3 = {1: obstacle31, 2: obstacle32, 3: obstacle33, 4: obstacle34};
+var ObsList = {1: obstacle11, 2: obstacle12, 3: obstacle13, 4: obstacle14, 5: obstacle15, 6: obstacle16, 7: obstacle17, 8: obstacle18,
+				9: obstacle21, 10: obstacle22, 11: obstacle23, 12: obstacle24, 13: obstacle31, 14: obstacle32, 15: obstacle33, 16: obstacle34};
 var allObs = {1: obstacle1, 2: obstacle2, 3: obstacle3};
 function drawObstacle(O){
 	for(Z in O){
@@ -187,7 +213,7 @@ function drawObstacle(O){
 				}
 			}
 			if(STATE == "Jungle"){
-				ctx.drawImage(JungleTrees[Math.floor(jungleIndex/2)], O[Z].x - O[Z].width/2, O[Z].y - 576);
+				ctx.drawImage(JungleTrees[Math.floor(O[Z].index/2)], O[Z].x - O[Z].width/2, O[Z].y - 576);
 			}
 		}
 	}
@@ -220,6 +246,7 @@ function obsHit(O){
 		O.y = 2000;
 	}
 	if(STATE != "Jungle"){
+		Killed.currentTime=0;
 		Killed.play();
 	}
 }

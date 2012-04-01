@@ -19,6 +19,7 @@ var lightning = {
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
 			if(this.used == 0){
+				Thunder.currentTime=0;
 				Thunder.play();
 				this.used = 1;
 			}
@@ -181,6 +182,7 @@ var lightning12 = {
 	},
 	// Spawn
 	shoot: function(){
+		Thunder.currentTime=0;
 		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;
@@ -273,6 +275,7 @@ var lightning2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Thunder.currentTime=0;
 		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;
@@ -368,6 +371,7 @@ var lightning22 = {
 	},
 	// Spawn
 	shoot: function(){
+		Thunder.currentTime=0;
 		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;
@@ -452,6 +456,7 @@ var lightning23 = {
 	},
 	// Spawn
 	shoot: function(){
+		Thunder.currentTime=0;
 		Thunder.play();
 		this.hx = 400;
 		this.vx = -2000;

@@ -23,6 +23,7 @@ var mystic = {
 			ctx.fillStyle = this.color;
 			ctx.globalAlpha = 0.25;
 			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
 				fastbeepsHigh.play();
 				this.used = 1;
 			}
@@ -348,6 +349,7 @@ var mystic2 = {
 		
 	shoot: function(){
 	if(this.cd == 0){
+		fastbeepsHigh.currentTime=0;
 		fastbeepsHigh.play();
 		this.height = 32;
 		this.width = 32;
@@ -495,6 +497,7 @@ var IllusionBlast = {
 		
 	// Spawn
 	shoot: function(){
+		Explosion.currentTime=0;
 		Explosion.play();
 		this.height = 32;
 		this.width = 32;
