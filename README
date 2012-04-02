@@ -1,29 +1,20 @@
 
-Version 0.5.2 Changes(4/1/2012):
+Version 0.5.3 Changes(4/2/2012):
 		-Bug Fixes:
-			-Obstacle Collision detection is much better
-			-Made sound reset on play, so it does not clip
-			-High score back button reloads the page, so no more tediousness for now
-			-Explosive Shots and Ice Shots now release their effects on obstacles
-			-Can no longer hit the enemy spawns off screen for max points
-			-Fire and Ice orbs now explode on hitting enemies
-		-Balancing:
-			-Zap Trap now drops pools in 2 second intervals
-			-Zap Trap drops a total of 5 pools
-		-Added random tree generation, removed a few trees
-		-Added control display to options menu
-		-Updated level change effect from forest to jungle
-		-Reskinned pikkit in jungle
-		-Added animated giant trees in jungle
-		-Changed Bubble Blast animation
-		-Added in water sound effects
-		-Added in music
-		-Trees grow at random times now for the jungle level
-		-Added music to options menu
+			-Water+Lightning doesn't secretly stay on screen anymore
+		-Added humpDump animation
+		-HumpDumps climb down trees now
+		-Main menu is now better looking
+		-Sorceror lightning is now blue
+		-Sorceror ice now changes the alpha like player ice
 		
 	TODO:
+		-Highscores
+			-Prompt for initials
+			-Save universal scores on github?
 		+Optimize
 			+Arrays for pickups, old spells (frozen web), etc.
+			-Remove unused songs
 		-Spells
 			-Dark (Black)
 				-HP Steal?
@@ -32,6 +23,7 @@ Version 0.5.2 Changes(4/1/2012):
 		-More enemies and AI
 			-Bosses: Maybe random power ups?
 			+Thief enemy
+			-Make it apparent what spell the enemy wizard has
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level

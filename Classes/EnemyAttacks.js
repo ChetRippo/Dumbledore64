@@ -223,10 +223,9 @@ var sIce = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
 		}
 	},
 	
@@ -238,6 +237,7 @@ var sIce = {
 			this.y = -100;
 			this.onScreen = 0;
 			this.end = true;
+			ctx.globalAlpha = 1;
 		}
 		else{
 			this.width = this.width + (32*this.frame);
@@ -344,28 +344,28 @@ var sLightning = {
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.hstate == 0){
-				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				ctx.drawImage(ehlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 1){
-				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				ctx.drawImage(ehlightning2, this.hx - this.hwidth/2, this.hy - this.hheight/2);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 2){
-				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				ctx.drawImage(ehlightning3, this.hx - this.hwidth/2, this.hy - this.hheight/2);
 				this.hstate=0;
 			}
 			if(this.vx != -2000){
 				if(this.vstate == 0){
-					ctx.drawImage(vlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+					ctx.drawImage(evlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 1){
-					ctx.drawImage(vlightning2, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+					ctx.drawImage(evlightning2, this.vx-this.vwidth/2, this.vy - this.vheight/2);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 2){
-					ctx.drawImage(vlightning3, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+					ctx.drawImage(evlightning3, this.vx-this.vwidth/2, this.vy - this.vheight/2);
 					this.vstate=0;
 				}
 			}
@@ -1586,6 +1586,7 @@ var rootStrike = {
 	type: -2,
 	x: -500,
 	y: -500,
+	onTree: 0,
 	width: 16,
 	height: 16,
 	dirct: 0,
@@ -1705,6 +1706,7 @@ var rootStrike2 = {
 	type: -3,
 	x: -500,
 	y: -500,
+	onTree: 0,
 	width: 16,
 	height: 16,
 	dirct: 0,
@@ -1825,6 +1827,7 @@ var rootStrike3 = {
 	type: -4,
 	x: -500,
 	y: -500,
+	onTree: 0,
 	width: 16,
 	height: 16,
 	dirct: 0,
@@ -1946,6 +1949,7 @@ var rootStrike4 = {
 	x: -500,
 	y: -500,
 	width: 16,
+	onTree: 0,
 	height: 16,
 	dirct: 0,
 	speed: 8,

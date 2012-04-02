@@ -3,6 +3,8 @@
 // Enemy 1 - Hudge
 var Enemy = {
 	type: 0,
+	bug: 0,
+	onTree: 0,
 	x: 9000,
 	y: -400,
 	width: 32,
@@ -37,9 +39,11 @@ var Enemy = {
 	}
 };
 
-// Enemy 2 - Pikkit
+// Enemy 2 - Pikkit/humpDump
 var EnemyA = {
 	type: 0,
+	bug: 1,
+	onTree: 0,
 	x: -9000,
 	y: -9000,
 	width: 32,
@@ -53,6 +57,8 @@ var EnemyA = {
 	dir: "W",
 	rp: 100,
 	onScreen: 0,
+	index: 1,
+	dindex: 1,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
@@ -60,7 +66,33 @@ var EnemyA = {
 			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
 		}
 		else if(STATE == "Jungle"){
-			ctx.drawImage(humpDump, this.x-this.width/2, this.y - this.height/2);
+			if(this.onTree == 1){
+				if(this.dindex > 2){
+					this.dindex = 1;
+				}
+				ctx.drawImage(humpdList[this.dindex], this.x - this.width / 2, this.y - this.height / 2);
+				this.dindex++;
+			}
+			else{
+				if(this.index > 3){
+					this.index = 1;
+				}
+				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+					this.LR = "Left";
+					ctx.drawImage(humplList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+					ctx.drawImage(humprList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					this.LR = "Right";
+				}
+				else if(this.LR == "Left"){
+					ctx.drawImage(humplList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else{
+					ctx.drawImage(humprList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+				}
+				this.index++;
+			}
 		}
 	}
 };
@@ -68,6 +100,8 @@ var EnemyA = {
 // Enemy 3 - Hudge
 var EnemyB = {
 	type: 0,
+	bug: 0,
+	onTree: 0,
 	x: -9000,
 	y: -9000,
 	width: 32,
@@ -102,9 +136,11 @@ var EnemyB = {
 	}
 };
 
-// Enemy 4 - Pikkit
+// Enemy 4 - Pikkit/humpDump
 var EnemyC = {
 	type: 0,
+	bug: 1,
+	onTree: 0,
 	x: -9000,
 	y: -9000,
 	width: 32,
@@ -118,6 +154,8 @@ var EnemyC = {
 	origrp: 300,
 	rp: 100,
 	onScreen: 0,
+	index: 1,
+	dindex: 1,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
@@ -125,7 +163,33 @@ var EnemyC = {
 			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
 		}
 		else if(STATE == "Jungle"){
-			ctx.drawImage(humpDump, this.x-this.width/2, this.y - this.height/2);
+			if(this.onTree == 1){
+				if(this.dindex > 2){
+					this.dindex = 1;
+				}
+				ctx.drawImage(humpdList[this.dindex], this.x - this.width / 2, this.y - this.height / 2);
+				this.dindex++;
+			}
+			else{
+				if(this.index > 3){
+					this.index = 1;
+				}
+				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+					this.LR = "Left";
+					ctx.drawImage(humplList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+					ctx.drawImage(humprList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					this.LR = "Right";
+				}
+				else if(this.LR == "Left"){
+					ctx.drawImage(humplList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else{
+					ctx.drawImage(humprList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+				}
+				this.index++;
+			}
 		}
 	}
 };
@@ -133,6 +197,8 @@ var EnemyC = {
 // Fast Enemy - Globbly
 var Tenemy = {
 	type: 0,
+	bug: 0,
+	onTree: 0,
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -160,6 +226,8 @@ var Tenemy = {
 // Fast Enemy 2 - Globbly
 var TenemyA = {
 	type: 0,
+	bug: 0,
+	onTree: 0,
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -188,6 +256,8 @@ var TenemyA = {
 // Fast Enemy 3 - Globbly
 var TenemyB = {
 	type: 0,
+	bug: 0,
+	onTree: 0,
 	x: 2000,
 	y: 0,
 	width: 32,
@@ -216,6 +286,8 @@ var TenemyB = {
 // Lavaman
 var Lavaman = {
 	type: 0,
+	bug: 0,
+	onTree: 0,
 	x: 9000,
 	y: -400,
 	width: 32,
@@ -237,6 +309,8 @@ var Lavaman = {
 };
 var Lavaman2 = {
 	type: 0,
+	bug: 0,
+	onTree: 0,
 	x: 9000,
 	y: -400,
 	width: 32,
@@ -258,6 +332,8 @@ var Lavaman2 = {
 };
 var Lavaman3 = {
 	type: 0,
+	bug: 0,
+	onTree: 0,
 	x: 9000,
 	y: -400,
 	width: 32,
@@ -279,6 +355,8 @@ var Lavaman3 = {
 };
 var Lavaman4 = {
 	type: 0,
+	bug: 0,
+	onTree: 0,
 	x: 9000,
 	y: -400,
 	width: 32,
@@ -303,6 +381,7 @@ var Spawner = {
 	type: 2,
 	x: 2000,
 	y: 0,
+	onTree: 0,
 	width: 64,
 	height: 64,
 	speed: 2,
@@ -413,6 +492,7 @@ var Sorceror = {
 	type: 1,
 	x: 2000,
 	y: 0,
+	onTree: 0,
 	width: 32,
 	height: 32,
 	speed: 4,
@@ -467,6 +547,7 @@ var Sorceror = {
 var treeWizz = {
 	type: -1,
 	x: 9000,
+	onTree: 0,
 	y: -400,
 	width: 32,
 	height: 32,
@@ -701,6 +782,9 @@ function onHit(E){
 			}
 		}
 	}
+	if(E.type == 0 && E.onTree == 1){
+		deadz = false;
+	}
 	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == -2 || E.type == -3 || E.type == -4 || E.type == -5){
 		if(!(E.hptimer > 0)){
 			E.hp-=1;
@@ -880,7 +964,10 @@ function move(E){
 			E.x-=E.speed;
 		}
 		if(E.dir == "S" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
+			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion)) && E.onTree != 1){
+			E.y+=E.speed;
+		}
+		if(E.dir == "S" && E.onTree == 1){
 			E.y+=E.speed;
 		}
 		if(E.dir == "D" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
@@ -911,6 +998,10 @@ function move(E){
 }
 // Enemy AI
 function AI(E){		
+	if(E.type == 0 && STATE == "Jungle" && E.bug == 1 && E.onTree == 1 && E.dirct == 0){
+		E.onTree = 0;
+		E.speed = E.speed2*2;
+	}
 		var xdiff = player.x - E.x;
 		var ydiff = player.y - E.y;
 		if(Illusion.onScreen == 1){
@@ -996,6 +1087,7 @@ function AI(E){
 			}
 		}
 		if(obsCollision(obstacle1, E, E.dir) || obsCollision(obstacle2, E, E.dir) || obsCollision(obstacle3, E, E.dir)){
+			if(E.onTree != 1){
 			if(E.dir == "W"){
 				E.dirct = 20;
 				E.y+=2*E.speed;
@@ -1039,6 +1131,7 @@ function AI(E){
 				E.x+=E.speed;
 				E.y+=E.speed;
 				E.dir = "D";
+			}
 			}
 		}
 		else if(E.dirct == 0 && E.type != -1){
@@ -1095,55 +1188,70 @@ if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft ==
 	}
 	if(E.respawn == 0){
 		E.movement = true;
-		var spawnPoint = Math.floor(Math.random() * 8) + 1;
-		if(spawnPoint == 1){
-			E.x = 0;
-			E.y = 0;
-			E.onScreen = 1;
-			E.respawn-=1;
-		}
-		else if(spawnPoint == 2){
-			E.x = 400;
-			E.y = 0;
-			E.onScreen = 1;
-			E.respawn-=1;
-		}
-		else if(spawnPoint == 3){
-			E.x = 800;
-			E.y = 0;
-			E.onScreen = 1;
-			E.respawn-=1;
-		}
-		else if(spawnPoint == 4){
-			E.x = 0;
-			E.y = 288;
-			E.onScreen = 1;
-			E.respawn-=1;
-		}
-		else if(spawnPoint == 5){
-			E.x = 800;
-			E.y = 288;
-			E.onScreen = 1;
-			E.respawn-=1;
-		}
-		else if(spawnPoint == 6){
-			E.x = 0;
-			E.y = 576;
-			E.onScreen = 1;
-			E.respawn-=1;
-		}
-		else if(spawnPoint == 7){
-			E.x = 400;
-			E.y = 576;
-			E.onScreen = 1;
-			E.respawn-=1;
+		if(E.type == 0 && E.bug == 1 && STATE == "Jungle"){
+			var spawnTree = Math.floor(Math.random() * 8) + 1;
+			if(obstacle1[spawnTree].x != 2000){
+				E.x = obstacle1[spawnTree].x;
+				E.y = obstacle1[spawnTree].y-576;
+				E.onScreen = 1;
+				E.respawn-=1;
+				E.dir = "S";
+				E.dirct = 72;
+				E.onTree = 1;
+				E.speed = 8;
+			}
 		}
 		else{
-			E.x = 800;
-			E.y = 576;
-			E.onScreen = 1;
-			E.respawn-=1;
-		}			
+			var spawnPoint = Math.floor(Math.random() * 8) + 1;
+			if(spawnPoint == 1){
+				E.x = 0;
+				E.y = 0;
+				E.onScreen = 1;
+				E.respawn-=1;
+			}
+			else if(spawnPoint == 2){
+				E.x = 400;
+				E.y = 0;
+				E.onScreen = 1;
+				E.respawn-=1;
+			}
+			else if(spawnPoint == 3){
+				E.x = 800;
+				E.y = 0;
+				E.onScreen = 1;
+				E.respawn-=1;
+			}
+			else if(spawnPoint == 4){
+				E.x = 0;
+				E.y = 288;
+				E.onScreen = 1;
+				E.respawn-=1;
+			}
+			else if(spawnPoint == 5){
+				E.x = 800;
+				E.y = 288;
+				E.onScreen = 1;
+				E.respawn-=1;
+			}
+			else if(spawnPoint == 6){
+				E.x = 0;
+				E.y = 576;
+				E.onScreen = 1;
+				E.respawn-=1;
+			}
+			else if(spawnPoint == 7){
+				E.x = 400;
+				E.y = 576;
+				E.onScreen = 1;
+				E.respawn-=1;
+			}
+			else{
+				E.x = 800;
+				E.y = 576;
+				E.onScreen = 1;
+				E.respawn-=1;
+			}
+		}
 	}
 	else{
 		E.respawn-=1;

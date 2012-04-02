@@ -14,33 +14,22 @@
 
 */
 /*
-	Version 0.5.2 Changes(4/1/2012):
+	Version 0.5.3 Changes(4/2/2012):
 		-Bug Fixes:
-			-Obstacle Collision detection is much better
-			-Made sound reset on play, so it does not clip
-			-High score back button reloads the page, so no more tediousness for now
-			-Explosive Shots and Ice Shots now release their effects on obstacles
-			-Can no longer hit the enemy spawns off screen for max points
-			-Fire and Ice orbs now explode on hitting enemies
-		-Balancing:
-			-Zap Trap now drops pools in 2 second intervals
-			-Zap Trap drops a total of 5 pools
-		-Added random tree generation, removed a few trees
-		-Added control display to options menu
-		-Updated level change effect from forest to jungle
-		-Reskinned pikkit in jungle
-		-Added animated giant trees in jungle
-		-Changed Bubble Blast animation
-		-Added in water sound effects
-		-Added in music
-		-Trees grow at random times now for the jungle level
-		-Added music to options menu
+			-Water+Lightning doesn't secretly stay on screen anymore
+		-Added humpDump animation
+		-HumpDumps climb down trees now
+		-Main menu is now better looking
+		-Sorceror lightning is now blue
+		-Sorceror ice now changes the alpha like player ice
 		
 	TODO:
-		-Bugs/Small things:
-			-Music is on the pause menu
+		-Highscores
+			-Prompt for initials
+			-Save universal scores on github?
 		+Optimize
 			+Arrays for pickups, old spells (frozen web), etc.
+			-Remove unused songs
 		-Spells
 			-Dark (Black)
 				-HP Steal?
@@ -49,6 +38,7 @@
 		-More enemies and AI
 			-Bosses: Maybe random power ups?
 			+Thief enemy
+			-Make it apparent what spell the enemy wizard has
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
@@ -111,6 +101,20 @@ var menuBack = new Image();
 menuBack.src = "grafix/menu/menu.png";
 var Title = new Image();
 Title.src = "grafix/menu/title.png";
+var textmenu = new Image();
+textmenu.src = "grafix/menu/mainmenu/text.png";
+var creditsmenu = new Image();
+creditsmenu.src = "grafix/menu/mainmenu/bkgblur.credits.png";
+var helpmenu = new Image();
+helpmenu.src = "grafix/menu/mainmenu/bkgblur.help.png";
+var newgamemenu = new Image();
+newgamemenu.src = "grafix/menu/mainmenu/bkgblur.newgame.png";
+var noselectmenu = new Image();
+noselectmenu.src = "grafix/menu/mainmenu/bkgblur.noneselect.png";
+var optionsmenu = new Image();
+optionsmenu.src = "grafix/menu/mainmenu/bkgblur.options.png";
+var scoremenu = new Image();
+scoremenu.src = "grafix/menu/mainmenu/bkgblur.score.png";
 //Environment
 var Tree = new Image();
 Tree.src = "grafix/objects/tree/health.3.png";
@@ -168,8 +172,25 @@ HudgeR.src = "grafix/creatures/hudge/hudge.r1.png";
 //Enemy2
 var Pikkit = new Image();
 Pikkit.src = "grafix/creatures/pikkit/pikkit.l1.png";
-var humpDump = new Image();
-humpDump.src = "grafix/creatures/humpdump/humpdump.r1.png";
+var humpDumpr1 = new Image();
+humpDumpr1.src = "grafix/creatures/humpdump/humpdump.r1.png";
+var humpDumpr2 = new Image();
+humpDumpr2.src = "grafix/creatures/humpdump/humpdump.r2.png";
+var humpDumpr3 = new Image();
+humpDumpr3.src = "grafix/creatures/humpdump/humpdump.r3.png";
+var humpDumpl1 = new Image();
+humpDumpl1.src = "grafix/creatures/humpdump/humpdump.l1.png";
+var humpDumpl2 = new Image();
+humpDumpl2.src = "grafix/creatures/humpdump/humpdump.l2.png";
+var humpDumpl3 = new Image();
+humpDumpl3.src = "grafix/creatures/humpdump/humpdump.l3.png";
+var humprList = {1: humpDumpr1, 2: humpDumpr2, 3: humpDumpr3};
+var humplList = {1: humpDumpl1, 2: humpDumpl2, 3: humpDumpl3};
+var humpDumpd1 = new Image();
+humpDumpd1.src = "grafix/creatures/humpdump/humpdump.d1.png";
+var humpDumpd2 = new Image();
+humpDumpd2.src = "grafix/creatures/humpdump/humpdump.d2.png";
+var humpdList = {1: humpDumpd1, 2: humpDumpd2};
 //Spawner
 var Splavaman = new Image();
 Splavaman.src = "grafix/creatures/lavaman/lavaman.l1.png";
@@ -325,9 +346,20 @@ var vlightning2 = new Image();
 vlightning2.src = "grafix/effects/lightning.self/ver.2.png";
 var vlightning3 = new Image();
 vlightning3.src = "grafix/effects/lightning.self/ver.3.png";
-//Buttons
-var newGame = new Image();
-newGame.src = "grafix/menu/newgame.png";
+//ehlightning
+var ehlightning1 = new Image();
+ehlightning1.src = "grafix/effects/lightning.enemy/hor.1.png";
+var ehlightning2 = new Image();
+ehlightning2.src = "grafix/effects/lightning.enemy/hor.2.png";
+var ehlightning3 = new Image();
+ehlightning3.src = "grafix/effects/lightning.enemy/hor.3.png";
+//evlightning
+var evlightning1 = new Image();
+evlightning1.src = "grafix/effects/lightning.enemy/ver.1.png";
+var evlightning2 = new Image();
+evlightning2.src = "grafix/effects/lightning.enemy/ver.2.png";
+var evlightning3 = new Image();
+evlightning3.src = "grafix/effects/lightning.enemy/ver.3.png";
 //--------------------------------------------------- Sounds ------------------------------------------------------------------------//
 var Beam = document.getElementsByTagName("audio")[0];
 var Killed = document.getElementsByTagName("audio")[1];
@@ -428,56 +460,65 @@ var Menu = {
 	width: 150,
 	height: 30,
 	draw: function(){
+		var select = false;
 		ctx.fillStyle = "white";
 		ctx.font = "18pt Arial";
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
-		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-this.height);
-		ctx.fillText("Version 0.5.2: April 1 2012", this.x-3*this.width/3, this.y+7*this.height);
-		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
-		ctx.fillText("Options", this.x-this.width/2, this.y-this.height/2 + 3*this.height);
-		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 4*this.height);
-		ctx.fillText("Credits", this.x-this.width/2, this.y-this.height/2 + 5*this.height);
-		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width/2 && hY <= this.y + this.height && hY>=this.y-this.height){
-			ctx.strokeRect(this.x-this.width*4/5, this.y-this.height, 3*this.width/2, 4*this.height/2);
+		ctx.drawImage(textmenu, 0, 0);
+		ctx.fillText("Version 0.5.2: April 1 2012", this.x-3*this.width/3, this.y+9*this.height);
+		//newgame
+		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
+			select = true;
+			ctx.drawImage(newgamemenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y + this.height && cY>=this.y-this.height){
+		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width && cY <= this.y + 1.75*this.height && cY>=this.y-this.height*7/6 + 2*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 1;
 		}
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + 2*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
-			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 2*this.height, this.width, this.height);
+		//How to Play
+		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width/2 && hY <= this.y + 6*this.height && hY>=this.y-this.height*7/6 + 6*this.height){
+			select = true;
+			ctx.drawImage(helpmenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 2*this.height && cY>=this.y-this.height*7/6 + 2*this.height){
+		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y + 6*this.height && cY>=this.y-this.height*7/6 + 6*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 2;
 		}
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + 4*this.height && hY>=this.y-this.height*7/6 + 4*this.height){
-			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 4*this.height, this.width, this.height);
+		//Score
+		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 3.25*this.height && hY>=this.y-this.height*7/5 + 3.25*this.height){
+			select = true;
+			ctx.drawImage(scoremenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 4*this.height&& cY>=this.y-this.height*7/6 + 4*this.height){
+		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 3.25*this.height && cY>=this.y-this.height*7/5 + 3.25*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 5;
 		}
 		//Options
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + 3*this.height && hY>=this.y-this.height*7/6 + 3*this.height){
-			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 3*this.height, this.width, this.height);
+		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 4.5*this.height && hY>=this.y-this.height*7/6 + 4.5*this.height){
+			select = true;
+			ctx.drawImage(optionsmenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 3*this.height&& cY>=this.y-this.height*7/6 + 3*this.height){
+		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 4.5*this.height&& cY>=this.y-this.height*7/6 + 4.5*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 6;
 		}
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + 5*this.height && hY>=this.y-this.height*7/6 + 5*this.height){
-			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 5*this.height, this.width, this.height);
+		//Credits
+		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 7.25*this.height && hY>=this.y-this.height*7/6 + 7.25*this.height){
+			select = true;
+			ctx.drawImage(creditsmenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 5*this.height&& cY>=this.y-this.height*7/6 + 5*this.height){
+		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 7.25*this.height&& cY>=this.y-this.height*7/6 + 7.25*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 3;
+		}
+		if(select == false){
+			ctx.drawImage(noselectmenu, 0, 0);
 		}
 	}
 };
@@ -564,6 +605,12 @@ var Pause = {
 		ctx.font = "18pt Arial";
 		ctx.drawImage(menuBack, this.x-this.width/2, this.y-this.height/2);
 		ctx.fillText("-Paused-", this.x-64, this.y-32);
+		for(S in AllSounds){
+			AllSounds[S].pause();
+		}
+		for(S in AllMusic){
+			AllMusic[S].pause();
+		}
 	}
 };
 var Options = {
@@ -1904,7 +1951,6 @@ function gameOver(){
 	if(cX >= bx-10 && cX <=bx + 50 && cY <= by && cY>=by-height*7/6){
 		score = 0;
 		reset();
-		STATE = 0;
 		fastbeepsLow.currentTime=0;
 		fastbeepsLow.play();
 	}	
@@ -2211,7 +2257,9 @@ setInterval(function(){
 			}
 			treeWizz.spawn();
 			for(E in AllEnemies){
-				AllEnemies[E].draw();
+				if(AllEnemies[E].onTree == 0){
+					AllEnemies[E].draw();
+				}
 				move(AllEnemies[E]);
 				AI(AllEnemies[E]);
 				spawn(AllEnemies[E]);
@@ -2236,6 +2284,11 @@ setInterval(function(){
 					else if(obstacle1[O].index<12){
 						obstacle1[O].index+=1;
 					}
+				}
+			}
+			for(E in AllEnemies){
+				if(AllEnemies[E].onTree == 1){
+					AllEnemies[E].draw();
 				}
 			}
 			TwizEffect.draw();

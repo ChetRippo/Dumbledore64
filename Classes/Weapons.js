@@ -5047,7 +5047,7 @@ var waterlightning = {
 				Wpool2.x = player.x;
 				Wpool2.y = player.y;
 			}
-			if(this.frame == 90){
+			if(this.frame == 120){
 				SpawnerSpawn.crrentTime=0;
 				SpawnerSpawn.play();
 				Wpool3.onScreen = 1;
@@ -5055,7 +5055,7 @@ var waterlightning = {
 				Wpool3.x = player.x;
 				Wpool3.y = player.y;
 			}
-			if(this.frame == 120){
+			if(this.frame == 180){
 				SpawnerSpawn.crrentTime=0;
 				SpawnerSpawn.play();
 				Wpool4.onScreen = 1;
@@ -5063,7 +5063,7 @@ var waterlightning = {
 				Wpool4.x = player.x;
 				Wpool4.y = player.y;
 			}
-			if(this.frame == 150){
+			if(this.frame == 240){
 				SpawnerSpawn.crrentTime=0;
 				SpawnerSpawn.play();
 				Wpool5.onScreen = 1;
@@ -5149,6 +5149,8 @@ var Wpool = {
 			this.width = 32;
 			this.height = 32;
 			this.charged = 0;
+			this.x = -200;
+			this.y = -100;
 		}
 	}
 };
@@ -5217,6 +5219,8 @@ var Wpool2 = {
 			this.width = 32;
 			this.height = 32;
 			this.charged = 0;
+			this.x = -200;
+			this.y = -100;
 		}
 	}
 };
@@ -5285,6 +5289,8 @@ var Wpool3 = {
 			this.width = 32;
 			this.height = 32;
 			this.charged = 0;
+			this.x = -200;
+			this.y = -100;
 		}
 	}
 };
@@ -5353,6 +5359,8 @@ var Wpool4 = {
 			this.width = 32;
 			this.height = 32;
 			this.charged = 0;
+			this.x = -200;
+			this.y = -100;
 		}
 	}
 };
@@ -5421,6 +5429,8 @@ var Wpool5 = {
 			this.width = 32;
 			this.height = 32;
 			this.charged = 0;
+			this.x = -200;
+			this.y = -100;
 		}
 	}
 };
