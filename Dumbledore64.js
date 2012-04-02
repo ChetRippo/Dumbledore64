@@ -37,6 +37,8 @@
 		-Added music to options menu
 		
 	TODO:
+		-Bugs/Small things:
+			-Music is on the pause menu
 		+Optimize
 			+Arrays for pickups, old spells (frozen web), etc.
 		-Spells

@@ -2982,14 +2982,15 @@ var waterfire = {
 	speed: 12,
 	onScreen: 0,
 	used: 0,
+	played: 0,
 	dir: "",
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(this.used == 0){
+			if(this.played == 0){
 				longpulse.currentTime=0;
 				longpulse.play();
-				this.used = 1;
+				this.played = 1;
 			}
 			if(spell == "Explosive Orbs"){
 				ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
@@ -3005,16 +3006,6 @@ var waterfire = {
 		}
 		if(this.cd2 > 0){
 			this.cd2-=1;
-		}
-		if(this.onScreen == 1 && waterfire2.used == 0 && waterfire3.used == 0 && waterfire4.used == 0 && waterfire5.used == 0 && waterfire6.used == 0
-			&& waterfire7.used == 0 && waterfire8.used == 0){
-			waterfire2.shoot();
-			waterfire3.shoot();
-			waterfire4.shoot();
-			waterfire5.shoot();
-			waterfire6.shoot();
-			waterfire7.shoot();
-			waterfire8.shoot();
 		}
 		if(this.onScreen == 1){
 			HpMove(this);
@@ -3063,11 +3054,19 @@ var waterfire = {
 			this.x = player.x;
 			this.y = player.y;
 			this.dir = "W";
-			this.cd = 6;
+			this.cd = 600;
 			this.onScreen = 1;
+			this.played=0;
 			for(W in waterFires){
 				waterFires[W].used = 0;
 			}
+			waterfire2.shoot();
+			waterfire3.shoot();
+			waterfire4.shoot();
+			waterfire5.shoot();
+			waterfire6.shoot();
+			waterfire7.shoot();
+			waterfire8.shoot();
 		}
 	}
 	else if(spell == "Frozen Orbs"){
@@ -3075,11 +3074,19 @@ var waterfire = {
 			this.x = player.x;
 			this.y = player.y;
 			this.dir = "W";
-			this.cd2 = 36;
+			this.played=0;
+			this.cd2 = 360;
 			this.onScreen = 1;
 			for(W in waterFires){
 				waterFires[W].used = 0;
 			}
+			waterfire2.shoot();
+			waterfire3.shoot();
+			waterfire4.shoot();
+			waterfire5.shoot();
+			waterfire6.shoot();
+			waterfire7.shoot();
+			waterfire8.shoot();
 		}
 	}
 	}
