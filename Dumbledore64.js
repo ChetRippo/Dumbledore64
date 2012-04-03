@@ -1949,10 +1949,12 @@ function gameOver(){
 		ctx.strokeRect(bx-10, by-height*7/6, width * 3 + 10, height+10);
 	}		
 	if(cX >= bx-10 && cX <=bx + 50 && cY <= by && cY>=by-height*7/6){
+		cX=0;
+		cY=0;
 		score = 0;
-		reset();
 		fastbeepsLow.currentTime=0;
 		fastbeepsLow.play();
+		reset();
 	}	
 }
 //---------------------------------------------------------- Music Player -----------------------------------------------------------//
