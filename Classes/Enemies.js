@@ -758,8 +758,365 @@ var TwizEffect = {
 		}
 	}
 };
+// Thief enemy
+var Thief = {
+	type: "Thief",
+	state: 2,
+	spell: "N/A",
+	x: 9000,
+	onTree: 0,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	respawn: 10,
+	origrp: 450,
+	rp: 450,
+	onScreen: 0,
+	counter: 0,
+	runCounter: -1,
+	movement: false,
+	stole: false,
+	hp: 2,
+	hptimer: 0,
+	pts: 500,
+	draw: function(){
+		if(this.counter > 1){
+			this.counter-=1;
+		}
+		if(this.counter == 1){
+			this.movement = true;
+			this.state = 2;
+		}
+		if(this.runCounter > 0){
+			this.runCounter-=1;
+		}
+		if(this.runCounter == 0 || (this.x > 784 && this.onScreen == 1) || (this.x < 16 && this.onScreen == 1) || (this.y < 16 && this.onScreen == 1) || (this.y > 560 && this.onScreen == 1)){
+			SmokeBomb.x1 = this.x;
+			SmokeBomb.y1 = this.y;
+			this.runCounter = -1;
+			this.spell = "N/A";
+			this.speed = 4;
+			this.onScreen = 0;
+			this.state = 1;
+			this.stole = false;
+			this.respawn = this.rp;
+			this.x = 9000;
+			this.y = -9000;
+			this.movement = false;
+			this.hp = 2;
+			this.hptimer = 0;
+			this.counter = 0;
+			SmokeBomb.frame = 0;
+			SmokeBomb.onScreen = 1;
+			SmokeBomb.draaw = 1;
+			SmokeBomb.used = 0;
+		}
+		if(this.hptimer>0){
+			this.hptimer-=1;
+		}
+		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+			ctx.fillStyle = "white"
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}
+		else{
+			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}		
+		if(this.hp == 2){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else{
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		if(this.spell != "N/A"){
+			if(this.spell == "Fire"){
+				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Ice"){
+				ctx.drawImage(Icebox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Earth"){
+				ctx.drawImage(Earthbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Lightning"){
+				ctx.drawImage(Thunderbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Air"){
+				ctx.drawImage(Windbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Mystic"){
+				ctx.drawImage(Mysticbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Water"){
+				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
+			}
+		}
+	},
+	steal: function(){
+		if(this.spell == "N/A" && this.stole == false){
+			if(collision(this.dir, this, player) || contained(player, this)){
+				this.stole = true;
+				this.runCounter = 45;
+				if(spell2 != "N/A"){
+					this.spell = spell2;
+					spell2 = "N/A";
+				}
+				else if(spell1 != "N/A"){
+					this.spell = spell1;
+					spell1 = "N/A";
+				}
+				this.speed = this.speed2*4;
+				this.state = 3;
+			}
+		}
+	}
+};
+// Thief enemy
+var ThiefA = {
+	type: "Thief",
+	state: 2,
+	spell: "N/A",
+	x: 9000,
+	onTree: 0,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	respawn: 600,
+	origrp: 450,
+	rp: 450,
+	onScreen: 0,
+	counter: 0,
+	runCounter: -1,
+	movement: false,
+	stole: false,
+	hp: 2,
+	hptimer: 0,
+	pts: 500,
+	draw: function(){
+		if(this.counter > 1){
+			this.counter-=1;
+		}
+		if(this.counter == 1){
+			this.movement = true;
+			this.state = 2;
+		}
+		if(this.runCounter > 0){
+			this.runCounter-=1;
+		}
+		if(this.runCounter == 0 || (this.x > 784 && this.onScreen == 1) || (this.x < 16 && this.onScreen == 1) || (this.y < 16 && this.onScreen == 1) || (this.y > 560 && this.onScreen == 1)){
+			SmokeBombA.x1 = this.x;
+			SmokeBombA.y1 = this.y;
+			this.runCounter = -1;
+			this.onScreen = 0;
+			this.spell = "N/A";
+			this.speed = 4;
+			this.state = 1;
+			this.stole = false;
+			this.respawn = this.rp;
+			this.x = 9000;
+			this.y = -9000;
+			this.movement = false;
+			this.hp = 2;
+			this.hptimer = 0;
+			this.counter = 0;
+			SmokeBombA.frame = 0;
+			SmokeBombA.onScreen = 1;
+			SmokeBombA.draaw = 1;
+			SmokeBombA.used = 0;
+		}
+		if(this.hptimer>0){
+			this.hptimer-=1;
+		}
+		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+			ctx.fillStyle = "white"
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}
+		else{
+			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}		
+		if(this.hp == 2){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else{
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		if(this.spell != "N/A"){
+			if(this.spell == "Fire"){
+				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Ice"){
+				ctx.drawImage(Icebox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Earth"){
+				ctx.drawImage(Earthbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Lightning"){
+				ctx.drawImage(Thunderbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Air"){
+				ctx.drawImage(Windbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Mystic"){
+				ctx.drawImage(Mysticbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Water"){
+				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
+			}
+		}
+	},
+	steal: function(){
+		if(this.spell == "N/A" && this.stole == false){
+			if(collision(this.dir, this, player) || contained(player, this)){
+				this.stole = true;
+				this.runCounter = 45;
+				if(spell2 != "N/A"){
+					this.spell = spell2;
+					spell2 = "N/A";
+				}
+				else if(spell1 != "N/A"){
+					this.spell = spell1;
+					spell1 = "N/A";
+				}
+				this.speed = this.speed2*4;
+				this.state = 3;
+			}
+		}
+	}
+};
+// Thief enemy
+var ThiefB = {
+	type: "Thief",
+	state: 2,
+	spell: "N/A",
+	x: 9000,
+	onTree: 0,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	respawn: 1200,
+	origrp: 450,
+	rp: 450,
+	onScreen: 0,
+	counter: 0,
+	runCounter: -1,
+	movement: false,
+	stole: false,
+	hp: 2,
+	hptimer: 0,
+	pts: 500,
+	draw: function(){
+		if(this.counter > 1){
+			this.counter-=1;
+		}
+		if(this.counter == 1){
+			this.movement = true;
+			this.state = 2;
+		}
+		if(this.runCounter > 0){
+			this.runCounter-=1;
+		}
+		if(this.runCounter == 0 || (this.x > 784 && this.onScreen == 1) || (this.x < 16 && this.onScreen == 1) || (this.y < 16 && this.onScreen == 1) || (this.y > 560 && this.onScreen == 1)){
+			SmokeBombB.x1 = this.x;
+			SmokeBombB.y1 = this.y;
+			this.runCounter = -1;
+			this.onScreen = 0;
+			this.spell = "N/A";
+			this.speed = 4;
+			this.state = 1;
+			this.stole = false;
+			this.respawn = this.rp;
+			this.x = 9000;
+			this.y = -9000;
+			this.movement = false;
+			this.hp = 2;
+			this.hptimer = 0;
+			this.counter = 0;
+			SmokeBombB.frame = 0;
+			SmokeBombB.onScreen = 1;
+			SmokeBombB.draaw = 1;
+			SmokeBombB.used = 0;
+		}
+		if(this.hptimer>0){
+			this.hptimer-=1;
+		}
+		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+			ctx.fillStyle = "white"
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}
+		else{
+			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}		
+		if(this.hp == 2){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else{
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		if(this.spell != "N/A"){
+			if(this.spell == "Fire"){
+				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Ice"){
+				ctx.drawImage(Icebox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Earth"){
+				ctx.drawImage(Earthbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Lightning"){
+				ctx.drawImage(Thunderbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Air"){
+				ctx.drawImage(Windbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Mystic"){
+				ctx.drawImage(Mysticbox, this.x-this.width/2, this.y - 48);
+			}
+			if(this.spell == "Water"){
+				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
+			}
+		}
+	},
+	steal: function(){
+		if(this.spell == "N/A" && this.stole == false){
+			if(collision(this.dir, this, player) || contained(player, this)){
+				this.stole = true;
+				this.runCounter = 45;
+				if(spell2 != "N/A"){
+					this.spell = spell2;
+					spell2 = "N/A";
+				}
+				else if(spell1 != "N/A"){
+					this.spell = spell1;
+					spell1 = "N/A";
+				}
+				this.speed = this.speed2*4;
+				this.state = 3;
+			}
+		}
+	}
+};
 var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner,
-					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4};
+					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4, 19: Thief, 20: ThiefA, 21: ThiefB};
 function onHit(E){
 	var deadz = false;
 	if(E.type == 0){
@@ -785,16 +1142,25 @@ function onHit(E){
 	if(E.type == 0 && E.onTree == 1){
 		deadz = false;
 	}
-	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == -2 || E.type == -3 || E.type == -4 || E.type == -5){
+	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == -2 || E.type == -3 || E.type == -4 || E.type == -5 || E.type == "Thief"){
 		if(!(E.hptimer > 0)){
 			E.hp-=1;
 			E.hptimer = 30;
+			if(E.type == "Thief"){
+				E.state = 3;
+				E.counter = 0;
+				E.movement = true;
+				E.speed = E.speed2*4;
+			}
 			if(E.hp < 1){
 				Killed.currentTime=0;
 				Killed.play();
 				deadz = true;
 				if(E.type == 2){
 					E.hp = 5;
+				}
+				if(E.type == "Thief"){
+					E.hp = 2;
 				}
 				if(E.type == -2 || E.type == -1){
 					rootStrike.x = -2000;
@@ -848,12 +1214,12 @@ function onHit(E){
 						roots14[R].y = -9000;
 					}
 				}
-				if(E.type == -1){
+				if(E.type == -1 || E.type == "Thief"){
 					E.speed = 4;
 					E.speed2 = 2;
 					E.width = 32;
 					E.height = 32;
-				}	
+				}
 			}
 			else{
 				onDmg.currentTime=0;
@@ -877,38 +1243,115 @@ function onHit(E){
 			planted = false;
 			TwizEffect.onScreen = 1;
 		}
-		else{
-			if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100){
+		else if(E.type == "Thief"){
+			E.state = 1;
+			E.speed = 4;
+			E.hp = 2;
+			E.stole = false;
+			if(E.spell == "Fire"){
 				redCube.x = E.x;
 				redCube.y = E.y;
 				redCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && tealCube.x == -100){
+			else if(E.spell == "Ice"){
 				tealCube.x = E.x;
 				tealCube.y = E.y;
 				tealCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && greenCube.x == -100){
+			else if(E.spell == "Earth"){
 				greenCube.x = E.x;
 				greenCube.y = E.y;
 				greenCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100){
+			else if(E.spell == "Lightning"){
 				yellowCube.x = E.x;
 				yellowCube.y = E.y;
 				yellowCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100){
+			else if(E.spell == "Air"){
 				greyCube.x = E.x;
 				greyCube.y = E.y;
 				greyCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100){
+			else if(E.spell == "Mystic"){
 				purpleCube.x = E.x;
 				purpleCube.y = E.y;
 				purpleCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && blueCube.x == -100){
+			else if(E.spell == "Water"){
+				blueCube.x = E.x;
+				blueCube.y = E.y;
+				blueCube.timeLeft = 90;
+			}
+			if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
+				marker4.points = E.pts;
+				marker4.mult = multiplier;
+				marker4.x = E.x;
+				marker4.y = E.y;
+				marker4.timeLeft = 20;
+			}
+			else if(marker.x != -100 && marker2.x != -100){
+				marker3.points = "" + E.pts;
+				marker3.mult = multiplier;
+				marker3.x = E.x;
+				marker3.y = E.y;
+				marker3.timeLeft = 20;
+			}
+			else if(marker.x != -100){
+				marker2.points = "" + E.pts;
+				marker2.mult = multiplier;
+				marker2.x = E.x;
+				marker2.y = E.y;
+				marker2.timeLeft = 20;
+			}
+			else{
+				marker.points = "" + E.pts;
+				marker.mult = multiplier;
+				marker.x = E.x;
+				marker.y = E.y;
+				marker.timeLeft = 20;
+			}
+			E.spell = "N/A";
+		}
+		else{
+			if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100 && Thief.spell != "Fire" && ThiefA.spell != "Fire"
+				 && ThiefB.spell != "Fire"){
+				redCube.x = E.x;
+				redCube.y = E.y;
+				redCube.timeLeft = 90;
+			}
+			else if(((Math.floor(Math.random() * 10) + 1) == 7) && tealCube.x == -100 && Thief.spell != "Ice" && ThiefA.spell != "Ice"
+				 && ThiefB.spell != "Ice"){
+				tealCube.x = E.x;
+				tealCube.y = E.y;
+				tealCube.timeLeft = 90;
+			}
+			else if(((Math.floor(Math.random() * 10) + 1) == 7) && greenCube.x == -100 && Thief.spell != "Earth" && ThiefA.spell != "Earth"
+				 && ThiefB.spell != "Earth"){
+				greenCube.x = E.x;
+				greenCube.y = E.y;
+				greenCube.timeLeft = 90;
+			}
+			else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100 && Thief.spell != "Lightning" && ThiefA.spell != "Lightning"
+				 && ThiefB.spell != "Lightning"){
+				yellowCube.x = E.x;
+				yellowCube.y = E.y;
+				yellowCube.timeLeft = 90;
+			}
+			else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100 && Thief.spell != "Air" && ThiefA.spell != "Air"
+				 && ThiefB.spell != "Air"){
+				greyCube.x = E.x;
+				greyCube.y = E.y;
+				greyCube.timeLeft = 90;
+			}
+			else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100 && Thief.spell != "Mystic" && ThiefA.spell != "Mystic"
+				 && ThiefB.spell != "Mystic"){
+				purpleCube.x = E.x;
+				purpleCube.y = E.y;
+				purpleCube.timeLeft = 90;
+			}
+			else if(((Math.floor(Math.random() * 10) + 1) == 7) && blueCube.x == -100 && Thief.spell != "Water" && ThiefA.spell != "Water"
+				 && ThiefB.spell != "Water"){
 				blueCube.x = E.x;
 				blueCube.y = E.y;
 				blueCube.timeLeft = 90;
@@ -1088,76 +1531,100 @@ function AI(E){
 		}
 		if(obsCollision(obstacle1, E, E.dir) || obsCollision(obstacle2, E, E.dir) || obsCollision(obstacle3, E, E.dir)){
 			if(E.onTree != 1){
-			if(E.dir == "W"){
-				E.dirct = 20;
-				E.y+=2*E.speed;
-				E.dir = "D";
-			}
-			else if(E.dir == "A"){
-				E.dirct = 20;
-				E.x+=E.speed;
-				E.dir = "W";
-			}
-			else if(E.dir == "S"){
-				E.dirct = 20;
-				E.y-=2*E.speed;
-				E.dir = "A";
-			}
-			else if(E.dir == "D"){
-				E.dirct = 20;
-				E.x-=E.speed;
-				E.dir = "S";
-			}
-			else if(E.dir == "WD"){
-				E.dirct = 20;
-				E.x+=E.speed;
-				E.y-=E.speed;
-				E.dir = "W";
-			}
-			else if(E.dir == "WA"){
-				E.dirct = 20;
-				E.x-=E.speed;
-				E.y-=E.speed;
-				E.dir = "A";
-			}
-			else if(E.dir == "AS"){
-				E.dirct = 20;
-				E.x-=E.speed;
-				E.y+=E.speed;
-				E.dir = "S";
-			}
-			else if(E.dir == "SD"){
-				E.dirct = 20;
-				E.x+=E.speed;
-				E.y+=E.speed;
-				E.dir = "D";
-			}
+				if(E.dir == "W"){
+					E.dirct = 20;
+					E.y+=2*E.speed;
+					E.dir = "D";
+				}
+				else if(E.dir == "A"){
+					E.dirct = 20;
+					E.x+=E.speed;
+					E.dir = "W";
+				}
+				else if(E.dir == "S"){
+					E.dirct = 20;
+					E.y-=2*E.speed;
+					E.dir = "A";
+				}
+				else if(E.dir == "D"){
+					E.dirct = 20;
+					E.x-=E.speed;
+					E.dir = "S";
+				}
+				else if(E.dir == "WD"){
+					E.dirct = 20;
+					E.x+=E.speed;
+					E.y-=E.speed;
+					E.dir = "W";
+				}
+				else if(E.dir == "WA"){
+					E.dirct = 20;
+					E.x-=E.speed;
+					E.y-=E.speed;
+					E.dir = "A";
+				}
+				else if(E.dir == "AS"){
+					E.dirct = 20;
+					E.x-=E.speed;
+					E.y+=E.speed;
+					E.dir = "S";
+				}
+				else if(E.dir == "SD"){
+					E.dirct = 20;
+					E.x+=E.speed;
+					E.y+=E.speed;
+					E.dir = "D";
+				}
 			}
 		}
 		else if(E.dirct == 0 && E.type != -1){
 			if(xdiff < 4 && ydiff < 4){
 				E.dir = "WA";
+				if(E.type == "Thief" && E.stole == true){
+					E.dir = "SD";
+				}
 			}
 			else if(xdiff < 4 && ydiff > 4){
 				E.dir = "AS";
+				if(E.type == "Thief" && E.stole == true){
+					E.dir = "WD";
+				}
 			}
 			else if(xdiff > 4 && ydiff < 4){
 				E.dir = "WD";
+				if(E.type == "Thief" && E.stole == true){
+					E.dir = "AS";
+				}
 			}
 			else if (xdiff > 4 && ydiff > 4){
 				E.dir = "SD";
+				if(E.type == "Thief" && E.stole == true){
+					E.dir = "WA";
+				}
 			}
 			else if (xdiff == 4 && ydiff > 4){
 				E.dir = "S";
+				if(E.type == "Thief" && E.stole == true){
+					E.dir = "W";
+				}
 			}
 			else if(xdiff == 4 && ydiff < 4){
 				E.dir = "W";
+				if(E.type == "Thief" && E.stole == true){
+					E.dir = "S";
+				}
 			}
 			else if(xdiff < 4 && ydiff == 4){
 				E.dir = "A";
+				if(E.type == "Thief" && E.stole == true){
+					E.dir = "D";
+				}
 			}
 			else{
 				E.dir = "D";
+				if(E.type == "Thief" && E.stole == true){
+					E.dir = "A";
+				}
 			}
 		}
 		else{
@@ -1188,6 +1655,28 @@ if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft ==
 	}
 	if(E.respawn == 0){
 		E.movement = true;
+		if(E.type == "Thief"){
+			var spawnspot = Math.floor(Math.random() * 8) + 1;
+			if(E.counter == 1){
+				E.movement = true;
+				E.state = 2;
+				E.respawn-=1;
+				E.counter-=1;
+			}
+			if(obstacle1[spawnspot].x != 2000){
+				E.x = obstacle1[spawnspot].x-48;
+				E.y = obstacle1[spawnspot].y-32;
+				E.onScreen = 1;
+				E.respawn-=1;
+				E.speed = 4;
+				E.state = 1;
+				E.spell = "N/A";
+				E.stole = false;
+				E.movement=false;
+				E.hp = 2;
+				E.counter = 60;
+			}
+		}
 		if(E.type == 0 && E.bug == 1 && STATE == "Jungle"){
 			var spawnTree = Math.floor(Math.random() * 8) + 1;
 			if(obstacle1[spawnTree].x != 2000){
@@ -1201,7 +1690,7 @@ if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft ==
 				E.speed = 8;
 			}
 		}
-		else{
+		else if(E.type != "Thief"){
 			var spawnPoint = Math.floor(Math.random() * 8) + 1;
 			if(spawnPoint == 1){
 				E.x = 0;
@@ -1253,7 +1742,14 @@ if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft ==
 			}
 		}
 	}
-	else{
+	else if(E.type == "Thief" && STATE == "Jungle" && E.respawn > 0){
+		E.respawn-=1;
+	}
+	//if globbly in jungle
+	if(E.type == 0 && STATE == "Jungle" && E.speed2*2 == 8){
+		E.respawn= E.respawn;
+	}
+	else if(E.type != "Thief"){
 		E.respawn-=1;
 	}
 }

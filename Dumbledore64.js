@@ -14,16 +14,22 @@
 
 */
 /*
-	Version 0.5.3 Changes(4/2/2012):
+	Version 0.5.4 Changes(4/4/2012):
 		-Bug Fixes:
-			-Water+Lightning doesn't secretly stay on screen anymore
-		-Added humpDump animation
-		-HumpDumps climb down trees now
-		-Main menu is now better looking
-		-Sorceror lightning is now blue
-		-Sorceror ice now changes the alpha like player ice
+			-Can no longer be damaged by humpdumps while they
+				are in trees
+		-Balancing:
+			-Frozen Web now has a longer recharge
+			-Zap Trap now has a shorter recharge
+			-Homing Shots now have a 1.5 second cooldown
+		-Added Thief enemy in Jungle. Has 2 hp. Steals spell from you and runs away.
+		-Took out the 3 globbly enemies in the Jungle, replaced them with thieves
+		
 		
 	TODO:
+		-Bugs
+			-Teleport when bubble shield is on fucks up
+			-bubblebeam corner shots
 		-Highscores
 			-Prompt for initials
 			-Save universal scores on github?
@@ -37,7 +43,6 @@
 				-Minions
 		-More enemies and AI
 			-Bosses: Maybe random power ups?
-			+Thief enemy
 			-Make it apparent what spell the enemy wizard has
 		-Terrain
 			-Different levels, at the end of each is a boss
@@ -191,6 +196,14 @@ humpDumpd1.src = "grafix/creatures/humpdump/humpdump.d1.png";
 var humpDumpd2 = new Image();
 humpDumpd2.src = "grafix/creatures/humpdump/humpdump.d2.png";
 var humpdList = {1: humpDumpd1, 2: humpDumpd2};
+//Thief
+var thiefPeek = new Image();
+thiefPeek.src = "grafix/creatures/sneak/peek.png";
+var thiefSneak = new Image();
+thiefSneak.src = "grafix/creatures/sneak/hidden.l1.png";
+var thiefVis = new Image();
+thiefVis.src = "grafix/creatures/sneak/visible.l1.png";
+var Thieves = {1: thiefPeek, 2: thiefSneak, 3: thiefVis};
 //Spawner
 var Splavaman = new Image();
 Splavaman.src = "grafix/creatures/lavaman/lavaman.l1.png";
@@ -466,7 +479,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.5.3: April 2 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.5.4: April 4 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -475,6 +488,8 @@ var Menu = {
 		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width && cY <= this.y + 1.75*this.height && cY>=this.y-this.height*7/6 + 2*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
 			STATE = 1;
 		}
 		//How to Play
@@ -485,6 +500,8 @@ var Menu = {
 		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y + 6*this.height && cY>=this.y-this.height*7/6 + 6*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
 			STATE = 2;
 		}
 		//Score
@@ -495,6 +512,8 @@ var Menu = {
 		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 3.25*this.height && cY>=this.y-this.height*7/5 + 3.25*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
 			STATE = 5;
 		}
 		//Options
@@ -505,6 +524,8 @@ var Menu = {
 		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 4.5*this.height&& cY>=this.y-this.height*7/6 + 4.5*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
 			STATE = 6;
 		}
 		//Credits
@@ -515,6 +536,8 @@ var Menu = {
 		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 7.25*this.height&& cY>=this.y-this.height*7/6 + 7.25*this.height){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
 			STATE = 3;
 		}
 		if(select == false){
@@ -796,9 +819,11 @@ var player = {
 	else{
 		for(E in AllEnemies){
 			if(collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])){
-				onDmg.currentTime=0;
-				onDmg.play();
-				this.dmg = true;
+				if(AllEnemies[E].onTree == 0){
+					onDmg.currentTime=0;
+					onDmg.play();
+					this.dmg = true;
+				}
 			}
 		}
 		if(this.dmg == true){
@@ -1936,7 +1961,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.3: April 2 2012", 244, 96);
+	ctx.fillText("Version 0.5.4: April 4 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	ctx.fillText("1st: " + highscore1, 308, 240);
 	ctx.fillText("2nd: " + highscore2, 308, 272);
@@ -2266,6 +2291,9 @@ setInterval(function(){
 				AI(AllEnemies[E]);
 				spawn(AllEnemies[E]);
 			}
+			Thief.steal();
+			ThiefA.steal();
+			ThiefB.steal();
 			Globblyfire.draw();
 			Globblyfire.move();
 			Globblyfire2.draw();
@@ -2274,6 +2302,9 @@ setInterval(function(){
 			Globblyfire3.move();
 		
 			Spawner.fire();
+			SmokeBomb.draw();
+			SmokeBombA.draw();
+			SmokeBombB.draw();
 			for(O in allObs){
 				drawObstacle(allObs[O]);
 				obsTick(allObs[O]);

@@ -64,7 +64,7 @@ var bullet = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 40;
+			cd = 45;
 		}
 		if(spell == "Bubblebeam"){
 			cd = 20;
@@ -113,7 +113,7 @@ var bullet2 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 40;
+			cd = 45;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -163,7 +163,7 @@ var bullet3 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 40;
+			cd = 45;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -212,7 +212,7 @@ var bullet4 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 40;
+			cd = 45;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -260,7 +260,7 @@ var bullet5 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 40;
+			cd = 45;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -308,7 +308,7 @@ var bullet6 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 40;
+			cd = 45;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -356,7 +356,7 @@ var bullet7 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 40;
+			cd = 45;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -404,7 +404,7 @@ var bullet8 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 40;
+			cd = 45;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -2411,12 +2411,11 @@ var icelightning = {
 		horil.y = player.y
 		horil.frame = 0;
 		horil.onScreen = 1;
-		this.cd = 450;
+		this.cd = 900;
 		this.timeLeft = 300;
 		this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
 	}
 	}
-	
 };
 
 // Fire Wave: Damages all enemies in front of the player
@@ -5079,7 +5078,7 @@ var waterlightning = {
 	shoot: function(){
 		if(this.cd == 0){
 			this.onScreen = 1;
-			this.cd = 1200;
+			this.cd = 900;
 			this.frame = 0;
 		}
 	}

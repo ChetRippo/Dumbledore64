@@ -1,14 +1,19 @@
 
-Version 0.5.3 Changes(4/2/2012):
+Version 0.5.4 Changes(4/4/2012):
 		-Bug Fixes:
-			-Water+Lightning doesn't secretly stay on screen anymore
-		-Added humpDump animation
-		-HumpDumps climb down trees now
-		-Main menu is now better looking
-		-Sorceror lightning is now blue
-		-Sorceror ice now changes the alpha like player ice
+			-Can no longer be damaged by humpdumps while they
+				are in trees
+		-Balancing:
+			-Frozen Web now has a longer recharge
+			-Zap Trap now has a shorter recharge
+			-Homing Shots now have a 1.5 second cooldown
+		-Added Thief enemy in Jungle. Has 2 hp. Steals spell from you and runs away.
+		-Took out the 3 globbly enemies in the Jungle, replaced them with thieves
 		
 	TODO:
+		-Bugs
+			-Teleport when bubble shield is on fucks up
+			-bubblebeam corner shots
 		-Highscores
 			-Prompt for initials
 			-Save universal scores on github?
@@ -22,7 +27,6 @@ Version 0.5.3 Changes(4/2/2012):
 				-Minions
 		-More enemies and AI
 			-Bosses: Maybe random power ups?
-			+Thief enemy
 			-Make it apparent what spell the enemy wizard has
 		-Terrain
 			-Different levels, at the end of each is a boss

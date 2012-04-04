@@ -2121,3 +2121,132 @@ var LeafHeal = {
 		this.used = 0;
 	}	
 };
+//Thief Smoke Bomb
+var SmokeBomb = {
+	color: "black",
+	width: 32,
+	height: 32,
+	x1: 0,
+	y1: 0,
+	onScreen: 0,
+	draaw: 0,
+	frame: 0,
+	used: 0,
+	
+	draw: function(){
+		if(this.draaw == 1){
+			ctx.fillStyle = this.color;
+			ctx.globalAlpha = 0.5;
+			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
+			if(this.frame < 4){
+				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				this.width = this.width + 8 * this.frame;
+				this.height = this.height + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				this.width = this.width - 8 * this.frame;
+				this.height = this.height - 8 * this.frame;
+				this.frame++;
+			}
+			else{
+				this.frame = 0;
+				this.draaw = 0;
+				this.width = 32;
+				this.height = 32;
+			}
+			ctx.globalAlpha = 1;
+		}
+	}
+};
+//Thief Smoke Bomb
+var SmokeBombA = {
+	color: "black",
+	width: 32,
+	height: 32,
+	x1: 0,
+	y1: 0,
+	onScreen: 0,
+	draaw: 0,
+	frame: 0,
+	used: 0,
+	
+	draw: function(){
+		if(this.draaw == 1){
+			ctx.fillStyle = this.color;
+			ctx.globalAlpha = 0.5;
+			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
+			if(this.frame < 4){
+				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				this.width = this.width + 8 * this.frame;
+				this.height = this.height + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				this.width = this.width - 8 * this.frame;
+				this.height = this.height - 8 * this.frame;
+				this.frame++;
+			}
+			else{
+				this.frame = 0;
+				this.draaw = 0;
+				this.width = 32;
+				this.height = 32;
+			}
+			ctx.globalAlpha = 1;
+		}
+	}
+};
+//Thief Smoke Bomb
+var SmokeBombB = {
+	color: "black",
+	width: 32,
+	height: 32,
+	x1: 0,
+	y1: 0,
+	onScreen: 0,
+	draaw: 0,
+	frame: 0,
+	used: 0,
+	
+	draw: function(){
+		if(this.draaw == 1){
+			ctx.fillStyle = this.color;
+			ctx.globalAlpha = 0.5;
+			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
+			if(this.frame < 4){
+				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				this.width = this.width + 8 * this.frame;
+				this.height = this.height + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				this.width = this.width - 8 * this.frame;
+				this.height = this.height - 8 * this.frame;
+				this.frame++;
+			}
+			else{
+				this.frame = 0;
+				this.draaw = 0;
+				this.width = 32;
+				this.height = 32;
+			}
+			ctx.globalAlpha = 1;
+		}
+	}
+};
