@@ -161,10 +161,19 @@ var mystic = {
 		}
 		player.x = this.x;
 		player.y = this.y;
+		for(B in bubbleRotate){
+			if(bubbleRotate[B].onScreen == 1){
+				bubbleRotate[B].shoot();
+			}
+		}
+		if(water.onScreen == 1){
+			water.x = player.x - 48;
+			water.y = player.y;
+			water.dir = "WD";
+		}
 		this.onScreen = 0;
-	}
+		}
 	},
-		
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
@@ -173,7 +182,7 @@ var mystic = {
 		this.draaw = 1;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 60;
+		this.cd = 90;
 		this.loop = 2;
 		this.onScreen = 1;
 		this.used = 0;
@@ -356,7 +365,7 @@ var mystic2 = {
 		this.draaw = 1;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 600;
+		this.cd = 450;
 		this.loop = 2;
 		this.onScreen = 1;
 	}
@@ -505,3 +514,5 @@ var IllusionBlast = {
 		this.onScreen = 1;
 	}
 };
+//------------------------------------------ Import Arrays --------------------------------------------------------------------------//
+var Ticks = {1: iceheal, 2: fireheal, 3: lightningheal, 4: airearth, 5: mysticearth, 6: icelightning, 7: air2, 8: waterearth, 9: waterlightning};

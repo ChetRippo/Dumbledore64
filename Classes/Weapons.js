@@ -1181,43 +1181,43 @@ function Bulletmove(B){
 	}
 	else if (B.timeLeft > 0 && B.dir == "DWD"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y -= B.speed/4;
+		B.x += B.speed;
+		B.y -= B.speed/2;
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2WD"){
 		B.timeLeft--;
-		B.x += B.speed/4;
-		B.y -= B.speed/2;
+		B.x += B.speed/2;
+		B.y -= B.speed;
 	}
 	else if (B.timeLeft > 0 && B.dir == "DWA"){
 		B.timeLeft--;
-		B.x -= B.speed/2;
-		B.y -= B.speed/4;
+		B.x -= B.speed;
+		B.y -= B.speed/2;
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2WA"){
 		B.timeLeft--;
-		B.x -= B.speed/4;
-		B.y -= B.speed/2;
+		B.x -= B.speed/2;
+		B.y -= B.speed;
 	}
 	else if (B.timeLeft > 0 && B.dir == "DSD"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y += B.speed/4;
+		B.x += B.speed;
+		B.y += B.speed/2;
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2SD"){
 		B.timeLeft--;
-		B.x += B.speed/4;
-		B.y += B.speed/2;
+		B.x += B.speed/2;
+		B.y += B.speed;
 	}
 	else if (B.timeLeft > 0 && B.dir == "DAS"){
 		B.timeLeft--;
-		B.x -= B.speed/2;
-		B.y += B.speed/4;
+		B.x -= B.speed;
+		B.y += B.speed/2;
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2AS"){
 		B.timeLeft--;
-		B.x -= B.speed/4;
-		B.y += B.speed/2;
+		B.x -= B.speed/2;
+		B.y += B.speed;
 	}
 }
 // ------------------------------------------------------ Spell Combos ---------------------------------------------------------------//
@@ -1589,6 +1589,7 @@ var firelightning = {
 		this.cd = 900;
 		this.timeLeft = 210;
 		this.cast = 45;
+		cd = 45;
 		castingBar.onScreen = 1;
 		castingBar.cast = 45;
 		castingBar.castmax = 45;
@@ -2851,6 +2852,7 @@ var airice = {
 		this.cast = 30;
 		ice.cd = 0;
 		ice.cast = 30;
+		cd = 30;
 		ice.shoot();
 		this.used = 0;
 	}
@@ -5439,3 +5441,5 @@ var Weapons = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: fire, 6: fire2,
 				11: earth2, 12: lightning, 13: lightning2, 14: icelightning, 15: firelightning, 16: sFire, 17: sIce, 18: sLightning, 19: air,
 				20: air2, 21: airfire, 22: airice, 23: airlightning/*, 24: mystic, 25: mystic2, 26: mysticfire, 27: mysticice, 28: mysticearth,
 				29: mysticlightning, 30: mysticair, 31: Water, 32: waterfire*/};
+var AllFire = {1: fire, 2: fire2, 3: fireice, 4: firelightningf1, 5: firelightningf2, 6: firelightningf3, 7: firelightningf4,
+				8: Mfire, 9: Mfire2, 10: Mfire3, 11: Mfire4, 12: Globblyfire, 13: Globblyfire2, 14: Globblyfire3};

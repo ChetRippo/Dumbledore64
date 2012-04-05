@@ -1005,6 +1005,7 @@ function HpAi(E){
 		E.dirct-=1;
 	}
 }
+var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp};
 var hpParticles = {1: hpParticleW, 2: hpParticleA, 3: hpParticleS, 4: hpParticleD, 5: hpParticleWA, 6: hpParticleWD, 7: hpParticleAS, 8: hpParticleSD};
 // If you pick it up
 function pickup(C){

@@ -1694,3 +1694,6 @@ var air2up3 = {
 		this.onScreen = 1;
 	}
 };
+var Air1Air2 = {1: air, 2: air12, 3: air13, 4: air2right, 5: air2right2, 6: air2right3, 7: air2left,
+				8: air2left2, 9: air2left3, 10: air2down, 11: air2down2, 12: air2down3, 13: air2up,
+				14: air2up2, 15: air2up3};

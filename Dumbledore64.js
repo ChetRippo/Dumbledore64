@@ -14,28 +14,36 @@
 
 */
 /*
-	Version 0.5.4 Changes(4/4/2012):
+	Version 0.5.4 Changes(4/5/2012):
 		-Bug Fixes:
 			-Can no longer be damaged by humpdumps while they
 				are in trees
+			-Can no longer shoot while casting
+			-Pause menu sound fully stops
+			-Fixed bubblebeam diagonal shots so they make sense
+			-Teleporting when bubble shields are around you no longer
+				causes the bubbles to scatter
 		-Balancing:
+			-Reset all High scores. Will do this every tenth of a version
+				e.g. version 0.6.0
 			-Frozen Web now has a longer recharge
 			-Zap Trap now has a shorter recharge
 			-Homing Shots now have a 1.5 second cooldown
+			-Added 5 seconds to Chain Lightning cooldown
+			-Added 1 second to all teleport cooldowns
+			-Subtracted 5 seconds from Mirage cooldown
 		-Added Thief enemy in Jungle. Has 2 hp. Steals spell from you and runs away.
 		-Took out the 3 globbly enemies in the Jungle, replaced them with thieves
-		
+		-Thieves now are more stealthy
+		-Optimized a lot of code, should load and run slightly faster
 		
 	TODO:
-		-Bugs
-			-Teleport when bubble shield is on fucks up
-			-bubblebeam corner shots
+		+Bugs
 		-Highscores
 			-Prompt for initials
-			-Save universal scores on github?
+			-Cannot make dynamic pages on git
 		+Optimize
-			+Arrays for pickups, old spells (frozen web), etc.
-			-Remove unused songs
+			+Arrays
 		-Spells
 			-Dark (Black)
 				-HP Steal?
@@ -44,6 +52,7 @@
 		-More enemies and AI
 			-Bosses: Maybe random power ups?
 			-Make it apparent what spell the enemy wizard has
+			-Forest boss #2 (3 part dragon?)
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
@@ -409,32 +418,31 @@ var AllSounds = {1: Beam, 2: Killed, 3: Pickup, 4: Explosion, 5: Frozen, 6: Fwav
 //Music
 var Spells = document.getElementsByTagName("audio")[28];
 var OverwhelmedByGoblins = document.getElementsByTagName("audio")[29];
-var Story = document.getElementsByTagName("audio")[30];
-var BadWizards = document.getElementsByTagName("audio")[31];
-var DumblebeatsNormal = document.getElementsByTagName("audio")[32];
-var DumblebeatsFading = document.getElementsByTagName("audio")[33];
-var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: Story, 4: BadWizards, 5: DumblebeatsNormal, 6: DumblebeatsFading};
+var BadWizards = document.getElementsByTagName("audio")[30];
+var DumblebeatsNormal = document.getElementsByTagName("audio")[31];
+var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: DumblebeatsNormal};
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
-var highscore1 = $.jStorage.get("highscore1");
+//reset by changing the strings, change in gameover() too
+var highscore1 = $.jStorage.get("v5highscore1");
 if(!highscore1){
 		var highscore1 = 0;
-		$.jStorage.set("highscore1",highscore1);}
-var highscore2 = $.jStorage.get("highscore2");
+		$.jStorage.set("v5highscore1",highscore1);}
+var highscore2 = $.jStorage.get("v5highscore2");
 if(!highscore2){
 		var highscore2 = 0;
-		$.jStorage.set("highscore2",highscore2);}
-var highscore3 = $.jStorage.get("highscore3");
+		$.jStorage.set("v5highscore2",highscore2);}
+var highscore3 = $.jStorage.get("v5highscore3");
 if(!highscore3){
 		var highscore3 = 0;
-		$.jStorage.set("highscore3",highscore3);}
-var highscore4 = $.jStorage.get("highscore4");
+		$.jStorage.set("v5highscore3",highscore3);}
+var highscore4 = $.jStorage.get("v5highscore4");
 if(!highscore4){
 		var highscore4 = 0;
-		$.jStorage.set("highscore4",highscore4);}
-var highscore5 = $.jStorage.get("highscore5");
+		$.jStorage.set("v5highscore4",highscore4);}
+var highscore5 = $.jStorage.get("v5highscore5");
 if(!highscore5){
 		var highscore5 = 0;
-		$.jStorage.set("highscore5",highscore5);}
+		$.jStorage.set("v5highscore5",highscore5);}
 //---------------------------------------------------------------- Mouse Posn -------------------------------------------------------//
 function getPosition(event){
     if (event.x != undefined && event.y != undefined){
@@ -479,7 +487,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.5.4: April 4 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.5.4: April 5 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -1811,83 +1819,6 @@ var keys = function(){
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
-/*
-	planted = false;
-	nu = 0;
-	hs = 0;
-	cd = 0;
-	hptimer = 0;
-	spell1 = "N/A";
-	spell2 = "N/A";
-	spell = "N/A";
-	score = 0;
-	muliplier = 1;
-	multtimer = 0;
-	player.x = 400;
-	player.y = 256;
-	player.speed = 8;
-	player.hp = 3;
-	player.maxhp = 3;
-	player.dir = "W";
-	Sorceror.hp = 1;
-	Sorceror.hptimer = 0;
-	Spawner.hp = 1;
-	Spawner.hptimer = 0;
-	rePlant();
-	treeWizz.hp = 1;
-	treeWizz.hptimer = 0;
-	for(E in AllEnemies){
-		onHit(AllEnemies[E]);
-		AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
-		AllEnemies[E].respawn = AllEnemies[E].origrp;
-	}
-	treeWizz.hp = 6;
-	treeWizz.spawned = 0;
-	treeWizz.speed = 4;
-	treeWizz.speed2 = 2;
-	treeWizz.width = 32;
-	treeWizz.height = 32;
-	Sorceror.hp = 3;
-	Sorceror.hptimer = 0;
-	Sorceror.cd = 0;
-	Spawner.hp = 5;
-	Spawner.hptimer = 0;
-	Spawner.cd = 0;
-	for (W in Weapons){
-		Weapons[W].timeLeft = 0;
-		Weapons[W].onScreen = 0;
-		Weapons[W].cd = 0;
-	}
-	Globblyfire.x = -100;
-	Globblyfire.y = -200;
-	Globblyfire.width = 16;
-	Globblyfire.height = 16;
-	Globblyfire.onScreen = 0;
-	Globblyfire2.x = -100;
-	Globblyfire2.y = -200;
-	Globblyfire2.width = 16;
-	Globblyfire2.height = 16;
-	Globblyfire2.onScreen = 0;
-	Globblyfire3.x = -100;
-	Globblyfire3.y = -200;
-	Globblyfire3.width = 16;
-	Globblyfire3.height = 16;
-	Globblyfire3.onScreen = 0;
-	score = 0;
-	multiplier = 1;
-	marker.timeLeft = 0;
-	marker2.timeLeft = 0;
-	marker3.timeLeft = 0;
-	marker4.timeLeft = 0;
-	redCube.timeLeft = 0;
-	tealCube.timeLeft = 0;
-	greenCube.timeLeft = 0;
-	yellowCube.timeLeft = 0;
-	greyCube.timeLeft = 0;
-	purpleCube.timeLeft = 0;
-	hpUp.x = -100;
-	hpUp.y = -200;
-	ctx.globalAlpha = 1;*/
 	window.location.reload();
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
@@ -1904,51 +1835,51 @@ function gameOver(){
 		ctx.fillText("Score: " + score, 320, 144);
 	}
 	if(highscore1 < score && nu == 1){
-		$.jStorage.set("highscore5",highscore4);
+		$.jStorage.set("v5highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("highscore4",highscore3);
+		$.jStorage.set("v5highscore4",highscore3);
 		highscore4 = highscore3;
-		$.jStorage.set("highscore3",highscore2);
+		$.jStorage.set("v5highscore3",highscore2);
 		highscore3 = highscore2;
-		$.jStorage.set("highscore2",highscore1);
+		$.jStorage.set("v5highscore2",highscore1);
 		highscore2 = highscore1;
-		$.jStorage.set("highscore1",score);
+		$.jStorage.set("v5highscore1",score);
 		highscore1 = score;
 		hs = 1;
 		nu = 0;
 	}
 	else if(highscore2 < score && nu == 1){
-		$.jStorage.set("highscore5",highscore4);
+		$.jStorage.set("v5highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("highscore4",highscore3);
+		$.jStorage.set("v5highscore4",highscore3);
 		highscore4 = highscore3;
-		$.jStorage.set("highscore3",highscore2);
+		$.jStorage.set("v5highscore3",highscore2);
 		highscore3 = highscore2;
-		$.jStorage.set("highscore2",score);
+		$.jStorage.set("v5highscore2",score);
 		highscore2 = score;
 		hs = 1;
 		nu = 0;
 	}
 	else if(highscore3 < score && nu == 1){
-		$.jStorage.set("highscore5",highscore4);
+		$.jStorage.set("v5highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("highscore4",highscore3);
+		$.jStorage.set("v5highscore4",highscore3);
 		highscore4 = highscore3;
-		$.jStorage.set("highscore3",score);
+		$.jStorage.set("v5highscore3",score);
 		highscore3 = score;
 		hs = 1;
 		nu = 0;
 	}
 	else if(highscore4 < score && nu == 1){
-		$.jStorage.set("highscore5",highscore4);
+		$.jStorage.set("v5highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("highscore4",score);
+		$.jStorage.set("v5highscore4",score);
 		highscore4 = score;
 		hs = 1;
 		nu = 0;
 	}
 	else if(highscore5 < score && nu == 1){
-		$.jStorage.set("highscore5",score);
+		$.jStorage.set("v5highscore5",score);
 		highscore5 = score;
 		hs = 1;
 		nu = 0;
@@ -1961,7 +1892,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.4: April 4 2012", 244, 96);
+	ctx.fillText("Version 0.5.4: April 5 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	ctx.fillText("1st: " + highscore1, 308, 240);
 	ctx.fillText("2nd: " + highscore2, 308, 272);
@@ -1984,7 +1915,7 @@ function gameOver(){
 }
 //---------------------------------------------------------- Music Player -----------------------------------------------------------//
 function MusicPlayer(){
-if(Options.Music==true){
+if(Options.Music==true && STATE != "PAUSE"){
 	if(STATE == 1 && treeWizz.onScreen == 0){
 		DumblebeatsNormal.currentTime=0;
 		Spells.currentTime=0;
@@ -2054,55 +1985,27 @@ setInterval(function(){
 		else{
 			keys();
 			multiply();
-			
 			player.draw();
 			player.onhit();
-			
 			rePlant();
-			
-			redCube.draw();
-			pickup(redCube);
-		
-			tealCube.draw();
-			pickup(tealCube);
-		
-			yellowCube.draw();
-			pickup(yellowCube);
-			
-			greyCube.draw();
-			pickup(greyCube);
-		
-			greenCube.draw();
-			pickup(greenCube);
-			
-			purpleCube.draw();
-			pickup(purpleCube);
-			
-			blueCube.draw();
-			pickup(blueCube);
-			
-			hpUp.draw();
-			pickup(hpUp);
+			for(B in Boxes){
+				Boxes[B].draw();
+				pickup(Boxes[B]);
+			}
 			for(H in hpParticles){
 				hpParticles[H].draw();
 				hpParticles[H].onHit();
 				HpMove(hpParticles[H]);
 				HpAi(hpParticles[H]);
 			}
-			
 			for(B in Bullets){
 				drawBullet(Bullets[B]);
 				Bulletmove(Bullets[B]);
 			}
-		
-			fire.draw();
-			fire.move();
-			fire2.draw();
-			fire2.move();
-		
-			fireice.draw();
-			fireice.move();
-		
+			for(F in AllFire){
+				AllFire[F].draw();
+				AllFire[F].move();
+			}
 			ice.draw();
 			ice.move();
 			ice.effect();
@@ -2114,12 +2017,10 @@ setInterval(function(){
 			earth.move();
 			earth2.draw();
 			earth2.move();
-		
-			iceheal.tick();
-			fireheal.tick();
-			lightningheal.tick();
-			airearth.tick();
-		
+			//All Tick spells, in mystic class do to imports
+			for(T in Ticks){
+				Ticks[T].tick();
+			}		
 			lightning.draw();
 			lightning.effect();
 		
@@ -2137,16 +2038,7 @@ setInterval(function(){
 		
 			firelightning.draw();
 			firelightning.effect();
-			firelightningf1.draw();
-			firelightningf1.move();
-			firelightningf2.draw();
-			firelightningf2.move();
-			firelightningf3.draw();
-			firelightningf3.move();
-			firelightningf4.draw();
-			firelightningf4.move();
 		
-			icelightning.tick();
 			icelightning.effect();
 			horil.draw();
 			vertil.draw();
@@ -2158,39 +2050,10 @@ setInterval(function(){
 			vertil4.draw();
 			horil5.draw();
 			vertil5.draw();
-			
-			air.draw();
-			air.effect();
-			air12.draw();
-			air12.effect();
-			air13.draw();
-			air13.effect();
-			air2.tick();
-			air2right.draw();
-			air2right.effect();
-			air2right2.draw();
-			air2right2.effect();
-			air2right3.draw();
-			air2right3.effect();
-			air2left.draw();
-			air2left.effect();
-			air2left2.draw();
-			air2left2.effect();
-			air2left3.draw();
-			air2left3.effect();
-			air2down.draw();
-			air2down.effect();
-			air2down2.draw();
-			air2down2.effect();
-			air2down3.draw();
-			air2down3.effect();
-			air2up.draw();
-			air2up.effect();
-			air2up2.draw();
-			air2up2.effect();
-			air2up3.draw();
-			air2up3.effect();
-			
+			for(A in Air1Air2){
+				Air1Air2[A].draw();
+				Air1Air2[A].effect();
+			}		
 			airfire.draw();
 			airfire.effect();
 			airfire12.draw();
@@ -2206,14 +2069,6 @@ setInterval(function(){
 			
 			mystic.move();
 			mystic.draw();
-			Mfire.draw();
-			Mfire.move();
-			Mfire2.draw();
-			Mfire2.move();
-			Mfire3.draw();
-			Mfire3.move();
-			Mfire4.draw();
-			Mfire4.move();
 			Mice.draw();
 			Mice.move();
 			Mice2.draw();
@@ -2222,7 +2077,6 @@ setInterval(function(){
 			Mice3.move();
 			Mice4.draw();
 			Mice4.move();
-			mysticearth.tick();
 			mystic2.draw();
 			mystic2.move();
 			Illusion.draw();
@@ -2246,7 +2100,7 @@ setInterval(function(){
 				IBubbles[I].draw();
 				IBubbles[I].move();
 			}
-			waterearth.tick();
+			
 			waterair.draw();
 			for(W in wairParticles){
 				wairParticles[W].draw();
@@ -2258,7 +2112,6 @@ setInterval(function(){
 				Wpools[W].draw();
 				Wpools[W].move();
 			}
-			waterlightning.tick();
 			sIce.draw();
 			sIce.move();
 			sIce.effect();
@@ -2294,12 +2147,6 @@ setInterval(function(){
 			Thief.steal();
 			ThiefA.steal();
 			ThiefB.steal();
-			Globblyfire.draw();
-			Globblyfire.move();
-			Globblyfire2.draw();
-			Globblyfire2.move();
-			Globblyfire3.draw();
-			Globblyfire3.move();
 		
 			Spawner.fire();
 			SmokeBomb.draw();

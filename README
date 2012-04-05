@@ -1,25 +1,34 @@
 
-Version 0.5.4 Changes(4/4/2012):
+Version 0.5.4 Changes(4/5/2012):
 		-Bug Fixes:
 			-Can no longer be damaged by humpdumps while they
 				are in trees
+			-Can no longer shoot while casting
+			-Pause menu sound fully stops
+			-Fixed bubblebeam diagonal shots so they make sense
+			-Teleporting when bubble shields are around you no longer
+				causes the bubbles to scatter
 		-Balancing:
+			-Reset all High scores. Will do this every tenth of a version
+				e.g. version 0.6.0
 			-Frozen Web now has a longer recharge
 			-Zap Trap now has a shorter recharge
 			-Homing Shots now have a 1.5 second cooldown
+			-Added 5 seconds to Chain Lightning cooldown
+			-Added 1 second to all teleport cooldowns
+			-Subtracted 5 seconds from Mirage cooldown
 		-Added Thief enemy in Jungle. Has 2 hp. Steals spell from you and runs away.
 		-Took out the 3 globbly enemies in the Jungle, replaced them with thieves
+		-Thieves now are more stealthy
+		-Optimized a lot of code, should load and run slightly faster
 		
 	TODO:
-		-Bugs
-			-Teleport when bubble shield is on fucks up
-			-bubblebeam corner shots
+		+Bugs
 		-Highscores
 			-Prompt for initials
-			-Save universal scores on github?
+			-Cannot make dynamic pages on git
 		+Optimize
-			+Arrays for pickups, old spells (frozen web), etc.
-			-Remove unused songs
+			+Arrays
 		-Spells
 			-Dark (Black)
 				-HP Steal?
@@ -28,6 +37,7 @@ Version 0.5.4 Changes(4/4/2012):
 		-More enemies and AI
 			-Bosses: Maybe random power ups?
 			-Make it apparent what spell the enemy wizard has
+			-Forest boss #2 (3 part dragon?)
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level

@@ -280,7 +280,7 @@ var lightning2 = {
 		this.hx = 400;
 		this.vx = -2000;
 		this.hy = player.y;
-		this.cd = 900;
+		this.cd = 1050;
 		this.onScreen = 1;
 		this.timeLeft = 240;
 	}

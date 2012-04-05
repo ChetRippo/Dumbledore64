@@ -818,13 +818,19 @@ var Thief = {
 		if(this.hptimer>0){
 			this.hptimer-=1;
 		}
+		if(this.state == 1){
+			ctx.globalAlpha = 0.5;
+		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white"
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
 		else{
 			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		}		
+		}
+		if(this.state != 3){
+			ctx.globalAlpha = 0.5;
+		}
 		if(this.hp == 2){
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
@@ -857,6 +863,7 @@ var Thief = {
 				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
 			}
 		}
+		ctx.globalAlpha = 1;
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
@@ -937,13 +944,19 @@ var ThiefA = {
 		if(this.hptimer>0){
 			this.hptimer-=1;
 		}
+		if(this.state == 1){
+			ctx.globalAlpha = 0.5;
+		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white"
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
 		else{
 			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		}		
+		}
+		if(this.state != 3){
+			ctx.globalAlpha = 0.5;
+		}
 		if(this.hp == 2){
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
@@ -976,6 +989,7 @@ var ThiefA = {
 				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
 			}
 		}
+		ctx.globalAlpha = 1;
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
@@ -1056,13 +1070,19 @@ var ThiefB = {
 		if(this.hptimer>0){
 			this.hptimer-=1;
 		}
+		if(this.state == 1){
+			ctx.globalAlpha = 0.5;
+		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white"
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
 		else{
 			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		}		
+		}
+		if(this.state != 3){
+			ctx.globalAlpha = 0.5;
+		}
 		if(this.hp == 2){
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
@@ -1095,6 +1115,7 @@ var ThiefB = {
 				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
 			}
 		}
+		ctx.globalAlpha = 1;
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
