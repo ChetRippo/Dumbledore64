@@ -784,6 +784,7 @@ var Thief = {
 	hptimer: 0,
 	pts: 500,
 	draw: function(){
+	if(this.onScreen == 1){
 		if(this.counter > 1){
 			this.counter-=1;
 		}
@@ -840,6 +841,7 @@ var Thief = {
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 		}
+		ctx.globalAlpha = 1;
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
 				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
@@ -863,7 +865,7 @@ var Thief = {
 				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
 			}
 		}
-		ctx.globalAlpha = 1;
+		}
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
@@ -910,6 +912,7 @@ var ThiefA = {
 	hptimer: 0,
 	pts: 500,
 	draw: function(){
+	if(this.onScreen == 1){
 		if(this.counter > 1){
 			this.counter-=1;
 		}
@@ -924,9 +927,9 @@ var ThiefA = {
 			SmokeBombA.x1 = this.x;
 			SmokeBombA.y1 = this.y;
 			this.runCounter = -1;
-			this.onScreen = 0;
 			this.spell = "N/A";
 			this.speed = 4;
+			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
 			this.respawn = this.rp;
@@ -966,6 +969,7 @@ var ThiefA = {
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 		}
+		ctx.globalAlpha = 1;
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
 				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
@@ -989,7 +993,7 @@ var ThiefA = {
 				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
 			}
 		}
-		ctx.globalAlpha = 1;
+		}
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
@@ -1036,6 +1040,7 @@ var ThiefB = {
 	hptimer: 0,
 	pts: 500,
 	draw: function(){
+	if(this.onScreen == 1){
 		if(this.counter > 1){
 			this.counter-=1;
 		}
@@ -1050,9 +1055,9 @@ var ThiefB = {
 			SmokeBombB.x1 = this.x;
 			SmokeBombB.y1 = this.y;
 			this.runCounter = -1;
-			this.onScreen = 0;
 			this.spell = "N/A";
 			this.speed = 4;
+			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
 			this.respawn = this.rp;
@@ -1092,6 +1097,7 @@ var ThiefB = {
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 		}
+		ctx.globalAlpha = 1;
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
 				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
@@ -1115,7 +1121,7 @@ var ThiefB = {
 				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
 			}
 		}
-		ctx.globalAlpha = 1;
+		}
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
