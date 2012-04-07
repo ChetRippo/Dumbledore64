@@ -1040,7 +1040,7 @@ function pickup(C){
 					marker.y = player.y;
 					marker.timeLeft = 20;
 				}
-				score+=25;
+				score+=50;
 			}
 		}
 		Pickup.currentTime=0;

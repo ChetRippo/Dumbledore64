@@ -23,6 +23,10 @@
 			-Fixed bubblebeam diagonal shots so they make sense
 			-Teleporting when bubble shields are around you no longer
 				causes the bubbles to scatter
+			-Fixed bug where page reload didn't work in chrome
+			-Fixed bug where homing shots cooldown didn't change
+			-Fixed thief alpha effect negating ice
+			-Fixed bug where thieves disappeared easily
 		-Balancing:
 			-Reset all High scores. Will do this every tenth of a version
 				e.g. version 0.6.0
@@ -32,6 +36,10 @@
 			-Added 5 seconds to Chain Lightning cooldown
 			-Added 1 second to all teleport cooldowns
 			-Subtracted 5 seconds from Mirage cooldown
+			-Halved Thief points to 250
+			-Increased Enemy Wizard points to 500
+			-Increased Tree Wizard points to 2000
+			-Increased pickup points to 50
 		-Added Thief enemy in Jungle. Has 2 hp. Steals spell from you and runs away.
 		-Took out the 3 globbly enemies in the Jungle, replaced them with thieves
 		-Thieves now are more stealthy
@@ -49,10 +57,11 @@
 				-HP Steal?
 			-Summon (?)
 				-Minions
-		-More enemies and AI
-			-Bosses: Maybe random power ups?
+		+More enemies and AI
+			+Bosses:
+				+Grass level boss #2: 3 part dragon (Dragon, DragonR, DragonL)
 			-Make it apparent what spell the enemy wizard has
-			-Forest boss #2 (3 part dragon?)
+			-Random Power Ups
 		-Terrain
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
@@ -1819,7 +1828,7 @@ var keys = function(){
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
-	window.location.reload();
+	window.location.reload(true);
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
 function gameOver(){

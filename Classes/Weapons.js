@@ -66,7 +66,7 @@ var bullet = {
 		if(spell == "Homing Shots"){
 			cd = 45;
 		}
-		if(spell == "Bubblebeam"){
+		else if(spell == "Bubblebeam"){
 			cd = 20;
 			this.height = 16;
 			this.width = 16;

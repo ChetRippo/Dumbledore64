@@ -504,7 +504,7 @@ var Sorceror = {
 	hp: 3,
 	hptimer: 0,
 	movement: false,
-	pts: 100,
+	pts: 500,
 	cd: 0,
 	spawned: 60,
 	rp: 1200,
@@ -568,7 +568,7 @@ var treeWizz = {
 	deadtrees: 0,
 	herp: 0,
 	frame: 0,
-	pts: 1000,
+	pts: 2000,
 	spawned: 0,
 	index: 1,
 	draw: function(){
@@ -781,8 +781,9 @@ var Thief = {
 	movement: false,
 	stole: false,
 	hp: 2,
+	alphaChange: false,
 	hptimer: 0,
-	pts: 500,
+	pts: 250,
 	draw: function(){
 	if(this.onScreen == 1){
 		if(this.counter > 1){
@@ -795,7 +796,7 @@ var Thief = {
 		if(this.runCounter > 0){
 			this.runCounter-=1;
 		}
-		if(this.runCounter == 0 || (this.x > 784 && this.onScreen == 1) || (this.x < 16 && this.onScreen == 1) || (this.y < 16 && this.onScreen == 1) || (this.y > 560 && this.onScreen == 1)){
+		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)){
 			SmokeBomb.x1 = this.x;
 			SmokeBomb.y1 = this.y;
 			this.runCounter = -1;
@@ -819,8 +820,9 @@ var Thief = {
 		if(this.hptimer>0){
 			this.hptimer-=1;
 		}
-		if(this.state == 1){
+		if(this.state == 1 && ctx.globalAlpha == 1){
 			ctx.globalAlpha = 0.5;
+			this.alphaChange = true;
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white"
@@ -829,8 +831,9 @@ var Thief = {
 		else{
 			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		if(this.state != 3){
+		if(this.state != 3 && ctx.globalAlpha == 1){
 			ctx.globalAlpha = 0.5;
+			this.alphaChange = true
 		}
 		if(this.hp == 2){
 			ctx.fillStyle = "red";
@@ -841,7 +844,10 @@ var Thief = {
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 		}
-		ctx.globalAlpha = 1;
+		if(this.alphaChange){
+			ctx.globalAlpha = 1;
+			this.alphaChange = false;
+		}
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
 				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
@@ -904,13 +910,14 @@ var ThiefA = {
 	origrp: 450,
 	rp: 450,
 	onScreen: 0,
+	alphaChange: false,
 	counter: 0,
 	runCounter: -1,
 	movement: false,
 	stole: false,
 	hp: 2,
 	hptimer: 0,
-	pts: 500,
+	pts: 250,
 	draw: function(){
 	if(this.onScreen == 1){
 		if(this.counter > 1){
@@ -923,7 +930,7 @@ var ThiefA = {
 		if(this.runCounter > 0){
 			this.runCounter-=1;
 		}
-		if(this.runCounter == 0 || (this.x > 784 && this.onScreen == 1) || (this.x < 16 && this.onScreen == 1) || (this.y < 16 && this.onScreen == 1) || (this.y > 560 && this.onScreen == 1)){
+		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)){
 			SmokeBombA.x1 = this.x;
 			SmokeBombA.y1 = this.y;
 			this.runCounter = -1;
@@ -947,8 +954,9 @@ var ThiefA = {
 		if(this.hptimer>0){
 			this.hptimer-=1;
 		}
-		if(this.state == 1){
+		if(this.state == 1 && ctx.globalAlpha == 1){
 			ctx.globalAlpha = 0.5;
+			this.alphaChange = true;
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white"
@@ -957,8 +965,9 @@ var ThiefA = {
 		else{
 			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		if(this.state != 3){
+		if(this.state != 3 && ctx.globalAlpha == 1){
 			ctx.globalAlpha = 0.5;
+			this.alphaChange = true
 		}
 		if(this.hp == 2){
 			ctx.fillStyle = "red";
@@ -969,7 +978,10 @@ var ThiefA = {
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 		}
-		ctx.globalAlpha = 1;
+		if(this.alphaChange){
+			ctx.globalAlpha = 1;
+			this.alphaChange = false;
+		}
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
 				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
@@ -1033,12 +1045,13 @@ var ThiefB = {
 	rp: 450,
 	onScreen: 0,
 	counter: 0,
+	alphaChange: false,
 	runCounter: -1,
 	movement: false,
 	stole: false,
 	hp: 2,
 	hptimer: 0,
-	pts: 500,
+	pts: 250,
 	draw: function(){
 	if(this.onScreen == 1){
 		if(this.counter > 1){
@@ -1051,7 +1064,7 @@ var ThiefB = {
 		if(this.runCounter > 0){
 			this.runCounter-=1;
 		}
-		if(this.runCounter == 0 || (this.x > 784 && this.onScreen == 1) || (this.x < 16 && this.onScreen == 1) || (this.y < 16 && this.onScreen == 1) || (this.y > 560 && this.onScreen == 1)){
+		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)){
 			SmokeBombB.x1 = this.x;
 			SmokeBombB.y1 = this.y;
 			this.runCounter = -1;
@@ -1075,8 +1088,9 @@ var ThiefB = {
 		if(this.hptimer>0){
 			this.hptimer-=1;
 		}
-		if(this.state == 1){
+		if(this.state == 1 && ctx.globalAlpha == 1){
 			ctx.globalAlpha = 0.5;
+			this.alphaChange = true;
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white"
@@ -1085,8 +1099,9 @@ var ThiefB = {
 		else{
 			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		if(this.state != 3){
+		if(this.state != 3 && ctx.globalAlpha == 1){
 			ctx.globalAlpha = 0.5;
+			this.alphaChange = true
 		}
 		if(this.hp == 2){
 			ctx.fillStyle = "red";
@@ -1097,7 +1112,10 @@ var ThiefB = {
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 		}
-		ctx.globalAlpha = 1;
+		if(this.alphaChange){
+			ctx.globalAlpha = 1;
+			this.alphaChange = false;
+		}
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
 				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
@@ -1141,7 +1159,365 @@ var ThiefB = {
 			}
 		}
 	}
+};/*
+var Dragon = {
+	type: "DragonH",
+	x: 9000,
+	onTree: 0,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	respawn: -1,
+	origrp: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	cd: 90,
+	hp: 6,
+	hptimer: 0,
+	width2: 0,
+	height2: 0,
+	deadtrees: 0,
+	herp: 0,
+	frame: 0,
+	pts: 1000,
+	spawned: 0,
+	index: 1,
+	draw: function(){
+		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}
+		else{
+			ctx.drawImage(Treewizzez[this.index], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			this.index++;
+			if(this.index > 8){
+				this.index = 1;
+			}
+		}
+		ctx.fillStyle = "yellow";
+		if(this.hp == 6){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 5){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 4){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 3){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 2){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else{
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+	},
+	spawn: function(){
+		if(this.hptimer > 0){
+			this.hptimer-=1;
+		}
+		if(this.cd > 0 && this.onScreen == 1){
+			this.cd-=1;
+		}
+		else if(this.spawned == 0){
+			for(O in obstacle1){
+				if(obstacle1[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			for(O in obstacle2){
+				if(obstacle2[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			for(O in obstacle3){
+				if(obstacle3[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			this.herp = this.deadtrees;
+			this.deadtrees = 0;
+			if(this.herp >= 10 && this.onScreen == 0){
+				this.respawn = 0;
+				this.spawned = 1;
+				spawn(this);
+				this.herp = 0;
+			}
+		}
+	},
+	Attack: function(){
+		if(this.onScreen == 1){
+			
+		}
+	}
 };
+var DragonR = {
+	type: "DragonR",
+	x: 9000,
+	onTree: 0,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	respawn: -1,
+	origrp: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	cd: 90,
+	hp: 6,
+	hptimer: 0,
+	width2: 0,
+	height2: 0,
+	deadtrees: 0,
+	herp: 0,
+	frame: 0,
+	pts: 1000,
+	spawned: 0,
+	index: 1,
+	draw: function(){
+		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}
+		else{
+			ctx.drawImage(Treewizzez[this.index], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			this.index++;
+			if(this.index > 8){
+				this.index = 1;
+			}
+		}
+		ctx.fillStyle = "yellow";
+		if(this.hp == 6){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 5){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 4){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 3){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 2){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else{
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+	},
+	spawn: function(){
+		if(this.hptimer > 0){
+			this.hptimer-=1;
+		}
+		if(this.cd > 0 && this.onScreen == 1){
+			this.cd-=1;
+		}
+		else if(this.spawned == 0){
+			for(O in obstacle1){
+				if(obstacle1[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			for(O in obstacle2){
+				if(obstacle2[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			for(O in obstacle3){
+				if(obstacle3[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			this.herp = this.deadtrees;
+			this.deadtrees = 0;
+			if(this.herp >= 10 && this.onScreen == 0){
+				this.respawn = 0;
+				this.spawned = 1;
+				spawn(this);
+				this.herp = 0;
+			}
+		}
+	},
+	Attack: function(){
+		if(this.onScreen == 1){
+			
+		}
+	}
+};
+var DragonL = {
+	type: "DragonL",
+	x: 9000,
+	onTree: 0,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	respawn: -1,
+	origrp: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	cd: 90,
+	hp: 6,
+	hptimer: 0,
+	width2: 0,
+	height2: 0,
+	deadtrees: 0,
+	herp: 0,
+	frame: 0,
+	pts: 1000,
+	spawned: 0,
+	index: 1,
+	draw: function(){
+		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}
+		else{
+			ctx.drawImage(Treewizzez[this.index], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			this.index++;
+			if(this.index > 8){
+				this.index = 1;
+			}
+		}
+		ctx.fillStyle = "yellow";
+		if(this.hp == 6){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 5){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 4){
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 3){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else if(this.hp == 2){
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+		else{
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		}
+	},
+	spawn: function(){
+		if(this.hptimer > 0){
+			this.hptimer-=1;
+		}
+		if(this.cd > 0 && this.onScreen == 1){
+			this.cd-=1;
+		}
+		else if(this.spawned == 0){
+			for(O in obstacle1){
+				if(obstacle1[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			for(O in obstacle2){
+				if(obstacle2[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			for(O in obstacle3){
+				if(obstacle3[O].hp == 0){
+					this.deadtrees+=1;
+				}
+			}
+			this.herp = this.deadtrees;
+			this.deadtrees = 0;
+			if(this.herp >= 10 && this.onScreen == 0){
+				this.respawn = 0;
+				this.spawned = 1;
+				spawn(this);
+				this.herp = 0;
+			}
+		}
+	},
+	Attack: function(){
+		if(this.onScreen == 1){
+			
+		}
+	}
+};
+var DragonEffect = {
+	x: 500,
+	y: -400,
+	width: 32,
+	height: 32,
+	onScreen: 0,
+	frame: 0,
+	played: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.played == 0){
+				this.played = 1;
+				trailingbeeps.currentTime=0;
+				trailingbeeps.play();
+			}
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = "228b22";
+			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+			this.width = this.width + 8*this.frame;
+			this.height = this.height + 8*this.frame;
+			this.frame++;
+			ctx.globalAlpha = 1;
+		}
+	}
+};*/
 var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner,
 					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4, 19: Thief, 20: ThiefA, 21: ThiefB};
 function onHit(E){
