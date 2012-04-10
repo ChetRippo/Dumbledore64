@@ -593,6 +593,131 @@ var blueCube = {
 		this.timeLeft = 0;
 	}
 };
+// Random drop
+var RandomCube = {
+	type: 1,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	index: 1,
+	stage: "up",
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water"},
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			this.timeLeft-=1;
+			if(this.stage == "up"){
+				this.index++;
+			}
+			else{
+				this.index-=1;
+			}
+			if(this.index == 6){
+				this.index = 5;
+				this.stage = "down";
+			}
+			else if(this.index == 0){
+				this.index = 1;
+				this.stage = "up";
+			}
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell1;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell1;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell1;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell2;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell2;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell2;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
+var RandEffect = {
+	color: "FF00FF",
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	onScreen: 0,
+	frame: 0,
+	used: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.fillStyle = this.color;
+			ctx.globalAlpha = 0.25;
+			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width + 8 * this.frame;
+				this.height = this.height + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width - 8 * this.frame;
+				this.height = this.height - 8 * this.frame;
+				this.frame++;
+			}
+			else{
+				this.frame = 0;
+				this.onScreen = 0;
+				this.width = 32;
+				this.height = 32;
+			}
+			ctx.globalAlpha = 1;
+		}
+	}
+};
 // hpUp drop
 var hpUp = {
 	type: 0,
@@ -1005,7 +1130,7 @@ function HpAi(E){
 		E.dirct-=1;
 	}
 }
-var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp};
+var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 8: RandomCube};
 var hpParticles = {1: hpParticleW, 2: hpParticleA, 3: hpParticleS, 4: hpParticleD, 5: hpParticleWA, 6: hpParticleWD, 7: hpParticleAS, 8: hpParticleSD};
 // If you pick it up
 function pickup(C){
@@ -1013,28 +1138,28 @@ function pickup(C){
 		if(C.type != 0){
 			if((spell1 != "N/A") && (spell2 != "N/A")){
 				if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
-					marker4.points = "25";
+					marker4.points = "50";
 					marker4.mult = 1;
 					marker4.x = player.x;
 					marker4.y = player.y;
 					marker4.timeLeft = 20;
 				}
 				else if(marker.x != -100 && marker2.x != -100){
-					marker3.points = "25";
+					marker3.points = "50";
 					marker3.mult = 1;
 					marker3.x = player.x;
 					marker3.y = player.y;
 					marker3.timeLeft = 20;
 				}
 				else if(marker.x != -100){
-					marker2.points = "25";
+					marker2.points = "50";
 					marker2.mult = 1;
 					marker2.x = player.x;
 					marker2.y = player.y;
 					marker2.timeLeft = 20;
 				}
 				else{
-					marker.points = "25";
+					marker.points = "50";
 					marker.mult = 1;
 					marker.x = player.x;
 					marker.y = player.y;

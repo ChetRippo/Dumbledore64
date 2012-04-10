@@ -238,16 +238,16 @@ function obsTick(O){
 }
 function obsHit(O){
 	if(O.hptimer <= 0){
+		if(STATE != "Jungle"){
+			Killed.currentTime=0;
+			Killed.play();
+		}
 		O.hp-=1;
 		O.hptimer = 20;
 	}
 	if(O.hp == 0){
 		O.x = 2000;
 		O.y = 2000;
-	}
-	if(STATE != "Jungle"){
-		Killed.currentTime=0;
-		Killed.play();
 	}
 }
 function rePlant(){

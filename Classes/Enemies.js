@@ -536,7 +536,7 @@ var Sorceror = {
 			sIce.shoot();
 		}
 		else if(this.spell == "Fire"){
-			sFire.shoot();
+			sFire.shoot(this);
 		}
 		else if(this.spell == "Lightning"){
 			sLightning.shoot();
@@ -623,7 +623,7 @@ var treeWizz = {
 		if(this.cd > 0 && this.onScreen == 1){
 			this.cd-=1;
 		}
-		else if(this.spawned == 0){
+		else if(this.spawned == 0 && STATE == 1 && Dragon.spawned == 0){
 			for(O in obstacle1){
 				if(obstacle1[O].hp == 0){
 					this.deadtrees+=1;
@@ -1159,19 +1159,19 @@ var ThiefB = {
 			}
 		}
 	}
-};/*
+};
 var Dragon = {
-	type: "DragonH",
+	type: "Dragon",
 	x: 9000,
 	onTree: 0,
 	y: -400,
-	width: 32,
-	height: 32,
+	width: 80,
+	height: 80,
 	speed: 4,
 	speed2: 2,
 	dirct: 0,
 	dir: "W",
-	respawn: -1,
+	respawn: 2500,
 	origrp: -1,
 	rp: -1,
 	onScreen: 0,
@@ -1181,22 +1181,16 @@ var Dragon = {
 	hptimer: 0,
 	width2: 0,
 	height2: 0,
-	deadtrees: 0,
-	herp: 0,
 	frame: 0,
 	pts: 1000,
 	spawned: 0,
-	index: 1,
 	draw: function(){
+		ctx.fillStyle = "red";
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.fillStyle = "white";
 		}
 		else{
-			ctx.drawImage(Treewizzez[this.index], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-			this.index++;
-			if(this.index > 8){
-				this.index = 1;
-			}
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
 		ctx.fillStyle = "yellow";
 		if(this.hp == 6){
@@ -1239,35 +1233,28 @@ var Dragon = {
 		if(this.cd > 0 && this.onScreen == 1){
 			this.cd-=1;
 		}
-		else if(this.spawned == 0){
-			for(O in obstacle1){
-				if(obstacle1[O].hp == 0){
-					this.deadtrees+=1;
-				}
-			}
-			for(O in obstacle2){
-				if(obstacle2[O].hp == 0){
-					this.deadtrees+=1;
-				}
-			}
-			for(O in obstacle3){
-				if(obstacle3[O].hp == 0){
-					this.deadtrees+=1;
-				}
-			}
-			this.herp = this.deadtrees;
-			this.deadtrees = 0;
-			if(this.herp >= 10 && this.onScreen == 0){
-				this.respawn = 0;
-				this.spawned = 1;
-				spawn(this);
-				this.herp = 0;
+		if(this.spawned == 0){
+			if(treeWizz.spawned == 0){
+				this.respawn-=1;
 			}
 		}
+		if(this.respawn ==0){
+			this.respawn-=1;
+			this.spawned = 1;
+			this.onScreen = 1;
+			this.x = 64;
+			this.y = 256;
+		}
 	},
-	Attack: function(){
-		if(this.onScreen == 1){
-			
+	attack: function(){
+		if(this.cd == 0 && this.onScreen ==1){
+			this.cd = 120;
+			if(Math.sqrt(((player.x - this.x)*(player.x - this.x)) + ((player.y - this.y)*(player.y - this.y))) < 448){
+				sFire.shoot(this);
+			}
+			else{
+				DragonFire.shoot();
+			}
 		}
 	}
 };
@@ -1288,59 +1275,50 @@ var DragonR = {
 	onScreen: 0,
 	movement: false,
 	cd: 90,
-	hp: 6,
+	hp: 3,
 	hptimer: 0,
-	width2: 0,
-	height2: 0,
-	deadtrees: 0,
-	herp: 0,
-	frame: 0,
-	pts: 1000,
 	spawned: 0,
-	index: 1,
+	pts: 500,
 	draw: function(){
+		ctx.fillStyle = "red";
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.fillStyle = "white";
 		}
 		else{
-			ctx.drawImage(Treewizzez[this.index], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-			this.index++;
-			if(this.index > 8){
-				this.index = 1;
-			}
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
 		ctx.fillStyle = "yellow";
 		if(this.hp == 6){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
 		}
 		else if(this.hp == 5){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
 			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
 		}
 		else if(this.hp == 4){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
 			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
 		}
 		else if(this.hp == 3){
 			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 26, this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
 		}
 		else if(this.hp == 2){
 			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
 		}
 		else{
 			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4, player.width/4, player.height/4);
 		}
 	},
 	spawn: function(){
@@ -1350,35 +1328,19 @@ var DragonR = {
 		if(this.cd > 0 && this.onScreen == 1){
 			this.cd-=1;
 		}
-		else if(this.spawned == 0){
-			for(O in obstacle1){
-				if(obstacle1[O].hp == 0){
-					this.deadtrees+=1;
-				}
-			}
-			for(O in obstacle2){
-				if(obstacle2[O].hp == 0){
-					this.deadtrees+=1;
-				}
-			}
-			for(O in obstacle3){
-				if(obstacle3[O].hp == 0){
-					this.deadtrees+=1;
-				}
-			}
-			this.herp = this.deadtrees;
-			this.deadtrees = 0;
-			if(this.herp >= 10 && this.onScreen == 0){
-				this.respawn = 0;
-				this.spawned = 1;
-				spawn(this);
-				this.herp = 0;
-			}
+		if(this.spawned == 0 && Dragon.onScreen == 1){
+			this.onScreen = 1;
+			this.spawned = 1;
+			this.x = 72;
+			this.y = 320;
 		}
 	},
-	Attack: function(){
-		if(this.onScreen == 1){
-			
+	attack: function(){
+		if(this.onScreen == 1 && this.cd == 0){
+			this.cd = 150;
+			BigMeteor1.x = this.x;
+			BigMeteor1.y = this.y;
+			BigMeteor1.shoot();
 		}
 	}
 };
@@ -1399,26 +1361,19 @@ var DragonL = {
 	onScreen: 0,
 	movement: false,
 	cd: 90,
-	hp: 6,
+	hp: 3,
 	hptimer: 0,
 	width2: 0,
 	height2: 0,
-	deadtrees: 0,
-	herp: 0,
-	frame: 0,
-	pts: 1000,
+	pts: 500,
 	spawned: 0,
-	index: 1,
 	draw: function(){
+		ctx.fillStyle = "red";
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.fillStyle = "white";
 		}
 		else{
-			ctx.drawImage(Treewizzez[this.index], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-			this.index++;
-			if(this.index > 8){
-				this.index = 1;
-			}
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
 		ctx.fillStyle = "yellow";
 		if(this.hp == 6){
@@ -1461,65 +1416,57 @@ var DragonL = {
 		if(this.cd > 0 && this.onScreen == 1){
 			this.cd-=1;
 		}
-		else if(this.spawned == 0){
-			for(O in obstacle1){
-				if(obstacle1[O].hp == 0){
-					this.deadtrees+=1;
-				}
-			}
-			for(O in obstacle2){
-				if(obstacle2[O].hp == 0){
-					this.deadtrees+=1;
-				}
-			}
-			for(O in obstacle3){
-				if(obstacle3[O].hp == 0){
-					this.deadtrees+=1;
-				}
-			}
-			this.herp = this.deadtrees;
-			this.deadtrees = 0;
-			if(this.herp >= 10 && this.onScreen == 0){
-				this.respawn = 0;
-				this.spawned = 1;
-				spawn(this);
-				this.herp = 0;
-			}
+		if(this.spawned == 0 && Dragon.onScreen == 1){
+			this.onScreen = 1;
+			this.spawned = 1;
+			this.x = 72;
+			this.y = 190;
 		}
 	},
-	Attack: function(){
-		if(this.onScreen == 1){
-			
+	attack: function(){
+		if(this.onScreen == 1 && this.cd == 0){
+			this.cd = 150;
+			BigMeteor2.x = this.x;
+			BigMeteor2.y = this.y;
+			BigMeteor2.shoot();
 		}
 	}
 };
 var DragonEffect = {
 	x: 500,
 	y: -400,
-	width: 32,
-	height: 32,
-	onScreen: 0,
+	width: 256,
+	height: 256,
 	frame: 0,
-	played: 0,
+	cd: 90,
 	draw: function(){
-		if(this.onScreen == 1){
-			if(this.played == 0){
-				this.played = 1;
-				trailingbeeps.currentTime=0;
-				trailingbeeps.play();
-			}
+		if(Dragon.onScreen == 1 && (DragonL.onScreen == 1 || DragonR.onScreen == 1)){
 			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = "228b22";
+			ctx.fillStyle = "red";
 			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
-			this.width = this.width + 8*this.frame;
-			this.height = this.height + 8*this.frame;
+			this.x = Dragon.x;
+			this.y = Dragon.y;
 			this.frame++;
 			ctx.globalAlpha = 1;
 		}
+		if(Dragon.onScreen == 1 && this.cd <=0){
+			this.cd = 360;
+			RandEffect.onScreen = 1;
+			RandEffect.used = 0;
+			RandEffect.x = 400;
+			RandEffect.y = 288;
+			RandomCube.timeLeft = 150;
+			RandomCube.x = 400;
+			RandomCube.y = 288;
+		}
+		else if(Dragon.onScreen == 1){
+			this.cd-=1;
+		}
 	}
-};*/
+};
 var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner,
-					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4, 19: Thief, 20: ThiefA, 21: ThiefB};
+					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4, 19: Thief, 20: ThiefA, 21: ThiefB, 22: Dragon, 23: DragonR, 24: DragonL,
+					25: BigMeteor1, 26: Meteor1, 27: Meteor2, 28: Meteor3, 29: Meteor4, 30: BigMeteor2, 31: Meteor5, 32: Meteor6, 33: Meteor7, 34: Meteor8, 35: MeteorD1, 36: MeteorD2};
 function onHit(E){
 	var deadz = false;
 	if(E.type == 0){
@@ -1545,7 +1492,60 @@ function onHit(E){
 	if(E.type == 0 && E.onTree == 1){
 		deadz = false;
 	}
-	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == -2 || E.type == -3 || E.type == -4 || E.type == -5 || E.type == "Thief"){
+	if(E.type == "Meteor" && E.immunity <= 0){
+		deadz = false;
+		E.timeLeft = 0;
+		Killed.currentTime=0;
+		Killed.play();
+		if(E.height == 32){
+			if(E.num != 2){
+				Meteor1.timeLeft = 150;
+				Meteor1.x = E.x;
+				Meteor1.y = E.y;
+				Meteor1.immunity = 5;
+				Meteor2.timeLeft = 150;
+				Meteor2.x = E.x;
+				Meteor2.y = E.y;
+				Meteor2.immunity = 5;
+				Meteor3.timeLeft = 150;
+				Meteor3.x = E.x;
+				Meteor3.y = E.y;
+				Meteor3.immunity = 5;
+				Meteor4.timeLeft = 150;
+				Meteor4.x = E.x;
+				Meteor4.y = E.y;
+				Meteor4.immunity = 5;
+				MeteorD1.timeLeft = 150;
+				MeteorD1.x = E.x;
+				MeteorD1.y = E.y;
+				MeteorD1.immunity = 5;
+			}
+			else{
+				Meteor5.timeLeft = 150;
+				Meteor5.x = E.x;
+				Meteor5.y = E.y;
+				Meteor5.immunity = 5;
+				Meteor6.timeLeft = 150;
+				Meteor6.x = E.x;
+				Meteor6.y = E.y;
+				Meteor6.immunity = 5;
+				Meteor7.timeLeft = 150;
+				Meteor7.x = E.x;
+				Meteor7.y = E.y;
+				Meteor7.immunity = 5;
+				Meteor8.timeLeft = 150;
+				Meteor8.x = E.x;
+				Meteor8.y = E.y;
+				Meteor8.immunity = 5;
+				MeteorD2.timeLeft = 150;
+				MeteorD2.x = E.x;
+				MeteorD2.y = E.y;
+				MeteorD2.immunity = 5;
+			}
+		}
+	}
+	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == -2 || E.type == -3 || E.type == -4 || E.type == -5 || E.type == "Thief"
+		|| (E.type == "Dragon" && DragonR.onScreen == 0 && DragonL.onScreen == 0) || E.type == "DragonR" || E.type == "DragonL"){
 		if(!(E.hptimer > 0)){
 			E.hp-=1;
 			E.hptimer = 30;
@@ -1561,9 +1561,6 @@ function onHit(E){
 				deadz = true;
 				if(E.type == 2){
 					E.hp = 5;
-				}
-				if(E.type == "Thief"){
-					E.hp = 2;
 				}
 				if(E.type == -2 || E.type == -1){
 					rootStrike.x = -2000;
@@ -1800,7 +1797,10 @@ function onHit(E){
 }
 // Enemy move paramaterized
 function move(E){
-	if(E.movement == true){
+	if(E.type == "Meteor"){
+		MeteorMove(E);
+	}
+	else if(E.movement == true){
 		if(E.dir == "W" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
 			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			E.y-=E.speed;
@@ -1843,7 +1843,8 @@ function move(E){
 	}	
 }
 // Enemy AI
-function AI(E){		
+function AI(E){	
+if(E.type != "Meteor"){	
 	if(E.type == 0 && STATE == "Jungle" && E.bug == 1 && E.onTree == 1 && E.dirct == 0){
 		E.onTree = 0;
 		E.speed = E.speed2*2;
@@ -2033,10 +2034,12 @@ function AI(E){
 		else{
 			E.dirct-=1;
 		}
+	}
 }
 
 function spawn(E){
-if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft == 0 && typemarker3.timeLeft == 0 && hpUp.x == -100){
+if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft == 0 && typemarker3.timeLeft == 0 && hpUp.x == -100
+	&& Dragon.onScreen != 1){
 	if(E.type == 1){
 		if(E.respawn == 0){
 			E.movement = true;

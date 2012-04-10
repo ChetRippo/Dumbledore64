@@ -2429,8 +2429,6 @@ var airfire = {
 	oy: -200,
 	width: 32,
 	height: 8,
-	hwidth: 8,
-	hheight: 32,
 	frame: 0,
 	cd: 0,
 	speed: 16,
@@ -2453,9 +2451,9 @@ var airfire = {
 				this.width, this.height);
 			}
 			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
+				ctx.fillRect(this.x - this.width / 2,
+				this.y - this.height / 2,
+				this.width, this.height);
 			}
 		}
 	},
@@ -2479,16 +2477,14 @@ var airfire = {
 			this.width = 32;
 			this.onScreen = 0;
 			this.height = 8;
-			this.hwidth = 8;
 			this.frame = 0;
-			this.hheight = 32;
 		}
 		else if(this.onScreen ==1){
 			if(this.dir == "S" || this.dir == "W"){
 				this.width = 32 + (4*this.frame);
 			}
 			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
+				this.height = 32 + (4*this.frame);
 			}
 			this.frame++;
 			if (this.dir == "W"){
@@ -2530,7 +2526,6 @@ var airfire = {
 	if(this.cd == 0){
 		Fwave.currentTime=0;
 		Fwave.play();
-		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
 		this.ox = player.x;
@@ -2539,9 +2534,14 @@ var airfire = {
 		this.cd = 60;
 		this.frame = 0;
 		this.onScreen = 1;
-	}
-	else{
-		return 0;
+		if(this.dir == "S" || this.dir == "W"){
+			this.width = 32;
+			this.height = 8;
+		}
+		else if(this.dir == "A" || this.dir == "D"){
+			this.width = 8;
+			this.height = 32;
+		}
 	}
 	}
 };
@@ -2552,8 +2552,6 @@ var airfire12 = {
 	y: -200,
 	width: 32,
 	height: 8,
-	hwidth: 8,
-	hheight: 32,
 	frame: 0,
 	speed: 16,
 	onScreen: 0,
@@ -2572,9 +2570,9 @@ var airfire12 = {
 				this.width, this.height);
 			}
 			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
+				ctx.fillRect(this.x - this.width / 2,
+				this.y - this.height / 2,
+				this.width, this.height);
 			}
 		}
 	},
@@ -2585,19 +2583,14 @@ var airfire12 = {
 			this.width = 32;
 			this.onScreen = 0;
 			this.height = 8;
-			this.hwidth = 8;
-			this.hheight = 32;
 			this.frame = 0;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
 		}
 		else if(this.onScreen ==1){
 			if(this.dir == "S" || this.dir == "W"){
 				this.width = 32 + (4*this.frame);
 			}
 			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
+				this.height = 32 + (4*this.frame);
 			}
 			this.frame++;
 			if (this.dir == "W"){
@@ -2636,10 +2629,17 @@ var airfire12 = {
 	},
 	// Spawn
 	shoot: function(){
-		this.width = 32;
 		this.dir = airfire.dir;
 		this.frame = 0;
 		this.onScreen = 1;
+		if(this.dir == "S" || this.dir == "W"){
+			this.width = 32;
+			this.height = 8;
+		}
+		else if(this.dir == "A" || this.dir == "D"){
+			this.width = 8;
+			this.height = 32;
+		}
 	}
 };
 
@@ -2650,8 +2650,6 @@ var airfire13 = {
 	y: -200,
 	width: 32,
 	height: 8,
-	hwidth: 8,
-	hheight: 32,
 	frame: 0,
 	speed: 16,
 	onScreen: 0,
@@ -2671,8 +2669,8 @@ var airfire13 = {
 			}
 			else if(this.dir == "A" || this.dir == "D"){
 				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
+				this.y - this.height / 2,
+				this.width, this.height);
 			}
 		}
 	},
@@ -2683,19 +2681,14 @@ var airfire13 = {
 			this.width = 32;
 			this.onScreen = 0;
 			this.height = 8;
-			this.hwidth = 8;
-			this.hheight = 32;
 			this.frame = 0;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
 		}
 		else if(this.onScreen ==1){
 			if(this.dir == "S" || this.dir == "W"){
 				this.width = 32 + (4*this.frame);
 			}
 			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
+				this.height = 32 + (4*this.frame);
 			}
 			this.frame++;
 			if (this.dir == "W"){
@@ -2734,10 +2727,17 @@ var airfire13 = {
 	},
 	// Spawn
 	shoot: function(){
-		this.width = 32;
 		this.dir = airfire.dir;
 		this.frame = 0;
 		this.onScreen = 1;
+		if(this.dir == "S" || this.dir == "W"){
+			this.width = 32;
+			this.height = 8;
+		}
+		else if(this.dir == "A" || this.dir == "D"){
+			this.width = 8;
+			this.height = 32;
+		}
 	}
 };
 

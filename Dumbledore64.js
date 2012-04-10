@@ -14,44 +14,27 @@
 
 */
 /*
-	Version 0.5.4 Changes(4/5/2012):
+	Version 0.5.5 Changes(4/9/2012):
 		-Bug Fixes:
-			-Can no longer be damaged by humpdumps while they
-				are in trees
-			-Can no longer shoot while casting
-			-Pause menu sound fully stops
-			-Fixed bubblebeam diagonal shots so they make sense
-			-Teleporting when bubble shields are around you no longer
-				causes the bubbles to scatter
-			-Fixed bug where page reload didn't work in chrome
-			-Fixed bug where homing shots cooldown didn't change
-			-Fixed thief alpha effect negating ice
-			-Fixed bug where thieves disappeared easily
-		-Balancing:
-			-Reset all High scores. Will do this every tenth of a version
-				e.g. version 0.6.0
-			-Frozen Web now has a longer recharge
-			-Zap Trap now has a shorter recharge
-			-Homing Shots now have a 1.5 second cooldown
-			-Added 5 seconds to Chain Lightning cooldown
-			-Added 1 second to all teleport cooldowns
-			-Subtracted 5 seconds from Mirage cooldown
-			-Halved Thief points to 250
-			-Increased Enemy Wizard points to 500
-			-Increased Tree Wizard points to 2000
-			-Increased pickup points to 50
-		-Added Thief enemy in Jungle. Has 2 hp. Steals spell from you and runs away.
-		-Took out the 3 globbly enemies in the Jungle, replaced them with thieves
-		-Thieves now are more stealthy
-		-Optimized a lot of code, should load and run slightly faster
+			-Fixed bug where trees would make infinite sounds on each hit
+			-Made Fire Wave have better collisions
+		-Equalized volume better
+		-Added fire boss. Appears after a certain amount of time in the first level
+			(provided you don't summon the tree wizard)
+			-Has 2 nodes that create a shield. Can't be harmed until they go down.
+			-2 Nodes shoot homing meteors that split into more meteors on hit
+			-Boss fires either inferno or dragon breath based on your location
+		-Added randomly generating element to the fire boss fight
+		
 		
 	TODO:
 		+Bugs
+			+Wind on meteors makes them faster
 		-Highscores
 			-Prompt for initials
 			-Cannot make dynamic pages on git
-		+Optimize
-			+Arrays
+		-Optimize
+			-Arrays
 		-Spells
 			-Dark (Black)
 				-HP Steal?
@@ -59,10 +42,10 @@
 				-Minions
 		+More enemies and AI
 			+Bosses:
-				+Grass level boss #2: 3 part dragon (Dragon, DragonR, DragonL)
+				+Fire boss Sprites
 			-Make it apparent what spell the enemy wizard has
-			-Random Power Ups
-		-Terrain
+		+Terrain
+			+Fire level & transition
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies
@@ -363,6 +346,37 @@ var IceBubble = new Image();
 IceBubble.src = "grafix/effects/bubble/icebubble.png";
 var MysticBubble = new Image();
 MysticBubble.src = "grafix/effects/bubble/mysticbubble.png";
+//Meteor
+var MeteorF0 = new Image();
+MeteorF0.src = "grafix/effects/meteor/meteor.fire0.png";
+var Meteor = new Image();
+Meteor.src = "grafix/effects/meteor/meteor.rock.png";
+var MeteorF15d = new Image();
+MeteorF15d.src = "grafix/effects/meteor/meteor.fire15d.png";
+var MeteorF15u = new Image();
+MeteorF15u.src = "grafix/effects/meteor/meteor.fire15u.png";
+var MeteorF30d = new Image();
+MeteorF30d.src = "grafix/effects/meteor/meteor.fire30d.png";
+var MeteorF30u = new Image();
+MeteorF30u.src = "grafix/effects/meteor/meteor.fire30u.png";
+var MeteorF45d = new Image();
+MeteorF45d.src = "grafix/effects/meteor/meteor.fire45d.png";
+var MeteorF45u = new Image();
+MeteorF45u.src = "grafix/effects/meteor/meteor.fire45u.png";
+var BigMeteorF0 = new Image();
+BigMeteorF0.src = "grafix/effects/meteor/meteor.fire0.big.png";
+var BigMeteorF15d = new Image();
+BigMeteorF15d.src = "grafix/effects/meteor/meteor.fire15d.big.png";
+var BigMeteorF15u = new Image();
+BigMeteorF15u.src = "grafix/effects/meteor/meteor.fire15u.big.png";
+var BigMeteorF30d = new Image();
+BigMeteorF30d.src = "grafix/effects/meteor/meteor.fire30d.big.png";
+var BigMeteorF30u = new Image();
+BigMeteorF30u.src = "grafix/effects/meteor/meteor.fire30u.big.png";
+var BigMeteorF45d = new Image();
+BigMeteorF45d.src = "grafix/effects/meteor/meteor.fire45d.big.png";
+var BigMeteorF45u = new Image();
+BigMeteorF45u.src = "grafix/effects/meteor/meteor.fire45u.big.png";
 //hlightning
 var hlightning1 = new Image();
 hlightning1.src = "grafix/effects/lightning.self/hor.1.png";
@@ -430,6 +444,10 @@ var OverwhelmedByGoblins = document.getElementsByTagName("audio")[29];
 var BadWizards = document.getElementsByTagName("audio")[30];
 var DumblebeatsNormal = document.getElementsByTagName("audio")[31];
 var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: DumblebeatsNormal};
+for(M in AllMusic){
+	AllMusic[M].volume = 0.5;
+}
+DumblebeatsNormal.volume = 0.4
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 //reset by changing the strings, change in gameover() too
 var highscore1 = $.jStorage.get("v5highscore1");
@@ -496,7 +514,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.5.4: April 5 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.5.5: April 9 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -689,7 +707,7 @@ var Options = {
 		if(this.vol == true){
 			ctx.fillText("Sound: On", this.x-this.width/2, this.y+4*this.height/2);
 			for(S in AllSounds){
-				AllSounds[S].volume=0.8;
+				AllSounds[S].volume=0.5;
 			}
 		}
 		if(this.vol == false){
@@ -975,6 +993,15 @@ function contained(a, b){
 	var dist = Math.sqrt(((b.x - a.x)*(b.x - a.x)) + ((b.y - a.y)*(b.y - a.y)));
 	if(dist <= b.width/2 || dist <= b.height/2 ||
 		dist <= a.width/2 || dist <= a.height/2){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+//dragon flame
+function Hcontained(a, b){
+	if(a.y >= b.y-b.height/2 && a.y <= b.y + b.height/2 && a.x <= b.x + b.width/2 && a.x >= b.x-b.width/2){
 		return true;
 	}
 	else{
@@ -1901,7 +1928,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.4: April 5 2012", 244, 96);
+	ctx.fillText("Version 0.5.5: April 9 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	ctx.fillText("1st: " + highscore1, 308, 240);
 	ctx.fillText("2nd: " + highscore2, 308, 272);
@@ -1925,7 +1952,7 @@ function gameOver(){
 //---------------------------------------------------------- Music Player -----------------------------------------------------------//
 function MusicPlayer(){
 if(Options.Music==true && STATE != "PAUSE"){
-	if(STATE == 1 && treeWizz.onScreen == 0){
+	if(STATE == 1 && treeWizz.onScreen == 0 && Dragon.onScreen == 0){
 		DumblebeatsNormal.currentTime=0;
 		Spells.currentTime=0;
 		DumblebeatsNormal.pause();
@@ -1944,6 +1971,15 @@ if(Options.Music==true && STATE != "PAUSE"){
 		DumblebeatsNormal.play();
 	}
 	else if(treeWizz.onScreen==1){
+		OverwhelmedByGoblins.currentTime=0;
+		Spells.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.currentTime=0;
+		DumblebeatsNormal.pause();
+		BadWizards.play();
+	}
+	else if(Dragon.onScreen==1){
 		OverwhelmedByGoblins.currentTime=0;
 		Spells.currentTime=0;
 		OverwhelmedByGoblins.pause();
@@ -2001,6 +2037,7 @@ setInterval(function(){
 				Boxes[B].draw();
 				pickup(Boxes[B]);
 			}
+			RandEffect.draw();
 			for(H in hpParticles){
 				hpParticles[H].draw();
 				hpParticles[H].onHit();
@@ -2145,14 +2182,33 @@ setInterval(function(){
 				roots1[R].draw();
 			}
 			treeWizz.spawn();
+			Dragon.spawn();
+			Dragon.draw();
+			DragonR.spawn();
+			DragonR.draw();
+			DragonL.spawn();
+			DragonL.draw();
+			Dragon.attack();
+			DragonR.attack();
+			DragonL.attack();
+			for(D in Dragonflame){
+				Dragonflame[D].draw();
+				Dragonflame[D].effect();
+			}
 			for(E in AllEnemies){
 				if(AllEnemies[E].onTree == 0){
 					AllEnemies[E].draw();
 				}
-				move(AllEnemies[E]);
-				AI(AllEnemies[E]);
-				spawn(AllEnemies[E]);
+				if(AllEnemies[E].type != "Dragon" && AllEnemies[E].type != "DragonL" && AllEnemies[E].type != "DragonR"){
+					move(AllEnemies[E]);
+					AI(AllEnemies[E]);
+					spawn(AllEnemies[E]);
+				}
 			}
+			for(M in BigMeteors){
+				MeteorAI(BigMeteors[M]);
+			}
+			DragonEffect.draw();
 			Thief.steal();
 			ThiefA.steal();
 			ThiefB.steal();
@@ -2209,8 +2265,7 @@ setInterval(function(){
 			castingBar.draw();
 			castingBar.tick();
 			TreecastingBar.draw();
-			TreecastingBar.tick();
-			
+			TreecastingBar.tick();			
 			// Cooldown calculation
 			if(cd <= 0){
 				cd = cd;

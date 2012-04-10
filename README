@@ -1,42 +1,25 @@
 
-Version 0.5.4 Changes(4/5/2012):
+Version 0.5.5 Changes(4/9/2012):
 		-Bug Fixes:
-			-Can no longer be damaged by humpdumps while they
-				are in trees
-			-Can no longer shoot while casting
-			-Pause menu sound fully stops
-			-Fixed bubblebeam diagonal shots so they make sense
-			-Teleporting when bubble shields are around you no longer
-				causes the bubbles to scatter
-			-Fixed bug where page reload didn't work in chrome
-			-Fixed bug where homing shots cooldown didn't change
-			-Fixed thief alpha effect negating ice
-			-Fixed bug where thieves disappeared easily
-		-Balancing:
-			-Reset all High scores. Will do this every tenth of a version
-				e.g. version 0.6.0
-			-Frozen Web now has a longer recharge
-			-Zap Trap now has a shorter recharge
-			-Homing Shots now have a 1.5 second cooldown
-			-Added 5 seconds to Chain Lightning cooldown
-			-Added 1 second to all teleport cooldowns
-			-Subtracted 5 seconds from Mirage cooldown
-			-Halved Thief points to 250
-			-Increased Enemy Wizard points to 500
-			-Increased Tree Wizard points to 2000
-			-Increased pickup points to 50
-		-Added Thief enemy in Jungle. Has 2 hp. Steals spell from you and runs away.
-		-Took out the 3 globbly enemies in the Jungle, replaced them with thieves
-		-Thieves now are more stealthy
-		-Optimized a lot of code, should load and run slightly faster
+			-Fixed bug where trees would make infinite sounds on each hit
+			-Made Fire Wave have better collisions
+		-Equalized volume better
+		-Added fire boss. Appears after a certain amount of time in the first level
+			(provided you don't summon the tree wizard)
+			-Has 2 nodes that create a shield. Can't be harmed until they go down.
+			-2 Nodes shoot homing meteors that split into more meteors on hit
+			-Boss fires either inferno or dragon breath based on your location
+		-Added randomly generating element to the fire boss fight
+		
 		
 	TODO:
 		+Bugs
+			+Wind on meteors makes them faster
 		-Highscores
 			-Prompt for initials
 			-Cannot make dynamic pages on git
-		+Optimize
-			+Arrays
+		-Optimize
+			-Arrays
 		-Spells
 			-Dark (Black)
 				-HP Steal?
@@ -44,10 +27,10 @@ Version 0.5.4 Changes(4/5/2012):
 				-Minions
 		+More enemies and AI
 			+Bosses:
-				+Grass level boss #2: 3 part dragon (Dragon, DragonR, DragonL)
+				+Fire boss Sprites
 			-Make it apparent what spell the enemy wizard has
-			-Random Power Ups
-		-Terrain
+		+Terrain
+			+Fire level & transition
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies

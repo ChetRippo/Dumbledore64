@@ -283,7 +283,12 @@ var sFire = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -292,7 +297,7 @@ var sFire = {
 	},
 	
 	move: function(){
-		if(this.frame == 10){
+		if(this.frame == 22){
 			this.x = -100;
 			this.y = -200;
 			this.width = 32;
@@ -315,13 +320,13 @@ var sFire = {
 	},
 		
 	// Spawn
-	shoot: function(){
+	shoot: function(A){
 		Explosion.currentTime=0;
 		Explosion.play();
 		this.height = 32;
 		this.width = 32;
-		this.x = Sorceror.x;
-		this.y = Sorceror.y;
+		this.x = A.x;
+		this.y = A.y;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
@@ -2250,3 +2255,1662 @@ var SmokeBombB = {
 		}
 	}
 };
+//----------------------------------------------- Dragon Attacks --------------------------------------------------------------------//
+var DragonFire = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	cd: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 1){
+			Dfire2.x = Dragon.x;
+			Dfire2.y = Dragon.y;
+			Dfire2.shoot();
+		}
+		if(this.frame == 2){
+			Dfire3.x = Dragon.x;
+			Dfire3.y = Dragon.y;
+			Dfire3.shoot();
+		}
+		if(this.frame == 3){
+			Dfire4.x = Dragon.x;
+			Dfire4.y = Dragon.y;
+			Dfire4.shoot();
+		}
+		if(this.frame == 4){
+			Dfire5.x = Dragon.x;
+			Dfire5.y = Dragon.y;
+			Dfire5.shoot();
+		}
+		if(this.frame == 5){
+			Dfire6.x = Dragon.x;
+			Dfire6.y = Dragon.y;
+			Dfire6.shoot();
+		}
+		if(this.frame == 6){
+			Dfire7.x = Dragon.x;
+			Dfire7.y = Dragon.y;
+			Dfire7.shoot();
+		}
+		if(this.frame == 7){
+			Dfire8.x = Dragon.x;
+			Dfire8.y = Dragon.y;
+			Dfire8.shoot();
+		}
+		if(this.frame == 8){
+			Dfire9.x = Dragon.x;
+			Dfire9.y = Dragon.y;
+			Dfire9.shoot();
+		}
+		if(this.frame == 9){
+			Dfire10.x = Dragon.x;
+			Dfire10.y = Dragon.y;
+			Dfire10.shoot();
+		}
+		if(this.frame == 10){
+			Dfire11.x = Dragon.x;
+			Dfire11.y = Dragon.y;
+			Dfire11.shoot();
+		}
+		if(this.frame == 11){
+			Dfire12.x = Dragon.x;
+			Dfire12.y = Dragon.y;
+			Dfire12.shoot();
+		}
+		if(this.frame == 12){
+			Dfire13.x = Dragon.x;
+			Dfire13.y = Dragon.y;
+			Dfire13.shoot();
+		}
+		if(this.frame == 13){
+			Dfire14.x = Dragon.x;
+			Dfire14.y = Dragon.y;
+			Dfire14.shoot();
+		}
+		if(this.frame == 14){
+			Dfire15.x = Dragon.x;
+			Dfire15.y = Dragon.y;
+			Dfire15.shoot();
+		}
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		longfuzz.currentTime=0;
+		longfuzz.play();
+		this.height = 32;
+		this.width = 16;
+		this.x = Dragon.x;
+		this.y = Dragon.y;
+		this.dir = "D";
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var Dfire2 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+
+var Dfire3 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.width = 16;
+		this.height = 32;
+	}
+};
+var Dfire4 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire5 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire6 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire7 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire8 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire9 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire10 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire11 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire12 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire13 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire14 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dfire15 = {
+	color1: "FF6600",
+	color2: "990000",
+	color3: "FFCC00",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 8,
+	dir: "D",
+	frame: 0,
+	speed: 16,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			var color = Math.floor(Math.random() * 3) + 1;
+			if(color == 1){
+				ctx.fillStyle = this.color1;
+			}
+			else if(color == 2){
+				ctx.fillStyle = this.color2;
+			}
+			else if(color == 3){
+				ctx.fillStyle = this.color3;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+		}
+	},
+	effect: function(){
+		if(this.frame == 45){
+			this.x = -100;
+			this.y = -200;
+			this.onScreen = 0;
+			this.frame = 0;
+		}
+		else if(this.onScreen ==1){
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			this.x += this.speed;
+			if(Hcontained(player, this)){
+				if(hptimer<=0){
+					hptimer = 30;
+					player.hp-=1;
+				}
+			}
+			for (O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.onScreen = 1;
+		this.height = 32;
+		this.width = 16;
+	}
+};
+var Dragonflame = {1: DragonFire, 2: Dfire2, 3: Dfire3, 4: Dfire4, 5: Dfire5, 6: Dfire6, 7: Dfire7, 8: Dfire8, 9: Dfire9, 10: Dfire10, 11: Dfire11, 12: Dfire12, 13: Dfire13, 14: Dfire14, 15: Dfire15};
+// Meteor
+var BigMeteor1 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	num: 1,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	immunity: 0,
+	width: 32,
+	height: 32,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			if(this.dir == "D"){
+				ctx.drawImage(BigMeteorF0, this.x-this.width/2, this.y-this.height/2);
+			}
+			if(this.dir == "WD"){
+				ctx.drawImage(BigMeteorF45u, this.x-this.width/2, this.y-this.height/2);
+			}
+			if(this.dir == "SD"){
+				ctx.drawImage(BigMeteorF45d, this.x-this.width/2, this.y-this.height/2);
+			}
+			if(this.dir == "DWD"){
+				ctx.drawImage(BigMeteorF30u, this.x-this.width/2, this.y-this.height/2);
+			}
+			if(this.dir == "D2D"){
+				ctx.drawImage(BigMeteorF30d, this.x-this.width/2, this.y-this.height/2);
+			}
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var Meteor1 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "SD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF45d, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var Meteor2 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "WD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF45u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var Meteor3 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "D2D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF30d, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var Meteor4 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "DWD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF30u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var BigMeteor2 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	num: 2,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	immunity: 0,
+	width: 32,
+	height: 32,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			if(this.dir == "D"){
+				ctx.drawImage(BigMeteorF0, this.x-this.width/2, this.y-this.height/2);
+			}
+			if(this.dir == "WD"){
+				ctx.drawImage(BigMeteorF45u, this.x-this.width/2, this.y-this.height/2);
+			}
+			if(this.dir == "SD"){
+				ctx.drawImage(BigMeteorF45d, this.x-this.width/2, this.y-this.height/2);
+			}
+			if(this.dir == "DWD"){
+				ctx.drawImage(BigMeteorF30u, this.x-this.width/2, this.y-this.height/2);
+			}
+			if(this.dir == "D2D"){
+				ctx.drawImage(BigMeteorF30d, this.x-this.width/2, this.y-this.height/2);
+			}
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var Meteor5 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "SD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF45d, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var Meteor6 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "WD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF45u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var Meteor7 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "D2D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF30d, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var Meteor8 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "DWD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF30u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var MeteorD1 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var MeteorD2 = {
+	type: "Meteor",
+	x: -9000,
+	y: -2000,
+	timeLeft: 0,
+	onTree: 0,
+	speed: 8,
+	speed2: 4,
+	//Bullet clipping causes them to die early
+	immunity: 0,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	movement: false,
+	respawn: -1,
+	rs: -1,
+	dir: "D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.x = -9000;
+			this.y = -2000;
+		}
+		if(this.immunity > 0){
+			this.immunity-=1;
+		}
+	},
+	shoot: function(){
+		this.timeLeft = 150;
+	}
+};
+var BigMeteors = {1: BigMeteor1, 2: BigMeteor2};
+function MeteorMove(B){
+	if (B.timeLeft > 0 && B.dir == "D"){
+		B.timeLeft--;
+		B.x += B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "SD"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y += B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "WD"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y -= B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2W"){
+		B.timeLeft--;
+		B.x += B.speed/2;
+		B.y -= B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2S"){
+		B.timeLeft--;
+		B.x += B.speed/2;
+		B.y += B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DD"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y -= B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2D"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y += B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DWD"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y -= B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2WD"){
+		B.timeLeft--;
+		B.x += B.speed/2;
+		B.y -= B.speed;
+	}
+	else if (B.timeLeft > 0 && B.dir == "DSD"){
+		B.timeLeft--;
+		B.x += B.speed;
+		B.y += B.speed/2;
+	}
+	else if (B.timeLeft > 0 && B.dir == "D2SD"){
+		B.timeLeft--;
+		B.x += B.speed/2;
+		B.y += B.speed;
+	}
+}
+function MeteorAI(E){	
+	var xdiff = player.x - E.x;
+	var ydiff = player.y - E.y;
+	if(xdiff < 4 && ydiff < 4){
+		E.dir = E.dir;
+	}
+	else if(xdiff < 4 && ydiff > 4){
+		E.dir = E.dir;
+	}	
+	else if(xdiff > 4 && ydiff < 4){
+		E.dir = "DWD";
+	}	
+	else if (xdiff > 4 && ydiff > 4){
+		E.dir = "D2D";
+	}
+	else if (xdiff == 4 && ydiff > 4){
+		E.dir = "SD";
+	}
+	else if(xdiff == 4 && ydiff < 4){
+		E.dir = "WD";
+	}
+	else if(xdiff < 4 && ydiff == 4){
+		E.dir = E.dir;
+	}
+	else{
+		E.dir = "D";
+	}
+}
