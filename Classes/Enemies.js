@@ -1171,7 +1171,7 @@ var Dragon = {
 	speed2: 2,
 	dirct: 0,
 	dir: "W",
-	respawn: 20,
+	respawn: 2000,
 	origrp: -1,
 	rp: -1,
 	onScreen: 0,
