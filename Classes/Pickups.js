@@ -731,6 +731,9 @@ var hpUp = {
 		if(this.boss == "treeW"){
 			ctx.drawImage(maxUP, this.x - this.width / 2, this.y - this.height / 2);
 		}
+		if(this.boss == "Dragon"){
+			ctx.drawImage(DragonmaxUP, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	},
 	onHit: function(){
 		if(typemarker.x != -100 && typemarker2.x != -100){
@@ -774,12 +777,14 @@ var hpUp = {
 		hpParticleAS.y = this.y+16;
 		hpParticleSD.x = this.x+16;
 		hpParticleSD.y = this.y+16;
-		TwizEffect.x = 500;
-		TwizEffect.y = -400;
-		TwizEffect.width = 0;
-		TwizEffect.height = 0;
-		TwizEffect.onScreen = 0;
-		TwizEffect.frame = 0;
+		if(this.boss == "treeW"){
+			TwizEffect.x = 500;
+			TwizEffect.y = -400;
+			TwizEffect.width = 0;
+			TwizEffect.height = 0;
+			TwizEffect.onScreen = 0;
+			TwizEffect.frame = 0;
+		}
 		this.x = -100;
 		this.y = -200;
 	}
@@ -1130,7 +1135,7 @@ function HpAi(E){
 		E.dirct-=1;
 	}
 }
-var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 8: RandomCube};
+var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 9: RandomCube};
 var hpParticles = {1: hpParticleW, 2: hpParticleA, 3: hpParticleS, 4: hpParticleD, 5: hpParticleWA, 6: hpParticleWD, 7: hpParticleAS, 8: hpParticleSD};
 // If you pick it up
 function pickup(C){

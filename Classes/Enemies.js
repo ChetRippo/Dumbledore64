@@ -1171,7 +1171,7 @@ var Dragon = {
 	speed2: 2,
 	dirct: 0,
 	dir: "W",
-	respawn: 2500,
+	respawn: 20,
 	origrp: -1,
 	rp: -1,
 	onScreen: 0,
@@ -1643,7 +1643,12 @@ function onHit(E){
 			planted = false;
 			TwizEffect.onScreen = 1;
 		}
-		else if(E.type == "Thief"){
+		else if(E.type == "Dragon"){
+			hpUp.x = E.x;
+			hpUp.y = E.y;
+			hpUp.boss = "Dragon";
+		}
+		if(E.type == "Thief"){
 			E.state = 1;
 			E.speed = 4;
 			E.hp = 2;
@@ -1713,7 +1718,7 @@ function onHit(E){
 			}
 			E.spell = "N/A";
 		}
-		else{
+		else if(E.type != "DragonR" && E.type != "DragonL" && E.type != "Dragon" && E.type != -1){
 			if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100 && Thief.spell != "Fire" && ThiefA.spell != "Fire"
 				 && ThiefB.spell != "Fire"){
 				redCube.x = E.x;
@@ -1756,34 +1761,34 @@ function onHit(E){
 				blueCube.y = E.y;
 				blueCube.timeLeft = 90;
 			}
-			if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
-				marker4.points = E.pts;
-				marker4.mult = multiplier;
-				marker4.x = E.x;
-				marker4.y = E.y;
-				marker4.timeLeft = 20;
-			}
-			else if(marker.x != -100 && marker2.x != -100){
-				marker3.points = "" + E.pts;
-				marker3.mult = multiplier;
-				marker3.x = E.x;
-				marker3.y = E.y;
-				marker3.timeLeft = 20;
-			}
-			else if(marker.x != -100){
-				marker2.points = "" + E.pts;
-				marker2.mult = multiplier;
-				marker2.x = E.x;
-				marker2.y = E.y;
-				marker2.timeLeft = 20;
-			}
-			else{
-				marker.points = "" + E.pts;
-				marker.mult = multiplier;
-				marker.x = E.x;
-				marker.y = E.y;
-				marker.timeLeft = 20;
-			}
+		}
+		if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
+			marker4.points = E.pts;
+			marker4.mult = multiplier;
+			marker4.x = E.x;
+			marker4.y = E.y;
+			marker4.timeLeft = 20;
+		}
+		else if(marker.x != -100 && marker2.x != -100){
+			marker3.points = "" + E.pts;
+			marker3.mult = multiplier;
+			marker3.x = E.x;
+			marker3.y = E.y;
+			marker3.timeLeft = 20;
+		}
+		else if(marker.x != -100){
+			marker2.points = "" + E.pts;
+			marker2.mult = multiplier;
+			marker2.x = E.x;
+			marker2.y = E.y;
+			marker2.timeLeft = 20;
+		}
+		else{
+			marker.points = "" + E.pts;
+			marker.mult = multiplier;
+			marker.x = E.x;
+			marker.y = E.y;
+			marker.timeLeft = 20;
 		}
 		E.x = -9000;
 		E.y = -9000;

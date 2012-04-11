@@ -319,6 +319,8 @@ var Waters = {1: Waterbox, 2: Waterbox2, 3: Waterbox3, 4: Waterbox4, 5: Waterbox
 //Hp up
 var maxUP = new Image();
 maxUP.src = "grafix/powers/heartup/treeheart.png";
+var DragonmaxUP = new Image();
+DragonmaxUP.src = "grafix/powers/heartup/redheart.png";
 // Particle
 var particle1 = new Image();
 particle1.src = "grafix/effects/hpup/hpup1.png";
