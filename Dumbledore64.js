@@ -1857,7 +1857,7 @@ var keys = function(){
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
-	window.location.reload(false);
+	window.location.href=window.location.href;
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
 function gameOver(){
