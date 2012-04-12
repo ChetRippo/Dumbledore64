@@ -1857,12 +1857,7 @@ var keys = function(){
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
-	window.location.href=window.location.href;
-	var timer = 60;
-	while(timer > 0){
-		timer-=1;
-	}
-	window.location.href=window.location.href;
+	window.location.reload(false);
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
 function gameOver(){
