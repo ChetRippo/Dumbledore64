@@ -785,6 +785,15 @@ var hpUp = {
 			TwizEffect.onScreen = 0;
 			TwizEffect.frame = 0;
 		}
+		if(this.boss == "Dragon"){
+			DragonEffect2.x = 500;
+			DragonEffect2.y = -400;
+			DragonEffect2.width = 0;
+			DragonEffect2.height = 0;
+			DragonEffect2.onScreen = 0;
+			DragonEffect2.frame = 0;
+			ctx.globalAlpha = 1;
+		}
 		this.x = -100;
 		this.y = -200;
 	}

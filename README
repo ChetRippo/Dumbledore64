@@ -1,22 +1,19 @@
 
-Version 0.5.5 Changes(4/9/2012):
+Version 0.5.6 Changes(4/12/2012):
 		-Bug Fixes:
-			-Fixed bug where trees would make infinite sounds on each hit
-			-Made Fire Wave have better collisions
-		-Equalized volume better
-		-Added fire boss. Appears after a certain amount of time in the first level
-			(provided you don't summon the tree wizard)
-			-Has 2 nodes that create a shield. Can't be harmed until they go down.
-			-2 Nodes shoot homing meteors that split into more meteors on hit
-			-Boss fires either inferno or dragon breath based on your location
-		-Added randomly generating element to the fire boss fight
+			-Made enemy wizard's ice spell not mess up alpha
+			-Made Thunderstorm noise not annoying
+		-Added HP UP powerup to fire boss fight
+		-Added Level transition from fire boss. The large meteors turn into obstacles
+		-Added fire level. Contains all globblys, hudges, lavamen, and lavamen spawners
+		-Added Jack's Casey's Quest song to fire level
 		
 		
 	TODO:
 		+Bugs
 			+Wind on meteors makes them faster
-		-Highscores
-			-Prompt for initials
+		+Highscores
+			+Prompt for initials
 			-Cannot make dynamic pages on git
 		-Optimize
 			-Arrays
@@ -30,7 +27,6 @@ Version 0.5.5 Changes(4/9/2012):
 				+Fire boss Sprites
 			-Make it apparent what spell the enemy wizard has
 		+Terrain
-			+Fire level & transition
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies

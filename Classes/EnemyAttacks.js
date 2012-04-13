@@ -209,6 +209,906 @@ var Globblyfire3 = {
 		this.onScreen = 1;
 	}
 };
+//------------------------------------------------------------- Tiny Meteor Explosions ----------------------------------------------//
+var EMplosion1 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (8*this.frame);
+			this.height = 16 + (8*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion2 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (8*this.frame);
+			this.height = 16 + (8*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion3 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (8*this.frame);
+			this.height = 16 + (8*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion4 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (8*this.frame);
+			this.height = 16 + (8*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion5 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (8*this.frame);
+			this.height = 16 + (8*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion6 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (8*this.frame);
+			this.height = 16 + (8*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion7 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (8*this.frame);
+			this.height = 16 + (8*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion8 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (8*this.frame);
+			this.height = 16 + (8*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion9 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (16*this.frame);
+			this.height = 16 + (16*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion10 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (16*this.frame);
+			this.height = 16 + (16*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion11 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (16*this.frame);
+			this.height = 16 + (16*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion12 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (16*this.frame);
+			this.height = 16 + (16*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosion13 = {
+	color: "FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	onScreen: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = 1;
+		}
+	},
+	
+	move: function(){
+		if(this.frame == 10){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.onScreen = 0;
+		}
+		else{
+			this.width = 16 + (16*this.frame);
+			this.height = 16 + (16*this.frame);
+			this.frame++;
+			if(contained(player, this)){
+				if(hptimer <= 0){
+					player.hp-=1;
+					onDmg.currentTime=0;
+					onDmg.play();
+					hptimer = 30;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
+		Explosion.currentTime=0;
+		Explosion.play();
+		this.height = 16;
+		this.width = 16;
+		this.frame = 0;
+		this.onScreen = 1;
+	}
+};
+var EMplosions = {1: EMplosion1, 2: EMplosion2, 3: EMplosion3, 4: EMplosion4, 5: EMplosion5, 6: EMplosion6, 7: EMplosion7, 8: EMplosion8, 9: EMplosion9, 10: EMplosion10, 11: EMplosion11,
+					12: EMplosion12, 13: EMplosion13};
 // sIce: Slows player down by halving speed
 var sIce = {
 	color: "00CCFF",
@@ -385,7 +1285,7 @@ var sLightning = {
 				this.timeLeft-=1;
 			}
 			if(this.vx != -2000){
-				if(player.x >= this.vx && player.x <= this.vx + this.vwidth){
+				if(player.x >= this.vx-this.vwidth/2 && player.x <= this.vx + this.vwidth/2){
 					if(hptimer <= 0){
 						player.hp-=1;
 						onDmg.currentTime=0;
@@ -395,7 +1295,7 @@ var sLightning = {
 				}
 			}
 			if(this.hy != -2000){
-				if(player.y <= this.hy + this.hheight && player.y >= this.hy){
+				if(player.y <= this.hy + this.hheight/2 && player.y >= this.hy-this.hheight/2){
 					if(this.vx == -2000){
 						this.vx = player.x
 					}
@@ -3830,6 +4730,382 @@ var MeteorD2 = {
 	}
 };
 var BigMeteors = {1: BigMeteor1, 2: BigMeteor2};
+//------------------------------------------------------ Effect Meteors -------------------------------------------------------------//
+var EMeteor1 = {
+	type: "Meteor",
+	x: 64,
+	y: 256,
+	timeLeft: -1,
+	speed: 4,
+	width: 32,
+	height: 32,
+	//cancel out allenemies[e].movement
+	respawn: -1,
+	dir: "D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(BigMeteorF0, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			Globblyfire.x = this.x;
+			Globblyfire.y = this.y;
+			Globblyfire.shoot();
+			obstacle31.x = this.x;
+			obstacle31.y = this.y;
+		}
+	}
+};
+var EMeteor2 = {
+	type: "Meteor",
+	x: -50,
+	y: 400,
+	timeLeft: -1,
+	speed: 4,
+	width: 32,
+	height: 32,
+	//cancel out allenemies[e].movement
+	respawn: -1,
+	dir: "DWD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(BigMeteorF30u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			Globblyfire2.x = this.x;
+			Globblyfire2.y = this.y;
+			Globblyfire2.shoot();
+			obstacle32.x = this.x;
+			obstacle32.y = this.y;
+		}
+	}
+};
+var EMeteor3 = {
+	type: "Meteor",
+	x: 0,
+	y: -32,
+	timeLeft: -1,
+	speed: 4,
+	width: 32,
+	height: 32,
+	//cancel out allenemies[e].movement
+	respawn: -1,
+	dir: "D2D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(BigMeteorF30d, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			Globblyfire3.x = this.x;
+			Globblyfire3.y = this.y;
+			Globblyfire3.shoot();
+			obstacle33.x = this.x;
+			obstacle33.y = this.y;
+		}
+	}
+};
+var EMeteor4 = {
+	type: "Meteor",
+	x: 0,
+	y: 576,
+	timeLeft: -1,
+	speed: 4,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	respawn: -1,
+	dir: "DWD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(MeteorF30u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion1.x = this.x;
+			EMplosion1.y = this.y;
+			EMplosion1.shoot();
+		}
+	}
+};
+var EMeteor5 = {
+	type: "Meteor",
+	x: 0,
+	y: 64,
+	timeLeft: -1,
+	speed: 4,
+	width: 16,
+	height: 16,
+	//cancel out allenemies[e].movement
+	respawn: -1,
+	dir: "D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion2.x = this.x;
+			EMplosion2.y = this.y;
+			EMplosion2.shoot();
+		}
+	}
+};
+var EMeteor6 = {
+	type: "Meteor",
+	x: -32,
+	y: 128,
+	timeLeft: -1,
+	speed: 4,
+	width: 16,
+	height: 16,
+	respawn: -1,
+	dir: "D2D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(MeteorF30d, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion3.x = this.x;
+			EMplosion3.y = this.y;
+			EMplosion3.shoot();
+		}
+	}
+};
+var EMeteor7 = {
+	type: "Meteor",
+	x: 0,
+	y: 376,
+	timeLeft: -1,
+	speed: 4,
+	width: 16,
+	height: 16,
+	respawn: -1,
+	dir: "WD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(MeteorF45u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion4.x = this.x;
+			EMplosion4.y = this.y;
+			EMplosion4.shoot();
+		}
+	}
+};
+var EMeteor8 = {
+	type: "Meteor",
+	x: 0,
+	y: 64,
+	timeLeft: -1,
+	speed: 4,
+	width: 16,
+	height: 16,
+	respawn: -1,
+	dir: "D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion5.x = this.x;
+			EMplosion5.y = this.y;
+			EMplosion5.shoot();
+		}
+	}
+};
+var EMeteor9 = {
+	type: "Meteor",
+	x: 0,
+	y: 420,
+	timeLeft: -1,
+	speed: 4,
+	width: 16,
+	height: 16,
+	respawn: -1,
+	dir: "D2D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(MeteorF30d, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion6.x = this.x;
+			EMplosion6.y = this.y;
+			EMplosion6.shoot();
+		}
+	}
+};
+var EMeteor10 = {
+	type: "Meteor",
+	x: 0,
+	y: 128,
+	timeLeft: -1,
+	speed: 4,
+	width: 16,
+	height: 16,
+	respawn: -1,
+	dir: "WD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(MeteorF45u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion7.x = this.x;
+			EMplosion7.y = this.y;
+			EMplosion7.shoot();
+		}
+	}
+};
+var EMeteor11 = {
+	type: "Meteor",
+	x: -64,
+	y: 256,
+	timeLeft: -1,
+	speed: 6,
+	width: 16,
+	height: 16,
+	respawn: -1,
+	dir: "D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion8.x = this.x;
+			EMplosion8.y = this.y;
+			EMplosion8.shoot();
+		}
+	}
+};
+var EMeteor12 = {
+	type: "Meteor",
+	x: 0,
+	y: 576,
+	timeLeft: -1,
+	speed: 6,
+	width: 32,
+	height: 32,
+	respawn: -1,
+	dir: "WD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(BigMeteorF45u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion9.x = this.x;
+			EMplosion9.y = this.y;
+			EMplosion9.shoot();
+			obstacle34.x = this.x;
+			obstacle34.y = this.y;
+		}
+	}
+};
+var EMeteor13 = {
+	type: "Meteor",
+	x: 0,
+	y: 64,
+	timeLeft: -1,
+	speed: 4,
+	width: 32,
+	height: 32,
+	respawn: -1,
+	dir: "SD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(BigMeteorF45d, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion10.x = this.x;
+			EMplosion10.y = this.y;
+			EMplosion10.shoot();
+			obstacle21.x = this.x;
+			obstacle21.y = this.y;
+		}
+	}
+};
+var EMeteor14 = {
+	type: "Meteor",
+	x: 0,
+	y: 320,
+	timeLeft: -1,
+	speed: 6,
+	width: 32,
+	height: 32,
+	respawn: -1,
+	dir: "D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(BigMeteorF0, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion11.x = this.x;
+			EMplosion11.y = this.y;
+			EMplosion11.shoot();
+			obstacle22.x = this.x;
+			obstacle22.y = this.y;
+		}
+	}
+};
+var EMeteor15 = {
+	type: "Meteor",
+	x: -128,
+	y: 640,
+	timeLeft: -1,
+	speed: 6,
+	width: 32,
+	height: 32,
+	respawn: -1,
+	dir: "DWD",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(BigMeteorF30u, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion12.x = this.x;
+			EMplosion12.y = this.y;
+			EMplosion12.shoot();
+			obstacle23.x = this.x;
+			obstacle23.y = this.y;
+		}
+	}
+};
+var EMeteor16 = {
+	type: "Meteor",
+	x: -128,
+	y: -128,
+	timeLeft: -1,
+	speed: 6,
+	width: 32,
+	height: 32,
+	respawn: -1,
+	dir: "D2D",
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(BigMeteorF30d, this.x-this.width/2, this.y-this.height/2);
+		}
+		if(this.timeLeft == 0){
+			this.timeLeft-=1;
+			EMplosion13.x = this.x;
+			EMplosion13.y = this.y;
+			EMplosion13.shoot();
+			obstacle24.x = this.x;
+			obstacle24.y = this.y;
+		}
+	}
+};
+var EMeteors = {1: EMeteor1, 2: EMeteor2, 3: EMeteor3, 4: EMeteor4, 5: EMeteor5, 6: EMeteor6, 7: EMeteor7, 8: EMeteor8, 9: EMeteor9, 10: EMeteor10, 11: EMeteor11, 12: EMeteor12,
+				13: EMeteor13, 14: EMeteor14, 15: EMeteor15, 16: EMeteor16};
 function MeteorMove(B){
 	if (B.timeLeft > 0 && B.dir == "D"){
 		B.timeLeft--;

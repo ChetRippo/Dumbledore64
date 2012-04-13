@@ -14,24 +14,21 @@
 
 */
 /*
-	Version 0.5.5 Changes(4/9/2012):
+	Version 0.5.6 Changes(4/12/2012):
 		-Bug Fixes:
-			-Fixed bug where trees would make infinite sounds on each hit
-			-Made Fire Wave have better collisions
-		-Equalized volume better
-		-Added fire boss. Appears after a certain amount of time in the first level
-			(provided you don't summon the tree wizard)
-			-Has 2 nodes that create a shield. Can't be harmed until they go down.
-			-2 Nodes shoot homing meteors that split into more meteors on hit
-			-Boss fires either inferno or dragon breath based on your location
-		-Added randomly generating element to the fire boss fight
+			-Made enemy wizard's ice spell not mess up alpha
+			-Made Thunderstorm noise not annoying
+		-Added HP UP powerup to fire boss fight
+		-Added Level transition from fire boss. The large meteors turn into obstacles
+		-Added fire level. Contains all globblys, hudges, lavamen, and lavamen spawners
+		-Added Jack's Casey's Quest song to fire level
 		
 		
 	TODO:
 		+Bugs
 			+Wind on meteors makes them faster
-		-Highscores
-			-Prompt for initials
+		+Highscores
+			+Prompt for initials
 			-Cannot make dynamic pages on git
 		-Optimize
 			-Arrays
@@ -45,7 +42,6 @@
 				+Fire boss Sprites
 			-Make it apparent what spell the enemy wizard has
 		+Terrain
-			+Fire level & transition
 			-Different levels, at the end of each is a boss
 			-During battle terrain gradually changes to new level
 			-Each level has its own element drops and enemies
@@ -132,6 +128,8 @@ var backGround1 = new Image();
 backGround1.src = "grafix/background/grass1.png";
 var backGround2 = new Image();
 backGround2.src = "grafix/background/jungle1.png";
+var backGround3 = new Image();
+backGround3.src = "grafix/background/fire1.png";
 //Jungle
 var Jtree1 = new Image();
 Jtree1.src = "grafix/objects/jungle.tree/sprout1.png";
@@ -351,8 +349,8 @@ MysticBubble.src = "grafix/effects/bubble/mysticbubble.png";
 //Meteor
 var MeteorF0 = new Image();
 MeteorF0.src = "grafix/effects/meteor/meteor.fire0.png";
-var Meteor = new Image();
-Meteor.src = "grafix/effects/meteor/meteor.rock.png";
+var Meteorcold = new Image();
+Meteorcold.src = "grafix/effects/meteor/meteor.rock.png";
 var MeteorF15d = new Image();
 MeteorF15d.src = "grafix/effects/meteor/meteor.fire15d.png";
 var MeteorF15u = new Image();
@@ -445,11 +443,13 @@ var Spells = document.getElementsByTagName("audio")[28];
 var OverwhelmedByGoblins = document.getElementsByTagName("audio")[29];
 var BadWizards = document.getElementsByTagName("audio")[30];
 var DumblebeatsNormal = document.getElementsByTagName("audio")[31];
-var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: DumblebeatsNormal};
+var CaseysQuest = document.getElementsByTagName("audio")[32];
+var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: DumblebeatsNormal, 5: CaseysQuest};
 for(M in AllMusic){
 	AllMusic[M].volume = 0.5;
 }
-DumblebeatsNormal.volume = 0.4
+DumblebeatsNormal.volume = 0.4;
+CaseysQuest.volume = 0.25;
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 //reset by changing the strings, change in gameover() too
 var highscore1 = $.jStorage.get("v5highscore1");
@@ -516,7 +516,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.5.5: April 9 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.5.6 Alpha: April 12 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -863,6 +863,15 @@ var player = {
 				}
 			}
 		}
+		for(E in EMeteors){
+			if(collision(EMeteors[E].dir, EMeteors[E], this) || collision(this.dir, this, EMeteors[E])){
+				if(EMeteors[E].timeLeft > 0){
+					onDmg.currentTime=0;
+					onDmg.play();
+					this.dmg = true;
+				}
+			}
+		}
 		if(this.dmg == true){
 			this.hp-=1;
 			hptimer = 30;
@@ -1169,7 +1178,7 @@ if(ctx.globalAlpha == 1){
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
-	if(STATE != 1 && STATE != "Jungle"){
+	if(STATE != 1 && STATE != "Jungle" && STATE != "Scorched"){
 		ctx.drawImage(menuBack, 4, 4);
 	}
 	else if(STATE == 1){
@@ -1177,6 +1186,9 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 	}
 	else if(STATE == "Jungle"){
 		ctx.drawImage(backGround2, 0, 0);
+	}
+	else if(STATE == "Scorched"){
+		ctx.drawImage(backGround3, 0, 0);
 	}
 };
 //-------------------------------------------------- HUD and Spell Calculation ------------------------------------------------------//
@@ -1930,7 +1942,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.5: April 9 2012", 244, 96);
+	ctx.fillText("Version 0.5.6 Alpha: April 12 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	ctx.fillText("1st: " + highscore1, 308, 240);
 	ctx.fillText("2nd: " + highscore2, 308, 272);
@@ -1961,6 +1973,8 @@ if(Options.Music==true && STATE != "PAUSE"){
 		Spells.pause();
 		BadWizards.currentTime=0;
 		BadWizards.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
 		OverwhelmedByGoblins.play();
 	}
 	else if(STATE == "Jungle"){
@@ -1970,6 +1984,8 @@ if(Options.Music==true && STATE != "PAUSE"){
 		Spells.pause();
 		BadWizards.currentTime=0;
 		BadWizards.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
 		DumblebeatsNormal.play();
 	}
 	else if(treeWizz.onScreen==1){
@@ -1979,6 +1995,8 @@ if(Options.Music==true && STATE != "PAUSE"){
 		Spells.pause();
 		DumblebeatsNormal.currentTime=0;
 		DumblebeatsNormal.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
 		BadWizards.play();
 	}
 	else if(Dragon.onScreen==1){
@@ -1988,7 +2006,20 @@ if(Options.Music==true && STATE != "PAUSE"){
 		Spells.pause();
 		DumblebeatsNormal.currentTime=0;
 		DumblebeatsNormal.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
 		BadWizards.play();
+	}
+	else if(STATE=="Scorched"){
+		OverwhelmedByGoblins.currentTime=0;
+		Spells.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.currentTime=0;
+		DumblebeatsNormal.pause();
+		BadWizards.currentTime=0;
+		BadWizards.pause();
+		CaseysQuest.play();
 	}
 	else{
 		DumblebeatsNormal.currentTime=0;
@@ -1997,6 +2028,8 @@ if(Options.Music==true && STATE != "PAUSE"){
 		OverwhelmedByGoblins.pause();
 		BadWizards.currentTime=0;
 		BadWizards.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
 		Spells.play();
 	}
 }
@@ -2024,7 +2057,7 @@ setInterval(function(){
 	else if(STATE == 6){
 		Options.draw();
 	}
-	else if(STATE == 1 || STATE == "Jungle"){
+	else if(STATE == 1 || STATE == "Jungle" || STATE == "Scorched"){
 		if(player.hp <= 0){
 			STATE = 4;
 			nu = 1;
@@ -2060,6 +2093,9 @@ setInterval(function(){
 			ice2.draw();
 			ice2.move();
 			ice2.effect();
+			sIce.draw();
+			sIce.move();
+			sIce.effect();
 		
 			earth.draw();
 			earth.move();
@@ -2160,9 +2196,6 @@ setInterval(function(){
 				Wpools[W].draw();
 				Wpools[W].move();
 			}
-			sIce.draw();
-			sIce.move();
-			sIce.effect();
 			
 			sFire.draw();
 			sFire.move();
@@ -2210,6 +2243,14 @@ setInterval(function(){
 			for(M in BigMeteors){
 				MeteorAI(BigMeteors[M]);
 			}
+			for(E in EMeteors){
+				EMeteors[E].draw();
+				MeteorMove(EMeteors[E]);
+			}
+			for(E in EMplosions){
+				EMplosions[E].draw();
+				EMplosions[E].move();
+			}
 			DragonEffect.draw();
 			Thief.steal();
 			ThiefA.steal();
@@ -2239,6 +2280,7 @@ setInterval(function(){
 				}
 			}
 			TwizEffect.draw();
+			DragonEffect2.draw();
 			
 			UI();
 			SCORE();

@@ -2897,8 +2897,6 @@ var airlightning = {
 	
 	draw: function(){
 		if(this.LonScreen == 1){
-			Thunder.currentTime=0;
-			Thunder.play();
 			this.LonScreen = 0;
 			ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
 			ctx.drawImage(vlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
@@ -2926,13 +2924,17 @@ var airlightning = {
 				this.hy = -2000;
 			}
 			for (E in AllEnemies){
-				if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
+				if(AllEnemies[E].x >= this.vx-this.vwidth/2 && AllEnemies[E].x <= this.vx + this.vwidth/2 && AllEnemies[E].onScreen == 1){
 					onHit(AllEnemies[E]);
+					Thunder.currentTime=0;
+					Thunder.play();
 				}
 			}			
 			for (E in AllEnemies){
-				if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
+				if(AllEnemies[E].y <= this.hy + this.hheight/2 && AllEnemies[E].y >= this.hy-this.hheight/2 && AllEnemies[E].onScreen == 1){
 					onHit(AllEnemies[E]);
+					Thunder.currentTime=0;
+					Thunder.play();
 				}
 			}			
 		}

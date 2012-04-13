@@ -215,6 +215,15 @@ function drawObstacle(O){
 			if(STATE == "Jungle"){
 				ctx.drawImage(JungleTrees[Math.floor(O[Z].index/2)], O[Z].x - O[Z].width/2, O[Z].y - 576);
 			}
+			if(STATE == "Scorched"){
+				if (O[Z].hptimer/2 != Math.round(O[Z].hptimer/2)){
+					ctx.fillStyle = "white";
+					ctx.fillRect(O[Z].x - O[Z].width / 2, O[Z].y - O[Z].height / 2, O[Z].width, O[Z].height);
+				}
+				ctx.globalAlpha = 0.5;
+				ctx.drawImage(Meteorcold, O[Z].x - O[Z].width/2, O[Z].y - O[Z].height/2, O[Z].width, O[Z].height);
+				ctx.globalAlpha = 1;
+			}
 		}
 	}
 }
@@ -308,6 +317,23 @@ function rePlant(){
 		for(Z in obstacle3){
 			obstacle3[Z].x = 2000;
 			obstacle3[Z].y = 2000;
+		}
+		planted = true;
+	}
+	if(STATE == "Scorched" && planted == false){
+		for(Z in obstacle1){
+			obstacle1[Z].x = 2000;
+			obstacle1[Z].y = 2000;
+		}
+		for(Z in obstacle2){
+			obstacle2[Z].x = 2000;
+			obstacle2[Z].y = 2000;
+			obstacle2[Z].hp = 5;
+		}
+		for(Z in obstacle3){
+			obstacle3[Z].x = 2000;
+			obstacle3[Z].y = 2000;
+			obstacle3[Z].hp = 5;
 		}
 		planted = true;
 	}

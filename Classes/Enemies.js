@@ -65,6 +65,9 @@ var EnemyA = {
 		if(STATE == 1){
 			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
 		}
+		if(STATE == "Scorched"){
+			ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+		}
 		else if(STATE == "Jungle"){
 			if(this.onTree == 1){
 				if(this.dindex > 2){
@@ -161,6 +164,9 @@ var EnemyC = {
 	draw: function(){
 		if(STATE == 1){
 			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		if(STATE == "Scorched"){
+			ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
 		}
 		else if(STATE == "Jungle"){
 			if(this.onTree == 1){
@@ -389,7 +395,7 @@ var Spawner = {
 	dirct: 0,
 	hp: 5,
 	hptimer: 0,
-	respawn: -1,
+	respawn: 300,
 	origrp: -1,
 	dir: "W",
 	rp: -1,
@@ -1464,6 +1470,36 @@ var DragonEffect = {
 		}
 	}
 };
+var DragonEffect2 = {
+	x: 500,
+	y: -400,
+	width: 32,
+	height: 32,
+	onScreen: 0,
+	frame: 0,
+	played: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.globalAlpha = 0.2;
+			if(this.played == 0){
+				this.played = 1;
+				radiofailure.currentTime=0;
+				radiofailure.play();
+				for(M in EMeteors){
+					EMeteors[M].timeLeft = Math.floor(Math.random() * 150) + 30;
+				}
+				STATE = "Scorched";
+				planted = false;
+				rePlant();
+			}
+			ctx.fillStyle = "CC0000";
+			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+			this.width = this.width + 8*this.frame;
+			this.height = this.height + 8*this.frame;
+			this.frame++;
+		}
+	}
+};
 var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner,
 					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4, 19: Thief, 20: ThiefA, 21: ThiefB, 22: Dragon, 23: DragonR, 24: DragonL,
 					25: BigMeteor1, 26: Meteor1, 27: Meteor2, 28: Meteor3, 29: Meteor4, 30: BigMeteor2, 31: Meteor5, 32: Meteor6, 33: Meteor7, 34: Meteor8, 35: MeteorD1, 36: MeteorD2};
@@ -1647,6 +1683,10 @@ function onHit(E){
 			hpUp.x = E.x;
 			hpUp.y = E.y;
 			hpUp.boss = "Dragon";
+			DragonEffect2.x = E.x;
+			DragonEffect2.y = E.y;
+			DragonEffect2.played = 0;
+			DragonEffect2.onScreen = 1;
 		}
 		if(E.type == "Thief"){
 			E.state = 1;
@@ -2156,11 +2196,14 @@ if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft ==
 	else if(E.type == "Thief" && STATE == "Jungle" && E.respawn > 0){
 		E.respawn-=1;
 	}
+	else if(E.type == 2 && STATE == "Scorched" && E.respawn > 0){
+		E.respawn-=1;
+	}
 	//if globbly in jungle
 	if(E.type == 0 && STATE == "Jungle" && E.speed2*2 == 8){
 		E.respawn= E.respawn;
 	}
-	else if(E.type != "Thief"){
+	else if(E.type != "Thief" && E.type != 2){
 		E.respawn-=1;
 	}
 }
