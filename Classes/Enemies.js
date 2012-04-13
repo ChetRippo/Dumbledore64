@@ -396,9 +396,9 @@ var Spawner = {
 	hp: 5,
 	hptimer: 0,
 	respawn: 300,
-	origrp: -1,
+	origrp: 450,
 	dir: "W",
-	rp: -1,
+	rp: 450,
 	pts: 500,
 	onScreen: 0,
 	cd: 60,
@@ -1826,6 +1826,13 @@ function onHit(E){
 		score+=(E.pts * multiplier);
 		multiplier++;
 		multtimer = 30;
+		//Makes it harder
+		if(StateTimer/30 > 60){
+			E.respawn-=Math.floor(StateTimer/30);
+			if(E.respawn<30){
+				E.respawn = 30;
+			}
+		}
 	}
 }
 // Enemy move paramaterized

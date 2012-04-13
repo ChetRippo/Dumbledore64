@@ -92,6 +92,8 @@ var planted = false;
 var jungleAni = false;
 // Alpha
 var Alpha = 1;
+//StateTimer: for staying in levels with no boss
+var StateTimer = 0;
 //------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //Girraffix
 var WizzurdL = new Image();
@@ -2066,6 +2068,9 @@ setInterval(function(){
 			nu = 1;
 		}
 		else{
+			if(STATE == "Jungle" || STATE == "Scorched"){
+				StateTimer+=1;
+			}
 			ctx.globalAlpha = Alpha;
 			keys();
 			multiply();
