@@ -754,13 +754,13 @@ var TwizEffect = {
 				trailingbeeps.currentTime=0;
 				trailingbeeps.play();
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha/2;
 			ctx.fillStyle = "228b22";
 			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
 			this.width = this.width + 8*this.frame;
 			this.height = this.height + 8*this.frame;
 			this.frame++;
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -826,8 +826,8 @@ var Thief = {
 		if(this.hptimer>0){
 			this.hptimer-=1;
 		}
-		if(this.state == 1 && ctx.globalAlpha == 1){
-			ctx.globalAlpha = 0.5;
+		if(this.state == 1 || this.state == 2){
+			ctx.globalAlpha = Alpha/2;
 			this.alphaChange = true;
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
@@ -836,10 +836,6 @@ var Thief = {
 		}
 		else{
 			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		}
-		if(this.state != 3 && ctx.globalAlpha == 1){
-			ctx.globalAlpha = 0.5;
-			this.alphaChange = true
 		}
 		if(this.hp == 2){
 			ctx.fillStyle = "red";
@@ -851,7 +847,7 @@ var Thief = {
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 		}
 		if(this.alphaChange){
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.alphaChange = false;
 		}
 		if(this.spell != "N/A"){
@@ -960,8 +956,8 @@ var ThiefA = {
 		if(this.hptimer>0){
 			this.hptimer-=1;
 		}
-		if(this.state == 1 && ctx.globalAlpha == 1){
-			ctx.globalAlpha = 0.5;
+		if(this.state == 1 || this.state == 2){
+			ctx.globalAlpha = Alpha/2;
 			this.alphaChange = true;
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
@@ -970,10 +966,6 @@ var ThiefA = {
 		}
 		else{
 			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		}
-		if(this.state != 3 && ctx.globalAlpha == 1){
-			ctx.globalAlpha = 0.5;
-			this.alphaChange = true
 		}
 		if(this.hp == 2){
 			ctx.fillStyle = "red";
@@ -985,7 +977,7 @@ var ThiefA = {
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 		}
 		if(this.alphaChange){
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.alphaChange = false;
 		}
 		if(this.spell != "N/A"){
@@ -1094,8 +1086,8 @@ var ThiefB = {
 		if(this.hptimer>0){
 			this.hptimer-=1;
 		}
-		if(this.state == 1 && ctx.globalAlpha == 1){
-			ctx.globalAlpha = 0.5;
+		if(this.state == 1 || this.state == 2){
+			ctx.globalAlpha = Alpha/2;
 			this.alphaChange = true;
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
@@ -1104,10 +1096,6 @@ var ThiefB = {
 		}
 		else{
 			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		}
-		if(this.state != 3 && ctx.globalAlpha == 1){
-			ctx.globalAlpha = 0.5;
-			this.alphaChange = true
 		}
 		if(this.hp == 2){
 			ctx.fillStyle = "red";
@@ -1119,7 +1107,7 @@ var ThiefB = {
 			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
 		}
 		if(this.alphaChange){
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.alphaChange = false;
 		}
 		if(this.spell != "N/A"){
@@ -1447,13 +1435,13 @@ var DragonEffect = {
 	cd: 90,
 	draw: function(){
 		if(Dragon.onScreen == 1 && (DragonL.onScreen == 1 || DragonR.onScreen == 1)){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha/2;
 			ctx.fillStyle = "red";
 			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
 			this.x = Dragon.x;
 			this.y = Dragon.y;
 			this.frame++;
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 		if(Dragon.onScreen == 1 && this.cd <=0){
 			this.cd = 360;
@@ -1480,7 +1468,7 @@ var DragonEffect2 = {
 	played: 0,
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.2;
+			ctx.globalAlpha = Alpha*0.2;
 			if(this.played == 0){
 				this.played = 1;
 				radiofailure.currentTime=0;

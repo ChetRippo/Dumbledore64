@@ -220,9 +220,9 @@ function drawObstacle(O){
 					ctx.fillStyle = "white";
 					ctx.fillRect(O[Z].x - O[Z].width / 2, O[Z].y - O[Z].height / 2, O[Z].width, O[Z].height);
 				}
-				ctx.globalAlpha = 0.5;
+				ctx.globalAlpha = Alpha*0.5;
 				ctx.drawImage(Meteorcold, O[Z].x - O[Z].width/2, O[Z].y - O[Z].height/2, O[Z].width, O[Z].height);
-				ctx.globalAlpha = 1;
+				ctx.globalAlpha = Alpha;
 			}
 		}
 	}

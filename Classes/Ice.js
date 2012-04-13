@@ -20,7 +20,7 @@ var ice = {
 				Frozen.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.15;
+			Alpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
 		}
@@ -40,7 +40,7 @@ var ice = {
 			this.y = -100;
 			this.onScreen = 0;
 			this.end = true;
-			ctx.globalAlpha = 1;
+			Alpha = 1;
 		}
 		else if(this.onScreen == 1 && this.cast == 0){
 			this.width = this.width + (32*this.frame);
@@ -94,7 +94,7 @@ var ice2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.15;
+			Alpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
 		}
@@ -111,7 +111,7 @@ var ice2 = {
 			this.y = -100;
 			this.onScreen = 0;
 			this.end = true;
-			ctx.globalAlpha = 1;
+			Alpha = 1;
 		}
 		else if(this.onScreen == 1){
 			this.width = this.width + (32*this.frame);
@@ -167,10 +167,10 @@ var Mice = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -216,10 +216,10 @@ var Mice2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -265,10 +265,10 @@ var Mice3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -314,10 +314,10 @@ var Mice4 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	

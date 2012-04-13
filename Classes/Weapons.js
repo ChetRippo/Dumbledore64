@@ -1241,32 +1241,32 @@ var fireice = {
 		if(this.onScreen == 1){
 			if(this.state == 0){
 				if(this.flicker/2 != Math.round(this.flicker/2)){
-					ctx.globalAlpha = 0.5;
+					ctx.globalAlpha = Alpha*0.5;
 					ctx.fillStyle = this.color2;
 					ctx.fillRect(this.x - this.width / 2,
 					this.y - this.height / 2,
 					this.width, this.height);
-					ctx.globalAlpha = 1;
+					ctx.globalAlpha = Alpha;
 					this.flicker-=1;
 				}
 				else{
-					ctx.globalAlpha = 0.5;
+					ctx.globalAlpha = Alpha*0.5;
 					ctx.fillStyle = this.color1;
 					ctx.fillRect(this.x - this.width / 2,
 					this.y - this.height / 2,
 					this.width, this.height);
-					ctx.globalAlpha = 1;
+					ctx.globalAlpha = Alpha;
 					this.flicker-=1;
 				}	
 			}
 			else{
-			ctx.globalAlpha = 1;
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			}
 		}
 	},
@@ -1610,12 +1610,12 @@ var firelightningf1 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -1677,12 +1677,12 @@ var firelightningf2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -1745,12 +1745,12 @@ var firelightningf3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -1812,12 +1812,12 @@ var firelightningf4 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -1892,10 +1892,10 @@ var vertil = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.height = this.height + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -1931,10 +1931,10 @@ var vertil2 = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.height = this.height + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -1970,10 +1970,10 @@ var vertil3 = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.height = this.height + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -2009,10 +2009,10 @@ var vertil4 = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.height = this.height + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -2048,10 +2048,10 @@ var vertil5 = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.height = this.height + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -2087,10 +2087,10 @@ var horil = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.width = this.width + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -2126,10 +2126,10 @@ var horil2 = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.width = this.width + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -2165,10 +2165,10 @@ var horil3 = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.width = this.width + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -2204,10 +2204,10 @@ var horil4 = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.width = this.width + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -2243,10 +2243,10 @@ var horil5 = {
 			this.height = 16;
 		}
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			this.width = this.width + (32*this.frame);
 			this.frame++;
 			for(E in AllEnemies){
@@ -2764,7 +2764,7 @@ var airice = {
 				Frozen.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha * 2;
 			if(this.timeLeft/2 != Math.round(this.timeLeft/2)){
 				ctx.fillStyle = this.color1;
 			}
@@ -2774,6 +2774,7 @@ var airice = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -2787,7 +2788,7 @@ var airice = {
 		if(this.timeLeft == 0 && this.onScreen == 1){
 			this.onScreen = 0;
 			ice.cd = 0;
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 		else if(this.timeLeft<=30 && this.cast == 0){
 			this.height+=4;
@@ -3603,7 +3604,7 @@ var Wfire = {
 				Explosion.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -3613,7 +3614,7 @@ var Wfire = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -3678,7 +3679,7 @@ var Wfire2 = {
 				Explosion.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -3688,7 +3689,7 @@ var Wfire2 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -3753,7 +3754,7 @@ var Wfire3 = {
 				Explosion.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -3763,7 +3764,7 @@ var Wfire3 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -3828,7 +3829,7 @@ var Wfire4 = {
 				Explosion.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -3838,7 +3839,7 @@ var Wfire4 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -3903,7 +3904,7 @@ var Wfire5 = {
 				Explosion.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -3913,7 +3914,7 @@ var Wfire5 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -3978,7 +3979,7 @@ var Wfire6 = {
 				Explosion.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -3988,7 +3989,7 @@ var Wfire6 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -4053,7 +4054,7 @@ var Wfire7 = {
 				Explosion.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -4063,7 +4064,7 @@ var Wfire7 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -4128,7 +4129,7 @@ var Wfire8 = {
 				Explosion.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -4138,7 +4139,7 @@ var Wfire8 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -4199,10 +4200,10 @@ var IBubble = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -4248,10 +4249,10 @@ var IBubble2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -4297,10 +4298,10 @@ var IBubble3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -4346,10 +4347,10 @@ var IBubble4 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -4395,10 +4396,10 @@ var IBubble5 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -4444,10 +4445,10 @@ var IBubble6 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -4493,10 +4494,10 @@ var IBubble7 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -4542,10 +4543,10 @@ var IBubble8 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -5111,9 +5112,9 @@ var Wpool = {
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -5181,9 +5182,9 @@ var Wpool2 = {
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -5251,9 +5252,9 @@ var Wpool3 = {
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -5321,9 +5322,9 @@ var Wpool4 = {
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){
@@ -5391,9 +5392,9 @@ var Wpool5 = {
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	move: function(){

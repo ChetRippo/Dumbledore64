@@ -3,6 +3,7 @@ Version 0.5.6 Changes(4/12/2012):
 		-Bug Fixes:
 			-Made enemy wizard's ice spell not mess up alpha
 			-Made Thunderstorm noise not annoying
+			-Fixed all Alpha changes
 		-Added HP UP powerup to fire boss fight
 		-Added Level transition from fire boss. The large meteors turn into obstacles
 		-Added fire level. Contains all globblys, hudges, lavamen, and lavamen spawners

@@ -19,7 +19,7 @@ var fire = {
 				Explosion.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -29,7 +29,7 @@ var fire = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -103,7 +103,7 @@ var fire2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -113,7 +113,7 @@ var fire2 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -183,7 +183,7 @@ var Mfire = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -193,7 +193,7 @@ var Mfire = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -245,7 +245,7 @@ var Mfire2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -255,7 +255,7 @@ var Mfire2 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -307,7 +307,7 @@ var Mfire3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -317,7 +317,7 @@ var Mfire3 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -369,7 +369,7 @@ var Mfire4 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -379,7 +379,7 @@ var Mfire4 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	

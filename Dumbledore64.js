@@ -18,6 +18,7 @@
 		-Bug Fixes:
 			-Made enemy wizard's ice spell not mess up alpha
 			-Made Thunderstorm noise not annoying
+			-Fixed all Alpha changes
 		-Added HP UP powerup to fire boss fight
 		-Added Level transition from fire boss. The large meteors turn into obstacles
 		-Added fire level. Contains all globblys, hudges, lavamen, and lavamen spawners
@@ -89,6 +90,8 @@ addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
 // Environment
 var planted = false;
 var jungleAni = false;
+// Alpha
+var Alpha = 1;
 //------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //Girraffix
 var WizzurdL = new Image();
@@ -1588,7 +1591,7 @@ var keys = function(){
 		if (80 in keysDown && keytimer == 0){
 			STATE = preSTATE;
 			keytimer = 20;
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	}
 	else{
@@ -2063,6 +2066,7 @@ setInterval(function(){
 			nu = 1;
 		}
 		else{
+			ctx.globalAlpha = Alpha;
 			keys();
 			multiply();
 			player.draw();

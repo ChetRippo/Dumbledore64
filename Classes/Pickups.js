@@ -690,7 +690,7 @@ var RandEffect = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.fillStyle = this.color;
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			if(this.used == 0){
 				fastbeepsHigh.currentTime=0;
 				fastbeepsHigh.play();
@@ -714,7 +714,7 @@ var RandEffect = {
 				this.width = 32;
 				this.height = 32;
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -792,7 +792,7 @@ var hpUp = {
 			DragonEffect2.height = 0;
 			DragonEffect2.onScreen = 0;
 			DragonEffect2.frame = 0;
-			ctx.globalAlpha = 1;
+			Alpha = 1;
 		}
 		this.x = -100;
 		this.y = -200;
@@ -1048,19 +1048,19 @@ var hpParticleSD = {
 	},
 	onHit: function(){
 		if(this.x != -100 && this.dirct > 0){
-			ctx.globalAlpha = 0.1;
+			ctx.globalAlpha = Alpha*0.1;
 			for(H in hpParticles){
 				hpParticles[H].speed = this.speed2;
 			}
 		}
 		else if(this.x != -100 && this.dirct == 0){
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 			for(H in hpParticles){
 				hpParticles[H].speed = this.speed2 * 3;
 			}
 		}
 		if(counter == 8){
-			ctx.globalAlpha = 1;
+			Alpha = 1;
 			player.speed = player.speed2*4;
 			if(hpUp.boss == "treeW"){
 				jungleAni = true;

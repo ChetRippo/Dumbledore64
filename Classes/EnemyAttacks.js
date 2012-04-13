@@ -12,12 +12,12 @@ var Globblyfire = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -82,12 +82,12 @@ var Globblyfire2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -152,12 +152,12 @@ var Globblyfire3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -222,12 +222,12 @@ var EMplosion1 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -291,12 +291,12 @@ var EMplosion2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -360,12 +360,12 @@ var EMplosion3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -429,12 +429,12 @@ var EMplosion4 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -498,12 +498,12 @@ var EMplosion5 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -567,12 +567,12 @@ var EMplosion6 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -636,12 +636,12 @@ var EMplosion7 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -705,12 +705,12 @@ var EMplosion8 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -774,12 +774,12 @@ var EMplosion9 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -843,12 +843,12 @@ var EMplosion10 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -912,12 +912,12 @@ var EMplosion11 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -981,12 +981,12 @@ var EMplosion12 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -1050,12 +1050,12 @@ var EMplosion13 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -1123,7 +1123,7 @@ var sIce = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.15;
+			Alpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
 		}
@@ -1137,7 +1137,7 @@ var sIce = {
 			this.y = -100;
 			this.onScreen = 0;
 			this.end = true;
-			ctx.globalAlpha = 1;
+			Alpha = 1;
 		}
 		else{
 			this.width = this.width + (32*this.frame);
@@ -1182,7 +1182,7 @@ var sFire = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "CC0000";
 			}
@@ -1192,7 +1192,7 @@ var sFire = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -1338,10 +1338,10 @@ var rootBlastW = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1400,10 +1400,10 @@ var rootBlastA = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.hwidth / 2, this.y - this.hheight / 2, this.hwidth, this.hheight);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1462,12 +1462,12 @@ var rootBlastS = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 				ctx.fillRect(this.x - this.width / 2,
 				this.y - this.height / 2,
 				this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1526,10 +1526,10 @@ var rootBlastD = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.hwidth / 2, this.y - this.hheight / 2, this.hwidth, this.hheight);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1578,10 +1578,10 @@ var rootstr = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 	}
 		
 	}
@@ -1594,10 +1594,10 @@ var rootstr2 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1609,10 +1609,10 @@ var rootstr3 = {
 	onScreen: 0,
 	draw: function(){
 		if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 		
 	}
@@ -1625,10 +1625,10 @@ var rootstr4 = {
 	onScreen: 0,
 	draw: function(){
 		if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 		
 	}
@@ -1641,10 +1641,10 @@ var rootstr5 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 	}	
 	}
 };
@@ -1656,10 +1656,10 @@ var rootstr6 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1671,10 +1671,10 @@ var rootstr7 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1686,10 +1686,10 @@ var rootstr8 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1701,10 +1701,10 @@ var rootstr9 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1716,10 +1716,10 @@ var rootstr10 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1731,10 +1731,10 @@ var rootstr11 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1746,10 +1746,10 @@ var rootstr12 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1761,10 +1761,10 @@ var rootstr13 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1776,10 +1776,10 @@ var rootstr14 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1791,10 +1791,10 @@ var rootstr15 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1806,10 +1806,10 @@ var rootstr21 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1821,10 +1821,10 @@ var rootstr22 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1836,10 +1836,10 @@ var rootstr23 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1851,10 +1851,10 @@ var rootstr24 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1866,10 +1866,10 @@ var rootstr25 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1881,10 +1881,10 @@ var rootstr26 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1896,10 +1896,10 @@ var rootstr27 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1911,10 +1911,10 @@ var rootstr28 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1926,10 +1926,10 @@ var rootstr29 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1941,10 +1941,10 @@ var rootstr210 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1956,10 +1956,10 @@ var rootstr211 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1971,10 +1971,10 @@ var rootstr212 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -1986,10 +1986,10 @@ var rootstr213 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2001,10 +2001,10 @@ var rootstr214 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2016,10 +2016,10 @@ var rootstr215 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2031,10 +2031,10 @@ var rootstr31 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2046,10 +2046,10 @@ var rootstr32 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2061,10 +2061,10 @@ var rootstr33 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2076,10 +2076,10 @@ var rootstr34 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2091,10 +2091,10 @@ var rootstr35 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2106,10 +2106,10 @@ var rootstr36 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2121,10 +2121,10 @@ var rootstr37 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2136,10 +2136,10 @@ var rootstr38 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2151,10 +2151,10 @@ var rootstr39 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2166,10 +2166,10 @@ var rootstr310 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2181,10 +2181,10 @@ var rootstr311 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2196,10 +2196,10 @@ var rootstr312 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2211,10 +2211,10 @@ var rootstr313 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2226,10 +2226,10 @@ var rootstr314 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2241,10 +2241,10 @@ var rootstr315 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2256,10 +2256,10 @@ var rootstr41 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2271,10 +2271,10 @@ var rootstr42 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2286,10 +2286,10 @@ var rootstr43 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2301,10 +2301,10 @@ var rootstr44 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2316,10 +2316,10 @@ var rootstr45 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2331,10 +2331,10 @@ var rootstr46 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2346,10 +2346,10 @@ var rootstr47 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2361,10 +2361,10 @@ var rootstr48 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2376,10 +2376,10 @@ var rootstr49 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2391,10 +2391,10 @@ var rootstr410 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2406,10 +2406,10 @@ var rootstr411 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2421,10 +2421,10 @@ var rootstr412 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2436,10 +2436,10 @@ var rootstr413 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2451,10 +2451,10 @@ var rootstr414 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2466,10 +2466,10 @@ var rootstr415 = {
 	onScreen: 0,
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -2513,7 +2513,7 @@ var rootStrike = {
 		if(this.hptimer > 0){
 			this.hptimer-=1;
 		}
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		if(this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white";
 		}
@@ -2521,7 +2521,7 @@ var rootStrike = {
 			ctx.fillStyle = "330000";
 		}
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(rootstr.onScreen == 0){
@@ -2634,7 +2634,7 @@ var rootStrike2 = {
 		if(this.hptimer > 0){
 			this.hptimer-=1;
 		}
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		if(this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white";
 		}
@@ -2642,7 +2642,7 @@ var rootStrike2 = {
 			ctx.fillStyle = "330000";
 		}
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(rootstr21.onScreen == 0){
@@ -2755,7 +2755,7 @@ var rootStrike3 = {
 		if(this.hptimer > 0){
 			this.hptimer-=1;
 		}
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		if(this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white";
 		}
@@ -2763,7 +2763,7 @@ var rootStrike3 = {
 			ctx.fillStyle = "330000";
 		}
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(rootstr31.onScreen == 0){
@@ -2876,7 +2876,7 @@ var rootStrike4 = {
 		if(this.hptimer > 0){
 			this.hptimer-=1;
 		}
-		ctx.globalAlpha = 0.5;
+		ctx.globalAlpha = Alpha*0.5;
 		if(this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white";
 		}
@@ -2884,7 +2884,7 @@ var rootStrike4 = {
 			ctx.fillStyle = "330000";
 		}
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(rootstr41.onScreen == 0){
@@ -3041,7 +3041,7 @@ var SmokeBomb = {
 	draw: function(){
 		if(this.draaw == 1){
 			ctx.fillStyle = this.color;
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.used == 0){
 				fastbeepsHigh.currentTime=0;
 				fastbeepsHigh.play();
@@ -3065,7 +3065,7 @@ var SmokeBomb = {
 				this.width = 32;
 				this.height = 32;
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -3084,7 +3084,7 @@ var SmokeBombA = {
 	draw: function(){
 		if(this.draaw == 1){
 			ctx.fillStyle = this.color;
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.used == 0){
 				fastbeepsHigh.currentTime=0;
 				fastbeepsHigh.play();
@@ -3108,7 +3108,7 @@ var SmokeBombA = {
 				this.width = 32;
 				this.height = 32;
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	}
 };
@@ -3127,7 +3127,7 @@ var SmokeBombB = {
 	draw: function(){
 		if(this.draaw == 1){
 			ctx.fillStyle = this.color;
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.used == 0){
 				fastbeepsHigh.currentTime=0;
 				fastbeepsHigh.play();
@@ -3151,7 +3151,7 @@ var SmokeBombB = {
 				this.width = 32;
 				this.height = 32;
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	}
 };

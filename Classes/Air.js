@@ -23,7 +23,7 @@ var air = {
 				Wind.play();
 				this.used = 1;
 			}
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.ox - player.width / 2,
 				this.oy - player.height / 2,
@@ -38,7 +38,7 @@ var air = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -154,7 +154,7 @@ var air12 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -166,7 +166,7 @@ var air12 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -259,7 +259,7 @@ var air13 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -271,7 +271,7 @@ var air13 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -390,7 +390,7 @@ var air2right = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.ox - player.width / 2,
 				this.oy - player.height / 2,
@@ -405,7 +405,7 @@ var air2right = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -511,7 +511,7 @@ var air2right2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -523,7 +523,7 @@ var air2right2 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -616,7 +616,7 @@ var air2right3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -628,7 +628,7 @@ var air2right3 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -723,7 +723,7 @@ var air2left = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -735,7 +735,7 @@ var air2left = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -841,7 +841,7 @@ var air2left2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -853,7 +853,7 @@ var air2left2 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -946,7 +946,7 @@ var air2left3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -958,7 +958,7 @@ var air2left3 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1053,7 +1053,7 @@ var air2down = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -1065,7 +1065,7 @@ var air2down = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1171,7 +1171,7 @@ var air2down2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -1183,7 +1183,7 @@ var air2down2 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1276,7 +1276,7 @@ var air2down3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -1288,7 +1288,7 @@ var air2down3 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1383,7 +1383,7 @@ var air2up = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -1395,7 +1395,7 @@ var air2up = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1501,7 +1501,7 @@ var air2up2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -1513,7 +1513,7 @@ var air2up2 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -1606,7 +1606,7 @@ var air2up3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
 			if(this.dir == "W" || this.dir == "S"){
 				ctx.fillRect(this.x - this.width / 2,
@@ -1618,7 +1618,7 @@ var air2up3 = {
 				this.y - this.hheight / 2,
 				this.hwidth, this.hheight);
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
