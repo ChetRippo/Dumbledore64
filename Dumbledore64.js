@@ -1110,7 +1110,7 @@ function drawtypeMarker(M){
 			M.color = "#00FFFF";
 		}
 		else if(M.text == "+ Lightning"){
-			M.color = "#yellow";
+			M.color = "yellow";
 		}
 		else if(M.text == "+ Earth"){
 			M.color = "#33FF00";
