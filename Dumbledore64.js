@@ -14,14 +14,16 @@
 
 */
 /*
-	Version 0.5.6 Changes(4/12/2012):
+	Version 0.5.6 Changes(4/14/2012):
 		-Bug Fixes:
 			-Made enemy wizard's ice spell not mess up alpha
 			-Made Thunderstorm noise not annoying
 			-Fixed all Alpha changes
-			-Added some compatibility stuff. Almost works in normal IE
+			-Added some compatibility stuff.
+				-Fully compatible with all Chrome and Firefox and Opera now. Maybe IE and Safari
 		-Balancing:
 			-Made enemies respawn faster over time in levels with no boss
+			-Slightly buffed homing shots
 		-Added HP UP powerup to fire boss fight
 		-Added Level transition from fire boss. The large meteors turn into obstacles
 		-Added fire level. Contains all globblys, hudges, lavamen, and lavamen spawners
@@ -523,7 +525,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.5.6.5 Alpha: April 12 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.5.6 Alpha: April 14 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -1949,7 +1951,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.6.5 Alpha: April 12 2012", 244, 96);
+	ctx.fillText("Version 0.5.6 Alpha: April 14 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	ctx.fillText("1st: " + highscore1, 308, 240);
 	ctx.fillText("2nd: " + highscore2, 308, 272);

@@ -64,7 +64,7 @@ var bullet = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 45;
+			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -113,7 +113,7 @@ var bullet2 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 45;
+			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -163,7 +163,7 @@ var bullet3 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 45;
+			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -212,7 +212,7 @@ var bullet4 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 45;
+			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -260,7 +260,7 @@ var bullet5 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 45;
+			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -308,7 +308,7 @@ var bullet6 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 45;
+			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -356,7 +356,7 @@ var bullet7 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 45;
+			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
@@ -404,7 +404,7 @@ var bullet8 = {
 		this.x = player.x;
 		this.y = player.y;
 		if(spell == "Homing Shots"){
-			cd = 45;
+			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
 			cd = 20;
