@@ -1,6 +1,6 @@
 // Fire: Damages all enemies in radius
 var fire = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -21,7 +21,7 @@ var fire = {
 			}
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -91,7 +91,7 @@ var fire = {
 
 // Fire2: Damages all enemies in radius
 var fire2 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -1000,
 	y: -200,
 	timeLeft: 0,
@@ -105,7 +105,7 @@ var fire2 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -173,7 +173,7 @@ var fire2 = {
 //------------------------------------- Mystic Fire powerup explosions --------------------------------------------------------------//
 // Fire: Damages all enemies in radius
 var Mfire = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -185,7 +185,7 @@ var Mfire = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -235,7 +235,7 @@ var Mfire = {
 };
 // Fire: Damages all enemies in radius
 var Mfire2 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -247,7 +247,7 @@ var Mfire2 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -297,7 +297,7 @@ var Mfire2 = {
 };
 // Fire: Damages all enemies in radius
 var Mfire3 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -309,7 +309,7 @@ var Mfire3 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -359,7 +359,7 @@ var Mfire3 = {
 };
 // Fire: Damages all enemies in radius
 var Mfire4 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -371,7 +371,7 @@ var Mfire4 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;

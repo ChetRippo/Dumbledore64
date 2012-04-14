@@ -1,6 +1,6 @@
 // Earth: Heals player hp by 1
 var earth = {
-	color: "33CC00",
+	color: "#33CC00",
 	timeLeft: 0,
 	x: -100,
 	y: -200,
@@ -63,7 +63,7 @@ var earth = {
 };
 // Earth2: Heals player hp by 2
 var earth2 = {
-	color: "33CC00",
+	color: "#33CC00",
 	timeLeft: 0,
 	x: -100,
 	y: -200,

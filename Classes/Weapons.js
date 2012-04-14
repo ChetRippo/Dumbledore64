@@ -579,16 +579,16 @@ var Bullets = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: bullet5, 6: bul
 function drawBullet(B){
 	if (B.timeLeft > 0){
 		if(spell == "Explosive Shots"){
-			ctx.fillStyle = "CC0000";
+			ctx.fillStyle = "#CC0000";
 		}
 		else if(spell == "Ice Shots"){
-			ctx.fillStyle = "66CCFF";
+			ctx.fillStyle = "#66CCFF";
 		}
 		else if(spell == "Conductive Shots"){
-			ctx.fillStyle = "FFFF00";
+			ctx.fillStyle = "#FFFF00";
 		}
 		else if(spell == "Homing Shots"){
-			ctx.fillStyle = "FF00FF";
+			ctx.fillStyle = "#FF00FF";
 		}
 		else if(spell != "Bubblebeam"){
 			ctx.fillStyle = B.color;
@@ -1223,9 +1223,9 @@ function Bulletmove(B){
 // ------------------------------------------------------ Spell Combos ---------------------------------------------------------------//
 // Frozen Fireball: Fires a projectile. On hitting an obstacle or wall it explodes forming an ice field.
 var fireice = {
-	color1: "FF6600",
-	color2: "00CCFF",
-	color: "FF6600",
+	color1: "#FF6600",
+	color2: "#00CCFF",
+	color: "#FF6600",
 	state: 0,
 	x: -1000,
 	y: -200,
@@ -1599,7 +1599,7 @@ var firelightning = {
 	
 };
 var firelightningf1 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -1000,
 	y: -200,
 	timeLeft: 0,
@@ -1666,7 +1666,7 @@ var firelightningf1 = {
 	
 };
 var firelightningf2 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -1000,
 	y: -200,
 	timeLeft: 0,
@@ -1734,7 +1734,7 @@ var firelightningf2 = {
 	
 };
 var firelightningf3 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -1000,
 	y: -200,
 	timeLeft: 0,
@@ -1801,7 +1801,7 @@ var firelightningf3 = {
 	
 };
 var firelightningf4 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -1000,
 	y: -200,
 	timeLeft: 0,
@@ -1868,7 +1868,7 @@ var firelightningf4 = {
 
 // Frozen Web: Creates a web of ice that stops all enemies in its tracks
 var vertil = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -1907,7 +1907,7 @@ var vertil = {
 	}	
 };
 var vertil2 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -1946,7 +1946,7 @@ var vertil2 = {
 	}	
 };
 var vertil3 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -1985,7 +1985,7 @@ var vertil3 = {
 	}	
 };
 var vertil4 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -2024,7 +2024,7 @@ var vertil4 = {
 	}	
 };
 var vertil5 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -2063,7 +2063,7 @@ var vertil5 = {
 	}	
 };
 var horil = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -2102,7 +2102,7 @@ var horil = {
 	}	
 };
 var horil2 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -2141,7 +2141,7 @@ var horil2 = {
 	}	
 };
 var horil3 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -2180,7 +2180,7 @@ var horil3 = {
 	}	
 };
 var horil4 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -2219,7 +2219,7 @@ var horil4 = {
 	}	
 };
 var horil5 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 16,
 	height: 16,
@@ -2260,7 +2260,7 @@ var horil5 = {
 var webhoril = {1: horil5, 2: horil4, 3: horil3, 4: horil2, 5: horil};
 var webvertil = {1: vertil5, 2: vertil4, 3: vertil3, 4: vertil2, 5: vertil};
 var icelightning = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	cd: 0,
 	timeLeft: 0,
 	end: false,
@@ -2421,8 +2421,8 @@ var icelightning = {
 
 // Fire Wave: Damages all enemies in front of the player
 var airfire = {
-	color1: "FF6600",
-	color2: "990000",
+	color1: "#FF6600",
+	color2: "#990000",
 	x: -100,
 	y: -200,
 	ox: -100,
@@ -2546,8 +2546,8 @@ var airfire = {
 	}
 };
 var airfire12 = {
-	color1: "FF6600",
-	color2: "990000",
+	color1: "#FF6600",
+	color2: "#990000",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -2644,8 +2644,8 @@ var airfire12 = {
 };
 
 var airfire13 = {
-	color1: "FF6600",
-	color2: "990000",
+	color1: "#FF6600",
+	color2: "#990000",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -2743,8 +2743,8 @@ var airfire13 = {
 
 // Maelstrom: Slows all enemies on screen and creates a storm around the player
 var airice = {
-	color1: "3300CC",
-	color2: "33CCCC",
+	color1: "#3300CC",
+	color2: "#33CCCC",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -3586,7 +3586,7 @@ var waterfire8 = {
 	}
 };
 var Wfire = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -3606,7 +3606,7 @@ var Wfire = {
 			}
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -3661,7 +3661,7 @@ var Wfire = {
 	}
 };
 var Wfire2 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -3681,7 +3681,7 @@ var Wfire2 = {
 			}
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -3736,7 +3736,7 @@ var Wfire2 = {
 	}
 };
 var Wfire3 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -3756,7 +3756,7 @@ var Wfire3 = {
 			}
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -3811,7 +3811,7 @@ var Wfire3 = {
 	}
 };
 var Wfire4 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -3831,7 +3831,7 @@ var Wfire4 = {
 			}
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -3886,7 +3886,7 @@ var Wfire4 = {
 	}
 };
 var Wfire5 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -3906,7 +3906,7 @@ var Wfire5 = {
 			}
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -3961,7 +3961,7 @@ var Wfire5 = {
 	}
 };
 var Wfire6 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -3981,7 +3981,7 @@ var Wfire6 = {
 			}
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -4036,7 +4036,7 @@ var Wfire6 = {
 	}
 };
 var Wfire7 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -4056,7 +4056,7 @@ var Wfire7 = {
 			}
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -4111,7 +4111,7 @@ var Wfire7 = {
 	}
 };
 var Wfire8 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -4131,7 +4131,7 @@ var Wfire8 = {
 			}
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -4189,7 +4189,7 @@ var waterFires = {1: waterfire, 2: waterfire2, 3: waterfire3, 4: waterfire4, 5: 
 var WFires = {1: Wfire, 2: Wfire2, 3: Wfire3, 4: Wfire4, 5: Wfire5, 6: Wfire6, 7: Wfire7, 8: Wfire8};
 
 var IBubble = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -4238,7 +4238,7 @@ var IBubble = {
 	}
 };
 var IBubble2 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -4287,7 +4287,7 @@ var IBubble2 = {
 	}
 };
 var IBubble3 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -4336,7 +4336,7 @@ var IBubble3 = {
 	}
 };
 var IBubble4 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -4385,7 +4385,7 @@ var IBubble4 = {
 	}
 };
 var IBubble5 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -4434,7 +4434,7 @@ var IBubble5 = {
 	}
 };
 var IBubble6 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -4483,7 +4483,7 @@ var IBubble6 = {
 	}
 };
 var IBubble7 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -4532,7 +4532,7 @@ var IBubble7 = {
 	}
 };
 var IBubble8 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -5089,8 +5089,8 @@ var waterlightning = {
 	}
 };
 var Wpool = {
-	color: "0000FF",
-	color2: "FFFF00",
+	color: "#0000FF",
+	color2: "#FFFF00",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -5159,8 +5159,8 @@ var Wpool = {
 	}
 };
 var Wpool2 = {
-	color: "0000FF",
-	color2: "FFFF00",
+	color: "#0000FF",
+	color2: "#FFFF00",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -5229,8 +5229,8 @@ var Wpool2 = {
 	}
 };
 var Wpool3 = {
-	color: "0000FF",
-	color2: "FFFF00",
+	color: "#0000FF",
+	color2: "#FFFF00",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -5299,8 +5299,8 @@ var Wpool3 = {
 	}
 };
 var Wpool4 = {
-	color: "0000FF",
-	color2: "FFFF00",
+	color: "#0000FF",
+	color2: "#FFFF00",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -5369,8 +5369,8 @@ var Wpool4 = {
 	}
 };
 var Wpool5 = {
-	color: "0000FF",
-	color2: "FFFF00",
+	color: "#0000FF",
+	color2: "#FFFF00",
 	timeLeft: 0,
 	width: 32,
 	height: 32,

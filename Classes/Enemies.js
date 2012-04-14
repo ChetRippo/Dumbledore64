@@ -755,7 +755,7 @@ var TwizEffect = {
 				trailingbeeps.play();
 			}
 			ctx.globalAlpha = Alpha/2;
-			ctx.fillStyle = "228b22";
+			ctx.fillStyle = "#228b22";
 			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
 			this.width = this.width + 8*this.frame;
 			this.height = this.height + 8*this.frame;
@@ -1480,7 +1480,7 @@ var DragonEffect2 = {
 				planted = false;
 				rePlant();
 			}
-			ctx.fillStyle = "CC0000";
+			ctx.fillStyle = "#CC0000";
 			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
 			this.width = this.width + 8*this.frame;
 			this.height = this.height + 8*this.frame;

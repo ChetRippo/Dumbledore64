@@ -1,7 +1,7 @@
 //-------------------------------------------------------------- Enemy Spells -------------------------------------------------------//
 // Globblyfire: Damages player if in radius
 var Globblyfire = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -71,7 +71,7 @@ var Globblyfire = {
 };
 // Globblyfire2: Damages player if in radius
 var Globblyfire2 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -141,7 +141,7 @@ var Globblyfire2 = {
 };
 // Globblyfire: Damages player if in radius
 var Globblyfire3 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -211,7 +211,7 @@ var Globblyfire3 = {
 };
 //------------------------------------------------------------- Tiny Meteor Explosions ----------------------------------------------//
 var EMplosion1 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -280,7 +280,7 @@ var EMplosion1 = {
 	}
 };
 var EMplosion2 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -349,7 +349,7 @@ var EMplosion2 = {
 	}
 };
 var EMplosion3 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -418,7 +418,7 @@ var EMplosion3 = {
 	}
 };
 var EMplosion4 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -487,7 +487,7 @@ var EMplosion4 = {
 	}
 };
 var EMplosion5 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -556,7 +556,7 @@ var EMplosion5 = {
 	}
 };
 var EMplosion6 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -625,7 +625,7 @@ var EMplosion6 = {
 	}
 };
 var EMplosion7 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -694,7 +694,7 @@ var EMplosion7 = {
 	}
 };
 var EMplosion8 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -763,7 +763,7 @@ var EMplosion8 = {
 	}
 };
 var EMplosion9 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -832,7 +832,7 @@ var EMplosion9 = {
 	}
 };
 var EMplosion10 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -901,7 +901,7 @@ var EMplosion10 = {
 	}
 };
 var EMplosion11 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -970,7 +970,7 @@ var EMplosion11 = {
 	}
 };
 var EMplosion12 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -1039,7 +1039,7 @@ var EMplosion12 = {
 	}
 };
 var EMplosion13 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -1111,7 +1111,7 @@ var EMplosions = {1: EMplosion1, 2: EMplosion2, 3: EMplosion3, 4: EMplosion4, 5:
 					12: EMplosion12, 13: EMplosion13};
 // sIce: Slows player down by halving speed
 var sIce = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -1171,7 +1171,7 @@ var sIce = {
 };
 // sFire: Damages player if in radius
 var sFire = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -1184,7 +1184,7 @@ var sFire = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -1321,7 +1321,7 @@ var sLightning = {
 };
 //--------------------------------------------------------- Tree Wizzurd Spells -----------------------------------------------------//
 var rootBlastW = {
-	color: "33CC00",
+	color: "#33CC00",
 	x: -100,
 	y: -200,
 	ox: -100,
@@ -1383,7 +1383,7 @@ var rootBlastW = {
 	}
 };
 var rootBlastA = {
-	color: "33CC00",
+	color: "#33CC00",
 	x: -100,
 	y: -200,
 	ox: -100,
@@ -1445,7 +1445,7 @@ var rootBlastA = {
 	}
 };
 var rootBlastS = {
-	color: "33CC00",
+	color: "#33CC00",
 	x: -100,
 	y: -200,
 	ox: -100,
@@ -1509,7 +1509,7 @@ var rootBlastS = {
 	}
 };
 var rootBlastD = {
-	color: "33CC00",
+	color: "#33CC00",
 	x: -100,
 	y: -200,
 	ox: -100,
@@ -1579,7 +1579,7 @@ var rootstr = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 	}
@@ -1595,7 +1595,7 @@ var rootstr2 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1610,7 +1610,7 @@ var rootstr3 = {
 	draw: function(){
 		if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1626,7 +1626,7 @@ var rootstr4 = {
 	draw: function(){
 		if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1642,7 +1642,7 @@ var rootstr5 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 	}	
@@ -1657,7 +1657,7 @@ var rootstr6 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1672,7 +1672,7 @@ var rootstr7 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1687,7 +1687,7 @@ var rootstr8 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1702,7 +1702,7 @@ var rootstr9 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1717,7 +1717,7 @@ var rootstr10 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1732,7 +1732,7 @@ var rootstr11 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1747,7 +1747,7 @@ var rootstr12 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1762,7 +1762,7 @@ var rootstr13 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1777,7 +1777,7 @@ var rootstr14 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1792,7 +1792,7 @@ var rootstr15 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1807,7 +1807,7 @@ var rootstr21 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1822,7 +1822,7 @@ var rootstr22 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1837,7 +1837,7 @@ var rootstr23 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1852,7 +1852,7 @@ var rootstr24 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1867,7 +1867,7 @@ var rootstr25 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1882,7 +1882,7 @@ var rootstr26 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1897,7 +1897,7 @@ var rootstr27 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1912,7 +1912,7 @@ var rootstr28 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1927,7 +1927,7 @@ var rootstr29 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1942,7 +1942,7 @@ var rootstr210 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1957,7 +1957,7 @@ var rootstr211 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1972,7 +1972,7 @@ var rootstr212 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -1987,7 +1987,7 @@ var rootstr213 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2002,7 +2002,7 @@ var rootstr214 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2017,7 +2017,7 @@ var rootstr215 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2032,7 +2032,7 @@ var rootstr31 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2047,7 +2047,7 @@ var rootstr32 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2062,7 +2062,7 @@ var rootstr33 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2077,7 +2077,7 @@ var rootstr34 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2092,7 +2092,7 @@ var rootstr35 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2107,7 +2107,7 @@ var rootstr36 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2122,7 +2122,7 @@ var rootstr37 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2137,7 +2137,7 @@ var rootstr38 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2152,7 +2152,7 @@ var rootstr39 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2167,7 +2167,7 @@ var rootstr310 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2182,7 +2182,7 @@ var rootstr311 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2197,7 +2197,7 @@ var rootstr312 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2212,7 +2212,7 @@ var rootstr313 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2227,7 +2227,7 @@ var rootstr314 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2242,7 +2242,7 @@ var rootstr315 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2257,7 +2257,7 @@ var rootstr41 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2272,7 +2272,7 @@ var rootstr42 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2287,7 +2287,7 @@ var rootstr43 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2302,7 +2302,7 @@ var rootstr44 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2317,7 +2317,7 @@ var rootstr45 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2332,7 +2332,7 @@ var rootstr46 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2347,7 +2347,7 @@ var rootstr47 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2362,7 +2362,7 @@ var rootstr48 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2377,7 +2377,7 @@ var rootstr49 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2392,7 +2392,7 @@ var rootstr410 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2407,7 +2407,7 @@ var rootstr411 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2422,7 +2422,7 @@ var rootstr412 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2437,7 +2437,7 @@ var rootstr413 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2452,7 +2452,7 @@ var rootstr414 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2467,7 +2467,7 @@ var rootstr415 = {
 	draw: function(){
 	if(this.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "330000";
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		}
@@ -2518,7 +2518,7 @@ var rootStrike = {
 			ctx.fillStyle = "white";
 		}
 		else{
-			ctx.fillStyle = "330000";
+			ctx.fillStyle = "#330000";
 		}
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
@@ -2639,7 +2639,7 @@ var rootStrike2 = {
 			ctx.fillStyle = "white";
 		}
 		else{
-			ctx.fillStyle = "330000";
+			ctx.fillStyle = "#330000";
 		}
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
@@ -2760,7 +2760,7 @@ var rootStrike3 = {
 			ctx.fillStyle = "white";
 		}
 		else{
-			ctx.fillStyle = "330000";
+			ctx.fillStyle = "#330000";
 		}
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
@@ -2881,7 +2881,7 @@ var rootStrike4 = {
 			ctx.fillStyle = "white";
 		}
 		else{
-			ctx.fillStyle = "330000";
+			ctx.fillStyle = "#330000";
 		}
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
@@ -2972,7 +2972,7 @@ var rootStrike4 = {
 };
 // Heal Leaf Wizard
 var LeafHeal = {
-	color: "33CC00",
+	color: "#33CC00",
 	timeLeft: 0,
 	x: -100,
 	y: -200,
@@ -3157,9 +3157,9 @@ var SmokeBombB = {
 };
 //----------------------------------------------- Dragon Attacks --------------------------------------------------------------------//
 var DragonFire = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3305,9 +3305,9 @@ var DragonFire = {
 	}
 };
 var Dfire2 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3377,9 +3377,9 @@ var Dfire2 = {
 };
 
 var Dfire3 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3446,9 +3446,9 @@ var Dfire3 = {
 	}
 };
 var Dfire4 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3517,9 +3517,9 @@ var Dfire4 = {
 	}
 };
 var Dfire5 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3588,9 +3588,9 @@ var Dfire5 = {
 	}
 };
 var Dfire6 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3659,9 +3659,9 @@ var Dfire6 = {
 	}
 };
 var Dfire7 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3730,9 +3730,9 @@ var Dfire7 = {
 	}
 };
 var Dfire8 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3801,9 +3801,9 @@ var Dfire8 = {
 	}
 };
 var Dfire9 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3872,9 +3872,9 @@ var Dfire9 = {
 	}
 };
 var Dfire10 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -3943,9 +3943,9 @@ var Dfire10 = {
 	}
 };
 var Dfire11 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -4014,9 +4014,9 @@ var Dfire11 = {
 	}
 };
 var Dfire12 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -4085,9 +4085,9 @@ var Dfire12 = {
 	}
 };
 var Dfire13 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -4156,9 +4156,9 @@ var Dfire13 = {
 	}
 };
 var Dfire14 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -4227,9 +4227,9 @@ var Dfire14 = {
 	}
 };
 var Dfire15 = {
-	color1: "FF6600",
-	color2: "990000",
-	color3: "FFCC00",
+	color1: "#FF6600",
+	color2: "#990000",
+	color3: "#FFCC00",
 	x: -100,
 	y: -200,
 	width: 32,

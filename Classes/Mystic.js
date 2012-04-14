@@ -1,6 +1,6 @@
 //Teleport
 var mystic = {
-	color: "FF00FF",
+	color: "#FF00FF",
 	width: 32,
 	height: 32,
 	x: player.x,
@@ -191,7 +191,7 @@ var mystic = {
 };
 //Mirage
 var mystic2 = {
-	color: "FF00FF",
+	color: "#FF00FF",
 	width: 32,
 	height: 32,
 	x: player.x,
@@ -433,7 +433,7 @@ var IllusionBlast = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "660099";
+				ctx.fillStyle = "#660099";
 			}
 			else{
 				ctx.fillStyle = this.color;

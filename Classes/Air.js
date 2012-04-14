@@ -1,6 +1,6 @@
 // Air: Blows back all enemies in front of player
 var air = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	ox: -100,
@@ -141,7 +141,7 @@ var air = {
 };
 // Air: Blows back all enemies in front of player
 var air12 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -246,7 +246,7 @@ var air12 = {
 
 // Air: Blows back all enemies in front of player
 var air13 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -374,7 +374,7 @@ var air2 = {
 	}
 };
 var air2right = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	dir: "D",
@@ -497,7 +497,7 @@ var air2right = {
 };
 // Air: Blows back all enemies in front of player
 var air2right2 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -602,7 +602,7 @@ var air2right2 = {
 
 // Air: Blows back all enemies in front of player
 var air2right3 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -706,7 +706,7 @@ var air2right3 = {
 };
 // Air: Blows back all enemies in front of player
 var air2left = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	ox: -100,
@@ -827,7 +827,7 @@ var air2left = {
 };
 // Air: Blows back all enemies in front of player
 var air2left2 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -932,7 +932,7 @@ var air2left2 = {
 
 // Air: Blows back all enemies in front of player
 var air2left3 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -1036,7 +1036,7 @@ var air2left3 = {
 };
 // Air: Blows back all enemies in front of player
 var air2down = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	ox: -100,
@@ -1157,7 +1157,7 @@ var air2down = {
 };
 // Air: Blows back all enemies in front of player
 var air2down2 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -1262,7 +1262,7 @@ var air2down2 = {
 
 // Air: Blows back all enemies in front of player
 var air2down3 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -1366,7 +1366,7 @@ var air2down3 = {
 };
 // Air: Blows back all enemies in front of player
 var air2up = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	ox: -100,
@@ -1487,7 +1487,7 @@ var air2up = {
 };
 // Air: Blows back all enemies in front of player
 var air2up2 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -1592,7 +1592,7 @@ var air2up2 = {
 
 // Air: Blows back all enemies in front of player
 var air2up3 = {
-	color: "E8E8E8",
+	color: "#E8E8E8",
 	x: -100,
 	y: -200,
 	width: 32,

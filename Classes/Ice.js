@@ -1,6 +1,6 @@
 // Ice: Slows all enemies by halving their speed
 var ice = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -81,7 +81,7 @@ var ice = {
 
 // Ice2: Slows all enemies by halving their speed
 var ice2 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -156,7 +156,7 @@ var ice2 = {
 };
 //----------------------------------------------------------- Mystic Ice Shots ------------------------------------------------------//
 var Mice = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -205,7 +205,7 @@ var Mice = {
 	}
 };
 var Mice2 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -254,7 +254,7 @@ var Mice2 = {
 	}
 };
 var Mice3 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -303,7 +303,7 @@ var Mice3 = {
 	}
 };
 var Mice4 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,

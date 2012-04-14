@@ -679,7 +679,7 @@ var RandomCube = {
 	}
 };
 var RandEffect = {
-	color: "FF00FF",
+	color: "#FF00FF",
 	width: 32,
 	height: 32,
 	x: -100,

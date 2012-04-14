@@ -19,11 +19,13 @@
 			-Made enemy wizard's ice spell not mess up alpha
 			-Made Thunderstorm noise not annoying
 			-Fixed all Alpha changes
+			-Added some compatibility stuff. Almost works in normal IE
+		-Balancing:
+			-Made enemies respawn faster over time in levels with no boss
 		-Added HP UP powerup to fire boss fight
 		-Added Level transition from fire boss. The large meteors turn into obstacles
 		-Added fire level. Contains all globblys, hudges, lavamen, and lavamen spawners
-		-Added Jack's Casey's Quest song to fire level
-		
+		-Added Jack's Casey's Quest song to fire level		
 		
 	TODO:
 		+Bugs
@@ -82,7 +84,7 @@ var score = 0;
 var muliplier = 1;
 var multtimer = 0;
 //colors
-var colorz = {1: "D0D0D0", 2: "CC0000", 3: "00FFFF", 4: "yellow", 5: "33FF00", 6: "663399"};
+var colorz = {1: "#D0D0D0", 2: "#CC0000", 3: "#00FFFF", 4: "yellow", 5: "#33FF00", 6: "#663399"};
 var colorNum = 1;
 // Key Listeners
 addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
@@ -454,7 +456,7 @@ for(M in AllMusic){
 	AllMusic[M].volume = 0.5;
 }
 DumblebeatsNormal.volume = 0.4;
-CaseysQuest.volume = 0.25;
+CaseysQuest.volume = 0.4;
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 //reset by changing the strings, change in gameover() too
 var highscore1 = $.jStorage.get("v5highscore1");
@@ -902,7 +904,7 @@ var castingBar = {
 		this.x = player.x - player.width/2;
 		this.y = player.y + player.height/2;
 		if(this.onScreen == 1){
-			ctx.fillStyle = "0404B4";
+			ctx.fillStyle = "#0404B4";
 			ctx.strokeStyle = "black";
 			ctx.strokeRect(this.x, this.y, this.width, this.height);
 			ctx.fillRect(this.x + 2, this.y + 2, this.width2, this.height - 2);
@@ -934,7 +936,7 @@ var TreecastingBar = {
 		this.x = treeWizz.x - treeWizz.width/2;
 		this.y = treeWizz.y + treeWizz.height/2;
 		if(this.onScreen == 1){
-			ctx.fillStyle = "0404B4";
+			ctx.fillStyle = "#0404B4";
 			ctx.strokeStyle = "black";
 			ctx.strokeRect(this.x, this.y, this.width, this.height);
 			ctx.fillRect(this.x + 2, this.y + 2, this.width2, this.height - 2);
@@ -1027,7 +1029,7 @@ function Hcontained(a, b){
 //------------------------------------------------- Point and Element Markers -------------------------------------------------------//
 // Fancyness
 var marker = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
@@ -1037,7 +1039,7 @@ var marker = {
 };
 
 var marker2 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
@@ -1047,7 +1049,7 @@ var marker2 = {
 };
 
 var marker3 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
@@ -1057,7 +1059,7 @@ var marker3 = {
 };
 
 var marker4 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
@@ -1067,30 +1069,30 @@ var marker4 = {
 };
 
 var typemarker = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: "",
+	text: ""
 };
 
 var typemarker2 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: "",
+	text: ""
 };
 
 var typemarker3 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: "",
+	text: ""
 };
 function drawtypeMarker(M){
 	if(M.timeLeft == 0){
@@ -1099,25 +1101,25 @@ function drawtypeMarker(M){
 	}
 	if (M.timeLeft != 0){
 		if(M.text == "+ Air"){
-			M.color = "D0D0D0";
+			M.color = "#D0D0D0";
 		}
 		else if(M.text == "+ Fire"){
-			M.color = "CC0000";
+			M.color = "#CC0000";
 		}
 		else if(M.text == "+ Ice"){
-			M.color = "00FFFF";
+			M.color = "#00FFFF";
 		}
 		else if(M.text == "+ Lightning"){
-			M.color = "yellow";
+			M.color = "#yellow";
 		}
 		else if(M.text == "+ Earth"){
-			M.color = "33FF00";
+			M.color = "#33FF00";
 		}
 		else if(M.text == "+ Mystic"){
-			M.color = "663399";
+			M.color = "#663399";
 		}
 		else if(M.text == "+ Water"){
-			M.color = "0000FF";
+			M.color = "#0000FF";
 		}
 		else if(M.text == "+ Max Hp"){
 			M.color = colorz[colorNum];
@@ -1140,19 +1142,19 @@ function drawMarker(M){
 	}
 	if (M.timeLeft != 0){
 		if(M.mult == 1){
-			M.color = "00FF00";
+			M.color = "#00FF00";
 		}
 		else if(M.mult == 2){
-			M.color = "FFFF00";
+			M.color = "#FFFF00";
 		}
 		else if(M.mult == 3){
-			M.color = "FF6600";
+			M.color = "#FF6600";
 		}
 		else if(M.mult == 4){
-			M.color = "CC0000";
+			M.color = "#CC0000";
 		}
 		else if(M.mult >= 5){
-			M.color = "FF99FF";
+			M.color = "#FF99FF";
 		}
 	ctx.fillStyle = M.color;
 	ctx.font = "32pt Arial";
@@ -1381,7 +1383,7 @@ function UI(){
 	ctx.fillStyle = "black";
 	ctx.font = "18pt Arial";
 	ctx.fillText("Spell:", 32, 512);
-	ctx.strokeStyle = "000000";
+	ctx.strokeStyle = "#000000";
 	ctx.strokeRect(92, 476, 32, 48);
 	ctx.strokeRect(124, 476, 32, 48);
 	if(spell1pic != "N/A"){
