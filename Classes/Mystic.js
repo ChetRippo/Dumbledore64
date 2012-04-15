@@ -515,4 +515,4 @@ var IllusionBlast = {
 	}
 };
 //------------------------------------------ Import Arrays --------------------------------------------------------------------------//
-var Ticks = {1: iceheal, 2: fireheal, 3: lightningheal, 4: airearth, 5: mysticearth, 6: icelightning, 7: air2, 8: waterearth, 9: waterlightning};
+var Ticks = {1: iceheal, 2: fireheal, 3: lightningheal, 4: airearth, 5: mysticearth, 6: icelightning, 7: waterearth, 8: waterlightning};

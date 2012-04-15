@@ -14,24 +14,35 @@
 
 */
 /*
-	Version 0.5.6 Changes(4/14/2012):
+	Version 0.5.7 Changes(4/15/2012):
 		-Bug Fixes:
-			-Made enemy wizard's ice spell not mess up alpha
-			-Made Thunderstorm noise not annoying
-			-Fixed all Alpha changes
-			-Added some compatibility stuff.
+			-Thunderstorm noise is less annoying
+			-Fixed all Alpha effects
+			-Added some compatibility
 				-Fully compatible with all Chrome and Firefox and Opera now. Maybe IE and Safari
+			-Improved Fire Wave collisions
+			-Jungle trees can no longer spawn on top of eachother
+			-Fixed bug where jungle enemies wouldn't spawn
 		-Balancing:
-			-Made enemies respawn faster over time in levels with no boss
+			-Enemy spawn rate is increased in Jungle and fire levels
 			-Slightly buffed homing shots
-		-Added HP UP powerup to fire boss fight
-		-Added Level transition from fire boss. The large meteors turn into obstacles
-		-Added fire level. Contains all globblys, hudges, lavamen, and lavamen spawners
-		-Added Jack's Casey's Quest song to fire level		
+			-Shortened Fire Orbs recharge to 10 seconds
+			-Shortened Ice Orbs recharge to 10 seconds
+			-Took 1 thief out of the Jungle level to make it easier
+			-Fire level meteors now damage you on touch
+			-Changed Air to a dash move
+			-Changed Air + Air to a dash move with direction changes
+		-Additions:
+			-Fixed enemy respawns in fire level
+			-Changed bubble sprite
+			-Changed Fire Orb sprite
+			-Changed Ice Orb sprite
+			-Changed Bubblebeam sprite
+			-Changed Meteor obstacle sprite to an animation
+			-Added new boss sprites for the fire boss
 		
 	TODO:
 		+Bugs
-			+Wind on meteors makes them faster
 		+Highscores
 			+Prompt for initials
 			-Cannot make dynamic pages on git
@@ -39,16 +50,20 @@
 			-Arrays
 		-Spells
 			-Dark (Black)
-				-HP Steal?
+				-Close range 2 damage spikes?
 			-Summon (?)
 				-Minions
 		+More enemies and AI
 			+Bosses:
-				+Fire boss Sprites
-			-Make it apparent what spell the enemy wizard has
-		+Terrain
-			-Different levels, at the end of each is a boss
-			-During battle terrain gradually changes to new level
+				-Swamp boss?
+				-Boss that uses stolen spells?
+			-Make it apparent what spell the enemy wizard has?
+		-Terrain
+			-Swamp level, has boardwalks and lots of water that slows you if you go in it
+				-Crocodiles appear in water if you stay still
+				-Flying enemy who has no speed changes
+				-After Jungle?
+				-Slightly haunted? Bats?
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
 */
@@ -236,6 +251,13 @@ TWizzurd7.src = "grafix/wizzurds/tree.wizard/tree.wiz.l7.png";
 var TWizzurd8 = new Image();
 TWizzurd8.src = "grafix/wizzurds/tree.wizard/tree.wiz.l8.png";
 var Treewizzez = {1: TWizzurd, 2: TWizzurd2, 3: TWizzurd3, 4: TWizzurd4, 5: TWizzurd5, 6: TWizzurd6, 7: TWizzurd7, 8: TWizzurd8};
+//Fire Demon Boss
+var FbossIdle = new Image();
+FbossIdle.src = "grafix/creatures/dearyrocks/drocks.idle.png";
+var FbossTotemU = new Image();
+FbossTotemU.src = "grafix/creatures/dearyrocks/tote.u.png";
+var FbossTotemD = new Image();
+FbossTotemD.src = "grafix/creatures/dearyrocks/tote.d.png";
 //Monochrome Wizzurd
 var MonoWizzurd = new Image();
 MonoWizzurd.src = "grafix/wizzurds/effects.wizard/bw.wiz.l1.png";
@@ -350,16 +372,23 @@ var colorParticles = {1: particle1, 2: particle2, 3: particle3, 4: particle4, 5:
 var Bubble = new Image();
 Bubble.src = "grafix/effects/bubble/bubble.png";
 var FireBubble = new Image();
-FireBubble.src = "grafix/effects/bubble/firebubble.png";
+FireBubble.src = "grafix/effects/bubble/firebubble.1.png";
+var FireBubble2 = new Image();
+FireBubble2.src = "grafix/effects/bubble/firebubble.2.png";
 var IceBubble = new Image();
-IceBubble.src = "grafix/effects/bubble/icebubble.png";
+IceBubble.src = "grafix/effects/bubble/icebubble.1.png";
+var IceBubble2 = new Image();
+IceBubble2.src = "grafix/effects/bubble/icebubble.2.png";
+var IceBubble3 = new Image();
+IceBubble3.src = "grafix/effects/bubble/icebubble.3.png";
+var iceBpics = {0: IceBubble, 1: IceBubble2, 2: IceBubble3};
 var MysticBubble = new Image();
-MysticBubble.src = "grafix/effects/bubble/mysticbubble.png";
+MysticBubble.src = "grafix/effects/bubble/mysticbubble.1.png";
+var MysticBubble2 = new Image();
+MysticBubble2.src = "grafix/effects/bubble/mysticbubble.2.png";
 //Meteor
 var MeteorF0 = new Image();
 MeteorF0.src = "grafix/effects/meteor/meteor.fire0.png";
-var Meteorcold = new Image();
-Meteorcold.src = "grafix/effects/meteor/meteor.rock.png";
 var MeteorF15d = new Image();
 MeteorF15d.src = "grafix/effects/meteor/meteor.fire15d.png";
 var MeteorF15u = new Image();
@@ -386,6 +415,76 @@ var BigMeteorF45d = new Image();
 BigMeteorF45d.src = "grafix/effects/meteor/meteor.fire45d.big.png";
 var BigMeteorF45u = new Image();
 BigMeteorF45u.src = "grafix/effects/meteor/meteor.fire45u.big.png";
+//Meteor env
+var Meteorcold = new Image();
+Meteorcold.src = "grafix/objects/hot.rock/glow.01.png";
+var Meteorcold2 = new Image();
+Meteorcold2.src = "grafix/objects/hot.rock/glow.02.png";
+var Meteorcold3 = new Image();
+Meteorcold3.src = "grafix/objects/hot.rock/glow.03.png";
+var Meteorcold4 = new Image();
+Meteorcold4.src = "grafix/objects/hot.rock/glow.04.png";
+var Meteorcold5 = new Image();
+Meteorcold5.src = "grafix/objects/hot.rock/glow.05.png";
+var Meteorcold6 = new Image();
+Meteorcold6.src = "grafix/objects/hot.rock/glow.06.png";
+var Meteorcold7 = new Image();
+Meteorcold7.src = "grafix/objects/hot.rock/glow.07.png";
+var Meteorcold8 = new Image();
+Meteorcold8.src = "grafix/objects/hot.rock/glow.08.png";
+var Meteorcold9 = new Image();
+Meteorcold9.src = "grafix/objects/hot.rock/glow.09.png";
+var Meteorcold10 = new Image();
+Meteorcold10.src = "grafix/objects/hot.rock/glow.10.png";
+var Meteorcold11 = new Image();
+Meteorcold11.src = "grafix/objects/hot.rock/glow.11.png";
+var Meteorcold12 = new Image();
+Meteorcold12.src = "grafix/objects/hot.rock/glow.12.png";
+var Meteorcold13 = new Image();
+Meteorcold13.src = "grafix/objects/hot.rock/glow.13.png";
+var Meteorcold14 = new Image();
+Meteorcold14.src = "grafix/objects/hot.rock/glow.14.png";
+var Meteorcold15 = new Image();
+Meteorcold15.src = "grafix/objects/hot.rock/glow.15.png";
+var Meteorcold16 = new Image();
+Meteorcold16.src = "grafix/objects/hot.rock/glow.16.png";
+var Meteorcold17 = new Image();
+Meteorcold17.src = "grafix/objects/hot.rock/glow.17.png";
+var Meteorcold18 = new Image();
+Meteorcold18.src = "grafix/objects/hot.rock/glow.18.png";
+var Meteorcold19 = new Image();
+Meteorcold19.src = "grafix/objects/hot.rock/glow.19.png";
+var Meteorcold20 = new Image();
+Meteorcold20.src = "grafix/objects/hot.rock/glow.20.png";
+var Meteorcold21 = new Image();
+Meteorcold21.src = "grafix/objects/hot.rock/glow.21.png";
+var Meteorcold22 = new Image();
+Meteorcold22.src = "grafix/objects/hot.rock/glow.22.png";
+var Meteorcold23 = new Image();
+Meteorcold23.src = "grafix/objects/hot.rock/glow.23.png";
+var Meteorcold24 = new Image();
+Meteorcold24.src = "grafix/objects/hot.rock/glow.24.png";
+var Meteorcold25 = new Image();
+Meteorcold25.src = "grafix/objects/hot.rock/glow.25.png";
+var Meteorcold26 = new Image();
+Meteorcold26.src = "grafix/objects/hot.rock/glow.26.png";
+var Meteorcold27 = new Image();
+Meteorcold27.src = "grafix/objects/hot.rock/glow.27.png";
+var Meteorcold28 = new Image();
+Meteorcold28.src = "grafix/objects/hot.rock/glow.28.png";
+var Meteorcold29 = new Image();
+Meteorcold29.src = "grafix/objects/hot.rock/glow.29.png";
+var Meteorcold30 = new Image();
+Meteorcold30.src = "grafix/objects/hot.rock/glow.30.png";
+var Meteorcold31 = new Image();
+Meteorcold31.src = "grafix/objects/hot.rock/glow.31.png";
+var Meteorcold32 = new Image();
+Meteorcold32.src = "grafix/objects/hot.rock/glow.32.png";
+var Meteorcold33 = new Image();
+Meteorcold33.src = "grafix/objects/hot.rock/glow.33.png";
+var EnvMeteor = {1: Meteorcold, 2: Meteorcold2, 3: Meteorcold3, 4: Meteorcold4, 5: Meteorcold5, 6: Meteorcold6, 7: Meteorcold7, 8: Meteorcold8, 9: Meteorcold9, 10: Meteorcold10, 11: Meteorcold11,
+				12: Meteorcold12, 13: Meteorcold13, 14: Meteorcold14, 15: Meteorcold15, 16: Meteorcold16, 17: Meteorcold17, 18: Meteorcold18, 19: Meteorcold19, 20: Meteorcold20, 21: Meteorcold21, 22: Meteorcold22,
+				23: Meteorcold23, 24: Meteorcold24, 25: Meteorcold25, 26: Meteorcold26, 27: Meteorcold27, 28: Meteorcold28, 29: Meteorcold29, 30: Meteorcold30, 31: Meteorcold31, 32: Meteorcold32, 33: Meteorcold33}; 
 //hlightning
 var hlightning1 = new Image();
 hlightning1.src = "grafix/effects/lightning.self/hor.1.png";
@@ -525,7 +624,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.5.6 Alpha: April 14 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.5.7 Alpha: April 15 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -797,6 +896,7 @@ var player = {
 	height: 32,
 	speed: 8,
 	speed2: 2,
+	dirct: 0,
 	hp: 3,
 	maxhp: 3,
 	dmg: false,
@@ -859,37 +959,49 @@ var player = {
 		}
 	},
 	onhit: function(){
-	if(hptimer > 0){
-		hptimer-=1;
-	}
-	else{
-		for(E in AllEnemies){
-			if(collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])){
-				if(AllEnemies[E].onTree == 0){
-					onDmg.currentTime=0;
-					onDmg.play();
-					this.dmg = true;
-				}
-			}
+		if(this.dirct > 0){
+			this.dirct-=1;
 		}
-		for(E in EMeteors){
-			if(collision(EMeteors[E].dir, EMeteors[E], this) || collision(this.dir, this, EMeteors[E])){
-				if(EMeteors[E].timeLeft > 0){
-					onDmg.currentTime=0;
-					onDmg.play();
-					this.dmg = true;
-				}
-			}
-		}
-		if(this.dmg == true){
-			this.hp-=1;
-			hptimer = 30;
-			this.dmg = false;
+		if(hptimer > 0){
+			hptimer-=1;
 		}
 		else{
-			this.hp = this.hp;
+			for(E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])){
+					if(AllEnemies[E].onTree == 0){
+						onDmg.currentTime=0;
+						onDmg.play();
+						this.dmg = true;
+					}
+				}
+			}
+			for(E in EMeteors){
+				if(collision(EMeteors[E].dir, EMeteors[E], this) || collision(this.dir, this, EMeteors[E])){
+					if(EMeteors[E].timeLeft > 0){
+						onDmg.currentTime=0;
+						onDmg.play();
+						this.dmg = true;
+					}
+				}
+			}
+			if(STATE == "Scorched"){
+				for(O in ObsList){
+					if(collision(this.dir, this, ObsList[O])){
+						this.dmg = true;
+						onDmg.currentTime=0;
+						onDmg.play();
+					}
+				}
+			}
+			if(this.dmg == true){
+				this.hp-=1;
+				hptimer = 30;
+				this.dmg = false;
+			}
+			else{
+				this.hp = this.hp;
+			}
 		}
-	}
 	}
 };
 //----------------------------------------------- Casting Bar -----------------------------------------------------------------------//
@@ -1217,7 +1329,7 @@ function UI(){
 			spell = "Lightning";
 		}	
 		if(spell1 == "Air"){
-			spell = "Gust";
+			spell = "Dash";
 		}
 		if(spell1 == "Mystic"){
 			spell = "Teleport";
@@ -1240,7 +1352,7 @@ function UI(){
 			spell = "Lightning";
 		}	
 		if(spell2 == "Air"){
-			spell = "Gust";
+			spell = "Dash";
 		}
 		if(spell2 == "Mystic"){
 			spell = "Teleport";
@@ -1289,7 +1401,7 @@ function UI(){
 		spell = "Maelstrom";
 	}
 	if((spell1 == "Earth" && spell2 == "Air") || (spell2 == "Earth" && spell1 == "Air")){
-		spell = "Gust and Heal";
+		spell = "Dash and Heal";
 	}
 	if((spell1 == "Lightning" && spell2 == "Air") || (spell2 == "Lightning" && spell1 == "Air")){
 		spell = "Thunderstorm";
@@ -1466,7 +1578,7 @@ function UI(){
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(lightningheal.cd/30) + "s", 32, 544);
 	}
-	else if(spell == "Gust"){
+	else if(spell == "Dash"){
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(air.cd/30) + "s", 32, 544);
@@ -1486,7 +1598,7 @@ function UI(){
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airice.cd/30) + "s", 32, 544);
 	}
-	else if(spell == "Gust and Heal"){
+	else if(spell == "Dash and Heal"){
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airearth.cd/30) + "s", 32, 544);
@@ -1610,101 +1722,109 @@ var keys = function(){
 			STATE = "PAUSE";
 			keytimer = 20;
 		}
-		if (87 in keysDown){
+		if (87 in keysDown && player.dirct <= 0){
 			player.dir = "W";
 		}
-		if (65 in keysDown){
+		if (65 in keysDown && player.dirct <= 0){
 			player.dir = "A";
 		}
-		if (83 in keysDown){
+		if (83 in keysDown && player.dirct <= 0){
 			player.dir = "S";
 		}
-		if (68 in keysDown){
+		if (68 in keysDown && player.dirct <= 0){
 			player.dir = "D";
 		}
-		if(87 in keysDown){
+		if(87 in keysDown && player.dirct <= 0){
 			for(O in ObsList){
 				if(collision("W", player, ObsList[O])){
 					Up = false;
 				}
 			}
 		}
-		if(68 in keysDown){
+		if(68 in keysDown && player.dirct <= 0){
 			for(O in ObsList){
 				if(collision("D", player, ObsList[O])){
 					Right = false;
 				}
 			}
 		}
-		if(83 in keysDown){
+		if(83 in keysDown && player.dirct <= 0){
 			for(O in ObsList){
 				if(collision("S", player, ObsList[O])){
 					Down = false;
 				}
 			}
 		}
-		if(65 in keysDown){
+		if(65 in keysDown && player.dirct <= 0){
 			for(O in ObsList){
 				if(collision("A", player, ObsList[O])){
 					Left = false;
 				}
 			}
 		}
-		if (87 in keysDown && player.y - player.speed > 4 && Up == true){
-			player.y-=player.speed;
-			for(W in bubbleRotate){
-				if(bubbleRotate[W].onScreen == 1){
-					bubbleRotate[W].y-=player.speed;
+		if ((87 in keysDown || (player.dirct > 0 && player.dir == "W")) && player.y - player.speed > 4 && Up == true){
+			if(player.dirct <= 0 || player.dir == "W"){
+				player.y-=player.speed;
+				for(W in bubbleRotate){
+					if(bubbleRotate[W].onScreen == 1){
+						bubbleRotate[W].y-=player.speed;
+					}
 				}
-			}
-			for(W in wairParticles){
-				if(wairParticles[W].onScreen == 1){
-					wairParticles[W].y-=player.speed;
+				for(W in wairParticles){
+					if(wairParticles[W].onScreen == 1){
+						wairParticles[W].y-=player.speed;
+					}
 				}
+				player.dir = "W";
 			}
-			player.dir = "W";
 		}
-		if (65 in keysDown && player.x - player.speed > 4 && Left == true){
-			player.x-=player.speed;
-			for(W in bubbleRotate){
-				if(bubbleRotate[W].onScreen == 1){
-					bubbleRotate[W].x-=player.speed;
+		if ((65 in keysDown || (player.dirct > 0 && player.dir == "A")) && player.x - player.speed > 4 && Left == true){
+			if(player.dirct <= 0 || player.dir == "A"){
+				player.x-=player.speed;
+				for(W in bubbleRotate){
+					if(bubbleRotate[W].onScreen == 1){
+						bubbleRotate[W].x-=player.speed;
+					}
 				}
-			}
-			for(W in wairParticles){
-				if(wairParticles[W].onScreen == 1){
-					wairParticles[W].x-=player.speed;
+				for(W in wairParticles){
+					if(wairParticles[W].onScreen == 1){
+						wairParticles[W].x-=player.speed;
+					}
 				}
+				player.dir = "A";
 			}
-			player.dir = "A";
 		}
-		if (83 in keysDown && player.y + player.speed < canvas.height - 4 && Down == true){
-			player.y+=player.speed;
-			for(W in bubbleRotate){
-				if(bubbleRotate[W].onScreen == 1){
-					bubbleRotate[W].y+=player.speed;
+		if ((83 in keysDown || (player.dirct > 0 && player.dir == "S")) && player.y + player.speed < canvas.height - 4 && Down == true){
+			if(player.dirct <= 0 || player.dir == "S"){
+				player.y+=player.speed;
+				for(W in bubbleRotate){
+					if(bubbleRotate[W].onScreen == 1){
+						bubbleRotate[W].y+=player.speed;
+					}
 				}
-			}
-			for(W in wairParticles){
-				if(wairParticles[W].onScreen == 1){
-					wairParticles[W].y+=player.speed;
+				for(W in wairParticles){
+					if(wairParticles[W].onScreen == 1){
+						wairParticles[W].y+=player.speed;
+					}
 				}
+				player.dir = "S";
 			}
-			player.dir = "S";
 		}
-		if (68 in keysDown && player.x + player.speed < canvas.width - 4 && Right == true){
-			player.x+=player.speed;
-			for(W in bubbleRotate){
-				if(bubbleRotate[W].onScreen == 1){
-					bubbleRotate[W].x+=player.speed;
+		if ((68 in keysDown || (player.dirct > 0 && player.dir == "D")) && player.x + player.speed < canvas.width - 4 && Right == true){
+			if(player.dirct <= 0 || player.dir == "D"){
+				player.x+=player.speed;
+				for(W in bubbleRotate){
+					if(bubbleRotate[W].onScreen == 1){
+						bubbleRotate[W].x+=player.speed;
+					}
 				}
-			}
-			for(W in wairParticles){
-				if(wairParticles[W].onScreen == 1){
-					wairParticles[W].x+=player.speed;
+				for(W in wairParticles){
+					if(wairParticles[W].onScreen == 1){
+						wairParticles[W].x+=player.speed;
+					}
 				}
+				player.dir = "D";
 			}
-			player.dir = "D";
 		}
 		if (37 in keysDown && 38 in keysDown){
 			bullet.shoot("WA", 4, 4);
@@ -1951,7 +2071,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.6 Alpha: April 14 2012", 244, 96);
+	ctx.fillText("Version 0.5.7 Alpha: April 15 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	ctx.fillText("1st: " + highscore1, 308, 240);
 	ctx.fillText("2nd: " + highscore2, 308, 272);
@@ -2147,10 +2267,14 @@ setInterval(function(){
 			vertil4.draw();
 			horil5.draw();
 			vertil5.draw();
-			for(A in Air1Air2){
+			/*for(A in Air1Air2){
 				Air1Air2[A].draw();
 				Air1Air2[A].effect();
-			}		
+			}*/
+			air.draw();
+			air.effect();
+			air2.draw();
+			air2.effect();
 			airfire.draw();
 			airfire.effect();
 			airfire12.draw();

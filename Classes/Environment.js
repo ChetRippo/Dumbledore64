@@ -220,9 +220,11 @@ function drawObstacle(O){
 					ctx.fillStyle = "white";
 					ctx.fillRect(O[Z].x - O[Z].width / 2, O[Z].y - O[Z].height / 2, O[Z].width, O[Z].height);
 				}
-				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(Meteorcold, O[Z].x - O[Z].width/2, O[Z].y - O[Z].height/2, O[Z].width, O[Z].height);
-				ctx.globalAlpha = Alpha;
+				ctx.drawImage(EnvMeteor[O[Z].index], O[Z].x - O[Z].width/2, O[Z].y - O[Z].height/2, O[Z].width, O[Z].height);
+				O[Z].index++;
+				if(O[Z].index > 33){
+					O[Z].index = 1;
+				}
 			}
 		}
 	}
@@ -298,7 +300,7 @@ function rePlant(){
 			obstacle1[Z].x = (Math.floor(Math.random() * 9) + 2)*64;
 			obstacle1[Z].y = (Math.floor(Math.random() * 7) + 2)*64;
 			for(A in obstacle1){
-				if(obstacle1[Z].x == obstacle1[A].x && obstacle1[Z].y != obstacle1[A].y){
+				if(obstacle1[Z].x == obstacle1[A].x && obstacle1[A] != obstacle1[Z]){
 					obstacle1[Z].x = 2000;
 					obstacle1[Z].y = 2000;
 				}
@@ -329,11 +331,13 @@ function rePlant(){
 			obstacle2[Z].x = 2000;
 			obstacle2[Z].y = 2000;
 			obstacle2[Z].hp = 5;
+			obstacle2[Z].index = Math.floor(Math.random() * 33) + 1;
 		}
 		for(Z in obstacle3){
 			obstacle3[Z].x = 2000;
 			obstacle3[Z].y = 2000;
 			obstacle3[Z].hp = 5;
+			obstacle3[Z].index = Math.floor(Math.random() * 33) + 1;
 		}
 		planted = true;
 	}

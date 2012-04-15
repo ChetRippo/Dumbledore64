@@ -576,6 +576,7 @@ var bullet82 = {
 var Bullets = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: bullet5, 6: bullet6, 7: bullet7, 8: bullet8, 9: bullet11, 10: bullet12,
 				11: bullet21, 12: bullet22, 13: bullet31, 14: bullet32, 15: bullet41, 16: bullet42, 17: bullet51, 18: bullet52, 19: bullet61, 20: bullet62,
 				21: bullet71, 22: bullet72, 23: bullet81, 24: bullet82};
+var mystIndex = 1;
 function drawBullet(B){
 	if (B.timeLeft > 0){
 		if(spell == "Explosive Shots"){
@@ -594,7 +595,17 @@ function drawBullet(B){
 			ctx.fillStyle = B.color;
 		}
 		if(spell == "Bubblebeam"){
-			ctx.drawImage(MysticBubble, B.x-B.width/2, B.y-B.height/2);
+			if(mystIndex < 5){
+				ctx.drawImage(MysticBubble, B.x-B.width/2, B.y-B.height/2);
+				mystIndex++;
+			}
+			else{
+				ctx.drawImage(MysticBubble2, B.x-B.width/2, B.y-B.height/2);
+				mystIndex++;
+				if(mystIndex > 10){
+					mystIndex = 1;
+				}
+			}
 		}
 		else{
 			if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
@@ -2859,7 +2870,7 @@ var airice = {
 	}
 	}
 };
-// Gust and Heal: Heals user by 1 and casts Gust
+// Dash and Heal: Heals user by 1 and casts Dash
 var airearth = {
 	cd: 0,
 	tick: function(){
@@ -2869,7 +2880,7 @@ var airearth = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
-			this.cd = 450;
+			this.cd = 300;
 			air.cd = 0;
 			earth.cd = 0;
 			air.shoot();
@@ -2943,7 +2954,7 @@ var airlightning = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		this.cd = 60;
+		this.cd = 120;
 		this.onScreen = 1;
 		this.timeLeft = 360;
 		this.frame = 0;
@@ -2983,6 +2994,8 @@ var waterfire = {
 	timeLeft: 0,
 	cd: 0,
 	cd2: 0,
+	index: 1,
+	Iindex: 0,
 	speed: 12,
 	onScreen: 0,
 	used: 0,
@@ -2997,10 +3010,24 @@ var waterfire = {
 				this.played = 1;
 			}
 			if(spell == "Explosive Orbs"){
-				ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+				if(this.index < 3){
+					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+				}
+				else{
+					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+					if(this.index >= 5){
+						this.index = 1;
+					}
+				}
 			}
 			if(spell == "Frozen Orbs"){
-				ctx.drawImage(IceBubble, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				this.Iindex++;
+				if(this.Iindex >= 6){
+					this.Iindex = 0;
+				}
 			}
 		}
 	},
@@ -3058,7 +3085,7 @@ var waterfire = {
 			this.x = player.x;
 			this.y = player.y;
 			this.dir = "W";
-			this.cd = 600;
+			this.cd = 300;
 			this.onScreen = 1;
 			this.played=0;
 			for(W in waterFires){
@@ -3079,7 +3106,7 @@ var waterfire = {
 			this.y = player.y;
 			this.dir = "W";
 			this.played=0;
-			this.cd2 = 360;
+			this.cd2 = 300;
 			this.onScreen = 1;
 			for(W in waterFires){
 				waterFires[W].used = 0;
@@ -3101,6 +3128,8 @@ var waterfire2 = {
 	width: 16,
 	height: 16,
 	speed: 12,
+	index: 1,
+	Iindex: 0,
 	onScreen: 0,
 	used: 0,
 	dir: "",
@@ -3108,10 +3137,24 @@ var waterfire2 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			if(spell == "Explosive Orbs"){
-				ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+				if(this.index < 3){
+					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+				}
+				else{
+					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+					if(this.index >= 5){
+						this.index = 1;
+					}
+				}
 			}
 			if(spell == "Frozen Orbs"){
-				ctx.drawImage(IceBubble, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				this.Iindex++;
+				if(this.Iindex >= 6){
+					this.Iindex = 0;
+				}
 			}
 		}
 	},
@@ -3172,16 +3215,32 @@ var waterfire3 = {
 	height: 16,
 	speed: 12,
 	onScreen: 0,
+	index: 1,
+	Iindex: 0,
 	used: 0,
 	dir: "",
 	
 	draw: function(){
 		if(this.onScreen == 1){
 			if(spell == "Explosive Orbs"){
-				ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+				if(this.index < 3){
+					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+				}
+				else{
+					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+					if(this.index >= 5){
+						this.index = 1;
+					}
+				}
 			}
 			if(spell == "Frozen Orbs"){
-				ctx.drawImage(IceBubble, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				this.Iindex++;
+				if(this.Iindex >= 6){
+					this.Iindex = 0;
+				}
 			}
 		}
 	},
@@ -3243,15 +3302,31 @@ var waterfire4 = {
 	speed: 12,
 	onScreen: 0,
 	used: 0,
+	index: 1,
+	Iindex: 0,
 	dir: "",
 	
 	draw: function(){
 		if(this.onScreen == 1){
 			if(spell == "Explosive Orbs"){
-				ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+				if(this.index < 3){
+					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+				}
+				else{
+					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+					if(this.index >= 5){
+						this.index = 1;
+					}
+				}
 			}
 			if(spell == "Frozen Orbs"){
-				ctx.drawImage(IceBubble, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				this.Iindex++;
+				if(this.Iindex >= 6){
+					this.Iindex = 0;
+				}
 			}
 		}
 	},
@@ -3312,16 +3387,32 @@ var waterfire5 = {
 	height: 16,
 	speed: 12,
 	onScreen: 0,
+	index: 1,
+	Iindex: 0,
 	used: 0,
 	dir: "",
 	
 	draw: function(){
 		if(this.onScreen == 1){
 			if(spell == "Explosive Orbs"){
-				ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+				if(this.index < 3){
+					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+				}
+				else{
+					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+					if(this.index >= 5){
+						this.index = 1;
+					}
+				}
 			}
 			if(spell == "Frozen Orbs"){
-				ctx.drawImage(IceBubble, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				this.Iindex++;
+				if(this.Iindex >= 6){
+					this.Iindex = 0;
+				}
 			}
 		}
 	},
@@ -3383,15 +3474,31 @@ var waterfire6 = {
 	speed: 12,
 	onScreen: 0,
 	used: 0,
+	index: 1,
+	Iindex: 0,
 	dir: "",
 	
 	draw: function(){
 		if(this.onScreen == 1){
 			if(spell == "Explosive Orbs"){
-				ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+				if(this.index < 3){
+					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+				}
+				else{
+					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+					if(this.index >= 5){
+						this.index = 1;
+					}
+				}
 			}
 			if(spell == "Frozen Orbs"){
-				ctx.drawImage(IceBubble, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				this.Iindex++;
+				if(this.Iindex >= 6){
+					this.Iindex = 0;
+				}
 			}
 		}
 	},
@@ -3453,15 +3560,31 @@ var waterfire7 = {
 	speed: 12,
 	onScreen: 0,
 	used: 0,
+	index: 1,
+	Iindex: 0,
 	dir: "",
 	
 	draw: function(){
 		if(this.onScreen == 1){
 			if(spell == "Explosive Orbs"){
-				ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+				if(this.index < 3){
+					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+				}
+				else{
+					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+					if(this.index >= 5){
+						this.index = 1;
+					}
+				}
 			}
 			if(spell == "Frozen Orbs"){
-				ctx.drawImage(IceBubble, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				this.Iindex++;
+				if(this.Iindex >= 6){
+					this.Iindex = 0;
+				}
 			}
 		}
 	},
@@ -3523,15 +3646,31 @@ var waterfire8 = {
 	speed: 12,
 	onScreen: 0,
 	used: 0,
+	index: 1,
+	Iindex: 0,
 	dir: "",
 	
 	draw: function(){
 		if(this.onScreen == 1){
 			if(spell == "Explosive Orbs"){
-				ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+				if(this.index < 3){
+					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+				}
+				else{
+					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					this.index++;
+					if(this.index >= 5){
+						this.index = 1;
+					}
+				}
 			}
 			if(spell == "Frozen Orbs"){
-				ctx.drawImage(IceBubble, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				this.Iindex++;
+				if(this.Iindex >= 6){
+					this.Iindex = 0;
+				}
 			}
 		}
 	},

@@ -1,23 +1,33 @@
 
-Version 0.5.6 Changes(4/14/2012):
+Version 0.5.7 Changes(4/15/2012):
 		-Bug Fixes:
-			-Made enemy wizard's ice spell not mess up alpha
-			-Made Thunderstorm noise not annoying
-			-Fixed all Alpha changes
-			-Added some compatibility stuff.
+			-Thunderstorm noise is less annoying
+			-Fixed all Alpha effects
+			-Added some compatibility
 				-Fully compatible with all Chrome and Firefox and Opera now. Maybe IE and Safari
+			-Improved Fire Wave collisions
+			-Jungle trees can no longer spawn on top of eachother
+			-Fixed bug where jungle enemies wouldn't spawn
 		-Balancing:
-			-Made enemies respawn faster over time in levels with no boss
+			-Enemy spawn rate is increased in Jungle and fire levels
 			-Slightly buffed homing shots
-		-Added HP UP powerup to fire boss fight
-		-Added Level transition from fire boss. The large meteors turn into obstacles
-		-Added fire level. Contains all globblys, hudges, lavamen, and lavamen spawners
-		-Added Jack's Casey's Quest song to fire level
-		
+			-Shortened Fire Orbs recharge to 10 seconds
+			-Shortened Ice Orbs recharge to 10 seconds
+			-Took 1 thief out of the Jungle level to make it easier
+			-Fire level meteors now damage you on touch
+			-Changed Air to a dash move
+			-Changed Air + Air to a dash move with direction changes
+		-Additions:
+			-Fixed enemy respawns in fire level
+			-Changed bubble sprite
+			-Changed Fire Orb sprite
+			-Changed Ice Orb sprite
+			-Changed Bubblebeam sprite
+			-Changed Meteor obstacle sprite to an animation
+			-Added new boss sprites for the fire boss
 		
 	TODO:
 		+Bugs
-			+Wind on meteors makes them faster
 		+Highscores
 			+Prompt for initials
 			-Cannot make dynamic pages on git
@@ -25,16 +35,20 @@ Version 0.5.6 Changes(4/14/2012):
 			-Arrays
 		-Spells
 			-Dark (Black)
-				-HP Steal?
+				-Close range 2 damage spikes?
 			-Summon (?)
 				-Minions
 		+More enemies and AI
 			+Bosses:
-				+Fire boss Sprites
-			-Make it apparent what spell the enemy wizard has
-		+Terrain
-			-Different levels, at the end of each is a boss
-			-During battle terrain gradually changes to new level
+				-Swamp boss?
+				-Boss that uses stolen spells?
+			-Make it apparent what spell the enemy wizard has?
+		-Terrain
+			-Swamp level, has boardwalks and lots of water that slows you if you go in it
+				-Crocodiles appear in water if you stay still
+				-Flying enemy who has no speed changes
+				-After Jungle?
+				-Slightly haunted? Bats?
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
 
