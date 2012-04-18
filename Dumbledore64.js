@@ -2107,6 +2107,7 @@ function gameOver(){
 						inits[H] = " ";
 					}
 				}
+				init = inits[1] + inits[2] + inits[3] + inits[4] + inits[5] + inits[6] + inits[7] + inits[8];
 				initsInd = 9;
 			}
 		}
