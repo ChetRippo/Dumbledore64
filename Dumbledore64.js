@@ -2068,6 +2068,11 @@ var keys = function(){
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
+	$.jStorage.set("v58hs5init",hs5init);
+	$.jStorage.set("v58hs4init",hs4init);
+	$.jStorage.set("v58hs3init",hs3init);
+	$.jStorage.set("v58hs2init",hs2init);
+	$.jStorage.set("v58hs1init",hs1init);
 	window.location.reload(true);
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
