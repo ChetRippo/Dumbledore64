@@ -2068,12 +2068,12 @@ var keys = function(){
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
-	window.location.reload(false);
+	window.location.reload(true);
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
 //array of init
 var inits = {1: "_", 2: "_", 3: "_", 4: "_", 5: "_", 6: "_", 7: "_", 8: "_"};
-var init = "_ _ _";
+var init = "_____";
 var initsInd = 1;
 var hsColor = 1;
 var hsNum = 0;
@@ -2210,7 +2210,6 @@ function gameOver(){
 		ctx.font = "18pt Arial";
 		ctx.fillText("New High Score! Please Enter Your Name!", 176, 64);
 	}
-	
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
