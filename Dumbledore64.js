@@ -2078,6 +2078,7 @@ var initsInd = 1;
 var hsColor = 1;
 var hsNum = 0;
 var wait = 0;
+var lowestScore = highscore5;
 function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.globalAlpha = 1;
@@ -2093,7 +2094,7 @@ function gameOver(){
 	}
 	if(STATE != 5){
 		ctx.fillText("Score: " + score, 320, 144);
-		if(score > highscore5){
+		if(score > lowestScore){
 			if(initsInd <= 8 && wait <= 0){
 				inits[initsInd] = printAlphabet();
 				if(inits[initsInd] != "_"){
