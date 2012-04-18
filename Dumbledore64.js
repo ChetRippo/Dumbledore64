@@ -2068,11 +2068,6 @@ var keys = function(){
 };
 //--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
 function reset(){
-	$.jStorage.set("v58hs5init",hs5init);
-	$.jStorage.set("v58hs4init",hs4init);
-	$.jStorage.set("v58hs3init",hs3init);
-	$.jStorage.set("v58hs2init",hs2init);
-	$.jStorage.set("v58hs1init",hs1init);
 	window.location.reload(true);
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
@@ -2245,20 +2240,6 @@ function gameOver(){
 		ctx.fillStyle = colorz[hsColor];
 	}
 	ctx.fillText("5th: " + highscore5 + "    " + hs5init, 308, 368);
-	ctx.fillStyle = "white";
-	ctx.font = "16pt Arial";
-	ctx.fillText("Back", bx, by);
-	if(hX >= bx-10 && hX <=bx + 50 && hY <= by && hY>=by-height*7/6){
-		ctx.strokeRect(bx-10, by-height*7/6, width * 3 + 10, height+10);
-	}		
-	if(cX >= bx-10 && cX <=bx + 50 && cY <= by && cY>=by-height*7/6){
-		cX=0;
-		cY=0;
-		score = 0;
-		fastbeepsLow.currentTime=0;
-		fastbeepsLow.play();
-		reset();
-	}	
 }
 //---------------------------------------------------------- Alphabet Print ---------------------------------------------------------//
 function printAlphabet(){
