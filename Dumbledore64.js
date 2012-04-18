@@ -2101,15 +2101,6 @@ function gameOver(){
 					wait = 4;
 				}
 			}
-			if(13 in keysDown){
-				for(H in inits){
-					if(inits[H] == "_"){
-						inits[H] = " ";
-					}
-				}
-				init = inits[1] + inits[2] + inits[3] + inits[4] + inits[5] + inits[6] + inits[7] + inits[8];
-				initsInd = 9;
-			}
 		}
 		else{
 			var init = " ";
