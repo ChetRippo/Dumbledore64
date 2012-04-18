@@ -116,6 +116,11 @@ var air = {
 					onHit(AllEnemies[E]);
 				}
 			}
+			for(O in ObsList){
+				if(collision(player.dir, player, ObsList[O])){
+					obsHit(ObsList[O]);
+				}
+			}
 			player.speed = player.speed2 * 16;
 		}
 		if(this.onScreen == 1 && this.cast == 0 && this.used == 0){
@@ -258,24 +263,28 @@ var air2 = {
 					onHit(AllEnemies[E]);
 				}
 			}
+			for(O in ObsList){
+				if(collision(player.dir, player, ObsList[O])){
+					obsHit(ObsList[O]);
+				}
+			}
 		}
 		if(this.onScreen == 1 && this.cast == 0 && this.used == 0){
-			player.dirct = 15;
-			hptimer = 15;
+			player.dirct = 10;
+			hptimer = 40;
 			player.speed = player.speed2 * 16;
 			this.used = 1;
 		}
 		if(this.timeLeft <=0 && this.onScreen == 1){
-			if(this.num >= 3){
+			if(this.num >= 4){
 				player.speed = player.speed2 * 4;
 				this.onScreen = 0;
 				this.num = 0;
 			}
 			else{
 				this.num++;
-				this.timeLeft = 15;
-				hptimer = 15;
-				player.dirct = 15;
+				this.timeLeft = 10;
+				player.dirct = 10;
 				player.speed = player.speed2 * 16;
 				if (87 in keysDown){
 					player.dir = "W";
@@ -296,7 +305,7 @@ var air2 = {
 	shoot: function(){
 	if(this.cd == 0){
 		this.cd = 300;
-		this.timeLeft = 15;
+		this.timeLeft = 10;
 		this.onScreen = 1;
 		this.used = 0;
 	}

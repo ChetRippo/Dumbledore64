@@ -14,37 +14,20 @@
 
 */
 /*
-	Version 0.5.7 Changes(4/15/2012):
+	Version 0.5.8 Changes(4/18/2012):
 		-Bug Fixes:
-			-Thunderstorm noise is less annoying
-			-Fixed all Alpha effects
-			-Added some compatibility
-				-Fully compatible with all Chrome and Firefox and Opera now. Maybe IE and Safari
-			-Improved Fire Wave collisions
-			-Jungle trees can no longer spawn on top of eachother
-			-Fixed bug where jungle enemies wouldn't spawn
+			-Can no longer be damaged while in Twister
 		-Balancing:
-			-Enemy spawn rate is increased in Jungle and fire levels
-			-Slightly buffed homing shots
-			-Shortened Fire Orbs recharge to 10 seconds
-			-Shortened Ice Orbs recharge to 10 seconds
-			-Took 1 thief out of the Jungle level to make it easier
-			-Fire level meteors now damage you on touch
-			-Changed Air to a dash move
-			-Changed Air + Air to a dash move with direction changes
+			-Dash and Twister now damage obstacles
+			-Twister lets you turn more and more often
+			-Reset High Scores
 		-Additions:
-			-Fixed enemy respawns in fire level
-			-Changed bubble sprite
-			-Changed Fire Orb sprite
-			-Changed Ice Orb sprite
-			-Changed Bubblebeam sprite
-			-Changed Meteor obstacle sprite to an animation
-			-Added new boss sprites for the fire boss
+			-Option preferences are now cookied
+			-High score menu now prompts for initials
 		
 	TODO:
 		+Bugs
 		+Highscores
-			+Prompt for initials
 			-Cannot make dynamic pages on git
 		-Optimize
 			-Arrays
@@ -560,26 +543,109 @@ DumblebeatsNormal.volume = 0.4;
 CaseysQuest.volume = 0.4;
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 //reset by changing the strings, change in gameover() too
-var highscore1 = $.jStorage.get("v5highscore1");
+var highscore1 = $.jStorage.get("v58highscore1");
 if(!highscore1){
 		var highscore1 = 0;
-		$.jStorage.set("v5highscore1",highscore1);}
-var highscore2 = $.jStorage.get("v5highscore2");
+		$.jStorage.set("v58highscore1",highscore1);
+}
+var highscore2 = $.jStorage.get("v58highscore2");
 if(!highscore2){
 		var highscore2 = 0;
-		$.jStorage.set("v5highscore2",highscore2);}
-var highscore3 = $.jStorage.get("v5highscore3");
+		$.jStorage.set("v58highscore2",highscore2);
+}
+var highscore3 = $.jStorage.get("v58highscore3");
 if(!highscore3){
 		var highscore3 = 0;
-		$.jStorage.set("v5highscore3",highscore3);}
-var highscore4 = $.jStorage.get("v5highscore4");
+		$.jStorage.set("v58highscore3",highscore3);
+}
+var highscore4 = $.jStorage.get("v58highscore4");
 if(!highscore4){
 		var highscore4 = 0;
-		$.jStorage.set("v5highscore4",highscore4);}
-var highscore5 = $.jStorage.get("v5highscore5");
+		$.jStorage.set("v58highscore4",highscore4);
+}
+var highscore5 = $.jStorage.get("v58highscore5");
 if(!highscore5){
 		var highscore5 = 0;
-		$.jStorage.set("v5highscore5",highscore5);}
+		$.jStorage.set("v58highscore5",highscore5);
+}
+//Get Initials
+var hs1init = $.jStorage.get("v58hs1init");
+if(!hs1init){
+		var hs1init = "        ";
+		$.jStorage.set("v58hs1init",hs1init);
+}
+var hs2init = $.jStorage.get("v58hs2init");
+if(!hs2init){
+		var hs2init = "        ";
+		$.jStorage.set("v58hs2init",hs2init);
+}
+var hs3init = $.jStorage.get("v58hs3init");
+if(!hs3init){
+		var hs3init = "        ";
+		$.jStorage.set("v58hs3init",hs3init);
+}
+var hs4init = $.jStorage.get("v58hs4init");
+if(!hs4init){
+		var hs4init = "        ";
+		$.jStorage.set("v58hs4init",hs4init);
+}
+var hs5init = $.jStorage.get("v58hs5init");
+if(!hs5init){
+		var hs5init = "        ";
+		$.jStorage.set("v58hs5init",hs5init);
+}
+//Remove _ in initials
+var chars = hs1init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs1init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs2init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs2init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs3init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs3init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs4init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs4init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs5init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs5init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+//Get options
+var dispCntrls = $.jStorage.get("cntrls");
+if(!dispCntrls){
+	var dispCntrls = 2;
+	$.jStorage.set("cntrls", dispCntrls);
+}
+var vol = $.jStorage.get("vol");
+if(!vol){
+	var vol = 2;
+	$.jStorage.set("vol", vol);
+}
+var Music = $.jStorage.get("Music");
+if(!Music){
+	var Music = 2;
+	$.jStorage.set("Music", Music);
+}
 //---------------------------------------------------------------- Mouse Posn -------------------------------------------------------//
 function getPosition(event){
     if (event.x != undefined && event.y != undefined){
@@ -624,7 +690,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.5.7 Alpha: April 15 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.5.8 Alpha: April 18 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -781,6 +847,7 @@ var Pause = {
 		}
 	}
 };
+
 var Options = {
 	x: 300,
 	y: canvas.height/8,
@@ -788,9 +855,6 @@ var Options = {
 	height: 20,
 	bx: 400-50,
 	by: 560,
-	dispControls: true,
-	vol: true,
-	Music: true,
 	draw: function(){
 		ctx.fillStyle = "white";
 		ctx.font = "18pt Arial";
@@ -803,24 +867,26 @@ var Options = {
 		if(cX >= this.x-20 && cX <=this.x + this.width*4 && cY <= this.y+5*this.height/2 && cY>=this.y+this.height/2){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
-			if(this.vol == false){
-				this.vol = true;
+			if(vol == 1){
+				vol = 2;
+				$.jStorage.set("vol",vol);
 				cX = 0;
 				cY = 0;
 			}
-			else if(this.vol == true){
-				this.vol = false;
+			else if(vol == 2){
+				vol = 1;
+				$.jStorage.set("vol",vol);
 				cX = 0;
 				cY = 0;
 			}
 		}
-		if(this.vol == true){
+		if(vol == 2){
 			ctx.fillText("Sound: On", this.x-this.width/2, this.y+4*this.height/2);
 			for(S in AllSounds){
 				AllSounds[S].volume=0.5;
 			}
 		}
-		if(this.vol == false){
+		if(vol == 1){
 			ctx.fillText("Sound: Off", this.x-this.width/2, this.y+4*this.height/2);
 			for(S in AllSounds){
 				AllSounds[S].volume=0;
@@ -832,21 +898,23 @@ var Options = {
 		if(cX >= this.x-20 && cX <=this.x + this.width*5 && cY <= this.y+7*this.height/2 && cY>=this.y+4*this.height/2){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
-			if(this.Music == false){
-				this.Music = true;
+			if(Music == 1){
+				Music = 2;
+				$.jStorage.set("Music",Music);
 				cX = 0;
 				cY = 0;
 			}
-			else if(this.Music == true){
-				this.Music = false;
+			else if(Music == 2){
+				Music = 1;
+				$.jStorage.set("Music",Music);
 				cX = 0;
 				cY = 0;
 			}
 		}
-		if(this.Music == true){
+		if(Music == 2){
 			ctx.fillText("Music: On", this.x-this.width/2, this.y+7*this.height/2);
 		}
-		if(this.Music == false){
+		if(Music == 1){
 			ctx.fillText("Music: Off", this.x-this.width/2, this.y+7*this.height/2);
 			for(M in AllMusic){
 				AllMusic[M].currentTime=0;
@@ -859,21 +927,23 @@ var Options = {
 		if(cX >= this.x-20 && cX <=this.x + this.width*10 && cY <= this.y+10*this.height/2 && cY>=this.y+7*this.height/2){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
-			if(this.dispControls == false){
-				this.dispControls = true;
+			if(dispCntrls == 1){
+				dispCntrls = 2;
+				$.jStorage.set("cntrls",dispCntrls);
 				cX = 0;
 				cY = 0;
 			}
-			else if(this.dispControls == true){
-				this.dispControls = false;
+			else if(dispCntrls == 2){
+				dispCntrls = 1;
+				$.jStorage.set("cntrls",dispCntrls);
 				cX = 0;
 				cY = 0;
 			}
 		}
-		if(this.dispControls == true){
+		if(dispCntrls == 2){
 			ctx.fillText("Display Controls: Yes", this.x-this.width/2, this.y+10*this.height/2);
 		}
-		if(this.dispControls == false){
+		if(dispCntrls == 1){
 			ctx.fillText("Display Controls: No", this.x-this.width/2, this.y+10*this.height/2);
 		}
 		ctx.fillText("Back", this.bx, this.by);
@@ -1685,7 +1755,7 @@ function UI(){
 	}
 	ctx.fillStyle = "black";
 	ctx.font = "16pt Arial";
-	if(Options.dispControls == true){
+	if(dispCntrls == 2){
 		ctx.fillText("Q: Drop Spell 1", 576, 496);
 		ctx.fillText("E: Drop Spell 2", 576, 528);
 		ctx.fillText("Spacebar: Use spell", 576, 464);
@@ -2001,6 +2071,13 @@ function reset(){
 	window.location.reload(false);
 }
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
+//array of init
+var inits = {1: "_", 2: "_", 3: "_", 4: "_", 5: "_", 6: "_", 7: "_", 8: "_"};
+var init = "_ _ _";
+var initsInd = 1;
+var hsColor = 1;
+var hsNum = 0;
+var wait = 0;
 function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.globalAlpha = 1;
@@ -2009,75 +2086,169 @@ function gameOver(){
 	var by = 560;
 	var width = 20;
 	var height = 20;
+	init = inits[1] + inits[2] + inits[3] + inits[4] + inits[5] + inits[6] + inits[7] + inits[8];
 	multiplier = 1;
+	if(wait > 0){
+		wait-=1;
+	}
 	if(STATE != 5){
 		ctx.fillText("Score: " + score, 320, 144);
+		if(score > highscore5){
+			if(initsInd <= 8 && wait <= 0){
+				inits[initsInd] = printAlphabet();
+				if(inits[initsInd] != "_"){
+					initsInd++;
+					wait = 4;
+				}
+			}
+			if(13 in keysDown){
+				for(H in inits){
+					if(inits[H] == "_"){
+						inits[H] = " ";
+					}
+				}
+				initsInd = 9;
+			}
+		}
+		else{
+			var init = " ";
+		}
 	}
 	if(highscore1 < score && nu == 1){
-		$.jStorage.set("v5highscore5",highscore4);
+		$.jStorage.set("v58highscore5",highscore4);
+		$.jStorage.set("v58hs5init",hs4init);
 		highscore5 = highscore4;
-		$.jStorage.set("v5highscore4",highscore3);
+		hs5init = hs4init;
+		$.jStorage.set("v58highscore4",highscore3);
+		$.jStorage.set("v58hs4init",hs3init);
+		hs4init = hs3init;
 		highscore4 = highscore3;
-		$.jStorage.set("v5highscore3",highscore2);
+		$.jStorage.set("v58highscore3",highscore2);
 		highscore3 = highscore2;
-		$.jStorage.set("v5highscore2",highscore1);
+		$.jStorage.set("v58hs3init",hs2init);
+		hs3init = hs2init;
+		$.jStorage.set("v58highscore2",highscore1);
 		highscore2 = highscore1;
-		$.jStorage.set("v5highscore1",score);
+		$.jStorage.set("v58hs2init",hs1init);
+		hs2init = hs1init;
+		$.jStorage.set("v58highscore1",score);
 		highscore1 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 1;
 	}
 	else if(highscore2 < score && nu == 1){
-		$.jStorage.set("v5highscore5",highscore4);
+		$.jStorage.set("v58highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("v5highscore4",highscore3);
+		$.jStorage.set("v58hs5init",hs4init);
+		hs5init = hs4init;
+		$.jStorage.set("v58highscore4",highscore3);
 		highscore4 = highscore3;
-		$.jStorage.set("v5highscore3",highscore2);
+		$.jStorage.set("v58hs4init",hs3init);
+		hs4init = hs3init;
+		$.jStorage.set("v58highscore3",highscore2);
 		highscore3 = highscore2;
-		$.jStorage.set("v5highscore2",score);
+		$.jStorage.set("v58hs3init",hs2init);
+		hs3init = hs2init;
+		$.jStorage.set("v58highscore2",score);
 		highscore2 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 2;
 	}
 	else if(highscore3 < score && nu == 1){
-		$.jStorage.set("v5highscore5",highscore4);
+		$.jStorage.set("v58highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("v5highscore4",highscore3);
+		$.jStorage.set("v58hs5init",hs4init);
+		hs5init = hs4init;
+		$.jStorage.set("v58highscore4",highscore3);
 		highscore4 = highscore3;
-		$.jStorage.set("v5highscore3",score);
+		$.jStorage.set("v58hs4init",hs3init);
+		hs4init = hs3init;
+		$.jStorage.set("v58highscore3",score);
 		highscore3 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 3;
 	}
 	else if(highscore4 < score && nu == 1){
-		$.jStorage.set("v5highscore5",highscore4);
+		$.jStorage.set("v58highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("v5highscore4",score);
+		$.jStorage.set("v58hs5init",hs4init);
+		hs5init = hs4init;
+		$.jStorage.set("v58highscore4",score);
 		highscore4 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 4;
 	}
 	else if(highscore5 < score && nu == 1){
-		$.jStorage.set("v5highscore5",score);
+		$.jStorage.set("v58highscore5",score);
 		highscore5 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 5;
+	}
+	if(hsNum == 1){
+		$.jStorage.set("v58hs1init",init);
+		hs1init = init;
+	}
+	if(hsNum == 2){
+		$.jStorage.set("v58hs2init",init);
+		hs2init = init;
+	}
+	if(hsNum == 3){
+		$.jStorage.set("v58hs3init",init);
+		hs3init = init;
+	}
+	if(hsNum == 4){
+		$.jStorage.set("v58hs4init",init);
+		hs4init = init;
+	}
+	if(hsNum == 5){
+		$.jStorage.set("v58hs5init",init);
+		hs5init = init;
 	}
 	if(hs == 1){
-		ctx.fillStyle = "red";
+		ctx.fillStyle = colorz[hsColor];
+		hsColor++;
+		if(hsColor > 6){
+			hsColor = 1;
+		}
 		ctx.font = "18pt Arial";
-		ctx.fillText("New High Score!!", 360, 64);
+		ctx.fillText("New High Score! Please Enter Your Name!", 176, 64);
 	}
+	
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.7 Alpha: April 15 2012", 244, 96);
+	ctx.fillText("Version 0.5.8 Alpha: April 18 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
-	ctx.fillText("1st: " + highscore1, 308, 240);
-	ctx.fillText("2nd: " + highscore2, 308, 272);
-	ctx.fillText("3rd: " + highscore3, 308, 304);
-	ctx.fillText("4th: " + highscore4, 308, 336);
-	ctx.fillText("5th: " + highscore5, 308, 368);
+	if(hsNum == 1){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("1st: " + highscore1 + "    " + hs1init, 308, 240);
+	ctx.fillStyle = "white";
+	if(hsNum == 2){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("2nd: " + highscore2 + "    " + hs2init, 308, 272);
+	ctx.fillStyle = "white";
+	if(hsNum == 3){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("3rd: " + highscore3 + "    " + hs3init, 308, 304);
+	ctx.fillStyle = "white";
+	if(hsNum == 4){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("4th: " + highscore4 + "    " + hs4init, 308, 336);
+	ctx.fillStyle = "white";
+	if(hsNum == 5){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("5th: " + highscore5 + "    " + hs5init, 308, 368);
+	ctx.fillStyle = "white";
 	ctx.font = "16pt Arial";
 	ctx.fillText("Back", bx, by);
 	if(hX >= bx-10 && hX <=bx + 50 && hY <= by && hY>=by-height*7/6){
@@ -2092,9 +2263,93 @@ function gameOver(){
 		reset();
 	}	
 }
+//---------------------------------------------------------- Alphabet Print ---------------------------------------------------------//
+function printAlphabet(){
+	if(65 in keysDown){
+		return "A";
+	}
+	else if(66 in keysDown){
+		return "B";
+	}
+	else if(67 in keysDown){
+		return "C";
+	}
+	else if(68 in keysDown){
+		return "D";
+	}
+	else if(69 in keysDown){
+		return "E";
+	}
+	else if(70 in keysDown){
+		return "F";
+	}
+	else if(71 in keysDown){
+		return "G";
+	}
+	else if(72 in keysDown){
+		return "H";
+	}
+	else if(73 in keysDown){
+		return "I";
+	}
+	else if(74 in keysDown){
+		return "J";
+	}
+	else if(75 in keysDown){
+		return "K";
+	}
+	else if(76 in keysDown){
+		return "L";
+	}
+	else if(77 in keysDown){
+		return "M";
+	}
+	else if(78 in keysDown){
+		return "N";
+	}
+	else if(79 in keysDown){
+		return "O";
+	}
+	else if(80 in keysDown){
+		return "P";
+	}
+	else if(81 in keysDown){
+		return "Q";
+	}
+	else if(82 in keysDown){
+		return "R";
+	}
+	else if(83 in keysDown){
+		return "S";
+	}
+	else if(84 in keysDown){
+		return "T";
+	}
+	else if(85 in keysDown){
+		return "U";
+	}
+	else if(86 in keysDown){
+		return "V";
+	}
+	else if(87 in keysDown){
+		return "W";
+	}
+	else if(88 in keysDown){
+		return "X";
+	}
+	else if(89 in keysDown){
+		return "Y";
+	}
+	else if(90 in keysDown){
+		return "Z";
+	}
+	else{
+		return "_";
+	}
+}		
 //---------------------------------------------------------- Music Player -----------------------------------------------------------//
 function MusicPlayer(){
-if(Options.Music==true && STATE != "PAUSE"){
+if(Music==2 && STATE != "PAUSE"){
 	if(STATE == 1 && treeWizz.onScreen == 0 && Dragon.onScreen == 0){
 		DumblebeatsNormal.currentTime=0;
 		Spells.currentTime=0;

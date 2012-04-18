@@ -1,35 +1,18 @@
 
-Version 0.5.7 Changes(4/15/2012):
+Version 0.5.8 Changes(4/18/2012):
 		-Bug Fixes:
-			-Thunderstorm noise is less annoying
-			-Fixed all Alpha effects
-			-Added some compatibility
-				-Fully compatible with all Chrome and Firefox and Opera now. Maybe IE and Safari
-			-Improved Fire Wave collisions
-			-Jungle trees can no longer spawn on top of eachother
-			-Fixed bug where jungle enemies wouldn't spawn
+			-Can no longer be damaged while in Twister
 		-Balancing:
-			-Enemy spawn rate is increased in Jungle and fire levels
-			-Slightly buffed homing shots
-			-Shortened Fire Orbs recharge to 10 seconds
-			-Shortened Ice Orbs recharge to 10 seconds
-			-Took 1 thief out of the Jungle level to make it easier
-			-Fire level meteors now damage you on touch
-			-Changed Air to a dash move
-			-Changed Air + Air to a dash move with direction changes
+			-Dash and Twister now damage obstacles
+			-Twister lets you turn more and more often
+			-Reset High Scores
 		-Additions:
-			-Fixed enemy respawns in fire level
-			-Changed bubble sprite
-			-Changed Fire Orb sprite
-			-Changed Ice Orb sprite
-			-Changed Bubblebeam sprite
-			-Changed Meteor obstacle sprite to an animation
-			-Added new boss sprites for the fire boss
+			-Option preferences are now cookied
+			-High score menu now prompts for initials
 		
 	TODO:
 		+Bugs
 		+Highscores
-			+Prompt for initials
 			-Cannot make dynamic pages on git
 		-Optimize
 			-Arrays
