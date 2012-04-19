@@ -2430,8 +2430,10 @@ setInterval(function(){
 			STATE = 4;
 		}
 		if(player.hp <= 0){
+			if(nu != 1){
+				deathTimer = 30;
+			}
 			nu = 1;
-			deathTimer = 30;
 		}
 		else{
 			if(STATE == "Jungle" || STATE == "Scorched"){
