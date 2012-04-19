@@ -96,6 +96,8 @@ var jungleAni = false;
 var Alpha = 1;
 //StateTimer: for staying in levels with no boss
 var StateTimer = 0;
+//End of game pause
+var deathTimer = -1;
 //------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //Girraffix
 var WizzurdL = new Image();
@@ -2420,9 +2422,16 @@ setInterval(function(){
 		Options.draw();
 	}
 	else if(STATE == 1 || STATE == "Jungle" || STATE == "Scorched"){
-		if(player.hp <= 0){
+		if(deathTimer > 0){
+			deathTimer-=1;
+		}
+		if(deathTimer == 0){
+			deathTimer-=1;
 			STATE = 4;
+		}
+		if(player.hp <= 0){
 			nu = 1;
+			deathTimer = 30;
 		}
 		else{
 			if(STATE == "Jungle" || STATE == "Scorched"){
