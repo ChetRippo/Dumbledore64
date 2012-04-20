@@ -1,31 +1,49 @@
 
-Version 0.4.6 Changes(3/22/2012):
-		-Added prototype background
-		-Made Ice, Ice2, and Maelstrom effects crazier
-		-Put grey background in high score menu
-TODO:
-		-Bugs/small shit <------- Next
-			-Sound plays on reset
-			-Make Thunderstorm more clear
-			-Sounds play before cast on cast bar spells
-			-Sounds for tree hit
+Version 0.6.0 Changes(4/20/2012):
+		-Bug Fixes:
+			-Frozen Web now stops the tree wizard and thieves
+			-Equalized Volume
+			-Fixed bug where Mirage explosion was black
+			-Added to HTML compatibility
+		-Additions:
+			-Added backspace button to initial typing
+			-Added enter button to initial typing
+			-Added Back button from high scores in again.
+				Now it no longer reloads the page but resets all var's
+			-Enemy wizard's spell is now shown above his head
+			-Added sound for wind spells
+		
+	TODO:
+		-Bugs
+		-Highscores
+			-Get website/leaderboards
+		-Optimize
+			-Arrays
 		-Spells
 			-Dark (Black)
-				-HP Steal?
-			-Water (Blue) <------- Next
-				-Particle shield?
+				-Teemo spikes?
+					-Dark = Spike Trap
+					-Dark + Dark = DeathBound
+					-Dark + Fire = Land Mine
+					-Dark + Ice = Ice Trap
+					-Dark + Lightning = ???
+					-Dark + Air = ???
+					-Dark + Mystic = Portal?
+					-Dark + Water = ???
 			-Summon (?)
 				-Minions
-		-More enemies and AI
-			-Wizards that change terrain?
-			-Bosses? Dependent on terrain
-			-Each boss kill gives + 1 max hp?
+		+More enemies and AI
+			+Bosses:
+				-Swamp boss?
+				-Boss that uses stolen spells?
 		-Terrain
-			-Different levels, at the end of each is a boss
-			-During battle terrain gradually changes to new level
+			-Swamp level, has boardwalks and lots of water that slows you if you go in it
+				-Crocodiles appear in water if you stay still
+				-Flying enemy who has no speed changes
+				-After Jungle?
+				-Slightly haunted? Bats?
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
-			-Special events that can change to other levels (such as tree wizzurd summon)
 
 **********************************************************************************************************
 

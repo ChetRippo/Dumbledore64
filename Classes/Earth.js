@@ -1,6 +1,6 @@
 // Earth: Heals player hp by 1
 var earth = {
-	color: "33CC00",
+	color: "#33CC00",
 	timeLeft: 0,
 	x: -100,
 	y: -200,
@@ -32,10 +32,11 @@ var earth = {
 			this.y -= this.speed;
 			this.timeLeft--;
 			if(this.used == 0){
-				if(player.hp < 3){
+				if(player.hp < player.maxhp){
 					player.hp+=1;
 				}
 				this.used = 1;
+				Pickup.currentTime=0;
 				Pickup.play();
 			}
 		}
@@ -48,20 +49,18 @@ var earth = {
 		this.y = player.y;
 		this.cd = 1020;
 		this.cast = 30;
+		cd = 30;
 		this.timeLeft = 15;
 		castingBar.onScreen = 1;
 		castingBar.cast = 30;
 		castingBar.castmax = 30;
 		this.used = 0;
 	}
-	else{
-		return 0;
-	}
 	}	
 };
 // Earth2: Heals player hp by 2
 var earth2 = {
-	color: "33CC00",
+	color: "#33CC00",
 	timeLeft: 0,
 	x: -100,
 	y: -200,
@@ -93,13 +92,14 @@ var earth2 = {
 			this.y -= this.speed;
 			this.timeLeft--;
 			if(this.used == 0){
-				if(player.hp < 2){
+				if(player.hp < player.maxhp-1){
 					player.hp+=2;
 				}
-				if(player.hp < 3){
+				else if(player.hp < player.maxhp){
 					player.hp+=1;
 				}
 				this.used = 1;
+				Pickup.currentTime=0;
 				Pickup.play();
 			}
 		}
@@ -112,14 +112,12 @@ var earth2 = {
 		this.y = player.y;
 		this.cd = 1020;
 		this.cast = 30;
+		cd = 30;
 		this.timeLeft = 15;
 		castingBar.onScreen = 1;
 		castingBar.cast = 30;
 		castingBar.castmax = 30;
 		this.used = 0;
-	}
-	else{
-		return 0;
 	}
 	}	
 };

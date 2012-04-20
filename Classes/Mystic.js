@@ -1,6 +1,6 @@
 //Teleport
 var mystic = {
-	color: "FF00FF",
+	color: "#FF00FF",
 	width: 32,
 	height: 32,
 	x: player.x,
@@ -16,11 +16,17 @@ var mystic = {
 	draaw: 0,
 	frame: 0,
 	cast: 0,
+	used: 0,
 	
 	draw: function(){
 		if(this.draaw == 1 && this.cast <= 0){
 			ctx.fillStyle = this.color;
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
 			if(this.frame < 4){
 				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
 				ctx.fillRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
@@ -41,7 +47,7 @@ var mystic = {
 				this.width = 32;
 				this.height = 32;
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -155,28 +161,37 @@ var mystic = {
 		}
 		player.x = this.x;
 		player.y = this.y;
+		for(B in bubbleRotate){
+			if(bubbleRotate[B].onScreen == 1){
+				bubbleRotate[B].shoot();
+			}
+		}
+		if(water.onScreen == 1){
+			water.x = player.x - 48;
+			water.y = player.y;
+			water.dir = "WD";
+		}
 		this.onScreen = 0;
-	}
+		}
 	},
-		
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Frozen.play();
 		this.height = 32;
 		this.width = 32;
 		this.draaw = 1;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 60;
+		this.cd = 90;
 		this.loop = 2;
 		this.onScreen = 1;
+		this.used = 0;
 	}
 	}
 };
 //Mirage
 var mystic2 = {
-	color: "FF00FF",
+	color: "#FF00FF",
 	width: 32,
 	height: 32,
 	x: player.x,
@@ -196,7 +211,7 @@ var mystic2 = {
 	draw: function(){
 		if(this.draaw == 1 && this.cast <= 0){
 			ctx.fillStyle = this.color;
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			if(this.frame < 4){
 				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
 				ctx.fillRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
@@ -217,7 +232,7 @@ var mystic2 = {
 				this.width = 32;
 				this.height = 32;
 			}
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -343,13 +358,14 @@ var mystic2 = {
 		
 	shoot: function(){
 	if(this.cd == 0){
-		Frozen.play();
+		fastbeepsHigh.currentTime=0;
+		fastbeepsHigh.play();
 		this.height = 32;
 		this.width = 32;
 		this.draaw = 1;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 600;
+		this.cd = 450;
 		this.loop = 2;
 		this.onScreen = 1;
 	}
@@ -404,7 +420,7 @@ var Illusion = {
 };
 // IllusionBlast
 var IllusionBlast = {
-	color: "FF00FF",
+	color: "#FF00FF",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -415,9 +431,9 @@ var IllusionBlast = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "660099";
+				ctx.fillStyle = "#660099";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -425,7 +441,7 @@ var IllusionBlast = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -434,15 +450,9 @@ var IllusionBlast = {
 			this.width = 32 + (16*this.frame);
 			this.height = 32 + (16*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -463,15 +473,9 @@ var IllusionBlast = {
 		}
 		else if(this.frame <= 30 && this.onScreen == 1){
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -502,6 +506,7 @@ var IllusionBlast = {
 		
 	// Spawn
 	shoot: function(){
+		Explosion.currentTime=0;
 		Explosion.play();
 		this.height = 32;
 		this.width = 32;
@@ -509,3 +514,5 @@ var IllusionBlast = {
 		this.onScreen = 1;
 	}
 };
+//------------------------------------------ Import Arrays --------------------------------------------------------------------------//
+var Ticks = {1: iceheal, 2: fireheal, 3: lightningheal, 4: airearth, 5: mysticearth, 6: icelightning, 7: waterearth, 8: waterlightning};

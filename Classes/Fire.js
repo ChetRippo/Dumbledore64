@@ -1,6 +1,6 @@
 // Fire: Damages all enemies in radius
 var fire = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	timeLeft: 0,
@@ -10,12 +10,18 @@ var fire = {
 	cd: 0,
 	onScreen: 0,
 	cast: 0,
+	used: 0,
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
-			ctx.globalAlpha = 0.5;
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -23,7 +29,7 @@ var fire = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -45,15 +51,9 @@ var fire = {
 			this.width = 32 + (16*this.frame);
 			this.height = 32 + (16*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -77,7 +77,6 @@ var fire = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = player.x;
@@ -85,13 +84,14 @@ var fire = {
 		this.cd = 150;
 		this.frame = 0;
 		this.onScreen = 1;
+		this.used = 0;
 	}
 	}
 };
 
 // Fire2: Damages all enemies in radius
 var fire2 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -1000,
 	y: -200,
 	timeLeft: 0,
@@ -103,9 +103,9 @@ var fire2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -113,7 +113,7 @@ var fire2 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -132,15 +132,9 @@ var fire2 = {
 			this.width = 32 + (32*this.frame);
 			this.height = 32 + (32*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -164,6 +158,7 @@ var fire2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Explosion.currentTime=0;
 		Explosion.play();
 		this.height = 32;
 		this.width = 32;
@@ -178,7 +173,7 @@ var fire2 = {
 //------------------------------------- Mystic Fire powerup explosions --------------------------------------------------------------//
 // Fire: Damages all enemies in radius
 var Mfire = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -188,9 +183,9 @@ var Mfire = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -198,7 +193,7 @@ var Mfire = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -215,15 +210,9 @@ var Mfire = {
 			this.width = 32 + (8*this.frame);
 			this.height = 32 + (8*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -246,7 +235,7 @@ var Mfire = {
 };
 // Fire: Damages all enemies in radius
 var Mfire2 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -256,9 +245,9 @@ var Mfire2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -266,7 +255,7 @@ var Mfire2 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -283,15 +272,9 @@ var Mfire2 = {
 			this.width = 32 + (8*this.frame);
 			this.height = 32 + (8*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -314,7 +297,7 @@ var Mfire2 = {
 };
 // Fire: Damages all enemies in radius
 var Mfire3 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -324,9 +307,9 @@ var Mfire3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -334,7 +317,7 @@ var Mfire3 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -351,15 +334,9 @@ var Mfire3 = {
 			this.width = 32 + (8*this.frame);
 			this.height = 32 + (8*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){
@@ -382,7 +359,7 @@ var Mfire3 = {
 };
 // Fire: Damages all enemies in radius
 var Mfire4 = {
-	color: "FF6600",
+	color: "#FF6600",
 	x: -100,
 	y: -200,
 	width: 32,
@@ -392,9 +369,9 @@ var Mfire4 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
+			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "CC0000";
+				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
@@ -402,7 +379,7 @@ var Mfire4 = {
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -419,15 +396,9 @@ var Mfire4 = {
 			this.width = 32 + (8*this.frame);
 			this.height = 32 + (8*this.frame);
 			this.frame++;
-			for (E in Enemies){
-				if(contained(Enemies[E], this)){
-					onHit(Enemies[E], Enemies[E].rp);
-				}
-				if(contained(Sorceror, this)){
-					Sorceror.onHit();
-				}
-				if(contained(Spawner, this)){
-					Spawner.onHit();
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
 				}
 			}
 			for (O in obstacle1){

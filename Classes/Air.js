@@ -1,38 +1,103 @@
 // Air: Blows back all enemies in front of player
 var air = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	ox: -100,
-	oy: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	frame: 0,
+	timeLeft: 0,
 	cd: 0,
 	speed: 16,
 	onScreen: 0,
 	cast: 0,
+	used: 0,
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.ox - player.width / 2,
-				this.oy - player.height / 2,
-				player.width, player.height);
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
+			if(player.dir == "W"){
+				if(player.LR == "Left"){
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 8);
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 24);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 40);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 56);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 72);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 88);
+				}
+				else{
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 8);
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 24);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 40);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 56);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 72);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 88);
+				}
 			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
+			if(player.dir == "S"){
+				if(player.LR == "Left"){
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 8);
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 24);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 40);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 56);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 72);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 88);
+				}
+				else{
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 8);
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 24);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 40);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 56);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 72);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 88);
+				}
 			}
-			ctx.globalAlpha = 1;
+			if(player.dir == "A"){
+				ctx.globalAlpha = Alpha/2;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 8, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/2;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 24, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/4;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 40, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/4;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 56, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 72, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 88, player.y - player.height / 2);
+			}
+			if(player.dir == "D"){
+				ctx.globalAlpha = Alpha/2;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 8, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/2;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 24, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/4;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 40, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/4;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 56, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 72, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 88, player.y - player.height / 2);
+			}
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	effect: function(){
@@ -42,77 +107,200 @@ var air = {
 		if(this.cast > 0){
 			this.cast-=1;
 		}
-		if(this.frame == 5){
-			air12.x = this.ox;
-			air12.y = this.oy;
-			air12.shoot();
+		if(this.timeLeft > 0 && this.cast <= 0){
+			this.timeLeft-=1;
 		}
-		if(this.frame == 10){
-			air13.x = this.ox;
-			air13.y = this.oy;
-			air13.shoot();
-		}
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.frame = 0;
-			this.hheight = 32;
+		if(this.onScreen == 1 && this.cast == 0){
 			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
+				if(collision(player.dir, player, AllEnemies[E])){
+					onHit(AllEnemies[E]);
+				}
+			}
+			for(O in ObsList){
+				if(collision(player.dir, player, ObsList[O])){
+					obsHit(ObsList[O]);
+				}
+			}
+			player.speed = player.speed2 * 16;
+		}
+		if(this.onScreen == 1 && this.cast == 0 && this.used == 0){
+			player.dirct = 15;
+			hptimer = 15;
+			player.speed = player.speed2 * 16;
+			this.used = 1;
+			Wind.currentTime = 0;
+			Wind.play();
+		}
+		if(this.timeLeft <=0 && this.onScreen == 1){
+			player.speed = player.speed2 * 4;
+			this.onScreen = 0;
+		}
+	},
+	// Spawn
+	shoot: function(){
+	if(this.cd == 0){
+		this.cd = 120;
+		this.timeLeft = 15;
+		this.onScreen = 1;
+		this.used = 0;
+	}
+	}
+};
+// air2: Blow away all nearby enemies
+var air2 = {
+	timeLeft: 0,
+	cd: 0,
+	speed: 16,
+	onScreen: 0,
+	cast: 0,
+	num: 0,
+	used: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1 && this.cast == 0){
+			if(player.dir == "W"){
+				if(player.LR == "Left"){
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 8);
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 24);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 40);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 56);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 72);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 88);
+				}
+				else{
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 8);
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 24);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 40);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 56);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 72);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 88);
+				}
+			}
+			if(player.dir == "S"){
+				if(player.LR == "Left"){
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 8);
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 24);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 40);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 56);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 72);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 88);
+				}
+				else{
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 8);
+					ctx.globalAlpha = Alpha/2;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 24);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 40);
+					ctx.globalAlpha = Alpha/4;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 56);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 72);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 88);
+				}
+			}
+			if(player.dir == "A"){
+				ctx.globalAlpha = Alpha/2;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 8, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/2;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 24, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/4;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 40, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/4;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 56, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 72, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 88, player.y - player.height / 2);
+			}
+			if(player.dir == "D"){
+				ctx.globalAlpha = Alpha/2;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 8, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/2;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 24, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/4;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 40, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/4;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 56, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 72, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 88, player.y - player.height / 2);
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	effect: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		if(this.timeLeft > 0){
+			this.timeLeft-=1;
+		}
+		if(this.onScreen == 1 && this.cast == 0){
+			for(E in AllEnemies){
+				if(collision(player.dir, player, AllEnemies[E])){
+					onHit(AllEnemies[E]);
+				}
+			}
+			for(O in ObsList){
+				if(collision(player.dir, player, ObsList[O])){
+					obsHit(ObsList[O]);
+				}
 			}
 		}
-		else if(this.onScreen ==1 && this.cast == 0){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
+		if(this.onScreen == 1 && this.cast == 0 && this.used == 0){
+			player.dirct = 10;
+			hptimer = 40;
+			player.speed = player.speed2 * 16;
+			this.used = 1;
+			Wind.currentTime = 0;
+			Wind.play();
+		}
+		if(this.timeLeft <=0 && this.onScreen == 1){
+			if(this.num >= 4){
+				player.speed = player.speed2 * 4;
+				this.onScreen = 0;
+				this.num = 0;
 			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
+			else{
+				this.num++;
+				this.timeLeft = 10;
+				player.dirct = 10;
+				player.speed = player.speed2 * 16;
+				if (87 in keysDown){
+					player.dir = "W";
+				}
+				if (65 in keysDown){
+					player.dir = "A";
+				}
+				if (83 in keysDown){
+					player.dir = "S";
+				}
+				if (68 in keysDown){
+					player.dir = "D";
 				}
 			}
 		}
@@ -120,1573 +308,10 @@ var air = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Wind.play();
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.ox = player.x;
-		this.oy = player.y;
-		this.dir = player.dir;
-		this.cd = 60;
-		this.frame = 0;
+		this.cd = 300;
+		this.timeLeft = 10;
 		this.onScreen = 1;
+		this.used = 0;
 	}
-	else{
-		return 0;
-	}
-	}
-};
-// Air: Blows back all enemies in front of player
-var air12 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.hheight = 32;
-			this.frame = 0;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.dir = air.dir;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-
-// Air: Blows back all enemies in front of player
-var air13 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.hheight = 32;
-			this.frame = 0;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.dir = air.dir;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-
-// air2: Blow away all nearby enemies
-var air2 = {
-	cd: 0,
-	tick: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		else{
-			this.cd = 0;
-		}
-	},
-	// Spawn
-	shoot: function(){
-		if(this.cd == 0){
-			Wind.play();
-			air2right.shoot();
-			air2left.shoot();
-			air2up.shoot();
-			air2down.shoot();
-			this.cd = 150;
-		}
-	}
-};
-var air2right = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	dir: "D",
-	ox: -100,
-	oy: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.ox - player.width / 2,
-				this.oy - player.height / 2,
-				player.width, player.height);
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 5){
-			air2right2.x = this.ox;
-			air2right2.y = this.oy;
-			air2right2.shoot();
-		}
-		if(this.frame == 10){
-			air2right3.x = this.ox;
-			air2right3.y = this.oy;
-			air2right3.shoot();
-		}
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.hheight = 32;
-			this.frame = 0;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.ox = player.x;
-		this.oy = player.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-// Air: Blows back all enemies in front of player
-var air2right2 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "D",
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.hheight = 32;
-			this.frame = 0;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-
-// Air: Blows back all enemies in front of player
-var air2right3 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	dir: "D",
-	hheight: 32,
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.hheight = 32;
-			this.frame = 0;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-// Air: Blows back all enemies in front of player
-var air2left = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	ox: -100,
-	oy: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "A",
-	frame: 0,
-	cd: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 5){
-			air2left2.x = this.ox;
-			air2left2.y = this.oy;
-			air2left2.shoot();
-		}
-		if(this.frame == 10){
-			air2left3.x = this.ox;
-			air2left3.y = this.oy;
-			air2left3.shoot();
-		}
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.hheight = 32;
-			this.frame = 0;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.ox = player.x;
-		this.oy = player.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-// Air: Blows back all enemies in front of player
-var air2left2 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "A",
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.frame = 0;
-			this.hheight = 32;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-
-// Air: Blows back all enemies in front of player
-var air2left3 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "A",
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.frame = 0;
-			this.hheight = 32;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-// Air: Blows back all enemies in front of player
-var air2down = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	ox: -100,
-	oy: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "S",
-	frame: 0,
-	cd: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 5){
-			air2down2.x = this.ox;
-			air2down2.y = this.oy;
-			air2down2.shoot();
-		}
-		if(this.frame == 10){
-			air2down3.x = this.ox;
-			air2down3.y = this.oy;
-			air2down3.shoot();
-		}
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.frame = 0;
-			this.hwidth = 8;
-			this.hheight = 32;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.ox = player.x;
-		this.oy = player.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-// Air: Blows back all enemies in front of player
-var air2down2 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "S",
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.frame = 0;
-			this.hwidth = 8;
-			this.hheight = 32;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-
-// Air: Blows back all enemies in front of player
-var air2down3 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "S",
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.frame = 0;
-			this.hheight = 32;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-// Air: Blows back all enemies in front of player
-var air2up = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	ox: -100,
-	oy: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "W",
-	frame: 0,
-	cd: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 5){
-			air2up2.x = this.ox;
-			air2up2.y = this.oy;
-			air2up2.shoot();
-		}
-		if(this.frame == 10){
-			air2up3.x = this.ox;
-			air2up3.y = this.oy;
-			air2up3.shoot();
-		}
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.frame = 0;
-			this.hheight = 32;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.ox = player.x;
-		this.oy = player.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-// Air: Blows back all enemies in front of player
-var air2up2 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "W",
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.hheight = 32;
-			this.frame = 0;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-
-// Air: Blows back all enemies in front of player
-var air2up3 = {
-	color: "E8E8E8",
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
-	dir: "W",
-	frame: 0,
-	speed: 16,
-	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.5;
-			ctx.fillStyle = this.color;
-			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
-				this.width, this.height);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.hheight / 2,
-				this.hwidth, this.hheight);
-			}
-			ctx.globalAlpha = 1;
-		}
-	},
-	effect: function(){
-		if(this.frame == 30){
-			this.x = -100;
-			this.y = -200;
-			this.width = 32;
-			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
-			this.frame = 0;
-			this.hheight = 32;
-			for(E in AllEnemies){
-				AllEnemies[E].speed = AllEnemies[E].speed2*2;
-			}
-		}
-		else if(this.onScreen ==1){
-			if(this.dir == "S" || this.dir == "W"){
-				this.width = 32 + (4*this.frame);
-			}
-			else if(this.dir == "A" || this.dir == "D"){
-				this.hheight = 32 + (4*this.frame);
-			}
-			this.frame++;
-			if (this.dir == "W"){
-				this.y -= this.speed;
-			}
-			else if (this.dir == "A"){
-				this.x -= this.speed;
-			}
-			else if (this.dir == "S"){
-				this.y += this.speed;
-			}
-			else if (this.dir == "D"){
-				this.x += this.speed;
-			}
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					if(AllEnemies[E].dir == "W"){
-						AllEnemies[E].dir = "S";
-					}
-					else if(AllEnemies[E].dir == "S"){
-						AllEnemies[E].dir = "W";
-					}
-					else if(AllEnemies[E].dir == "A"){
-						AllEnemies[E].dir = "D";
-					}
-					else if(AllEnemies[E].dir == "D"){
-						AllEnemies[E].dir = "A";
-					}
-					else if(AllEnemies[E].dir == "WD"){
-						AllEnemies[E].dir = "AS";
-					}
-					else if(AllEnemies[E].dir == "AS"){
-						AllEnemies[E].dir = "WD";
-					}
-					else if(AllEnemies[E].dir == "WA"){
-						AllEnemies[E].dir = "SD";
-					}
-					else if(AllEnemies[E].dir == "SD"){
-						AllEnemies[E].dir = "WD";
-					}
-					AllEnemies[E].dirct = 15;
-					AllEnemies[E].speed = 32;
-				}
-			}
-		}
-	},
-	// Spawn
-	shoot: function(){
-		this.width = 32;
-		this.frame = 0;
-		this.onScreen = 1;
 	}
 };

@@ -1,6 +1,6 @@
 // Ice: Slows all enemies by halving their speed
 var ice = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -11,10 +11,16 @@ var ice = {
 	onScreen: 0,
 	end: false,
 	cast: 0,
+	used: 0,
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast ==0){
-			ctx.globalAlpha = 0.1;
+			if(this.used == 0){
+				Frozen.currentTime=0;
+				Frozen.play();
+				this.used = 1;
+			}
+			Alpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
 		}
@@ -34,7 +40,7 @@ var ice = {
 			this.y = -100;
 			this.onScreen = 0;
 			this.end = true;
-			ctx.globalAlpha = 1;
+			Alpha = 1;
 		}
 		else if(this.onScreen == 1 && this.cast == 0){
 			this.width = this.width + (32*this.frame);
@@ -61,7 +67,6 @@ var ice = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		Frozen.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = player.x;
@@ -69,13 +74,14 @@ var ice = {
 		this.cd = 450;
 		this.frame = 0;
 		this.onScreen = 1;
+		this.used = 0;
 	}
 	}
 };
 
 // Ice2: Slows all enemies by halving their speed
 var ice2 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -88,7 +94,7 @@ var ice2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.1;
+			Alpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
 		}
@@ -105,7 +111,7 @@ var ice2 = {
 			this.y = -100;
 			this.onScreen = 0;
 			this.end = true;
-			ctx.globalAlpha = 1;
+			Alpha = 1;
 		}
 		else if(this.onScreen == 1){
 			this.width = this.width + (32*this.frame);
@@ -132,6 +138,7 @@ var ice2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
+		Frozen.currentTime=0;
 		Frozen.play();
 		this.height = 32;
 		this.width = 32;
@@ -149,7 +156,7 @@ var ice2 = {
 };
 //----------------------------------------------------------- Mystic Ice Shots ------------------------------------------------------//
 var Mice = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -160,10 +167,10 @@ var Mice = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -198,7 +205,7 @@ var Mice = {
 	}
 };
 var Mice2 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -209,10 +216,10 @@ var Mice2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -247,7 +254,7 @@ var Mice2 = {
 	}
 };
 var Mice3 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -258,10 +265,10 @@ var Mice3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -296,7 +303,7 @@ var Mice3 = {
 	}
 };
 var Mice4 = {
-	color: "00CCFF",
+	color: "#00CCFF",
 	timeLeft: 0,
 	width: 32,
 	height: 32,
@@ -307,10 +314,10 @@ var Mice4 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = 0.25;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = 1;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	

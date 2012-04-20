@@ -14,34 +14,51 @@
 
 */
 /*
-	Version 0.4.6 Changes(3/22/2012):
-		-Added prototype background
-		-Made Ice, Ice2, and Maelstrom effects crazier
-		-Put grey background in high score menu
+	Version 0.6.0 Changes(4/20/2012):
+		-Bug Fixes:
+			-Frozen Web now stops the tree wizard and thieves
+			-Equalized Volume
+			-Fixed bug where Mirage explosion was black
+			-Added to HTML compatibility
+		-Additions:
+			-Added backspace button to initial typing
+			-Added enter button to initial typing
+			-Added Back button from high scores in again.
+				Now it no longer reloads the page but resets all var's
+			-Enemy wizard's spell is now shown above his head
+			-Added sound for wind spells
 		
 	TODO:
-		-Bugs/small shit <-------- Next
-			-Sound plays on reset
-			-Make Thunderstorm more clear
-			-Sounds play before cast on cast bar spells
-			-Sounds for tree hit
+		-Bugs
+		-Highscores
+			-Get website/leaderboards
+		-Optimize
+			-Arrays
 		-Spells
 			-Dark (Black)
-				-HP Steal?
-			-Water (Blue) <-------- Next
-				-Particle shield?
+				-Teemo spikes?
+					-Dark = Spike Trap
+					-Dark + Dark = DeathBound
+					-Dark + Fire = Land Mine
+					-Dark + Ice = Ice Trap
+					-Dark + Lightning = ???
+					-Dark + Air = ???
+					-Dark + Mystic = Portal?
+					-Dark + Water = ???
 			-Summon (?)
 				-Minions
-		-More enemies and AI
-			-Wizards that change terrain?
-			-Bosses? Dependent on terrain
-			-Each boss kill gives + 1 max hp?
+		+More enemies and AI
+			+Bosses:
+				-Swamp boss?
+				-Boss that uses stolen spells?
 		-Terrain
-			-Different levels, at the end of each is a boss
-			-During battle terrain gradually changes to new level
+			-Swamp level, has boardwalks and lots of water that slows you if you go in it
+				-Crocodiles appear in water if you stay still
+				-Flying enemy who has no speed changes
+				-After Jungle?
+				-Slightly haunted? Bats?
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
-			-Special events that can change to other levels (such as tree wizzurd summon)
 */
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
 // Canvas, Frames per Second, KeysDown, Global vars
@@ -55,6 +72,9 @@ var cY = new Number();
 var hX = new Number();
 var hY = new Number();
 var STATE = 0;
+//Pause menu
+var preSTATE = 0;
+var keytimer = 0;
 var nu = 0;
 var hs = 0;
 // Mouse listeners
@@ -73,31 +93,571 @@ var spell2pic = "N/A";
 var score = 0;
 var muliplier = 1;
 var multtimer = 0;
-var currpts = 0;
+//colors
+var colorz = {1: "#D0D0D0", 2: "#CC0000", 3: "#00FFFF", 4: "yellow", 5: "#33FF00", 6: "#663399"};
+var colorNum = 1;
 // Key Listeners
 addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
 addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
+// Environment
+var planted = false;
+var jungleAni = false;
+// Alpha
+var Alpha = 1;
+//StateTimer: for staying in levels with no boss
+var StateTimer = 0;
+//End of game pause
+var deathTimer = -1;
+//------------------------------------------------------- Graphics ------------------------------------------------------------------//
+//Girraffix
+var WizzurdL = new Image();
+WizzurdL.src = "grafix/wizzurds/wizard/wiz.l.png";
+var WizzurdR = new Image();
+WizzurdR.src = "grafix/wizzurds/wizard/wiz.r.png";
+//Ondmg
+var Wizzurd2 = new Image();
+Wizzurd2.src = "grafix/wizzurds/effects.wizard/nega.wiz.l1.png";
+//menu
+var menuBack = new Image();
+menuBack.src = "grafix/menu/menu.png";
+var Title = new Image();
+Title.src = "grafix/menu/title.png";
+var textmenu = new Image();
+textmenu.src = "grafix/menu/mainmenu/text.png";
+var creditsmenu = new Image();
+creditsmenu.src = "grafix/menu/mainmenu/bkgblur.credits.png";
+var helpmenu = new Image();
+helpmenu.src = "grafix/menu/mainmenu/bkgblur.help.png";
+var newgamemenu = new Image();
+newgamemenu.src = "grafix/menu/mainmenu/bkgblur.newgame.png";
+var noselectmenu = new Image();
+noselectmenu.src = "grafix/menu/mainmenu/bkgblur.noneselect.png";
+var optionsmenu = new Image();
+optionsmenu.src = "grafix/menu/mainmenu/bkgblur.options.png";
+var scoremenu = new Image();
+scoremenu.src = "grafix/menu/mainmenu/bkgblur.score.png";
+//Environment
+var Tree = new Image();
+Tree.src = "grafix/objects/tree/health.3.png";
+var Tree2 = new Image();
+Tree2.src = "grafix/objects/tree/health.2.png";
+var Tree3 = new Image();
+Tree3.src = "grafix/objects/tree/health.1.png";
+var backGround1 = new Image();
+backGround1.src = "grafix/background/grass1.png";
+var backGround2 = new Image();
+backGround2.src = "grafix/background/jungle1.png";
+var backGround3 = new Image();
+backGround3.src = "grafix/background/fire1.png";
+//Jungle
+var Jtree1 = new Image();
+Jtree1.src = "grafix/objects/jungle.tree/sprout1.png";
+var Jtree2 = new Image();
+Jtree2.src = "grafix/objects/jungle.tree/grow1.png";
+var Jtree3 = new Image();
+Jtree3.src = "grafix/objects/jungle.tree/grow2.png";
+var Jtree4 = new Image();
+Jtree4.src = "grafix/objects/jungle.tree/grow3.png";
+var Jtree5 = new Image();
+Jtree5.src = "grafix/objects/jungle.tree/grow4.png";
+var Jtree6 = new Image();
+Jtree6.src = "grafix/objects/jungle.tree/grow5.png";
+var Jtree7 = new Image();
+Jtree7.src = "grafix/objects/jungle.tree/trunk.png";
+var JungleTrees = {0: Jtree1, 1: Jtree2, 2: Jtree3, 3: Jtree4, 4: Jtree5, 5: Jtree6, 6: Jtree7}; 
+var jungleIndex = 0;
+//Lavaman
+var Lavamanpic = new Image();
+Lavamanpic.src = "grafix/creatures/firesprite/firesprite.l1.png";
+//Tenemy
+var Globbly = new Image();
+Globbly.src = "grafix/creatures/globbly/globbly.r1.png";
+var Globbly2 = new Image();
+Globbly2.src = "grafix/creatures/globbly/globbly.r2.png";
+var Globbly3 = new Image();
+Globbly3.src = "grafix/creatures/globbly/globbly.r3.png";
+var Globbly4 = new Image();
+Globbly4.src = "grafix/creatures/globbly/globbly.r4.png";
+var Globbly5 = new Image();
+Globbly5.src = "grafix/creatures/globbly/globbly.r5.png";
+var Globbly6 = new Image();
+Globbly6.src = "grafix/creatures/globbly/globbly.r6.png";
+var Globbly7 = new Image();
+Globbly7.src = "grafix/creatures/globbly/globbly.r7.png";
+var Globbly8 = new Image();
+Globbly8.src = "grafix/creatures/globbly/globbly.r8.png";
+var Globblys = {1: Globbly, 2: Globbly2, 3: Globbly3, 4: Globbly4, 5: Globbly5, 6: Globbly6, 7: Globbly7, 8: Globbly8};
+//Hudge
+var HudgeL = new Image();
+HudgeL.src = "grafix/creatures/hudge/hudge.l1.png";
+var HudgeR = new Image();
+HudgeR.src = "grafix/creatures/hudge/hudge.r1.png";
+//Enemy2
+var Pikkit = new Image();
+Pikkit.src = "grafix/creatures/pikkit/pikkit.l1.png";
+var humpDumpr1 = new Image();
+humpDumpr1.src = "grafix/creatures/humpdump/humpdump.r1.png";
+var humpDumpr2 = new Image();
+humpDumpr2.src = "grafix/creatures/humpdump/humpdump.r2.png";
+var humpDumpr3 = new Image();
+humpDumpr3.src = "grafix/creatures/humpdump/humpdump.r3.png";
+var humpDumpl1 = new Image();
+humpDumpl1.src = "grafix/creatures/humpdump/humpdump.l1.png";
+var humpDumpl2 = new Image();
+humpDumpl2.src = "grafix/creatures/humpdump/humpdump.l2.png";
+var humpDumpl3 = new Image();
+humpDumpl3.src = "grafix/creatures/humpdump/humpdump.l3.png";
+var humprList = {1: humpDumpr1, 2: humpDumpr2, 3: humpDumpr3};
+var humplList = {1: humpDumpl1, 2: humpDumpl2, 3: humpDumpl3};
+var humpDumpd1 = new Image();
+humpDumpd1.src = "grafix/creatures/humpdump/humpdump.d1.png";
+var humpDumpd2 = new Image();
+humpDumpd2.src = "grafix/creatures/humpdump/humpdump.d2.png";
+var humpdList = {1: humpDumpd1, 2: humpDumpd2};
+//Thief
+var thiefPeek = new Image();
+thiefPeek.src = "grafix/creatures/sneak/peek.png";
+var thiefSneak = new Image();
+thiefSneak.src = "grafix/creatures/sneak/hidden.l1.png";
+var thiefVis = new Image();
+thiefVis.src = "grafix/creatures/sneak/visible.l1.png";
+var Thieves = {1: thiefPeek, 2: thiefSneak, 3: thiefVis};
+//Spawner
+var Splavaman = new Image();
+Splavaman.src = "grafix/creatures/lavaman/lavaman.l1.png";
+//Evil Wizzurd
+var Sorcerorpng = new Image();
+Sorcerorpng.src = "grafix/wizzurds/poison.wizard/poison.wiz.l1.png";
+//Tree Wizzurd
+var TWizzurd = new Image();
+TWizzurd.src = "grafix/wizzurds/tree.wizard/tree.wiz.l1.png";
+var TWizzurd2 = new Image();
+TWizzurd2.src = "grafix/wizzurds/tree.wizard/tree.wiz.l2.png";
+var TWizzurd3 = new Image();
+TWizzurd3.src = "grafix/wizzurds/tree.wizard/tree.wiz.l3.png";
+var TWizzurd4 = new Image();
+TWizzurd4.src = "grafix/wizzurds/tree.wizard/tree.wiz.l4.png";
+var TWizzurd5 = new Image();
+TWizzurd5.src = "grafix/wizzurds/tree.wizard/tree.wiz.l5.png";
+var TWizzurd6 = new Image();
+TWizzurd6.src = "grafix/wizzurds/tree.wizard/tree.wiz.l6.png";
+var TWizzurd7 = new Image();
+TWizzurd7.src = "grafix/wizzurds/tree.wizard/tree.wiz.l7.png";
+var TWizzurd8 = new Image();
+TWizzurd8.src = "grafix/wizzurds/tree.wizard/tree.wiz.l8.png";
+var Treewizzez = {1: TWizzurd, 2: TWizzurd2, 3: TWizzurd3, 4: TWizzurd4, 5: TWizzurd5, 6: TWizzurd6, 7: TWizzurd7, 8: TWizzurd8};
+//Fire Demon Boss
+var FbossIdle = new Image();
+FbossIdle.src = "grafix/creatures/dearyrocks/drocks.idle.png";
+var FbossTotemU = new Image();
+FbossTotemU.src = "grafix/creatures/dearyrocks/tote.u.png";
+var FbossTotemD = new Image();
+FbossTotemD.src = "grafix/creatures/dearyrocks/tote.d.png";
+//Monochrome Wizzurd
+var MonoWizzurd = new Image();
+MonoWizzurd.src = "grafix/wizzurds/effects.wizard/bw.wiz.l1.png";
+//Fire powerup
+var Firebox = new Image();
+Firebox.src = "grafix/powers/fire/fire1.png";
+var Firebox2 = new Image();
+Firebox2.src = "grafix/powers/fire/fire2.png";
+var Firebox3 = new Image();
+Firebox3.src = "grafix/powers/fire/fire3.png";
+var Firebox4 = new Image();
+Firebox4.src = "grafix/powers/fire/fire4.png";
+var Firebox5 = new Image();
+Firebox5.src = "grafix/powers/fire/fire5.png";
+var Fires = {1: Firebox, 2: Firebox2, 3: Firebox3, 4: Firebox4, 5: Firebox5};
+//Ice powerup
+var Icebox = new Image();
+Icebox.src = "grafix/powers/ice/ice1.png";
+var Icebox2 = new Image();
+Icebox2.src = "grafix/powers/ice/ice2.png";
+var Icebox3 = new Image();
+Icebox3.src = "grafix/powers/ice/ice3.png";
+var Icebox4 = new Image();
+Icebox4.src = "grafix/powers/ice/ice4.png";
+var Icebox5 = new Image();
+Icebox5.src = "grafix/powers/ice/ice5.png";
+var Ices = {1: Icebox, 2: Icebox2, 3: Icebox3, 4: Icebox4, 5: Icebox5};
+//Earth powerup
+var Earthbox = new Image();
+Earthbox.src = "grafix/powers/earth/earth1.png";
+var Earthbox2 = new Image();
+Earthbox2.src = "grafix/powers/earth/earth2.png";
+var Earthbox3 = new Image();
+Earthbox3.src = "grafix/powers/earth/earth3.png";
+var Earthbox4 = new Image();
+Earthbox4.src = "grafix/powers/earth/earth4.png";
+var Earthbox5 = new Image();
+Earthbox5.src = "grafix/powers/earth/earth5.png";
+var Earths = {1: Earthbox, 2: Earthbox2, 3: Earthbox3, 4: Earthbox4, 5: Earthbox5};
+//lightning powerup
+var Thunderbox = new Image();
+Thunderbox.src = "grafix/powers/zap/zap1.png";
+var Thunderbox2 = new Image();
+Thunderbox2.src = "grafix/powers/zap/zap2.png";
+var Thunderbox3 = new Image();
+Thunderbox3.src = "grafix/powers/zap/zap3.png";
+var Thunderbox4 = new Image();
+Thunderbox4.src = "grafix/powers/zap/zap4.png";
+var Thunderbox5 = new Image();
+Thunderbox5.src = "grafix/powers/zap/zap5.png";
+var Thunders = {1: Thunderbox, 2: Thunderbox2, 3: Thunderbox3, 4: Thunderbox4, 5: Thunderbox5};
+//Air powerup
+var Windbox = new Image();
+Windbox.src = "grafix/powers/air/air1.png";
+var Windbox2 = new Image();
+Windbox2.src = "grafix/powers/air/air2.png";
+var Windbox3 = new Image();
+Windbox3.src = "grafix/powers/air/air3.png";
+var Windbox4 = new Image();
+Windbox4.src = "grafix/powers/air/air4.png";
+var Windbox5 = new Image();
+Windbox5.src = "grafix/powers/air/air5.png";
+var Winds = {1: Windbox, 2: Windbox2, 3: Windbox3, 4: Windbox4, 5: Windbox5};
+//Mystic powerup
+var Mysticbox = new Image();
+Mysticbox.src = "grafix/powers/mystic/mystic1.png";
+var Mysticbox2 = new Image();
+Mysticbox2.src = "grafix/powers/mystic/mystic2.png";
+var Mysticbox3 = new Image();
+Mysticbox3.src = "grafix/powers/mystic/mystic3.png";
+var Mysticbox4 = new Image();
+Mysticbox4.src = "grafix/powers/mystic/mystic4.png";
+var Mysticbox5 = new Image();
+Mysticbox5.src = "grafix/powers/mystic/mystic5.png";
+var Mystics = {1: Mysticbox, 2: Mysticbox2, 3: Mysticbox3, 4: Mysticbox4, 5: Mysticbox5};
+//Water powerup
+var Waterbox = new Image();
+Waterbox.src = "grafix/powers/water/water1.png";
+var Waterbox2 = new Image();
+Waterbox2.src = "grafix/powers/water/water2.png";
+var Waterbox3 = new Image();
+Waterbox3.src = "grafix/powers/water/water3.png";
+var Waterbox4 = new Image();
+Waterbox4.src = "grafix/powers/water/water4.png";
+var Waterbox5 = new Image();
+Waterbox5.src = "grafix/powers/water/water5.png";
+var Waters = {1: Waterbox, 2: Waterbox2, 3: Waterbox3, 4: Waterbox4, 5: Waterbox5};
+//Hp up
+var maxUP = new Image();
+maxUP.src = "grafix/powers/heartup/treeheart.png";
+var DragonmaxUP = new Image();
+DragonmaxUP.src = "grafix/powers/heartup/redheart.png";
+// Particle
+var particle1 = new Image();
+particle1.src = "grafix/effects/hpup/hpup1.png";
+var particle2 = new Image();
+particle2.src = "grafix/effects/hpup/hpup2.png";
+var particle3 = new Image();
+particle3.src = "grafix/effects/hpup/hpup3.png";
+var particle4 = new Image();
+particle4.src = "grafix/effects/hpup/hpup4.png";
+var particle5 = new Image();
+particle5.src = "grafix/effects/hpup/hpup5.png";
+var particle6 = new Image();
+particle6.src = "grafix/effects/hpup/hpup6.png";
+var particle7 = new Image();
+particle7.src = "grafix/effects/hpup/hpup7.png";
+var particle8 = new Image();
+particle8.src = "grafix/effects/hpup/hpup8.png";
+var colorParticles = {1: particle1, 2: particle2, 3: particle3, 4: particle4, 5: particle5, 6: particle6, 7: particle7, 8: particle8};
+//Bubble
+var Bubble = new Image();
+Bubble.src = "grafix/effects/bubble/bubble.png";
+var FireBubble = new Image();
+FireBubble.src = "grafix/effects/bubble/firebubble.1.png";
+var FireBubble2 = new Image();
+FireBubble2.src = "grafix/effects/bubble/firebubble.2.png";
+var IceBubble = new Image();
+IceBubble.src = "grafix/effects/bubble/icebubble.1.png";
+var IceBubble2 = new Image();
+IceBubble2.src = "grafix/effects/bubble/icebubble.2.png";
+var IceBubble3 = new Image();
+IceBubble3.src = "grafix/effects/bubble/icebubble.3.png";
+var iceBpics = {0: IceBubble, 1: IceBubble2, 2: IceBubble3};
+var MysticBubble = new Image();
+MysticBubble.src = "grafix/effects/bubble/mysticbubble.1.png";
+var MysticBubble2 = new Image();
+MysticBubble2.src = "grafix/effects/bubble/mysticbubble.2.png";
+//Meteor
+var MeteorF0 = new Image();
+MeteorF0.src = "grafix/effects/meteor/meteor.fire0.png";
+var MeteorF15d = new Image();
+MeteorF15d.src = "grafix/effects/meteor/meteor.fire15d.png";
+var MeteorF15u = new Image();
+MeteorF15u.src = "grafix/effects/meteor/meteor.fire15u.png";
+var MeteorF30d = new Image();
+MeteorF30d.src = "grafix/effects/meteor/meteor.fire30d.png";
+var MeteorF30u = new Image();
+MeteorF30u.src = "grafix/effects/meteor/meteor.fire30u.png";
+var MeteorF45d = new Image();
+MeteorF45d.src = "grafix/effects/meteor/meteor.fire45d.png";
+var MeteorF45u = new Image();
+MeteorF45u.src = "grafix/effects/meteor/meteor.fire45u.png";
+var BigMeteorF0 = new Image();
+BigMeteorF0.src = "grafix/effects/meteor/meteor.fire0.big.png";
+var BigMeteorF15d = new Image();
+BigMeteorF15d.src = "grafix/effects/meteor/meteor.fire15d.big.png";
+var BigMeteorF15u = new Image();
+BigMeteorF15u.src = "grafix/effects/meteor/meteor.fire15u.big.png";
+var BigMeteorF30d = new Image();
+BigMeteorF30d.src = "grafix/effects/meteor/meteor.fire30d.big.png";
+var BigMeteorF30u = new Image();
+BigMeteorF30u.src = "grafix/effects/meteor/meteor.fire30u.big.png";
+var BigMeteorF45d = new Image();
+BigMeteorF45d.src = "grafix/effects/meteor/meteor.fire45d.big.png";
+var BigMeteorF45u = new Image();
+BigMeteorF45u.src = "grafix/effects/meteor/meteor.fire45u.big.png";
+//Meteor env
+var Meteorcold = new Image();
+Meteorcold.src = "grafix/objects/hot.rock/glow.01.png";
+var Meteorcold2 = new Image();
+Meteorcold2.src = "grafix/objects/hot.rock/glow.02.png";
+var Meteorcold3 = new Image();
+Meteorcold3.src = "grafix/objects/hot.rock/glow.03.png";
+var Meteorcold4 = new Image();
+Meteorcold4.src = "grafix/objects/hot.rock/glow.04.png";
+var Meteorcold5 = new Image();
+Meteorcold5.src = "grafix/objects/hot.rock/glow.05.png";
+var Meteorcold6 = new Image();
+Meteorcold6.src = "grafix/objects/hot.rock/glow.06.png";
+var Meteorcold7 = new Image();
+Meteorcold7.src = "grafix/objects/hot.rock/glow.07.png";
+var Meteorcold8 = new Image();
+Meteorcold8.src = "grafix/objects/hot.rock/glow.08.png";
+var Meteorcold9 = new Image();
+Meteorcold9.src = "grafix/objects/hot.rock/glow.09.png";
+var Meteorcold10 = new Image();
+Meteorcold10.src = "grafix/objects/hot.rock/glow.10.png";
+var Meteorcold11 = new Image();
+Meteorcold11.src = "grafix/objects/hot.rock/glow.11.png";
+var Meteorcold12 = new Image();
+Meteorcold12.src = "grafix/objects/hot.rock/glow.12.png";
+var Meteorcold13 = new Image();
+Meteorcold13.src = "grafix/objects/hot.rock/glow.13.png";
+var Meteorcold14 = new Image();
+Meteorcold14.src = "grafix/objects/hot.rock/glow.14.png";
+var Meteorcold15 = new Image();
+Meteorcold15.src = "grafix/objects/hot.rock/glow.15.png";
+var Meteorcold16 = new Image();
+Meteorcold16.src = "grafix/objects/hot.rock/glow.16.png";
+var Meteorcold17 = new Image();
+Meteorcold17.src = "grafix/objects/hot.rock/glow.17.png";
+var Meteorcold18 = new Image();
+Meteorcold18.src = "grafix/objects/hot.rock/glow.18.png";
+var Meteorcold19 = new Image();
+Meteorcold19.src = "grafix/objects/hot.rock/glow.19.png";
+var Meteorcold20 = new Image();
+Meteorcold20.src = "grafix/objects/hot.rock/glow.20.png";
+var Meteorcold21 = new Image();
+Meteorcold21.src = "grafix/objects/hot.rock/glow.21.png";
+var Meteorcold22 = new Image();
+Meteorcold22.src = "grafix/objects/hot.rock/glow.22.png";
+var Meteorcold23 = new Image();
+Meteorcold23.src = "grafix/objects/hot.rock/glow.23.png";
+var Meteorcold24 = new Image();
+Meteorcold24.src = "grafix/objects/hot.rock/glow.24.png";
+var Meteorcold25 = new Image();
+Meteorcold25.src = "grafix/objects/hot.rock/glow.25.png";
+var Meteorcold26 = new Image();
+Meteorcold26.src = "grafix/objects/hot.rock/glow.26.png";
+var Meteorcold27 = new Image();
+Meteorcold27.src = "grafix/objects/hot.rock/glow.27.png";
+var Meteorcold28 = new Image();
+Meteorcold28.src = "grafix/objects/hot.rock/glow.28.png";
+var Meteorcold29 = new Image();
+Meteorcold29.src = "grafix/objects/hot.rock/glow.29.png";
+var Meteorcold30 = new Image();
+Meteorcold30.src = "grafix/objects/hot.rock/glow.30.png";
+var Meteorcold31 = new Image();
+Meteorcold31.src = "grafix/objects/hot.rock/glow.31.png";
+var Meteorcold32 = new Image();
+Meteorcold32.src = "grafix/objects/hot.rock/glow.32.png";
+var Meteorcold33 = new Image();
+Meteorcold33.src = "grafix/objects/hot.rock/glow.33.png";
+var EnvMeteor = {1: Meteorcold, 2: Meteorcold2, 3: Meteorcold3, 4: Meteorcold4, 5: Meteorcold5, 6: Meteorcold6, 7: Meteorcold7, 8: Meteorcold8, 9: Meteorcold9, 10: Meteorcold10, 11: Meteorcold11,
+				12: Meteorcold12, 13: Meteorcold13, 14: Meteorcold14, 15: Meteorcold15, 16: Meteorcold16, 17: Meteorcold17, 18: Meteorcold18, 19: Meteorcold19, 20: Meteorcold20, 21: Meteorcold21, 22: Meteorcold22,
+				23: Meteorcold23, 24: Meteorcold24, 25: Meteorcold25, 26: Meteorcold26, 27: Meteorcold27, 28: Meteorcold28, 29: Meteorcold29, 30: Meteorcold30, 31: Meteorcold31, 32: Meteorcold32, 33: Meteorcold33}; 
+//hlightning
+var hlightning1 = new Image();
+hlightning1.src = "grafix/effects/lightning.self/hor.1.png";
+var hlightning2 = new Image();
+hlightning2.src = "grafix/effects/lightning.self/hor.2.png";
+var hlightning3 = new Image();
+hlightning3.src = "grafix/effects/lightning.self/hor.3.png";
+//vlightning
+var vlightning1 = new Image();
+vlightning1.src = "grafix/effects/lightning.self/ver.1.png";
+var vlightning2 = new Image();
+vlightning2.src = "grafix/effects/lightning.self/ver.2.png";
+var vlightning3 = new Image();
+vlightning3.src = "grafix/effects/lightning.self/ver.3.png";
+//ehlightning
+var ehlightning1 = new Image();
+ehlightning1.src = "grafix/effects/lightning.enemy/hor.1.png";
+var ehlightning2 = new Image();
+ehlightning2.src = "grafix/effects/lightning.enemy/hor.2.png";
+var ehlightning3 = new Image();
+ehlightning3.src = "grafix/effects/lightning.enemy/hor.3.png";
+//evlightning
+var evlightning1 = new Image();
+evlightning1.src = "grafix/effects/lightning.enemy/ver.1.png";
+var evlightning2 = new Image();
+evlightning2.src = "grafix/effects/lightning.enemy/ver.2.png";
+var evlightning3 = new Image();
+evlightning3.src = "grafix/effects/lightning.enemy/ver.3.png";
+//--------------------------------------------------- Sounds ------------------------------------------------------------------------//
+var Beam = document.getElementsByTagName("audio")[0];
+var Killed = document.getElementsByTagName("audio")[1];
+var Pickup = document.getElementsByTagName("audio")[2];
+var Explosion = document.getElementsByTagName("audio")[3];
+var Frozen = document.getElementsByTagName("audio")[4];
+var Fwave = document.getElementsByTagName("audio")[5];
+var Thunder = document.getElementsByTagName("audio")[6];
+var Wind = document.getElementsByTagName("audio")[7];
+var onDmg = document.getElementsByTagName("audio")[8];
+var SpawnerSpawn = document.getElementsByTagName("audio")[9];
+var zapLaser = document.getElementsByTagName("audio")[10];
+var Plucky = document.getElementsByTagName("audio")[11];
+var multiLaser = document.getElementsByTagName("audio")[12];
+var midBoop = document.getElementsByTagName("audio")[13];
+var lowDouble = document.getElementsByTagName("audio")[14];
+var lowBomb = document.getElementsByTagName("audio")[15];
+var highDouble = document.getElementsByTagName("audio")[16];
+var flatBoop = document.getElementsByTagName("audio")[17];
+var fastbeepsLow = document.getElementsByTagName("audio")[18];
+var fastbeepsHigh = document.getElementsByTagName("audio")[19];
+//Longsounds
+var hum = document.getElementsByTagName("audio")[20];
+var longfuzz = document.getElementsByTagName("audio")[21];
+var longlaser = document.getElementsByTagName("audio")[22];
+var longpew = document.getElementsByTagName("audio")[23];
+var longpulse = document.getElementsByTagName("audio")[24];
+var lowpulse = document.getElementsByTagName("audio")[25];
+var radiofailure = document.getElementsByTagName("audio")[26];
+var trailingbeeps = document.getElementsByTagName("audio")[27];
+var AllSounds = {1: Beam, 2: Killed, 3: Pickup, 4: Explosion, 5: Frozen, 6: Fwave, 7: Thunder, 8: Wind, 9: onDmg, 10: SpawnerSpawn,
+				11: zapLaser, 12: Plucky, 13: multiLaser, 14: midBoop, 15: lowDouble, 16: lowBomb, 17: highDouble, 18: flatBoop, 19: fastbeepsLow, 20: fastbeepsHigh,
+				21: hum, 22: longfuzz, 23: longlaser, 24: longpew, 25: longpulse, 26: lowpulse, 27: radiofailure, 28: trailingbeeps};
+//Music
+var Spells = document.getElementsByTagName("audio")[28];
+var OverwhelmedByGoblins = document.getElementsByTagName("audio")[29];
+var BadWizards = document.getElementsByTagName("audio")[30];
+var DumblebeatsNormal = document.getElementsByTagName("audio")[31];
+var CaseysQuest = document.getElementsByTagName("audio")[32];
+var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: DumblebeatsNormal, 5: CaseysQuest};
+for(M in AllMusic){
+	AllMusic[M].volume = 0.5;
+}
+DumblebeatsNormal.volume = 0.4;
+CaseysQuest.volume = 0.4;
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
-var highscore1 = $.jStorage.get("highscore1");
+//reset by changing the strings, change in gameover() too
+var highscore1 = $.jStorage.get("v58highscore1");
 if(!highscore1){
 		var highscore1 = 0;
-		$.jStorage.set("highscore1",highscore1);}
-var highscore2 = $.jStorage.get("highscore2");
+		$.jStorage.set("v58highscore1",highscore1);
+}
+var highscore2 = $.jStorage.get("v58highscore2");
 if(!highscore2){
 		var highscore2 = 0;
-		$.jStorage.set("highscore2",highscore2);}
-var highscore3 = $.jStorage.get("highscore3");
+		$.jStorage.set("v58highscore2",highscore2);
+}
+var highscore3 = $.jStorage.get("v58highscore3");
 if(!highscore3){
 		var highscore3 = 0;
-		$.jStorage.set("highscore3",highscore3);}
-var highscore4 = $.jStorage.get("highscore4");
+		$.jStorage.set("v58highscore3",highscore3);
+}
+var highscore4 = $.jStorage.get("v58highscore4");
 if(!highscore4){
 		var highscore4 = 0;
-		$.jStorage.set("highscore4",highscore4);}
-var highscore5 = $.jStorage.get("highscore5");
+		$.jStorage.set("v58highscore4",highscore4);
+}
+var highscore5 = $.jStorage.get("v58highscore5");
 if(!highscore5){
 		var highscore5 = 0;
-		$.jStorage.set("highscore5",highscore5);}
+		$.jStorage.set("v58highscore5",highscore5);
+}
+//Get Initials
+var hs1init = $.jStorage.get("v58hs1init");
+if(!hs1init){
+		var hs1init = "        ";
+		$.jStorage.set("v58hs1init",hs1init);
+}
+var hs2init = $.jStorage.get("v58hs2init");
+if(!hs2init){
+		var hs2init = "        ";
+		$.jStorage.set("v58hs2init",hs2init);
+}
+var hs3init = $.jStorage.get("v58hs3init");
+if(!hs3init){
+		var hs3init = "        ";
+		$.jStorage.set("v58hs3init",hs3init);
+}
+var hs4init = $.jStorage.get("v58hs4init");
+if(!hs4init){
+		var hs4init = "        ";
+		$.jStorage.set("v58hs4init",hs4init);
+}
+var hs5init = $.jStorage.get("v58hs5init");
+if(!hs5init){
+		var hs5init = "        ";
+		$.jStorage.set("v58hs5init",hs5init);
+}
+//Remove _ in initials
+var chars = hs1init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs1init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs2init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs2init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs3init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs3init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs4init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs4init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs5init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs5init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+//Get options
+var dispCntrls = $.jStorage.get("cntrls");
+if(!dispCntrls){
+	var dispCntrls = 2;
+	$.jStorage.set("cntrls", dispCntrls);
+}
+var vol = $.jStorage.get("vol");
+if(!vol){
+	var vol = 2;
+	$.jStorage.set("vol", vol);
+}
+var Music = $.jStorage.get("Music");
+if(!Music){
+	var Music = 2;
+	$.jStorage.set("Music", Music);
+}
 //---------------------------------------------------------------- Mouse Posn -------------------------------------------------------//
 function getPosition(event){
     if (event.x != undefined && event.y != undefined){
@@ -129,105 +689,6 @@ function getPositionhover(event){
 		hX -= canvas.offsetLeft;
         hY -= canvas.offsetTop;
 }
-//------------------------------------------------------- Graphics ------------------------------------------------------------------//
-//Girraffix
-var WizzurdL = new Image();
-WizzurdL.src = "grafix/wizzurd.l32.png";
-var WizzurdR = new Image();
-WizzurdR.src = "grafix/wizzurd.r32.png";
-//Ondmg
-var Wizzurd2 = new Image();
-Wizzurd2.src = "grafix/nega-wizzurd32.png";
-//Environment
-var Tree = new Image();
-Tree.src = "grafix/obj.tree32.png";
-var backGround1 = new Image();
-backGround1.src = "grafix/bkg1.png";
-//Lavaman
-var Lavamanpic = new Image();
-Lavamanpic.src = "grafix/cre.firesprite32.png";
-//Tenemy
-var Globbly = new Image();
-Globbly.src = "grafix/cre.globbly32.png";
-//Hudge
-var HudgeL = new Image();
-HudgeL.src = "grafix/cre.hudge.l32.png";
-var HudgeR = new Image();
-HudgeR.src = "grafix/cre.hudge.r32.png";
-//Enemy2
-var Pikkit = new Image();
-Pikkit.src = "grafix/cre.pikkit32.png";
-//Spawner
-var Splavaman = new Image();
-Splavaman.src = "grafix/lavaman64.png";
-//Evil Wizzurd
-var Sorcerorpng = new Image();
-Sorcerorpng.src = "grafix/poison-wizzurd32.png";
-//Tree Wizzurd
-var TWizzurd = new Image();
-TWizzurd.src = "grafix/treewizzurd32.png";
-//Monochrome Wizzurd
-var MonoWizzurd = new Image();
-MonoWizzurd.src = "grafix/bw-wizzurd32.png";
-//Fire powerup
-var Firebox = new Image();
-Firebox.src = "grafix/ele.fire32.png";
-//Ice powerup
-var Icebox = new Image();
-Icebox.src = "grafix/ele.ice32.png";
-//Earth powerup
-var Earthbox = new Image();
-Earthbox.src = "grafix/ele.earth32.png";
-//lightning powerup
-var Thunderbox = new Image();
-Thunderbox.src = "grafix/ele.zap32.png";
-//Air powerup
-var Windbox = new Image();
-Windbox.src = "grafix/ele.air32.png";
-//Mystic powerup
-var Mysticbox = new Image();
-Mysticbox.src = "grafix/ele.dev32.png";
-// Particle
-var particle = new Image();
-particle.src = "grafix/particle.png";
-//hlightning
-var hlightning1 = new Image();
-hlightning1.src = "grafix/lightning-h1.png";
-var hlightning2 = new Image();
-hlightning2.src = "grafix/lightning-h2.png";
-var hlightning3 = new Image();
-hlightning3.src = "grafix/lightning-h3.png";
-//vlightning
-var vlightning1 = new Image();
-vlightning1.src = "grafix/lightning-v1.png";
-var vlightning2 = new Image();
-vlightning2.src = "grafix/lightning-v2.png";
-var vlightning3 = new Image();
-vlightning3.src = "grafix/lightning-v3.png";
-//Buttons
-var newGame = new Image();
-newGame.src = "grafix/butt.newgame.png";
-//--------------------------------------------------- Sounds ------------------------------------------------------------------------//
-//Dumblebeam
-var Beam = document.getElementsByTagName("audio")[0];
-//Enemy Dead
-var Killed = document.getElementsByTagName("audio")[1];
-//Pickup
-var Pickup = document.getElementsByTagName("audio")[2];
-//Fire
-var Explosion = document.getElementsByTagName("audio")[3];
-//Ice
-var Frozen = document.getElementsByTagName("audio")[4];
-//Fire Wave
-var Fwave = document.getElementsByTagName("audio")[5];
-//Thunder
-var Thunder = document.getElementsByTagName("audio")[6];
-//Wind
-var Wind = document.getElementsByTagName("audio")[7];
-//Ondmg
-var onDmg = document.getElementsByTagName("audio")[8];
-//SpawnerSpawn
-var SpawnerSpawn = document.getElementsByTagName("audio")[9];
 //------------------------------------------------- Menu ----------------------------------------------------------------------------//
 var Menu = {
 	x: canvas.width/2,
@@ -235,55 +696,93 @@ var Menu = {
 	width: 150,
 	height: 30,
 	draw: function(){
-		ctx.fillStyle = "black";
+		var select = false;
+		ctx.fillStyle = "white";
 		ctx.font = "18pt Arial";
-		ctx.drawImage(newGame, this.x-2*this.width/3, this.y-2*this.height);
-		ctx.fillText("Version 0.4.6: March 22 2012", this.x-3*this.width/3, this.y+6*this.height);
-		ctx.fillText("Dumbledore64", this.x-2*this.width/3, this.y-6*this.height);
-		ctx.fillText("How to Play", this.x-this.width/2, this.y-this.height/2 + this.height);
-		ctx.fillText("High Scores", this.x-this.width/2, this.y-this.height/2 + 2*this.height);
-		ctx.fillText("Credits", this.x-this.width/2, this.y-this.height/2 + 3*this.height);
-		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width/2 && hY <= this.y && hY>=this.y-2*this.height){
-			ctx.strokeRect(this.x-this.width*4/5, this.y-this.height*2, 3*this.width/2, 4*this.height/2);
+		ctx.strokeStyle = "white";
+		ctx.drawImage(Title, 0, 0);
+		ctx.drawImage(textmenu, 0, 0);
+		ctx.fillText("Version 0.6.0 Alpha: April 20 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		//newgame
+		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
+			select = true;
+			ctx.drawImage(newgamemenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y && cY>=this.y-2*this.height){
+		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width && cY <= this.y + 1.75*this.height && cY>=this.y-this.height*7/6 + 2*this.height){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
 			STATE = 1;
 		}
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + this.height && hY>=this.y-this.height*7/6 + this.height){
-			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + this.height, this.width, this.height);
+		//How to Play
+		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width/2 && hY <= this.y + 6*this.height && hY>=this.y-this.height*7/6 + 6*this.height){
+			select = true;
+			ctx.drawImage(helpmenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + this.height&& cY>=this.y-this.height*7/6 + this.height){
+		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y + 6*this.height && cY>=this.y-this.height*7/6 + 6*this.height){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
 			STATE = 2;
 		}
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + 2*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
-			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 2*this.height, this.width, this.height);
+		//Score
+		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 3.25*this.height && hY>=this.y-this.height*7/5 + 3.25*this.height){
+			select = true;
+			ctx.drawImage(scoremenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 2*this.height&& cY>=this.y-this.height*7/6 + 2*this.height){
+		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 3.25*this.height && cY>=this.y-this.height*7/5 + 3.25*this.height){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
 			STATE = 5;
 		}
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width/3 && hY <= this.y + 3*this.height && hY>=this.y-this.height*7/6 + 3*this.height){
-			ctx.strokeRect(this.x-this.width*3/5, this.y-this.height*7/6 + 3*this.height, this.width, this.height);
+		//Options
+		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 4.5*this.height && hY>=this.y-this.height*7/6 + 4.5*this.height){
+			select = true;
+			ctx.drawImage(optionsmenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width/3 && cY <= this.y + 3*this.height&& cY>=this.y-this.height*7/6 + 3*this.height){
+		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 4.5*this.height&& cY>=this.y-this.height*7/6 + 4.5*this.height){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
+			STATE = 6;
+		}
+		//Credits
+		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 7.25*this.height && hY>=this.y-this.height*7/6 + 7.25*this.height){
+			select = true;
+			ctx.drawImage(creditsmenu, 0, 0);
+		}		
+		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 7.25*this.height&& cY>=this.y-this.height*7/6 + 7.25*this.height){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			cX = 0;
+			cY = 0;
 			STATE = 3;
+		}
+		if(select == false){
+			ctx.drawImage(noselectmenu, 0, 0);
 		}
 	}
 };
 var Info = {
 	x: canvas.width/25,
-	y: canvas.height/8,
+	y: canvas.height/11,
 	width: 20,
 	height: 20,
-	bx: 400-50,
+	bx: 696,
 	by: 560,
 	draw: function(){
-		ctx.fillStyle = "black";
-		ctx.font = "16pt Arial";
+		ctx.fillStyle = "white";
+		ctx.font = "14pt Arial";
+		ctx.strokeStyle = "white";
 		ctx.fillText("Have you ever wanted to be just like Dumbledore?", this.x-this.width/2, this.y-this.height/2); 
 		ctx.fillText("Well now you can with this AMAZING wizard simulator!", this.x-this.width/2, this.y+2*this.height/2);
 		ctx.fillText("Originally released for the Nintendo 64,", this.x-this.width/2, this.y+5*this.height/2);
 		ctx.fillText("this lifetime classic is now available at your leisure!",  this.x-this.width/2, this.y+8*this.height/2);
-		ctx.fillStyle = "black";
 		ctx.fillText("Controls:", this.x-this.width/2, this.y+11*this.height/2);
 		ctx.fillText("W: Move up", this.x-this.width/2, this.y+14*this.height/2);
 		ctx.fillText("A: Move left", this.x-this.width/2, this.y+17*this.height/2);
@@ -291,19 +790,21 @@ var Info = {
 		ctx.fillText("D: move right", this.x-this.width/2, this.y+23*this.height/2);
 		ctx.fillText("Arrow keys: Shoot Dumblebeam", this.x-this.width/2, this.y+26*this.height/2);
 		ctx.fillText("Spacebar: Use spell", this.x-this.width/2, this.y+29*this.height/2);
-		ctx.fillText("Q: Drop most recently obtained spell", this.x-this.width/2, this.y+32*this.height/2);
-		ctx.fillStyle = "black";
-		ctx.fillText("How to play: ", this.x-this.width/2, this.y+35*this.height/2);
-		ctx.fillText("Kill enemies! Acquire points! Pick up boxes to get elements!", this.x-this.width/2, this.y+38*this.height/2);
-		ctx.fillText("Each element corresponds to a unique spell, and you can combine", this.x-this.width/2, this.y+41*this.height/2);
-		ctx.fillText("up to 2 elements for MORE unique spells!!!", this.x-this.width/2, this.y+44*this.height/2);
-		ctx.fillStyle = "black";
+		ctx.fillText("Q: Drop Element 1", this.x-this.width/2, this.y+32*this.height/2);
+		ctx.fillText("E: Drop Element 2", this.x-this.width/2, this.y+35*this.height/2);
+		ctx.fillText("P: Pause game", this.x-this.width/2, this.y+38*this.height/2);
+		ctx.fillText("How to play: ", this.x-this.width/2, this.y+41*this.height/2);
+		ctx.fillText("Kill enemies! Acquire points! Pick up boxes to get elements!", this.x-this.width/2, this.y+44*this.height/2);
+		ctx.fillText("Each element corresponds to a unique spell, and you can combine", this.x-this.width/2, this.y+47*this.height/2);
+		ctx.fillText("up to 2 elements for MORE unique spells!!!", this.x-this.width/2, this.y+50*this.height/2);
 		ctx.font = "16pt Arial";
 		ctx.fillText("Back", this.bx, this.by);
 		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
 		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
 			STATE = 0;
 		}
 }
@@ -316,23 +817,154 @@ var Credits = {
 	bx: 400-50,
 	by: 560,
 	draw: function(){
-		ctx.fillStyle = "black";
+		ctx.fillStyle = "white";
 		ctx.font = "18pt Arial";
+		ctx.strokeStyle = "white";
 		ctx.fillText("Credits", this.x, this.y-this.height/2); 
 		ctx.font = "16pt Arial";
 		ctx.fillText("Creator/Developer:", this.x-this.width/2, this.y+4*this.height/2);
 		ctx.fillText("Brett Davis", this.x-this.width/2, this.y+7*this.height/2);
 		ctx.fillText("Art:",  this.x-this.width/2, this.y+12*this.height/2);
 		ctx.fillText("Kyle Fleischer", this.x-this.width/2, this.y+15*this.height/2);
-		ctx.fillText("Sound and Javascript Master:", this.x-this.width/2, this.y+20*this.height/2);
+		ctx.fillText("Music and Sound:", this.x-this.width/2, this.y+20*this.height/2);
 		ctx.fillText("Dave Gedarovich", this.x-this.width/2, this.y+23*this.height/2);
-		ctx.fillStyle = "black";
-		ctx.font = "16pt Arial";
+		ctx.fillText("Jack Van Oudenaren", this.x-this.width/2, this.y+26*this.height/2);
 		ctx.fillText("Back", this.bx, this.by);
 		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
 		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			STATE = 0;
+		}
+}
+};
+var Pause = {
+	x: canvas.width/2,
+	y: canvas.height/2,
+	width: 800,
+	height: 576,
+	draw: function(){
+		ctx.globalAlpha = 1;
+		ctx.fillStyle = "white";
+		ctx.font = "18pt Arial";
+		ctx.drawImage(menuBack, this.x-this.width/2, this.y-this.height/2);
+		ctx.fillText("-Paused-", this.x-64, this.y-32);
+		for(S in AllSounds){
+			AllSounds[S].pause();
+		}
+		for(S in AllMusic){
+			AllMusic[S].pause();
+		}
+	}
+};
+
+var Options = {
+	x: 300,
+	y: canvas.height/8,
+	width: 20,
+	height: 20,
+	bx: 400-50,
+	by: 560,
+	draw: function(){
+		ctx.fillStyle = "white";
+		ctx.font = "18pt Arial";
+		ctx.strokeStyle = "white";
+		ctx.fillText("Options", this.x, this.y-this.height/2); 
+		ctx.font = "16pt Arial";
+		if(hX >= this.x-20 && hX <=this.x + this.width*4 && hY <= this.y+5*this.height/2 && hY>=this.y+this.height/2){
+			ctx.strokeRect(this.x-20, this.y + this.height, this.width * 6, this.height+10);
+		}		
+		if(cX >= this.x-20 && cX <=this.x + this.width*4 && cY <= this.y+5*this.height/2 && cY>=this.y+this.height/2){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			if(vol == 1){
+				vol = 2;
+				$.jStorage.set("vol",vol);
+				cX = 0;
+				cY = 0;
+			}
+			else if(vol == 2){
+				vol = 1;
+				$.jStorage.set("vol",vol);
+				cX = 0;
+				cY = 0;
+			}
+		}
+		if(vol == 2){
+			ctx.fillText("Sound: On", this.x-this.width/2, this.y+4*this.height/2);
+			for(S in AllSounds){
+				AllSounds[S].volume=0.8;
+			}
+		}
+		if(vol == 1){
+			ctx.fillText("Sound: Off", this.x-this.width/2, this.y+4*this.height/2);
+			for(S in AllSounds){
+				AllSounds[S].volume=0;
+			}
+		}
+		if(hX >= this.x-20 && hX <=this.x + this.width*5 && hY <= this.y+7*this.height/2 && hY>=this.y+4*this.height/2){
+			ctx.strokeRect(this.x-20, this.y + 2.5*this.height, this.width * 6, this.height+10);
+		}		
+		if(cX >= this.x-20 && cX <=this.x + this.width*5 && cY <= this.y+7*this.height/2 && cY>=this.y+4*this.height/2){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			if(Music == 1){
+				Music = 2;
+				$.jStorage.set("Music",Music);
+				cX = 0;
+				cY = 0;
+			}
+			else if(Music == 2){
+				Music = 1;
+				$.jStorage.set("Music",Music);
+				cX = 0;
+				cY = 0;
+			}
+		}
+		if(Music == 2){
+			ctx.fillText("Music: On", this.x-this.width/2, this.y+7*this.height/2);
+		}
+		if(Music == 1){
+			ctx.fillText("Music: Off", this.x-this.width/2, this.y+7*this.height/2);
+			for(M in AllMusic){
+				AllMusic[M].currentTime=0;
+				AllMusic[M].pause();
+			}
+		}
+		if(hX >= this.x-20 && hX <=this.x + this.width*10 && hY <= this.y+10*this.height/2 && hY>=this.y+7*this.height/2){
+			ctx.strokeRect(this.x-20, this.y + 4*this.height, this.width * 12, this.height+10);
+		}		
+		if(cX >= this.x-20 && cX <=this.x + this.width*10 && cY <= this.y+10*this.height/2 && cY>=this.y+7*this.height/2){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
+			if(dispCntrls == 1){
+				dispCntrls = 2;
+				$.jStorage.set("cntrls",dispCntrls);
+				cX = 0;
+				cY = 0;
+			}
+			else if(dispCntrls == 2){
+				dispCntrls = 1;
+				$.jStorage.set("cntrls",dispCntrls);
+				cX = 0;
+				cY = 0;
+			}
+		}
+		if(dispCntrls == 2){
+			ctx.fillText("Display Controls: Yes", this.x-this.width/2, this.y+10*this.height/2);
+		}
+		if(dispCntrls == 1){
+			ctx.fillText("Display Controls: No", this.x-this.width/2, this.y+10*this.height/2);
+		}
+		ctx.fillText("Back", this.bx, this.by);
+		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
+			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
+		}		
+		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+			fastbeepsLow.currentTime=0;
+			fastbeepsLow.play();
 			STATE = 0;
 		}
 }
@@ -345,7 +977,10 @@ var player = {
 	width: 32,
 	height: 32,
 	speed: 8,
+	speed2: 2,
+	dirct: 0,
 	hp: 3,
+	maxhp: 3,
 	dmg: false,
 	dir: "W",
 	LR: "",
@@ -372,7 +1007,27 @@ var player = {
 			}
 		}
 		ctx.fillStyle = "red";
-		if(this.hp == 3){
+		if(this.hp == 6){
+			ctx.fillStyle = "yellow";
+			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+		}
+		else if(this.hp == 5){
+			ctx.fillStyle = "yellow";
+			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+		}
+		else if(this.hp == 4){
+			ctx.fillStyle = "yellow";
+			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
+		}
+		else if(this.hp == 3){
 			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
@@ -386,25 +1041,49 @@ var player = {
 		}
 	},
 	onhit: function(){
-	if(hptimer > 0){
-		hptimer-=1;
-	}
-	else{
-		for(E in AllEnemies){
-			if(collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])){
-				onDmg.play();
-				this.dmg = true;
-			}
+		if(this.dirct > 0){
+			this.dirct-=1;
 		}
-		if(this.dmg == true){
-			this.hp-=1;
-			hptimer = 30;
-			this.dmg = false;
+		if(hptimer > 0){
+			hptimer-=1;
 		}
 		else{
-			this.hp = this.hp;
+			for(E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])){
+					if(AllEnemies[E].onTree == 0){
+						onDmg.currentTime=0;
+						onDmg.play();
+						this.dmg = true;
+					}
+				}
+			}
+			for(E in EMeteors){
+				if(collision(EMeteors[E].dir, EMeteors[E], this) || collision(this.dir, this, EMeteors[E])){
+					if(EMeteors[E].timeLeft > 0){
+						onDmg.currentTime=0;
+						onDmg.play();
+						this.dmg = true;
+					}
+				}
+			}
+			if(STATE == "Scorched"){
+				for(O in ObsList){
+					if(collision(this.dir, this, ObsList[O])){
+						this.dmg = true;
+						onDmg.currentTime=0;
+						onDmg.play();
+					}
+				}
+			}
+			if(this.dmg == true){
+				this.hp-=1;
+				hptimer = 30;
+				this.dmg = false;
+			}
+			else{
+				this.hp = this.hp;
+			}
 		}
-	}
 	}
 };
 //----------------------------------------------- Casting Bar -----------------------------------------------------------------------//
@@ -421,7 +1100,7 @@ var castingBar = {
 		this.x = player.x - player.width/2;
 		this.y = player.y + player.height/2;
 		if(this.onScreen == 1){
-			ctx.fillStyle = "0404B4";
+			ctx.fillStyle = "#0404B4";
 			ctx.strokeStyle = "black";
 			ctx.strokeRect(this.x, this.y, this.width, this.height);
 			ctx.fillRect(this.x + 2, this.y + 2, this.width2, this.height - 2);
@@ -440,455 +1119,38 @@ var castingBar = {
 		}
 	}
 }
-//---------------------------------------------- Pickups ----------------------------------------------------------------------------//
-// Fire drop
-var redCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
+var TreecastingBar = {
+	x: treeWizz.x - treeWizz.width/2,
+	y: treeWizz.y + treeWizz.height/2,
+	width: treeWizz.width,
+	height: treeWizz.height/4,
+	width2: 0,
+	onScreen: 0,
+	cast: -1,
+	castmax: 0,
 	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Firebox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
+		this.x = treeWizz.x - treeWizz.width/2;
+		this.y = treeWizz.y + treeWizz.height/2;
+		if(this.onScreen == 1){
+			ctx.fillStyle = "#0404B4";
+			ctx.strokeStyle = "black";
+			ctx.strokeRect(this.x, this.y, this.width, this.height);
+			ctx.fillRect(this.x + 2, this.y + 2, this.width2, this.height - 2);
 		}
 	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Fire";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Fire";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Fire";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Fire";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
+	tick: function(){
+		if(this.cast > 0){
+			treeWizz.speed = 0;
+			this.cast-=1;
+			this.width2 = this.cast/this.castmax * this.width;
 		}
-		else if(spell2 == "N/A"){
-			spell2 = "Fire";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Fire";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Fire";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Fire";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
+		if(this.cast == 0){
+			treeWizz.speed = treeWizz.speed2*2;
+			this.onScreen = 0;
 		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Ice drop
-var tealCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Icebox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Ice";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Ice";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Ice";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Ice";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Ice";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Ice";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Ice";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Ice";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Earth drop
-var greenCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Earthbox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Earth";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Earth";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Earth";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Earth";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Earth";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Earth";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Earth";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Earth";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Thunder drop
-var yellowCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Thunderbox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Lightning";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Lightning";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Lightning";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Lightning";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Lightning";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Lightning";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Lightning";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Lightning";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Wind drop
-var greyCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Windbox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Air";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Air";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Air";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Air";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Air";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Air";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Air";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Air";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-
-// Mystic drop
-var purpleCube = {
-	x: -100,
-	y: -200,
-	width: 32,
-	height: 32,
-	timeLeft: 0,
-	
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(Mysticbox, this.x - this.width / 2, this.y - this.height / 2);
-			this.timeLeft-=1;
-		}
-		else{
-			this.x = -100;
-			this.y = -200;
-			this.timeLeft = 0;
-		}
-	},
-	onHit: function(){
-		if(spell1 == "N/A"){
-			spell1 = "Mystic";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Mystic";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Mystic";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Mystic";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		else if(spell2 == "N/A"){
-			spell2 = "Mystic";
-			if(typemarker.x != -100 && typemarker2.x != -100){
-				typemarker3.text = "+ Mystic";
-				typemarker3.x = player.x-player.width*2;
-				typemarker3.y = player.y;
-				typemarker3.timeLeft = 20;
-			}
-			else if(typemarker.x != -100){
-				typemarker2.text = "+ Mystic";
-				typemarker2.x = player.x-player.width*2;
-				typemarker2.y = player.y;
-				typemarker2.timeLeft = 20;
-			}
-			else{
-				typemarker.text = "+ Mystic";
-				typemarker.x = player.x-player.width*2;
-				typemarker.y = player.y;
-				typemarker.timeLeft = 20;
-			}
-		}
-		this.x = -100;
-		this.y = -200;
-		this.timeLeft = 0;
-	}
-};
-	
-// If you pick it up
-function pickup(C){
-	if(collision(player.dir, player, C)){
-		if((spell1 != "N/A") && (spell2 != "N/A")){
-			if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
-				marker4.points = "25";
-				marker4.mult = 1;
-				marker4.x = player.x;
-				marker4.y = player.y;
-				marker4.timeLeft = 20;
-			}
-			else if(marker.x != -100 && marker2.x != -100){
-				marker3.points = "25";
-				marker3.mult = 1;
-				marker3.x = player.x;
-				marker3.y = player.y;
-				marker3.timeLeft = 20;
-			}
-			else if(marker.x != -100){
-				marker2.points = "25";
-				marker2.mult = 1;
-				marker2.x = player.x;
-				marker2.y = player.y;
-				marker2.timeLeft = 20;
-			}
-			else{
-				marker.points = "25";
-				marker.mult = 1;
-				marker.x = player.x;
-				marker.y = player.y;
-				marker.timeLeft = 20;
-			}
-			score+=25;
-			currpts = "25";
-		}
-		Pickup.play();
-		C.onHit();
 	}
 }
-
+//------------------------------------------------- Collision Detection -------------------------------------------------------------//
 // Collision detection
 function collision(dir, one, two){
 	if(dir == "W"){
@@ -935,6 +1197,9 @@ function collision(dir, one, two){
 			return false;
 		}
 	}
+	else{
+		return contained(two, one);
+	}
 }
 
 // Collision detection cont'd
@@ -948,10 +1213,19 @@ function contained(a, b){
 		return false;
 	}
 }
-
+//dragon flame
+function Hcontained(a, b){
+	if(a.y >= b.y-b.height/2 && a.y <= b.y + b.height/2 && a.x <= b.x + b.width/2 && a.x >= b.x-b.width/2){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+//------------------------------------------------- Point and Element Markers -------------------------------------------------------//
 // Fancyness
 var marker = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
@@ -961,7 +1235,7 @@ var marker = {
 };
 
 var marker2 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
@@ -971,7 +1245,7 @@ var marker2 = {
 };
 
 var marker3 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
@@ -981,7 +1255,7 @@ var marker3 = {
 };
 
 var marker4 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
@@ -989,34 +1263,34 @@ var marker4 = {
 	points: 0,
 	mult: 1
 };
-
+var markerlist = {1: marker, 2: marker2, 3: marker3, 4: marker4};
 var typemarker = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: "",
+	text: ""
 };
 
 var typemarker2 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: "",
+	text: ""
 };
 
 var typemarker3 = {
-	color: "00FF00",
+	color: "#00FF00",
 	speed: 4,
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: "",
+	text: ""
 };
-
+var typemarkerlist = {1: typemarker, 2: typemarker2, 3: typemarker3};
 function drawtypeMarker(M){
 	if(M.timeLeft == 0){
 		M.x = -100;
@@ -1024,22 +1298,32 @@ function drawtypeMarker(M){
 	}
 	if (M.timeLeft != 0){
 		if(M.text == "+ Air"){
-			M.color = "D0D0D0";
+			M.color = "#D0D0D0";
 		}
 		else if(M.text == "+ Fire"){
-			M.color = "CC0000";
+			M.color = "#CC0000";
 		}
 		else if(M.text == "+ Ice"){
-			M.color = "00FFFF";
+			M.color = "#00FFFF";
 		}
 		else if(M.text == "+ Lightning"){
 			M.color = "yellow";
 		}
 		else if(M.text == "+ Earth"){
-			M.color = "33FF00";
+			M.color = "#33FF00";
 		}
 		else if(M.text == "+ Mystic"){
-			M.color = "BF00FF";
+			M.color = "#663399";
+		}
+		else if(M.text == "+ Water"){
+			M.color = "#0000FF";
+		}
+		else if(M.text == "+ Max Hp"){
+			M.color = colorz[colorNum];
+			colorNum++;
+			if(colorNum > 6){
+				colorNum = 1;
+			}
 		}
 	ctx.fillStyle = M.color;
 	ctx.font = "32pt Arial";
@@ -1051,22 +1335,23 @@ function drawMarker(M){
 	if(M.timeLeft == 0){
 		M.x = -100;
 		M.y = -100;
+		M.speed = 4;
 	}
 	if (M.timeLeft != 0){
 		if(M.mult == 1){
-			M.color = "00FF00";
+			M.color = "#00FF00";
 		}
 		else if(M.mult == 2){
-			M.color = "FFFF00";
+			M.color = "#FFFF00";
 		}
 		else if(M.mult == 3){
-			M.color = "FF6600";
+			M.color = "#FF6600";
 		}
 		else if(M.mult == 4){
-			M.color = "CC0000";
+			M.color = "#CC0000";
 		}
 		else if(M.mult >= 5){
-			M.color = "FF99FF";
+			M.color = "#FF99FF";
 		}
 	ctx.fillStyle = M.color;
 	ctx.font = "32pt Arial";
@@ -1079,7 +1364,7 @@ function moveMarker(M){
 		M.y -= M.speed;
 		M.timeLeft--;}
 	}
-
+//------------------------------------------------- Keep Track of Score Multiplier --------------------------------------------------//
 //Multiply
 var multiply = function(){
 	if(multtimer <= 0){
@@ -1089,21 +1374,28 @@ var multiply = function(){
 		multtimer-=1;
 	}
 }
+//------------------------------------------------- Clear Canvas Each Frame ---------------------------------------------------------//
 // Clear the canvas - draw a white rectangle over everything
-
 var clear = function(){
 // Border
+if(ctx.globalAlpha == 1){
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
-	if(STATE != 1){
-		ctx.fillStyle = "grey";
-		ctx.fillRect(4, 4, canvas.width-4, canvas.height-4);
+}
+	if(STATE != 1 && STATE != "Jungle" && STATE != "Scorched"){
+		ctx.drawImage(menuBack, 4, 4);
 	}
-	else{
+	else if(STATE == 1){
 		ctx.drawImage(backGround1, 0, 0);
 	}
+	else if(STATE == "Jungle"){
+		ctx.drawImage(backGround2, 0, 0);
+	}
+	else if(STATE == "Scorched"){
+		ctx.drawImage(backGround3, 0, 0);
+	}
 };
-
+//-------------------------------------------------- HUD and Spell Calculation ------------------------------------------------------//
 function UI(){
 	//Calculate spell
 	if(spell2 == "N/A"){
@@ -1120,11 +1412,14 @@ function UI(){
 			spell = "Lightning";
 		}	
 		if(spell1 == "Air"){
-			spell = "Gust";
+			spell = "Dash";
 		}
 		if(spell1 == "Mystic"){
 			spell = "Teleport";
-		}			
+		}
+		if(spell1 == "Water"){
+			spell = "Bubble Shield";
+		}		
 	}
 	if(spell1 == "N/A" && spell2 != "N/A"){
 		if(spell2 == "Fire"){
@@ -1140,11 +1435,14 @@ function UI(){
 			spell = "Lightning";
 		}	
 		if(spell2 == "Air"){
-			spell = "Gust";
+			spell = "Dash";
 		}
 		if(spell2 == "Mystic"){
 			spell = "Teleport";
-		}		
+		}
+		if(spell2 == "Water"){
+			spell = "Bubble Shield";
+		}
 	}
 	if(spell1 == "Fire" && spell2 == "Fire"){
 		spell = "Inferno";
@@ -1186,7 +1484,7 @@ function UI(){
 		spell = "Maelstrom";
 	}
 	if((spell1 == "Earth" && spell2 == "Air") || (spell2 == "Earth" && spell1 == "Air")){
-		spell = "Gust and Heal";
+		spell = "Dash and Heal";
 	}
 	if((spell1 == "Lightning" && spell2 == "Air") || (spell2 == "Lightning" && spell1 == "Air")){
 		spell = "Thunderstorm";
@@ -1209,6 +1507,27 @@ function UI(){
 	if((spell1 == "Air" && spell2 == "Mystic") || (spell2 == "Air" && spell1 == "Mystic")){
 		spell = "Homing Shots";
 	}
+	if(spell1 == "Water" && spell2 == "Water"){
+		spell = "Heavy Bubble Shield";
+	}
+	if((spell1 == "Water" && spell2 == "Fire") || (spell2 == "Water" && spell1 == "Fire")){
+		spell = "Explosive Orbs";
+	}
+	if((spell1 == "Water" && spell2 == "Ice") || (spell2 == "Water" && spell1 == "Ice")){
+		spell = "Frozen Orbs";
+	}
+	if((spell1 == "Water" && spell2 == "Earth") || (spell2 == "Water" && spell1 == "Earth")){
+		spell = "Bubble Shield and Heal";
+	}
+	if((spell1 == "Water" && spell2 == "Lightning") || (spell2 == "Water" && spell1 == "Lightning")){
+		spell = "Zap Trap";
+	}
+	if((spell1 == "Water" && spell2 == "Air") || (spell2 == "Water" && spell1 == "Air")){
+		spell = "Bubble Blast";
+	}
+	if((spell1 == "Water" && spell2 == "Mystic") || (spell2 == "Water" && spell1 == "Mystic")){
+		spell = "Bubblebeam";
+	}
 	if(spell1 == "Fire"){
 		spell1pic = Firebox;
 	}
@@ -1227,6 +1546,9 @@ function UI(){
 	else if(spell1 == "Mystic"){
 		spell1pic = Mysticbox;
 	}
+	else if(spell1 == "Water"){
+		spell1pic = Waterbox;
+	}	
 	else{
 		spell1pic = "N/A";
 	}
@@ -1248,6 +1570,9 @@ function UI(){
 	else if(spell2 == "Mystic"){
 		spell2pic = Mysticbox;
 	}
+	else if(spell2 == "Water"){
+		spell2pic = Waterbox;
+	}
 	else{
 		spell2pic = "N/A";
 	}
@@ -1255,7 +1580,7 @@ function UI(){
 	ctx.fillStyle = "black";
 	ctx.font = "18pt Arial";
 	ctx.fillText("Spell:", 32, 512);
-	ctx.strokeStyle = "000000";
+	ctx.strokeStyle = "#000000";
 	ctx.strokeRect(92, 476, 32, 48);
 	ctx.strokeRect(124, 476, 32, 48);
 	if(spell1pic != "N/A"){
@@ -1336,7 +1661,7 @@ function UI(){
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(lightningheal.cd/30) + "s", 32, 544);
 	}
-	else if(spell == "Gust"){
+	else if(spell == "Dash"){
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(air.cd/30) + "s", 32, 544);
@@ -1356,7 +1681,7 @@ function UI(){
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airice.cd/30) + "s", 32, 544);
 	}
-	else if(spell == "Gust and Heal"){
+	else if(spell == "Dash and Heal"){
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airearth.cd/30) + "s", 32, 544);
@@ -1401,13 +1726,56 @@ function UI(){
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
 	}
+	else if(spell == "Bubble Shield"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(water.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Heavy Bubble Shield"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(water.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Explosive Orbs"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterfire.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Frozen Orbs"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterfire.cd2/30) + "s", 32, 544);
+	}
+	else if(spell == "Bubble Shield and Heal"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterearth.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Zap Trap"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterlightning.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Bubble Blast"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(waterair.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Bubblebeam"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
 	ctx.fillStyle = "black";
 	ctx.font = "16pt Arial";
-	ctx.fillText("Q: Drop Spell 1", 576, 528);
-	ctx.fillText("E: Drop Spell 2", 576, 560);
-	ctx.fillText("Spacebar: Use spell", 576, 496);
+	if(dispCntrls == 2){
+		ctx.fillText("Q: Drop Spell 1", 576, 496);
+		ctx.fillText("E: Drop Spell 2", 576, 528);
+		ctx.fillText("Spacebar: Use spell", 576, 464);
+		ctx.fillText("P: Pause", 576, 560);
+	}
 }
-
+//----------------------------------------------------- Score -----------------------------------------------------------------------//
 function SCORE(){
 	ctx.fillStyle = "black";
 	ctx.font = "18pt Arial";
@@ -1417,349 +1785,654 @@ function SCORE(){
 //--------------------------------------------- Keys and Activation -----------------------------------------------------------------//
 // Key bindings
 var keys = function(){
-	if (87 in keysDown){
-		player.dir = "W";
+	if(keytimer > 0){
+		keytimer-=1;
 	}
-	if (65 in keysDown){
-		player.dir = "A";
-	}
-	if (83 in keysDown){
-		player.dir = "S";
-	}
-	if (68 in keysDown){
-		player.dir = "D";
-	}
-	if (87 in keysDown && player.y - player.speed > 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
-		&& !(obsCollision(obstacle3, player, player.dir))){
-		player.y-=player.speed; 
-		player.dir = "W";
-	}
-	if (65 in keysDown && player.x - player.speed > 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
-		&& !(obsCollision(obstacle3, player, player.dir))){
-		player.x-=player.speed;
-		player.dir = "A";
-	}
-	if (83 in keysDown && player.y + player.speed < canvas.height - 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
-		&& !(obsCollision(obstacle3, player, player.dir))){
-		player.y+=player.speed;
-		player.dir = "S";
-	}
-	if (68 in keysDown && player.x + player.speed < canvas.width - 4 && !(obsCollision(obstacle1, player, player.dir)) && !(obsCollision(obstacle2, player, player.dir))
-		&& !(obsCollision(obstacle3, player, player.dir))){
-		player.x+=player.speed;
-		player.dir = "D";
-	}
-	if (37 in keysDown && 38 in keysDown){
-		bullet.shoot("WA", 4, 4);
-	}	
-	if (37 in keysDown && 40 in keysDown){
-		bullet.shoot("AS", 4, 4);
-	}	
-	if (39 in keysDown && 40 in keysDown){
-		bullet.shoot("SD", 4, 4);
-	}	
-	if (38 in keysDown && 39 in keysDown){
-		bullet.shoot("WD", 4, 4);
-	}	
-	if (38 in keysDown){
-		bullet.shoot("W", 32, 4);
-	}	
-	if (37 in keysDown){
-		bullet.shoot("A", 4, 32);
-	}	
-	if (40 in keysDown){
-		bullet.shoot("S", 32, 4);
-	}	
-	if (39 in keysDown){
-		bullet.shoot("D", 4, 32);
-	}
-	if(81 in keysDown){
-		if(spell1 != "N/A"){
-			spell1 = "N/A";
-			spell = spell2;
+	if(STATE == "PAUSE"){
+		if (80 in keysDown && keytimer == 0){
+			STATE = preSTATE;
+			keytimer = 20;
+			ctx.globalAlpha = Alpha;
 		}
 	}
-	if(69 in keysDown){
-		if(spell2 != "N/A"){
-			spell2 = "N/A";
-			spell = spell1;
+	else{
+		var Up = true;
+		var Down = true;
+		var Left = true;
+		var Right = true;
+		if (80 in keysDown && keytimer == 0){
+			preSTATE = STATE;
+			STATE = "PAUSE";
+			keytimer = 20;
 		}
-	}
-	if(32 in keysDown && spell1 != "N/A" && spell2 == "N/A"){
-		if(spell1 == "Fire"){
-			fire.shoot();
+		if (87 in keysDown && player.dirct <= 0){
+			player.dir = "W";
 		}
-		if(spell1 == "Ice"){
-			ice.shoot();
+		if (65 in keysDown && player.dirct <= 0){
+			player.dir = "A";
 		}
-		if(spell1 == "Earth"){
-			earth.shoot();
+		if (83 in keysDown && player.dirct <= 0){
+			player.dir = "S";
 		}
-		if(spell1 == "Lightning"){
-			lightning.shoot();
+		if (68 in keysDown && player.dirct <= 0){
+			player.dir = "D";
 		}
-		if(spell1 == "Air"){
-			air.shoot();
+		if(87 in keysDown && player.dirct <= 0){
+			for(O in ObsList){
+				if(collision("W", player, ObsList[O])){
+					Up = false;
+				}
+			}
 		}
-		if(spell1 == "Mystic"){
-			mystic.shoot();
+		if(68 in keysDown && player.dirct <= 0){
+			for(O in ObsList){
+				if(collision("D", player, ObsList[O])){
+					Right = false;
+				}
+			}
 		}
-	}
-	if(32 in keysDown && spell2 != "N/A" && spell1 == "N/A"){
-		if(spell2 == "Fire"){
-			fire.shoot();
+		if(83 in keysDown && player.dirct <= 0){
+			for(O in ObsList){
+				if(collision("S", player, ObsList[O])){
+					Down = false;
+				}
+			}
 		}
-		if(spell2 == "Ice"){
-			ice.shoot();
+		if(65 in keysDown && player.dirct <= 0){
+			for(O in ObsList){
+				if(collision("A", player, ObsList[O])){
+					Left = false;
+				}
+			}
 		}
-		if(spell2 == "Earth"){
-			earth.shoot();
+		if ((87 in keysDown || (player.dirct > 0 && player.dir == "W")) && player.y - player.speed > 4 && Up == true){
+			if(player.dirct <= 0 || player.dir == "W"){
+				player.y-=player.speed;
+				for(W in bubbleRotate){
+					if(bubbleRotate[W].onScreen == 1){
+						bubbleRotate[W].y-=player.speed;
+					}
+				}
+				for(W in wairParticles){
+					if(wairParticles[W].onScreen == 1){
+						wairParticles[W].y-=player.speed;
+					}
+				}
+				player.dir = "W";
+			}
 		}
-		if(spell2 == "Lightning"){
-			lightning.shoot();
+		if ((65 in keysDown || (player.dirct > 0 && player.dir == "A")) && player.x - player.speed > 4 && Left == true){
+			if(player.dirct <= 0 || player.dir == "A"){
+				player.x-=player.speed;
+				for(W in bubbleRotate){
+					if(bubbleRotate[W].onScreen == 1){
+						bubbleRotate[W].x-=player.speed;
+					}
+				}
+				for(W in wairParticles){
+					if(wairParticles[W].onScreen == 1){
+						wairParticles[W].x-=player.speed;
+					}
+				}
+				player.dir = "A";
+			}
 		}
-		if(spell2 == "Air"){
-			air.shoot();
+		if ((83 in keysDown || (player.dirct > 0 && player.dir == "S")) && player.y + player.speed < canvas.height - 4 && Down == true){
+			if(player.dirct <= 0 || player.dir == "S"){
+				player.y+=player.speed;
+				for(W in bubbleRotate){
+					if(bubbleRotate[W].onScreen == 1){
+						bubbleRotate[W].y+=player.speed;
+					}
+				}
+				for(W in wairParticles){
+					if(wairParticles[W].onScreen == 1){
+						wairParticles[W].y+=player.speed;
+					}
+				}
+				player.dir = "S";
+			}
 		}
-		if(spell2 == "Mystic"){
-			mystic.shoot();
+		if ((68 in keysDown || (player.dirct > 0 && player.dir == "D")) && player.x + player.speed < canvas.width - 4 && Right == true){
+			if(player.dirct <= 0 || player.dir == "D"){
+				player.x+=player.speed;
+				for(W in bubbleRotate){
+					if(bubbleRotate[W].onScreen == 1){
+						bubbleRotate[W].x+=player.speed;
+					}
+				}
+				for(W in wairParticles){
+					if(wairParticles[W].onScreen == 1){
+						wairParticles[W].x+=player.speed;
+					}
+				}
+				player.dir = "D";
+			}
 		}
-	}
-	if(32 in keysDown && spell1 != "N/A" && spell2 != "N/A"){
-		if(spell1 == "Fire" && spell2 == "Fire"){
-			fire2.shoot();
+		if (37 in keysDown && 38 in keysDown){
+			bullet.shoot("WA", 4, 4);
+		}	
+		if (37 in keysDown && 40 in keysDown){
+			bullet.shoot("AS", 4, 4);
+		}	
+		if (39 in keysDown && 40 in keysDown){
+			bullet.shoot("SD", 4, 4);
+		}	
+		if (38 in keysDown && 39 in keysDown){
+			bullet.shoot("WD", 4, 4);
+		}	
+		if (38 in keysDown){
+			bullet.shoot("W", 32, 4);
+		}	
+		if (37 in keysDown){
+			bullet.shoot("A", 4, 32);
+		}	
+		if (40 in keysDown){
+			bullet.shoot("S", 32, 4);
+		}	
+		if (39 in keysDown){
+			bullet.shoot("D", 4, 32);
 		}
-		if((spell1 == "Ice" && spell2 == "Fire") || (spell1 == "Fire" && spell2 == "Ice")){
-			fireice.shoot();
+		if(81 in keysDown){
+			if(spell1 != "N/A"){
+				spell1 = "N/A";
+				spell = spell2;
+			}
 		}
-		if(spell1 == "Ice" && spell2 == "Ice"){
-			ice2.shoot();
+		if(69 in keysDown){
+			if(spell2 != "N/A"){
+				spell2 = "N/A";
+				spell = spell1;
+			}
 		}
-		if(spell1 == "Earth" && spell2 == "Earth"){
-			earth2.shoot();
+		if(32 in keysDown && spell1 != "N/A" && spell2 == "N/A"){
+			if(spell1 == "Fire"){
+				fire.shoot();
+			}
+			if(spell1 == "Ice"){
+				ice.shoot();
+			}
+			if(spell1 == "Earth"){
+				earth.shoot();
+			}
+			if(spell1 == "Lightning"){
+				lightning.shoot();
+			}
+			if(spell1 == "Air"){
+				air.shoot();
+			}
+			if(spell1 == "Mystic"){
+				mystic.shoot();
+			}
+			if(spell1 == "Water"){
+				water.shoot();
+			}
 		}
-		if((spell1 == "Earth" && spell2 == "Ice") || (spell2 == "Earth" && spell1 == "Ice")){
-			iceheal.shoot();
+		if(32 in keysDown && spell2 != "N/A" && spell1 == "N/A"){
+			if(spell2 == "Fire"){
+				fire.shoot();
+			}
+			if(spell2 == "Ice"){
+				ice.shoot();
+			}
+			if(spell2 == "Earth"){
+				earth.shoot();
+			}
+			if(spell2 == "Lightning"){
+				lightning.shoot();
+			}
+			if(spell2 == "Air"){
+				air.shoot();
+			}
+			if(spell2 == "Mystic"){
+				mystic.shoot();
+			}
+			if(spell2 == "Water"){
+				water.shoot();
+			}
 		}
-		if((spell1 == "Fire" && spell2 == "Earth") || (spell2 == "Fire" && spell1 == "Earth")){
-			fireheal.shoot();
-		}
-		if(spell1 == "Lightning" && spell2 == "Lightning"){
-			lightning2.shoot();
-		}
-		if((spell1 == "Fire" && spell2 == "Lightning") || (spell2 == "Fire" && spell1 == "Lightning")){
-			firelightning.shoot();
-		}
-		if((spell1 == "Ice" && spell2 == "Lightning") || (spell2 == "Ice" && spell1 == "Lightning")){
-			icelightning.shoot();
-		}
-		if((spell1 == "Earth" && spell2 == "Lightning") || (spell2 == "Earth" && spell1 == "Lightning")){
-			lightningheal.shoot();
-		}
-		if(spell1 == "Air" && spell2 == "Air"){
-			air2.shoot();
-		}
-		if((spell1 == "Air" && spell2 == "Fire") || (spell2 == "Air" && spell1 == "Fire")){
-			airfire.shoot();
-		}
-		if((spell1 == "Air" && spell2 == "Ice") || (spell2 == "Air" && spell1 == "Ice")){
-			airice.shoot();
-		}
-		if((spell1 == "Air" && spell2 == "Lightning") || (spell2 == "Air" && spell1 == "Lightning")){
-			airlightning.shoot();
-		}
-		if((spell1 == "Air" && spell2 == "Earth") || (spell2 == "Air" && spell1 == "Earth")){
-			airearth.shoot();
-		}
-		if(spell1 == "Mystic" && spell2 == "Mystic"){
-			mystic2.shoot();
-		}
-		if((spell1 == "Mystic" && spell2 == "Earth") || (spell2 == "Mystic" && spell1 == "Earth")){
-			mysticearth.shoot();
-		}
-		if((spell1 == "Mystic" && spell2 == "Fire") || (spell2 == "Mystic" && spell1 == "Fire")){
-			mystic.shoot();
-		}
-		if((spell1 == "Mystic" && spell2 == "Ice") || (spell2 == "Mystic" && spell1 == "Ice")){
-			mystic.shoot();
-		}
-		if((spell1 == "Mystic" && spell2 == "Lightning") || (spell2 == "Mystic" && spell1 == "Lightning")){
-			mystic.shoot();
-		}
-		if((spell1 == "Mystic" && spell2 == "Air") || (spell2 == "Mystic" && spell1 == "Air")){
-			mystic.shoot();
+		if(32 in keysDown && spell1 != "N/A" && spell2 != "N/A"){
+			if(spell1 == "Fire" && spell2 == "Fire"){
+				fire2.shoot();
+			}
+			if((spell1 == "Ice" && spell2 == "Fire") || (spell1 == "Fire" && spell2 == "Ice")){
+				fireice.shoot();
+			}
+			if(spell1 == "Ice" && spell2 == "Ice"){
+				ice2.shoot();
+			}
+			if(spell1 == "Earth" && spell2 == "Earth"){
+				earth2.shoot();
+			}
+			if((spell1 == "Earth" && spell2 == "Ice") || (spell2 == "Earth" && spell1 == "Ice")){
+				iceheal.shoot();
+			}
+			if((spell1 == "Fire" && spell2 == "Earth") || (spell2 == "Fire" && spell1 == "Earth")){
+				fireheal.shoot();
+			}
+			if(spell1 == "Lightning" && spell2 == "Lightning"){
+				lightning2.shoot();
+			}
+			if((spell1 == "Fire" && spell2 == "Lightning") || (spell2 == "Fire" && spell1 == "Lightning")){
+				firelightning.shoot();
+			}
+			if((spell1 == "Ice" && spell2 == "Lightning") || (spell2 == "Ice" && spell1 == "Lightning")){
+				icelightning.shoot();
+			}
+			if((spell1 == "Earth" && spell2 == "Lightning") || (spell2 == "Earth" && spell1 == "Lightning")){
+				lightningheal.shoot();
+			}
+			if(spell1 == "Air" && spell2 == "Air"){
+				air2.shoot();
+			}
+			if((spell1 == "Air" && spell2 == "Fire") || (spell2 == "Air" && spell1 == "Fire")){
+				airfire.shoot();
+			}
+			if((spell1 == "Air" && spell2 == "Ice") || (spell2 == "Air" && spell1 == "Ice")){
+				airice.shoot();
+			}
+			if((spell1 == "Air" && spell2 == "Lightning") || (spell2 == "Air" && spell1 == "Lightning")){
+				airlightning.shoot();
+			}
+			if((spell1 == "Air" && spell2 == "Earth") || (spell2 == "Air" && spell1 == "Earth")){
+				airearth.shoot();
+			}
+			if(spell1 == "Mystic" && spell2 == "Mystic"){
+				mystic2.shoot();
+			}
+			if((spell1 == "Mystic" && spell2 == "Earth") || (spell2 == "Mystic" && spell1 == "Earth")){
+				mysticearth.shoot();
+			}
+			if((spell1 == "Mystic" && spell2 == "Fire") || (spell2 == "Mystic" && spell1 == "Fire")){
+				mystic.shoot();
+			}
+			if((spell1 == "Mystic" && spell2 == "Ice") || (spell2 == "Mystic" && spell1 == "Ice")){
+				mystic.shoot();
+			}
+			if((spell1 == "Mystic" && spell2 == "Lightning") || (spell2 == "Mystic" && spell1 == "Lightning")){
+				mystic.shoot();
+			}
+			if((spell1 == "Mystic" && spell2 == "Air") || (spell2 == "Mystic" && spell1 == "Air")){
+				mystic.shoot();
+			}
+			if(spell1 == "Water" && spell2 == "Water"){
+				water.shoot();
+			}
+			if((spell1 == "Water" && spell2 == "Earth") || (spell2 == "Water" && spell1 == "Earth")){
+				waterearth.shoot();
+			}
+			if((spell1 == "Water" && spell2 == "Fire") || (spell2 == "Water" && spell1 == "Fire")){
+				waterfire.shoot();
+			}
+			if((spell1 == "Water" && spell2 == "Ice") || (spell2 == "Water" && spell1 == "Ice")){
+				waterfire.shoot();
+			}
+			if((spell1 == "Water" && spell2 == "Lightning") || (spell2 == "Water" && spell1 == "Lightning")){
+				waterlightning.shoot();
+			}
+			if((spell1 == "Water" && spell2 == "Air") || (spell2 == "Water" && spell1 == "Air")){
+				waterair.shoot();
+			}
+			if((spell1 == "Water" && spell2 == "Mystic") || (spell2 == "Water" && spell1 == "Mystic")){
+				mystic.shoot();
+			}
 		}
 	}
 };
-// Reset all Global Variables
-function reset(){
-	nu = 0;
-	hs = 0;
-	cd = 0;
-	hptimer = 0;
-	spell1 = "N/A";
-	spell2 = "N/A";
-	spell = "N/A";
-	score = 0;
-	muliplier = 1;
-	multtimer = 0;
-	currpts = 0;
-	player.x = 400;
-	player.y = 256;
-	player.speed = 8;
-	player.hp = 3;
-	player.dir = "W";
-	for(E in Enemies){
-		onHit(Enemies[E], Enemies[E].rp);
-	}
-	Sorceror.hp = 1;
-	Sorceror.hptimer = 0;
-	Sorceror.onHit();
-	Spawner.hp = 1;
-	Spawner.hptimer = 0;
-	Spawner.onHit();
-	for (E in AllEnemies){
-		AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
-		AllEnemies[E].onScreen = 0;
-		AllEnemies[E].movement = false;
-		AllEnemies[E].respawn = AllEnemies[E].origrp;
-	}
-	Sorceror.hp = 3;
-	Sorceror.hptimer = 0;
-	Sorceror.cd = 0;
-	Spawner.hp = 5;
-	Spawner.hptimer = 0;
-	Spawner.cd = 0;
-	for (W in Weapons){
-		Weapons[W].timeLeft = 0;
-		Weapons[W].onScreen = 0;
-	}
-	Globblyfire.x = -100;
-	Globblyfire.y = -200;
-	Globblyfire.width = 16;
-	Globblyfire.height = 16;
-	Globblyfire.onScreen = 0;
-	Globblyfire2.x = -100;
-	Globblyfire2.y = -200;
-	Globblyfire2.width = 16;
-	Globblyfire2.height = 16;
-	Globblyfire2.onScreen = 0;
-	Globblyfire3.x = -100;
-	Globblyfire3.y = -200;
-	Globblyfire3.width = 16;
-	Globblyfire3.height = 16;
-	Globblyfire3.onScreen = 0;
-	score = 0;
-	multiplier = 1;
-	marker.timeLeft = 0;
-	marker2.timeLeft = 0;
-	marker3.timeLeft = 0;
-	marker4.timeLeft = 0;
-	redCube.timeLeft = 0;
-	tealCube.timeLeft = 0;
-	greenCube.timeLeft = 0;
-	yellowCube.timeLeft = 0;
-	greyCube.timeLeft = 0;
-	rePlant();
-}
-
-// Game Over
+//-------------------------------------------------------------- Game Over ----------------------------------------------------------//
+//array of init
+var inits = {1: "_", 2: "_", 3: "_", 4: "_", 5: "_", 6: "_", 7: "_", 8: "_"};
+var init = "_____";
+var initsInd = 1;
+var hsColor = 1;
+var hsNum = 0;
+var wait = 0;
+var lowestScore = highscore5;
 function gameOver(){
 	ctx.fillStyle = "white";
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = "black";
+	ctx.globalAlpha = 1;
 	ctx.font = "18pt Arial";
 	var bx = 350;
 	var by = 560;
 	var width = 20;
 	var height = 20;
+	init = inits[1] + inits[2] + inits[3] + inits[4] + inits[5] + inits[6] + inits[7] + inits[8];
 	multiplier = 1;
-	ctx.fillStyle = "grey";
-	ctx.fillRect(4, 4, canvas.width-4, canvas.height-4);
+	if(wait > 0){
+		wait-=1;
+	}
 	if(STATE != 5){
-		ctx.fillText("Score: " + score, 400, 144);
+		ctx.fillText("Score: " + score, 320, 144);
+		if(score > lowestScore){
+			if(initsInd <= 8 && wait <= 0){
+				inits[initsInd] = printAlphabet();
+				if(inits[initsInd] != "_"){
+					initsInd++;
+					wait = 4;
+				}
+			}
+			if(13 in keysDown){
+				for(H in inits){
+					if(inits[H] == "_"){
+						inits[H] = " ";
+					}
+				}
+				initsInd = 9;
+			}
+			if(8 in keysDown && wait <= 0){
+				initsInd--;
+				inits[initsInd] = "_";
+				wait = 4;
+			}
+		}
+		else{
+			var init = " ";
+		}
 	}
 	if(highscore1 < score && nu == 1){
-		$.jStorage.set("highscore5",highscore4);
+		$.jStorage.set("v58highscore5",highscore4);
+		$.jStorage.set("v58hs5init",hs4init);
 		highscore5 = highscore4;
-		$.jStorage.set("highscore4",highscore3);
+		hs5init = hs4init;
+		$.jStorage.set("v58highscore4",highscore3);
+		$.jStorage.set("v58hs4init",hs3init);
+		hs4init = hs3init;
 		highscore4 = highscore3;
-		$.jStorage.set("highscore3",highscore2);
+		$.jStorage.set("v58highscore3",highscore2);
 		highscore3 = highscore2;
-		$.jStorage.set("highscore2",highscore1);
+		$.jStorage.set("v58hs3init",hs2init);
+		hs3init = hs2init;
+		$.jStorage.set("v58highscore2",highscore1);
 		highscore2 = highscore1;
-		$.jStorage.set("highscore1",score);
+		$.jStorage.set("v58hs2init",hs1init);
+		hs2init = hs1init;
+		$.jStorage.set("v58highscore1",score);
 		highscore1 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 1;
 	}
 	else if(highscore2 < score && nu == 1){
-		$.jStorage.set("highscore5",highscore4);
+		$.jStorage.set("v58highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("highscore4",highscore3);
+		$.jStorage.set("v58hs5init",hs4init);
+		hs5init = hs4init;
+		$.jStorage.set("v58highscore4",highscore3);
 		highscore4 = highscore3;
-		$.jStorage.set("highscore3",highscore2);
+		$.jStorage.set("v58hs4init",hs3init);
+		hs4init = hs3init;
+		$.jStorage.set("v58highscore3",highscore2);
 		highscore3 = highscore2;
-		$.jStorage.set("highscore2",score);
+		$.jStorage.set("v58hs3init",hs2init);
+		hs3init = hs2init;
+		$.jStorage.set("v58highscore2",score);
 		highscore2 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 2;
 	}
 	else if(highscore3 < score && nu == 1){
-		$.jStorage.set("highscore5",highscore4);
+		$.jStorage.set("v58highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("highscore4",highscore3);
+		$.jStorage.set("v58hs5init",hs4init);
+		hs5init = hs4init;
+		$.jStorage.set("v58highscore4",highscore3);
 		highscore4 = highscore3;
-		$.jStorage.set("highscore3",score);
+		$.jStorage.set("v58hs4init",hs3init);
+		hs4init = hs3init;
+		$.jStorage.set("v58highscore3",score);
 		highscore3 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 3;
 	}
 	else if(highscore4 < score && nu == 1){
-		$.jStorage.set("highscore5",highscore4);
+		$.jStorage.set("v58highscore5",highscore4);
 		highscore5 = highscore4;
-		$.jStorage.set("highscore4",score);
+		$.jStorage.set("v58hs5init",hs4init);
+		hs5init = hs4init;
+		$.jStorage.set("v58highscore4",score);
 		highscore4 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 4;
 	}
 	else if(highscore5 < score && nu == 1){
-		$.jStorage.set("highscore5",score);
+		$.jStorage.set("v58highscore5",score);
 		highscore5 = score;
 		hs = 1;
 		nu = 0;
+		hsNum = 5;
+	}
+	if(hsNum == 1){
+		$.jStorage.set("v58hs1init",init);
+		hs1init = init;
+	}
+	if(hsNum == 2){
+		$.jStorage.set("v58hs2init",init);
+		hs2init = init;
+	}
+	if(hsNum == 3){
+		$.jStorage.set("v58hs3init",init);
+		hs3init = init;
+	}
+	if(hsNum == 4){
+		$.jStorage.set("v58hs4init",init);
+		hs4init = init;
+	}
+	if(hsNum == 5){
+		$.jStorage.set("v58hs5init",init);
+		hs5init = init;
 	}
 	if(hs == 1){
-		ctx.fillStyle = "red";
+		ctx.fillStyle = colorz[hsColor];
+		hsColor++;
+		if(hsColor > 6){
+			hsColor = 1;
+		}
 		ctx.font = "18pt Arial";
-		ctx.fillText("New High Score!!", 360, 64);
+		ctx.fillText("New High Score! Please Enter Your Name!", 176, 64);
 	}
-	ctx.fillStyle = "black";
+	ctx.fillStyle = "white";
+	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("High Scores:", 360, 208);
-	ctx.fillText("1st: " + highscore1, 360, 240);
-	ctx.fillText("2nd: " + highscore2, 360, 272);
-	ctx.fillText("3rd: " + highscore3, 360, 304);
-	ctx.fillText("4th: " + highscore4, 360, 336);
-	ctx.fillText("5th: " + highscore5, 360, 368);
-	ctx.fillStyle = "black";
+	ctx.fillText("Version 0.6.0 Alpha: April 20 2012", 244, 96);
+	ctx.fillText("High Scores:", 308, 208);
+	if(hsNum == 1){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("1st: " + highscore1 + "    " + hs1init, 308, 240);
+	ctx.fillStyle = "white";
+	if(hsNum == 2){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("2nd: " + highscore2 + "    " + hs2init, 308, 272);
+	ctx.fillStyle = "white";
+	if(hsNum == 3){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("3rd: " + highscore3 + "    " + hs3init, 308, 304);
+	ctx.fillStyle = "white";
+	if(hsNum == 4){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("4th: " + highscore4 + "    " + hs4init, 308, 336);
+	ctx.fillStyle = "white";
+	if(hsNum == 5){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("5th: " + highscore5 + "    " + hs5init, 308, 368);
+	ctx.fillStyle = "white";
 	ctx.font = "16pt Arial";
 	ctx.fillText("Back", bx, by);
 	if(hX >= bx-10 && hX <=bx + 50 && hY <= by && hY>=by-height*7/6){
 		ctx.strokeRect(bx-10, by-height*7/6, width * 3 + 10, height+10);
-	}		
+	}
 	if(cX >= bx-10 && cX <=bx + 50 && cY <= by && cY>=by-height*7/6){
-		score = 0;
+		cX=0;
+		cY=0;
 		reset();
-		STATE = 0;
-	}	
+	} 
 }
-
-// Big-Bang
+//---------------------------------------------------------- Alphabet Print ---------------------------------------------------------//
+function printAlphabet(){
+	if(65 in keysDown){
+		return "A";
+	}
+	else if(66 in keysDown){
+		return "B";
+	}
+	else if(67 in keysDown){
+		return "C";
+	}
+	else if(68 in keysDown){
+		return "D";
+	}
+	else if(69 in keysDown){
+		return "E";
+	}
+	else if(70 in keysDown){
+		return "F";
+	}
+	else if(71 in keysDown){
+		return "G";
+	}
+	else if(72 in keysDown){
+		return "H";
+	}
+	else if(73 in keysDown){
+		return "I";
+	}
+	else if(74 in keysDown){
+		return "J";
+	}
+	else if(75 in keysDown){
+		return "K";
+	}
+	else if(76 in keysDown){
+		return "L";
+	}
+	else if(77 in keysDown){
+		return "M";
+	}
+	else if(78 in keysDown){
+		return "N";
+	}
+	else if(79 in keysDown){
+		return "O";
+	}
+	else if(80 in keysDown){
+		return "P";
+	}
+	else if(81 in keysDown){
+		return "Q";
+	}
+	else if(82 in keysDown){
+		return "R";
+	}
+	else if(83 in keysDown){
+		return "S";
+	}
+	else if(84 in keysDown){
+		return "T";
+	}
+	else if(85 in keysDown){
+		return "U";
+	}
+	else if(86 in keysDown){
+		return "V";
+	}
+	else if(87 in keysDown){
+		return "W";
+	}
+	else if(88 in keysDown){
+		return "X";
+	}
+	else if(89 in keysDown){
+		return "Y";
+	}
+	else if(90 in keysDown){
+		return "Z";
+	}
+	else{
+		return "_";
+	}
+}		
+//---------------------------------------------------------- Music Player -----------------------------------------------------------//
+function MusicPlayer(){
+if(Music==2 && STATE != "PAUSE"){
+	if(STATE == 1 && treeWizz.onScreen == 0 && Dragon.onScreen == 0){
+		DumblebeatsNormal.currentTime=0;
+		Spells.currentTime=0;
+		DumblebeatsNormal.pause();
+		Spells.pause();
+		BadWizards.currentTime=0;
+		BadWizards.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
+		OverwhelmedByGoblins.play();
+	}
+	else if(STATE == "Jungle"){
+		OverwhelmedByGoblins.currentTime=0;
+		Spells.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		BadWizards.currentTime=0;
+		BadWizards.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
+		DumblebeatsNormal.play();
+	}
+	else if(treeWizz.onScreen==1){
+		OverwhelmedByGoblins.currentTime=0;
+		Spells.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.currentTime=0;
+		DumblebeatsNormal.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
+		BadWizards.play();
+	}
+	else if(Dragon.onScreen==1){
+		OverwhelmedByGoblins.currentTime=0;
+		Spells.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.currentTime=0;
+		DumblebeatsNormal.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
+		BadWizards.play();
+	}
+	else if(STATE=="Scorched"){
+		OverwhelmedByGoblins.currentTime=0;
+		Spells.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.currentTime=0;
+		DumblebeatsNormal.pause();
+		BadWizards.currentTime=0;
+		BadWizards.pause();
+		CaseysQuest.play();
+	}
+	else{
+		DumblebeatsNormal.currentTime=0;
+		DumblebeatsNormal.pause();
+		OverwhelmedByGoblins.currentTime=0;
+		OverwhelmedByGoblins.pause();
+		BadWizards.currentTime=0;
+		BadWizards.pause();
+		CaseysQuest.currentTime=0;
+		CaseysQuest.pause();
+		Spells.play();
+	}
+}
+}
+//---------------------------------------------------------- Big-Bang ---------------------------------------------------------------//
 setInterval(function(){
-	// Clear the canvas so things won't be repeated if moved
 	clear();
-	// Get the key actions
+	MusicPlayer();
 	if(STATE == 0){
 		Menu.draw();
 	}
@@ -1772,82 +2445,74 @@ setInterval(function(){
 	else if(STATE == 4 || STATE == 5){
 		gameOver();
 	}
-	else if(STATE == 1){
-		if(player.hp <= 0){
+	else if(STATE == "PAUSE"){
+		keys();
+		Pause.draw();
+	}
+	else if(STATE == 6){
+		Options.draw();
+	}
+	else if(STATE == 1 || STATE == "Jungle" || STATE == "Scorched"){
+		if(deathTimer > 0){
+			deathTimer-=1;
+		}
+		if(deathTimer == 0){
+			deathTimer-=1;
 			STATE = 4;
+		}
+		if(player.hp <= 0){
+			if(nu != 1){
+				deathTimer = 30;
+			}
 			nu = 1;
 		}
 		else{
+			if(STATE == "Jungle" || STATE == "Scorched"){
+				StateTimer+=1;
+			}
+			ctx.globalAlpha = Alpha;
 			keys();
 			multiply();
-			SCORE();
-			// Calling the draw functions
 			player.draw();
 			player.onhit();
-		
-			redCube.draw();
-			pickup(redCube);
-		
-			tealCube.draw();
-			pickup(tealCube);
-		
-			yellowCube.draw();
-			pickup(yellowCube);
-			
-			greyCube.draw();
-			pickup(greyCube);
-		
-			greenCube.draw();
-			pickup(greenCube);
-			
-			purpleCube.draw();
-			pickup(purpleCube);
-		
-			drawObstacle(obstacle1);
-			drawObstacle(obstacle2);
-			drawObstacle(obstacle3);
-			obsTick(obstacle1);
-			obsTick(obstacle2);
-			obsTick(obstacle3);
-			UI();
-			
-			drawBullet(bullet);
-			Bulletmove(bullet);
-			
-			drawBullet(bullet2);
-			Bulletmove(bullet2);
-			
-			drawBullet(bullet3);
-			Bulletmove(bullet3);
-		
-			drawBullet(bullet4);
-			Bulletmove(bullet4);
-		
-			fire.draw();
-			fire.move();
-			fire2.draw();
-			fire2.move();
-		
-			fireice.draw();
-			fireice.move();
-		
+			rePlant();
+			for(B in Boxes){
+				Boxes[B].draw();
+				pickup(Boxes[B]);
+			}
+			RandEffect.draw();
+			for(H in hpParticles){
+				hpParticles[H].draw();
+				hpParticles[H].onHit();
+				HpMove(hpParticles[H]);
+				HpAi(hpParticles[H]);
+			}
+			for(B in Bullets){
+				drawBullet(Bullets[B]);
+				Bulletmove(Bullets[B]);
+			}
+			for(F in AllFire){
+				AllFire[F].draw();
+				AllFire[F].move();
+			}
 			ice.draw();
 			ice.move();
 			ice.effect();
 			ice2.draw();
 			ice2.move();
 			ice2.effect();
+			sIce.draw();
+			sIce.move();
+			sIce.effect();
 		
 			earth.draw();
 			earth.move();
 			earth2.draw();
 			earth2.move();
-		
-			iceheal.tick();
-			fireheal.tick();
-			lightningheal.tick();
-			airearth.tick();
-		
+			//All Tick spells, in mystic class do to imports
+			for(T in Ticks){
+				Ticks[T].tick();
+			}		
 			lightning.draw();
 			lightning.effect();
 		
@@ -1865,16 +2530,7 @@ setInterval(function(){
 		
 			firelightning.draw();
 			firelightning.effect();
-			firelightningf1.draw();
-			firelightningf1.move();
-			firelightningf2.draw();
-			firelightningf2.move();
-			firelightningf3.draw();
-			firelightningf3.move();
-			firelightningf4.draw();
-			firelightningf4.move();
 		
-			icelightning.tick();
 			icelightning.effect();
 			horil.draw();
 			vertil.draw();
@@ -1886,39 +2542,11 @@ setInterval(function(){
 			vertil4.draw();
 			horil5.draw();
 			vertil5.draw();
-			
+
 			air.draw();
 			air.effect();
-			air12.draw();
-			air12.effect();
-			air13.draw();
-			air13.effect();
-			air2.tick();
-			air2right.draw();
-			air2right.effect();
-			air2right2.draw();
-			air2right2.effect();
-			air2right3.draw();
-			air2right3.effect();
-			air2left.draw();
-			air2left.effect();
-			air2left2.draw();
-			air2left2.effect();
-			air2left3.draw();
-			air2left3.effect();
-			air2down.draw();
-			air2down.effect();
-			air2down2.draw();
-			air2down2.effect();
-			air2down3.draw();
-			air2down3.effect();
-			air2up.draw();
-			air2up.effect();
-			air2up2.draw();
-			air2up2.effect();
-			air2up3.draw();
-			air2up3.effect();
-			
+			air2.draw();
+			air2.effect();
 			airfire.draw();
 			airfire.effect();
 			airfire12.draw();
@@ -1934,14 +2562,6 @@ setInterval(function(){
 			
 			mystic.move();
 			mystic.draw();
-			Mfire.draw();
-			Mfire.move();
-			Mfire2.draw();
-			Mfire2.move();
-			Mfire3.draw();
-			Mfire3.move();
-			Mfire4.draw();
-			Mfire4.move();
 			Mice.draw();
 			Mice.move();
 			Mice2.draw();
@@ -1950,17 +2570,41 @@ setInterval(function(){
 			Mice3.move();
 			Mice4.draw();
 			Mice4.move();
-			mysticearth.tick();
 			mystic2.draw();
 			mystic2.move();
 			Illusion.draw();
 			Illusion.shoot();
 			IllusionBlast.draw();
 			IllusionBlast.move();
-		
-			sIce.draw();
-			sIce.move();
-			sIce.effect();
+			
+			for(W in bubbleRotate){
+				bubbleRotate[W].draw();
+				bubbleRotate[W].effect();
+			}
+			for(W in waterFires){
+				waterFires[W].draw();
+				waterFires[W].effect();
+			}
+			for(W in WFires){
+				WFires[W].draw();
+				WFires[W].move();
+			}
+			for(I in IBubbles){
+				IBubbles[I].draw();
+				IBubbles[I].move();
+			}
+			
+			waterair.draw();
+			for(W in wairParticles){
+				wairParticles[W].draw();
+				wairParticles[W].onHit();
+				HpAi(wairParticles[W]);
+				HpMove(wairParticles[W]);
+			}
+			for(W in Wpools){
+				Wpools[W].draw();
+				Wpools[W].move();
+			}
 			
 			sFire.draw();
 			sFire.move();
@@ -1968,24 +2612,87 @@ setInterval(function(){
 			sLightning.draw();
 			sLightning.effect();
 			
-			for(E in AllEnemies){
-				AllEnemies[E].draw();
-				move(AllEnemies[E]);
-				AI(AllEnemies[E]);
-				spawn(AllEnemies[E]);
+			rootBlastW.draw();
+			rootBlastW.effect();
+			rootBlastA.draw();
+			rootBlastA.effect();
+			rootBlastS.draw();
+			rootBlastS.effect();
+			rootBlastD.draw();
+			rootBlastD.effect();
+			LeafHeal.draw();
+			LeafHeal.move();
+			for(R in roots1){
+				roots1[R].draw();
 			}
 			treeWizz.spawn();
-			AI(treeWizz);
-			move(treeWizz);
-			treeWizz.draw();
-			Globblyfire.draw();
-			Globblyfire.move();
-			Globblyfire2.draw();
-			Globblyfire2.move();
-			Globblyfire3.draw();
-			Globblyfire3.move();
+			Dragon.spawn();
+			Dragon.draw();
+			DragonR.spawn();
+			DragonR.draw();
+			DragonL.spawn();
+			DragonL.draw();
+			Dragon.attack();
+			DragonR.attack();
+			DragonL.attack();
+			for(D in Dragonflame){
+				Dragonflame[D].draw();
+				Dragonflame[D].effect();
+			}
+			for(E in AllEnemies){
+				if(AllEnemies[E].onTree == 0){
+					AllEnemies[E].draw();
+				}
+				if(AllEnemies[E].type != "Dragon" && AllEnemies[E].type != "DragonL" && AllEnemies[E].type != "DragonR"){
+					move(AllEnemies[E]);
+					AI(AllEnemies[E]);
+					spawn(AllEnemies[E]);
+				}
+			}
+			for(M in BigMeteors){
+				MeteorAI(BigMeteors[M]);
+			}
+			for(E in EMeteors){
+				EMeteors[E].draw();
+				MeteorMove(EMeteors[E]);
+			}
+			for(E in EMplosions){
+				EMplosions[E].draw();
+				EMplosions[E].move();
+			}
+			DragonEffect.draw();
+			Thief.steal();
+			ThiefA.steal();
+			ThiefB.steal();
 		
 			Spawner.fire();
+			SmokeBomb.draw();
+			SmokeBombA.draw();
+			SmokeBombB.draw();
+			for(O in allObs){
+				drawObstacle(allObs[O]);
+				obsTick(allObs[O]);
+			}
+			if(STATE == "Jungle" && jungleAni == true){
+				for(O in obstacle1){
+					if(obstacle1[O].growTimer > 0){
+						obstacle1[O].growTimer-=1;
+					}
+					else if(obstacle1[O].index<12){
+						obstacle1[O].index+=1;
+					}
+				}
+			}
+			for(E in AllEnemies){
+				if(AllEnemies[E].onTree == 1){
+					AllEnemies[E].draw();
+				}
+			}
+			TwizEffect.draw();
+			DragonEffect2.draw();
+			
+			UI();
+			SCORE();
 			
 			drawMarker(marker);
 			moveMarker(marker);
@@ -2010,7 +2717,8 @@ setInterval(function(){
 			
 			castingBar.draw();
 			castingBar.tick();
-			
+			TreecastingBar.draw();
+			TreecastingBar.tick();			
 			// Cooldown calculation
 			if(cd <= 0){
 				cd = cd;
@@ -2020,5 +2728,4 @@ setInterval(function(){
 			}
 		}
 	}
-	// End of function, match it up with frames per second defined top
 }, 1000/FPS);
