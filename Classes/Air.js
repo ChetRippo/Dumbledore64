@@ -128,6 +128,8 @@ var air = {
 			hptimer = 15;
 			player.speed = player.speed2 * 16;
 			this.used = 1;
+			Wind.currentTime = 0;
+			Wind.play();
 		}
 		if(this.timeLeft <=0 && this.onScreen == 1){
 			player.speed = player.speed2 * 4;
@@ -274,6 +276,8 @@ var air2 = {
 			hptimer = 40;
 			player.speed = player.speed2 * 16;
 			this.used = 1;
+			Wind.currentTime = 0;
+			Wind.play();
 		}
 		if(this.timeLeft <=0 && this.onScreen == 1){
 			if(this.num >= 4){

@@ -56,9 +56,6 @@ var earth = {
 		castingBar.castmax = 30;
 		this.used = 0;
 	}
-	else{
-		return 0;
-	}
 	}	
 };
 // Earth2: Heals player hp by 2
@@ -121,9 +118,6 @@ var earth2 = {
 		castingBar.cast = 30;
 		castingBar.castmax = 30;
 		this.used = 0;
-	}
-	else{
-		return 0;
 	}
 	}	
 };

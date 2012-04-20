@@ -14,33 +14,43 @@
 
 */
 /*
-	Version 0.5.8 Changes(4/18/2012):
+	Version 0.6.0 Changes(4/20/2012):
 		-Bug Fixes:
-			-Can no longer be damaged while in Twister
-		-Balancing:
-			-Dash and Twister now damage obstacles
-			-Twister lets you turn more and more often
-			-Reset High Scores
+			-Frozen Web now stops the tree wizard and thieves
+			-Equalized Volume
+			-Fixed bug where Mirage explosion was black
+			-Added to HTML compatibility
 		-Additions:
-			-Option preferences are now cookied
-			-High score menu now prompts for initials
+			-Added backspace button to initial typing
+			-Added enter button to initial typing
+			-Added Back button from high scores in again.
+				Now it no longer reloads the page but resets all var's
+			-Enemy wizard's spell is now shown above his head
+			-Added sound for wind spells
 		
 	TODO:
-		+Bugs
-		+Highscores
-			-Cannot make dynamic pages on git
+		-Bugs
+		-Highscores
+			-Get website/leaderboards
 		-Optimize
 			-Arrays
 		-Spells
 			-Dark (Black)
-				-Close range 2 damage spikes?
+				-Teemo spikes?
+					-Dark = Spike Trap
+					-Dark + Dark = DeathBound
+					-Dark + Fire = Land Mine
+					-Dark + Ice = Ice Trap
+					-Dark + Lightning = ???
+					-Dark + Air = ???
+					-Dark + Mystic = Portal?
+					-Dark + Water = ???
 			-Summon (?)
 				-Minions
 		+More enemies and AI
 			+Bosses:
 				-Swamp boss?
 				-Boss that uses stolen spells?
-			-Make it apparent what spell the enemy wizard has?
 		-Terrain
 			-Swamp level, has boardwalks and lots of water that slows you if you go in it
 				-Crocodiles appear in water if you stay still
@@ -692,7 +702,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.5.8 Alpha: April 18 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.6.0 Alpha: April 20 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -885,7 +895,7 @@ var Options = {
 		if(vol == 2){
 			ctx.fillText("Sound: On", this.x-this.width/2, this.y+4*this.height/2);
 			for(S in AllSounds){
-				AllSounds[S].volume=0.5;
+				AllSounds[S].volume=0.8;
 			}
 		}
 		if(vol == 1){
@@ -1253,7 +1263,7 @@ var marker4 = {
 	points: 0,
 	mult: 1
 };
-
+var markerlist = {1: marker, 2: marker2, 3: marker3, 4: marker4};
 var typemarker = {
 	color: "#00FF00",
 	speed: 4,
@@ -1280,6 +1290,7 @@ var typemarker3 = {
 	y: -100,
 	text: ""
 };
+var typemarkerlist = {1: typemarker, 2: typemarker2, 3: typemarker3};
 function drawtypeMarker(M){
 	if(M.timeLeft == 0){
 		M.x = -100;
@@ -2068,10 +2079,6 @@ var keys = function(){
 		}
 	}
 };
-//--------------------------------------------------- Reset all Global Variables ----------------------------------------------------//
-function reset(){
-	window.location.reload(true);
-}
 //-------------------------------------------------------------- Game Over ----------------------------------------------------------//
 //array of init
 var inits = {1: "_", 2: "_", 3: "_", 4: "_", 5: "_", 6: "_", 7: "_", 8: "_"};
@@ -2103,6 +2110,19 @@ function gameOver(){
 					initsInd++;
 					wait = 4;
 				}
+			}
+			if(13 in keysDown){
+				for(H in inits){
+					if(inits[H] == "_"){
+						inits[H] = " ";
+					}
+				}
+				initsInd = 9;
+			}
+			if(8 in keysDown && wait <= 0){
+				initsInd--;
+				inits[initsInd] = "_";
+				wait = 4;
 			}
 		}
 		else{
@@ -2216,7 +2236,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.5.8 Alpha: April 18 2012", 244, 96);
+	ctx.fillText("Version 0.6.0 Alpha: April 20 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	if(hsNum == 1){
 		ctx.fillStyle = colorz[hsColor];
@@ -2242,6 +2262,17 @@ function gameOver(){
 		ctx.fillStyle = colorz[hsColor];
 	}
 	ctx.fillText("5th: " + highscore5 + "    " + hs5init, 308, 368);
+	ctx.fillStyle = "white";
+	ctx.font = "16pt Arial";
+	ctx.fillText("Back", bx, by);
+	if(hX >= bx-10 && hX <=bx + 50 && hY <= by && hY>=by-height*7/6){
+		ctx.strokeRect(bx-10, by-height*7/6, width * 3 + 10, height+10);
+	}
+	if(cX >= bx-10 && cX <=bx + 50 && cY <= by && cY>=by-height*7/6){
+		cX=0;
+		cY=0;
+		reset();
+	} 
 }
 //---------------------------------------------------------- Alphabet Print ---------------------------------------------------------//
 function printAlphabet(){
@@ -2511,10 +2542,7 @@ setInterval(function(){
 			vertil4.draw();
 			horil5.draw();
 			vertil5.draw();
-			/*for(A in Air1Air2){
-				Air1Air2[A].draw();
-				Air1Air2[A].effect();
-			}*/
+
 			air.draw();
 			air.effect();
 			air2.draw();

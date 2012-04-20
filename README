@@ -1,31 +1,41 @@
 
-Version 0.5.8 Changes(4/18/2012):
+Version 0.6.0 Changes(4/20/2012):
 		-Bug Fixes:
-			-Can no longer be damaged while in Twister
-		-Balancing:
-			-Dash and Twister now damage obstacles
-			-Twister lets you turn more and more often
-			-Reset High Scores
+			-Frozen Web now stops the tree wizard and thieves
+			-Equalized Volume
+			-Fixed bug where Mirage explosion was black
+			-Added to HTML compatibility
 		-Additions:
-			-Option preferences are now cookied
-			-High score menu now prompts for initials
+			-Added backspace button to initial typing
+			-Added enter button to initial typing
+			-Added Back button from high scores in again.
+				Now it no longer reloads the page but resets all var's
+			-Enemy wizard's spell is now shown above his head
+			-Added sound for wind spells
 		
 	TODO:
-		+Bugs
-		+Highscores
-			-Cannot make dynamic pages on git
+		-Bugs
+		-Highscores
+			-Get website/leaderboards
 		-Optimize
 			-Arrays
 		-Spells
 			-Dark (Black)
-				-Close range 2 damage spikes?
+				-Teemo spikes?
+					-Dark = Spike Trap
+					-Dark + Dark = DeathBound
+					-Dark + Fire = Land Mine
+					-Dark + Ice = Ice Trap
+					-Dark + Lightning = ???
+					-Dark + Air = ???
+					-Dark + Mystic = Portal?
+					-Dark + Water = ???
 			-Summon (?)
 				-Minions
 		+More enemies and AI
 			+Bosses:
 				-Swamp boss?
 				-Boss that uses stolen spells?
-			-Make it apparent what spell the enemy wizard has?
 		-Terrain
 			-Swamp level, has boardwalks and lots of water that slows you if you go in it
 				-Crocodiles appear in water if you stay still

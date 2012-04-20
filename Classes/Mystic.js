@@ -420,7 +420,7 @@ var Illusion = {
 };
 // IllusionBlast
 var IllusionBlast = {
-	color: "FF00FF",
+	color: "#FF00FF",
 	x: -100,
 	y: -200,
 	timeLeft: 0,

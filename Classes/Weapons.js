@@ -1876,7 +1876,7 @@ var firelightningf4 = {
 		this.onScreen = 1;
 	}
 };
-
+var fireLightnings = {1: firelightningf1, 2: firelightningf2, 3: firelightningf3, 4: firelightningf4};
 // Frozen Web: Creates a web of ice that stops all enemies in its tracks
 var vertil = {
 	color: "#00CCFF",
@@ -2275,7 +2275,7 @@ var icelightning = {
 	cd: 0,
 	timeLeft: 0,
 	end: false,
-	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner},
+	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner, 14: treeWizz, 15: Thief, 16: ThiefA, 17: ThiefB},
 	tick: function(){
 		if(this.cd>0){
 			this.cd-=1;
@@ -5579,9 +5579,5 @@ var Wpool5 = {
 };
 var Wpools = {1: Wpool, 2: Wpool2, 3: Wpool3, 4: Wpool4, 5: Wpool5};
 //--------------------------------------------------------------- Spell Array -------------------------------------------------------//
-var Weapons = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: fire, 6: fire2, 7: ice, 8: ice2, 9: fireice, 10: earth, 
-				11: earth2, 12: lightning, 13: lightning2, 14: icelightning, 15: firelightning, 16: sFire, 17: sIce, 18: sLightning, 19: air,
-				20: air2, 21: airfire, 22: airice, 23: airlightning/*, 24: mystic, 25: mystic2, 26: mysticfire, 27: mysticice, 28: mysticearth,
-				29: mysticlightning, 30: mysticair, 31: Water, 32: waterfire*/};
 var AllFire = {1: fire, 2: fire2, 3: fireice, 4: firelightningf1, 5: firelightningf2, 6: firelightningf3, 7: firelightningf4,
 				8: Mfire, 9: Mfire2, 10: Mfire3, 11: Mfire4, 12: Globblyfire, 13: Globblyfire2, 14: Globblyfire3};

@@ -3,8 +3,6 @@
 var obstacle11 = {
 	x: 512,
 	y: 352,
-	ox: 512,
-	oy: 352,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -15,8 +13,6 @@ var obstacle11 = {
 var obstacle12 = {
 	x: 544,
 	y: 352,
-	ox: 544,
-	oy: 352,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -27,8 +23,6 @@ var obstacle12 = {
 var obstacle13 = {
 	x: 512,
 	y: 384,
-	ox: 512,
-	oy: 384,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -39,8 +33,6 @@ var obstacle13 = {
 var obstacle14 = {
 	x: 544,
 	y: 384,
-	ox: 544,
-	oy: 384,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -51,8 +43,6 @@ var obstacle14 = {
 var obstacle15 = {
 	x: 512,
 	y: 416,
-	ox: 512,
-	oy: 416,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -63,8 +53,6 @@ var obstacle15 = {
 var obstacle16 = {
 	x: 544,
 	y: 416,
-	ox: 544,
-	oy: 416,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -75,8 +63,6 @@ var obstacle16 = {
 var obstacle17 = {
 	x: 512,
 	y: 448,
-	ox: 512,
-	oy: 448,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -87,8 +73,6 @@ var obstacle17 = {
 var obstacle18 = {
 	x: 544,
 	y: 448,
-	ox: 544,
-	oy: 448,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -100,8 +84,6 @@ var obstacle18 = {
 var obstacle21 = {
 	x: 256,
 	y: 128,
-	ox: 256,
-	oy: 128,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -111,8 +93,6 @@ var obstacle21 = {
 var obstacle22 = {
 	x: 288,
 	y: 128,
-	ox: 288,
-	oy: 128,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -122,8 +102,6 @@ var obstacle22 = {
 var obstacle23 = {
 	x: 320,
 	y: 128,
-	ox: 320,
-	oy: 128,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -133,8 +111,6 @@ var obstacle23 = {
 var obstacle24 = {
 	x: 352,
 	y: 128,
-	ox: 352,
-	oy: 128,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -145,8 +121,6 @@ var obstacle24 = {
 var obstacle31 = {
 	x: 704,
 	y: 256,
-	ox: 704,
-	oy: 256,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -156,8 +130,6 @@ var obstacle31 = {
 var obstacle32 = {
 	x: 704,
 	y: 288,
-	ox: 704,
-	oy: 288,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -167,8 +139,6 @@ var obstacle32 = {
 var obstacle33 = {
 	x: 704,
 	y: 320,
-	ox: 704,
-	oy: 320,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -178,8 +148,6 @@ var obstacle33 = {
 var obstacle34 = {
 	x: 704,
 	y: 352,
-	ox: 704,
-	oy: 352,
 	width: 32,
 	height: 32,
 	hp: 3,

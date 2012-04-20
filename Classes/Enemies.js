@@ -14,7 +14,6 @@ var Enemy = {
 	dirct: 0,
 	dir: "W",
 	respawn: 1,
-	origrp: 1,
 	rp: 100,
 	pts: 50,
 	LR: "",
@@ -52,7 +51,6 @@ var EnemyA = {
 	speed: 4,
 	speed2: 2,
 	respawn: 250,
-	origrp: 250,
 	pts: 50,
 	dir: "W",
 	rp: 100,
@@ -113,7 +111,6 @@ var EnemyB = {
 	speed: 4,
 	speed2: 2,
 	respawn: 125,
-	origrp: 125,
 	pts: 50,
 	rp: 100,
 	dir: "W",
@@ -154,7 +151,6 @@ var EnemyC = {
 	respawn: 300,
 	pts: 50,
 	dir: "W",
-	origrp: 300,
 	rp: 100,
 	onScreen: 0,
 	index: 1,
@@ -214,7 +210,6 @@ var Tenemy = {
 	dirct: 0,
 	dir: "W",
 	respawn: 600,
-	origrp: 600,
 	pts: 50,
 	rp: 600,
 	frame: 1,
@@ -243,7 +238,6 @@ var TenemyA = {
 	dirct: 0,
 	dir: "W",
 	respawn: 2400,
-	origrp: 2400,
 	pts: 50,
 	rp: 600,
 	frame: 1,
@@ -273,7 +267,6 @@ var TenemyB = {
 	dirct: 0,
 	dir: "W",
 	respawn: 1800,
-	origrp: 1800,
 	pts: 50,
 	rp: 600,
 	frame: 1,
@@ -303,7 +296,6 @@ var Lavaman = {
 	dirct: 0,
 	dir: "W",
 	respawn: -1,
-	origrp: -1,
 	pts: 50,
 	rp: -1,
 	onScreen: 0,
@@ -326,7 +318,6 @@ var Lavaman2 = {
 	dirct: 0,
 	dir: "W",
 	respawn: -1,
-	origrp: -1,
 	pts: 50,
 	rp: -1,
 	onScreen: 0,
@@ -349,7 +340,6 @@ var Lavaman3 = {
 	dirct: 0,
 	dir: "W",
 	respawn: -1,
-	origrp: -1,
 	pts: 50,
 	rp: -1,
 	onScreen: 0,
@@ -372,7 +362,6 @@ var Lavaman4 = {
 	dirct: 0,
 	dir: "W",
 	respawn: -1,
-	origrp: -1,
 	pts: 50,
 	rp: -1,
 	onScreen: 0,
@@ -382,6 +371,7 @@ var Lavaman4 = {
 		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
+var lavamenlist = {1: Lavaman, 2: Lavaman2, 3: Lavaman3, 4: Lavaman4};
 // PORTAL TO HELL
 var Spawner = {
 	type: 2,
@@ -396,7 +386,6 @@ var Spawner = {
 	hp: 5,
 	hptimer: 0,
 	respawn: 300,
-	origrp: 450,
 	dir: "W",
 	rp: 450,
 	pts: 500,
@@ -505,7 +494,6 @@ var Sorceror = {
 	speed2: 2,
 	dirct: 0,
 	respawn: 1200,
-	origrp: 1200,
 	spell: "Ice",
 	hp: 3,
 	hptimer: 0,
@@ -536,6 +524,15 @@ var Sorceror = {
 		else{
 			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
 		}
+		if(this.spell == "Fire"){
+			ctx.drawImage(Firebox, this.x-this.width/2, this.y - 60);
+		}
+		if(this.spell == "Ice"){
+			ctx.drawImage(Icebox, this.x-this.width/2, this.y - 60);
+		}
+		if(this.spell == "Lightning"){
+			ctx.drawImage(Thunderbox, this.x-this.width/2, this.y - 60);
+		}
 	},
 	cast: function(){
 		if(this.spell == "Ice"){
@@ -562,7 +559,6 @@ var treeWizz = {
 	dirct: 0,
 	dir: "W",
 	respawn: -1,
-	origrp: -1,
 	rp: -1,
 	onScreen: 0,
 	movement: false,
@@ -779,7 +775,6 @@ var Thief = {
 	dirct: 0,
 	dir: "W",
 	respawn: 10,
-	origrp: 450,
 	rp: 450,
 	onScreen: 0,
 	counter: 0,
@@ -909,7 +904,6 @@ var ThiefA = {
 	dirct: 0,
 	dir: "W",
 	respawn: 600,
-	origrp: 450,
 	rp: 450,
 	onScreen: 0,
 	alphaChange: false,
@@ -1039,7 +1033,6 @@ var ThiefB = {
 	dirct: 0,
 	dir: "W",
 	respawn: -1,
-	origrp: -1,
 	rp: -1,
 	onScreen: 0,
 	counter: 0,
@@ -1166,7 +1159,6 @@ var Dragon = {
 	dirct: 0,
 	dir: "D",
 	respawn: 2000,
-	origrp: -1,
 	rp: -1,
 	onScreen: 0,
 	movement: false,

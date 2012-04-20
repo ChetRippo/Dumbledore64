@@ -593,6 +593,7 @@ var blueCube = {
 		this.timeLeft = 0;
 	}
 };
+var allEleCubes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube};
 // Random drop
 var RandomCube = {
 	type: 1,
