@@ -1,4 +1,9 @@
 function reset(){
+	if(vol != 1){
+		for(S in AllSounds){
+			AllSounds[S].volume = 0;
+		}
+	}
 	//------------------------ Dumbledore64.js ------------------//
 	STATE = 0;
 	//Pause menu
@@ -1814,5 +1819,10 @@ function reset(){
 	}
 
 	//end
+	if(vol != 1){
+		for(S in AllSounds){
+			AllSounds[S].volume = 0.8;
+		}
+	}
 	fastbeepsLow.play();
 }
