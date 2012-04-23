@@ -60,6 +60,9 @@ var EnemyA = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.onTree == 1){
+			this.speed = 8;
+		}
 		if(STATE == 1){
 			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
 		}
@@ -158,6 +161,9 @@ var EnemyC = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.onTree == 1){
+			this.speed = 8;
+		}
 		if(STATE == 1){
 			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
 		}
@@ -625,7 +631,7 @@ var treeWizz = {
 		if(this.cd > 0 && this.onScreen == 1){
 			this.cd-=1;
 		}
-		else if(this.spawned == 0 && STATE == 1 && Dragon.spawned == 0){
+		else if(STATE == 1 && Dragon.spawned == 0){
 			for(O in obstacle1){
 				if(obstacle1[O].hp == 0){
 					this.deadtrees+=1;
@@ -644,95 +650,103 @@ var treeWizz = {
 			this.herp = this.deadtrees;
 			this.deadtrees = 0;
 			if(this.herp >= 8 && this.onScreen == 0){
-				this.respawn = 0;
 				this.spawned = 1;
-				spawn(this);
-				this.herp = 0;
+				var queue = true;
+				for(E in AllEnemies){
+					if(AllEnemies[E].onScreen == 1){
+						queue = false;
+					}
+				}
+				if(queue){
+					this.respawn = 0;
+					spawn(this);
+					this.herp = 0;
+				}
 			}
 		}
 	},
 	grow: function(){
-	if(this.onScreen == 1){
-		this.cd = 90;
-		rootStrike.x = -2000;
-		rootStrike.y = -2000;
-		rootStrike.onScreen = 0;
-		rootStrike.movement = false;
-		rootStrike.hp = 2;
-		rootStrike2.x = -2000;
-		rootStrike2.y = -2000;
-		rootStrike2.onScreen = 0;
-		rootStrike2.movement = false;
-		rootStrike2.hp = 2;
-		rootStrike3.x = -2000;
-		rootStrike3.y = -2000;
-		rootStrike3.onScreen = 0;
-		rootStrike3.hp = 2;
-		rootStrike3.movement = false;
-		rootStrike4.x = -2000;
-		rootStrike4.y = -2000;
-		rootStrike4.onScreen = 0;
-		rootStrike4.movement = false;
-		rootStrike4.hp = 2;
-		for(R in roots11){
-			roots11[R].onScreen = 0;
-			roots11[R].movement = false;
-			roots11[R].x = -9000;
-			roots11[R].y = -9000;
-		}
-		for(R in roots12){
-			roots12[R].onScreen = 0;
-			roots12[R].movement = false;
-			roots12[R].x = -9000;
-			roots12[R].y = -9000;
-		}
-		for(R in roots13){
-			roots13[R].onScreen = 0;
-			roots13[R].movement = false;
-			roots13[R].x = -9000;
-			roots13[R].y = -9000;
-		}
-		for(R in roots14){
-			roots14[R].onScreen = 0;
-			roots14[R].movement = false;
-			roots14[R].x = -9000;
-			roots14[R].y = -9000;
-		}
-		var attack = Math.floor(Math.random() * 5) + 1;
-		if(attack == 1 || attack == 4){
-			Fwave.currentTime=0;
-			Fwave.play();
-			rootStrike.x = this.x;
-			rootStrike.y = this.y - 64;
-			rootStrike.onScreen = 1;
-			rootStrike.movement = true;
+		if(this.onScreen == 1){
+			this.cd = 90;
+			rootStrike.x = -2000;
+			rootStrike.y = -2000;
+			rootStrike.onScreen = 0;
+			rootStrike.movement = false;
 			rootStrike.hp = 2;
-			rootStrike2.x = this.x;
-			rootStrike2.y = this.y + 64;
-			rootStrike2.onScreen = 1;
-			rootStrike2.movement = true;
+			rootStrike2.x = -2000;
+			rootStrike2.y = -2000;
+			rootStrike2.onScreen = 0;
+			rootStrike2.movement = false;
 			rootStrike2.hp = 2;
-			rootStrike3.x = this.x - 64;
-			rootStrike3.y = this.y;
-			rootStrike3.onScreen = 1;
+			rootStrike3.x = -2000;
+			rootStrike3.y = -2000;
+			rootStrike3.onScreen = 0;
 			rootStrike3.hp = 2;
-			rootStrike3.movement = true;
-			rootStrike4.x = this.x + 64;
-			rootStrike4.y = this.y;
-			rootStrike4.onScreen = 1;
-			rootStrike4.movement = true;
+			rootStrike3.movement = false;
+			rootStrike4.x = -2000;
+			rootStrike4.y = -2000;
+			rootStrike4.onScreen = 0;
+			rootStrike4.movement = false;
 			rootStrike4.hp = 2;
+			for(R in roots11){
+				roots11[R].onScreen = 0;
+				roots11[R].movement = false;
+				roots11[R].x = -9000;
+				roots11[R].y = -9000;
+			}
+			for(R in roots12){
+				roots12[R].onScreen = 0;
+				roots12[R].movement = false;
+				roots12[R].x = -9000;
+				roots12[R].y = -9000;
+			}
+			for(R in roots13){
+				roots13[R].onScreen = 0;
+				roots13[R].movement = false;
+				roots13[R].x = -9000;
+				roots13[R].y = -9000;
+			}
+			for(R in roots14){
+				roots14[R].onScreen = 0;
+				roots14[R].movement = false;
+				roots14[R].x = -9000;
+				roots14[R].y = -9000;
+			}
+			var attack = Math.floor(Math.random() * 5) + 1;
+			if(attack == 1 || attack == 4){
+				Fwave.currentTime=0;
+				Fwave.play();
+				rootStrike.x = this.x;
+				rootStrike.y = this.y - 64;
+				rootStrike.onScreen = 1;
+				rootStrike.movement = true;
+				rootStrike.hp = 2;
+				rootStrike2.x = this.x;
+				rootStrike2.y = this.y + 64;
+				rootStrike2.onScreen = 1;
+				rootStrike2.movement = true;
+				rootStrike2.hp = 2;
+				rootStrike3.x = this.x - 64;
+				rootStrike3.y = this.y;
+				rootStrike3.onScreen = 1;
+				rootStrike3.hp = 2;
+				rootStrike3.movement = true;
+				rootStrike4.x = this.x + 64;
+				rootStrike4.y = this.y;
+				rootStrike4.onScreen = 1;
+				rootStrike4.movement = true;
+				rootStrike4.hp = 2;
+			}
+			if(attack == 2 || attack == 5){
+				rootBlastW.shoot();
+				rootBlastA.shoot();
+				rootBlastS.shoot();
+				rootBlastD.shoot();
+			}
+			if(attack == 3 && this.hp < 6){
+				LeafHeal.shoot();
+			}
 		}
-		if(attack == 2 || attack == 5){
-			rootBlastW.shoot();
-			rootBlastA.shoot();
-			rootBlastS.shoot();
-			rootBlastD.shoot();
-		}
-		if(attack == 3 && this.hp < 6){
-			LeafHeal.shoot();
-		}
-	}
 	}
 };
 var TwizEffect = {
@@ -1227,11 +1241,20 @@ var Dragon = {
 			}
 		}
 		if(this.respawn ==0){
-			this.respawn-=1;
+			var queue = true;
 			this.spawned = 1;
-			this.onScreen = 1;
-			this.x = 64;
-			this.y = 280;
+			for(E in AllEnemies){
+				if(AllEnemies[E].onScreen == 1){
+					queue = false;
+				}
+			}
+			if(queue == true){
+				this.respawn-=1;
+				this.x = 64;
+				this.y = 280;
+				this.onScreen = 1;
+				sFire.shoot(this);
+			}
 		}
 	},
 	attack: function(){
@@ -1413,7 +1436,6 @@ var DragonL = {
 			this.spawned = 1;
 			this.x = 216;
 			this.y = 170;
-			sFire.shoot(this);
 		}
 	},
 	attack: function(){
@@ -2084,7 +2106,7 @@ if(E.type != "Meteor"){
 
 function spawn(E){
 	if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft == 0 && typemarker3.timeLeft == 0 && hpUp.x == -100
-		&& Dragon.onScreen != 1){
+		&& Dragon.onScreen != 1 && (!(Dragon.spawned == 1 && player.maxhp < 4) && !(treeWizz.spawned == 1 && player.maxhp < 4) || E.type == "Dragon" || E.type == -1)){
 		if(E.type == 1){
 			if(E.respawn == 0){
 				E.movement = true;
@@ -2205,8 +2227,8 @@ function spawn(E){
 		else if(E.type == 2 && STATE == "Scorched" && E.respawn > 0){
 			E.respawn-=1;
 		}
-		//if globbly in jungle
-		if(E.type == 0 && STATE == "Jungle" && E.bug == 0 && E.speed2*2 == 8){
+		//if globbly not in fire level
+		if(E.type == 0 && STATE != "Scorched" && E.bug == 0 && E.speed2*2 == 8){
 			E.respawn= E.respawn;
 		}
 		else if(E.type != "Thief" && E.type != 2){

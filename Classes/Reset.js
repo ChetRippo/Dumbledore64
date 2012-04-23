@@ -1821,6 +1821,8 @@ function reset(){
 	//end
 	if(vol != 1){
 		for(S in AllSounds){
+			AllSounds[S].currentTime = 0;
+			AllSounds[S].pause();
 			AllSounds[S].volume = 0.8;
 		}
 	}

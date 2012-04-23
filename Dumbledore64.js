@@ -14,12 +14,14 @@
 
 */
 /*
-	Version 0.6.0 Changes(4/20/2012):
+	Version 0.6.0 Changes(4/23/2012):
 		-Bug Fixes:
 			-Frozen Web now stops the tree wizard and thieves
 			-Equalized Volume
 			-Fixed bug where Mirage explosion was black
 			-Added to HTML compatibility
+			-Fixed bug where sound played on game reset
+			-Hump Dumps now ignore ice moves while in trees
 		-Additions:
 			-Added backspace button to initial typing
 			-Added enter button to initial typing
@@ -27,6 +29,8 @@
 				Now it no longer reloads the page but resets all var's
 			-Enemy wizard's spell is now shown above his head
 			-Added sound for wind spells
+			-Globblies no longer spawn outside the fire level
+			-Bosses do not spawn when enemies are on screen, instead enemies stop spawning
 		
 	TODO:
 		-Bugs
@@ -51,6 +55,8 @@
 			+Bosses:
 				-Swamp boss?
 				-Boss that uses stolen spells?
+				-Fire boss increases damage instead of hp?
+					-If so change clause in spawn enemy function to include that for not spawning enemies when boss in queue
 		-Terrain
 			-Swamp level, has boardwalks and lots of water that slows you if you go in it
 				-Crocodiles appear in water if you stay still
@@ -702,7 +708,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.6.0 Alpha: April 20 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.6.0 Alpha: April 23 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -2236,7 +2242,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.6.0 Alpha: April 20 2012", 244, 96);
+	ctx.fillText("Version 0.6.0 Alpha: April 23 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	if(hsNum == 1){
 		ctx.fillStyle = colorz[hsColor];
@@ -2642,9 +2648,9 @@ setInterval(function(){
 			for(E in AllEnemies){
 				if(AllEnemies[E].onTree == 0){
 					AllEnemies[E].draw();
+					move(AllEnemies[E]);
 				}
 				if(AllEnemies[E].type != "Dragon" && AllEnemies[E].type != "DragonL" && AllEnemies[E].type != "DragonR"){
-					move(AllEnemies[E]);
 					AI(AllEnemies[E]);
 					spawn(AllEnemies[E]);
 				}
@@ -2686,6 +2692,7 @@ setInterval(function(){
 			for(E in AllEnemies){
 				if(AllEnemies[E].onTree == 1){
 					AllEnemies[E].draw();
+					move(AllEnemies[E]);
 				}
 			}
 			TwizEffect.draw();
