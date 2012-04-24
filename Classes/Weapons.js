@@ -1132,103 +1132,103 @@ function Bulletmove(B){
 	}
 	else if (B.timeLeft > 0 && B.dir == "WA"){
 		B.timeLeft--;
-		B.x -= B.speed;
-		B.y -= B.speed;
+		B.x -= B.speed/Math.sqrt(2);
+		B.y -= B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "AS"){
 		B.timeLeft--;
-		B.x -= B.speed;
-		B.y += B.speed;
+		B.x -= B.speed/Math.sqrt(2);
+		B.y += B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "SD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y += B.speed;
+		B.x += B.speed/Math.sqrt(2);
+		B.y += B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "WD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y -= B.speed;
+		B.x += B.speed/Math.sqrt(2);
+		B.y -= B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DW"){
 		B.timeLeft--;
-		B.x -= B.speed/2;
-		B.y -= B.speed;
+		B.x -= B.speed/2/Math.sqrt(2);
+		B.y -= B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2W"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y -= B.speed;
+		B.x += B.speed/2/Math.sqrt(2);
+		B.y -= B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DA"){
 		B.timeLeft--;
-		B.x -= B.speed;
-		B.y -= B.speed/2;
+		B.x -= B.speed/Math.sqrt(2);
+		B.y -= B.speed/2/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2A"){
 		B.timeLeft--;
-		B.x -= B.speed;
-		B.y += B.speed/2;
+		B.x -= B.speed/Math.sqrt(2);
+		B.y += B.speed/2/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DS"){
 		B.timeLeft--;
-		B.x -= B.speed/2;
-		B.y += B.speed;
+		B.x -= B.speed/2/Math.sqrt(2);
+		B.y += B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2S"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y += B.speed;
+		B.x += B.speed/2/Math.sqrt(2);
+		B.y += B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y -= B.speed/2;
+		B.x += B.speed/Math.sqrt(2);
+		B.y -= B.speed/2/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2D"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y += B.speed/2;
+		B.x += B.speed/Math.sqrt(2);
+		B.y += B.speed/2/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DWD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y -= B.speed/2;
+		B.x += B.speed/Math.sqrt(2);
+		B.y -= B.speed/2/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2WD"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y -= B.speed;
+		B.x += B.speed/2/Math.sqrt(2);
+		B.y -= B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DWA"){
 		B.timeLeft--;
-		B.x -= B.speed;
-		B.y -= B.speed/2;
+		B.x -= B.speed/Math.sqrt(2);
+		B.y -= B.speed/2/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2WA"){
 		B.timeLeft--;
-		B.x -= B.speed/2;
-		B.y -= B.speed;
+		B.x -= B.speed/2/Math.sqrt(2);
+		B.y -= B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DSD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y += B.speed/2;
+		B.x += B.speed/Math.sqrt(2);
+		B.y += B.speed/2/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2SD"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y += B.speed;
+		B.x += B.speed/2/Math.sqrt(2);
+		B.y += B.speed/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DAS"){
 		B.timeLeft--;
-		B.x -= B.speed;
-		B.y += B.speed/2;
+		B.x -= B.speed/Math.sqrt(2);
+		B.y += B.speed/2/Math.sqrt(2);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2AS"){
 		B.timeLeft--;
-		B.x -= B.speed/2;
-		B.y += B.speed;
+		B.x -= B.speed/2/Math.sqrt(2);
+		B.y += B.speed/Math.sqrt(2);
 	}
 }
 // ------------------------------------------------------ Spell Combos ---------------------------------------------------------------//

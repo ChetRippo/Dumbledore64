@@ -757,6 +757,7 @@ var TwizEffect = {
 	onScreen: 0,
 	frame: 0,
 	played: 0,
+	cd: 90,
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.played == 0){
@@ -771,6 +772,21 @@ var TwizEffect = {
 			this.height = this.height + 8*this.frame;
 			this.frame++;
 			ctx.globalAlpha = Alpha;
+		}
+		if(treeWizz.onScreen == 1 && this.cd <=0){
+			if(spell1 == "N/A"){
+				this.cd = 360;
+				RandEffect.onScreen = 1;
+				RandEffect.used = 0;
+				RandEffect.x = 400;
+				RandEffect.y = 288;
+				RandomCube.timeLeft = 150;
+				RandomCube.x = 400;
+				RandomCube.y = 288;
+			}
+		}
+		else if(treeWizz.onScreen == 1){
+			this.cd-=1;
 		}
 	}
 };

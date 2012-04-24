@@ -2508,102 +2508,110 @@ var rootStrike = {
 	onScreen: 0,
 	movement: false,
 	draw: function(){
-	if(this.onScreen == 1){
-		if(this.hptimer > 0){
-			this.hptimer-=1;
+		for(R in roots1){
+			if(collision(player.dir, player, roots1[R])){
+				if(hptimer <= 0){
+					player.hp-=1;
+					hptimer = 30;
+				}
+			}
 		}
-		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.fillStyle = "white";
-		}
-		else{
-			ctx.fillStyle = "#330000";
-		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		this.frame++;
-		if(this.frame/2 == Math.round(this.frame/2)){
-			if(rootstr.onScreen == 0){
-				rootstr.onScreen = 1;
-				rootstr.x = this.x;
-				rootstr.y = this.y;
+		if(this.onScreen == 1){
+			if(this.hptimer > 0){
+				this.hptimer-=1;
 			}
-			else if(rootstr2.onScreen == 0){
-				rootstr2.onScreen = 1;
-				rootstr2.x = this.x;
-				rootstr2.y = this.y;
-			}
-			else if(rootstr3.onScreen == 0){
-				rootstr3.onScreen = 1;
-				rootstr3.x = this.x;
-				rootstr3.y = this.y;
-			}
-			else if(rootstr4.onScreen == 0){
-				rootstr4.onScreen = 1;
-				rootstr4.x = this.x;
-				rootstr4.y = this.y;
-			}
-			else if(rootstr5.onScreen == 0){
-				rootstr5.onScreen = 1;
-				rootstr5.x = this.x;
-				rootstr5.y = this.y;
-			}
-			else if(rootstr6.onScreen == 0){
-				rootstr6.onScreen = 1;
-				rootstr6.x = this.x;
-				rootstr6.y = this.y;
-			}
-			else if(rootstr7.onScreen == 0){
-				rootstr7.onScreen = 1;
-				rootstr7.x = this.x;
-				rootstr7.y = this.y;
-			}
-			else if(rootstr8.onScreen == 0){
-				rootstr8.onScreen = 1;
-				rootstr8.x = this.x;
-				rootstr8.y = this.y;
-			}
-			else if(rootstr9.onScreen == 0){
-				rootstr9.onScreen = 1;
-				rootstr9.x = this.x;
-				rootstr9.y = this.y;
-			}
-			else if(rootstr10.onScreen == 0){
-				rootstr10.onScreen = 1;
-				rootstr10.x = this.x;
-				rootstr10.y = this.y;
-			}
-			else if(rootstr11.onScreen == 0){
-				rootstr11.onScreen = 1;
-				rootstr11.x = this.x;
-				rootstr11.y = this.y;
-			}
-			else if(rootstr12.onScreen == 0){
-				rootstr12.onScreen = 1;
-				rootstr12.x = this.x;
-				rootstr12.y = this.y;
-			}
-			else if(rootstr13.onScreen == 0){
-				rootstr13.onScreen = 1;
-				rootstr13.x = this.x;
-				rootstr13.y = this.y;
-			}
-			else if(rootstr14.onScreen == 0){
-				rootstr14.onScreen = 1;
-				rootstr14.x = this.x;
-				rootstr14.y = this.y;
-			}
-			else if(rootstr15.onScreen == 0){
-				rootstr15.onScreen = 1;
-				rootstr15.x = this.x;
-				rootstr15.y = this.y;
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.hptimer/2 != Math.round(this.hptimer/2)){
+				ctx.fillStyle = "white";
 			}
 			else{
-				this.movement = false;
-				this.frame = 0;
+				ctx.fillStyle = "#330000";
+			}
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.globalAlpha = Alpha;
+			this.frame++;
+			if(this.frame/2 == Math.round(this.frame/2)){
+				if(rootstr.onScreen == 0){
+					rootstr.onScreen = 1;
+					rootstr.x = this.x;
+					rootstr.y = this.y;
+				}
+				else if(rootstr2.onScreen == 0){
+					rootstr2.onScreen = 1;
+					rootstr2.x = this.x;
+					rootstr2.y = this.y;
+				}
+				else if(rootstr3.onScreen == 0){
+					rootstr3.onScreen = 1;
+					rootstr3.x = this.x;
+					rootstr3.y = this.y;
+				}
+				else if(rootstr4.onScreen == 0){
+					rootstr4.onScreen = 1;
+					rootstr4.x = this.x;
+					rootstr4.y = this.y;
+				}
+				else if(rootstr5.onScreen == 0){
+					rootstr5.onScreen = 1;
+					rootstr5.x = this.x;
+					rootstr5.y = this.y;
+				}
+				else if(rootstr6.onScreen == 0){
+					rootstr6.onScreen = 1;
+					rootstr6.x = this.x;
+					rootstr6.y = this.y;
+				}
+				else if(rootstr7.onScreen == 0){
+					rootstr7.onScreen = 1;
+					rootstr7.x = this.x;
+					rootstr7.y = this.y;
+				}
+				else if(rootstr8.onScreen == 0){
+					rootstr8.onScreen = 1;
+					rootstr8.x = this.x;
+					rootstr8.y = this.y;
+				}
+				else if(rootstr9.onScreen == 0){
+					rootstr9.onScreen = 1;
+					rootstr9.x = this.x;
+					rootstr9.y = this.y;
+				}
+				else if(rootstr10.onScreen == 0){
+					rootstr10.onScreen = 1;
+					rootstr10.x = this.x;
+					rootstr10.y = this.y;
+				}
+				else if(rootstr11.onScreen == 0){
+					rootstr11.onScreen = 1;
+					rootstr11.x = this.x;
+					rootstr11.y = this.y;
+				}
+				else if(rootstr12.onScreen == 0){
+					rootstr12.onScreen = 1;
+					rootstr12.x = this.x;
+					rootstr12.y = this.y;
+				}
+				else if(rootstr13.onScreen == 0){
+					rootstr13.onScreen = 1;
+					rootstr13.x = this.x;
+					rootstr13.y = this.y;
+				}
+				else if(rootstr14.onScreen == 0){
+					rootstr14.onScreen = 1;
+					rootstr14.x = this.x;
+					rootstr14.y = this.y;
+				}
+				else if(rootstr15.onScreen == 0){
+					rootstr15.onScreen = 1;
+					rootstr15.x = this.x;
+					rootstr15.y = this.y;
+				}
+				else{
+					this.movement = false;
+					this.frame = 0;
+				}
 			}
 		}
-	}
 	}
 };
 var rootStrike2 = {

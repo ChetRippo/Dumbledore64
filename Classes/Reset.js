@@ -45,6 +45,7 @@ function reset(){
 	player.hp = 3;
 	player.maxhp = 3;
 	player.power = 1;
+	player.currpower = 1;
 	player.dmg = false;
 	player.dir = "W";
 	player.LR = "";
@@ -483,6 +484,7 @@ function reset(){
 	TwizEffect.onScreen = 0;
 	TwizEffect.frame = 0;
 	TwizEffect.played = 0;
+	TwizEffect.cd = 90;
 	
 	Thief.type = "Thief";
 	Thief.state = 2;

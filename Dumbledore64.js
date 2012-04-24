@@ -14,30 +14,19 @@
 
 */
 /*
-	Version 0.6.0 Changes(4/23/2012):
+	Version 0.6.1 Changes(4/24/2012):
 		-Bug Fixes:
-			-Frozen Web now stops the tree wizard and thieves
-			-Equalized Volume
-			-Fixed bug where Mirage explosion was black
-			-Added to HTML compatibility
-			-Fixed bug where sound played on game reset
-			-Hump Dumps now ignore ice moves while in trees
-			-Random Element for dragon only spawns when you have no spells
+			-Slowed down diagonal shots and bubblebeam shots
+			-Tree Wizard's RootStrike now damages you in every spot
 		-Additions:
-			-Added backspace button to initial typing
-			-Added enter button to initial typing
-			-Added Back button from high scores in again.
-				Now it no longer reloads the page but resets all var's
-			-Enemy wizard's spell is now shown above his head
-			-Added sound for wind spells
-			-Globblies no longer spawn outside the fire level
-			-Bosses do not spawn when enemies are on screen, instead enemies stop spawning
 			-Fire boss powerup ups damage instead of health
+			-Tree Wizard now gives random powerup when you don't have an element
 		
 	TODO:
 		-Bugs
 			-If anything besides player hurts obs it does players power. maybe not a big deal?
-			-Give forest wizard randelement
+			-Make treeW collisions better
+			-Make rootStrike not have hp
 		-Highscores
 			-Get website/leaderboards
 		-Optimize
@@ -712,7 +701,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.6.0 Alpha: April 23 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.6.1 Alpha: April 24 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -992,6 +981,7 @@ var player = {
 	hp: 3,
 	maxhp: 3,
 	power: 1,
+	currpower: 1,
 	dmg: false,
 	dir: "W",
 	LR: "",
@@ -1329,6 +1319,9 @@ function drawtypeMarker(M){
 		else if(M.text == "+ Water"){
 			M.color = "#0000FF";
 		}
+		else if(M.text == "+ Dark"){
+			M.color = "black";
+		}
 		else if(M.text == "+ Max Hp" || M.text == "+ Damage"){
 			M.color = colorz[colorNum];
 			colorNum++;
@@ -1430,6 +1423,9 @@ function UI(){
 		}
 		if(spell1 == "Water"){
 			spell = "Bubble Shield";
+		}
+		if(spell1 == "Dark"){
+			spell = "Spike Trap";
 		}		
 	}
 	if(spell1 == "N/A" && spell2 != "N/A"){
@@ -1453,6 +1449,9 @@ function UI(){
 		}
 		if(spell2 == "Water"){
 			spell = "Bubble Shield";
+		}
+		if(spell2 == "Dark"){
+			spell = "Spike Trap";
 		}
 	}
 	if(spell1 == "Fire" && spell2 == "Fire"){
@@ -1539,6 +1538,30 @@ function UI(){
 	if((spell1 == "Water" && spell2 == "Mystic") || (spell2 == "Water" && spell1 == "Mystic")){
 		spell = "Bubblebeam";
 	}
+	if(spell1 == "Dark" && spell2 == "Dark"){
+		spell = "Deathbound";
+	}
+	if((spell1 == "Dark" && spell2 == "Fire") || (spell2 == "Dark" && spell1 == "Fire")){
+		spell = "Landmine";
+	}
+	if((spell1 == "Dark" && spell2 == "Ice") || (spell2 == "Dark" && spell1 == "Ice")){
+		spell = "Ice Trap";
+	}
+	if((spell1 == "Dark" && spell2 == "Earth") || (spell2 == "Dark" && spell1 == "Earth")){
+		spell = "Moonlight";
+	}
+	if((spell1 == "Dark" && spell2 == "Lightning") || (spell2 == "Dark" && spell1 == "Lightning")){
+		spell = "Spire";
+	}
+	if((spell1 == "Dark" && spell2 == "Air") || (spell2 == "Dark" && spell1 == "Air")){
+		spell = "Black Hole";
+	}
+	if((spell1 == "Dark" && spell2 == "Mystic") || (spell2 == "Dark" && spell1 == "Mystic")){
+		spell = "Piercing Shots";
+	}
+	if((spell1 == "Dark" && spell2 == "Water") || (spell2 == "Dark" && spell1 == "Water")){
+		spell = "Counter";
+	}
 	if(spell1 == "Fire"){
 		spell1pic = Firebox;
 	}
@@ -1559,7 +1582,10 @@ function UI(){
 	}
 	else if(spell1 == "Water"){
 		spell1pic = Waterbox;
-	}	
+	}
+	else if(spell1 == "Dark"){
+		spell1pic = Waterbox;
+	}		
 	else{
 		spell1pic = "N/A";
 	}
@@ -1582,6 +1608,9 @@ function UI(){
 		spell2pic = Mysticbox;
 	}
 	else if(spell2 == "Water"){
+		spell2pic = Waterbox;
+	}
+	else if(spell2 == "Dark"){
 		spell2pic = Waterbox;
 	}
 	else{
@@ -1776,6 +1805,51 @@ function UI(){
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Spike Trap"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(dark.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Deathbound"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(dark2.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Landmine"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(darkfire.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Ice Trap"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(darkice.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Moonlight"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(darkearth.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Spire"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(darklightning.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Black Hole"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(darkair.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Piercing Shots"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+	}
+	else if(spell == "Counter"){
+		ctx.fillStyle = "black";
+		ctx.font = "16pt Arial";
+		ctx.fillText("Recharge: " + Math.round(darkwater.cd/30) + "s", 32, 544);
 	}
 	ctx.fillStyle = "black";
 	ctx.font = "16pt Arial";
@@ -1978,6 +2052,9 @@ var keys = function(){
 			if(spell1 == "Water"){
 				water.shoot();
 			}
+			if(spell1 == "Dark"){
+				dark.shoot();
+			}
 		}
 		if(32 in keysDown && spell2 != "N/A" && spell1 == "N/A"){
 			if(spell2 == "Fire"){
@@ -2000,6 +2077,9 @@ var keys = function(){
 			}
 			if(spell2 == "Water"){
 				water.shoot();
+			}
+			if(spell2 == "Dark"){
+				dark.shoot();
 			}
 		}
 		if(32 in keysDown && spell1 != "N/A" && spell2 != "N/A"){
@@ -2086,6 +2166,30 @@ var keys = function(){
 			}
 			if((spell1 == "Water" && spell2 == "Mystic") || (spell2 == "Water" && spell1 == "Mystic")){
 				mystic.shoot();
+			}
+			if(spell1 == "Dark" && spell2 == "Dark"){
+				dark2.shoot();
+			}
+			if((spell1 == "Dark" && spell2 == "Earth") || (spell2 == "Dark" && spell1 == "Earth")){
+				darkearth.shoot();
+			}
+			if((spell1 == "Dark" && spell2 == "Fire") || (spell2 == "Dark" && spell1 == "Fire")){
+				darkfire.shoot();
+			}
+			if((spell1 == "Dark" && spell2 == "Ice") || (spell2 == "Dark" && spell1 == "Ice")){
+				darkice.shoot();
+			}
+			if((spell1 == "Dark" && spell2 == "Lightning") || (spell2 == "Dark" && spell1 == "Lightning")){
+				darklightning.shoot();
+			}
+			if((spell1 == "Dark" && spell2 == "Air") || (spell2 == "Dark" && spell1 == "Air")){
+				darkair.shoot();
+			}
+			if((spell1 == "Dark" && spell2 == "Mystic") || (spell2 == "Dark" && spell1 == "Mystic")){
+				mystic.shoot();
+			}
+			if((spell1 == "Dark" && spell2 == "Water") || (spell2 == "Dark" && spell1 == "Water")){
+				darkwater.shoot();
 			}
 		}
 	}
@@ -2247,7 +2351,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.6.0 Alpha: April 23 2012", 244, 96);
+	ctx.fillText("Version 0.6.1 Alpha: April 24 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	if(hsNum == 1){
 		ctx.fillStyle = colorz[hsColor];
@@ -2520,6 +2624,37 @@ setInterval(function(){
 			earth.move();
 			earth2.draw();
 			earth2.move();
+			/*for(R in earth2roots1){
+				earth2roots1[R].draw();
+			}
+			for(R in earth3roots1){
+				earth3roots1[R].draw();
+			}
+			earth2rootStrike.draw();
+			earth2Move(earth2rootStrike);
+			earth2AI(earth2rootStrike);
+			earth2rootStrike2.draw();
+			earth2Move(earth2rootStrike2);
+			earth2AI(earth2rootStrike2);
+			earth2rootStrike3.draw();
+			earth2Move(earth2rootStrike3);
+			earth2AI(earth2rootStrike3);
+			earth2rootStrike4.draw();
+			earth2Move(earth2rootStrike4);
+			earth2AI(earth2rootStrike4);
+			earth2rootStrike5.draw();
+			earth2Move(earth2rootStrike5);
+			earth2AI(earth2rootStrike5);
+			earth2rootStrike6.draw();
+			earth2Move(earth2rootStrike6);
+			earth2AI(earth2rootStrike6);
+			earth2rootStrike7.draw();
+			earth2Move(earth2rootStrike7);
+			earth2AI(earth2rootStrike7);
+			earth2rootStrike8.draw();
+			earth2Move(earth2rootStrike8);
+			earth2AI(earth2rootStrike8);
+			earth2.tick();*/
 			//All Tick spells, in mystic class do to imports
 			for(T in Ticks){
 				Ticks[T].tick();
@@ -2615,6 +2750,11 @@ setInterval(function(){
 			for(W in Wpools){
 				Wpools[W].draw();
 				Wpools[W].move();
+			}
+			
+			for(S in darkSpikes){
+				spikeDraw(darkSpikes[S]);
+				spikeMove(darkSpikes[S]);
 			}
 			
 			sFire.draw();
