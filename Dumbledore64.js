@@ -31,9 +31,11 @@
 			-Added sound for wind spells
 			-Globblies no longer spawn outside the fire level
 			-Bosses do not spawn when enemies are on screen, instead enemies stop spawning
+			-Fire boss powerup ups damage instead of health
 		
 	TODO:
 		-Bugs
+			-If anything besides player hurts obs it does players power. maybe not a big deal?
 		-Highscores
 			-Get website/leaderboards
 		-Optimize
@@ -987,6 +989,7 @@ var player = {
 	dirct: 0,
 	hp: 3,
 	maxhp: 3,
+	power: 1,
 	dmg: false,
 	dir: "W",
 	LR: "",
@@ -1324,7 +1327,7 @@ function drawtypeMarker(M){
 		else if(M.text == "+ Water"){
 			M.color = "#0000FF";
 		}
-		else if(M.text == "+ Max Hp"){
+		else if(M.text == "+ Max Hp" || M.text == "+ Damage"){
 			M.color = colorz[colorNum];
 			colorNum++;
 			if(colorNum > 6){

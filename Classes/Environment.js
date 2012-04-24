@@ -221,7 +221,10 @@ function obsHit(O){
 			Killed.currentTime=0;
 			Killed.play();
 		}
-		O.hp-=1;
+		O.hp-=player.power;
+		if(O.hp < 0){
+			O.hp = 0;
+		}
 		O.hptimer = 20;
 	}
 	if(O.hp == 0){

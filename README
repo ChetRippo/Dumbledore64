@@ -16,6 +16,7 @@ Version 0.6.0 Changes(4/23/2012):
 			-Added sound for wind spells
 			-Globblies no longer spawn outside the fire level
 			-Bosses do not spawn when enemies are on screen, instead enemies stop spawning
+			-Fire boss powerup ups damage instead of health
 		
 	TODO:
 		-Bugs

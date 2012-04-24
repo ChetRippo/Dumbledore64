@@ -738,28 +738,49 @@ var hpUp = {
 	},
 	onHit: function(){
 		if(typemarker.x != -100 && typemarker2.x != -100){
-			typemarker3.text = "+ Max Hp";
+			if(this.boss == "treeW"){
+				typemarker3.text = "+ Max Hp";
+			}
+			else{
+				typemarker3.text = "+ Damage";
+			}
 			typemarker3.x = player.x-player.width*2;
 			typemarker3.y = player.y;
 			typemarker3.speed = 2;
 			typemarker3.timeLeft = 90;
 		}
 		else if(typemarker.x != -100){
-			typemarker2.text = "+ Max Hp";
+			if(this.boss == "treeW"){
+				typemarker2.text = "+ Max Hp";
+			}
+			else{
+				typemarker2.text = "+ Damage";
+			}
 			typemarker2.x = player.x-player.width*2;
 			typemarker2.y = player.y;
 			typemarker2.speed = 2;
 			typemarker2.timeLeft = 90;
 		}
 		else{
-			typemarker.text = "+ Max Hp";
+			if(this.boss == "treeW"){
+				typemarker.text = "+ Max Hp";
+			}
+			else{
+				typemarker.text = "+ Damage";
+			}
 			typemarker.x = player.x-player.width*2;
 			typemarker.y = player.y;
 			typemarker.speed = 2;
 			typemarker.timeLeft = 90;
 		}
-		player.maxhp+=1;
-		player.hp = player.maxhp;
+		if(this.boss == "treeW"){
+			player.maxhp+=1;
+			player.hp = player.maxhp;
+		}
+		else if(this.boss == "Dragon"){
+			player.hp = player.maxhp;
+			player.power+=1;
+		}
 		Frozen.currentTime=0;
 		Frozen.play();
 		hpParticleW.x = this.x;

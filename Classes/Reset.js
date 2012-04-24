@@ -44,6 +44,7 @@ function reset(){
 	player.dirct = 0;
 	player.hp = 3;
 	player.maxhp = 3;
+	player.power = 1;
 	player.dmg = false;
 	player.dir = "W";
 	player.LR = "";

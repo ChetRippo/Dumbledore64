@@ -1598,8 +1598,11 @@ function onHit(E){
 	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == -2 || E.type == -3 || E.type == -4 || E.type == -5 || E.type == "Thief"
 		|| (E.type == "Dragon" && DragonR.onScreen == 0 && DragonL.onScreen == 0) || E.type == "DragonR" || E.type == "DragonL"){
 		if(!(E.hptimer > 0)){
-			E.hp-=1;
+			E.hp-=player.power;
 			E.hptimer = 30;
+			if(E.hp < 0){
+				E.hp = 0;
+			}
 			if(E.type == "Thief"){
 				E.state = 3;
 				E.counter = 0;
@@ -2106,7 +2109,7 @@ if(E.type != "Meteor"){
 
 function spawn(E){
 	if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft == 0 && typemarker3.timeLeft == 0 && hpUp.x == -100
-		&& Dragon.onScreen != 1 && (!(Dragon.spawned == 1 && player.maxhp < 4) && !(treeWizz.spawned == 1 && player.maxhp < 4) || E.type == "Dragon" || E.type == -1)){
+		&& Dragon.onScreen != 1 && (!(Dragon.spawned == 1 && player.power < 2) && !(treeWizz.spawned == 1 && player.maxhp < 4) || E.type == "Dragon" || E.type == -1)){
 		if(E.type == 1){
 			if(E.respawn == 0){
 				E.movement = true;
