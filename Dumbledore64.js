@@ -22,6 +22,7 @@
 			-Added to HTML compatibility
 			-Fixed bug where sound played on game reset
 			-Hump Dumps now ignore ice moves while in trees
+			-Random Element for dragon only spawns when you have no spells
 		-Additions:
 			-Added backspace button to initial typing
 			-Added enter button to initial typing
@@ -36,6 +37,7 @@
 	TODO:
 		-Bugs
 			-If anything besides player hurts obs it does players power. maybe not a big deal?
+			-Give forest wizard randelement
 		-Highscores
 			-Get website/leaderboards
 		-Optimize

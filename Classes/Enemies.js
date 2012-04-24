@@ -1471,14 +1471,16 @@ var DragonEffect = {
 			}
 		}
 		if(Dragon.onScreen == 1 && this.cd <=0){
-			this.cd = 360;
-			RandEffect.onScreen = 1;
-			RandEffect.used = 0;
-			RandEffect.x = 400;
-			RandEffect.y = 288;
-			RandomCube.timeLeft = 150;
-			RandomCube.x = 400;
-			RandomCube.y = 288;
+			if(spell1 == "N/A"){
+				this.cd = 360;
+				RandEffect.onScreen = 1;
+				RandEffect.used = 0;
+				RandEffect.x = 400;
+				RandEffect.y = 288;
+				RandomCube.timeLeft = 150;
+				RandomCube.x = 400;
+				RandomCube.y = 288;
+			}
 		}
 		else if(Dragon.onScreen == 1){
 			this.cd-=1;
