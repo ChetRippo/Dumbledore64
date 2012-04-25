@@ -717,8 +717,6 @@ function reset(){
 	rootBlastW.oy = -200;
 	rootBlastW.width = 32;
 	rootBlastW.height = 8;
-	rootBlastW.hwidth = 8;
-	rootBlastW.hheight = 32;
 	rootBlastW.frame = 0;
 	rootBlastW.cd = 0;
 	rootBlastW.speed = 16;
@@ -730,10 +728,8 @@ function reset(){
 	rootBlastA.y = -200;
 	rootBlastA.ox = -100;
 	rootBlastA.oy = -200;
-	rootBlastA.width = 32;
-	rootBlastA.height = 8;
-	rootBlastA.hwidth = 8;
-	rootBlastA.hheight = 32;
+	rootBlastA.width = 8;
+	rootBlastA.height = 32;
 	rootBlastA.frame = 0;
 	rootBlastA.cd = 0;
 	rootBlastA.speed = 16;
@@ -747,8 +743,6 @@ function reset(){
 	rootBlastS.oy = -200;
 	rootBlastS.width = 32;
 	rootBlastS.height = 8;
-	rootBlastS.hwidth = 8;
-	rootBlastS.hheight = 32;
 	rootBlastS.frame = 0;
 	rootBlastS.cd = 0;
 	rootBlastS.speed = 16;
@@ -760,10 +754,8 @@ function reset(){
 	rootBlastD.y = -200;
 	rootBlastD.ox = -100;
 	rootBlastD.oy = -200;
-	rootBlastD.width = 32;
-	rootBlastD.height = 8;
-	rootBlastD.hwidth = 8;
-	rootBlastD.hheight = 32;
+	rootBlastD.width = 8;
+	rootBlastD.height = 32;
 	rootBlastD.frame = 0;
 	rootBlastD.cd = 0;
 	rootBlastD.speed = 16;
@@ -788,10 +780,6 @@ function reset(){
 	rootStrike.speed = 8;
 	rootStrike.speed2 = 4;
 	rootStrike.respawn = -1;
-	rootStrike.origrp = -1;
-	rootStrike.pts = 25;
-	rootStrike.hp = 2;
-	rootStrike.hptimer = 0;
 	rootStrike.dir = "W";
 	rootStrike.rp = -1;
 	rootStrike.index = 0;
@@ -809,10 +797,6 @@ function reset(){
 	rootStrike2.speed = 8;
 	rootStrike2.speed2 = 4;
 	rootStrike2.respawn = -1;
-	rootStrike2.origrp = -1;
-	rootStrike2.pts = 25;
-	rootStrike2.hp = 2;
-	rootStrike2.hptimer = 0;
 	rootStrike2.dir = "W";
 	rootStrike2.rp = -1;
 	rootStrike2.index = 0;
@@ -830,10 +814,6 @@ function reset(){
 	rootStrike3.speed = 8;
 	rootStrike3.speed2 = 4;
 	rootStrike3.respawn = -1;
-	rootStrike3.origrp = -1;
-	rootStrike3.pts = 25;
-	rootStrike3.hp = 2;
-	rootStrike3.hptimer = 0;
 	rootStrike3.dir = "W";
 	rootStrike3.rp = -1;
 	rootStrike3.index = 0;
@@ -851,10 +831,6 @@ function reset(){
 	rootStrike4.speed = 8;
 	rootStrike4.speed2 = 4;
 	rootStrike4.respawn = -1;
-	rootStrike4.origrp = -1;
-	rootStrike4.pts = 25;
-	rootStrike4.hp = 2;
-	rootStrike4.hptimer = 0;
 	rootStrike4.dir = "W";
 	rootStrike4.rp = -1;
 	rootStrike4.index = 0;
@@ -1667,14 +1643,52 @@ function reset(){
 	earth.speed = 4;
 	earth.cast = 0;
 	earth.used = 0;
-	earth2.color = "#33CC00";
-	earth2.timeLeft = 0;
-	earth2.x = -100;
-	earth2.y = -200;
-	earth2.cd = 0;
-	earth2.speed = 4;
-	earth2.cast = 0;
-	earth2.used = 0;
+	earth2.cd: 0,
+	earth2.cast: 0,
+	earth2.used: 0,
+	earth2.timeLeft: -1,
+	earth2rootStrike.x = -100;
+	earth2rootStrike.y = -200;
+	earth2rootStrike.onScreen = 0;
+	earth2rootStrike.movement = false;
+	earth2rootStrike2.x = -100;
+	earth2rootStrike2.y = -200;
+	earth2rootStrike2.onScreen = 0;
+	earth2rootStrike2.movement = false;
+	earth2rootStrike3.x = -100;
+	earth2rootStrike3.y = -200;
+	earth2rootStrike3.onScreen = 0;
+	earth2rootStrike3.movement = false;
+	earth2rootStrike4.x = -100;
+	earth2rootStrike4.y = -200;
+	earth2rootStrike4.onScreen = 0;
+	earth2rootStrike4.movement = false;
+	earth2rootStrike5.x = -100;
+	earth2rootStrike5.y = -200;
+	earth2rootStrike5.onScreen = 0;
+	earth2rootStrike5.movement = false;
+	earth2rootStrike6.x = -100;
+	earth2rootStrike6.y = -200;
+	earth2rootStrike6.onScreen = 0;
+	earth2rootStrike6.movement = false;
+	earth2rootStrike7.x = -100;
+	earth2rootStrike7.y = -200;
+	earth2rootStrike7.onScreen = 0;
+	earth2rootStrike7.movement = false;
+	earth2rootStrike8.x = -100;
+	earth2rootStrike8.y = -200;
+	earth2rootStrike8.onScreen = 0;
+	earth2rootStrike8.movement = false;
+	for(R in earth2roots1){
+		earth2roots1[R].onScreen = 0;
+		earth2roots1[R].x = -500;
+		earth2roots1[R].y = -500;
+	}
+	for(R in earth3roots1){
+		earth3roots1[R].onScreen = 0;
+		earth3roots1[R].x = -500;
+		earth3roots1[R].y = -500;
+	}
 	//------------------------ Lightning.js ---------------------//
 	lightning.timeLeft = 0;
 	lightning.vwidth = 32;

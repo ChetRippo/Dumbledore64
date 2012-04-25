@@ -14,42 +14,49 @@
 
 */
 /*
-	Version 0.6.1 Changes(4/24/2012):
+	Version 0.6.1 Changes(4/25/2012):
+		-Balancing:
+			-Lowered Earth1 Cooldown by 10 seconds
+			-Lowered Earth2 cooldown to 24 seconds
 		-Bug Fixes:
 			-Slowed down diagonal shots and bubblebeam shots
 			-Tree Wizard's RootStrike now damages you in every spot
+			-Improved Tree Wizard's Root Blast collisions
+			-Using Earth1, followed by an Earth1 + element spell no longer resets Earth1 cooldown
 		-Additions:
 			-Fire boss powerup ups damage instead of health
 			-Tree Wizard now gives random powerup when you don't have an element
+			-Tree Wizard's RootStrike moves more tangly
+			-Tree Wizard's RootStrike is now not killable and does not act like enemies
+			-Changed Earth2 to a new spell. Sends out roots at enemies. After 3 seconds you are healed and more roots are sent out.
+				-After another 3 you are healed again. You are immobile the whole time
 		
 	TODO:
 		-Bugs
-			-If anything besides player hurts obs it does players power. maybe not a big deal?
-			-Make treeW collisions better
-			-Make rootStrike not have hp
+			-obs always take 1 dmg, maybe an issue?
 		-Highscores
 			-Get website/leaderboards
 		-Optimize
 			-Arrays
 		-Spells
+			-Change Earth2?
+				-RootStrike + Heal?
 			-Dark (Black)
-				-Teemo spikes?
-					-Dark = Spike Trap
-					-Dark + Dark = DeathBound
-					-Dark + Fire = Land Mine
-					-Dark + Ice = Ice Trap
-					-Dark + Lightning = ???
-					-Dark + Air = ???
-					-Dark + Mystic = Portal?
-					-Dark + Water = ???
+				-Dark = Spike Trap: Drop 1 trap, does player dmg + 1 and disappears if an enemy hits it. Can only have 5 on map at once. 1 second recharge
+				-Dark + Dark = DeathBound: ?
+				-Dark + Fire = Land Mine: Drop 1 Landmine, does player dmg + 1 explosion if enemy hits it. 5 on map at once. 1 second recharge
+				-Dark + Ice = Ice Trap: Drop one Ice trap, freezes enemies in an area for 3 seconds if they hit it. 1 second recharge, 5 on map
+				-Dark + Earth = Moonlight: Heals x hp, but the player cannot see well for x seconds
+				-Dark + Lightning = Spire: Creates a large spike that kills anything that touches it. Shooting the spike causes it to fire conductive shots
+				-Dark + Air = Black Hole: ?
+				-Dark + Mystic = Piercing Shots: Teleport active, passive makes regular attacks do 1 extra damage
+				-Dark + Water = ?
 			-Summon (?)
 				-Minions
-		+More enemies and AI
-			+Bosses:
+		-More enemies and AI
+			-Bosses:
 				-Swamp boss?
 				-Boss that uses stolen spells?
-				-Fire boss increases damage instead of hp?
-					-If so change clause in spawn enemy function to include that for not spawning enemies when boss in queue
 		-Terrain
 			-Swamp level, has boardwalks and lots of water that slows you if you go in it
 				-Crocodiles appear in water if you stay still
@@ -83,8 +90,8 @@ var FPS = 30;
 var keysDown = {};
 var cd = 0;
 var hptimer = 0;
-var spell1 = "N/A";
-var spell2 = "N/A";
+var spell1 = "Earth";
+var spell2 = "Earth";
 var spell = "N/A";
 var spell1pic = "N/A";
 var spell2pic = "N/A";
@@ -701,7 +708,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.6.1 Alpha: April 24 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.6.1 Alpha: April 25 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//newgame
 		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
 			select = true;
@@ -781,7 +788,7 @@ var Info = {
 		ctx.fillText("Have you ever wanted to be just like Dumbledore?", this.x-this.width/2, this.y-this.height/2); 
 		ctx.fillText("Well now you can with this AMAZING wizard simulator!", this.x-this.width/2, this.y+2*this.height/2);
 		ctx.fillText("Originally released for the Nintendo 64,", this.x-this.width/2, this.y+5*this.height/2);
-		ctx.fillText("this lifetime classic is now available at your leisure!",  this.x-this.width/2, this.y+8*this.height/2);
+		ctx.fillText("this Synthesistime classic is now available at your leisure!",  this.x-this.width/2, this.y+8*this.height/2);
 		ctx.fillText("Controls:", this.x-this.width/2, this.y+11*this.height/2);
 		ctx.fillText("W: Move up", this.x-this.width/2, this.y+14*this.height/2);
 		ctx.fillText("A: Move left", this.x-this.width/2, this.y+17*this.height/2);
@@ -1223,6 +1230,73 @@ function Hcontained(a, b){
 		return false;
 	}
 }
+//DiffDir for rootstrike
+function DiffDir(dir){
+	if(dir == "W"){
+		if(Math.floor(Math.random() * 2) + 1 == 2){
+			return "A";
+		}
+		else{
+			return "D";
+		}
+	}
+	else if(dir == "A"){
+		if(Math.floor(Math.random() * 2) + 1 == 2){
+			return "W";
+		}
+		else{
+			return "S";
+		}
+	}
+	else if(dir == "S"){
+		if(Math.floor(Math.random() * 2) + 1 == 2){
+			return "A";
+		}
+		else{
+			return "D";
+		}
+	}
+	else if(dir == "D"){
+		if(Math.floor(Math.random() * 2) + 1 == 2){
+			return "W";
+		}
+		else{
+			return "S";
+		}
+	}
+	else if(dir == "WD"){
+		if(Math.floor(Math.random() * 2) + 1 == 2){
+			return "WA";
+		}
+		else{
+			return "SD";
+		}
+	}
+	else if(dir == "AS"){
+		if(Math.floor(Math.random() * 2) + 1 == 2){
+			return "AS";
+		}
+		else{
+			return "WA";
+		}
+	}
+	else if(dir == "WA"){
+		if(Math.floor(Math.random() * 2) + 1 == 2){
+			return "AS";
+		}
+		else{
+			return "WD";
+		}
+	}
+	else if(dir == "SD"){
+		if(Math.floor(Math.random() * 2) + 1 == 2){
+			return "AS";
+		}
+		else{
+			return "WD";
+		}
+	}
+}
 //------------------------------------------------- Point and Element Markers -------------------------------------------------------//
 // Fancyness
 var marker = {
@@ -1464,7 +1538,7 @@ function UI(){
 		spell = "Absolute Zero";
 	}
 	if(spell1 == "Earth" && spell2 == "Earth"){
-		spell = "Life";
+		spell = "Synthesis";
 	}
 	if((spell1 == "Earth" && spell2 == "Fire") || (spell2 == "Earth" && spell1 == "Fire")){
 		spell = "Fire and Heal";
@@ -1661,7 +1735,7 @@ function UI(){
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(earth.cd/30) + "s", 32, 544);
 	}
-	else if(spell == "Life"){
+	else if(spell == "Synthesis"){
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(earth2.cd/30) + "s", 32, 544);
@@ -2351,7 +2425,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.6.1 Alpha: April 24 2012", 244, 96);
+	ctx.fillText("Version 0.6.1 Alpha: April 25 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	if(hsNum == 1){
 		ctx.fillStyle = colorz[hsColor];
@@ -2622,9 +2696,9 @@ setInterval(function(){
 		
 			earth.draw();
 			earth.move();
-			earth2.draw();
-			earth2.move();
-			/*for(R in earth2roots1){
+			//earth2.draw();
+			//earth2.move();
+			for(R in earth2roots1){
 				earth2roots1[R].draw();
 			}
 			for(R in earth3roots1){
@@ -2654,7 +2728,7 @@ setInterval(function(){
 			earth2rootStrike8.draw();
 			earth2Move(earth2rootStrike8);
 			earth2AI(earth2rootStrike8);
-			earth2.tick();*/
+			earth2.tick();
 			//All Tick spells, in mystic class do to imports
 			for(T in Ticks){
 				Ticks[T].tick();

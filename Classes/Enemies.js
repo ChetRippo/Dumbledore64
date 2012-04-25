@@ -1613,8 +1613,8 @@ function onHit(E){
 			}
 		}
 	}
-	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == -2 || E.type == -3 || E.type == -4 || E.type == -5 || E.type == "Thief"
-		|| (E.type == "Dragon" && DragonR.onScreen == 0 && DragonL.onScreen == 0) || E.type == "DragonR" || E.type == "DragonL"){
+	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == "Thief" || (E.type == "Dragon" && DragonR.onScreen == 0 && DragonL.onScreen == 0)
+		|| E.type == "DragonR" || E.type == "DragonL"){
 		if(!(E.hptimer > 0)){
 			E.hp-=player.power;
 			E.hptimer = 30;
@@ -1634,7 +1634,7 @@ function onHit(E){
 				if(E.type == 2){
 					E.hp = 5;
 				}
-				if(E.type == -2 || E.type == -1){
+				if(E.type == -1){
 					rootStrike.x = -2000;
 					rootStrike.y = -2000;
 					rootStrike.onScreen = 0;
@@ -1646,8 +1646,6 @@ function onHit(E){
 						roots11[R].x = -9000;
 						roots11[R].y = -9000;
 					}
-				}
-				if(E.type == -3 || E.type == -1){
 					rootStrike2.x = -2000;
 					rootStrike2.y = -2000;
 					rootStrike2.onScreen = 0;
@@ -1659,8 +1657,6 @@ function onHit(E){
 						roots12[R].x = -9000;
 						roots12[R].y = -9000;
 					}
-				}
-				if(E.type == -4 || E.type == -1){
 					rootStrike3.x = -2000;
 					rootStrike3.y = -2000;
 					rootStrike3.onScreen = 0;
@@ -1672,8 +1668,6 @@ function onHit(E){
 						roots13[R].x = -9000;
 						roots13[R].y = -9000;
 					}
-				}
-				if(E.type == -5 || E.type == -1){
 					rootStrike4.x = -2000;
 					rootStrike4.y = -2000;
 					rootStrike4.onScreen = 0;

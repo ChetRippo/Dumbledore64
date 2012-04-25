@@ -47,7 +47,7 @@ var earth = {
 	if(this.cd == 0){
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 1020;
+		this.cd = 720;
 		this.cast = 30;
 		cd = 30;
 		this.timeLeft = 15;
@@ -58,74 +58,12 @@ var earth = {
 	}
 	}	
 };
-// Earth2: Heals player hp by 2
-var earth2 = {
-	color: "#33CC00",
-	timeLeft: 0,
-	x: -100,
-	y: -200,
-	cd: 0,
-	speed: 4,
-	cast: 0,
-	used: 0,
-	
-	draw: function(){
-		if(this.timeLeft == 0){
-			this.x = -100;
-			this.y = -200;
-		}
-		if(this.cast > 0){
-			this.cast-=1;
-		}
-		if(this.cast == 0 && this.timeLeft > 0){
-			ctx.fillStyle = this.color;
-			ctx.font = "18pt Arial";
-			ctx.fillText("+2", this.x, this.y);
-		}	
-	},
-	
-	move: function(){
-		if(this.cd > 0){
-			this.cd-=1;
-		}
-		if(this.timeLeft > 0 && this.cast == 0){
-			this.y -= this.speed;
-			this.timeLeft--;
-			if(this.used == 0){
-				if(player.hp < player.maxhp-1){
-					player.hp+=2;
-				}
-				else if(player.hp < player.maxhp){
-					player.hp+=1;
-				}
-				this.used = 1;
-				Pickup.currentTime=0;
-				Pickup.play();
-			}
-		}
-			
-	},
-	// Spawn
-	shoot: function(){
-	if(this.cd == 0){
-		this.x = player.x;
-		this.y = player.y;
-		this.cd = 1020;
-		this.cast = 30;
-		cd = 30;
-		this.timeLeft = 15;
-		castingBar.onScreen = 1;
-		castingBar.cast = 30;
-		castingBar.castmax = 30;
-		this.used = 0;
-	}
-	}	
-};/*
+//earth2: Heals 1 hp every 3 seconds for 6 seconds. Every 3 seconds a rootstrike is launched. You are immobile.
 var earth2 = {
 	cd: 0,
 	cast: 0,
 	used: 0,
-	timeLeft: 0,
+	timeLeft: -1,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
@@ -133,30 +71,36 @@ var earth2 = {
 		if(this.cast > 0){
 			this.cast-=1;
 		}
-		if(this.timeLeft > 0){
+		if(this.timeLeft >= 0){
 			this.timeLeft-=1;
 		}
 		if(this.timeLeft == 90){
-			earth2rootStrike5.x = earth2rootStrike.x;
-			earth2rootStrike5.y = earth2rootStrike.y;
+			Fwave.currentTime=0;
+			Fwave.play();
+			earth2rootStrike5.x = player.x + 32;
+			earth2rootStrike5.y = player.y + 32;
 			earth2rootStrike5.onScreen = 1;
 			earth2rootStrike5.movement = true;
-			earth2rootStrike5.hp = 2;
-			earth2rootStrike6.x = earth2rootStrike2.x;
-			earth2rootStrike6.y = earth2rootStrike2.y;
+			earth2rootStrike6.x = player.x-32;
+			earth2rootStrike6.y = player.y+32;
 			earth2rootStrike6.onScreen = 1;
 			earth2rootStrike6.movement = true;
-			earth2rootStrike6.hp = 2;
-			earth2rootStrike7.x = earth2rootStrike3.x;
-			earth2rootStrike7.y = earth2rootStrike3.y;
+			earth2rootStrike7.x = player.x+32;
+			earth2rootStrike7.y = player.y-32;
 			earth2rootStrike7.onScreen = 1;
-			earth2rootStrike7.hp = 2;
 			earth2rootStrike7.movement = true;
-			earth2rootStrike8.x = earth2rootStrike4.x;
-			earth2rootStrike8.y = earth2rootStrike4.y;
+			earth2rootStrike8.x = player.x-32;
+			earth2rootStrike8.y = player.y-32;
 			earth2rootStrike8.onScreen = 1;
 			earth2rootStrike8.movement = true;
-			earth2rootStrike8.hp = 2;
+			var currentEarthcd = earth.cd;
+			earth.cd = 0;
+			earth.shoot();
+			earth.cast = 0;
+			castingBar.onScreen = 1;
+			castingBar.cast = 90;
+			castingBar.castmax = 180;
+			earth.cd = currentEarthcd;
 		}
 		if(this.timeLeft == 0){
 			earth2rootStrike.x = -100;
@@ -191,6 +135,14 @@ var earth2 = {
 			earth2rootStrike8.y = -200;
 			earth2rootStrike8.onScreen = 0;
 			earth2rootStrike8.movement = false;
+			var currentEarthcd = earth.cd;
+			earth.cd = 0;
+			earth.shoot();
+			earth.cast = 0;
+			castingBar.onScreen = 1;
+			castingBar.cast = 0;
+			castingBar.castmax = 180;
+			earth.cd = currentEarthcd;
 			for(R in earth2roots1){
 				earth2roots1[R].onScreen = 0;
 				earth2roots1[R].x = -500;
@@ -227,23 +179,19 @@ var earth2 = {
 			earth2rootStrike.y = player.y - 64;
 			earth2rootStrike.onScreen = 1;
 			earth2rootStrike.movement = true;
-			earth2rootStrike.hp = 2;
 			earth2rootStrike2.x = player.x;
 			earth2rootStrike2.y = player.y + 64;
 			earth2rootStrike2.onScreen = 1;
 			earth2rootStrike2.movement = true;
-			earth2rootStrike2.hp = 2;
 			earth2rootStrike3.x = player.x - 64;
 			earth2rootStrike3.y = player.y;
 			earth2rootStrike3.onScreen = 1;
-			earth2rootStrike3.hp = 2;
 			earth2rootStrike3.movement = true;
 			earth2rootStrike4.x = player.x + 64;
 			earth2rootStrike4.y = player.y;
 			earth2rootStrike4.onScreen = 1;
 			earth2rootStrike4.movement = true;
-			earth2rootStrike4.hp = 2;
-			this.cd = 600;
+			this.cd = 720;
 			this.cast = 180;
 			this.timeLeft = 180;
 			cd = 180;
@@ -2080,6 +2028,14 @@ var earth3roots1 = {1: earth3rootstr, 2: earth3rootstr2, 3: earth3rootstr3, 4: e
 			31: earth3rootstr31, 32: earth3rootstr32, 33: earth3rootstr33, 34: earth3rootstr34,	35: earth3rootstr35, 36: earth3rootstr36, 37: earth3rootstr37, 38: earth3rootstr38, 39: earth3rootstr39, 40: earth3rootstr310, 41: earth3rootstr311, 42: earth3rootstr312,
 			43: earth3rootstr313, 44: earth3rootstr314, 45: earth3rootstr315, 46: earth3rootstr41, 47: earth3rootstr42, 48: earth3rootstr43, 49: earth3rootstr44,	50: earth3rootstr45, 51: earth3rootstr46, 52: earth3rootstr47, 53: earth3rootstr48,
 			54: earth3rootstr49, 55: earth3rootstr410, 56: earth3rootstr411, 57: earth3rootstr412, 58: earth3rootstr413, 59: earth3rootstr414, 60: earth3rootstr415};
+var earth3roots11 = {1: earth3rootstr, 2: earth3rootstr2, 3: earth3rootstr3, 4: earth3rootstr4, 5: earth3rootstr5, 6: earth3rootstr6, 7: earth3rootstr7, 8: earth3rootstr8, 9: earth3rootstr9, 10: earth3rootstr10,
+			11: earth3rootstr11, 12: earth3rootstr12, 13: earth3rootstr13, 14: earth3rootstr14, 15: earth3rootstr15};
+var earth3roots12 = {1: earth3rootstr21, 2: earth3rootstr22, 3: earth3rootstr23, 4: earth3rootstr24, 5: earth3rootstr25, 6: earth3rootstr26, 7: earth3rootstr27, 8: earth3rootstr28, 9: earth3rootstr29, 10: earth3rootstr210, 11: earth3rootstr211,
+			12: earth3rootstr212, 13: earth3rootstr213, 14: earth3rootstr214, 15: earth3rootstr215};
+var earth3roots13 = {1: earth3rootstr31, 2: earth3rootstr32, 3: earth3rootstr33, 4: earth3rootstr34,	5: earth3rootstr35, 6: earth3rootstr36, 7: earth3rootstr37, 8: earth3rootstr38, 9: earth3rootstr39, 10: earth3rootstr310,
+			11: earth3rootstr311, 12: earth3rootstr312,	13: earth3rootstr313, 14: earth3rootstr314, 15: earth3rootstr315};
+var earth3roots14 = {1: earth3rootstr41, 2: earth3rootstr42, 3: earth3rootstr43, 4: earth3rootstr44,	5: earth3rootstr45, 6: earth3rootstr46, 7: earth3rootstr47, 8: earth3rootstr48, 9: earth3rootstr49, 10: earth3rootstr410,
+			11: earth3rootstr411, 12: earth3rootstr412,	13: earth3rootstr413, 14: earth3rootstr414, 15: earth3rootstr415};
 var earth2rootStrike = {
 	type: -2,
 	x: -500,
@@ -2115,6 +2071,26 @@ var earth2rootStrike = {
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
+		if(this.dirct <= 0){
+			for(R in earth2roots12){
+				if(collision(this.dir, this, earth2roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth2roots13){
+				if(collision(this.dir, this, earth2roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth2roots14){
+				if(collision(this.dir, this, earth2roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+		}
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(earth2rootstr.onScreen == 0){
 				earth2rootstr.onScreen = 1;
@@ -2235,6 +2211,26 @@ var earth2rootStrike2 = {
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
+		if(this.dirct <= 0){
+			for(R in earth2roots11){
+				if(collision(this.dir, this, earth2roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth2roots13){
+				if(collision(this.dir, this, earth2roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth2roots14){
+				if(collision(this.dir, this, earth2roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+		}
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(earth2rootstr21.onScreen == 0){
 				earth2rootstr21.onScreen = 1;
@@ -2355,6 +2351,26 @@ var earth2rootStrike3 = {
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
+		if(this.dirct <= 0){
+			for(R in earth2roots12){
+				if(collision(this.dir, this, earth2roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth2roots11){
+				if(collision(this.dir, this, earth2roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth2roots14){
+				if(collision(this.dir, this, earth2roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+		}
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(earth2rootstr31.onScreen == 0){
 				earth2rootstr31.onScreen = 1;
@@ -2475,6 +2491,26 @@ var earth2rootStrike4 = {
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
+		if(this.dirct <= 0){
+			for(R in earth2roots12){
+				if(collision(this.dir, this, earth2roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth2roots13){
+				if(collision(this.dir, this, earth2roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth2roots11){
+				if(collision(this.dir, this, earth2roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+		}
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(earth2rootstr41.onScreen == 0){
 				earth2rootstr41.onScreen = 1;
@@ -2594,6 +2630,26 @@ var earth2rootStrike5 = {
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
+		if(this.dirct <= 0){
+			for(R in earth3roots12){
+				if(collision(this.dir, this, earth3roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth3roots13){
+				if(collision(this.dir, this, earth3roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth3roots14){
+				if(collision(this.dir, this, earth3roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+		}
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(earth3rootstr.onScreen == 0){
 				earth3rootstr.onScreen = 1;
@@ -2714,6 +2770,26 @@ var earth2rootStrike6 = {
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
+		if(this.dirct <= 0){
+			for(R in earth3roots11){
+				if(collision(this.dir, this, earth3roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth3roots13){
+				if(collision(this.dir, this, earth3roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth3roots14){
+				if(collision(this.dir, this, earth3roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+		}
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(earth3rootstr21.onScreen == 0){
 				earth3rootstr21.onScreen = 1;
@@ -2834,6 +2910,26 @@ var earth2rootStrike7 = {
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
+		if(this.dirct <= 0){
+			for(R in earth3roots12){
+				if(collision(this.dir, this, earth3roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth3roots14){
+				if(collision(this.dir, this, earth3roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth3roots11){
+				if(collision(this.dir, this, earth3roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+		}
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(earth3rootstr31.onScreen == 0){
 				earth3rootstr31.onScreen = 1;
@@ -2954,6 +3050,26 @@ var earth2rootStrike8 = {
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
+		if(this.dirct <= 0){
+			for(R in earth3roots12){
+				if(collision(this.dir, this, earth3roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth3roots13){
+				if(collision(this.dir, this, earth3roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in earth3roots11){
+				if(collision(this.dir, this, earth3roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+		}
 		if(this.frame/2 == Math.round(this.frame/2)){
 			if(earth3rootstr41.onScreen == 0){
 				earth3rootstr41.onScreen = 1;
@@ -3053,7 +3169,7 @@ function earth2AI(B){
 	if(closest.x < 8 || closest.y < 8 || closest.x > 792 || closest.y > 568){
 		B.dir = B.dir;
 	}
-	else{
+	else if(B.dirct <=0){
 		if(xdifference < 4 && ydifference < 4){
 			B.dir = "WA";
 		}
@@ -3078,6 +3194,9 @@ function earth2AI(B){
 		else{
 			B.dir = "D";
 		}
+	}
+	else if(B.dirct > 0){
+		B.dirct-=1;
 	}
 }
 function earth2Move(B){
@@ -3116,4 +3235,4 @@ function earth2Move(B){
 			}
 		}
 	}
-}*/
+}

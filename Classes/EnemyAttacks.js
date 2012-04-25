@@ -1328,8 +1328,6 @@ var rootBlastW = {
 	oy: -200,
 	width: 32,
 	height: 8,
-	hwidth: 8,
-	hheight: 32,
 	frame: 0,
 	cd: 0,
 	speed: 16,
@@ -1351,9 +1349,7 @@ var rootBlastW = {
 			this.width = 32;
 			this.onScreen = 0;
 			this.height = 8;
-			this.hwidth = 8;
 			this.frame = 0;
-			this.hheight = 32;
 		}
 		else if(this.onScreen ==1){
 			this.width = 32 + (4*this.frame);
@@ -1369,17 +1365,17 @@ var rootBlastW = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		multiLaser.currentTime=0;
-		multiLaser.play();
-		this.width = 32;
-		this.x = treeWizz.x;
-		this.y = treeWizz.y;
-		this.ox = treeWizz.x;
-		this.oy = treeWizz.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
+		if(this.cd == 0){
+			multiLaser.currentTime=0;
+			multiLaser.play();
+			this.width = 32;
+			this.x = treeWizz.x;
+			this.y = treeWizz.y;
+			this.ox = treeWizz.x;
+			this.oy = treeWizz.y;
+			this.frame = 0;
+			this.onScreen = 1;
+		}
 	}
 };
 var rootBlastA = {
@@ -1388,10 +1384,8 @@ var rootBlastA = {
 	y: -200,
 	ox: -100,
 	oy: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
+	width: 8,
+	height: 32,
 	frame: 0,
 	cd: 0,
 	speed: 16,
@@ -1402,7 +1396,7 @@ var rootBlastA = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.hwidth / 2, this.y - this.hheight / 2, this.hwidth, this.hheight);
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -1410,15 +1404,13 @@ var rootBlastA = {
 		if(this.frame == 30){
 			this.x = -100;
 			this.y = -200;
-			this.width = 32;
+			this.height = 32;
 			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
+			this.width = 8;
 			this.frame = 0;
-			this.hheight = 32;
 		}
 		else if(this.onScreen ==1){
-			this.hheight = 32 + (4*this.frame);
+			this.height = 32 + (4*this.frame);
 			this.frame++;
 			this.x -= this.speed;
 			if(collision(this.dir, this, player)){
@@ -1431,17 +1423,17 @@ var rootBlastA = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		multiLaser.currentTime=0;
-		multiLaser.play();
-		this.width = 32;
-		this.x = treeWizz.x;
-		this.y = treeWizz.y;
-		this.ox = treeWizz.x;
-		this.oy = treeWizz.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
+		if(this.cd == 0){
+			multiLaser.currentTime=0;
+			multiLaser.play();
+			this.height = 32;
+			this.x = treeWizz.x;
+			this.y = treeWizz.y;
+			this.ox = treeWizz.x;
+			this.oy = treeWizz.y;
+			this.frame = 0;
+			this.onScreen = 1;
+		}
 	}
 };
 var rootBlastS = {
@@ -1452,8 +1444,6 @@ var rootBlastS = {
 	oy: -200,
 	width: 32,
 	height: 8,
-	hwidth: 8,
-	hheight: 32,
 	frame: 0,
 	cd: 0,
 	speed: 16,
@@ -1477,9 +1467,7 @@ var rootBlastS = {
 			this.width = 32;
 			this.onScreen = 0;
 			this.height = 8;
-			this.hwidth = 8;
 			this.frame = 0;
-			this.hheight = 32;
 		}
 		else if(this.onScreen ==1){
 			this.width = 32 + (4*this.frame);
@@ -1495,17 +1483,17 @@ var rootBlastS = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		multiLaser.currentTime=0;
-		multiLaser.play();
-		this.width = 32;
-		this.x = treeWizz.x;
-		this.y = treeWizz.y;
-		this.ox = treeWizz.x;
-		this.oy = treeWizz.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
+		if(this.cd == 0){
+			multiLaser.currentTime=0;
+			multiLaser.play();
+			this.width = 32;
+			this.x = treeWizz.x;
+			this.y = treeWizz.y;
+			this.ox = treeWizz.x;
+			this.oy = treeWizz.y;
+			this.frame = 0;
+			this.onScreen = 1;
+		}
 	}
 };
 var rootBlastD = {
@@ -1514,10 +1502,8 @@ var rootBlastD = {
 	y: -200,
 	ox: -100,
 	oy: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
+	width: 8,
+	height: 32,
 	frame: 0,
 	cd: 0,
 	speed: 16,
@@ -1528,7 +1514,7 @@ var rootBlastD = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.hwidth / 2, this.y - this.hheight / 2, this.hwidth, this.hheight);
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -1536,15 +1522,13 @@ var rootBlastD = {
 		if(this.frame == 30){
 			this.x = -100;
 			this.y = -200;
-			this.width = 32;
+			this.width = 8;
 			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
+			this.height = 32;
 			this.frame = 0;
-			this.hheight = 32;
 		}
 		else if(this.onScreen ==1){
-			this.hheight = 32 + (4*this.frame);
+			this.height = 32 + (4*this.frame);
 			this.frame++;
 			this.x += this.speed;
 			if(collision(this.dir, this, player)){
@@ -1560,7 +1544,7 @@ var rootBlastD = {
 	if(this.cd == 0){
 		multiLaser.currentTime=0;
 		multiLaser.play();
-		this.width = 32;
+		this.height = 32;
 		this.x = treeWizz.x;
 		this.y = treeWizz.y;
 		this.ox = treeWizz.x;
@@ -2498,9 +2482,6 @@ var rootStrike = {
 	speed: 8,
 	speed2: 4,
 	respawn: -1,
-	pts: 0,
-	hp: 2,
-	hptimer: 0,
 	dir: "W",
 	rp: -1,
 	index: 0,
@@ -2516,17 +2497,29 @@ var rootStrike = {
 				}
 			}
 		}
+		if(this.dirct <= 0){
+			for(R in roots12){
+				if(collision(this.dir, this, roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots13){
+				if(collision(this.dir, this, roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots14){
+				if(collision(this.dir, this, roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+		}
 		if(this.onScreen == 1){
-			if(this.hptimer > 0){
-				this.hptimer-=1;
-			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.hptimer/2 != Math.round(this.hptimer/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = "#330000";
-			}
+			ctx.fillStyle = "#330000";
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 			ctx.globalAlpha = Alpha;
 			this.frame++;
@@ -2625,9 +2618,6 @@ var rootStrike2 = {
 	speed: 8,
 	speed2: 4,
 	respawn: -1,
-	pts: 0,
-	hp: 2,
-	hptimer: 0,
 	dir: "W",
 	rp: -1,
 	index: 0,
@@ -2637,16 +2627,28 @@ var rootStrike2 = {
 	// Draws the enemy on the canvas when called
 	draw: function(){
 	if(this.onScreen == 1){
-		if(this.hptimer > 0){
-			this.hptimer-=1;
+		if(this.dirct <= 0){
+			for(R in roots11){
+				if(collision(this.dir, this, roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots13){
+				if(collision(this.dir, this, roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots14){
+				if(collision(this.dir, this, roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.fillStyle = "white";
-		}
-		else{
-			ctx.fillStyle = "#330000";
-		}
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
@@ -2745,9 +2747,6 @@ var rootStrike3 = {
 	speed: 8,
 	speed2: 4,
 	respawn: -1,
-	pts: 0,
-	hp: 2,
-	hptimer: 0,
 	dir: "W",
 	rp: -1,
 	index: 0,
@@ -2757,16 +2756,28 @@ var rootStrike3 = {
 	// Draws the enemy on the canvas when called
 	draw: function(){
 	if(this.onScreen == 1){
-		if(this.hptimer > 0){
-			this.hptimer-=1;
+		if(this.dirct <= 0){
+			for(R in roots12){
+				if(collision(this.dir, this, roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots11){
+				if(collision(this.dir, this, roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots14){
+				if(collision(this.dir, this, roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.fillStyle = "white";
-		}
-		else{
-			ctx.fillStyle = "#330000";
-		}
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
@@ -2865,9 +2876,6 @@ var rootStrike4 = {
 	speed: 8,
 	speed2: 4,
 	respawn: -1,
-	pts: 0,
-	hp: 2,
-	hptimer: 0,
 	dir: "W",
 	rp: -1,
 	index: 0,
@@ -2877,16 +2885,28 @@ var rootStrike4 = {
 	// Draws the enemy on the canvas when called
 	draw: function(){
 	if(this.onScreen == 1){
-		if(this.hptimer > 0){
-			this.hptimer-=1;
+		if(this.dirct <= 0){
+			for(R in roots12){
+				if(collision(this.dir, this, roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots13){
+				if(collision(this.dir, this, roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots11){
+				if(collision(this.dir, this, roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.fillStyle = "white";
-		}
-		else{
-			ctx.fillStyle = "#330000";
-		}
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;

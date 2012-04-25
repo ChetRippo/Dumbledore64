@@ -1,37 +1,47 @@
 
-Version 0.6.1 Changes(4/24/2012):
+Version 0.6.1 Changes(4/25/2012):
+		-Balancing:
+			-Lowered Earth1 Cooldown by 10 seconds
+			-Lowered Earth2 cooldown to 24 seconds
 		-Bug Fixes:
 			-Slowed down diagonal shots and bubblebeam shots
 			-Tree Wizard's RootStrike now damages you in every spot
+			-Improved Tree Wizard's Root Blast collisions
+			-Using Earth1, followed by an Earth1 + element spell no longer resets Earth1 cooldown
 		-Additions:
 			-Fire boss powerup ups damage instead of health
 			-Tree Wizard now gives random powerup when you don't have an element
+			-Tree Wizard's RootStrike moves more tangly
+			-Tree Wizard's RootStrike is now not killable and does not act like enemies
+			-Changed Earth2 to a new spell. Sends out roots at enemies. After 3 seconds you are healed and more roots are sent out.
+				-After another 3 you are healed again. You are immobile the whole time
 		
 	TODO:
 		-Bugs
+			-obs always take 1 dmg, maybe an issue?
 		-Highscores
 			-Get website/leaderboards
 		-Optimize
 			-Arrays
 		-Spells
+			-Change Earth2?
+				-RootStrike + Heal?
 			-Dark (Black)
-				-Teemo spikes?
-					-Dark = Spike Trap
-					-Dark + Dark = DeathBound
-					-Dark + Fire = Land Mine
-					-Dark + Ice = Ice Trap
-					-Dark + Lightning = ???
-					-Dark + Air = ???
-					-Dark + Mystic = Portal?
-					-Dark + Water = ???
+				-Dark = Spike Trap: Drop 1 trap, does player dmg + 1 and disappears if an enemy hits it. Can only have 5 on map at once. 1 second recharge
+				-Dark + Dark = DeathBound: ?
+				-Dark + Fire = Land Mine: Drop 1 Landmine, does player dmg + 1 explosion if enemy hits it. 5 on map at once. 1 second recharge
+				-Dark + Ice = Ice Trap: Drop one Ice trap, freezes enemies in an area for 3 seconds if they hit it. 1 second recharge, 5 on map
+				-Dark + Earth = Moonlight: Heals x hp, but the player cannot see well for x seconds
+				-Dark + Lightning = Spire: Creates a large spike that kills anything that touches it. Shooting the spike causes it to fire conductive shots
+				-Dark + Air = Black Hole: ?
+				-Dark + Mystic = Piercing Shots: Teleport active, passive makes regular attacks do 1 extra damage
+				-Dark + Water = ?
 			-Summon (?)
 				-Minions
-		+More enemies and AI
-			+Bosses:
+		-More enemies and AI
+			-Bosses:
 				-Swamp boss?
 				-Boss that uses stolen spells?
-				-Fire boss increases damage instead of hp?
-					-If so change clause in spawn enemy function to include that for not spawning enemies when boss in queue
 		-Terrain
 			-Swamp level, has boardwalks and lots of water that slows you if you go in it
 				-Crocodiles appear in water if you stay still

@@ -1407,12 +1407,13 @@ var fireheal = {
 	shoot: function(){
 		if(this.cd == 0){
 			this.cd = 600;
+			var currentEarthcd = earth.cd;
 			fire.cd = 0;
 			earth.cd = 0;
 			fire.shoot();
 			earth.shoot();
 			fire.cd = 0;
-			earth.cd = 0;
+			earth.cd = currentEarthcd;
 			fire.cast = 30;
 		}
 		else{
@@ -1431,13 +1432,14 @@ var iceheal = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
+			var currentEarthcd = earth.cd;
 			this.cd = 600;
 			ice.cd = 0;
 			earth.cd = 0;
 			ice.shoot();
 			earth.shoot();
 			ice.cd = 0;
-			earth.cd = 0;
+			earth.cd = currentEarthcd;
 			ice.cast = 30;
 		}
 		else{
@@ -1456,13 +1458,14 @@ var lightningheal = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
+			var currentEarthcd = earth.cd;
 			this.cd = 600;
 			lightning.cd = 0;
 			earth.cd = 0;
 			lightning.shoot();
 			earth.shoot();
 			lightning.cd = 0;
-			earth.cd = 0;
+			earth.cd = currentEarthcd;
 			lightning.cast = 30;
 		}
 		else{
@@ -2880,13 +2883,14 @@ var airearth = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
+			var currentEarthcd = earth.cd;
 			this.cd = 300;
 			air.cd = 0;
 			earth.cd = 0;
 			air.shoot();
 			earth.shoot();
 			air.cd = 0;
-			earth.cd = 0;
+			earth.cd = currentEarthcd;
 			air.cast = 30;
 		}
 	}	
@@ -2975,13 +2979,14 @@ var mysticearth = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
+			var currentEarthcd = earth.cd;
 			this.cd = 300;
 			mystic.cd = 0;
 			earth.cd = 0;
 			mystic.shoot();
 			earth.shoot();
 			mystic.cd = 0;
-			earth.cd = 0;
+			earth.cd = currentEarthcd;
 			mystic.cast = 30;
 		}
 	}	
@@ -4730,13 +4735,14 @@ var waterearth = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
+			var currentEarthcd = earth.cd;
 			this.cd = 1020;
 			water.cd = 0;
 			earth.cd = 0;
 			water.shoot();
 			earth.shoot();
 			water.cd = 0;
-			earth.cd = 0;
+			earth.cd = currentEarthcd;
 			water.cast = 30;
 		}
 	}	
