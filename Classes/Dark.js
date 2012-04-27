@@ -8,7 +8,7 @@ var dark = {
 	cd: 0,
 	onScreen: 0,
 	used: 0,
-	inventory: 5,
+	inventory: 7,
 	shoot: function(){
 		if(this.cd == 0 && this.inventory > 0){
 			this.inventory-=1;
@@ -46,6 +46,20 @@ var dark = {
 				this.cd = 30;
 				dark15.onScreen = 1;
 				dark15.used = 0;
+			}
+			else if(dark16.onScreen == 0){
+				dark16.x = player.x;
+				dark16.y = player.y;
+				this.cd = 30;
+				dark16.onScreen = 1;
+				dark16.used = 0;
+			}
+			else if(dark17.onScreen == 0){
+				dark17.x = player.x;
+				dark17.y = player.y;
+				this.cd = 30;
+				dark17.onScreen = 1;
+				dark17.used = 0;
 			}
 		}
 	}
@@ -90,7 +104,27 @@ var dark15 = {
 	onScreen: 0,
 	used: 0
 }
-var darkSpikes = {1: dark, 2: dark12, 3: dark13, 4: dark14, 5: dark15};
+var dark16 = {
+	color: "black",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	cd: 0,
+	onScreen: 0,
+	used: 0
+}
+var dark17 = {
+	color: "black",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	cd: 0,
+	onScreen: 0,
+	used: 0
+}
+var darkSpikes = {1: dark, 2: dark12, 3: dark13, 4: dark14, 5: dark15, 6: dark16, 7: dark17};
 function spikeDraw(S){
 	if(S.onScreen == 1){
 		if(S.used == 0){
@@ -114,7 +148,7 @@ function spikeMove(S){
 		for (E in AllEnemies){
 			if(contained(AllEnemies[E], S)){
 				player.currpower = player.power;
-				player.power = 2;
+				player.power+=1;
 				onHit(AllEnemies[E]);
 				player.power = player.currpower;
 				S.onScreen = 0;

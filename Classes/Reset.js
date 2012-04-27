@@ -1643,10 +1643,10 @@ function reset(){
 	earth.speed = 4;
 	earth.cast = 0;
 	earth.used = 0;
-	earth2.cd: 0,
-	earth2.cast: 0,
-	earth2.used: 0,
-	earth2.timeLeft: -1,
+	earth2.cd = 0;
+	earth2.cast = 0;
+	earth2.used = 0;
+	earth2.timeLeft = -1;
 	earth2rootStrike.x = -100;
 	earth2rootStrike.y = -200;
 	earth2rootStrike.onScreen = 0;

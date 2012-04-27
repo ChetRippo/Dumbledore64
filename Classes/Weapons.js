@@ -5584,6 +5584,579 @@ var Wpool5 = {
 	}
 };
 var Wpools = {1: Wpool, 2: Wpool2, 3: Wpool3, 4: Wpool4, 5: Wpool5};
+// Landmine: Drops 2 dmg explosion trap on player's location
+var darkfire = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	cd: 0,
+	onScreen: 0,
+	used: 0,
+	inventory: 5,
+	shoot: function(){
+		if(this.cd == 0 && this.inventory > 0){
+			this.inventory-=1;
+			if(this.onScreen == 0){
+				this.x = player.x;
+				this.y = player.y;
+				this.cd = 30;
+				this.onScreen = 1;
+				this.used = 0;
+			}
+			else if(darkfire12.onScreen == 0){
+				darkfire12.x = player.x;
+				darkfire12.y = player.y;
+				this.cd = 30;
+				darkfire12.onScreen = 1;
+				darkfire12.used = 0;
+			}
+			else if(darkfire13.onScreen == 0){
+				darkfire13.x = player.x;
+				darkfire13.y = player.y;
+				this.cd = 30;
+				darkfire13.onScreen = 1;
+				darkfire13.used = 0;
+			}
+			else if(darkfire14.onScreen == 0){
+				darkfire14.x = player.x;
+				darkfire14.y = player.y;
+				this.cd = 30;
+				darkfire14.onScreen = 1;
+				darkfire14.used = 0;
+			}
+			else if(darkfire15.onScreen == 0){
+				darkfire15.x = player.x;
+				darkfire15.y = player.y;
+				this.cd = 30;
+				darkfire15.onScreen = 1;
+				darkfire15.used = 0;
+			}
+		}
+	}
+};
+var darkfire12 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	cd: 0,
+	onScreen: 0,
+	used: 0
+}	
+var darkfire13 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	cd: 0,
+	onScreen: 0,
+	used: 0
+}
+var darkfire14 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	cd: 0,
+	onScreen: 0,
+	used: 0
+}
+var darkfire15 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	cd: 0,
+	onScreen: 0,
+	used: 0
+}
+var darkfireExplosion = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	frame: 0,
+	cd: 0,
+	onScreen: 0,
+	used: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.frame == 20){
+			this.x = -100;
+			this.y = -200;
+			this.width = 32;
+			this.height = 32;
+			this.onScreen = 0;
+		}
+		else if(this.onScreen ==1){
+			this.width = 32 + (8*this.frame);
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					onHit(AllEnemies[E]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle1[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle2[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle3[O]);
+					player.power = player.currpower;
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.height = 32;
+		this.width = 32;
+		this.frame = 0;
+		this.onScreen = 1;
+		this.used = 0;
+	}
+};
+var darkfireExplosion2 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	frame: 0,
+	cd: 0,
+	onScreen: 0,
+	used: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.frame == 20){
+			this.x = -100;
+			this.y = -200;
+			this.width = 32;
+			this.height = 32;
+			this.onScreen = 0;
+		}
+		else if(this.onScreen ==1){
+			this.width = 32 + (8*this.frame);
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					onHit(AllEnemies[E]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle1[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle2[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle3[O]);
+					player.power = player.currpower;
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.height = 32;
+		this.width = 32;
+		this.frame = 0;
+		this.onScreen = 1;
+		this.used = 0;
+	}
+};
+var darkfireExplosion3 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	frame: 0,
+	cd: 0,
+	onScreen: 0,
+	used: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.frame == 20){
+			this.x = -100;
+			this.y = -200;
+			this.width = 32;
+			this.height = 32;
+			this.onScreen = 0;
+		}
+		else if(this.onScreen ==1){
+			this.width = 32 + (8*this.frame);
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					onHit(AllEnemies[E]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle1[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle2[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle3[O]);
+					player.power = player.currpower;
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.height = 32;
+		this.width = 32;
+		this.frame = 0;
+		this.onScreen = 1;
+		this.used = 0;
+	}
+};
+var darkfireExplosion4 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	frame: 0,
+	cd: 0,
+	onScreen: 0,
+	used: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.frame == 20){
+			this.x = -100;
+			this.y = -200;
+			this.width = 32;
+			this.height = 32;
+			this.onScreen = 0;
+		}
+		else if(this.onScreen ==1){
+			this.width = 32 + (8*this.frame);
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					onHit(AllEnemies[E]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle1[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle2[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle3[O]);
+					player.power = player.currpower;
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.height = 32;
+		this.width = 32;
+		this.frame = 0;
+		this.onScreen = 1;
+		this.used = 0;
+	}
+};
+var darkfireExplosion5 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	frame: 0,
+	cd: 0,
+	onScreen: 0,
+	used: 0,
+	
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width / 2,
+			this.y - this.height / 2,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.frame == 20){
+			this.x = -100;
+			this.y = -200;
+			this.width = 32;
+			this.height = 32;
+			this.onScreen = 0;
+		}
+		else if(this.onScreen ==1){
+			this.width = 32 + (8*this.frame);
+			this.height = 32 + (8*this.frame);
+			this.frame++;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					onHit(AllEnemies[E]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle1[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle2[O]);
+					player.power = player.currpower;
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					player.currpower = player.power;
+					player.power+=1;
+					obsHit(obstacle3[O]);
+					player.power = player.currpower;
+				}
+			}
+		}
+	},
+	// Spawn
+	shoot: function(){
+		this.height = 32;
+		this.width = 32;
+		this.frame = 0;
+		this.onScreen = 1;
+		this.used = 0;
+	}
+};
+var darkfireSpikes = {1: darkfire, 2: darkfire12, 3: darkfire13, 4: darkfire14, 5: darkfire15};
+var darkfireExplosions = {1: darkfireExplosion, 2: darkfireExplosion2, 3: darkfireExplosion3, 4: darkfireExplosion4, 5: darkfireExplosion5};
+function firespikeMove(S){
+	if(S.cd > 0){
+		S.cd-=1;
+	}
+	else if(S.onScreen == 1){
+		for (E in AllEnemies){
+			if(contained(AllEnemies[E], S)){
+				player.currpower = player.power;
+				player.power+=1;
+				onHit(AllEnemies[E]);
+				player.power = player.currpower;
+				if(darkfireExplosion.onScreen == 0){
+					darkfireExplosion.x = S.x;
+					darkfireExplosion.y = S.y;
+					darkfireExplosion.shoot();
+				}
+				else if(darkfireExplosion2.onScreen == 0){
+					darkfireExplosion2.x = S.x;
+					darkfireExplosion2.y = S.y;
+					darkfireExplosion2.shoot();
+				}
+				else if(darkfireExplosion3.onScreen == 0){
+					darkfireExplosion3.x = S.x;
+					darkfireExplosion3.y = S.y;
+					darkfireExplosion3.shoot();
+				}
+				else if(darkfireExplosion4.onScreen == 0){
+					darkfireExplosion4.x = S.x;
+					darkfireExplosion4.y = S.y;
+					darkfireExplosion4.shoot();
+				}
+				else if(darkfireExplosion5.onScreen == 0){
+					darkfireExplosion5.x = S.x;
+					darkfireExplosion5.y = S.y;
+					darkfireExplosion5.shoot();
+				}
+				S.onScreen = 0;
+				S.x = -100;
+				S.y = -200;
+				darkfire.inventory+=1;
+			}
+		}
+	}
+}
 //--------------------------------------------------------------- Spell Array -------------------------------------------------------//
 var AllFire = {1: fire, 2: fire2, 3: fireice, 4: firelightningf1, 5: firelightningf2, 6: firelightningf3, 7: firelightningf4,
 				8: Mfire, 9: Mfire2, 10: Mfire3, 11: Mfire4, 12: Globblyfire, 13: Globblyfire2, 14: Globblyfire3};

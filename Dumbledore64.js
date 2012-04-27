@@ -788,7 +788,7 @@ var Info = {
 		ctx.fillText("Have you ever wanted to be just like Dumbledore?", this.x-this.width/2, this.y-this.height/2); 
 		ctx.fillText("Well now you can with this AMAZING wizard simulator!", this.x-this.width/2, this.y+2*this.height/2);
 		ctx.fillText("Originally released for the Nintendo 64,", this.x-this.width/2, this.y+5*this.height/2);
-		ctx.fillText("this Synthesistime classic is now available at your leisure!",  this.x-this.width/2, this.y+8*this.height/2);
+		ctx.fillText("this lifetime classic is now available at your leisure!",  this.x-this.width/2, this.y+8*this.height/2);
 		ctx.fillText("Controls:", this.x-this.width/2, this.y+11*this.height/2);
 		ctx.fillText("W: Move up", this.x-this.width/2, this.y+14*this.height/2);
 		ctx.fillText("A: Move left", this.x-this.width/2, this.y+17*this.height/2);
@@ -2829,6 +2829,14 @@ setInterval(function(){
 			for(S in darkSpikes){
 				spikeDraw(darkSpikes[S]);
 				spikeMove(darkSpikes[S]);
+			}
+			for(S in darkfireSpikes){
+				spikeDraw(darkfireSpikes[S]);
+				firespikeMove(darkfireSpikes[S]);
+			}
+			for(S in darkfireExplosions){
+				darkfireExplosions[S].draw();
+				darkfireExplosions[S].move();
 			}
 			
 			sFire.draw();
