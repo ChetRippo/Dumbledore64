@@ -5,7 +5,9 @@ function reset(){
 		}
 	}
 	for(M in AllMusic){
-		AllMusic[M].currentTime = 0;
+		if(AllMusic[M] != Spells){
+			AllMusic[M].currentTime = 0;
+		}
 	}
 	//------------------------ Dumbledore64.js ------------------//
 	resetGame = true;
