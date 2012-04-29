@@ -128,8 +128,8 @@ var darkSpikes = {1: dark, 2: dark12, 3: dark13, 4: dark14, 5: dark15, 6: dark16
 function spikeDraw(S){
 	if(S.onScreen == 1){
 		if(S.used == 0){
-			Explosion.currentTime=0;
-			Explosion.play();
+			flatBoop.currentTime=0;
+			flatBoop.play();
 			S.used = 1;
 		}
 		ctx.globalAlpha = Alpha*0.5;
@@ -146,7 +146,7 @@ function spikeMove(S){
 	}
 	else if(S.onScreen == 1){
 		for (E in AllEnemies){
-			if(contained(AllEnemies[E], S)){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], S)){
 				player.currpower = player.power;
 				player.power+=1;
 				onHit(AllEnemies[E]);

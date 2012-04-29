@@ -8,7 +8,8 @@ function reset(){
 	STATE = 0;
 	//Pause menu
 	preSTATE = 0;
-	keytimer = 0;
+	//keytimer is 8 because otherwise enter will quick swap
+	keytimer = 8;
 	nu = 0;
 	hs = 0;
 	cd = 0;
@@ -35,6 +36,11 @@ function reset(){
 	//End of game pause
 	deathTimer = -1;
 	jungleIndex = 0;
+	Menu.newgameSelect = false;
+	Menu.howtoplaySelect = false;
+	Menu.optionsSelect = false;
+	Menu.scoreSelect = false;
+	Menu.creditSelect = false;
 	player.x = 400;
 	player.y = 256;
 	player.width = 32;

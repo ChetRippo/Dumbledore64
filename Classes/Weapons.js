@@ -591,6 +591,9 @@ function drawBullet(B){
 		else if(spell == "Homing Shots"){
 			ctx.fillStyle = "#FF00FF";
 		}
+		else if(spell == "Piercing Shots"){
+			ctx.fillStyle = "black";
+		}
 		else if(spell != "Bubblebeam"){
 			ctx.fillStyle = B.color;
 		}
@@ -705,7 +708,14 @@ function Bulletmove(B){
 	if(spell != "Homing Shots"){
 		for(O in obstacle1){
 			if(collision(B.dir, B, obstacle1[O])){
+				if(spell == "Piercing Shots"){
+					player.currpower = player.power;
+					player.power+=1;
+				}
 				obsHit(obstacle1[O]);
+				if(spell == "Piercing Shots"){
+					player.power = player.currpower;
+				}
 				if(spell == "Explosive Shots"){
 					if(Mfire.onScreen == 0){
 						Mfire.onScreen = 1;
@@ -807,7 +817,14 @@ function Bulletmove(B){
 		}
 		for(O in obstacle2){
 			if(collision(B.dir, B, obstacle2[O])){
+				if(spell == "Piercing Shots"){
+					player.currpower = player.power;
+					player.power+=1;
+				}
 				obsHit(obstacle2[O]);
+				if(spell == "Piercing Shots"){
+					player.power = player.currpower;
+				}
 				if(spell == "Explosive Shots"){
 					if(Mfire.onScreen == 0){
 						Mfire.onScreen = 1;
@@ -909,7 +926,14 @@ function Bulletmove(B){
 		}
 		for(O in obstacle3){
 			if(collision(B.dir, B, obstacle3[O])){
+				if(spell == "Piercing Shots"){
+					player.currpower = player.power;
+					player.power+=1;
+				}
 				obsHit(obstacle3[O]);
+				if(spell == "Piercing Shots"){
+					player.power = player.currpower;
+				}
 				if(spell == "Explosive Shots"){
 					if(Mfire.onScreen == 0){
 						Mfire.onScreen = 1;
@@ -1012,6 +1036,10 @@ function Bulletmove(B){
 	}
 	for (E in AllEnemies){
 		if(collision(B.dir, B, AllEnemies[E])){
+			if(spell == "Piercing Shots"){
+				player.currpower = player.power;
+				player.power+=1;
+			}
 			if(spell == "Explosive Shots"){
 				if(Mfire.onScreen == 0){
 					Mfire.onScreen = 1;
@@ -1112,6 +1140,9 @@ function Bulletmove(B){
 				B.timeLeft = 0;
 			}
 			onHit(AllEnemies[E]);
+			if(spell == "Piercing Shots"){
+				player.power = player.currpower;
+			}
 		}
 	}
 	if (B.timeLeft > 0 && B.dir == "W"){
@@ -6119,7 +6150,7 @@ function firespikeMove(S){
 	}
 	else if(S.onScreen == 1){
 		for (E in AllEnemies){
-			if(contained(AllEnemies[E], S)){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], S)){
 				player.currpower = player.power;
 				player.power+=1;
 				onHit(AllEnemies[E]);
@@ -6157,6 +6188,80 @@ function firespikeMove(S){
 		}
 	}
 }
+//Moonlight: Fully heals you but you can't see for x seconds
+var darkearth = {
+	color: "#33CC00",
+	timeLeft: 0,
+	x: -100,
+	y: -200,
+	width: 128,
+	height: 128,
+	cd: 0,
+	speed: 4,
+	used: 0,
+	HealAmount: 0,
+	blackTimer: 0,
+	draw: function(){
+		if(this.timeLeft == 0){
+			this.x = -100;
+			this.y = -200;
+		}
+		if(this.timeLeft > 0){
+			ctx.fillStyle = this.color;
+			ctx.font = "18pt Arial";
+			ctx.fillText("+" + this.HealAmount, this.x, this.y);
+		}	
+	},
+	blackDraw: function(){
+		if(this.blackTimer > 0){
+			this.blackTimer -=1;
+			ctx.strokeStyle = "black";
+			ctx.lineWidth = 250;
+			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+			ctx.lineWidth = 500;
+			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+			ctx.lineWidth = 750;
+			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+			ctx.lineWidth = 1000;
+			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+			ctx.lineWidth = 1250;
+			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+			ctx.lineWidth = 1500;
+			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+			ctx.lineWidth = 1;
+			ctx.globalAlpha = Alpha*0.75;
+			ctx.fillStyle = "black";
+			ctx.fillRect(0, 0, 800, 576);
+			ctx.globalAlpha = Alpha;
+		}	
+	},
+	move: function(){
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(this.timeLeft > 0){
+			this.y -= this.speed;
+			this.timeLeft--;
+			if(this.used == 0){
+				player.hp = player.maxhp;
+				this.used = 1;
+				radiofailure.currentTime=0;
+				radiofailure.play();
+			}
+		}		
+	},
+	shoot: function(){
+		if(this.cd == 0){
+			this.x = player.x;
+			this.y = player.y;
+			this.cd = 360;
+			this.timeLeft = 15;
+			this.used = 0;
+			this.HealAmount = player.maxhp - player.hp;
+			this.blackTimer = 150;
+		}
+	}	
+};
 //--------------------------------------------------------------- Spell Array -------------------------------------------------------//
 var AllFire = {1: fire, 2: fire2, 3: fireice, 4: firelightningf1, 5: firelightningf2, 6: firelightningf3, 7: firelightningf4,
 				8: Mfire, 9: Mfire2, 10: Mfire3, 11: Mfire4, 12: Globblyfire, 13: Globblyfire2, 14: Globblyfire3};

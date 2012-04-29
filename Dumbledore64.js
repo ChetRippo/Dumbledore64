@@ -14,42 +14,28 @@
 
 */
 /*
-	Version 0.6.1 Changes(4/25/2012):
-		-Balancing:
-			-Lowered Earth1 Cooldown by 10 seconds
-			-Lowered Earth2 cooldown to 24 seconds
-		-Bug Fixes:
-			-Slowed down diagonal shots and bubblebeam shots
-			-Tree Wizard's RootStrike now damages you in every spot
-			-Improved Tree Wizard's Root Blast collisions
-			-Using Earth1, followed by an Earth1 + element spell no longer resets Earth1 cooldown
+	Version 0.6.2 Changes(4/28/2012):
+		-Bug fixes:
+			-Fixed bug where sound effects still played until you entered options screen
+			-Removed white outline on the menus
 		-Additions:
-			-Fire boss powerup ups damage instead of health
-			-Tree Wizard now gives random powerup when you don't have an element
-			-Tree Wizard's RootStrike moves more tangly
-			-Tree Wizard's RootStrike is now not killable and does not act like enemies
-			-Changed Earth2 to a new spell. Sends out roots at enemies. After 3 seconds you are healed and more roots are sent out.
-				-After another 3 you are healed again. You are immobile the whole time
-		
+			-Added short death animation
+			-Added keyboard shortcuts for main menu. Arrow keys and enter/space to select. Enter/Space act as back buttons too
+			-Added in new page screen courtesy of John Szevin
 	TODO:
 		-Bugs
 			-obs always take 1 dmg, maybe an issue?
-		-Highscores
-			-Get website/leaderboards
+			-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
+		+Highscores
+			+Get website/leaderboards
 		-Optimize
 			-Arrays
-		-Spells
-			-Change Earth2?
-				-RootStrike + Heal?
-			-Dark (Black)
-				-Dark = Spike Trap: Drop 1 trap, does player dmg + 1 and disappears if an enemy hits it. Can only have 5 on map at once. 1 second recharge
+		+Spells
+			+Dark (Black) *NEEDS ART FIRST*
 				-Dark + Dark = DeathBound: ?
-				-Dark + Fire = Land Mine: Drop 1 Landmine, does player dmg + 1 explosion if enemy hits it. 5 on map at once. 1 second recharge
-				-Dark + Ice = Ice Trap: Drop one Ice trap, freezes enemies in an area for 3 seconds if they hit it. 1 second recharge, 5 on map
-				-Dark + Earth = Moonlight: Heals x hp, but the player cannot see well for x seconds
+				+Dark + Ice = Ice Trap: Drop one Ice trap, freezes enemies in an area for 3 seconds if they hit it. 1 second recharge, 5 on map
 				-Dark + Lightning = Spire: Creates a large spike that kills anything that touches it. Shooting the spike causes it to fire conductive shots
 				-Dark + Air = Black Hole: ?
-				-Dark + Mystic = Piercing Shots: Teleport active, passive makes regular attacks do 1 extra damage
 				-Dark + Water = ?
 			-Summon (?)
 				-Minions
@@ -664,6 +650,16 @@ if(!Music){
 	var Music = 2;
 	$.jStorage.set("Music", Music);
 }
+if(vol == 1){
+	for(S in AllSounds){
+		AllSounds[S].volume=0;
+	}
+}
+if(Music == 1){
+	for(M in AllMusic){
+		AllMusic[M].volume=0;
+	}
+}
 //---------------------------------------------------------------- Mouse Posn -------------------------------------------------------//
 function getPosition(event){
     if (event.x != undefined && event.y != undefined){
@@ -701,6 +697,11 @@ var Menu = {
 	y: canvas.height/2,
 	width: 150,
 	height: 30,
+	newgameSelect: false,
+	howtoplaySelect: false,
+	optionsSelect: false,
+	scoreSelect: false,
+	creditSelect: false,
 	draw: function(){
 		var select = false;
 		ctx.fillStyle = "white";
@@ -708,13 +709,22 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.6.1 Alpha: April 25 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.6.2 Alpha: April 28 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		//Menu controls, keys is never called so copy pasted
+		if(keytimer > 0){
+			keytimer-=1;
+		}
 		//newgame
-		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height){
+		if((hX >= this.x-this.width*4/5 && hX <=this.x + this.width && hY <= this.y + 1.75*this.height && hY>=this.y-this.height*7/6 + 2*this.height) || this.newgameSelect){
 			select = true;
+			this.newgameSelect = true;
+			this.howtoplaySelect = false;
+			this.optionsSelect = false;
+			this.scoreSelect = false;
+			this.creditSelect = false;
 			ctx.drawImage(newgamemenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width && cY <= this.y + 1.75*this.height && cY>=this.y-this.height*7/6 + 2*this.height){
+		if((cX >= this.x-this.width*4/5 && cX <=this.x + this.width && cY <= this.y + 1.75*this.height && cY>=this.y-this.height*7/6 + 2*this.height) || ((13 in keysDown || 32 in keysDown) && this.newgameSelect)){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			cX = 0;
@@ -722,52 +732,145 @@ var Menu = {
 			STATE = 1;
 		}
 		//How to Play
-		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width/2 && hY <= this.y + 6*this.height && hY>=this.y-this.height*7/6 + 6*this.height){
+		if((hX >= this.x-this.width*4/5 && hX <=this.x + this.width/2 && hY <= this.y + 6*this.height && hY>=this.y-this.height*7/6 + 6*this.height) || this.howtoplaySelect){
 			select = true;
+			this.newgameSelect = false;
+			this.howtoplaySelect = true;
+			this.optionsSelect = false;
+			this.scoreSelect = false;
+			this.creditSelect = false;
 			ctx.drawImage(helpmenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y + 6*this.height && cY>=this.y-this.height*7/6 + 6*this.height){
+		if((cX >= this.x-this.width*4/5 && cX <=this.x + this.width/2 && cY <= this.y + 6*this.height && cY>=this.y-this.height*7/6 + 6*this.height) || (this.howtoplaySelect && (13 in keysDown || 32 in keysDown) && keytimer <=0)){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			cX = 0;
 			cY = 0;
 			STATE = 2;
+			keytimer = 8;
 		}
 		//Score
-		if(hX >= this.x-this.width*4/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 3.25*this.height && hY>=this.y-this.height*7/5 + 3.25*this.height){
+		if((hX >= this.x-this.width*4/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 3.25*this.height && hY>=this.y-this.height*7/5 + 3.25*this.height) || this.scoreSelect){
 			select = true;
+			this.newgameSelect = false;
+			this.howtoplaySelect = false;
+			this.optionsSelect = false;
+			this.scoreSelect = true;
+			this.creditSelect = false;
 			ctx.drawImage(scoremenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*4/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 3.25*this.height && cY>=this.y-this.height*7/5 + 3.25*this.height){
+		if((cX >= this.x-this.width*4/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 3.25*this.height && cY>=this.y-this.height*7/5 + 3.25*this.height) || (this.scoreSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			cX = 0;
 			cY = 0;
 			STATE = 5;
+			wait = 8;
 		}
 		//Options
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 4.5*this.height && hY>=this.y-this.height*7/6 + 4.5*this.height){
+		if((hX >= this.x-this.width*3/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 4.5*this.height && hY>=this.y-this.height*7/6 + 4.5*this.height) || this.optionsSelect){
 			select = true;
+			this.newgameSelect = false;
+			this.howtoplaySelect = false;
+			this.optionsSelect = true;
+			this.scoreSelect = false;
+			this.creditSelect = false;
 			ctx.drawImage(optionsmenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 4.5*this.height&& cY>=this.y-this.height*7/6 + 4.5*this.height){
+		if((cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 4.5*this.height&& cY>=this.y-this.height*7/6 + 4.5*this.height) || (this.optionsSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			cX = 0;
 			cY = 0;
 			STATE = 6;
+			keytimer = 8;
 		}
 		//Credits
-		if(hX >= this.x-this.width*3/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 7.25*this.height && hY>=this.y-this.height*7/6 + 7.25*this.height){
+		if((hX >= this.x-this.width*3/5 && hX <=this.x + this.width*3/4 && hY <= this.y + 7.25*this.height && hY>=this.y-this.height*7/6 + 7.25*this.height) || this.creditSelect){
 			select = true;
+			this.newgameSelect = false;
+			this.howtoplaySelect = false;
+			this.optionsSelect = false;
+			this.scoreSelect = false;
+			this.creditSelect = true;
 			ctx.drawImage(creditsmenu, 0, 0);
 		}		
-		if(cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 7.25*this.height&& cY>=this.y-this.height*7/6 + 7.25*this.height){
+		if((cX >= this.x-this.width*3/5 && cX <=this.x + this.width*3/4 && cY <= this.y + 7.25*this.height&& cY>=this.y-this.height*7/6 + 7.25*this.height) || (this.creditSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			cX = 0;
 			cY = 0;
 			STATE = 3;
+			keytimer = 8;
+		}
+		//keys in menu, 40 down 38 up
+		//init
+		if(keytimer == 0 && !this.newgameSelect && !this.howtoplaySelect && !this.optionsSelect && !this.scoreSelect && !this.creditSelect && (38 in keysDown || 40 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.newgameSelect = true;
+		}
+		//full down
+		else if(keytimer == 0 && !this.howtoplaySelect && !this.optionsSelect && !this.scoreSelect && !this.creditSelect && (40 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.newgameSelect = false;
+			this.scoreSelect = true;
+		}
+		else if(keytimer == 0 && !this.howtoplaySelect && !this.optionsSelect && !this.creditSelect && (40 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.scoreSelect = false;
+			this.optionsSelect = true;
+		}
+		else if(keytimer == 0 && !this.howtoplaySelect && !this.creditSelect && (40 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.optionsSelect = false;
+			this.howtoplaySelect = true;
+		}
+		else if(keytimer == 0 && !this.creditSelect && (40 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.howtoplaySelect = false;
+			this.creditSelect = true;
+		}
+		if(keytimer == 0 && this.creditSelect && (40 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.creditSelect = false;
+			this.newgameSelect = true;
+		}
+		//full up
+		else if(keytimer == 0 && this.creditSelect && (38 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.creditSelect = false;
+			this.howtoplaySelect = true;
+		}
+		else if(keytimer == 0 && this.howtoplaySelect && (38 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.howtoplaySelect = false;
+			this.optionsSelect = true;
+		}
+		else if(keytimer == 0 && this.optionsSelect && (38 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.optionsSelect = false;
+			this.scoreSelect = true;
+		}
+		else if(keytimer == 0 && this.scoreSelect && (38 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.scoreSelect = false;
+			this.newgameSelect = true;
+		}
+		else if(keytimer == 0 && this.newgameSelect && (38 in keysDown)){
+			keytimer = 4;
+			select = true;
+			this.newgameSelect = false;
+			this.creditSelect = true;
 		}
 		if(select == false){
 			ctx.drawImage(noselectmenu, 0, 0);
@@ -782,6 +885,9 @@ var Info = {
 	bx: 696,
 	by: 560,
 	draw: function(){
+		if(keytimer > 0){
+			keytimer-=1;
+		}
 		ctx.fillStyle = "white";
 		ctx.font = "14pt Arial";
 		ctx.strokeStyle = "white";
@@ -808,9 +914,10 @@ var Info = {
 		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
-		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+		if((cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6) || ((13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
+			keytimer = 8;
 			STATE = 0;
 		}
 }
@@ -823,6 +930,9 @@ var Credits = {
 	bx: 400-50,
 	by: 560,
 	draw: function(){
+		if(keytimer > 0){
+			keytimer-=1;
+		}
 		ctx.fillStyle = "white";
 		ctx.font = "18pt Arial";
 		ctx.strokeStyle = "white";
@@ -839,10 +949,11 @@ var Credits = {
 		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
-		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+		if((cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6) || ((13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
 			STATE = 0;
+			keytimer = 8;
 		}
 }
 };
@@ -874,6 +985,9 @@ var Options = {
 	bx: 400-50,
 	by: 560,
 	draw: function(){
+		if(keytimer > 0){
+			keytimer-=1;
+		}
 		ctx.fillStyle = "white";
 		ctx.font = "18pt Arial";
 		ctx.strokeStyle = "white";
@@ -968,9 +1082,10 @@ var Options = {
 		if(hX >= this.bx-10 && hX <=this.bx + 50 && hY <= this.by && hY>=this.by-this.height*7/6){
 			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 10, this.height+10);
 		}		
-		if(cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6){
+		if((cX >= this.bx-10 && cX <=this.bx + 50 && cY <= this.by && cY>=this.by-this.height*7/6) || ((13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
+			keytimer = 8;
 			STATE = 0;
 		}
 }
@@ -1396,6 +1511,9 @@ function drawtypeMarker(M){
 		else if(M.text == "+ Dark"){
 			M.color = "black";
 		}
+		else if(M.text == "Dead!"){
+			M.color = "#CC0000";
+		}
 		else if(M.text == "+ Max Hp" || M.text == "+ Damage"){
 			M.color = colorz[colorNum];
 			colorNum++;
@@ -1461,7 +1579,7 @@ ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 	if(STATE != 1 && STATE != "Jungle" && STATE != "Scorched"){
-		ctx.drawImage(menuBack, 4, 4);
+		ctx.drawImage(menuBack, 0, 0);
 	}
 	else if(STATE == 1){
 		ctx.drawImage(backGround1, 0, 0);
@@ -1883,7 +2001,7 @@ function UI(){
 	else if(spell == "Spike Trap"){
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(dark.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.round(dark.cd/30) + "s Traps: " + dark.inventory, 32, 544);
 	}
 	else if(spell == "Deathbound"){
 		ctx.fillStyle = "black";
@@ -1893,7 +2011,7 @@ function UI(){
 	else if(spell == "Landmine"){
 		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(darkfire.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.round(darkfire.cd/30) + "s Traps: " + darkfire.inventory, 32, 544);
 	}
 	else if(spell == "Ice Trap"){
 		ctx.fillStyle = "black";
@@ -1954,7 +2072,7 @@ var keys = function(){
 			ctx.globalAlpha = Alpha;
 		}
 	}
-	else{
+	else if(player.hp>0){
 		var Up = true;
 		var Down = true;
 		var Left = true;
@@ -2306,6 +2424,7 @@ function gameOver(){
 						inits[H] = " ";
 					}
 				}
+				wait = 4;
 				initsInd = 9;
 			}
 			if(8 in keysDown && wait <= 0){
@@ -2425,7 +2544,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.6.1 Alpha: April 25 2012", 244, 96);
+	ctx.fillText("Version 0.6.2 Alpha: April 28 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	if(hsNum == 1){
 		ctx.fillStyle = colorz[hsColor];
@@ -2457,10 +2576,11 @@ function gameOver(){
 	if(hX >= bx-10 && hX <=bx + 50 && hY <= by && hY>=by-height*7/6){
 		ctx.strokeRect(bx-10, by-height*7/6, width * 3 + 10, height+10);
 	}
-	if(cX >= bx-10 && cX <=bx + 50 && cY <= by && cY>=by-height*7/6){
+	if((cX >= bx-10 && cX <=bx + 50 && cY <= by && cY>=by-height*7/6) || ((13 in keysDown || 32 in keysDown) && wait <= 0)){
 		cX=0;
 		cY=0;
 		reset();
+		Menu.scoreSelect = true;
 	} 
 }
 //---------------------------------------------------------- Alphabet Print ---------------------------------------------------------//
@@ -2649,12 +2769,6 @@ setInterval(function(){
 			deathTimer-=1;
 			STATE = 4;
 		}
-		if(player.hp <= 0){
-			if(nu != 1){
-				deathTimer = 30;
-			}
-			nu = 1;
-		}
 		else{
 			if(STATE == "Jungle" || STATE == "Scorched"){
 				StateTimer+=1;
@@ -2662,8 +2776,20 @@ setInterval(function(){
 			ctx.globalAlpha = Alpha;
 			keys();
 			multiply();
-			player.draw();
-			player.onhit();
+			if(player.hp <= 0){
+				if(nu != 1){
+					deathTimer = 30;
+					typemarker3.x = player.x-player.width/2;
+					typemarker3.y = player.y-player.height/2;
+					typemarker3.timeLeft = 30;
+					typemarker3.text = "Dead!";
+				}
+				nu = 1;
+			}
+			else{
+				player.draw();
+				player.onhit();
+			}
 			rePlant();
 			for(B in Boxes){
 				Boxes[B].draw();
@@ -2696,8 +2822,6 @@ setInterval(function(){
 		
 			earth.draw();
 			earth.move();
-			//earth2.draw();
-			//earth2.move();
 			for(R in earth2roots1){
 				earth2roots1[R].draw();
 			}
@@ -2925,6 +3049,13 @@ setInterval(function(){
 			TwizEffect.draw();
 			DragonEffect2.draw();
 			
+			// black out screen
+			if(darkearth.blackTimer > 0){
+				darkearth.blackDraw();
+			}
+			darkearth.draw();
+			darkearth.move();
+			
 			UI();
 			SCORE();
 			
@@ -2952,7 +3083,8 @@ setInterval(function(){
 			castingBar.draw();
 			castingBar.tick();
 			TreecastingBar.draw();
-			TreecastingBar.tick();			
+			TreecastingBar.tick();	
+
 			// Cooldown calculation
 			if(cd <= 0){
 				cd = cd;
