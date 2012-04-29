@@ -8,6 +8,7 @@ Version 0.6.2 Changes(4/28/2012):
 			-Added keyboard shortcuts for main menu. Arrow keys and enter/space to select. Enter/Space act as back buttons too
 			-Added in new page screen courtesy of John Szevin
 			-Added to browser compatibility, notably Internet Explorer
+			-Removed default browser functions from spacebar, enter, up, and down arrows as these are in-game buttons
 	TODO:
 		-Bugs
 			-obs always take 1 dmg, maybe an issue?

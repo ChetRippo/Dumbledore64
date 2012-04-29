@@ -23,6 +23,7 @@
 			-Added keyboard shortcuts for main menu. Arrow keys and enter/space to select. Enter/Space act as back buttons too
 			-Added in new page screen courtesy of John Szevin
 			-Added to browser compatibility, notably Internet Explorer
+			-Removed default browser functions from spacebar, enter, up, and down arrows as these are in-game buttons
 	TODO:
 		-Bugs
 			-obs always take 1 dmg, maybe an issue?
@@ -58,6 +59,7 @@
 var canvas = document.createElement("canvas");
 canvas.width = 800;
 canvas.height = 576;
+canvas.tabIndex = 1;
 document.body.appendChild(canvas);
 var ctx = canvas.getContext("2d");
 var cX = new Number();
@@ -90,7 +92,9 @@ var multtimer = 0;
 var colorz = {1: "#D0D0D0", 2: "#CC0000", 3: "#00FFFF", 4: "yellow", 5: "#33FF00", 6: "#663399"};
 var colorNum = 1;
 // Key Listeners
-addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;}, false);
+addEventListener("keydown", function (e) {keysDown[e.keyCode] = true;
+											if(e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 8 || e.keyCode == 32 || e.keyCode == 13){
+												e.preventDefault();}}, false);
 addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
 // Environment
 var planted = false;
