@@ -22,6 +22,7 @@
 			-Added short death animation
 			-Added keyboard shortcuts for main menu. Arrow keys and enter/space to select. Enter/Space act as back buttons too
 			-Added in new page screen courtesy of John Szevin
+			-Added to browser compatibility, notably Internet Explorer
 	TODO:
 		-Bugs
 			-obs always take 1 dmg, maybe an issue?
