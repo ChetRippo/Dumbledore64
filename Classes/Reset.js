@@ -4,7 +4,11 @@ function reset(){
 			AllSounds[S].volume = 0;
 		}
 	}
+	for(M in AllMusic){
+		AllMusic[M].currentTime = 0;
+	}
 	//------------------------ Dumbledore64.js ------------------//
+	resetGame = true;
 	STATE = 0;
 	//Pause menu
 	preSTATE = 0;

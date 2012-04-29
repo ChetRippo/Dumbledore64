@@ -1045,12 +1045,16 @@ var Options = {
 		}
 		if(Music == 2){
 			ctx.fillText("Music: On", this.x-this.width/2, this.y+7*this.height/2);
+			for(M in AllMusic){
+				AllMusic[M].volume = 0.5;
+			}
+			DumblebeatsNormal.volume = 0.4;
+			CaseysQuest.volume = 0.4;
 		}
 		if(Music == 1){
 			ctx.fillText("Music: Off", this.x-this.width/2, this.y+7*this.height/2);
 			for(M in AllMusic){
-				AllMusic[M].currentTime=0;
-				AllMusic[M].pause();
+				AllMusic[M].volume=0;
 			}
 		}
 		if(hX >= this.x-20 && hX <=this.x + this.width*10 && hY <= this.y+10*this.height/2 && hY>=this.y+7*this.height/2){
@@ -2671,68 +2675,44 @@ function printAlphabet(){
 function MusicPlayer(){
 if(Music==2 && STATE != "PAUSE"){
 	if(STATE == 1 && treeWizz.onScreen == 0 && Dragon.onScreen == 0){
-		DumblebeatsNormal.currentTime=0;
-		Spells.currentTime=0;
 		DumblebeatsNormal.pause();
 		Spells.pause();
-		BadWizards.currentTime=0;
 		BadWizards.pause();
-		CaseysQuest.currentTime=0;
 		CaseysQuest.pause();
 		OverwhelmedByGoblins.play();
 	}
 	else if(STATE == "Jungle"){
-		OverwhelmedByGoblins.currentTime=0;
-		Spells.currentTime=0;
 		OverwhelmedByGoblins.pause();
 		Spells.pause();
-		BadWizards.currentTime=0;
 		BadWizards.pause();
-		CaseysQuest.currentTime=0;
 		CaseysQuest.pause();
 		DumblebeatsNormal.play();
 	}
 	else if(treeWizz.onScreen==1){
-		OverwhelmedByGoblins.currentTime=0;
-		Spells.currentTime=0;
 		OverwhelmedByGoblins.pause();
 		Spells.pause();
-		DumblebeatsNormal.currentTime=0;
 		DumblebeatsNormal.pause();
-		CaseysQuest.currentTime=0;
 		CaseysQuest.pause();
 		BadWizards.play();
 	}
 	else if(Dragon.onScreen==1){
-		OverwhelmedByGoblins.currentTime=0;
-		Spells.currentTime=0;
 		OverwhelmedByGoblins.pause();
 		Spells.pause();
-		DumblebeatsNormal.currentTime=0;
 		DumblebeatsNormal.pause();
-		CaseysQuest.currentTime=0;
 		CaseysQuest.pause();
 		BadWizards.play();
 	}
 	else if(STATE=="Scorched"){
-		OverwhelmedByGoblins.currentTime=0;
-		Spells.currentTime=0;
 		OverwhelmedByGoblins.pause();
 		Spells.pause();
-		DumblebeatsNormal.currentTime=0;
 		DumblebeatsNormal.pause();
-		BadWizards.currentTime=0;
 		BadWizards.pause();
 		CaseysQuest.play();
 	}
 	else{
-		DumblebeatsNormal.currentTime=0;
 		DumblebeatsNormal.pause();
-		OverwhelmedByGoblins.currentTime=0;
 		OverwhelmedByGoblins.pause();
-		BadWizards.currentTime=0;
 		BadWizards.pause();
-		CaseysQuest.currentTime=0;
 		CaseysQuest.pause();
 		Spells.play();
 	}
