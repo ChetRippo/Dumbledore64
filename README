@@ -1,28 +1,51 @@
 
-Version 0.6.2 Changes(4/28/2012):
+/*        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                 Version 2, December 2004
+
+ Copyright (C) 2012 Brett Davis <bdavis1000@gmail.com>
+
+ Everyone is permitted to copy and distribute verbatim or modified
+ copies of this license document, and changing it is allowed as long
+ as the name is changed.
+
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+  0. You just DO WHAT THE FUCK YOU WANT TO.
+
+*/
+/*
+	Version 0.6.3 Changes(4/30/2012):
 		-Bug fixes:
-			-Fixed bug where sound effects still played until you entered options screen
-			-Removed white outline on the menus
+			-Improved all lightning collisions
+			-Can no longer cast casting bar spells after dying
+			-Improved collisions on enemy fire spells
+		-Balancing:
+			-Slightly increased fire boss fire spell radius
+			-Heavily decreased enemy wizard's fire spell radius
+			-Twister gives you slightly more dash time every time you hit an enemy
 		-Additions:
-			-Added short death animation
-			-Added keyboard shortcuts for main menu. Arrow keys and enter/space to select. Enter/Space act as back buttons too
-			-Added in new page screen courtesy of John Szevin
-			-Added to browser compatibility, notably Internet Explorer
-			-Removed default browser functions from spacebar, enter, up, and down arrows as these are in-game buttons
+			
 	TODO:
-		-Bugs
+		+Bugs
 			-obs always take 1 dmg, maybe an issue?
 			-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
+			-Tree wizard casting bar speeds up in ice
+			-Sorceror casting time
 		+Highscores
 			+Get website/leaderboards
 		-Optimize
 			-Arrays
 		+Spells
 			+Dark (Black) *NEEDS ART FIRST*
+				-Dark = Spike Trap *DONE*
 				-Dark + Dark = DeathBound: ?
+				-Dark + Fire = Landmine *DONE*
 				+Dark + Ice = Ice Trap: Drop one Ice trap, freezes enemies in an area for 3 seconds if they hit it. 1 second recharge, 5 on map
+				-Dark + Earth = Moonlight *DONE*
 				-Dark + Lightning = Spire: Creates a large spike that kills anything that touches it. Shooting the spike causes it to fire conductive shots
 				-Dark + Air = Black Hole: ?
+				-Dark + Mystic = Piercing Shots *DONE*
 				-Dark + Water = ?
 			-Summon (?)
 				-Minions

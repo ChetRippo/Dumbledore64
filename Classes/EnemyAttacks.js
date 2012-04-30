@@ -1179,6 +1179,7 @@ var sFire = {
 	height: 32,
 	frame: 0,
 	onScreen: 0,
+	caster: 0,
 	
 	draw: function(){
 		if(this.onScreen == 1){
@@ -1205,10 +1206,16 @@ var sFire = {
 			this.onScreen = 0;
 		}
 		else{
-			this.width = 32 + (32*this.frame);
-			this.height = 32 + (32*this.frame);
+			if(this.caster == Dragon){
+				this.width = 64 + (32*this.frame);
+				this.height = 64 + (32*this.frame);
+			}
+			else{
+				this.width = 32 + (16*this.frame);
+				this.height = 32 + (16*this.frame);
+			}
 			this.frame++;
-			if(contained(player, this)){
+			if(contained(player, this) || collision("W", player, this) || collision("A", player, this) || collision("S", player, this) || collision("D", player, this)){
 				if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
@@ -1227,6 +1234,7 @@ var sFire = {
 		this.width = 32;
 		this.x = A.x;
 		this.y = A.y;
+		this.caster = A;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
@@ -1285,7 +1293,8 @@ var sLightning = {
 				this.timeLeft-=1;
 			}
 			if(this.vx != -2000){
-				if(player.x >= this.vx-this.vwidth/2 && player.x <= this.vx + this.vwidth/2){
+				if(player.x >= this.vx-this.vwidth/2 && player.x <= this.vx + this.vwidth/2
+					|| (this.vx >= player.x && this.vx <= player.x + player.height/2)){
 					if(hptimer <= 0){
 						player.hp-=1;
 						onDmg.currentTime=0;
@@ -1295,7 +1304,8 @@ var sLightning = {
 				}
 			}
 			if(this.hy != -2000){
-				if(player.y <= this.hy + this.hheight/2 && player.y >= this.hy-this.hheight/2){
+				if(player.y <= this.hy + this.hheight/2 && player.y >= this.hy-this.hheight/2
+					|| (this.hy >= player.y && this.hy <= player.y + player.height/2)){
 					if(this.vx == -2000){
 						this.vx = player.x
 					}
@@ -3027,10 +3037,6 @@ var LeafHeal = {
 				if(treeWizz.hp < 10){
 					treeWizz.hp+=1;
 				}
-				treeWizz.height+=8;
-				treeWizz.width+=8;
-				treeWizz.speed+=2;
-				treeWizz.speed2 = treeWizz.speed/2;
 				this.used = 1;
 				Pickup.currentTime=0;
 				Pickup.play();

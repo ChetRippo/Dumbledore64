@@ -1560,7 +1560,7 @@ var firelightning = {
 			this.cd-=1;
 			this.vx = player.x;
 		}
-		if(this.timeLeft > 0 && this.cast == 0){
+		if(this.timeLeft > 0 && this.cast == 0 && deathTimer == -1){
 			this.onScreen = 1;
 		}
 		if(this.cast > 0){
@@ -1576,7 +1576,8 @@ var firelightning = {
 				this.timeLeft-=1;
 			}
 			for (E in AllEnemies){
-				if(AllEnemies[E].x >= player.x && AllEnemies[E].x <= player.x + this.vwidth && AllEnemies[E].onScreen == 1){
+				if(AllEnemies[E].x >= player.x && AllEnemies[E].x <= player.x + this.vwidth && AllEnemies[E].onScreen == 1
+					|| (player.x >= AllEnemies[E].x && player.x <= AllEnemies[E].x + AllEnemies[E].width/2)){
 					if(firelightningf1.x == -1000){
 						firelightningf1.x = AllEnemies[E].x;
 						firelightningf1.y = AllEnemies[E].y;
@@ -1600,7 +1601,8 @@ var firelightning = {
 				}
 			}			
 			for (E in AllEnemies){
-				if(AllEnemies[E].y <= player.y + this.hheight && AllEnemies[E].y >= player.y && AllEnemies[E].onScreen == 1){
+				if(AllEnemies[E].y <= player.y + this.hheight && AllEnemies[E].y >= player.y && AllEnemies[E].onScreen == 1
+					|| (player.y >= AllEnemies[E].y && player.y <= AllEnemies[E].y + AllEnemies[E].height/2)){
 					if(firelightningf1.x == -1000){
 						firelightningf1.x = AllEnemies[E].x;
 						firelightningf1.y = AllEnemies[E].y;
@@ -2801,7 +2803,7 @@ var airice = {
 	used: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1 && this.cast == 0){
+		if(this.onScreen == 1 && this.cast == 0 && deathTimer == -1){
 			if(this.used == 0){
 				Fwave.currentTime=0;
 				Fwave.play();
@@ -2830,32 +2832,32 @@ var airice = {
 		if(this.cast > 0){
 			this.cast-=1;
 		}
-		if(this.timeLeft == 0 && this.onScreen == 1){
+		if(this.timeLeft == 0 && this.onScreen == 1 && deathTimer == -1){
 			this.onScreen = 0;
 			ice.cd = 0;
 			ctx.globalAlpha = Alpha;
 		}
-		else if(this.timeLeft<=30 && this.cast == 0){
+		else if(this.timeLeft<=30 && this.cast == 0 && deathTimer == -1){
 			this.height+=4;
 			this.width+=4;
 		}
-		else if(this.timeLeft<=60 && this.cast == 0){
+		else if(this.timeLeft<=60 && this.cast == 0 && deathTimer == -1){
 			this.height-=4;
 			this.width-=4;
 		}
-		else if(this.timeLeft<=90 && this.cast == 0){
+		else if(this.timeLeft<=90 && this.cast == 0 && deathTimer == -1){
 			this.height+=4;
 			this.width+=4;
 		}
-		else if(this.timeLeft <= 120 && this.cast == 0){
+		else if(this.timeLeft <= 120 && this.cast == 0 && deathTimer == -1){
 			this.height-=4;
 			this.width-=4;
 		}
-		else if(this.cast == 0){
+		else if(this.cast == 0 && deathTimer == -1){
 			this.height+=4;
 			this.width+=4;
 		}
-		if(this.timeLeft != 0 && this.cast == 0){
+		if(this.timeLeft != 0 && this.cast == 0 && deathTimer == -1){
 			this.timeLeft-=1;
 			this.x = player.x;
 			this.y = player.y;
@@ -2971,14 +2973,16 @@ var airlightning = {
 				this.hy = -2000;
 			}
 			for (E in AllEnemies){
-				if(AllEnemies[E].x >= this.vx-this.vwidth/2 && AllEnemies[E].x <= this.vx + this.vwidth/2 && AllEnemies[E].onScreen == 1){
+				if(AllEnemies[E].x >= this.vx-this.vwidth/2 && AllEnemies[E].x <= this.vx + this.vwidth/2 && AllEnemies[E].onScreen == 1
+					|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
 					onHit(AllEnemies[E]);
 					Thunder.currentTime=0;
 					Thunder.play();
 				}
 			}			
 			for (E in AllEnemies){
-				if(AllEnemies[E].y <= this.hy + this.hheight/2 && AllEnemies[E].y >= this.hy-this.hheight/2 && AllEnemies[E].onScreen == 1){
+				if(AllEnemies[E].y <= this.hy + this.hheight/2 && AllEnemies[E].y >= this.hy-this.hheight/2 && AllEnemies[E].onScreen == 1
+					|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
 					onHit(AllEnemies[E]);
 					Thunder.currentTime=0;
 					Thunder.play();
@@ -6194,8 +6198,8 @@ var darkearth = {
 	timeLeft: 0,
 	x: -100,
 	y: -200,
-	width: 128,
-	height: 128,
+	width: 2400,
+	height: 1000,
 	cd: 0,
 	speed: 4,
 	used: 0,
@@ -6215,20 +6219,11 @@ var darkearth = {
 	blackDraw: function(){
 		if(this.blackTimer > 0){
 			this.blackTimer -=1;
-			ctx.strokeStyle = "black";
-			ctx.lineWidth = 250;
-			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
-			ctx.lineWidth = 500;
-			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
-			ctx.lineWidth = 750;
-			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
-			ctx.lineWidth = 1000;
-			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
-			ctx.lineWidth = 1250;
-			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
-			ctx.lineWidth = 1500;
-			ctx.strokeRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
-			ctx.lineWidth = 1;
+			ctx.fillStyle = "black";
+			ctx.fillRect(player.x-this.width/2, player.y-this.height-64, this.width, this.height);
+			ctx.fillRect(player.x-this.width/2, player.y+64, this.width, this.height);
+			ctx.fillRect(player.x-this.height-64, player.y-this.width/2, this.height, this.width);
+			ctx.fillRect(player.x+64, player.y-this.width/2, this.height, this.width);
 			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = "black";
 			ctx.fillRect(0, 0, 800, 576);

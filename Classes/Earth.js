@@ -17,7 +17,7 @@ var earth = {
 		if(this.cast > 0){
 			this.cast-=1;
 		}
-		if(this.cast == 0 && this.timeLeft > 0){
+		if(this.cast == 0 && this.timeLeft > 0 && deathTimer == -1){
 			ctx.fillStyle = this.color;
 			ctx.font = "18pt Arial";
 			ctx.fillText("+1", this.x, this.y);
@@ -28,7 +28,7 @@ var earth = {
 		if(this.cd > 0){
 			this.cd-=1;
 		}
-		if(this.timeLeft > 0 && this.cast == 0){
+		if(this.timeLeft > 0 && this.cast == 0 && deathTimer == -1){
 			this.y -= this.speed;
 			this.timeLeft--;
 			if(this.used == 0){
@@ -74,7 +74,7 @@ var earth2 = {
 		if(this.timeLeft >= 0){
 			this.timeLeft-=1;
 		}
-		if(this.timeLeft == 90){
+		if(this.timeLeft == 90 && deathTimer == -1){
 			Fwave.currentTime=0;
 			Fwave.play();
 			earth2rootStrike5.x = player.x + 32;
@@ -102,7 +102,7 @@ var earth2 = {
 			castingBar.castmax = 180;
 			earth.cd = currentEarthcd;
 		}
-		if(this.timeLeft == 0){
+		if(this.timeLeft == 0 && deathTimer == -1){
 			earth2rootStrike.x = -100;
 			earth2rootStrike.y = -200;
 			earth2rootStrike.onScreen = 0;
@@ -162,7 +162,7 @@ var earth2 = {
 				earth3roots1[R].y = -500;
 			}
 		}
-		else{
+		else if(deathTimer == -1){
 			for(R in earth2roots1){
 				for(E in AllEnemies){
 					if(collision(AllEnemies[E].dir, AllEnemies[E], earth2roots1[R])){
@@ -180,7 +180,7 @@ var earth2 = {
 		}
 	},
 	shoot: function(){
-		if(this.cd == 0 && this.cast == 0){
+		if(this.cd == 0 && this.cast == 0 && deathTimer == -1){
 			Fwave.currentTime=0;
 			Fwave.play();
 			earth2rootStrike.x = player.x;

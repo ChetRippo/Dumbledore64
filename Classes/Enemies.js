@@ -382,7 +382,7 @@ var lavamenlist = {1: Lavaman, 2: Lavaman2, 3: Lavaman3, 4: Lavaman4};
 var Spawner = {
 	type: 2,
 	x: 2000,
-	y: 0,
+	y: -9000,
 	onTree: 0,
 	width: 64,
 	height: 64,
@@ -649,7 +649,7 @@ var treeWizz = {
 			}
 			this.herp = this.deadtrees;
 			this.deadtrees = 0;
-			if(this.herp >= 8 && this.onScreen == 0){
+			if(this.herp >= 6 && this.onScreen == 0){
 				this.spawned = 1;
 				var queue = true;
 				for(E in AllEnemies){
@@ -1997,7 +1997,7 @@ if(E.type != "Meteor"){
 				}
 			}
 			else if(E.spell == "Fire"){
-				if((Math.abs(xdiff) < 128) && (Math.abs(ydiff) < 128) && E.cd <= 0
+				if((Math.abs(xdiff) < 144) && (Math.abs(ydiff) < 144) && E.cd <= 0
 					&& E.x > 32 && E.x < 768 && E.y > 32 && E.y < 560){
 					E.cast();
 				}

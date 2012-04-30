@@ -155,6 +155,7 @@ var air2 = {
 	cast: 0,
 	num: 0,
 	used: 0,
+	maxNum: 4,
 	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
@@ -263,6 +264,25 @@ var air2 = {
 			for(E in AllEnemies){
 				if(collision(player.dir, player, AllEnemies[E])){
 					onHit(AllEnemies[E]);
+					this.maxNum+=1;
+					if(typemarker5.x != -100 && typemarker6.x != -100){
+						typemarker4.text = "+ Time";
+						typemarker4.x = player.x-player.width*2;
+						typemarker4.y = player.y;
+						typemarker4.timeLeft = 20;
+					}
+					else if(typemarker6.x != -100){
+						typemarker5.text = "+ Time";
+						typemarker5.x = player.x-player.width*2;
+						typemarker5.y = player.y;
+						typemarker5.timeLeft = 20;
+					}
+					else{
+						typemarker6.text = "+ Time";
+						typemarker6.x = player.x-player.width*2;
+						typemarker6.y = player.y;
+						typemarker6.timeLeft = 20;
+					}
 				}
 			}
 			for(O in ObsList){
@@ -280,7 +300,7 @@ var air2 = {
 			Wind.play();
 		}
 		if(this.timeLeft <=0 && this.onScreen == 1){
-			if(this.num >= 4){
+			if(this.num >= this.maxNum){
 				player.speed = player.speed2 * 4;
 				this.onScreen = 0;
 				this.num = 0;
@@ -312,6 +332,7 @@ var air2 = {
 		this.timeLeft = 10;
 		this.onScreen = 1;
 		this.used = 0;
+		this.maxNum = 4;
 	}
 	}
 };

@@ -14,30 +14,38 @@
 
 */
 /*
-	Version 0.6.2 Changes(4/28/2012):
+	Version 0.6.3 Changes(4/30/2012):
 		-Bug fixes:
-			-Fixed bug where sound effects still played until you entered options screen
-			-Removed white outline on the menus
+			-Improved all lightning collisions
+			-Can no longer cast casting bar spells after dying
+			-Improved collisions on enemy fire spells
+			-Tree Wizard no longer speeds up when casting in ice spells
+		-Balancing:
+			-Slightly increased fire boss fire spell radius
+			-Heavily decreased enemy wizard's fire spell radius
+			-Twister gives you slightly more dash time every time you hit an enemy
 		-Additions:
-			-Added short death animation
-			-Added keyboard shortcuts for main menu. Arrow keys and enter/space to select. Enter/Space act as back buttons too
-			-Added in new page screen courtesy of John Szevin
-			-Added to browser compatibility, notably Internet Explorer
-			-Removed default browser functions from spacebar, enter, up, and down arrows as these are in-game buttons
+			
 	TODO:
-		-Bugs
+		+Bugs
 			-obs always take 1 dmg, maybe an issue?
 			-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
+			-Sorceror casting time
+			-Thieves dont fully speed up when hit with ice and getting out of it
 		+Highscores
 			+Get website/leaderboards
 		-Optimize
 			-Arrays
 		+Spells
 			+Dark (Black) *NEEDS ART FIRST*
+				-Dark = Spike Trap *DONE*
 				-Dark + Dark = DeathBound: ?
+				-Dark + Fire = Landmine *DONE*
 				+Dark + Ice = Ice Trap: Drop one Ice trap, freezes enemies in an area for 3 seconds if they hit it. 1 second recharge, 5 on map
+				-Dark + Earth = Moonlight *DONE*
 				-Dark + Lightning = Spire: Creates a large spike that kills anything that touches it. Shooting the spike causes it to fire conductive shots
 				-Dark + Air = Black Hole: ?
+				-Dark + Mystic = Piercing Shots *DONE*
 				-Dark + Water = ?
 			-Summon (?)
 				-Minions
@@ -714,7 +722,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.6.2 Alpha: April 28 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.6.3 Alpha: April 30 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//Menu controls, keys is never called so copy pasted
 		if(keytimer > 0){
 			keytimer-=1;
@@ -1277,6 +1285,7 @@ var TreecastingBar = {
 			this.width2 = this.cast/this.castmax * this.width;
 		}
 		if(this.cast == 0){
+			this.cast-=1;
 			treeWizz.speed = treeWizz.speed2*2;
 			this.onScreen = 0;
 		}
@@ -1489,14 +1498,41 @@ var typemarker3 = {
 	y: -100,
 	text: ""
 };
-var typemarkerlist = {1: typemarker, 2: typemarker2, 3: typemarker3};
+
+var typemarker4 = {
+	color: "#00FF00",
+	speed: 4,
+	timeLeft: 0,
+	x: -100,
+	y: -100,
+	text: ""
+};
+
+var typemarker5 = {
+	color: "#00FF00",
+	speed: 4,
+	timeLeft: 0,
+	x: -100,
+	y: -100,
+	text: ""
+};
+
+var typemarker6 = {
+	color: "#00FF00",
+	speed: 4,
+	timeLeft: 0,
+	x: -100,
+	y: -100,
+	text: ""
+};
+var typemarkerlist = {1: typemarker, 2: typemarker2, 3: typemarker3, 4: typemarker4, 5: typemarker5, 6: typemarker6};
 function drawtypeMarker(M){
 	if(M.timeLeft == 0){
 		M.x = -100;
 		M.y = -100;
 	}
 	if (M.timeLeft != 0){
-		if(M.text == "+ Air"){
+		if(M.text == "+ Air" || M.text == "+ Time"){
 			M.color = "#D0D0D0";
 		}
 		else if(M.text == "+ Fire"){
@@ -1819,9 +1855,15 @@ function UI(){
 	}
 	// Text
 	ctx.fillStyle = "black";
+	if(darkearth.blackTimer > 0){
+		ctx.fillStyle = "white";
+	}
 	ctx.font = "18pt Arial";
 	ctx.fillText("Spell:", 32, 512);
 	ctx.strokeStyle = "#000000";
+	if(darkearth.blackTimer > 0){
+		ctx.strokeStyle = "white";
+	}
 	ctx.strokeRect(92, 476, 32, 48);
 	ctx.strokeRect(124, 476, 32, 48);
 	if(spell1pic != "N/A"){
@@ -1833,226 +1875,185 @@ function UI(){
 	ctx.fillText("= " + spell, 160, 512);
 	// Recharge
 	if(spell == "Fire"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(fire.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Inferno"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(fire2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Frozen Fireball"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(fireice.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Ice"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(ice.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Absolute Zero"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(ice2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Earth Heal"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(earth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Synthesis"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(earth2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Fire and Heal"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(fireheal.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Ice and Heal"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(iceheal.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Lightning"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(lightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Chain Lightning"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(lightning2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Frozen Web"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(icelightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Ragnarok"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(firelightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Lightning and Heal"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(lightningheal.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Dash"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(air.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Twister"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(air2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Fire Wave"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airfire.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Maelstrom"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airice.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Dash and Heal"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airearth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Thunderstorm"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(airlightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Teleport"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Mirage"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Teleport and Heal"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mysticearth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Explosive Shots"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Ice Shots"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Conductive Shots"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Homing Shots"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Bubble Shield"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(water.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Heavy Bubble Shield"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(water.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Explosive Orbs"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(waterfire.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Frozen Orbs"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(waterfire.cd2/30) + "s", 32, 544);
 	}
 	else if(spell == "Bubble Shield and Heal"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(waterearth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Zap Trap"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(waterlightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Bubble Blast"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(waterair.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Bubblebeam"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Spike Trap"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(dark.cd/30) + "s Traps: " + dark.inventory, 32, 544);
 	}
 	else if(spell == "Deathbound"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(dark2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Landmine"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(darkfire.cd/30) + "s Traps: " + darkfire.inventory, 32, 544);
 	}
 	else if(spell == "Ice Trap"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(darkice.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Moonlight"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(darkearth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Spire"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(darklightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Black Hole"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(darkair.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Piercing Shots"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Counter"){
-		ctx.fillStyle = "black";
 		ctx.font = "16pt Arial";
 		ctx.fillText("Recharge: " + Math.round(darkwater.cd/30) + "s", 32, 544);
 	}
 	ctx.fillStyle = "black";
+	if(darkearth.blackTimer > 0){
+		ctx.fillStyle = "white";
+	}
 	ctx.font = "16pt Arial";
 	if(dispCntrls == 2){
 		ctx.fillText("Q: Drop Spell 1", 576, 496);
@@ -2064,6 +2065,9 @@ function UI(){
 //----------------------------------------------------- Score -----------------------------------------------------------------------//
 function SCORE(){
 	ctx.fillStyle = "black";
+	if(darkearth.blackTimer > 0){
+		ctx.fillStyle = "white";
+	}
 	ctx.font = "18pt Arial";
 	ctx.fillText("Score: " + score, 32, 48);
 }
@@ -2553,7 +2557,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.6.2 Alpha: April 28 2012", 244, 96);
+	ctx.fillText("Version 0.6.3 Alpha: April 30 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	if(hsNum == 1){
 		ctx.fillStyle = colorz[hsColor];
@@ -2981,6 +2985,8 @@ setInterval(function(){
 				Dragonflame[D].draw();
 				Dragonflame[D].effect();
 			}
+			//put here to negate ice abilities
+			TreecastingBar.tick();	
 			for(E in AllEnemies){
 				if(AllEnemies[E].onTree == 0){
 					AllEnemies[E].draw();
@@ -3065,10 +3071,18 @@ setInterval(function(){
 			drawtypeMarker(typemarker3);
 			moveMarker(typemarker3);
 			
+			drawtypeMarker(typemarker4);
+			moveMarker(typemarker4);
+			
+			drawtypeMarker(typemarker5);
+			moveMarker(typemarker5);
+			
+			drawtypeMarker(typemarker6);
+			moveMarker(typemarker6);
+			
 			castingBar.draw();
 			castingBar.tick();
 			TreecastingBar.draw();
-			TreecastingBar.tick();	
 
 			// Cooldown calculation
 			if(cd <= 0){

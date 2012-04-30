@@ -1789,6 +1789,7 @@ function reset(){
 	air2.cast = 0;
 	air2.num = 0;
 	air2.used = 0;
+	air2.maxNum = 4;
 	//------------------------ Mystic.js ------------------------//
 	mystic.color = "#FF00FF";
 	mystic.width = 32;
