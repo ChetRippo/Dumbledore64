@@ -1,5 +1,5 @@
 
-/*        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                  Version 2, December 2004
 
  Copyright (C) 2012 Brett Davis <bdavis1000@gmail.com>
@@ -13,25 +13,32 @@
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 
-*/
-/*
-	Version 0.6.3 Changes(4/30/2012):
+
+	Version 0.6.3 Changes(5/1/2012):
 		-Bug fixes:
 			-Improved all lightning collisions
 			-Can no longer cast casting bar spells after dying
 			-Improved collisions on enemy fire spells
+			-Tree Wizard no longer speeds up when casting in ice spells
+			-Thieves now have correct speed when under ice spells
+			-Interface now has consistent alpha even when under ice spells
 		-Balancing:
 			-Slightly increased fire boss fire spell radius
 			-Heavily decreased enemy wizard's fire spell radius
 			-Twister gives you slightly more dash time every time you hit an enemy
-		-Additions:
+			-Tree wizard shows up after 2 less trees are killed
+			-Tree wizard no longer speeds up or gets bigger after healing
+			-Sorcerors now have casting times for their spells
 			
 	TODO:
 		+Bugs
-			-obs always take 1 dmg, maybe an issue?
-			-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
-			-Tree wizard casting bar speeds up in ice
-			-Sorceror casting time
+			-Maybe issues:
+				-obs always take 1 dmg, maybe an issue?
+				-casting bars appear on top of everything, maybe issue?
+			-Issues for later stuff:
+				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
+			-Current issues:
+				-Ice spells make jungle trees transparent *Don't know how to fix yet*
 		+Highscores
 			+Get website/leaderboards
 		-Optimize

@@ -293,7 +293,7 @@ var air2 = {
 		}
 		if(this.onScreen == 1 && this.cast == 0 && this.used == 0){
 			player.dirct = 10;
-			hptimer = 40;
+			hptimer = 10;
 			player.speed = player.speed2 * 16;
 			this.used = 1;
 			Wind.currentTime = 0;
@@ -309,6 +309,7 @@ var air2 = {
 				this.num++;
 				this.timeLeft = 10;
 				player.dirct = 10;
+				hptimer+=10;
 				player.speed = player.speed2 * 16;
 				if (87 in keysDown){
 					player.dir = "W";
@@ -321,6 +322,9 @@ var air2 = {
 				}
 				if (68 in keysDown){
 					player.dir = "D";
+				}
+				else{
+					player.dir = player.dir;
 				}
 			}
 		}

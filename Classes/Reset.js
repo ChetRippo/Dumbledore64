@@ -69,14 +69,22 @@ function reset(){
 	castingBar.onScreen = 0;
 	castingBar.cast = -1;
 	castingBar.castmax = 0;
-	TreecastingBar.x = player.x - player.width/2;
-	TreecastingBar.y = player.y + player.height/2;
-	TreecastingBar.width = player.width;
-	TreecastingBar.height = player.height/4;
+	TreecastingBar.x = treeWizz.x - treeWizz.width/2;
+	TreecastingBar.y = treeWizz.y + treeWizz.height/2;
+	TreecastingBar.width = treeWizz.width;
+	TreecastingBar.height = treeWizz.height/4;
 	TreecastingBar.width2 = 0;
 	TreecastingBar.onScreen = 0;
 	TreecastingBar.cast = -1;
 	TreecastingBar.castmax = 0;
+	SorcCastingBar.x = -100;
+	SorcCastingBar.y = -200;
+	SorcCastingBar.width = Sorceror.width;
+	SorcCastingBar.height = Sorceror.height/4;
+	SorcCastingBar.width2 = 0;
+	SorcCastingBar.onScreen = 0;
+	SorcCastingBar.cast = -1;
+	SorcCastingBar.castmax = 0;
 	
 	for(M in markerlist){
 		markerlist[M].color = "#00FF00";
@@ -699,6 +707,8 @@ function reset(){
 	sIce.frame = 0;
 	sIce.onScreen = 0;
 	sIce.end = false;
+	sIce.cast = 0;
+	sIce.used = 0;
 	
 	sFire.color = "#FF6600";
 	sFire.timeLeft = 0;
@@ -708,6 +718,8 @@ function reset(){
 	sFire.y = -200;
 	sFire.frame = 0;
 	sFire.onScreen = 0;
+	sFire.cast = 0;
+	sFire.used = 0;
 	
 	sLightning.timeLeft = 0;
 	sLightning.vwidth = 32;
@@ -721,6 +733,8 @@ function reset(){
 	sLightning.vx = -2000;
 	sLightning.vy = 288;
 	sLightning.onScreen = 0;
+	sLightning.cast = 0;
+	sLightning.used = 0;
 	
 	rootBlastW.color = "#33CC00";
 	rootBlastW.x = -100;

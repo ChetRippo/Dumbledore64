@@ -14,24 +14,33 @@
 
 */
 /*
-	Version 0.6.3 Changes(4/30/2012):
+	Version 0.6.3 Changes(5/1/2012):
 		-Bug fixes:
 			-Improved all lightning collisions
 			-Can no longer cast casting bar spells after dying
 			-Improved collisions on enemy fire spells
 			-Tree Wizard no longer speeds up when casting in ice spells
+			-Thieves now have correct speed when under ice spells
+			-Interface now has consistent alpha even when under ice spells
 		-Balancing:
 			-Slightly increased fire boss fire spell radius
 			-Heavily decreased enemy wizard's fire spell radius
 			-Twister gives you slightly more dash time every time you hit an enemy
-		-Additions:
+			-Tree wizard shows up after 2 less trees are killed
+			-Tree wizard no longer speeds up or gets bigger after healing
+			-Sorcerors now have casting times for their spells
 			
 	TODO:
 		+Bugs
-			-obs always take 1 dmg, maybe an issue?
-			-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
-			-Sorceror casting time
-			-Thieves dont fully speed up when hit with ice and getting out of it
+			-Add globbly exploding on hitting you etc
+			-Improve globbly and meteor explosion effects
+			-Maybe issues:
+				-obs always take 1 dmg, maybe an issue?
+				-casting bars appear on top of everything, maybe issue?
+			-Issues for later stuff:
+				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
+			-Current issues:
+				-Ice spells make jungle trees transparent *Don't know how to fix yet*
 		+Highscores
 			+Get website/leaderboards
 		-Optimize
@@ -722,7 +731,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.6.3 Alpha: April 30 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.6.3 Alpha: May 1 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//Menu controls, keys is never called so copy pasted
 		if(keytimer > 0){
 			keytimer-=1;
@@ -1287,6 +1296,38 @@ var TreecastingBar = {
 		if(this.cast == 0){
 			this.cast-=1;
 			treeWizz.speed = treeWizz.speed2*2;
+			this.onScreen = 0;
+		}
+	}
+}
+var SorcCastingBar = {
+	x: -100,
+	y: -200,
+	width: Sorceror.width,
+	height: Sorceror.height/4,
+	width2: 0,
+	onScreen: 0,
+	cast: -1,
+	castmax: 0,
+	draw: function(){
+		this.x = Sorceror.x - Sorceror.width/2;
+		this.y = Sorceror.y + Sorceror.height/2;
+		if(this.onScreen == 1){
+			ctx.fillStyle = "#0404B4";
+			ctx.strokeStyle = "black";
+			ctx.strokeRect(this.x, this.y, this.width, this.height);
+			ctx.fillRect(this.x + 2, this.y + 2, this.width2, this.height - 2);
+		}
+	},
+	tick: function(){
+		if(this.cast > 0){
+			Sorceror.speed = 0;
+			this.cast-=1;
+			this.width2 = this.cast/this.castmax * this.width;
+		}
+		if(this.cast == 0){
+			this.cast-=1;
+			Sorceror.speed = Sorceror.speed2*2;
 			this.onScreen = 0;
 		}
 	}
@@ -2557,7 +2598,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.6.3 Alpha: April 30 2012", 244, 96);
+	ctx.fillText("Version 0.6.3 Alpha: May 1 2012", 244, 96);
 	ctx.fillText("High Scores:", 308, 208);
 	if(hsNum == 1){
 		ctx.fillStyle = colorz[hsColor];
@@ -2987,6 +3028,7 @@ setInterval(function(){
 			}
 			//put here to negate ice abilities
 			TreecastingBar.tick();	
+			SorcCastingBar.tick();
 			for(E in AllEnemies){
 				if(AllEnemies[E].onTree == 0){
 					AllEnemies[E].draw();
@@ -3017,6 +3059,7 @@ setInterval(function(){
 			SmokeBomb.draw();
 			SmokeBombA.draw();
 			SmokeBombB.draw();
+			
 			for(O in allObs){
 				drawObstacle(allObs[O]);
 				obsTick(allObs[O]);
@@ -3041,6 +3084,7 @@ setInterval(function(){
 			DragonEffect2.draw();
 			
 			// black out screen
+			ctx.globalAlpha = 1;
 			if(darkearth.blackTimer > 0){
 				darkearth.blackDraw();
 			}
@@ -3049,6 +3093,8 @@ setInterval(function(){
 			
 			UI();
 			SCORE();
+			
+			ctx.globalAlpha = Alpha;
 			
 			drawMarker(marker);
 			moveMarker(marker);
@@ -3083,6 +3129,7 @@ setInterval(function(){
 			castingBar.draw();
 			castingBar.tick();
 			TreecastingBar.draw();
+			SorcCastingBar.draw();
 
 			// Cooldown calculation
 			if(cd <= 0){

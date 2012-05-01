@@ -1120,9 +1120,11 @@ var sIce = {
 	frame: 0,
 	onScreen: 0,
 	end: false,
+	cast: 0,
+	used: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			Alpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
@@ -1130,45 +1132,61 @@ var sIce = {
 	},
 	
 	move: function(){
-		if(this.frame == 150){
-			this.width = 32;
-			this.height = 32;
-			this.x = -200;
-			this.y = -100;
-			this.onScreen = 0;
-			this.end = true;
-			Alpha = 1;
-		}
-		else{
-			this.width = this.width + (32*this.frame);
-			this.height = this.height + (32*this.frame);
-			this.frame++;
+		if(this.onScreen == 1){
+			if(this.cast > 0){
+				this.cast -=1;
+			}
+			if(this.cast == 0 && this.used == 0){
+				Frozen.currentTime=0;
+				Frozen.play();
+				this.used = 1;
+				this.height = 32;
+				this.width = 32;
+				this.x = Sorceror.x;
+				this.y = Sorceror.y;
+			}
+			if(this.frame == 150){
+				this.width = 32;
+				this.height = 32;
+				this.x = -200;
+				this.y = -100;
+				this.onScreen = 0;
+				this.end = true;
+				Alpha = 1;
+			}
+			else if(this.cast == 0){
+				this.width = this.width + (32*this.frame);
+				this.height = this.height + (32*this.frame);
+				this.frame++;
+			}
 		}
 	},
 	// Slow all enemies in radius
 	effect: function(){
-		if(this.onScreen == 1){
-			player.speed = 4;
-		}
-		else if(this.end == true){
-			player.speed = 8;
-			this.frame = 0;
-			this.end = false;
+		if(this.cast == 0){
+			if(this.onScreen == 1){
+				player.speed = 4;
+			}
+			else if(this.end == true){
+				player.speed = 8;
+				this.frame = 0;
+				this.end = false;
+			}
 		}
 	},
 		
 	// Spawn
 	shoot: function(){
-		Frozen.currentTime=0;
-		Frozen.play();
-		this.height = 32;
-		this.width = 32;
-		this.x = Sorceror.x;
-		this.y = Sorceror.y;
 		this.frame = 0;
 		this.onScreen = 1;
+		this.cast = 30;
+		SorcCastingBar.onScreen = 1;
+		SorcCastingBar.cast = 30;
+		SorcCastingBar.castmax = 30;
+		this.used = 0;
 	}
 };
+
 // sFire: Damages player if in radius
 var sFire = {
 	color: "#FF6600",
@@ -1180,9 +1198,11 @@ var sFire = {
 	frame: 0,
 	onScreen: 0,
 	caster: 0,
+	used: 0,
+	cast: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "#CC0000";
@@ -1198,6 +1218,14 @@ var sFire = {
 	},
 	
 	move: function(){
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		if(this.used == 0 && this.cast == 0 && this.onScreen == 1){
+			this.used = 1;
+			Explosion.currentTime=0;
+			Explosion.play();
+		}
 		if(this.frame == 22){
 			this.x = -100;
 			this.y = -200;
@@ -1205,7 +1233,7 @@ var sFire = {
 			this.height = 32;
 			this.onScreen = 0;
 		}
-		else{
+		else if(this.cast == 0 && this.onScreen == 1){
 			if(this.caster == Dragon){
 				this.width = 64 + (32*this.frame);
 				this.height = 64 + (32*this.frame);
@@ -1228,13 +1256,18 @@ var sFire = {
 		
 	// Spawn
 	shoot: function(A){
-		Explosion.currentTime=0;
-		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = A.x;
 		this.y = A.y;
 		this.caster = A;
+		if(this.caster == Sorceror){
+			this.cast = 30;
+			SorcCastingBar.onScreen = 1;
+			SorcCastingBar.cast = 30;
+			SorcCastingBar.castmax = 30;
+		}
+		this.used = 0;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
@@ -1253,9 +1286,11 @@ var sLightning = {
 	vx: -2000,
 	vy: 288,
 	onScreen: 0,
+	used: 0,
+	cast: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			if(this.hstate == 0){
 				ctx.drawImage(ehlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
 				this.hstate+=1;
@@ -1285,7 +1320,15 @@ var sLightning = {
 		}
 	},
 	effect: function(){
-		if(this.onScreen == 1){
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		if(this.cast == 0 && this.used == 0 && this.onScreen == 1){
+			Thunder.currentTime=0;
+			Thunder.play();
+			this.used = 1;
+		}
+		if(this.onScreen == 1 && this.cast == 0){
 			if(this.timeLeft <= 0){
 				this.onScreen = 0;
 			}
@@ -1321,12 +1364,15 @@ var sLightning = {
 	},
 	// Spawn
 	shoot: function(){
-		Thunder.currentTime=0;
-		Thunder.play();
 		this.hx = 400;
 		this.hy = Sorceror.y;
 		this.onScreen = 1;
 		this.timeLeft = 150;
+		this.cast = 30;
+		SorcCastingBar.onScreen = 1;
+		SorcCastingBar.cast = 30;
+		SorcCastingBar.castmax = 30;
+		this.used = 0;
 	}
 };
 //--------------------------------------------------------- Tree Wizzurd Spells -----------------------------------------------------//

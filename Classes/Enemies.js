@@ -833,6 +833,7 @@ var Thief = {
 			this.runCounter = -1;
 			this.spell = "N/A";
 			this.speed = 4;
+			this.speed2 = 2;
 			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
@@ -913,7 +914,8 @@ var Thief = {
 					this.spell = spell1;
 					spell1 = "N/A";
 				}
-				this.speed = this.speed2*4;
+				this.speed = 8;
+				this.speed2 = 4;
 				this.state = 3;
 			}
 		}
@@ -962,6 +964,7 @@ var ThiefA = {
 			this.runCounter = -1;
 			this.spell = "N/A";
 			this.speed = 4;
+			this.speed2 = 2;
 			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
@@ -1042,7 +1045,8 @@ var ThiefA = {
 					this.spell = spell1;
 					spell1 = "N/A";
 				}
-				this.speed = this.speed2*4;
+				this.speed = 8;
+				this.speed2 = 4;
 				this.state = 3;
 			}
 		}
@@ -1091,6 +1095,7 @@ var ThiefB = {
 			this.runCounter = -1;
 			this.spell = "N/A";
 			this.speed = 4;
+			this.speed2 = 2;
 			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
@@ -1171,7 +1176,8 @@ var ThiefB = {
 					this.spell = spell1;
 					spell1 = "N/A";
 				}
-				this.speed = this.speed2*4;
+				this.speed = 8;
+				this.speed2 = 4;
 				this.state = 3;
 			}
 		}
@@ -1625,7 +1631,8 @@ function onHit(E){
 				E.state = 3;
 				E.counter = 0;
 				E.movement = true;
-				E.speed = E.speed2*4;
+				E.speed = 8;
+				E.speed2 = 4;
 			}
 			if(E.hp < 1){
 				Killed.currentTime=0;
