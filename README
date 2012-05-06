@@ -14,24 +14,50 @@
   0. You just DO WHAT THE FUCK YOU WANT TO.
 
 
-	Version 0.6.3 Changes(5/1/2012):
+	Version 0.7.0 Changes(5/6/2012):
 		-Bug fixes:
-			-Improved all lightning collisions
-			-Can no longer cast casting bar spells after dying
-			-Improved collisions on enemy fire spells
-			-Tree Wizard no longer speeds up when casting in ice spells
-			-Thieves now have correct speed when under ice spells
-			-Interface now has consistent alpha even when under ice spells
+			-Removed sound effect for thunderstorm because it is repetitive
+			-Made tree wizard's RootBlast move easier to see, especially in ice
+			-Made tree wizard's RootBlast have better collisions, specifically the 'right' part of it
+			-Fixed thunderstorm sound effect
+			-Fixed bug where you could hit enemies with lightning at the top of the map
+			-Got rid of underscores on global names
 		-Balancing:
-			-Slightly increased fire boss fire spell radius
-			-Heavily decreased enemy wizard's fire spell radius
-			-Twister gives you slightly more dash time every time you hit an enemy
-			-Tree wizard shows up after 2 less trees are killed
-			-Tree wizard no longer speeds up or gets bigger after healing
-			-Sorcerors now have casting times for their spells
-			
+			-Reset global and personal high scores
+			-Lowered points in fire level:
+				-Regular enemies give 25 base
+				-Spawner enemies give 10 base
+			-Air spells redirect you when you hit the edge of the map
+		-Additions:
+			-New website is up: glassknuckle.com
+			-Added global high score board
+				-Submits when you hit 'back' from the high scores
+				-Only works if popups are allowed
+				-Saves top 5 score/name combos
+				-Changes don't show up until you refresh
+				-Cannot submit with buttons, must click
+			-Encrypted high score info
+			-High score submit button now only shows up when your score is greater than global score 5
+			-Added different text for getting global score, and added rainbow effect to it
+			-Added small player animation for when Zap Trap is in effect
+			-Added right-facing 'on damage' sprite for the player
+			-Added 3D Compatibility
+			-Added Dark Element
+				-Dark = Trap: Drop a death trap. Maximum of 7 on screen. Does +1 damage
+				-Dark + Dark = DeathBound: Charge for 1 second and release a wave of Spike Traps around your location. Does +1 damage
+				-Dark + Fire = Flame Trap: Drop a fire trap. Max of 5 on screen. Does +1 damage and creates a +1 damage explosion
+				-Dark + Ice = Ice Trap: Drop an ice trap. Max of 5 on screen. Freezes enemy for 3 seconds
+				-Dark + Earth = Moonlight: Fully heals player, but reduces vision for 5 seconds. 12 second recharge
+				-Dark + Lightning = Static Field: Drop a static field. Max of 2 on screen. When hit it releases a static field that can chain up to 5 times
+									All static fields deal +1 extra damage
+				-Dark + Air = Boosters: Drop a booster. Max of 5 on screen. Apply Dash effect to you when you walk over them.
+				-Dark + Mystic = Piercing Shots: Passively icreases your damage output. Casting the spell teleports you.
+				-Dark + Water = Shadow Cloak/Shield Charge: Applies a Shadow Cloak around you. Blocks 1 damage. 
+								Cast again to do a Shield Charge, increasing the shield's health. Can have a max of 3 health. 
+								Damages enemies on contact but loses 1 hp. Casting time of shield charge increases based on its hp.
 	TODO:
-		+Bugs
+		+Bugs/Other
+			-High Priority:
 			-Maybe issues:
 				-obs always take 1 dmg, maybe an issue?
 				-casting bars appear on top of everything, maybe issue?
@@ -39,24 +65,17 @@
 				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
 			-Current issues:
 				-Ice spells make jungle trees transparent *Don't know how to fix yet*
-		+Highscores
-			+Get website/leaderboards
+			-Backlog:
+				-Add globbly exploding on hitting you etc
+				-Improve globbly and meteor explosion effects
+				-Air in enemy ice is weird
 		-Optimize
 			-Arrays
-		+Spells
-			+Dark (Black) *NEEDS ART FIRST*
-				-Dark = Spike Trap *DONE*
-				-Dark + Dark = DeathBound: ?
-				-Dark + Fire = Landmine *DONE*
-				+Dark + Ice = Ice Trap: Drop one Ice trap, freezes enemies in an area for 3 seconds if they hit it. 1 second recharge, 5 on map
-				-Dark + Earth = Moonlight *DONE*
-				-Dark + Lightning = Spire: Creates a large spike that kills anything that touches it. Shooting the spike causes it to fire conductive shots
-				-Dark + Air = Black Hole: ?
-				-Dark + Mystic = Piercing Shots *DONE*
-				-Dark + Water = ?
+		-Map System
+		-Spells
 			-Summon (?)
 				-Minions
-		-More enemies and AI
+		-More enemies and AI **NOTE: ADD ALL MOVING ENEMIES TO ICELIGHTNING ARRAY**
 			-Bosses:
 				-Swamp boss?
 				-Boss that uses stolen spells?
