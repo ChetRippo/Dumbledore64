@@ -222,6 +222,9 @@ function obsHit(O){
 			Killed.play();
 		}
 		O.hp-=1;
+		if(O.hp < 0){
+			O.hp = 0;
+		}
 		O.hptimer = 20;
 	}
 	if(O.hp == 0){

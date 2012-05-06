@@ -69,7 +69,8 @@ var lightning = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
+						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
 						if(lightning12.hy == -2000){
 							lightning12.hy = AllEnemies[E].y;
 							lightning12.shoot();
@@ -81,7 +82,8 @@ var lightning = {
 			
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
+						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
 						if(this.vx == -2000){
 							this.vx = AllEnemies[E].x
 						}
@@ -163,14 +165,16 @@ var lightning12 = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
+						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
 						onHit(AllEnemies[E]);
 					}
 				}
 			}
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
+						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
 						if(this.vx == -2000){
 							this.vx = AllEnemies[E].x
 						}
@@ -251,7 +255,8 @@ var lightning2 = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
+						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
 						if(lightning22.hy == -2000){
 							lightning22.hy = AllEnemies[E].y;
 							lightning22.shoot();
@@ -262,7 +267,8 @@ var lightning2 = {
 			}
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
+						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
 						if(this.vx == -2000){
 							this.vx = AllEnemies[E].x
 						}
@@ -348,7 +354,8 @@ var lightning22 = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
+						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
 						if(lightning23.hy == -2000){
 							lightning23.hy = AllEnemies[E].y;
 							lightning23.shoot();
@@ -359,7 +366,8 @@ var lightning22 = {
 			}
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
+						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
 						if(this.vx == -2000){
 							this.vx = AllEnemies[E].x
 						}
@@ -437,14 +445,16 @@ var lightning23 = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
+						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
 						onHit(AllEnemies[E]);
 					}
 				}
 			}
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1){
+					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
+						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
 						if(this.vx == -2000){
 							this.vx = AllEnemies[E].x
 						}

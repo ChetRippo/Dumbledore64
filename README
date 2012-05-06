@@ -1,39 +1,82 @@
 
-Version 0.6.0 Changes(4/20/2012):
-		-Bug Fixes:
-			-Frozen Web now stops the tree wizard and thieves
-			-Equalized Volume
-			-Fixed bug where Mirage explosion was black
-			-Added to HTML compatibility
+        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                 Version 2, December 2004
+
+ Copyright (C) 2012 Brett Davis <bdavis1000@gmail.com>
+
+ Everyone is permitted to copy and distribute verbatim or modified
+ copies of this license document, and changing it is allowed as long
+ as the name is changed.
+
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+  0. You just DO WHAT THE FUCK YOU WANT TO.
+
+
+	Version 0.7.0 Changes(5/6/2012):
+		-Bug fixes:
+			-Removed sound effect for thunderstorm because it is repetitive
+			-Made tree wizard's RootBlast move easier to see, especially in ice
+			-Made tree wizard's RootBlast have better collisions, specifically the 'right' part of it
+			-Fixed thunderstorm sound effect
+			-Fixed bug where you could hit enemies with lightning at the top of the map
+			-Got rid of underscores on global names
+		-Balancing:
+			-Reset global and personal high scores
+			-Lowered points in fire level:
+				-Regular enemies give 25 base
+				-Spawner enemies give 10 base
+			-Air spells redirect you when you hit the edge of the map
 		-Additions:
-			-Added backspace button to initial typing
-			-Added enter button to initial typing
-			-Added Back button from high scores in again.
-				Now it no longer reloads the page but resets all var's
-			-Enemy wizard's spell is now shown above his head
-			-Added sound for wind spells
-		
+			-New website is up: glassknuckle.com
+			-Added global high score board
+				-Submits when you hit 'back' from the high scores
+				-Only works if popups are allowed
+				-Saves top 5 score/name combos
+				-Changes don't show up until you refresh
+				-Cannot submit with buttons, must click
+			-Encrypted high score info
+			-High score submit button now only shows up when your score is greater than global score 5
+			-Added different text for getting global score, and added rainbow effect to it
+			-Added small player animation for when Zap Trap is in effect
+			-Added right-facing 'on damage' sprite for the player
+			-Added 3D Compatibility
+			-Added Dark Element
+				-Dark = Trap: Drop a death trap. Maximum of 7 on screen. Does +1 damage
+				-Dark + Dark = DeathBound: Charge for 1 second and release a wave of Spike Traps around your location. Does +1 damage
+				-Dark + Fire = Flame Trap: Drop a fire trap. Max of 5 on screen. Does +1 damage and creates a +1 damage explosion
+				-Dark + Ice = Ice Trap: Drop an ice trap. Max of 5 on screen. Freezes enemy for 3 seconds
+				-Dark + Earth = Moonlight: Fully heals player, but reduces vision for 5 seconds. 12 second recharge
+				-Dark + Lightning = Static Field: Drop a static field. Max of 2 on screen. When hit it releases a static field that can chain up to 5 times
+									All static fields deal +1 extra damage
+				-Dark + Air = Boosters: Drop a booster. Max of 5 on screen. Apply Dash effect to you when you walk over them.
+				-Dark + Mystic = Piercing Shots: Passively icreases your damage output. Casting the spell teleports you.
+				-Dark + Water = Shadow Cloak/Shield Charge: Applies a Shadow Cloak around you. Blocks 1 damage. 
+								Cast again to do a Shield Charge, increasing the shield's health. Can have a max of 3 health. 
+								Damages enemies on contact but loses 1 hp. Casting time of shield charge increases based on its hp.
 	TODO:
-		-Bugs
-		-Highscores
-			-Get website/leaderboards
+		+Bugs/Other
+			-High Priority:
+			-Maybe issues:
+				-obs always take 1 dmg, maybe an issue?
+				-casting bars appear on top of everything, maybe issue?
+			-Issues for later stuff:
+				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
+			-Current issues:
+				-Ice spells make jungle trees transparent *Don't know how to fix yet*
+			-Backlog:
+				-Add globbly exploding on hitting you etc
+				-Improve globbly and meteor explosion effects
+				-Air in enemy ice is weird
 		-Optimize
 			-Arrays
+		-Map System
 		-Spells
-			-Dark (Black)
-				-Teemo spikes?
-					-Dark = Spike Trap
-					-Dark + Dark = DeathBound
-					-Dark + Fire = Land Mine
-					-Dark + Ice = Ice Trap
-					-Dark + Lightning = ???
-					-Dark + Air = ???
-					-Dark + Mystic = Portal?
-					-Dark + Water = ???
 			-Summon (?)
 				-Minions
-		+More enemies and AI
-			+Bosses:
+		-More enemies and AI **NOTE: ADD ALL MOVING ENEMIES TO ICELIGHTNING ARRAY**
+			-Bosses:
 				-Swamp boss?
 				-Boss that uses stolen spells?
 		-Terrain

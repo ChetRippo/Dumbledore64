@@ -34,7 +34,12 @@ var Globblyfire = {
 			this.height = 16 + (16*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}				
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -104,7 +109,12 @@ var Globblyfire2 = {
 			this.height = 16 + (16*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -174,7 +184,12 @@ var Globblyfire3 = {
 			this.height = 16 + (16*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -244,7 +259,12 @@ var EMplosion1 = {
 			this.height = 16 + (8*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -313,7 +333,12 @@ var EMplosion2 = {
 			this.height = 16 + (8*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -382,7 +407,12 @@ var EMplosion3 = {
 			this.height = 16 + (8*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -451,7 +481,12 @@ var EMplosion4 = {
 			this.height = 16 + (8*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -520,7 +555,12 @@ var EMplosion5 = {
 			this.height = 16 + (8*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -589,7 +629,12 @@ var EMplosion6 = {
 			this.height = 16 + (8*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -658,7 +703,12 @@ var EMplosion7 = {
 			this.height = 16 + (8*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -727,7 +777,12 @@ var EMplosion8 = {
 			this.height = 16 + (8*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -796,7 +851,12 @@ var EMplosion9 = {
 			this.height = 16 + (16*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -865,7 +925,12 @@ var EMplosion10 = {
 			this.height = 16 + (16*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -934,7 +999,12 @@ var EMplosion11 = {
 			this.height = 16 + (16*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -1003,7 +1073,12 @@ var EMplosion12 = {
 			this.height = 16 + (16*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -1072,7 +1147,12 @@ var EMplosion13 = {
 			this.height = 16 + (16*this.frame);
 			this.frame++;
 			if(contained(player, this)){
-				if(hptimer <= 0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -1120,9 +1200,11 @@ var sIce = {
 	frame: 0,
 	onScreen: 0,
 	end: false,
+	cast: 0,
+	used: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			Alpha = 0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
@@ -1130,45 +1212,61 @@ var sIce = {
 	},
 	
 	move: function(){
-		if(this.frame == 150){
-			this.width = 32;
-			this.height = 32;
-			this.x = -200;
-			this.y = -100;
-			this.onScreen = 0;
-			this.end = true;
-			Alpha = 1;
-		}
-		else{
-			this.width = this.width + (32*this.frame);
-			this.height = this.height + (32*this.frame);
-			this.frame++;
+		if(this.onScreen == 1){
+			if(this.cast > 0){
+				this.cast -=1;
+			}
+			if(this.cast == 0 && this.used == 0){
+				Frozen.currentTime=0;
+				Frozen.play();
+				this.used = 1;
+				this.height = 32;
+				this.width = 32;
+				this.x = Sorceror.x;
+				this.y = Sorceror.y;
+			}
+			if(this.frame == 150){
+				this.width = 32;
+				this.height = 32;
+				this.x = -200;
+				this.y = -100;
+				this.onScreen = 0;
+				this.end = true;
+				Alpha = 1;
+			}
+			else if(this.cast == 0){
+				this.width = this.width + (32*this.frame);
+				this.height = this.height + (32*this.frame);
+				this.frame++;
+			}
 		}
 	},
 	// Slow all enemies in radius
 	effect: function(){
-		if(this.onScreen == 1){
-			player.speed = 4;
-		}
-		else if(this.end == true){
-			player.speed = 8;
-			this.frame = 0;
-			this.end = false;
+		if(this.cast == 0){
+			if(this.onScreen == 1){
+				player.speed = 4;
+			}
+			else if(this.end == true){
+				player.speed = 8;
+				this.frame = 0;
+				this.end = false;
+			}
 		}
 	},
 		
 	// Spawn
 	shoot: function(){
-		Frozen.currentTime=0;
-		Frozen.play();
-		this.height = 32;
-		this.width = 32;
-		this.x = Sorceror.x;
-		this.y = Sorceror.y;
 		this.frame = 0;
 		this.onScreen = 1;
+		this.cast = 30;
+		SorcCastingBar.onScreen = 1;
+		SorcCastingBar.cast = 30;
+		SorcCastingBar.castmax = 30;
+		this.used = 0;
 	}
 };
+
 // sFire: Damages player if in radius
 var sFire = {
 	color: "#FF6600",
@@ -1179,9 +1277,12 @@ var sFire = {
 	height: 32,
 	frame: 0,
 	onScreen: 0,
+	caster: 0,
+	used: 0,
+	cast: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
 				ctx.fillStyle = "#CC0000";
@@ -1197,6 +1298,14 @@ var sFire = {
 	},
 	
 	move: function(){
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		if(this.used == 0 && this.cast == 0 && this.onScreen == 1){
+			this.used = 1;
+			Explosion.currentTime=0;
+			Explosion.play();
+		}
 		if(this.frame == 22){
 			this.x = -100;
 			this.y = -200;
@@ -1204,12 +1313,23 @@ var sFire = {
 			this.height = 32;
 			this.onScreen = 0;
 		}
-		else{
-			this.width = 32 + (32*this.frame);
-			this.height = 32 + (32*this.frame);
+		else if(this.cast == 0 && this.onScreen == 1){
+			if(this.caster == Dragon){
+				this.width = 64 + (32*this.frame);
+				this.height = 64 + (32*this.frame);
+			}
+			else{
+				this.width = 32 + (16*this.frame);
+				this.height = 32 + (16*this.frame);
+			}
 			this.frame++;
-			if(contained(player, this)){
-				if(hptimer <= 0){
+			if(contained(player, this) || collision("W", player, this) || collision("A", player, this) || collision("S", player, this) || collision("D", player, this)){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
 					player.hp-=1;
 					onDmg.currentTime=0;
 					onDmg.play();
@@ -1221,12 +1341,18 @@ var sFire = {
 		
 	// Spawn
 	shoot: function(A){
-		Explosion.currentTime=0;
-		Explosion.play();
 		this.height = 32;
 		this.width = 32;
 		this.x = A.x;
 		this.y = A.y;
+		this.caster = A;
+		if(this.caster == Sorceror){
+			this.cast = 30;
+			SorcCastingBar.onScreen = 1;
+			SorcCastingBar.cast = 30;
+			SorcCastingBar.castmax = 30;
+		}
+		this.used = 0;
 		this.frame = 0;
 		this.onScreen = 1;
 	}
@@ -1245,9 +1371,11 @@ var sLightning = {
 	vx: -2000,
 	vy: 288,
 	onScreen: 0,
+	used: 0,
+	cast: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
 			if(this.hstate == 0){
 				ctx.drawImage(ehlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
 				this.hstate+=1;
@@ -1277,7 +1405,15 @@ var sLightning = {
 		}
 	},
 	effect: function(){
-		if(this.onScreen == 1){
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		if(this.cast == 0 && this.used == 0 && this.onScreen == 1){
+			Thunder.currentTime=0;
+			Thunder.play();
+			this.used = 1;
+		}
+		if(this.onScreen == 1 && this.cast == 0){
 			if(this.timeLeft <= 0){
 				this.onScreen = 0;
 			}
@@ -1285,8 +1421,14 @@ var sLightning = {
 				this.timeLeft-=1;
 			}
 			if(this.vx != -2000){
-				if(player.x >= this.vx-this.vwidth/2 && player.x <= this.vx + this.vwidth/2){
-					if(hptimer <= 0){
+				if(player.x >= this.vx-this.vwidth/2 && player.x <= this.vx + this.vwidth/2
+					|| (this.vx >= player.x && this.vx <= player.x + player.height/2)){
+					if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+						darkwater.hptimer = 20;
+						darkwater.hp-=1;
+						hptimer = 20;
+					}	
+					else if(hptimer <= 0){
 						player.hp-=1;
 						onDmg.currentTime=0;
 						onDmg.play();
@@ -1295,11 +1437,17 @@ var sLightning = {
 				}
 			}
 			if(this.hy != -2000){
-				if(player.y <= this.hy + this.hheight/2 && player.y >= this.hy-this.hheight/2){
+				if(player.y <= this.hy + this.hheight/2 && player.y >= this.hy-this.hheight/2
+					|| (this.hy >= player.y && this.hy <= player.y + player.height/2)){
 					if(this.vx == -2000){
 						this.vx = player.x
 					}
-					if(hptimer <= 0){
+					if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+						darkwater.hptimer = 20;
+						darkwater.hp-=1;
+						hptimer = 20;
+					}	
+					else if(hptimer <= 0){
 						player.hp-=1;
 						onDmg.currentTime=0;
 						onDmg.play();
@@ -1311,25 +1459,26 @@ var sLightning = {
 	},
 	// Spawn
 	shoot: function(){
-		Thunder.currentTime=0;
-		Thunder.play();
 		this.hx = 400;
 		this.hy = Sorceror.y;
 		this.onScreen = 1;
 		this.timeLeft = 150;
+		this.cast = 30;
+		SorcCastingBar.onScreen = 1;
+		SorcCastingBar.cast = 30;
+		SorcCastingBar.castmax = 30;
+		this.used = 0;
 	}
 };
 //--------------------------------------------------------- Tree Wizzurd Spells -----------------------------------------------------//
 var rootBlastW = {
-	color: "#33CC00",
+	color: "#006600",
 	x: -100,
 	y: -200,
 	ox: -100,
 	oy: -200,
 	width: 32,
 	height: 8,
-	hwidth: 8,
-	hheight: 32,
 	frame: 0,
 	cd: 0,
 	speed: 16,
@@ -1338,7 +1487,7 @@ var rootBlastW = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
+			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
@@ -1351,16 +1500,19 @@ var rootBlastW = {
 			this.width = 32;
 			this.onScreen = 0;
 			this.height = 8;
-			this.hwidth = 8;
 			this.frame = 0;
-			this.hheight = 32;
 		}
 		else if(this.onScreen ==1){
 			this.width = 32 + (4*this.frame);
 			this.frame++;
 			this.y -= this.speed;
 			if(collision(this.dir, this, player)){
-				if(!(hptimer > 0)){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(!(hptimer > 0)){
 					player.hp-=1;
 					hptimer = 30;
 				}
@@ -1369,29 +1521,27 @@ var rootBlastW = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		multiLaser.currentTime=0;
-		multiLaser.play();
-		this.width = 32;
-		this.x = treeWizz.x;
-		this.y = treeWizz.y;
-		this.ox = treeWizz.x;
-		this.oy = treeWizz.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
+		if(this.cd == 0){
+			multiLaser.currentTime=0;
+			multiLaser.play();
+			this.width = 32;
+			this.x = treeWizz.x;
+			this.y = treeWizz.y;
+			this.ox = treeWizz.x;
+			this.oy = treeWizz.y;
+			this.frame = 0;
+			this.onScreen = 1;
+		}
 	}
 };
 var rootBlastA = {
-	color: "#33CC00",
+	color: "#006600",
 	x: -100,
 	y: -200,
 	ox: -100,
 	oy: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
+	width: 8,
+	height: 32,
 	frame: 0,
 	cd: 0,
 	speed: 16,
@@ -1400,9 +1550,9 @@ var rootBlastA = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
+			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.hwidth / 2, this.y - this.hheight / 2, this.hwidth, this.hheight);
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -1410,19 +1560,22 @@ var rootBlastA = {
 		if(this.frame == 30){
 			this.x = -100;
 			this.y = -200;
-			this.width = 32;
+			this.height = 32;
 			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
+			this.width = 8;
 			this.frame = 0;
-			this.hheight = 32;
 		}
 		else if(this.onScreen ==1){
-			this.hheight = 32 + (4*this.frame);
+			this.height = 32 + (4*this.frame);
 			this.frame++;
 			this.x -= this.speed;
 			if(collision(this.dir, this, player)){
-				if(!(hptimer > 0)){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(!(hptimer > 0)){
 					player.hp-=1;
 					hptimer = 30;
 				}
@@ -1431,29 +1584,27 @@ var rootBlastA = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		multiLaser.currentTime=0;
-		multiLaser.play();
-		this.width = 32;
-		this.x = treeWizz.x;
-		this.y = treeWizz.y;
-		this.ox = treeWizz.x;
-		this.oy = treeWizz.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
+		if(this.cd == 0){
+			multiLaser.currentTime=0;
+			multiLaser.play();
+			this.height = 32;
+			this.x = treeWizz.x;
+			this.y = treeWizz.y;
+			this.ox = treeWizz.x;
+			this.oy = treeWizz.y;
+			this.frame = 0;
+			this.onScreen = 1;
+		}
 	}
 };
 var rootBlastS = {
-	color: "#33CC00",
+	color: "#006600",
 	x: -100,
 	y: -200,
 	ox: -100,
 	oy: -200,
 	width: 32,
 	height: 8,
-	hwidth: 8,
-	hheight: 32,
 	frame: 0,
 	cd: 0,
 	speed: 16,
@@ -1462,7 +1613,7 @@ var rootBlastS = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
+			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = this.color;
 				ctx.fillRect(this.x - this.width / 2,
 				this.y - this.height / 2,
@@ -1477,16 +1628,19 @@ var rootBlastS = {
 			this.width = 32;
 			this.onScreen = 0;
 			this.height = 8;
-			this.hwidth = 8;
 			this.frame = 0;
-			this.hheight = 32;
 		}
 		else if(this.onScreen ==1){
 			this.width = 32 + (4*this.frame);
 			this.frame++;
 			this.y += this.speed;
 			if(collision(this.dir, this, player)){
-				if(!(hptimer > 0)){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(!(hptimer > 0)){
 					player.hp-=1;
 					hptimer = 30;
 				}
@@ -1495,29 +1649,27 @@ var rootBlastS = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		multiLaser.currentTime=0;
-		multiLaser.play();
-		this.width = 32;
-		this.x = treeWizz.x;
-		this.y = treeWizz.y;
-		this.ox = treeWizz.x;
-		this.oy = treeWizz.y;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
+		if(this.cd == 0){
+			multiLaser.currentTime=0;
+			multiLaser.play();
+			this.width = 32;
+			this.x = treeWizz.x;
+			this.y = treeWizz.y;
+			this.ox = treeWizz.x;
+			this.oy = treeWizz.y;
+			this.frame = 0;
+			this.onScreen = 1;
+		}
 	}
 };
 var rootBlastD = {
-	color: "#33CC00",
+	color: "#006600",
 	x: -100,
 	y: -200,
 	ox: -100,
 	oy: -200,
-	width: 32,
-	height: 8,
-	hwidth: 8,
-	hheight: 32,
+	width: 8,
+	height: 32,
 	frame: 0,
 	cd: 0,
 	speed: 16,
@@ -1526,9 +1678,9 @@ var rootBlastD = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
+			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.hwidth / 2, this.y - this.hheight / 2, this.hwidth, this.hheight);
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -1536,23 +1688,31 @@ var rootBlastD = {
 		if(this.frame == 30){
 			this.x = -100;
 			this.y = -200;
-			this.width = 32;
+			this.width = 8;
 			this.onScreen = 0;
-			this.height = 8;
-			this.hwidth = 8;
+			this.height = 32;
 			this.frame = 0;
-			this.hheight = 32;
 		}
 		else if(this.onScreen ==1){
-			this.hheight = 32 + (4*this.frame);
+			this.height = 32 + (4*this.frame);
 			this.frame++;
 			this.x += this.speed;
+			//Collisions here were weird. Moved back so it appears to hit you when it does.
+			this.speed = 0;
+			this.x-=16;
 			if(collision(this.dir, this, player)){
-				if(!(hptimer > 0)){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(!(hptimer > 0)){
 					player.hp-=1;
 					hptimer = 30;
 				}
 			}
+			this.x+=16;
+			this.speed = 16
 		}
 	},
 	// Spawn
@@ -1560,7 +1720,7 @@ var rootBlastD = {
 	if(this.cd == 0){
 		multiLaser.currentTime=0;
 		multiLaser.play();
-		this.width = 32;
+		this.height = 32;
 		this.x = treeWizz.x;
 		this.y = treeWizz.y;
 		this.ox = treeWizz.x;
@@ -2498,9 +2658,6 @@ var rootStrike = {
 	speed: 8,
 	speed2: 4,
 	respawn: -1,
-	pts: 0,
-	hp: 2,
-	hptimer: 0,
 	dir: "W",
 	rp: -1,
 	index: 0,
@@ -2508,102 +2665,127 @@ var rootStrike = {
 	onScreen: 0,
 	movement: false,
 	draw: function(){
-	if(this.onScreen == 1){
-		if(this.hptimer > 0){
-			this.hptimer-=1;
+		for(R in roots1){
+			if(collision(player.dir, player, roots1[R])){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer <= 0){
+					player.hp-=1;
+					hptimer = 30;
+				}
+			}
 		}
-		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.fillStyle = "white";
+		if(this.dirct <= 0){
+			for(R in roots12){
+				if(collision(this.dir, this, roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots13){
+				if(collision(this.dir, this, roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots14){
+				if(collision(this.dir, this, roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
 		}
-		else{
+		if(this.onScreen == 1){
+			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = "#330000";
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.globalAlpha = Alpha;
+			this.frame++;
+			if(this.frame/2 == Math.round(this.frame/2)){
+				if(rootstr.onScreen == 0){
+					rootstr.onScreen = 1;
+					rootstr.x = this.x;
+					rootstr.y = this.y;
+				}
+				else if(rootstr2.onScreen == 0){
+					rootstr2.onScreen = 1;
+					rootstr2.x = this.x;
+					rootstr2.y = this.y;
+				}
+				else if(rootstr3.onScreen == 0){
+					rootstr3.onScreen = 1;
+					rootstr3.x = this.x;
+					rootstr3.y = this.y;
+				}
+				else if(rootstr4.onScreen == 0){
+					rootstr4.onScreen = 1;
+					rootstr4.x = this.x;
+					rootstr4.y = this.y;
+				}
+				else if(rootstr5.onScreen == 0){
+					rootstr5.onScreen = 1;
+					rootstr5.x = this.x;
+					rootstr5.y = this.y;
+				}
+				else if(rootstr6.onScreen == 0){
+					rootstr6.onScreen = 1;
+					rootstr6.x = this.x;
+					rootstr6.y = this.y;
+				}
+				else if(rootstr7.onScreen == 0){
+					rootstr7.onScreen = 1;
+					rootstr7.x = this.x;
+					rootstr7.y = this.y;
+				}
+				else if(rootstr8.onScreen == 0){
+					rootstr8.onScreen = 1;
+					rootstr8.x = this.x;
+					rootstr8.y = this.y;
+				}
+				else if(rootstr9.onScreen == 0){
+					rootstr9.onScreen = 1;
+					rootstr9.x = this.x;
+					rootstr9.y = this.y;
+				}
+				else if(rootstr10.onScreen == 0){
+					rootstr10.onScreen = 1;
+					rootstr10.x = this.x;
+					rootstr10.y = this.y;
+				}
+				else if(rootstr11.onScreen == 0){
+					rootstr11.onScreen = 1;
+					rootstr11.x = this.x;
+					rootstr11.y = this.y;
+				}
+				else if(rootstr12.onScreen == 0){
+					rootstr12.onScreen = 1;
+					rootstr12.x = this.x;
+					rootstr12.y = this.y;
+				}
+				else if(rootstr13.onScreen == 0){
+					rootstr13.onScreen = 1;
+					rootstr13.x = this.x;
+					rootstr13.y = this.y;
+				}
+				else if(rootstr14.onScreen == 0){
+					rootstr14.onScreen = 1;
+					rootstr14.x = this.x;
+					rootstr14.y = this.y;
+				}
+				else if(rootstr15.onScreen == 0){
+					rootstr15.onScreen = 1;
+					rootstr15.x = this.x;
+					rootstr15.y = this.y;
+				}
+				else{
+					this.movement = false;
+					this.frame = 0;
+				}
+			}
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		this.frame++;
-		if(this.frame/2 == Math.round(this.frame/2)){
-			if(rootstr.onScreen == 0){
-				rootstr.onScreen = 1;
-				rootstr.x = this.x;
-				rootstr.y = this.y;
-			}
-			else if(rootstr2.onScreen == 0){
-				rootstr2.onScreen = 1;
-				rootstr2.x = this.x;
-				rootstr2.y = this.y;
-			}
-			else if(rootstr3.onScreen == 0){
-				rootstr3.onScreen = 1;
-				rootstr3.x = this.x;
-				rootstr3.y = this.y;
-			}
-			else if(rootstr4.onScreen == 0){
-				rootstr4.onScreen = 1;
-				rootstr4.x = this.x;
-				rootstr4.y = this.y;
-			}
-			else if(rootstr5.onScreen == 0){
-				rootstr5.onScreen = 1;
-				rootstr5.x = this.x;
-				rootstr5.y = this.y;
-			}
-			else if(rootstr6.onScreen == 0){
-				rootstr6.onScreen = 1;
-				rootstr6.x = this.x;
-				rootstr6.y = this.y;
-			}
-			else if(rootstr7.onScreen == 0){
-				rootstr7.onScreen = 1;
-				rootstr7.x = this.x;
-				rootstr7.y = this.y;
-			}
-			else if(rootstr8.onScreen == 0){
-				rootstr8.onScreen = 1;
-				rootstr8.x = this.x;
-				rootstr8.y = this.y;
-			}
-			else if(rootstr9.onScreen == 0){
-				rootstr9.onScreen = 1;
-				rootstr9.x = this.x;
-				rootstr9.y = this.y;
-			}
-			else if(rootstr10.onScreen == 0){
-				rootstr10.onScreen = 1;
-				rootstr10.x = this.x;
-				rootstr10.y = this.y;
-			}
-			else if(rootstr11.onScreen == 0){
-				rootstr11.onScreen = 1;
-				rootstr11.x = this.x;
-				rootstr11.y = this.y;
-			}
-			else if(rootstr12.onScreen == 0){
-				rootstr12.onScreen = 1;
-				rootstr12.x = this.x;
-				rootstr12.y = this.y;
-			}
-			else if(rootstr13.onScreen == 0){
-				rootstr13.onScreen = 1;
-				rootstr13.x = this.x;
-				rootstr13.y = this.y;
-			}
-			else if(rootstr14.onScreen == 0){
-				rootstr14.onScreen = 1;
-				rootstr14.x = this.x;
-				rootstr14.y = this.y;
-			}
-			else if(rootstr15.onScreen == 0){
-				rootstr15.onScreen = 1;
-				rootstr15.x = this.x;
-				rootstr15.y = this.y;
-			}
-			else{
-				this.movement = false;
-				this.frame = 0;
-			}
-		}
-	}
 	}
 };
 var rootStrike2 = {
@@ -2617,9 +2799,6 @@ var rootStrike2 = {
 	speed: 8,
 	speed2: 4,
 	respawn: -1,
-	pts: 0,
-	hp: 2,
-	hptimer: 0,
 	dir: "W",
 	rp: -1,
 	index: 0,
@@ -2629,16 +2808,28 @@ var rootStrike2 = {
 	// Draws the enemy on the canvas when called
 	draw: function(){
 	if(this.onScreen == 1){
-		if(this.hptimer > 0){
-			this.hptimer-=1;
+		if(this.dirct <= 0){
+			for(R in roots11){
+				if(collision(this.dir, this, roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots13){
+				if(collision(this.dir, this, roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots14){
+				if(collision(this.dir, this, roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.fillStyle = "white";
-		}
-		else{
-			ctx.fillStyle = "#330000";
-		}
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
@@ -2737,9 +2928,6 @@ var rootStrike3 = {
 	speed: 8,
 	speed2: 4,
 	respawn: -1,
-	pts: 0,
-	hp: 2,
-	hptimer: 0,
 	dir: "W",
 	rp: -1,
 	index: 0,
@@ -2749,16 +2937,28 @@ var rootStrike3 = {
 	// Draws the enemy on the canvas when called
 	draw: function(){
 	if(this.onScreen == 1){
-		if(this.hptimer > 0){
-			this.hptimer-=1;
+		if(this.dirct <= 0){
+			for(R in roots12){
+				if(collision(this.dir, this, roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots11){
+				if(collision(this.dir, this, roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots14){
+				if(collision(this.dir, this, roots14[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.fillStyle = "white";
-		}
-		else{
-			ctx.fillStyle = "#330000";
-		}
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
@@ -2857,9 +3057,6 @@ var rootStrike4 = {
 	speed: 8,
 	speed2: 4,
 	respawn: -1,
-	pts: 0,
-	hp: 2,
-	hptimer: 0,
 	dir: "W",
 	rp: -1,
 	index: 0,
@@ -2869,16 +3066,28 @@ var rootStrike4 = {
 	// Draws the enemy on the canvas when called
 	draw: function(){
 	if(this.onScreen == 1){
-		if(this.hptimer > 0){
-			this.hptimer-=1;
+		if(this.dirct <= 0){
+			for(R in roots12){
+				if(collision(this.dir, this, roots12[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots13){
+				if(collision(this.dir, this, roots13[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
+			for(R in roots11){
+				if(collision(this.dir, this, roots11[R])){
+					this.dir = DiffDir(this.dir);
+					this.dirct = 5;
+				}
+			}
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.fillStyle = "white";
-		}
-		else{
-			ctx.fillStyle = "#330000";
-		}
+		ctx.fillStyle = "#330000";
 		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
@@ -2999,10 +3208,6 @@ var LeafHeal = {
 				if(treeWizz.hp < 10){
 					treeWizz.hp+=1;
 				}
-				treeWizz.height+=8;
-				treeWizz.width+=8;
-				treeWizz.speed+=2;
-				treeWizz.speed2 = treeWizz.speed/2;
 				this.used = 1;
 				Pickup.currentTime=0;
 				Pickup.play();
@@ -3265,7 +3470,12 @@ var DragonFire = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3342,7 +3552,12 @@ var Dfire2 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3413,7 +3628,12 @@ var Dfire3 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3484,7 +3704,12 @@ var Dfire4 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3555,7 +3780,12 @@ var Dfire5 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3626,7 +3856,12 @@ var Dfire6 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3697,7 +3932,12 @@ var Dfire7 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3768,7 +4008,12 @@ var Dfire8 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3839,7 +4084,12 @@ var Dfire9 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3910,7 +4160,12 @@ var Dfire10 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -3981,7 +4236,12 @@ var Dfire11 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -4052,7 +4312,12 @@ var Dfire12 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -4123,7 +4388,12 @@ var Dfire13 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -4194,7 +4464,12 @@ var Dfire14 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}
@@ -4265,7 +4540,12 @@ var Dfire15 = {
 			this.frame++;
 			this.x += this.speed;
 			if(Hcontained(player, this)){
-				if(hptimer<=0){
+				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+					darkwater.hptimer = 20;
+					darkwater.hp-=1;
+					hptimer = 20;
+				}	
+				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
 				}

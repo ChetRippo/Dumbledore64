@@ -593,7 +593,91 @@ var blueCube = {
 		this.timeLeft = 0;
 	}
 };
-var allEleCubes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube};
+// Dark drop
+var blackCube = {
+	type: 1,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	index: 1,
+	stage: "up",
+	
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(Darks[this.index], this.x-this.width/2, this.y-this.height/2);
+			this.timeLeft-=1;
+			if(this.stage == "up"){
+				this.index++;
+			}
+			else{
+				this.index-=1;
+			}
+			if(this.index == 6){
+				this.index = 5;
+				this.stage = "down";
+			}
+			else if(this.index == 0){
+				this.index = 1;
+				this.stage = "up";
+			}
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = "Dark";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Dark";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Dark";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Dark";
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = "Dark";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Dark";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Dark";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Dark";
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
+var allEleCubes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: blackCube};
 // Random drop
 var RandomCube = {
 	type: 1,
@@ -604,8 +688,8 @@ var RandomCube = {
 	timeLeft: 0,
 	index: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water"},
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
 	draw: function(){
 		if(this.timeLeft > 0){
 			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
@@ -738,28 +822,49 @@ var hpUp = {
 	},
 	onHit: function(){
 		if(typemarker.x != -100 && typemarker2.x != -100){
-			typemarker3.text = "+ Max Hp";
+			if(this.boss == "treeW"){
+				typemarker3.text = "+ Max Hp";
+			}
+			else{
+				typemarker3.text = "+ Damage";
+			}
 			typemarker3.x = player.x-player.width*2;
 			typemarker3.y = player.y;
 			typemarker3.speed = 2;
 			typemarker3.timeLeft = 90;
 		}
 		else if(typemarker.x != -100){
-			typemarker2.text = "+ Max Hp";
+			if(this.boss == "treeW"){
+				typemarker2.text = "+ Max Hp";
+			}
+			else{
+				typemarker2.text = "+ Damage";
+			}
 			typemarker2.x = player.x-player.width*2;
 			typemarker2.y = player.y;
 			typemarker2.speed = 2;
 			typemarker2.timeLeft = 90;
 		}
 		else{
-			typemarker.text = "+ Max Hp";
+			if(this.boss == "treeW"){
+				typemarker.text = "+ Max Hp";
+			}
+			else{
+				typemarker.text = "+ Damage";
+			}
 			typemarker.x = player.x-player.width*2;
 			typemarker.y = player.y;
 			typemarker.speed = 2;
 			typemarker.timeLeft = 90;
 		}
-		player.maxhp+=1;
-		player.hp = player.maxhp;
+		if(this.boss == "treeW"){
+			player.maxhp+=1;
+			player.hp = player.maxhp;
+		}
+		else if(this.boss == "Dragon"){
+			player.hp = player.maxhp;
+			player.power+=1;
+		}
 		Frozen.currentTime=0;
 		Frozen.play();
 		hpParticleW.x = this.x;
@@ -1145,7 +1250,7 @@ function HpAi(E){
 		E.dirct-=1;
 	}
 }
-var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 9: RandomCube};
+var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 9: RandomCube, 10: blackCube};
 var hpParticles = {1: hpParticleW, 2: hpParticleA, 3: hpParticleS, 4: hpParticleD, 5: hpParticleWA, 6: hpParticleWD, 7: hpParticleAS, 8: hpParticleSD};
 // If you pick it up
 function pickup(C){

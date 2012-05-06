@@ -1,9 +1,21 @@
 function reset(){
+	if(vol != 1){
+		for(S in AllSounds){
+			AllSounds[S].volume = 0;
+		}
+	}
+	for(M in AllMusic){
+		if(AllMusic[M] != Spells){
+			AllMusic[M].currentTime = 0;
+		}
+	}
 	//------------------------ Dumbledore64.js ------------------//
+	resetGame = true;
 	STATE = 0;
 	//Pause menu
 	preSTATE = 0;
-	keytimer = 0;
+	//keytimer is 8 because otherwise enter will quick swap
+	keytimer = 8;
 	nu = 0;
 	hs = 0;
 	cd = 0;
@@ -30,6 +42,11 @@ function reset(){
 	//End of game pause
 	deathTimer = -1;
 	jungleIndex = 0;
+	Menu.newgameSelect = false;
+	Menu.howtoplaySelect = false;
+	Menu.optionsSelect = false;
+	Menu.scoreSelect = false;
+	Menu.creditSelect = false;
 	player.x = 400;
 	player.y = 256;
 	player.width = 32;
@@ -39,9 +56,12 @@ function reset(){
 	player.dirct = 0;
 	player.hp = 3;
 	player.maxhp = 3;
+	player.power = 1;
+	player.currpower = 1;
 	player.dmg = false;
 	player.dir = "W";
 	player.LR = "";
+	player.zapIndex = 1;
 	castingBar.x = player.x - player.width/2;
 	castingBar.y = player.y + player.height/2;
 	castingBar.width = player.width;
@@ -50,14 +70,22 @@ function reset(){
 	castingBar.onScreen = 0;
 	castingBar.cast = -1;
 	castingBar.castmax = 0;
-	TreecastingBar.x = player.x - player.width/2;
-	TreecastingBar.y = player.y + player.height/2;
-	TreecastingBar.width = player.width;
-	TreecastingBar.height = player.height/4;
+	TreecastingBar.x = treeWizz.x - treeWizz.width/2;
+	TreecastingBar.y = treeWizz.y + treeWizz.height/2;
+	TreecastingBar.width = treeWizz.width;
+	TreecastingBar.height = treeWizz.height/4;
 	TreecastingBar.width2 = 0;
 	TreecastingBar.onScreen = 0;
 	TreecastingBar.cast = -1;
 	TreecastingBar.castmax = 0;
+	SorcCastingBar.x = -100;
+	SorcCastingBar.y = -200;
+	SorcCastingBar.width = Sorceror.width;
+	SorcCastingBar.height = Sorceror.height/4;
+	SorcCastingBar.width2 = 0;
+	SorcCastingBar.onScreen = 0;
+	SorcCastingBar.cast = -1;
+	SorcCastingBar.castmax = 0;
 	
 	for(M in markerlist){
 		markerlist[M].color = "#00FF00";
@@ -335,7 +363,7 @@ function reset(){
 	Tenemy.bug = 0;
 	Tenemy.onTree = 0;
 	Tenemy.x = 2000;
-	Tenemy.y = 0;
+	Tenemy.y = -9000;
 	Tenemy.width = 32;
 	Tenemy.height = 32;
 	Tenemy.speed = 8;
@@ -353,7 +381,7 @@ function reset(){
 	TenemyA.bug = 0;
 	TenemyA.onTree = 0;
 	TenemyA.x = 2000;
-	TenemyA.y = 0;
+	TenemyA.y = -9000;
 	TenemyA.width = 32;
 	TenemyA.height = 32;
 	TenemyA.speed = 8;
@@ -371,7 +399,7 @@ function reset(){
 	TenemyB.bug = 0;
 	TenemyB.onTree = 0;
 	TenemyB.x = 2000;
-	TenemyB.y = 0;
+	TenemyB.y = -9000;
 	TenemyB.width = 32;
 	TenemyB.height = 32;
 	TenemyB.speed = 8;
@@ -406,7 +434,7 @@ function reset(){
 	
 	Spawner.type = 2;
 	Spawner.x = 2000;
-	Spawner.y = 0;
+	Spawner.y = -9000;
 	Spawner.onTree = 0;
 	Spawner.width = 64;
 	Spawner.height = 64;
@@ -425,7 +453,7 @@ function reset(){
 	
 	Sorceror.type = 1;
 	Sorceror.x = 2000;
-	Sorceror.y = 0;
+	Sorceror.y = -9000;
 	Sorceror.onTree = 0;
 	Sorceror.width = 32;
 	Sorceror.height = 32;
@@ -477,6 +505,7 @@ function reset(){
 	TwizEffect.onScreen = 0;
 	TwizEffect.frame = 0;
 	TwizEffect.played = 0;
+	TwizEffect.cd = 90;
 	
 	Thief.type = "Thief";
 	Thief.state = 2;
@@ -679,6 +708,8 @@ function reset(){
 	sIce.frame = 0;
 	sIce.onScreen = 0;
 	sIce.end = false;
+	sIce.cast = 0;
+	sIce.used = 0;
 	
 	sFire.color = "#FF6600";
 	sFire.timeLeft = 0;
@@ -688,6 +719,8 @@ function reset(){
 	sFire.y = -200;
 	sFire.frame = 0;
 	sFire.onScreen = 0;
+	sFire.cast = 0;
+	sFire.used = 0;
 	
 	sLightning.timeLeft = 0;
 	sLightning.vwidth = 32;
@@ -701,6 +734,8 @@ function reset(){
 	sLightning.vx = -2000;
 	sLightning.vy = 288;
 	sLightning.onScreen = 0;
+	sLightning.cast = 0;
+	sLightning.used = 0;
 	
 	rootBlastW.color = "#33CC00";
 	rootBlastW.x = -100;
@@ -709,8 +744,6 @@ function reset(){
 	rootBlastW.oy = -200;
 	rootBlastW.width = 32;
 	rootBlastW.height = 8;
-	rootBlastW.hwidth = 8;
-	rootBlastW.hheight = 32;
 	rootBlastW.frame = 0;
 	rootBlastW.cd = 0;
 	rootBlastW.speed = 16;
@@ -722,10 +755,8 @@ function reset(){
 	rootBlastA.y = -200;
 	rootBlastA.ox = -100;
 	rootBlastA.oy = -200;
-	rootBlastA.width = 32;
-	rootBlastA.height = 8;
-	rootBlastA.hwidth = 8;
-	rootBlastA.hheight = 32;
+	rootBlastA.width = 8;
+	rootBlastA.height = 32;
 	rootBlastA.frame = 0;
 	rootBlastA.cd = 0;
 	rootBlastA.speed = 16;
@@ -739,8 +770,6 @@ function reset(){
 	rootBlastS.oy = -200;
 	rootBlastS.width = 32;
 	rootBlastS.height = 8;
-	rootBlastS.hwidth = 8;
-	rootBlastS.hheight = 32;
 	rootBlastS.frame = 0;
 	rootBlastS.cd = 0;
 	rootBlastS.speed = 16;
@@ -752,10 +781,8 @@ function reset(){
 	rootBlastD.y = -200;
 	rootBlastD.ox = -100;
 	rootBlastD.oy = -200;
-	rootBlastD.width = 32;
-	rootBlastD.height = 8;
-	rootBlastD.hwidth = 8;
-	rootBlastD.hheight = 32;
+	rootBlastD.width = 8;
+	rootBlastD.height = 32;
 	rootBlastD.frame = 0;
 	rootBlastD.cd = 0;
 	rootBlastD.speed = 16;
@@ -780,10 +807,6 @@ function reset(){
 	rootStrike.speed = 8;
 	rootStrike.speed2 = 4;
 	rootStrike.respawn = -1;
-	rootStrike.origrp = -1;
-	rootStrike.pts = 25;
-	rootStrike.hp = 2;
-	rootStrike.hptimer = 0;
 	rootStrike.dir = "W";
 	rootStrike.rp = -1;
 	rootStrike.index = 0;
@@ -801,10 +824,6 @@ function reset(){
 	rootStrike2.speed = 8;
 	rootStrike2.speed2 = 4;
 	rootStrike2.respawn = -1;
-	rootStrike2.origrp = -1;
-	rootStrike2.pts = 25;
-	rootStrike2.hp = 2;
-	rootStrike2.hptimer = 0;
 	rootStrike2.dir = "W";
 	rootStrike2.rp = -1;
 	rootStrike2.index = 0;
@@ -822,10 +841,6 @@ function reset(){
 	rootStrike3.speed = 8;
 	rootStrike3.speed2 = 4;
 	rootStrike3.respawn = -1;
-	rootStrike3.origrp = -1;
-	rootStrike3.pts = 25;
-	rootStrike3.hp = 2;
-	rootStrike3.hptimer = 0;
 	rootStrike3.dir = "W";
 	rootStrike3.rp = -1;
 	rootStrike3.index = 0;
@@ -843,10 +858,6 @@ function reset(){
 	rootStrike4.speed = 8;
 	rootStrike4.speed2 = 4;
 	rootStrike4.respawn = -1;
-	rootStrike4.origrp = -1;
-	rootStrike4.pts = 25;
-	rootStrike4.hp = 2;
-	rootStrike4.hptimer = 0;
 	rootStrike4.dir = "W";
 	rootStrike4.rp = -1;
 	rootStrike4.index = 0;
@@ -1546,6 +1557,166 @@ function reset(){
 		Wpools[W].onScreen = 0;
 		Wpools[W].charged = 0;
 	}
+	
+	darkfire.cd = 0;
+	darkfire.inventory = 5;
+	for(S in darkfireSpikes){
+		darkfireSpikes[S].x = -100;
+		darkfireSpikes[S].y = -200;
+		darkfireSpikes[S].width = 32;
+		darkfireSpikes[S].height = 32;
+		darkfireSpikes[S].onScreen = 0;
+		darkfireSpikes[S].used = 0;
+		darkfireSpikes[S].index = 0;
+		darkfireSpikes[S].ice = false;
+		darkfireSpikes[S].light = false;
+	}
+	for(S in darkfireExplosions){
+		darkfireExplosions[S].color = "#FF6600";
+		darkfireExplosions[S].x = -100;
+		darkfireExplosions[S].y = -200;
+		darkfireExplosions[S].timeLeft = 0;
+		darkfireExplosions[S].width = 32;
+		darkfireExplosions[S].height = 32;
+		darkfireExplosions[S].frame = 0;
+		darkfireExplosions[S].onScreen = 0;
+		darkfireExplosions[S].used = 0;
+	}
+	
+	darkice.cd = 0;
+	darkice.inventory = 5;
+	for(S in darkiceSpikes){
+		darkiceSpikes[S].x = -100;
+		darkiceSpikes[S].y = -200;
+		darkiceSpikes[S].width = 32;
+		darkiceSpikes[S].height = 32;
+		darkiceSpikes[S].onScreen = 0;
+		darkiceSpikes[S].used = 0;
+		darkiceSpikes[S].index = 0;
+		darkiceSpikes[S].ice = true;
+		darkiceSpikes[S].light = false;
+	}
+	for(S in darkiceEffects){
+		darkiceEffects[S].color = "#00CCFF";
+		darkiceEffects[S].x = -100;
+		darkiceEffects[S].y = -200;
+		darkiceEffects[S].timeLeft = 0;
+		darkiceEffects[S].width = 32;
+		darkiceEffects[S].height = 32;
+		darkiceEffects[S].frame = 0;
+		darkiceEffects[S].onScreen = 0;
+		darkiceEffects[S].used = 0;
+		darkiceEffects[S].target = "";
+		darkiceEffects[S].prevSpeed = 0;
+	}
+	
+	darkearth.color = "#33CC00";
+	darkearth.timeLeft = 0;
+	darkearth.x = -100;
+	darkearth.y = -200;
+	darkearth.width = 2400;
+	darkearth.height = 1000;
+	darkearth.cd = 0;
+	darkearth.speed = 4;
+	darkearth.used = 0;
+	darkearth.HealAmount = 0;
+	darkearth.blackTimer = 0;
+	
+	darklightning.x = -100;
+	darklightning.y = -200;
+	darklightning.width = 32;
+	darklightning.height = 32;
+	darklightning.cd = 0;
+	darklightning.onScreen = 0;
+	darklightning.timeLeft = -1;
+	darklightning.used = 0;
+	darklightning.inventory = 2;
+	darklightning.index = 0;
+	darklightning.active = false;
+	darklightning.ice = false;
+	darklightning.light = true;
+	darklightning12.x = -100;
+	darklightning12.y = -200;
+	darklightning12.width = 32;
+	darklightning12.height = 32;
+	darklightning12.onScreen = 0;
+	darklightning12.timeLeft = -1;
+	darklightning12.used = 0;
+	darklightning12.index = 0;
+	darklightning12.active = false;
+	darklightning12.ice = false;
+	darklightning12.light = true;
+	for(S in darklightningExplosions){
+		darklightningExplosions[S].color = "#FFFF00";
+		darklightningExplosions[S].x = -100;
+		darklightningExplosions[S].y = -200;
+		darklightningExplosions[S].timeLeft = 0;
+		darklightningExplosions[S].width = 128;
+		darklightningExplosions[S].height = 128;
+		darklightningExplosions[S].frame = 0;
+		darklightningExplosions[S].onScreen = 0;
+		darklightningExplosions[S].chained = 0;
+	}
+	
+	darkair.cd = 0;
+	darkair.inventory = 5;
+	darkair.ccd = 0;
+	darkair.x = -100;
+	darkair.y = -200;
+	darkair.width = 32;
+	darkair.height = 32;
+	darkair.onScreen = 0;
+	darkair.used = 0;
+	darkair.timer = 0;
+	darkair.index = 1;
+	darkair.timeLeft = 0;
+	darkair2.x = -100;
+	darkair2.y = -200;
+	darkair2.width = 32;
+	darkair2.height = 32;
+	darkair2.onScreen = 0;
+	darkair2.used = 0;
+	darkair2.timer = 0;
+	darkair2.index = 1;
+	darkair2.timeLeft = 0;
+	darkair3.x = -100;
+	darkair3.y = -200;
+	darkair3.width = 32;
+	darkair3.height = 32;
+	darkair3.onScreen = 0;
+	darkair3.used = 0;
+	darkair3.timer = 0;
+	darkair3.index = 1;
+	darkair3.timeLeft = 0;
+	darkair4.x = -100;
+	darkair4.y = -200;
+	darkair4.width = 32;
+	darkair4.height = 32;
+	darkair4.onScreen = 0;
+	darkair4.used = 0;
+	darkair4.timer = 0;
+	darkair4.index = 1;
+	darkair4.timeLeft = 0;
+	darkair5.x = -100;
+	darkair5.y = -200;
+	darkair5.width = 32;
+	darkair5.height = 32;
+	darkair5.onScreen = 0;
+	darkair5.used = 0;
+	darkair5.timer = 0;
+	darkair5.index = 1;
+	darkair5.timeLeft = 0;
+	
+	darkwater.x = -100;
+	darkwater.y = -200;
+	darkwater.width = 32;
+	darkwater.height = 32;
+	darkwater.cd = 0;
+	darkwater.onScreen = 0;
+	darkwater.hp = 0;
+	darkwater.cast = -1;
+	darkwater.index = 1;
+	darkwater.hptimer = 0;
 	//------------------------ Fire.js --------------------------//
 	fire.color = "#FF6600";
 	fire.x = -100;
@@ -1659,14 +1830,60 @@ function reset(){
 	earth.speed = 4;
 	earth.cast = 0;
 	earth.used = 0;
-	earth2.color = "#33CC00";
-	earth2.timeLeft = 0;
-	earth2.x = -100;
-	earth2.y = -200;
 	earth2.cd = 0;
-	earth2.speed = 4;
 	earth2.cast = 0;
 	earth2.used = 0;
+	earth2.timeLeft = -1;
+	earth2rootStrike.x = -100;
+	earth2rootStrike.y = -200;
+	earth2rootStrike.onScreen = 0;
+	earth2rootStrike.movement = false;
+	earth2rootStrike.dirct = 0;
+	earth2rootStrike2.x = -100;
+	earth2rootStrike2.y = -200;
+	earth2rootStrike2.onScreen = 0;
+	earth2rootStrike2.movement = false;
+	earth2rootStrike2.dirct = 0;
+	earth2rootStrike3.x = -100;
+	earth2rootStrike3.y = -200;
+	earth2rootStrike3.onScreen = 0;
+	earth2rootStrike3.movement = false;
+	earth2rootStrike3.dirct = 0;
+	earth2rootStrike4.x = -100;
+	earth2rootStrike4.y = -200;
+	earth2rootStrike4.onScreen = 0;
+	earth2rootStrike4.movement = false;
+	earth2rootStrike4.dirct = 0;
+	earth2rootStrike5.x = -100;
+	earth2rootStrike5.y = -200;
+	earth2rootStrike5.onScreen = 0;
+	earth2rootStrike5.movement = false;
+	earth2rootStrike5.dirct = 0;
+	earth2rootStrike6.x = -100;
+	earth2rootStrike6.y = -200;
+	earth2rootStrike6.onScreen = 0;
+	earth2rootStrike6.movement = false;
+	earth2rootStrike6.dirct = 0;
+	earth2rootStrike7.x = -100;
+	earth2rootStrike7.y = -200;
+	earth2rootStrike7.onScreen = 0;
+	earth2rootStrike7.movement = false;
+	earth2rootStrike7.dirct = 0;
+	earth2rootStrike8.x = -100;
+	earth2rootStrike8.y = -200;
+	earth2rootStrike8.onScreen = 0;
+	earth2rootStrike8.movement = false;
+	earth2rootStrike8.dirct = 0;
+	for(R in earth2roots1){
+		earth2roots1[R].onScreen = 0;
+		earth2roots1[R].x = -500;
+		earth2roots1[R].y = -500;
+	}
+	for(R in earth3roots1){
+		earth3roots1[R].onScreen = 0;
+		earth3roots1[R].x = -500;
+		earth3roots1[R].y = -500;
+	}
 	//------------------------ Lightning.js ---------------------//
 	lightning.timeLeft = 0;
 	lightning.vwidth = 32;
@@ -1740,6 +1957,7 @@ function reset(){
 	air.onScreen = 0;
 	air.cast = 0;
 	air.used = 0;
+	air.isdark = false;
 	air2.timeLeft = 0;
 	air2.cd = 0;
 	air2.speed = 16;
@@ -1747,6 +1965,7 @@ function reset(){
 	air2.cast = 0;
 	air2.num = 0;
 	air2.used = 0;
+	air2.maxNum = 4;
 	//------------------------ Mystic.js ------------------------//
 	mystic.color = "#FF00FF";
 	mystic.width = 32;
@@ -1812,7 +2031,38 @@ function reset(){
 		bubbleRotate[B].used = 0;
 		bubbleRotate[B].dir = "";
 	}
-
+	//------------------------- Dark.js -------------------------//
+	dark.cd = 0;
+	dark.inventory = 7;
+	for(S in darkSpikes){
+		darkSpikes[S].x = -100;
+		darkSpikes[S].y = -200;
+		darkSpikes[S].width = 32;
+		darkSpikes[S].height = 32;
+		darkSpikes[S].onScreen = 0;
+		darkSpikes[S].used = 0;
+		darkSpikes[S].dark1 = true;
+		darkSpikes[S].active = false;
+		darkSpikes[S].timeLeft = -1;
+	}
+	dark2.cd = 0;
+	dark2.cast = -1;
+	for(S in dark2Spikes){
+		dark2Spikes[S].x = -100;
+		dark2Spikes[S].y = -200;
+		dark2Spikes[S].width = 32;
+		dark2Spikes[S].height = 32;
+		dark2Spikes[S].onScreen = 0;
+		dark2Spikes[S].frame = 0;
+	}
+	
 	//end
+	if(vol != 1){
+		for(S in AllSounds){
+			AllSounds[S].currentTime = 0;
+			AllSounds[S].pause();
+			AllSounds[S].volume = 0.8;
+		}
+	}
 	fastbeepsLow.play();
 }
