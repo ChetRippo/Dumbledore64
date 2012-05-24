@@ -19,21 +19,60 @@ var Enemy = {
 	LR: "",
 	onScreen: 0,
 	movement: false,
+	swimming: true,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
-			this.LR = "Left";
-			ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
-		}
-		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
-			this.LR = "Right";
-		}
-		else if(this.LR == "Left"){
-			ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
-		}
-		else{
-			ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.onScreen){
+			if(STATE != "Swamp"){
+				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+					this.LR = "Left";
+					ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+					ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					this.LR = "Right";
+				}
+				else if(this.LR == "Left"){
+					ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else{
+					ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+				}
+			}
+			else{
+				if(this.swimming){
+					if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+						this.LR = "Left";
+						ctx.drawImage(SwimswudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					}
+					else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+						ctx.drawImage(SwimswudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						this.LR = "Right";
+					}
+					else if(this.LR == "Left"){
+						ctx.drawImage(SwimswudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					}
+					else{
+						ctx.drawImage(SwimswudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					}
+				}
+				else{
+					if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+						this.LR = "Left";
+						ctx.drawImage(swudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					}
+					else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+						ctx.drawImage(swudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						this.LR = "Right";
+					}
+					else if(this.LR == "Left"){
+						ctx.drawImage(swudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					}
+					else{
+						ctx.drawImage(swudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					}
+				}
+			}
 		}
 	}
 };
@@ -57,14 +96,31 @@ var EnemyA = {
 	onScreen: 0,
 	index: 1,
 	dindex: 1,
+	LR: "",
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(STATE == "Swamp"){
+			this.respawn = 250;
+		}
 		if(this.onTree == 1){
 			this.speed = 8;
 		}
 		if(STATE == 1){
-			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				ctx.drawImage(PikkitL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(PikkitR, this.x - this.width / 2, this.y - this.height / 2);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(PikkitL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else{
+				ctx.drawImage(PikkitR, this.x - this.width / 2, this.y - this.height / 2);
+			}
 		}
 		if(STATE == "Scorched"){
 			ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
@@ -120,21 +176,60 @@ var EnemyB = {
 	LR: "",
 	onScreen: 0,
 	movement: false,
+	swimming: true,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
-			this.LR = "Left";
-			ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
-		}
-		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
-			this.LR = "Right";
-		}
-		else if(this.LR == "Left"){
-			ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
-		}
-		else{
-			ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.onScreen){
+			if(STATE != "Swamp"){
+				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+					this.LR = "Left";
+					ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+					ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					this.LR = "Right";
+				}
+				else if(this.LR == "Left"){
+					ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else{
+					ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+				}
+			}
+			else{
+				if(this.swimming){
+					if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+						this.LR = "Left";
+						ctx.drawImage(SwimswudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					}
+					else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+						ctx.drawImage(SwimswudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						this.LR = "Right";
+					}
+					else if(this.LR == "Left"){
+						ctx.drawImage(SwimswudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					}
+					else{
+						ctx.drawImage(SwimswudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					}
+				}
+				else{
+					if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+						this.LR = "Left";
+						ctx.drawImage(swudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					}
+					else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+						ctx.drawImage(swudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						this.LR = "Right";
+					}
+					else if(this.LR == "Left"){
+						ctx.drawImage(swudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					}
+					else{
+						ctx.drawImage(swudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					}
+				}
+			}
 		}
 	}
 };
@@ -158,14 +253,31 @@ var EnemyC = {
 	onScreen: 0,
 	index: 1,
 	dindex: 1,
+	LR: "",
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(STATE == "Swamp"){
+			this.respawn = 250;
+		}
 		if(this.onTree == 1){
 			this.speed = 8;
 		}
-		if(STATE == 1){
-			ctx.drawImage(Pikkit, this.x - this.width / 2, this.y - this.height / 2);
+		if(STATE == 1 || STATE == "Swamp"){
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				ctx.drawImage(PikkitL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(PikkitR, this.x - this.width / 2, this.y - this.height / 2);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(PikkitL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else{
+				ctx.drawImage(PikkitR, this.x - this.width / 2, this.y - this.height / 2);
+			}
 		}
 		if(STATE == "Scorched"){
 			ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
@@ -377,7 +489,96 @@ var Lavaman4 = {
 		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
 	}
 };
-var lavamenlist = {1: Lavaman, 2: Lavaman2, 3: Lavaman3, 4: Lavaman4};
+// Lavaman
+var Lavaman5 = {
+	type: 0,
+	bug: 0,
+	onTree: 0,
+	x: 9000,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	pts: 10,
+	respawn: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+	}
+};
+var Lavaman6 = {
+	type: 0,
+	bug: 0,
+	onTree: 0,
+	x: 9000,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	pts: 10,
+	respawn: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+	}
+};
+var Lavaman7 = {
+	type: 0,
+	bug: 0,
+	onTree: 0,
+	x: 9000,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	pts: 10,
+	respawn: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+	}
+};
+var Lavaman8 = {
+	type: 0,
+	bug: 0,
+	onTree: 0,
+	x: 9000,
+	y: -400,
+	width: 32,
+	height: 32,
+	speed: 4,
+	speed2: 2,
+	dirct: 0,
+	dir: "W",
+	pts: 10,
+	respawn: -1,
+	rp: -1,
+	onScreen: 0,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+	}
+};
+var lavamenlist = {1: Lavaman, 2: Lavaman2, 3: Lavaman3, 4: Lavaman4, 5: Lavaman5, 6: Lavaman6, 7: Lavaman7, 8: Lavaman8};
 // PORTAL TO HELL
 var Spawner = {
 	type: 2,
@@ -410,32 +611,7 @@ var Spawner = {
 		else{
 			ctx.drawImage(Splavaman, this.x - this.width / 2, this.y - this.height / 2);
 		}
-		ctx.fillStyle = "red";
-		if(this.hp == 5){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x -(this.width/2) + 52, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
-		if(this.hp == 4){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 39, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
-		if(this.hp == 3){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
-		else if(this.hp == 2){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
-		else{
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
+		hpBarDraw(this);
 	},
 	fire: function(){
 		if(this.onScreen == 1){
@@ -487,7 +663,89 @@ var Spawner = {
 		}
 	}
 };
-
+var Spawner2 = {
+	type: 2,
+	x: 2000,
+	y: -9000,
+	onTree: 0,
+	width: 64,
+	height: 64,
+	speed: 2,
+	speed2: 1,
+	dirct: 0,
+	hp: 5,
+	hptimer: 0,
+	respawn: 900,
+	dir: "W",
+	rp: 450,
+	pts: 500,
+	onScreen: 0,
+	cd: 60,
+	movement: false,
+	// Draws the enemy on the canvas when called
+	draw: function(){
+		if(this.hptimer >0){
+			this.hptimer-=1;
+		}
+		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+			ctx.fillStyle = "white";
+			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		}
+		else{
+			ctx.drawImage(Splavaman, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		hpBarDraw(this);
+	},
+	fire: function(){
+		if(this.onScreen == 1){
+			if(this.cd<= 0){
+				if(Lavaman5.onScreen == 0){
+					SpawnerSpawn.currentTime=0;
+					SpawnerSpawn.play();
+					Lavaman5.onScreen = 1;
+					Lavaman5.x = this.x-this.width/2;
+					Lavaman5.y = this.y-this.height/2;
+					Lavaman5.movement = true;
+					Lavaman5.cd = 15;
+					this.cd = 60;
+				}
+				else if(Lavaman6.onScreen == 0){
+					SpawnerSpawn.currentTime=0;
+					SpawnerSpawn.play();
+					Lavaman6.onScreen = 1;
+					Lavaman6.x = this.x-this.width/2;
+					Lavaman6.y = this.y-this.height/2;
+					Lavaman6.movement = true;
+					Lavaman6.cd = 15;
+					this.cd = 60;
+				}
+				else if(Lavaman7.onScreen == 0){
+					SpawnerSpawn.currentTime=0;
+					SpawnerSpawn.play();
+					Lavaman7.onScreen = 1;
+					Lavaman7.x = this.x-this.width/2;
+					Lavaman7.y = this.y-this.height/2;
+					Lavaman7.movement = true;
+					Lavaman7.cd = 15;
+					this.cd = 60;
+				}
+				else if(Lavaman8.onScreen == 0){
+					SpawnerSpawn.currentTime=0;
+					SpawnerSpawn.play();
+					Lavaman8.onScreen = 1;
+					Lavaman8.x = this.x-this.width/2;
+					Lavaman8.y = this.y-this.height/2;
+					Lavaman8.movement = true;
+					Lavaman8.cd = 15;
+					this.cd = 60;
+				}
+			}
+			else{
+				this.cd-=1;
+			}
+		}
+	}
+};
 // Sorceror
 var Sorceror = {
 	type: 1,
@@ -517,19 +775,7 @@ var Sorceror = {
 		else{
 			ctx.drawImage(Sorcerorpng, this.x - this.width / 2, this.y - this.height / 2);
 		}
-		ctx.fillStyle = "red";
-		if(this.hp == 3){
-			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
-		else if(this.hp == 2){
-			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
-		else{
-			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
+		hpBarDraw(this);
 		if(this.spell == "Fire"){
 			ctx.drawImage(Firebox, this.x-this.width/2, this.y - 60);
 		}
@@ -576,7 +822,7 @@ var treeWizz = {
 	deadtrees: 0,
 	herp: 0,
 	frame: 0,
-	pts: 2000,
+	pts: 5000,
 	spawned: 0,
 	index: 1,
 	draw: function(){
@@ -590,39 +836,7 @@ var treeWizz = {
 				this.index = 1;
 			}
 		}
-		ctx.fillStyle = "yellow";
-		if(this.hp == 6){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
-		else if(this.hp == 5){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
-		else if(this.hp == 4){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
-		else if(this.hp == 3){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
-		else if(this.hp == 2){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
-		else{
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-		}
+		hpBarDraw(this);
 	},
 	spawn: function(){
 		if(this.hptimer > 0){
@@ -774,7 +988,7 @@ var TwizEffect = {
 			ctx.globalAlpha = Alpha;
 		}
 		if(treeWizz.onScreen == 1 && this.cd <=0){
-			if(spell1 == "N/A"){
+			if(spell1 == "N/A" && spell2 == "N/A"){
 				this.cd = 360;
 				RandEffect.onScreen = 1;
 				RandEffect.used = 0;
@@ -804,8 +1018,9 @@ var Thief = {
 	speed2: 2,
 	dirct: 0,
 	dir: "W",
+	LR: "",
 	respawn: 10,
-	rp: 450,
+	rp: 300,
 	onScreen: 0,
 	counter: 0,
 	runCounter: -1,
@@ -827,17 +1042,27 @@ var Thief = {
 		if(this.runCounter > 0){
 			this.runCounter-=1;
 		}
-		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)){
+		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)
+			|| (this.x >= MasterThief.x-MasterThief.width/2 && this.x <= MasterThief.x + MasterThief.width/2 && this.y >= MasterThief.y-MasterThief.height/2 && this.y <= MasterThief.y+MasterThief.height/2 && this.stole)){
 			SmokeBomb.x1 = this.x;
 			SmokeBomb.y1 = this.y;
 			this.runCounter = -1;
+			if(this.spell != "N/A"){
+				MasterThief.queue+=1;
+				if(MasterThief.spell1 == "N/A"){
+					MasterThief.spell1 = this.spell;
+				}
+				else if(MasterThief.spell2 == "N/A"){
+					MasterThief.spell2 = this.spell;
+				}
+			}
 			this.spell = "N/A";
 			this.speed = 4;
 			this.speed2 = 2;
 			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
-			this.respawn = this.rp;
+			this.respawn = 2;
 			this.x = 9000;
 			this.y = -9000;
 			this.movement = false;
@@ -853,25 +1078,28 @@ var Thief = {
 			this.hptimer-=1;
 		}
 		if(this.state == 1 || this.state == 2){
-			ctx.globalAlpha = Alpha/2;
+			ctx.globalAlpha = Alpha/3;
 			this.alphaChange = true;
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white"
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		else{
-			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		else if(this.LR == "Left"){
+			ctx.drawImage(ThievesL[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		if(this.hp == 2){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		else if(this.LR == "Right"){
+			ctx.drawImage(ThievesR[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		else{
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		if(this.movement){
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				this.LR = "Right";
+			}
 		}
+		hpBarDraw(this);
 		if(this.alphaChange){
 			ctx.globalAlpha = Alpha;
 			this.alphaChange = false;
@@ -898,12 +1126,15 @@ var Thief = {
 			if(this.spell == "Water"){
 				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
 			}
+			if(this.spell == "Dark"){
+				ctx.drawImage(Darkbox, this.x-this.width/2, this.y - 48);
+			}
 		}
 		}
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
-			if(collision(this.dir, this, player) || contained(player, this)){
+			if((collision(this.dir, this, player) || contained(player, this)) && (hptimer <= 0 || hptimer == 30)){
 				this.stole = true;
 				this.runCounter = 45;
 				if(spell2 != "N/A"){
@@ -935,8 +1166,9 @@ var ThiefA = {
 	speed2: 2,
 	dirct: 0,
 	dir: "W",
+	LR: "",
 	respawn: 600,
-	rp: 450,
+	rp: 300,
 	onScreen: 0,
 	alphaChange: false,
 	counter: 0,
@@ -958,17 +1190,27 @@ var ThiefA = {
 		if(this.runCounter > 0){
 			this.runCounter-=1;
 		}
-		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)){
+		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)
+			|| (this.x >= MasterThief.x-MasterThief.width/2 && this.x <= MasterThief.x + MasterThief.width/2 && this.y >= MasterThief.y-MasterThief.height/2 && this.y <= MasterThief.y+MasterThief.height/2 && this.stole)){
 			SmokeBombA.x1 = this.x;
 			SmokeBombA.y1 = this.y;
 			this.runCounter = -1;
+			if(this.spell != "N/A"){
+				MasterThief.queue+=1;
+				if(MasterThief.spell1 == "N/A"){
+					MasterThief.spell1 = this.spell;
+				}
+				else if(MasterThief.spell2 == "N/A"){
+					MasterThief.spell2 = this.spell;
+				}
+			}
 			this.spell = "N/A";
 			this.speed = 4;
 			this.speed2 = 2;
 			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
-			this.respawn = this.rp;
+			this.respawn = 2;
 			this.x = 9000;
 			this.y = -9000;
 			this.movement = false;
@@ -984,25 +1226,28 @@ var ThiefA = {
 			this.hptimer-=1;
 		}
 		if(this.state == 1 || this.state == 2){
-			ctx.globalAlpha = Alpha/2;
+			ctx.globalAlpha = Alpha/3;
 			this.alphaChange = true;
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white"
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		else{
-			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		else if(this.LR == "Left"){
+			ctx.drawImage(ThievesL[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		if(this.hp == 2){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		else if(this.LR == "Right"){
+			ctx.drawImage(ThievesR[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		else{
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		if(this.movement){
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				this.LR = "Right";
+			}
 		}
+		hpBarDraw(this);
 		if(this.alphaChange){
 			ctx.globalAlpha = Alpha;
 			this.alphaChange = false;
@@ -1029,12 +1274,15 @@ var ThiefA = {
 			if(this.spell == "Water"){
 				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
 			}
+			if(this.spell == "Dark"){
+				ctx.drawImage(Darkbox, this.x-this.width/2, this.y - 48);
+			}
 		}
 		}
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
-			if(collision(this.dir, this, player) || contained(player, this)){
+			if((collision(this.dir, this, player) || contained(player, this)) && (hptimer <= 0 || hptimer == 30)){
 				this.stole = true;
 				this.runCounter = 45;
 				if(spell2 != "N/A"){
@@ -1066,8 +1314,9 @@ var ThiefB = {
 	speed2: 2,
 	dirct: 0,
 	dir: "W",
-	respawn: -1,
-	rp: -1,
+	LR: "",
+	respawn: 900,
+	rp: 300,
 	onScreen: 0,
 	counter: 0,
 	alphaChange: false,
@@ -1089,17 +1338,27 @@ var ThiefB = {
 		if(this.runCounter > 0){
 			this.runCounter-=1;
 		}
-		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)){
+		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)
+			|| (this.x >= MasterThief.x-MasterThief.width/2 && this.x <= MasterThief.x + MasterThief.width/2 && this.y >= MasterThief.y-MasterThief.height/2 && this.y <= MasterThief.y+MasterThief.height/2 && this.stole)){
 			SmokeBombB.x1 = this.x;
 			SmokeBombB.y1 = this.y;
 			this.runCounter = -1;
+			if(this.spell != "N/A"){
+				MasterThief.queue+=1;
+				if(MasterThief.spell1 == "N/A"){
+					MasterThief.spell1 = this.spell;
+				}
+				else if(MasterThief.spell2 == "N/A"){
+					MasterThief.spell2 = this.spell;
+				}
+			}
 			this.spell = "N/A";
 			this.speed = 4;
 			this.speed2 = 2;
 			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
-			this.respawn = this.rp;
+			this.respawn = 2;
 			this.x = 9000;
 			this.y = -9000;
 			this.movement = false;
@@ -1115,25 +1374,28 @@ var ThiefB = {
 			this.hptimer-=1;
 		}
 		if(this.state == 1 || this.state == 2){
-			ctx.globalAlpha = Alpha/2;
+			ctx.globalAlpha = Alpha/3;
 			this.alphaChange = true;
 		}
 		if (this.hptimer/2 != Math.round(this.hptimer/2)){
 			ctx.fillStyle = "white"
 			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		else{
-			ctx.drawImage(Thieves[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		else if(this.LR == "Left"){
+			ctx.drawImage(ThievesL[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		if(this.hp == 2){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		else if(this.LR == "Right"){
+			ctx.drawImage(ThievesR[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
 		}
-		else{
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4, player.width/4, player.height/4);
+		if(this.movement){
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				this.LR = "Right";
+			}
 		}
+		hpBarDraw(this);
 		if(this.alphaChange){
 			ctx.globalAlpha = Alpha;
 			this.alphaChange = false;
@@ -1160,12 +1422,15 @@ var ThiefB = {
 			if(this.spell == "Water"){
 				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
 			}
+			if(this.spell == "Dark"){
+				ctx.drawImage(Darkbox, this.x-this.width/2, this.y - 48);
+			}
 		}
 		}
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
-			if(collision(this.dir, this, player) || contained(player, this)){
+			if((collision(this.dir, this, player) || contained(player, this)) && (hptimer <= 0 || hptimer == 30)){
 				this.stole = true;
 				this.runCounter = 45;
 				if(spell2 != "N/A"){
@@ -1204,7 +1469,7 @@ var Dragon = {
 	width2: 0,
 	height2: 0,
 	frame: 0,
-	pts: 1000,
+	pts: 5000,
 	spawned: 0,
 	draw: function(){
 		if(this.onScreen == 1){
@@ -1270,7 +1535,7 @@ var Dragon = {
 					queue = false;
 				}
 			}
-			if(queue == true){
+			if(queue){
 				this.respawn-=1;
 				this.x = 64;
 				this.y = 280;
@@ -1311,7 +1576,7 @@ var DragonR = {
 	hp: 3,
 	hptimer: 0,
 	spawned: 0,
-	pts: 500,
+	pts: 2000,
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.hptimer/2 != Math.round(this.hptimer/2)){
@@ -1400,7 +1665,7 @@ var DragonL = {
 	hptimer: 0,
 	width2: 0,
 	height2: 0,
-	pts: 500,
+	pts: 2000,
 	spawned: 0,
 	draw: function(){
 		if(this.onScreen == 1){
@@ -1493,7 +1758,7 @@ var DragonEffect = {
 			}
 		}
 		if(Dragon.onScreen == 1 && this.cd <=0){
-			if(spell1 == "N/A"){
+			if(spell1 == "N/A" && spell2 == "N/A"){
 				this.cd = 360;
 				RandEffect.onScreen = 1;
 				RandEffect.used = 0;
@@ -1541,7 +1806,8 @@ var DragonEffect2 = {
 };
 var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner,
 					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4, 19: Thief, 20: ThiefA, 21: ThiefB, 22: Dragon, 23: DragonR, 24: DragonL,
-					25: BigMeteor1, 26: Meteor1, 27: Meteor2, 28: Meteor3, 29: Meteor4, 30: BigMeteor2, 31: Meteor5, 32: Meteor6, 33: Meteor7, 34: Meteor8, 35: MeteorD1, 36: MeteorD2};
+					25: BigMeteor1, 26: Meteor1, 27: Meteor2, 28: Meteor3, 29: Meteor4, 30: BigMeteor2, 31: Meteor5, 32: Meteor6, 33: Meteor7, 34: Meteor8, 35: MeteorD1, 36: MeteorD2,
+					37: Lavaman5, 38: Lavaman6, 39: Lavaman7, 40: Lavaman8, 41: Spawner2, 42: MasterThief, 43: Croc, 44: Croc2, 45: Mosquito, 46: Mosquito2, 47: Mosquito3, 48: Mosquito4};
 function onHit(E){
 	var deadz = false;
 	if(E.type == 0){
@@ -1561,6 +1827,26 @@ function onHit(E){
 				Globblyfire.x = E.x;
 				Globblyfire.y = E.y;
 				Globblyfire.shoot();
+			}
+		}
+		if(STATE == "Swamp" && E.bug == 0){
+			if(Swudge.onScreen){
+				Swudge2.x = E.x;
+				Swudge2.y = E.y;
+				Swudge2.onScreen = 1;
+				Swudge2.LR = E.LR;
+				Swudge2.index = 1;
+				Globblyfire2.color = "#008000";
+				Globblyfire2.shoot();
+			}
+			else{
+				Globblyfire.color = "#008000";
+				Globblyfire.shoot();
+				Swudge.x = E.x;
+				Swudge.y = E.y;
+				Swudge.onScreen = 1;
+				Swudge.LR = E.LR;
+				Swudge.index = 1;
 			}
 		}
 	}
@@ -1620,7 +1906,7 @@ function onHit(E){
 		}
 	}
 	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == "Thief" || (E.type == "Dragon" && DragonR.onScreen == 0 && DragonL.onScreen == 0)
-		|| E.type == "DragonR" || E.type == "DragonL"){
+		|| E.type == "DragonR" || E.type == "DragonL" || E.type == "MasterThief" || E.type == "Crocodile" || E.type == "Mosquito"){
 		if(!(E.hptimer > 0)){
 			E.hp-=player.power;
 			E.hptimer = 30;
@@ -1641,7 +1927,46 @@ function onHit(E){
 				if(E.type == 2){
 					E.hp = 5;
 				}
+				if(E.type == 1){
+					SorcCastingBar.x = -100;
+					SorcCastingBar.y = -200;
+					SorcCastingBar.width = Sorceror.width;
+					SorcCastingBar.height = Sorceror.height/4;
+					SorcCastingBar.width2 = 0;
+					SorcCastingBar.onScreen = 0;
+					SorcCastingBar.cast = -1;
+					SorcCastingBar.castmax = 0;
+					sIce.color = "#00CCFF";
+					sIce.timeLeft = 0;
+					sIce.frame = 150;
+					sIce.cast = -1;
+					sFire.color = "#FF6600";
+					sFire.timeLeft = 0;
+					sFire.width = 32;
+					sFire.height = 32;
+					sFire.x = -100;
+					sFire.y = -200;
+					sFire.frame = 0;
+					sFire.onScreen = 0;
+					sFire.cast = -1;
+					sFire.used = 0;
+					sLightning.timeLeft = 0;
+					sLightning.vwidth = 32;
+					sLightning.vheight = 800;
+					sLightning.hwidth = 800;
+					sLightning.hheight = 32;
+					sLightning.hstate = 0;
+					sLightning.vstate = 0;
+					sLightning.hx = 400;
+					sLightning.hy = -2000;
+					sLightning.vx = -2000;
+					sLightning.vy = 288;
+					sLightning.onScreen = 0;
+					sLightning.cast = -1;
+					sLightning.used = 0;
+				}
 				if(E.type == -1){
+					BadWizards.currentTime=0;
 					rootStrike.x = -2000;
 					rootStrike.y = -2000;
 					rootStrike.onScreen = 0;
@@ -1693,6 +2018,10 @@ function onHit(E){
 					E.width = 32;
 					E.height = 32;
 				}
+				if(E.type == "Mosquito"){
+					E.hp = 1;
+					E.hptimer = 0;
+				}
 			}
 			else{
 				onDmg.currentTime=0;
@@ -1708,6 +2037,18 @@ function onHit(E){
 		if(E.type == -1){
 			hpUp.x = E.x;
 			hpUp.y = E.y;
+			RandomCube.x = -100;
+			RandomCube.y = -200;
+			RandomCube.timeLeft = 0;
+			RandomCube.index = 1;
+			RandomCube.stage = "up";
+			RandEffect.width = 32;
+			RandEffect.height = 32;
+			RandEffect.x = -100;
+			RandEffect.y = -200;
+			RandEffect.onScreen = 0;
+			RandEffect.frame = 0;
+			RandEffect.used = 0;
 			TwizEffect.x = E.x;
 			TwizEffect.y = E.y;
 			TwizEffect.played = 0;
@@ -1719,11 +2060,123 @@ function onHit(E){
 		else if(E.type == "Dragon"){
 			hpUp.x = E.x;
 			hpUp.y = E.y;
+			RandomCube.x = -100;
+			RandomCube.y = -200;
+			RandomCube.timeLeft = 0;
+			RandomCube.index = 1;
+			RandomCube.stage = "up";
+			RandEffect.width = 32;
+			RandEffect.height = 32;
+			RandEffect.x = -100;
+			RandEffect.y = -200;
+			RandEffect.onScreen = 0;
+			RandEffect.frame = 0;
+			RandEffect.used = 0;
 			hpUp.boss = "Dragon";
 			DragonEffect2.x = E.x;
 			DragonEffect2.y = E.y;
 			DragonEffect2.played = 0;
 			DragonEffect2.onScreen = 1;
+		}
+		else if(E.type == "MasterThief"){
+			if(Thief.onScreen == 1){
+				Thief.hptimer = 0;
+				Thief.hp = 1;
+				onHit(Thief);
+			}
+			if(ThiefA.onScreen == 1){
+				ThiefA.hptimer = 0;
+				ThiefA.hp = 1;
+				onHit(ThiefA);
+			}
+			if(ThiefB.onScreen == 1){
+				ThiefB.hptimer = 0;
+				ThiefB.hp = 1;
+				onHit(ThiefB);
+			}
+			hpUp.x = E.x;
+			hpUp.y = E.y;
+			hpUp.boss = "MasterThief";
+			MasterTEffect.x = E.x;
+			MasterTEffect.y = E.y;
+			MasterTEffect.played = 0;
+			MasterTEffect.onScreen = 1;
+			for(O in obstacle1){
+				if(!obstacle1[O].falling){
+					lowBomb.currentTime = 0;
+					lowBomb.play();
+					obstacle1[O].falling = true;
+					var randLR = Math.floor(Math.random() * 2) + 1;
+					if(randLR == 1){
+						randLR = "Left";
+					}
+					else{
+						randLR = "Right";
+					}
+					obstacle1[O].LR = randLR
+				}
+			}
+			RandomCube.x = -100;
+			RandomCube.y = -200;
+			RandomCube.timeLeft = 0;
+			RandomCube.index = 1;
+			RandomCube.stage = "up";
+			RandEffect.width = 32;
+			RandEffect.height = 32;
+			RandEffect.x = -100;
+			RandEffect.y = -200;
+			RandEffect.onScreen = 0;
+			RandEffect.frame = 0;
+			RandEffect.used = 0;
+			RandomCube2.x = -100;
+			RandomCube2.y = -200;
+			RandomCube2.timeLeft = 0;
+			RandomCube2.index = 1;
+			RandomCube2.stage = "up";
+			RandEffect2.width = 32;
+			RandEffect2.height = 32;
+			RandEffect2.x = -100;
+			RandEffect2.y = -200;
+			RandEffect2.onScreen = 0;
+			RandEffect2.frame = 0;
+			RandEffect2.used = 0;
+			RandomCube3.x = -100;
+			RandomCube3.y = -200;
+			RandomCube3.timeLeft = 0;
+			RandomCube3.index = 1;
+			RandomCube3.stage = "up";
+			RandEffect3.width = 32;
+			RandEffect3.height = 32;
+			RandEffect3.x = -100;
+			RandEffect3.y = -200;
+			RandEffect3.onScreen = 0;
+			RandEffect3.frame = 0;
+			RandEffect3.used = 0;
+			RandomCube4.x = -100;
+			RandomCube4.y = -200;
+			RandomCube4.timeLeft = 0;
+			RandomCube4.index = 1;
+			RandomCube4.stage = "up";
+			RandEffect4.width = 32;
+			RandEffect4.height = 32;
+			RandEffect4.x = -100;
+			RandEffect4.y = -200;
+			RandEffect4.onScreen = 0;
+			RandEffect4.frame = 0;
+			RandEffect4.used = 0;
+			RandomCube5.x = -100;
+			RandomCube5.y = -200;
+			RandomCube5.timeLeft = 0;
+			RandomCube5.index = 1;
+			RandomCube5.stage = "up";
+			RandEffect5.width = 32;
+			RandEffect5.height = 32;
+			RandEffect5.x = -100;
+			RandEffect5.y = -200;
+			RandEffect5.onScreen = 0;
+			RandEffect5.frame = 0;
+			RandEffect5.used = 0;
+			STATE = "Swamp";
 		}
 		if(E.type == "Thief"){
 			E.state = 1;
@@ -1800,50 +2253,60 @@ function onHit(E){
 			}
 			E.spell = "N/A";
 		}
-		else if(E.type != "DragonR" && E.type != "DragonL" && E.type != "Dragon" && E.type != -1){
-			if(((Math.floor(Math.random() * 10) + 1) == 7) && redCube.x == -100 && Thief.spell != "Fire" && ThiefA.spell != "Fire"
+		else if(E.type != "DragonR" && E.type != "DragonL" && E.type != "Dragon" && E.type != -1 && E.type != "MasterThief"){
+			var drop = Math.floor(Math.random() * 3) + 1;
+			if(player.lucky){
+				drop = 1;
+			}
+			if(drop == 1){
+				var dropped = Math.floor(Math.random() * 8) + 1;
+			}
+			else{
+				var dropped = 0;
+			}
+			if(dropped == 1 && redCube.x == -100 && Thief.spell != "Fire" && ThiefA.spell != "Fire"
 				 && ThiefB.spell != "Fire"){
 				redCube.x = E.x;
 				redCube.y = E.y;
 				redCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && tealCube.x == -100 && Thief.spell != "Ice" && ThiefA.spell != "Ice"
+			else if(dropped == 2 && tealCube.x == -100 && Thief.spell != "Ice" && ThiefA.spell != "Ice"
 				 && ThiefB.spell != "Ice"){
 				tealCube.x = E.x;
 				tealCube.y = E.y;
 				tealCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && greenCube.x == -100 && Thief.spell != "Earth" && ThiefA.spell != "Earth"
+			else if(dropped == 3 && greenCube.x == -100 && Thief.spell != "Earth" && ThiefA.spell != "Earth"
 				 && ThiefB.spell != "Earth"){
 				greenCube.x = E.x;
 				greenCube.y = E.y;
 				greenCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && yellowCube.x == -100 && Thief.spell != "Lightning" && ThiefA.spell != "Lightning"
+			else if(dropped == 4 && yellowCube.x == -100 && Thief.spell != "Lightning" && ThiefA.spell != "Lightning"
 				 && ThiefB.spell != "Lightning"){
 				yellowCube.x = E.x;
 				yellowCube.y = E.y;
 				yellowCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && greyCube.x == -100 && Thief.spell != "Air" && ThiefA.spell != "Air"
+			else if(dropped == 5 && greyCube.x == -100 && Thief.spell != "Air" && ThiefA.spell != "Air"
 				 && ThiefB.spell != "Air"){
 				greyCube.x = E.x;
 				greyCube.y = E.y;
 				greyCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && purpleCube.x == -100 && Thief.spell != "Mystic" && ThiefA.spell != "Mystic"
+			else if(dropped == 6 && purpleCube.x == -100 && Thief.spell != "Mystic" && ThiefA.spell != "Mystic"
 				 && ThiefB.spell != "Mystic"){
 				purpleCube.x = E.x;
 				purpleCube.y = E.y;
 				purpleCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && blueCube.x == -100 && Thief.spell != "Water" && ThiefA.spell != "Water"
+			else if(dropped == 7 && blueCube.x == -100 && Thief.spell != "Water" && ThiefA.spell != "Water"
 				 && ThiefB.spell != "Water"){
 				blueCube.x = E.x;
 				blueCube.y = E.y;
 				blueCube.timeLeft = 90;
 			}
-			else if(((Math.floor(Math.random() * 10) + 1) == 7) && blackCube.x == -100 && Thief.spell != "Dark" && ThiefA.spell != "Dark"
+			else if(dropped == 8 && blackCube.x == -100 && Thief.spell != "Dark" && ThiefA.spell != "Dark"
 				 && ThiefB.spell != "Dark"){
 				blackCube.x = E.x;
 				blackCube.y = E.y;
@@ -1901,44 +2364,56 @@ function move(E){
 		MeteorMove(E);
 	}
 	else if(E.movement == true){
-		if(E.dir == "W" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
-			E.y-=E.speed;
+		if(E.dir == "W" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
+			Math.floor(E.y-=E.speed);
 		}
-		if(E.dir == "A" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
-			E.x-=E.speed;
+		if(E.dir == "A" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
+			Math.floor(E.x-=E.speed);
 		}
-		if(E.dir == "S" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion)) && E.onTree != 1){
-			E.y+=E.speed;
+		if(E.dir == "S" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion)) && E.onTree != 1){
+			Math.floor(E.y+=E.speed);
 		}
 		if(E.dir == "S" && E.onTree == 1){
-			E.y+=E.speed;
+			Math.floor(E.y+=E.speed);
 		}
-		if(E.dir == "D" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
-			E.x+=E.speed;
+		if(E.dir == "D" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
+			Math.floor(E.x+=E.speed);
 		}
-		if(E.dir == "AS" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
-			E.y+=E.speed;
-			E.x-=E.speed;
+		if(E.dir == "AS" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
+			Math.floor(E.y+=E.speed);
+			Math.floor(E.x-=E.speed);
 		}
-		if(E.dir == "WA" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
-			E.y-=E.speed;
-			E.x-=E.speed;
+		if(E.dir == "WA" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
+			Math.floor(E.y-=E.speed);
+			Math.floor(E.x-=E.speed);
 		}
-		if(E.dir == "WD" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
-			E.y-=E.speed;
-			E.x+=E.speed;
+		if(E.dir == "WD" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
+			Math.floor(E.y-=E.speed);
+			Math.floor(E.x+=E.speed);
 		}
-		if(E.dir == "SD" && !(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
-			&& !(obsCollision(obstacle3, E, E.dir)) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
-			E.y+=E.speed;
-			E.x+=E.speed;
+		if(E.dir == "SD" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
+			Math.floor(E.y+=E.speed);
+			Math.floor(E.x+=E.speed);
+		}
+		if(E.x/4 != Math.round(E.x/4) && E.speed/4 == Math.round(E.speed/4)){
+			E.x+=1;
+		}
+		if(E.y/4 != Math.round(E.y/4) && E.speed/4 == Math.round(E.speed/4)){
+			E.y+=1;
+		}
+		if(E.x/2 != Math.round(E.x/2) && E.speed/2 == Math.round(E.speed/2)){
+			E.x+=1;
+		}
+		if(E.y/2 != Math.round(E.y/2) && E.speed/2 == Math.round(E.speed/2)){
+			E.y+=1;
 		}
 	}	
 }
@@ -2033,8 +2508,8 @@ if(E.type != "Meteor"){
 				}	
 			}
 		}
-		if(obsCollision(obstacle1, E, E.dir) || obsCollision(obstacle2, E, E.dir) || obsCollision(obstacle3, E, E.dir)){
-			if(E.onTree != 1){
+		if((obsCollision(obstacle1, E, E.dir) || obsCollision(obstacle2, E, E.dir) || obsCollision(obstacle3, E, E.dir)) && STATE != "Swamp"){
+			if((E.onTree != 1 && E.type != "MasterThief") || (E.type == "MasterThief" && sAir.onScreen != 1)){
 				if(E.dir == "W"){
 					E.dirct = 20;
 					E.y+=2*E.speed;
@@ -2082,51 +2557,55 @@ if(E.type != "Meteor"){
 			}
 		}
 		else if(E.dirct == 0 && E.type != -1){
+			if(E.type == "Thief" && MasterThief.onScreen == 1 && E.stole){
+				var xdiff = MasterThief.x - E.x;
+				var ydiff = MasterThief.y - E.y;
+			}
 			if(xdiff < 4 && ydiff < 4){
 				E.dir = "WA";
-				if(E.type == "Thief" && E.stole == true){
+				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
 					E.dir = "SD";
 				}
 			}
 			else if(xdiff < 4 && ydiff > 4){
 				E.dir = "AS";
-				if(E.type == "Thief" && E.stole == true){
+				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
 					E.dir = "WD";
 				}
 			}
 			else if(xdiff > 4 && ydiff < 4){
 				E.dir = "WD";
-				if(E.type == "Thief" && E.stole == true){
+				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
 					E.dir = "AS";
 				}
 			}
 			else if (xdiff > 4 && ydiff > 4){
 				E.dir = "SD";
-				if(E.type == "Thief" && E.stole == true){
+				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
 					E.dir = "WA";
 				}
 			}
 			else if (xdiff == 4 && ydiff > 4){
 				E.dir = "S";
-				if(E.type == "Thief" && E.stole == true){
+				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
 					E.dir = "W";
 				}
 			}
 			else if(xdiff == 4 && ydiff < 4){
 				E.dir = "W";
-				if(E.type == "Thief" && E.stole == true){
+				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
 					E.dir = "S";
 				}
 			}
 			else if(xdiff < 4 && ydiff == 4){
 				E.dir = "A";
-				if(E.type == "Thief" && E.stole == true){
+				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
 					E.dir = "D";
 				}
 			}
 			else{
 				E.dir = "D";
-				if(E.type == "Thief" && E.stole == true){
+				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
 					E.dir = "A";
 				}
 			}
@@ -2139,9 +2618,10 @@ if(E.type != "Meteor"){
 
 function spawn(E){
 	if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft == 0 && typemarker3.timeLeft == 0 && hpUp.x == -100
-		&& Dragon.onScreen != 1 && (!(Dragon.spawned == 1 && player.power < 2) && !(treeWizz.spawned == 1 && player.maxhp < 4) || E.type == "Dragon" || E.type == -1)){
+		&& Dragon.onScreen != 1 && (!(Dragon.spawned == 1 && player.power < 2) && !(treeWizz.spawned == 1 && player.maxhp < 4) && (!(MasterThief.spawned == 1 && !player.lucky) || E.type == "Thief")
+		|| E.type == "Dragon" || E.type == -1)){
 		if(E.type == 1){
-			if(E.respawn == 0){
+			if(E.respawn == 0 && STATE == 1){
 				E.movement = true;
 				E.hp = 3;
 				E.onScreen = 1;
@@ -2158,20 +2638,32 @@ function spawn(E){
 					E.spell = "Lightning";
 				}
 			}
+			else if(STATE != 1){
+				E.respawn = -1;
+			}
 		}
 		if(E.respawn == 0){
 			E.movement = true;
 			if(E.type == "Thief"){
 				var spawnspot = Math.floor(Math.random() * 8) + 1;
+				var LR = Math.floor(Math.random() * 2) + 1;
 				if(E.counter == 1){
 					E.movement = true;
 					E.state = 2;
 					E.respawn-=1;
 					E.counter-=1;
 				}
-				if(obstacle1[spawnspot].x != 2000){
-					E.x = obstacle1[spawnspot].x-48;
-					E.y = obstacle1[spawnspot].y-32;
+				if(obstacle1[spawnspot].x != 2000 && !obstacle1[spawnspot].falling){
+					if(LR == 1){
+						E.x = obstacle1[spawnspot].x-48;
+						E.y = obstacle1[spawnspot].y-32;
+						E.LR = "Left"
+					}
+					else if(LR == 2){
+						E.x = obstacle1[spawnspot].x+48;
+						E.y = obstacle1[spawnspot].y-32;
+						E.LR = "Right"
+					}
 					E.onScreen = 1;
 					E.respawn-=1;
 					E.speed = 4;
@@ -2202,7 +2694,73 @@ function spawn(E){
 					E.respawn+=1;
 				}
 			}
-			else if(E.type != "Thief"){
+			else if(E.type == "Crocodile" && STATE == "Swamp"){
+				//spawn in random spot from player. If not in water try to spawn next frame
+				var spawnLoc = Math.floor(Math.random() * 4) + 1;
+				if(spawnLoc == 1){
+					E.x = player.x-128;
+					E.y = player.y;
+				}
+				else if(spawnLoc == 2){
+					E.x = player.x+128;
+					E.y = player.y;
+				}
+				else if(spawnLoc == 3){
+					E.x = player.x;
+					E.y = player.y+128;
+				}
+				else if(spawnLoc == 4){
+					E.x = player.x;
+					E.y = player.y-128;
+				}
+				var landed = false;
+				for(O in obstacle1){
+					if(obstacle1[O].LR == "Right"){
+						obstacle1[O].x+=256;
+						obstacle1[O].y-=64;
+						obstacle1[O].width+=64;
+					}
+					else{
+						obstacle1[O].x-=256;
+						obstacle1[O].y-=64;
+						obstacle1[O].width+=64;
+					}
+					if(collision(E.dir, E, obstacle1[O])){
+						landed = true;
+					}
+					if(obstacle1[O].LR == "Right"){
+						obstacle1[O].x-=256;
+						obstacle1[O].y+=64;
+						obstacle1[O].width-=64;
+					}
+					else{
+						obstacle1[O].x+=256;
+						obstacle1[O].y+=64;
+						obstacle1[O].width-=64;
+					}
+				}
+				for(O in obstacle2){
+					obstacle2[O].x+=32;
+					obstacle2[O].y+=obstacle2[O].height/2;
+					if(collision("D", E, obstacle2[O]) || collision("A", E, obstacle2[O]) || collision("S", E, obstacle2[O]) || collision("W", E, obstacle2[O]) ||
+						collision("WD", E, obstacle2[O]) || collision("WA", E, obstacle2[O]) || collision("AS", E, obstacle2[O]) || collision("SD", E, obstacle2[O])){
+						landed = true;
+					}
+					obstacle2[O].x-=32;
+					obstacle2[O].y-=obstacle2[O].height/2;
+				}
+				if(!landed){
+					E.onScreen = 1;
+					E.hp = 5;
+					E.hptimer = 0;
+					E.respawn-=1;
+				}
+				else{
+					E.x = -9000;
+					E.y = -9000;
+				}
+			}
+			else if(E.type != "Thief" && E.type != "Crocodile"){
 				var spawnPoint = Math.floor(Math.random() * 8) + 1;
 				if(spawnPoint == 1){
 					E.x = 0;
@@ -2264,8 +2822,62 @@ function spawn(E){
 		if(E.type == 0 && STATE != "Scorched" && E.bug == 0 && E.speed2*2 == 8){
 			E.respawn= E.respawn;
 		}
-		else if(E.type != "Thief" && E.type != 2){
+		else if(E.type != "Thief" && E.type != 2 && E.type != "Crocodile" && E.type != "Mosquito"){
 			E.respawn-=1;
 		}
+		else if(E.type == "Crocodile" && STATE == "Swamp" && !landed){
+			E.respawn-=1;
+		}
+		else if(E.type == "Mosquito" && STATE == "Swamp"){
+			E.respawn-=1;
+		}
+	}
+}
+function speedhandle(E){
+	for(O in obstacle1){
+		if(obstacle1[O].LR == "Right"){
+			obstacle1[O].x+=256;
+			obstacle1[O].y-=64;
+			obstacle1[O].width+=64;
+		}
+		else{
+			obstacle1[O].x-=256;
+			obstacle1[O].y-=64;
+			obstacle1[O].width+=64;
+		}
+		if(collision(E.dir, E, obstacle1[O])){
+			var noswim = true;
+			E.swimming = false;
+		}
+		if(obstacle1[O].LR == "Right"){
+			obstacle1[O].x-=256;
+			obstacle1[O].y+=64;
+			obstacle1[O].width-=64;
+		}
+		else{
+			obstacle1[O].x+=256;
+			obstacle1[O].y+=64;
+			obstacle1[O].width-=64;
+		}
+	}
+	for(O in obstacle2){
+		obstacle2[O].x+=32;
+		obstacle2[O].y+=obstacle2[O].height/2;
+		if(collision("D", E, obstacle2[O]) || collision("A", E, obstacle2[O]) || collision("S", E, obstacle2[O]) || collision("W", E, obstacle2[O]) ||
+			collision("WD", E, obstacle2[O]) || collision("WA", E, obstacle2[O]) || collision("AS", E, obstacle2[O]) || collision("SD", E, obstacle2[O])){
+			var noswim = true;
+			E.swimming = false;
+		}
+		obstacle2[O].x-=32;
+		obstacle2[O].y-=obstacle2[O].height/2;
+	}
+	if(!noswim){
+		E.speed = 2;
+		E.speed2 = 1;
+		E.swimming = true;
+	}
+	else{
+		E.speed = 4;
+		E.speed2 = 2;
 	}
 }

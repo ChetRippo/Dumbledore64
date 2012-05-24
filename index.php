@@ -139,6 +139,14 @@
 	<source src="Sounds/caseysquest.ogg" type="audio/ogg" />
 	<source src="Sounds/caseysquest.mp3" type="audio/mpeg" />
 </audio>
+<audio>
+	<source src="Sounds/rain.ogg" type="audio/ogg" />
+	<source src="Sounds/rain.mp3" type="audio/mpeg" />
+</audio>
+<audio>
+	<source src="Sounds/swamp.ogg" type="audio/ogg" />
+	<source src="Sounds/swamp.mp3" type="audio/mpeg" />
+</audio>
 <?php
 $scoredoc = fopen("HighScores.txt", "r") or die("Error: HighScores.txt could not be opened");
 $score1 = intval(fgets($scoredoc));
@@ -146,6 +154,11 @@ $score2 = intval(fgets($scoredoc));
 $score3 = intval(fgets($scoredoc));
 $score4 = intval(fgets($scoredoc));
 $score5 = intval(fgets($scoredoc));
+$score6 = intval(fgets($scoredoc));
+$score7 = intval(fgets($scoredoc));
+$score8 = intval(fgets($scoredoc));
+$score9 = intval(fgets($scoredoc));
+$score10 = intval(fgets($scoredoc));
 fclose($scoredoc);
 
 $namedoc = fopen("Names.txt", "r") or die("Error: Names.txt could not be opened");
@@ -159,6 +172,15 @@ $name3 = str_replace("\n",'',$name3);
 $name4 = str_replace("\n",'',$name4);
 (string) $name5 = fgets($namedoc);
 $name5 = str_replace("\n",'',$name5);
+(string) $name6 = fgets($namedoc);
+$name6 = str_replace("\n",'',$name6);
+(string) $name7 = fgets($namedoc);
+$name7 = str_replace("\n",'',$name7);
+(string) $name8 = fgets($namedoc);
+$name8 = str_replace("\n",'',$name8);
+(string) $name9 = fgets($namedoc);
+$name9 = str_replace("\n",'',$name9);
+(string) $name10 = fgets($namedoc);
 fclose($namedoc);
 ?>
 <script language="JavaScript">
@@ -167,15 +189,27 @@ var gscore2 = "<?php echo($score2);?>";
 var gscore3 = "<?php echo($score3);?>";
 var gscore4 = "<?php echo($score4);?>";
 var gscore5 = "<?php echo($score5);?>";
+var gscore6 = "<?php echo($score6);?>";
+var gscore7 = "<?php echo($score7);?>";
+var gscore8 = "<?php echo($score8);?>";
+var gscore9 = "<?php echo($score9);?>";
+var gscore10 = "<?php echo($score10);?>";
 var gname1 = "<?php echo($name1);?>";
 var gname2 = "<?php echo($name2);?>";
 var gname3 = "<?php echo($name3);?>";
 var gname4 = "<?php echo($name4);?>";
 var gname5 = "<?php echo($name5);?>";
+var gname6 = "<?php echo($name6);?>";
+var gname7 = "<?php echo($name7);?>";
+var gname8 = "<?php echo($name8);?>";
+var gname9 = "<?php echo($name9);?>";
+var gname10 = "<?php echo($name10);?>";
 </script>
 <script src="Classes/Stacktrace.js"></script>
 <script src="Classes/Environment.js"></script>
 <script src="Classes/EnemyAttacks.js"></script>
+<script src="Classes/Tier3EnemyAttacks.js"></script>
+<script src="Classes/Tier3Enemies.js"></script>
 <script src="Classes/Enemies.js"></script>
 <script src="Classes/Fire.js"></script>
 <script src="Classes/Ice.js"></script>

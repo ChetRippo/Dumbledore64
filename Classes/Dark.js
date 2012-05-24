@@ -995,7 +995,12 @@ function spikeMove(S){
 		for (E in AllEnemies){
 			if(collision(AllEnemies[E].dir, AllEnemies[E], S)){
 				player.currpower = player.power;
-				player.power+=1;
+				if(S.arrIndex){
+					player.power = player.maxhp-player.hp + 1;
+				}
+				else{
+					player.power+=1;
+				}
 				onHit(AllEnemies[E]);
 				player.power = player.currpower;
 				for(D in darkSpikes){

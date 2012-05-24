@@ -5,6 +5,7 @@ var water = {
 	height: 16,
 	timeLeft: 0,
 	cd: 0,
+	cd2: 0,
 	speed: 4,
 	onScreen: 0,
 	cast: 0,
@@ -24,6 +25,9 @@ var water = {
 	effect: function(){
 		if(this.cd > 0){
 			this.cd-=1;
+		}
+		if(this.cd2 > 0){
+			this.cd2-=1;
 		}
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
@@ -76,18 +80,36 @@ var water = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		this.x = player.x - 48;
-		this.y = player.y;
-		this.dir = "WD";
-		this.cd = 1020;
-		this.onScreen = 1;
-		this.used = 0;
-		for(W in bubbleRotate){
-			W.used = 0;
+		if(this.cd == 0 && (spell == "Bubble Shield" || spell == "Bubble Shield and Heal")){
+			for(B in bubbleRotate){
+				bubbleRotate[B].onScreen = 0;
+				bubbleRotate[B].x = -100;
+				bubbleRotate[B].y = -200;
+				bubbleRotate[B].used = 0;
+			}
+			this.x = player.x - 48;
+			this.y = player.y;
+			this.dir = "WD";
+			this.cd = 1020;
+			this.onScreen = 1;
+			this.used = 0;
+			this.timeLeft = 600;
 		}
-		this.timeLeft = 600;
-	}
+		else if(this.cd2 == 0 && spell == "Heavy Bubble Shield"){
+			for(B in bubbleRotate){
+				bubbleRotate[B].onScreen = 0;
+				bubbleRotate[B].x = -100;
+				bubbleRotate[B].y = -200;
+				bubbleRotate[B].used = 0;
+			}
+			this.x = player.x - 48;
+			this.y = player.y;
+			this.dir = "WD";
+			this.cd2 = 1020;
+			this.onScreen = 1;
+			this.used = 0;
+			this.timeLeft = 600;
+		}
 	}
 };
 var water12 = {

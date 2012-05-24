@@ -803,6 +803,506 @@ var RandEffect = {
 		}
 	}
 };
+// Random drop
+var RandomCube2 = {
+	type: 1,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	index: 1,
+	stage: "up",
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			this.timeLeft-=1;
+			if(this.stage == "up"){
+				this.index++;
+			}
+			else{
+				this.index-=1;
+			}
+			if(this.index == 6){
+				this.index = 5;
+				this.stage = "down";
+			}
+			else if(this.index == 0){
+				this.index = 1;
+				this.stage = "up";
+			}
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell1;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell1;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell1;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell2;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell2;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell2;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
+var RandEffect2 = {
+	color: "#FF00FF",
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	onScreen: 0,
+	frame: 0,
+	used: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.fillStyle = this.color;
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width + 8 * this.frame;
+				this.height = this.height + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width - 8 * this.frame;
+				this.height = this.height - 8 * this.frame;
+				this.frame++;
+			}
+			else{
+				this.frame = 0;
+				this.onScreen = 0;
+				this.width = 32;
+				this.height = 32;
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	}
+};
+// Random drop
+var RandomCube3 = {
+	type: 1,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	index: 1,
+	stage: "up",
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			this.timeLeft-=1;
+			if(this.stage == "up"){
+				this.index++;
+			}
+			else{
+				this.index-=1;
+			}
+			if(this.index == 6){
+				this.index = 5;
+				this.stage = "down";
+			}
+			else if(this.index == 0){
+				this.index = 1;
+				this.stage = "up";
+			}
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell1;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell1;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell1;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell2;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell2;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell2;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
+var RandEffect3 = {
+	color: "#FF00FF",
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	onScreen: 0,
+	frame: 0,
+	used: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.fillStyle = this.color;
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width + 8 * this.frame;
+				this.height = this.height + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width - 8 * this.frame;
+				this.height = this.height - 8 * this.frame;
+				this.frame++;
+			}
+			else{
+				this.frame = 0;
+				this.onScreen = 0;
+				this.width = 32;
+				this.height = 32;
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	}
+};
+// Random drop
+var RandomCube4 = {
+	type: 1,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	index: 1,
+	stage: "up",
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			this.timeLeft-=1;
+			if(this.stage == "up"){
+				this.index++;
+			}
+			else{
+				this.index-=1;
+			}
+			if(this.index == 6){
+				this.index = 5;
+				this.stage = "down";
+			}
+			else if(this.index == 0){
+				this.index = 1;
+				this.stage = "up";
+			}
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell1;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell1;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell1;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell2;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell2;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell2;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
+var RandEffect4 = {
+	color: "#FF00FF",
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	onScreen: 0,
+	frame: 0,
+	used: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.fillStyle = this.color;
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width + 8 * this.frame;
+				this.height = this.height + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width - 8 * this.frame;
+				this.height = this.height - 8 * this.frame;
+				this.frame++;
+			}
+			else{
+				this.frame = 0;
+				this.onScreen = 0;
+				this.width = 32;
+				this.height = 32;
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	}
+};
+// Random drop
+var RandomCube5 = {
+	type: 1,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	index: 1,
+	stage: "up",
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
+	draw: function(){
+		if(this.timeLeft > 0){
+			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			this.timeLeft-=1;
+			if(this.stage == "up"){
+				this.index++;
+			}
+			else{
+				this.index-=1;
+			}
+			if(this.index == 6){
+				this.index = 5;
+				this.stage = "down";
+			}
+			else if(this.index == 0){
+				this.index = 1;
+				this.stage = "up";
+			}
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell1;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell1;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell1;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ " + spell2;
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ " + spell2;
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ " + spell2;
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
+var RandEffect5 = {
+	color: "#FF00FF",
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	onScreen: 0,
+	frame: 0,
+	used: 0,
+	draw: function(){
+		if(this.onScreen == 1){
+			ctx.fillStyle = this.color;
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.used == 0){
+				fastbeepsHigh.currentTime=0;
+				fastbeepsHigh.play();
+				this.used = 1;
+			}
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width + 8 * this.frame;
+				this.height = this.height + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				this.width = this.width - 8 * this.frame;
+				this.height = this.height - 8 * this.frame;
+				this.frame++;
+			}
+			else{
+				this.frame = 0;
+				this.onScreen = 0;
+				this.width = 32;
+				this.height = 32;
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	}
+};
 // hpUp drop
 var hpUp = {
 	type: 0,
@@ -819,14 +1319,20 @@ var hpUp = {
 		if(this.boss == "Dragon"){
 			ctx.drawImage(DragonmaxUP, this.x - this.width / 2, this.y - this.height / 2);
 		}
+		if(this.boss == "MasterThief"){
+			ctx.drawImage(ThiefLuckUP, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	},
 	onHit: function(){
 		if(typemarker.x != -100 && typemarker2.x != -100){
 			if(this.boss == "treeW"){
 				typemarker3.text = "+ Max Hp";
 			}
-			else{
-				typemarker3.text = "+ Damage";
+			else if(this.boss == "Dragon"){
+				typemarker.text = "+ Damage";
+			}
+			else if(this.boss == "MasterThief"){
+				typemarker.text = "+ Luck";
 			}
 			typemarker3.x = player.x-player.width*2;
 			typemarker3.y = player.y;
@@ -837,8 +1343,11 @@ var hpUp = {
 			if(this.boss == "treeW"){
 				typemarker2.text = "+ Max Hp";
 			}
-			else{
-				typemarker2.text = "+ Damage";
+			else if(this.boss == "Dragon"){
+				typemarker.text = "+ Damage";
+			}
+			else if(this.boss == "MasterThief"){
+				typemarker.text = "+ Luck";
 			}
 			typemarker2.x = player.x-player.width*2;
 			typemarker2.y = player.y;
@@ -849,8 +1358,11 @@ var hpUp = {
 			if(this.boss == "treeW"){
 				typemarker.text = "+ Max Hp";
 			}
-			else{
+			else if(this.boss == "Dragon"){
 				typemarker.text = "+ Damage";
+			}
+			else if(this.boss == "MasterThief"){
+				typemarker.text = "+ Luck";
 			}
 			typemarker.x = player.x-player.width*2;
 			typemarker.y = player.y;
@@ -858,12 +1370,16 @@ var hpUp = {
 			typemarker.timeLeft = 90;
 		}
 		if(this.boss == "treeW"){
-			player.maxhp+=1;
+			player.maxhp+=3;
 			player.hp = player.maxhp;
 		}
 		else if(this.boss == "Dragon"){
 			player.hp = player.maxhp;
 			player.power+=1;
+		}
+		else if(this.boss == "MasterThief"){
+			player.hp = player.maxhp;
+			player.lucky=true;
 		}
 		Frozen.currentTime=0;
 		Frozen.play();
@@ -883,6 +1399,7 @@ var hpUp = {
 		hpParticleAS.y = this.y+16;
 		hpParticleSD.x = this.x+16;
 		hpParticleSD.y = this.y+16;
+		counter = 0;
 		if(this.boss == "treeW"){
 			TwizEffect.x = 500;
 			TwizEffect.y = -400;
@@ -890,6 +1407,7 @@ var hpUp = {
 			TwizEffect.height = 0;
 			TwizEffect.onScreen = 0;
 			TwizEffect.frame = 0;
+			Alpha = 0.15;
 		}
 		if(this.boss == "Dragon"){
 			DragonEffect2.x = 500;
@@ -898,7 +1416,24 @@ var hpUp = {
 			DragonEffect2.height = 0;
 			DragonEffect2.onScreen = 0;
 			DragonEffect2.frame = 0;
-			Alpha = 1;
+			Alpha = 0.15;
+		}
+		if(this.boss == "MasterThief"){
+			MasterTEffect.x = 500;
+			MasterTEffect.y = -400;
+			MasterTEffect.width = 0;
+			MasterTEffect.height = 0;
+			MasterTEffect.onScreen = 0;
+			MasterTEffect.frame = 0;
+			Enemy.width = 80;
+			Enemy.height = 60;
+			EnemyB.width = 80;
+			EnemyB.height = 60;
+			Alpha = 0.15;
+			if(vol == 2){
+				rainsound.currentTime = 0;
+				rainsound.pause();
+			}
 		}
 		this.x = -100;
 		this.y = -200;
@@ -931,7 +1466,7 @@ var hpParticleW = {
 			this.x = -100;
 			this.y = -200;
 			this.dir = "W";
-			this.dirct = 10;
+			this.dirct = 30;
 			this.index = 1;
 			counter++;
 		}
@@ -963,7 +1498,7 @@ var hpParticleA = {
 			this.x = -100;
 			this.y = -200;
 			this.dir = "A";
-			this.dirct = 10;
+			this.dirct = 30;
 			this.index = 2;
 			counter++;
 		}
@@ -995,7 +1530,7 @@ var hpParticleS = {
 			this.x = -100;
 			this.y = -200;
 			this.dir = "S";
-			this.dirct = 10;
+			this.dirct = 30;
 			this.index = 3;
 			counter++;
 		}
@@ -1027,7 +1562,7 @@ var hpParticleD = {
 			this.x = -100;
 			this.y = -200;
 			this.dir = "D";
-			this.dirct = 10;
+			this.dirct = 30;
 			this.index = 4;
 			counter++;
 		}
@@ -1059,7 +1594,7 @@ var hpParticleWA = {
 			this.x = -100;
 			this.y = -200;
 			this.dir = "WA";
-			this.dirct = 10;
+			this.dirct = 30;
 			this.index = 5;
 			counter++;
 		}
@@ -1091,7 +1626,7 @@ var hpParticleWD = {
 			this.x = -100;
 			this.y = -200;
 			this.dir = "WD";
-			this.dirct = 10;
+			this.dirct = 30;
 			this.index = 6;
 			counter++;
 		}
@@ -1123,7 +1658,7 @@ var hpParticleAS = {
 			this.x = -100;
 			this.y = -200;
 			this.dir = "AS";
-			this.dirct = 10;
+			this.dirct = 30;
 			this.index = 7;
 			counter++;
 		}
@@ -1173,13 +1708,21 @@ var hpParticleSD = {
 				radiofailure.currentTime=0;
 				radiofailure.play();
 			}
+			if(hpUp.boss == "MasterThief"){
+				for(O in obstacle1){
+					obstacle1[O].board = true;
+				}
+				swampFront= true;
+				radiofailure.currentTime=0;
+				radiofailure.play();
+			}
 			counter = 0;
 		}
 		if(collision(this.dir, this, player) && this.dirct == 0){
 			this.x = -100;
 			this.y = -200;
 			this.dir = "SD";
-			this.dirct = 10;
+			this.dirct = 30;
 			this.index = 8;
 			counter++;
 		}
@@ -1250,7 +1793,7 @@ function HpAi(E){
 		E.dirct-=1;
 	}
 }
-var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 9: RandomCube, 10: blackCube};
+var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 9: RandomCube, 10: blackCube, 11: RandomCube2, 12: RandomCube3, 13: RandomCube4, 14: RandomCube5};
 var hpParticles = {1: hpParticleW, 2: hpParticleA, 3: hpParticleS, 4: hpParticleD, 5: hpParticleWA, 6: hpParticleWD, 7: hpParticleAS, 8: hpParticleSD};
 // If you pick it up
 function pickup(C){

@@ -9,7 +9,6 @@ var Globblyfire = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
@@ -20,7 +19,6 @@ var Globblyfire = {
 			ctx.globalAlpha = Alpha;
 		}
 	},
-	
 	move: function(){
 		if(this.frame == 10){
 			this.x = -100;
@@ -63,7 +61,6 @@ var Globblyfire = {
 			}
 		}
 	},
-		
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -1243,7 +1240,7 @@ var sIce = {
 	},
 	// Slow all enemies in radius
 	effect: function(){
-		if(this.cast == 0){
+		if(this.cast <= 0){
 			if(this.onScreen == 1){
 				player.speed = 4;
 			}
@@ -1352,6 +1349,9 @@ var sFire = {
 			SorcCastingBar.cast = 30;
 			SorcCastingBar.castmax = 30;
 		}
+		else{
+			this.cast = 0;
+		}
 		this.used = 0;
 		this.frame = 0;
 		this.onScreen = 1;
@@ -1373,7 +1373,6 @@ var sLightning = {
 	onScreen: 0,
 	used: 0,
 	cast: 0,
-	
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
 			if(this.hstate == 0){
@@ -3205,7 +3204,7 @@ var LeafHeal = {
 			this.y -= this.speed;
 			this.timeLeft--;
 			if(this.used == 0){
-				if(treeWizz.hp < 10){
+				if(treeWizz.hp < 6){
 					treeWizz.hp+=1;
 				}
 				this.used = 1;

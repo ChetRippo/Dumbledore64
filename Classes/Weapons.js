@@ -89,7 +89,6 @@ var bullet = {
 	}
 	}
 };
-
 // Bullet: A basic attack
 var bullet2 = {
 	color: "blue",
@@ -103,43 +102,41 @@ var bullet2 = {
 
 	// Spawn
 	shoot: function(dir, h, w){
-	if(cd == 0){
-		Beam.currentTime=0;
-		Beam.play();
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = player.x;
-		this.y = player.y;
-		if(spell == "Homing Shots"){
-			cd = 35;
-		}
-		else if(spell == "Bubblebeam"){
-			cd = 20;
-			this.height = 16;
-			this.width = 16;
-			bullet21.dir = "D" + this.dir;
-			bullet21.timeLeft = 60;
-			bullet21.height = 16;
-			bullet21.width = 16;
-			bullet21.x = player.x;
-			bullet21.y = player.y;
-			bullet22.dir = "D2" + this.dir;
-			bullet22.timeLeft = 60;
-			bullet22.height = 16;
-			bullet22.width = 16;
-			bullet22.x = player.x;
-			bullet22.y = player.y;
-		}
-		else{
-			cd = 20;
+		if(cd == 0){
+			Beam.currentTime=0;
+			Beam.play();
+			this.dir = dir;
+			this.timeLeft = 60;
+			this.height = h;
+			this.width = w;
+			this.x = player.x;
+			this.y = player.y;
+			if(spell == "Homing Shots"){
+				cd = 35;
+			}
+			else if(spell == "Bubblebeam"){
+				cd = 20;
+				this.height = 16;
+				this.width = 16;
+				bullet21.dir = "D" + this.dir;
+				bullet21.timeLeft = 60;
+				bullet21.height = 16;
+				bullet21.width = 16;
+				bullet21.x = player.x;
+				bullet21.y = player.y;
+				bullet22.dir = "D2" + this.dir;
+				bullet22.timeLeft = 60;
+				bullet22.height = 16;
+				bullet22.width = 16;
+				bullet22.x = player.x;
+				bullet22.y = player.y;
+			}
+			else{
+				cd = 20;
+			}
 		}
 	}
-	}
-	
 };
-
 // Bullet: A basic attack
 var bullet3 = {
 	color: "blue",
@@ -150,45 +147,42 @@ var bullet3 = {
 	width: 8,
 	height: 6,
 	dir: "A",
-
-	// Spawn
 	shoot: function(dir, h, w){
-	if(cd == 0){
-		Beam.currentTime=0;
-		Beam.play();
-		this.dir = dir;
-		this.timeLeft = 60;
-		this.height = h;
-		this.width = w;
-		this.x = player.x;
-		this.y = player.y;
-		if(spell == "Homing Shots"){
-			cd = 35;
+		if(cd == 0){
+			Beam.currentTime=0;
+			Beam.play();
+			this.dir = dir;
+			this.timeLeft = 60;
+			this.height = h;
+			this.width = w;
+			this.x = player.x;
+			this.y = player.y;
+			if(spell == "Homing Shots"){
+				cd = 35;
+			}
+			else if(spell == "Bubblebeam"){
+				cd = 20;
+				this.height = 16;
+				this.width = 16;
+				bullet31.dir = "D" + this.dir;
+				bullet31.timeLeft = 60;
+				bullet31.height = 16;
+				bullet31.width = 16;
+				bullet31.x = player.x;
+				bullet31.y = player.y;
+				bullet32.dir = "D2" + this.dir;
+				bullet32.timeLeft = 60;
+				bullet32.height = 16;
+				bullet32.width = 16;
+				bullet32.x = player.x;
+				bullet32.y = player.y;
+			}
+			else{
+				cd = 20;
+			}
 		}
-		else if(spell == "Bubblebeam"){
-			cd = 20;
-			this.height = 16;
-			this.width = 16;
-			bullet31.dir = "D" + this.dir;
-			bullet31.timeLeft = 60;
-			bullet31.height = 16;
-			bullet31.width = 16;
-			bullet31.x = player.x;
-			bullet31.y = player.y;
-			bullet32.dir = "D2" + this.dir;
-			bullet32.timeLeft = 60;
-			bullet32.height = 16;
-			bullet32.width = 16;
-			bullet32.x = player.x;
-			bullet32.y = player.y;
-		}
-		else{
-			cd = 20;
-		}
-	}
 	}
 };
-
 // Bullet: A basic attack
 var bullet4 = {
 	color: "blue",
@@ -595,7 +589,7 @@ function drawBullet(B){
 			ctx.fillStyle = "black";
 		}
 		else if(spell != "Bubblebeam"){
-			ctx.fillStyle = B.color;
+			ctx.fillStyle = "blue";
 		}
 		if(spell == "Bubblebeam"){
 			if(mystIndex < 5){
@@ -648,13 +642,24 @@ function drawBullet(B){
 // Increment
 function Bulletmove(B){
 	if(spell == "Homing Shots"){
+		//Fix snapping
+		B.x = Math.floor(B.x);
+		B.y = Math.floor(B.y);
+		if(Math.round(B.x/4) != B.x/4 && B.speed/4 == Math.round(B.speed/4)){
+			B.x+=1;
+		}
+		if(Math.round(B.y/4) != B.y/4 && B.speed/4 == Math.round(B.speed/4)){
+			B.y+=1;
+		}
 		var closest = "";
 		var cdist = 2000;
 		for (E in AllEnemies){
-			var distance = Math.sqrt(((B.x - AllEnemies[E].x)*(B.x - AllEnemies[E].x)) + ((B.y - AllEnemies[E].y)*(B.y - AllEnemies[E].y)));
-			if(distance < cdist){
-				cdist = distance;
-				closest = AllEnemies[E];
+			if(AllEnemies[E].onTree == 0){
+				var distance = Math.sqrt(((B.x - AllEnemies[E].x)*(B.x - AllEnemies[E].x)) + ((B.y - AllEnemies[E].y)*(B.y - AllEnemies[E].y)));
+				if(distance < cdist){
+					cdist = distance;
+					closest = AllEnemies[E];
+				}
 			}
 		}
 		var xdifference = closest.x - B.x;
@@ -663,155 +668,158 @@ function Bulletmove(B){
 			B.dir = B.dir;
 		}
 		else{
-			if(xdifference < 4 && ydifference < 4){
-				B.dir = "WA";
-				B.width = 4;
-				B.height = 4;
-			}
-			else if(xdifference < 4 && ydifference > 4){
-				B.dir = "AS";
-				B.width = 4;
-				B.height = 4;
-			}
-			else if(xdifference > 4 && ydifference < 4){
-				B.dir = "WD";
-				B.width = 4;
-				B.height = 4;
-			}
-			else if (xdifference > 4 && ydifference > 4){
-				B.dir = "SD";
-				B.width = 4;
-				B.height = 4;
-			}
-			else if (xdifference == 4 && ydifference > 4){
+			if (xdifference <= closest.width/2  && xdifference >= 0 && ydifference > closest.height/2){
 				B.dir = "S";
 				B.width = 4;
 				B.height = 32;
 			}
-			else if(xdifference == 4 && ydifference < 4){
+			else if(xdifference <= closest.width/2  && xdifference >= 0 && ydifference < closest.height/2){
 				B.dir = "W";
 				B.width = 4;
 				B.height = 32;
 			}
-			else if(xdifference < 4 && ydifference == 4){
+			else if(xdifference < closest.width/2 && ydifference <= closest.height/2  && ydifference >= 0){
 				B.dir = "A";
 				B.width = 32;
 				B.height = 4;
 			}
-			else{
+			else if(xdifference > closest.width/2 && ydifference <= closest.height/2 && ydifference >= 0){
 				B.dir = "D";
 				B.width = 32;
 				B.height = 4;
 			}
+			else if(xdifference < 0 && ydifference < 0){
+				B.dir = "WA";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if(xdifference < 0 && ydifference > 0){
+				B.dir = "AS";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if(xdifference > 0 && ydifference < 0){
+				B.dir = "WD";
+				B.width = 4;
+				B.height = 4;
+			}
+			else if (xdifference > 0 && ydifference > 0){
+				B.dir = "SD";
+				B.width = 4;
+				B.height = 4;
+			}
+			
 		}
 	}
-	if(spell != "Homing Shots"){
+	if(spell != "Homing Shots" && STATE != "Swamp"){
 		for(O in obstacle1){
-			if(collision(B.dir, B, obstacle1[O])){
-				if(spell == "Piercing Shots"){
-					player.currpower = player.power;
-					player.power+=1;
-				}
-				obsHit(obstacle1[O]);
-				if(spell == "Piercing Shots"){
-					player.power = player.currpower;
-				}
-				if(spell == "Explosive Shots"){
-					if(Mfire.onScreen == 0){
-						Mfire.onScreen = 1;
-						Mfire.frame = 0;
-						Mfire.x = B.x;
-						Mfire.y = B.y;
+			if(obstacle1[O].fallIndex != 46){
+				if(collision(B.dir, B, obstacle1[O])){
+					if(spell == "Piercing Shots"){
+						player.currpower = player.power;
+						player.power+=1;
 					}
-					else if(Mfire2.onScreen == 0){
-						Mfire2.onScreen = 1;
-						Mfire2.frame = 0;
-						Mfire2.x = B.x;
-						Mfire2.y = B.y;
+					obsHit(obstacle1[O]);
+					if(spell == "Piercing Shots"){
+						player.power = player.currpower;
 					}
-					else if(Mfire3.onScreen == 0){
-						Mfire3.onScreen = 1;
-						Mfire3.frame = 0;
-						Mfire3.x = B.x;
-						Mfire3.y = B.y;
-					}
-					else if(Mfire4.onScreen == 0){
-						Mfire4.onScreen = 1;
-						Mfire4.frame = 0;
-						Mfire4.x = B.x;
-						Mfire4.y = B.y;
-					}
-				}
-				else if(spell == "Ice Shots"){
-					if(Mice.onScreen == 0){
-						Mice.onScreen = 1;
-						Mice.frame = 0;
-						Mice.x = B.x;
-						Mice.y = B.y;
-					}
-					else if(Mice2.onScreen == 0){
-						Mice2.onScreen = 1;
-						Mice2.frame = 0;
-						Mice2.x = B.x;
-						Mice2.y = B.y;
-					}
-					else if(Mice3.onScreen == 0){
-						Mice3.onScreen = 1;
-						Mice3.frame = 0;
-						Mice3.x = B.x;
-						Mice3.y = B.y;
-					}
-					else if(Mice4.onScreen == 0){
-						Mice4.onScreen = 1;
-						Mice4.frame = 0;
-						Mice4.x = B.x;
-						Mice4.y = B.y;
-					}
-				}
-				if(spell == "Conductive Shots"){
-					if(B.dir == "W" || B.dir == "S"){
-						B.width = 32;
-						B.height = 4;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
-							B.dir = "A";
+					if(spell == "Explosive Shots"){
+						if(Mfire.onScreen == 0){
+							Mfire.onScreen = 1;
+							Mfire.frame = 0;
+							Mfire.x = B.x;
+							Mfire.y = B.y;
 						}
-						else{
-							B.dir = "D";
+						else if(Mfire2.onScreen == 0){
+							Mfire2.onScreen = 1;
+							Mfire2.frame = 0;
+							Mfire2.x = B.x;
+							Mfire2.y = B.y;
+						}
+						else if(Mfire3.onScreen == 0){
+							Mfire3.onScreen = 1;
+							Mfire3.frame = 0;
+							Mfire3.x = B.x;
+							Mfire3.y = B.y;
+						}
+						else if(Mfire4.onScreen == 0){
+							Mfire4.onScreen = 1;
+							Mfire4.frame = 0;
+							Mfire4.x = B.x;
+							Mfire4.y = B.y;
 						}
 					}
-					else if(B.dir == "A" || B.dir == "D"){
-						B.width = 4;
-						B.height = 32;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
-							B.dir = "W";
+					else if(spell == "Ice Shots"){
+						if(Mice.onScreen == 0){
+							Mice.onScreen = 1;
+							Mice.frame = 0;
+							Mice.x = B.x;
+							Mice.y = B.y;
 						}
-						else{
-							B.dir = "S";
+						else if(Mice2.onScreen == 0){
+							Mice2.onScreen = 1;
+							Mice2.frame = 0;
+							Mice2.x = B.x;
+							Mice2.y = B.y;
 						}
-					}
-					else if(B.dir == "WD" || B.dir == "AS"){
-						B.width = 4;
-						B.height = 4;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
-							B.dir = "WA";
+						else if(Mice3.onScreen == 0){
+							Mice3.onScreen = 1;
+							Mice3.frame = 0;
+							Mice3.x = B.x;
+							Mice3.y = B.y;
 						}
-						else{
-							B.dir = "SD";
-						}
-					}
-					else if(B.dir == "WA" || B.dir == "SD"){
-						B.width = 4;
-						B.height = 4;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
-							B.dir = "WD";
-						}
-						else{
-							B.dir = "AS";
+						else if(Mice4.onScreen == 0){
+							Mice4.onScreen = 1;
+							Mice4.frame = 0;
+							Mice4.x = B.x;
+							Mice4.y = B.y;
 						}
 					}
-				}
-				else{
-					B.timeLeft = 0;
+					if(spell == "Conductive Shots"){
+						if(B.dir == "W" || B.dir == "S"){
+							B.width = 32;
+							B.height = 4;
+							if(Math.floor(Math.random() * 2) + 1 == 2){
+								B.dir = "A";
+							}
+							else{
+								B.dir = "D";
+							}
+						}
+						else if(B.dir == "A" || B.dir == "D"){
+							B.width = 4;
+							B.height = 32;
+							if(Math.floor(Math.random() * 2) + 1 == 2){
+								B.dir = "W";
+							}
+							else{
+								B.dir = "S";
+							}
+						}
+						else if(B.dir == "WD" || B.dir == "AS"){
+							B.width = 4;
+							B.height = 4;
+							if(Math.floor(Math.random() * 2) + 1 == 2){
+								B.dir = "WA";
+							}
+							else{
+								B.dir = "SD";
+							}
+						}
+						else if(B.dir == "WA" || B.dir == "SD"){
+							B.width = 4;
+							B.height = 4;
+							if(Math.floor(Math.random() * 2) + 1 == 2){
+								B.dir = "WD";
+							}
+							else{
+								B.dir = "AS";
+							}
+						}
+					}
+					else{
+						B.timeLeft = 0;
+					}
 				}
 			}
 		}
@@ -1035,7 +1043,7 @@ function Bulletmove(B){
 		}
 	}
 	for (E in AllEnemies){
-		if(collision(B.dir, B, AllEnemies[E])){
+		if(collision(B.dir, B, AllEnemies[E]) && AllEnemies[E].onTree == 0){
 			if(spell == "Piercing Shots"){
 				player.currpower = player.power;
 				player.power+=1;
@@ -1420,9 +1428,6 @@ var fireice = {
 		this.color = this.color1;
 		this.state = 0;
 	}
-	else{
-		return 0;
-	}
 	}
 	
 };
@@ -1439,16 +1444,14 @@ var fireheal = {
 		if(this.cd == 0){
 			this.cd = 600;
 			var currentEarthcd = earth.cd;
+			var currentFirecd = fire.cd;
 			fire.cd = 0;
 			earth.cd = 0;
 			fire.shoot();
 			earth.shoot();
-			fire.cd = 0;
+			fire.cd = currentFirecd;
 			earth.cd = currentEarthcd;
 			fire.cast = 30;
-		}
-		else{
-			return 0;
 		}
 	}	
 };
@@ -1464,17 +1467,15 @@ var iceheal = {
 	shoot: function(){
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
+			var currentIcecd = ice.cd;
 			this.cd = 600;
 			ice.cd = 0;
 			earth.cd = 0;
 			ice.shoot();
 			earth.shoot();
-			ice.cd = 0;
+			ice.cd = currentIcecd;
 			earth.cd = currentEarthcd;
 			ice.cast = 30;
-		}
-		else{
-			return 0;
 		}
 	}	
 };
@@ -1490,17 +1491,15 @@ var lightningheal = {
 	shoot: function(){
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
+			var currentLightningcd = lightning.cd;
 			this.cd = 600;
 			lightning.cd = 0;
 			earth.cd = 0;
 			lightning.shoot();
 			earth.shoot();
-			lightning.cd = 0;
+			lightning.cd = currentLightningcd;
 			earth.cd = currentEarthcd;
 			lightning.cast = 30;
-		}
-		else{
-			return 0;
 		}
 	}	
 };
@@ -1634,12 +1633,12 @@ var firelightning = {
 		this.vx = player.x;
 		this.hy = player.y;
 		this.cd = 900;
-		this.timeLeft = 210;
-		this.cast = 45;
-		cd = 45;
+		this.timeLeft = 150;
+		this.cast = 30;
+		cd = 30;
 		castingBar.onScreen = 1;
-		castingBar.cast = 45;
-		castingBar.castmax = 45;
+		castingBar.cast = 30;
+		castingBar.castmax = 30;
 		this.used = 0;
 	}
 	}
@@ -2311,7 +2310,8 @@ var icelightning = {
 	cd: 0,
 	timeLeft: 0,
 	end: false,
-	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner, 14: treeWizz, 15: Thief, 16: ThiefA, 17: ThiefB},
+	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner, 14: treeWizz, 15: Thief, 16: ThiefA, 17: ThiefB,
+					18: Lavaman5, 19: Lavaman6, 20: Lavaman7, 21: Lavaman8, 22: Spawner2, 23: MasterThief, 24: Croc, 25: Croc2, 26: Mosquito, 27: Mosquito2, 28: Mosquito3, 29: Mosquito4},
 	tick: function(){
 		if(this.cd>0){
 			this.cd-=1;
@@ -2917,12 +2917,13 @@ var airearth = {
 	shoot: function(){
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
+			var currentAircd = air.cd;
 			this.cd = 300;
 			air.cd = 0;
 			earth.cd = 0;
 			air.shoot();
 			earth.shoot();
-			air.cd = 0;
+			air.cd = currentAircd;
 			earth.cd = currentEarthcd;
 			air.cast = 30;
 		}
@@ -3015,12 +3016,13 @@ var mysticearth = {
 	shoot: function(){
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
+			var currentMysticcd = mystic.cd;
 			this.cd = 300;
 			mystic.cd = 0;
 			earth.cd = 0;
 			mystic.shoot();
 			earth.shoot();
-			mystic.cd = 0;
+			mystic.cd = currentMysticcd;
 			earth.cd = currentEarthcd;
 			mystic.cast = 30;
 		}
@@ -4771,12 +4773,13 @@ var waterearth = {
 	shoot: function(){
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
+			var currentWatercd = water.cd;
 			this.cd = 1020;
 			water.cd = 0;
 			earth.cd = 0;
 			water.shoot();
 			earth.shoot();
-			water.cd = 0;
+			water.cd = currentWatercd;
 			earth.cd = currentEarthcd;
 			water.cast = 30;
 		}
@@ -6776,7 +6779,7 @@ var darklightningExplosion = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			if(this.frame/2 != Math.round(this.frame/2)){
@@ -6801,7 +6804,7 @@ var darklightningExplosion = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					if(this.chained == 0){
@@ -6864,15 +6867,10 @@ var darklightningExplosion2 = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
+			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -6889,7 +6887,7 @@ var darklightningExplosion2 = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					if(this.chained == 0){
@@ -6953,15 +6951,10 @@ var darklightningExplosion3 = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
+			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -6978,7 +6971,7 @@ var darklightningExplosion3 = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					if(this.chained == 0){
@@ -7042,15 +7035,10 @@ var darklightningExplosion4 = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
+			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -7067,7 +7055,7 @@ var darklightningExplosion4 = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					if(this.chained == 0){
@@ -7131,15 +7119,10 @@ var darklightningExplosion5 = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
+			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -7156,7 +7139,7 @@ var darklightningExplosion5 = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					player.currpower = player.power;
@@ -7213,15 +7196,10 @@ var darklightningExplosion6 = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
+			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -7238,7 +7216,7 @@ var darklightningExplosion6 = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					if(this.chained == 0){
@@ -7302,15 +7280,10 @@ var darklightningExplosion7 = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
+			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -7327,7 +7300,7 @@ var darklightningExplosion7 = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					if(this.chained == 0){
@@ -7391,15 +7364,10 @@ var darklightningExplosion8 = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
+			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -7416,7 +7384,7 @@ var darklightningExplosion8 = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					if(this.chained == 0){
@@ -7480,15 +7448,10 @@ var darklightningExplosion9 = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
+			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -7505,7 +7468,7 @@ var darklightningExplosion9 = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					if(this.chained == 0){
@@ -7569,15 +7532,10 @@ var darklightningExplosion10 = {
 	onScreen: 0,
 	chained: 0,
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
-				ctx.fillStyle = "white";
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
+			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -7594,7 +7552,7 @@ var darklightningExplosion10 = {
 			this.onScreen = 0;
 			this.chained = 0;
 		}
-		else if(this.onScreen ==1){
+		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
 				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					player.currpower = player.power;
@@ -7967,16 +7925,16 @@ var darkwater = {
 			ctx.globalAlpha = Alpha;
 			ctx.fillStyle = "#00FFCC";
 			if(this.hp == 3){
-				ctx.fillRect(player.x - player.width/2 + 4, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
-				ctx.fillRect(player.x - (player.width/2 - player.width/4)+5, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
-				ctx.fillRect(player.x - (player.width/2 - player.width/2) + 6, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
+				ctx.fillRect(player.x - player.width/2, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
+				ctx.fillRect(player.x - (player.width/2)+13, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
+				ctx.fillRect(player.x - (player.width/2) + 26, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
 			}
 			else if(this.hp == 2){
-				ctx.fillRect(player.x - player.width/2 + 4, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
-				ctx.fillRect(player.x - (player.width/2 - player.width/4)+5, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
+				ctx.fillRect(player.x - player.width/2, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
+				ctx.fillRect(player.x - (player.width/2)+13, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
 			}
-			else{
-				ctx.fillRect(player.x - player.width/2 + 4, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
+			else if(this.hp == 1){
+				ctx.fillRect(player.x - player.width/2, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
 			}
 			ctx.globalAlpha = Alpha;
 		}
@@ -7987,6 +7945,9 @@ var darkwater = {
 		}
 		if(this.cast > 0){
 			this.cast-=1;
+		}
+		if(this.hp < 0){
+			this.hp = 0;
 		}
 		if(this.hptimer == 20){
 			lowBomb.currentTime = 0;

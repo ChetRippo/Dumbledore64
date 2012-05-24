@@ -14,53 +14,51 @@
 
 */
 /*
-	Version 0.7.0 Changes(5/6/2012):
+	Version 0.7.5 Changes(5/19/2012):
 		-Bug fixes:
-			-Removed sound effect for thunderstorm because it is repetitive
-			-Made tree wizard's RootBlast move easier to see, especially in ice
-			-Made tree wizard's RootBlast have better collisions, specifically the 'right' part of it
-			-Fixed thunderstorm sound effect
-			-Fixed bug where you could hit enemies with lightning at the top of the map
-			-Got rid of underscores on global names
-		-Balancing:
-			-Reset global and personal high scores
-			-Lowered points in fire level:
-				-Regular enemies give 25 base
-				-Spawner enemies give 10 base
-			-Air spells redirect you when you hit the edge of the map
 		-Additions:
-			-New website is up: glassknuckle.com
-			-Added global high score board
-				-Submits when you hit 'back' from the high scores
-				-Only works if popups are allowed
-				-Saves top 5 score/name combos
-				-Changes don't show up until you refresh
-				-Cannot submit with buttons, must click
-			-Encrypted high score info
-			-High score submit button now only shows up when your score is greater than global score 5
-			-Added different text for getting global score, and added rainbow effect to it
-			-Added small player animation for when Zap Trap is in effect
-			-Added right-facing 'on damage' sprite for the player
-			-Added 3D Compatibility
-			-Added Dark Element
-				-Dark = Trap: Drop a death trap. Maximum of 7 on screen. Does +1 damage
-				-Dark + Dark = DeathBound: Charge for 1 second and release a wave of Spike Traps around your location. Does +1 damage
-				-Dark + Fire = Flame Trap: Drop a fire trap. Max of 5 on screen. Does +1 damage and creates a +1 damage explosion
-				-Dark + Ice = Ice Trap: Drop an ice trap. Max of 5 on screen. Freezes enemy for 3 seconds
-				-Dark + Earth = Moonlight: Fully heals player, but reduces vision for 5 seconds. 12 second recharge
-				-Dark + Lightning = Static Field: Drop a static field. Max of 2 on screen. When hit it releases a static field that can chain up to 5 times
-									All static fields deal +1 extra damage
-				-Dark + Air = Boosters: Drop a booster. Max of 5 on screen. Apply Dash effect to you when you walk over them.
-				-Dark + Mystic = Piercing Shots: Passively icreases your damage output. Casting the spell teleports you.
-				-Dark + Water = Shadow Cloak/Shield Charge: Applies a Shadow Cloak around you. Blocks 1 damage. 
-								Cast again to do a Shield Charge, increasing the shield's health. Can have a max of 3 health. 
-								Damages enemies on contact but loses 1 hp. Casting time of shield charge increases based on its hp.
+			-Added new boss: Master Thief
+				-Spawns in Jungle once 2 elements have been successfully stolen from you
+				-Thieves continue to spawn, and run to him with stolen elements
+				-Starts with the 2 elements you lost
+				-Can consume 2 elements for +2 hp
+				-Can dash at you:
+					-Speed boost is minimal but it can move diagonally
+					-If it hits a tree it falls over, creating a damaging shockwave
+				-On death:
+					-Swamp level begins
+					-Luck powerup: 100% drop rate
+			-Added swamp level
+				-Fallen trees give 8 movement speed
+				-Rest of map gives 4
+				-Crocodile enemy:
+					-Spawns after x time in the water
+					-Spawns x distance from you
+					-2 speed
+					-3 hp
+					-2 of them
+					-Different pics based on if water and distance
+				-Fallen trees turn into walkways, vertical ones randomly generate
+				-Corner walkways appear based on location
+				-Mosquito enemy:
+					-spawns quickly and respawns quickly
+					-4 of them
+					-always move at 4 speed, regardless of water
+					-When they hit you they steal 1hp and run away for 1 second, then continue
+				-Transition from jungle:
+					-Trees all fall down when boss dies
+					-When powerup animation finishes the water rises and fades in
+					-Continues raining until water is fully extended
+					-When water is extended the trees disappear
+					-After a couple seconds the walkways float up to the top
+			
 	TODO:
-		+Bugs/Other
+		-Bugs/Other
 			-High Priority:
 			-Maybe issues:
 				-obs always take 1 dmg, maybe an issue?
 				-casting bars appear on top of everything, maybe issue?
+				-Add boss timer for thief?
 			-Issues for later stuff:
 				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
 			-Current issues:
@@ -69,22 +67,19 @@
 				-Add globbly exploding on hitting you etc
 				-Improve globbly and meteor explosion effects
 				-Air in enemy ice is weird
+				-Add 3d icon?
 		-Optimize
-			-Arrays
+			-Don't loop through stuff that never will happen ex: trying to draw all obs first when it doesn do anything unless they fell
+			-Set all the globbly and meteor explosions to one function
+			-Make speeds a list of factors so that multiple things can effect it easier
 		-Map System
+		-Sandbox Mode
 		-Spells
 			-Summon (?)
 				-Minions
-		-More enemies and AI **NOTE: ADD ALL MOVING ENEMIES TO ICELIGHTNING ARRAY**
-			-Bosses:
-				-Swamp boss?
-				-Boss that uses stolen spells?
+		-More enemies and AI **NOTE: ADD ALL MOVING ENEMIES TO ICELIGHTNING ARRAY AND RESET ICE LIGHTNING**
 		-Terrain
-			-Swamp level, has boardwalks and lots of water that slows you if you go in it
-				-Crocodiles appear in water if you stay still
-				-Flying enemy who has no speed changes
-				-After Jungle?
-				-Slightly haunted? Bats?
+			-Tier 3: Desert, Graveyard
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
 */
@@ -133,12 +128,19 @@ addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
 // Environment
 var planted = false;
 var jungleAni = false;
+//put fallen trees on top
+var treeFall = 1;
 // Alpha
 var Alpha = 1;
 //StateTimer: for staying in levels with no boss
 var StateTimer = 0;
 //End of game pause
 var deathTimer = -1;
+//swampindex
+var Swindex = 0;
+var swampFront =false;
+var swampIndex = 0;
+var swampBoardindex = 0;
 //------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //Girraffix
 var WizzurdL = new Image();
@@ -173,6 +175,11 @@ var Wizzurd2 = new Image();
 Wizzurd2.src = "grafix/wizzurds/effects.wizard/nega.wiz.l1.png";
 var Wizzurd2R = new Image();
 Wizzurd2R.src = "grafix/wizzurds/effects.wizard/nega.wiz.r1.png";
+//Swimwizz
+var swimWizzL = new Image();
+swimWizzL.src = "grafix/wizzurds/effects.wizard/wiz.pizz.l.png";
+var swimWizzR = new Image();
+swimWizzR.src = "grafix/wizzurds/effects.wizard/wiz.pizz.r.png";
 //menu
 var menuBack = new Image();
 menuBack.src = "grafix/menu/menu.png";
@@ -205,6 +212,15 @@ var backGround2 = new Image();
 backGround2.src = "grafix/background/jungle1.png";
 var backGround3 = new Image();
 backGround3.src = "grafix/background/fire1.png";
+//swamp bkg
+var swampbkg1 = new Image();
+swampbkg1.src = "grafix/background/swampwater1.png";
+var swampbkg2 = new Image();
+swampbkg2.src = "grafix/background/swampwater2.png";
+var swampbkg3 = new Image();
+swampbkg3.src = "grafix/background/swampwater3.png";
+var swampbkg4 = new Image();
+swampbkg4.src = "grafix/background/swampwater4.png";
 //Jungle
 var Jtree1 = new Image();
 Jtree1.src = "grafix/objects/jungle.tree/sprout1.png";
@@ -222,6 +238,152 @@ var Jtree7 = new Image();
 Jtree7.src = "grafix/objects/jungle.tree/trunk.png";
 var JungleTrees = {0: Jtree1, 1: Jtree2, 2: Jtree3, 3: Jtree4, 4: Jtree5, 5: Jtree6, 6: Jtree7}; 
 var jungleIndex = 0;
+var shakeTL = new Image();
+shakeTL.src = "grafix/objects/jungle.tree/shake.l.png";
+var shakeTR = new Image();
+shakeTR.src = "grafix/objects/jungle.tree/shake.r.png";
+var FallR1 = new Image();
+FallR1.src = "grafix/objects/jungle.tree/fall.r1.png";
+var FallR2 = new Image();
+FallR2.src = "grafix/objects/jungle.tree/fall.r2.png";
+var FallR3 = new Image();
+FallR3.src = "grafix/objects/jungle.tree/fall.r3.png";
+var FallR4 = new Image();
+FallR4.src = "grafix/objects/jungle.tree/fall.r4.png";
+var FallR5 = new Image();
+FallR5.src = "grafix/objects/jungle.tree/fall.r5.png";
+var FallR6 = new Image();
+FallR6.src = "grafix/objects/jungle.tree/fall.r6.png";
+var FallR7 = new Image();
+FallR7.src = "grafix/objects/jungle.tree/fall.r7.png";
+var FallR8 = new Image();
+FallR8.src = "grafix/objects/jungle.tree/fall.r8.png";
+var FallR9 = new Image();
+FallR9.src = "grafix/objects/jungle.tree/fall.r9.png";
+var FallR10 = new Image();
+FallR10.src = "grafix/objects/jungle.tree/fall.r10.png";
+var FallR11 = new Image();
+FallR11.src = "grafix/objects/jungle.tree/fall.r11.png";
+var FallR12 = new Image();
+FallR12.src = "grafix/objects/jungle.tree/fall.r12.png";
+var FallR13 = new Image();
+FallR13.src = "grafix/objects/jungle.tree/fall.r13.png";
+var FallR14 = new Image();
+FallR14.src = "grafix/objects/jungle.tree/fall.r14.png";
+var FallR15 = new Image();
+FallR15.src = "grafix/objects/jungle.tree/fall.r15.png";
+var FallR16 = new Image();
+FallR16.src = "grafix/objects/jungle.tree/fall.rdown.png";
+//vibrate: 1 frame per side (2 loop) for 15frames,  then 3 until 1 secs up
+var FallingTreesR = {1: shakeTR, 2: shakeTL, 3: shakeTR, 4: shakeTL, 5: shakeTR, 6: shakeTL, 7: shakeTR, 8: shakeTL, 9: shakeTR, 10: shakeTL, 11: shakeTR, 12: shakeTL,
+					13: shakeTR, 14: shakeTL, 15: shakeTR, 16: shakeTL, 17: shakeTL, 18: shakeTL, 19: shakeTR, 20: shakeTR, 21: shakeTR, 22: shakeTL, 23: shakeTL, 24: shakeTL, 
+					25: shakeTR, 26: shakeTR, 27: shakeTR, 28: shakeTL, 29: shakeTL, 30: shakeTL, 31: FallR1, 32: FallR2, 33: FallR3, 34: FallR4, 35: FallR5, 36: FallR6, 37: FallR7,
+					38: FallR8, 39: FallR9, 40: FallR10, 41: FallR11, 42: FallR12, 43: FallR13, 44: FallR14, 45: FallR15, 46: FallR16}; 
+var FallL1 = new Image();
+FallL1.src = "grafix/objects/jungle.tree/fall.l1.png";
+var FallL2 = new Image();
+FallL2.src = "grafix/objects/jungle.tree/fall.l2.png";
+var FallL3 = new Image();
+FallL3.src = "grafix/objects/jungle.tree/fall.l3.png";
+var FallL4 = new Image();
+FallL4.src = "grafix/objects/jungle.tree/fall.l4.png";
+var FallL5 = new Image();
+FallL5.src = "grafix/objects/jungle.tree/fall.l5.png";
+var FallL6 = new Image();
+FallL6.src = "grafix/objects/jungle.tree/fall.l6.png";
+var FallL7 = new Image();
+FallL7.src = "grafix/objects/jungle.tree/fall.l7.png";
+var FallL8 = new Image();
+FallL8.src = "grafix/objects/jungle.tree/fall.l8.png";
+var FallL9 = new Image();
+FallL9.src = "grafix/objects/jungle.tree/fall.l9.png";
+var FallL10 = new Image();
+FallL10.src = "grafix/objects/jungle.tree/fall.l10.png";
+var FallL11 = new Image();
+FallL11.src = "grafix/objects/jungle.tree/fall.l11.png";
+var FallL12 = new Image();
+FallL12.src = "grafix/objects/jungle.tree/fall.l12.png";
+var FallL13 = new Image();
+FallL13.src = "grafix/objects/jungle.tree/fall.l13.png";
+var FallL14 = new Image();
+FallL14.src = "grafix/objects/jungle.tree/fall.l14.png";
+var FallL15 = new Image();
+FallL15.src = "grafix/objects/jungle.tree/fall.l15.png";
+var FallL16 = new Image();
+FallL16.src = "grafix/objects/jungle.tree/fall.ldown.png";
+var FallingTreesL = {1: shakeTL, 2: shakeTR, 3: shakeTL, 4: shakeTR, 5: shakeTL, 6: shakeTR, 7: shakeTL, 8: shakeTR, 9: shakeTL, 10: shakeTR, 11: shakeTL, 12: shakeTR,
+					13: shakeTL, 14: shakeTR, 15: shakeTL, 16: shakeTR, 17: shakeTR, 18: shakeTR, 19: shakeTL, 20: shakeTL, 21: shakeTL, 22: shakeTR, 23: shakeTR, 24: shakeTR, 
+					25: shakeTL, 26: shakeTL, 27: shakeTL, 28: shakeTR, 29: shakeTR, 30: shakeTR, 31: FallL1, 32: FallL2, 33: FallL3, 34: FallL4, 35: FallL5, 36: FallL6, 37: FallL7,
+					38: FallL8, 39: FallL9, 40: FallL10, 41: FallL11, 42: FallL12, 43: FallL13, 44: FallL14, 45: FallL15, 46: FallL16}; 
+//rain
+var rain1 = new Image();
+rain1.src = "grafix/background/rain/rain.1.png";
+var rain2 = new Image();
+rain2.src = "grafix/background/rain/rain.2.png";
+var rain3 = new Image();
+rain3.src = "grafix/background/rain/rain.3.png";
+var rain4 = new Image();
+rain4.src = "grafix/background/rain/rain.4.png";
+var rain5 = new Image();
+rain5.src = "grafix/background/rain/rain.5.png";
+var rain6 = new Image();
+rain6.src = "grafix/background/rain/rain.6.png";
+var rain7 = new Image();
+rain7.src = "grafix/background/rain/rain.7.png";
+var rain8 = new Image();
+rain8.src = "grafix/background/rain/rain.8.png";
+var rain9 = new Image();
+rain9.src = "grafix/background/rain/rain.9.png";
+var rain10 = new Image();
+rain10.src = "grafix/background/rain/rain.10.png";
+var RainPics = {1: rain1, 2: rain2, 3: rain3, 4: rain4, 5: rain5, 6: rain6, 7: rain7, 8: rain8, 9: rain9, 10: rain10};
+var rainIndex = 1;
+//Swamp Terrain
+var boardSq = new Image();
+boardSq.src = "grafix/objects/walkway/connect.sq.png";
+var boardSq1 = new Image();
+boardSq1.src = "grafix/objects/walkway/connect.1.png";
+var boardSq2 = new Image();
+boardSq2.src = "grafix/objects/walkway/connect.2.png";
+var boardSq3 = new Image();
+boardSq3.src = "grafix/objects/walkway/connect.3.png";
+var boardSq4 = new Image();
+boardSq4.src = "grafix/objects/walkway/connect.4.png";
+var boardSq5 = new Image();
+boardSq5.src = "grafix/objects/walkway/connect.5.png";
+var boardSq6 = new Image();
+boardSq6.src = "grafix/objects/walkway/connect.6.png";
+var SqBoards = {0: boardSq1, 1: boardSq2, 2: boardSq3, 3: boardSq4, 4: boardSq5, 5: boardSq6, 6: boardSq};
+var boardH = new Image();
+boardH.src = "grafix/objects/walkway/hor.sq.png";
+var boardV = new Image();
+boardV.src = "grafix/objects/walkway/vert.sq.png";
+var boardV1 = new Image();
+boardV1.src = "grafix/objects/walkway/vert.1.png";
+var boardV2 = new Image();
+boardV2.src = "grafix/objects/walkway/vert.2.png";
+var boardV3 = new Image();
+boardV3.src = "grafix/objects/walkway/vert.3.png";
+var boardV4 = new Image();
+boardV4.src = "grafix/objects/walkway/vert.4.png";
+var boardV5 = new Image();
+boardV5.src = "grafix/objects/walkway/vert.5.png";
+var boardV6 = new Image();
+boardV6.src = "grafix/objects/walkway/vert.6.png";
+var vertBoards = {0: boardV1, 1: boardV2, 2: boardV3, 3: boardV4, 4: boardV5, 5: boardV6, 6: boardV};
+var boardH1 = new Image();
+boardH1.src = "grafix/objects/walkway/hor.1.png";
+var boardH2 = new Image();
+boardH2.src = "grafix/objects/walkway/hor.2.png";
+var boardH3 = new Image();
+boardH3.src = "grafix/objects/walkway/hor.3.png";
+var boardH4 = new Image();
+boardH4.src = "grafix/objects/walkway/hor.4.png";
+var boardH5 = new Image();
+boardH5.src = "grafix/objects/walkway/hor.5.png";
+var boardH6 = new Image();
+boardH6.src = "grafix/objects/walkway/hor.6.png";
+var horBoards = {0: boardH1, 1: boardH2, 2: boardH3, 3: boardH4, 4: boardH5, 5: boardH6, 6: boardH};
 //Lavaman
 var Lavamanpic = new Image();
 Lavamanpic.src = "grafix/creatures/firesprite/firesprite.l1.png";
@@ -248,9 +410,34 @@ var HudgeL = new Image();
 HudgeL.src = "grafix/creatures/hudge/hudge.l1.png";
 var HudgeR = new Image();
 HudgeR.src = "grafix/creatures/hudge/hudge.r1.png";
+//Swudge
+var swudgeL = new Image();
+swudgeL.src = "grafix/creatures/swudge/swudge.l1.png";
+var swudgeR = new Image();
+swudgeR.src = "grafix/creatures/swudge/swudge.r1.png";
+var SwimswudgeL = new Image();
+SwimswudgeL.src = "grafix/creatures/swudge/swudge.swim.l1.png";
+var SwimswudgeR = new Image();
+SwimswudgeR.src = "grafix/creatures/swudge/swudge.swim.r1.png";
+var BoomswudgeL1 = new Image();
+BoomswudgeL1.src = "grafix/creatures/swudge/swudge.boom.l1.png";
+var BoomswudgeL2 = new Image();
+BoomswudgeL2.src = "grafix/creatures/swudge/swudge.boom.l2.png";
+var BoomswudgeL3 = new Image();
+BoomswudgeL3.src = "grafix/creatures/swudge/swudge.boom.l3.png";
+var BoomswudgeL = {1: BoomswudgeL1, 2: BoomswudgeL2, 3: BoomswudgeL3};
+var BoomswudgeR1 = new Image();
+BoomswudgeR1.src = "grafix/creatures/swudge/swudge.boom.r1.png";
+var BoomswudgeR2 = new Image();
+BoomswudgeR2.src = "grafix/creatures/swudge/swudge.boom.r2.png";
+var BoomswudgeR3 = new Image();
+BoomswudgeR3.src = "grafix/creatures/swudge/swudge.boom.r3.png";
+var BoomswudgeR = {1: BoomswudgeR1, 2: BoomswudgeR2, 3: BoomswudgeR3};
 //Enemy2
-var Pikkit = new Image();
-Pikkit.src = "grafix/creatures/pikkit/pikkit.l1.png";
+var PikkitL = new Image();
+PikkitL.src = "grafix/creatures/pikkit/pikkit.l1.png";
+var PikkitR = new Image();
+PikkitR.src = "grafix/creatures/pikkit/pikkit.r1.png";
 var humpDumpr1 = new Image();
 humpDumpr1.src = "grafix/creatures/humpdump/humpdump.r1.png";
 var humpDumpr2 = new Image();
@@ -271,13 +458,20 @@ var humpDumpd2 = new Image();
 humpDumpd2.src = "grafix/creatures/humpdump/humpdump.d2.png";
 var humpdList = {1: humpDumpd1, 2: humpDumpd2};
 //Thief
-var thiefPeek = new Image();
-thiefPeek.src = "grafix/creatures/sneak/peek.png";
-var thiefSneak = new Image();
-thiefSneak.src = "grafix/creatures/sneak/hidden.l1.png";
-var thiefVis = new Image();
-thiefVis.src = "grafix/creatures/sneak/visible.l1.png";
-var Thieves = {1: thiefPeek, 2: thiefSneak, 3: thiefVis};
+var thiefPeekL = new Image();
+thiefPeekL.src = "grafix/creatures/sneak/peek.l1.png";
+var thiefSneakL = new Image();
+thiefSneakL.src = "grafix/creatures/sneak/hidden.l1.png";
+var thiefVisL = new Image();
+thiefVisL.src = "grafix/creatures/sneak/visible.l1.png";
+var ThievesL = {1: thiefPeekL, 2: thiefSneakL, 3: thiefVisL};
+var thiefPeekR = new Image();
+thiefPeekR.src = "grafix/creatures/sneak/peek.r1.png";
+var thiefSneakR = new Image();
+thiefSneakR.src = "grafix/creatures/sneak/hidden.r1.png";
+var thiefVisR = new Image();
+thiefVisR.src = "grafix/creatures/sneak/visible.r1.png";
+var ThievesR = {1: thiefPeekR, 2: thiefSneakR, 3: thiefVisR};
 //Spawner
 var Splavaman = new Image();
 Splavaman.src = "grafix/creatures/lavaman/lavaman.l1.png";
@@ -309,6 +503,49 @@ var FbossTotemU = new Image();
 FbossTotemU.src = "grafix/creatures/dearyrocks/tote.u.png";
 var FbossTotemD = new Image();
 FbossTotemD.src = "grafix/creatures/dearyrocks/tote.d.png";
+//Master Thief
+var ThiefBossPicL = new Image();
+ThiefBossPicL.src = "grafix/creatures/raoulfdatheifbaus/raoulff.l1.png";
+var ThiefBossPicR = new Image();
+ThiefBossPicR.src = "grafix/creatures/raoulfdatheifbaus/raoulff.r1.png";
+var ThiefBossDashL = new Image();
+ThiefBossDashL.src = "grafix/creatures/raoulfdatheifbaus/dash.l1.png";
+var ThiefBossDashR = new Image();
+ThiefBossDashR.src = "grafix/creatures/raoulfdatheifbaus/dash.r1.png";
+var ThiefBossPrintL = new Image();
+ThiefBossPrintL.src = "grafix/creatures/raoulfdatheifbaus/footprint.l1.png";
+var ThiefBossPrintR = new Image();
+ThiefBossPrintR.src = "grafix/creatures/raoulfdatheifbaus/footprint.r1.png";
+var ThiefBossFlashPrintL = new Image();
+ThiefBossFlashPrintL.src = "grafix/creatures/raoulfdatheifbaus/flashprint.l1.png";
+var ThiefBossFlashPrintR = new Image();
+ThiefBossFlashPrintR.src = "grafix/creatures/raoulfdatheifbaus/flashprint.r1.png";
+//Crocodile
+var crocclosel1 = new Image();
+crocclosel1.src = "grafix/creatures/crawk/close.l1.png";
+var croccloser1 = new Image();
+croccloser1.src = "grafix/creatures/crawk/close.r1.png";
+var croceyesl1 = new Image();
+croceyesl1.src = "grafix/creatures/crawk/eyes.l1.png";
+var croceyesr1 = new Image();
+croceyesr1.src = "grafix/creatures/crawk/eyes.r1.png";
+var crocopenl1 = new Image();
+crocopenl1.src = "grafix/creatures/crawk/open.l1.png";
+var crocopenr1 = new Image();
+crocopenr1.src = "grafix/creatures/crawk/open.r1.png";
+var crocswimr1 = new Image();
+crocswimr1.src = "grafix/creatures/crawk/swim.r1.png";
+var crocswiml1 = new Image();
+crocswiml1.src = "grafix/creatures/crawk/swim.l1.png";
+//Mosquito
+var bugL1 = new Image();
+bugL1.src = "grafix/creatures/mosspeetoe/flight.l1.png";
+var bugL2 = new Image();
+bugL2.src = "grafix/creatures/mosspeetoe/flight.l2.png";
+var bugR1 = new Image();
+bugR1.src = "grafix/creatures/mosspeetoe/flight.r1.png";
+var bugR2 = new Image();
+bugR2.src = "grafix/creatures/mosspeetoe/flight.r2.png";
 //Monochrome Wizzurd
 var MonoWizzurd = new Image();
 MonoWizzurd.src = "grafix/wizzurds/effects.wizard/bw.wiz.l1.png";
@@ -323,6 +560,8 @@ var Firebox4 = new Image();
 Firebox4.src = "grafix/powers/fire/fire4.png";
 var Firebox5 = new Image();
 Firebox5.src = "grafix/powers/fire/fire5.png";
+var FireIcon = new Image();
+FireIcon.src = "grafix/powers/fire/fire.icon.png";
 var Fires = {1: Firebox, 2: Firebox2, 3: Firebox3, 4: Firebox4, 5: Firebox5};
 //Ice powerup
 var Icebox = new Image();
@@ -335,6 +574,8 @@ var Icebox4 = new Image();
 Icebox4.src = "grafix/powers/ice/ice4.png";
 var Icebox5 = new Image();
 Icebox5.src = "grafix/powers/ice/ice5.png";
+var IceIcon = new Image();
+IceIcon.src = "grafix/powers/ice/ice.icon.png";
 var Ices = {1: Icebox, 2: Icebox2, 3: Icebox3, 4: Icebox4, 5: Icebox5};
 //Earth powerup
 var Earthbox = new Image();
@@ -347,6 +588,8 @@ var Earthbox4 = new Image();
 Earthbox4.src = "grafix/powers/earth/earth4.png";
 var Earthbox5 = new Image();
 Earthbox5.src = "grafix/powers/earth/earth5.png";
+var EarthIcon = new Image();
+EarthIcon.src = "grafix/powers/earth/earth.icon.png";
 var Earths = {1: Earthbox, 2: Earthbox2, 3: Earthbox3, 4: Earthbox4, 5: Earthbox5};
 //lightning powerup
 var Thunderbox = new Image();
@@ -359,6 +602,8 @@ var Thunderbox4 = new Image();
 Thunderbox4.src = "grafix/powers/zap/zap4.png";
 var Thunderbox5 = new Image();
 Thunderbox5.src = "grafix/powers/zap/zap5.png";
+var LightningIcon = new Image();
+LightningIcon.src = "grafix/powers/zap/zap.icon.png";
 var Thunders = {1: Thunderbox, 2: Thunderbox2, 3: Thunderbox3, 4: Thunderbox4, 5: Thunderbox5};
 //Air powerup
 var Windbox = new Image();
@@ -371,6 +616,8 @@ var Windbox4 = new Image();
 Windbox4.src = "grafix/powers/air/air4.png";
 var Windbox5 = new Image();
 Windbox5.src = "grafix/powers/air/air5.png";
+var AirIcon = new Image();
+AirIcon.src = "grafix/powers/air/air.icon.png";
 var Winds = {1: Windbox, 2: Windbox2, 3: Windbox3, 4: Windbox4, 5: Windbox5};
 //Mystic powerup
 var Mysticbox = new Image();
@@ -383,6 +630,8 @@ var Mysticbox4 = new Image();
 Mysticbox4.src = "grafix/powers/mystic/mystic4.png";
 var Mysticbox5 = new Image();
 Mysticbox5.src = "grafix/powers/mystic/mystic5.png";
+var MysticIcon = new Image();
+MysticIcon.src = "grafix/powers/mystic/mystic.icon.png";
 var Mystics = {1: Mysticbox, 2: Mysticbox2, 3: Mysticbox3, 4: Mysticbox4, 5: Mysticbox5};
 //Water powerup
 var Waterbox = new Image();
@@ -395,6 +644,8 @@ var Waterbox4 = new Image();
 Waterbox4.src = "grafix/powers/water/water4.png";
 var Waterbox5 = new Image();
 Waterbox5.src = "grafix/powers/water/water5.png";
+var WaterIcon = new Image();
+WaterIcon.src = "grafix/powers/water/water.icon.png";
 var Waters = {1: Waterbox, 2: Waterbox2, 3: Waterbox3, 4: Waterbox4, 5: Waterbox5};
 //Dark powerup
 var Darkbox = new Image();
@@ -407,12 +658,16 @@ var Darkbox4 = new Image();
 Darkbox4.src = "grafix/powers/dark/dark4.png";
 var Darkbox5 = new Image();
 Darkbox5.src = "grafix/powers/dark/dark5.png";
+var DarkIcon = new Image();
+DarkIcon.src = "grafix/powers/dark/dark.icon.png";
 var Darks = {1: Darkbox, 2: Darkbox2, 3: Darkbox3, 4: Darkbox4, 5: Darkbox5};
 //Hp up
 var maxUP = new Image();
 maxUP.src = "grafix/powers/heartup/treeheart.png";
 var DragonmaxUP = new Image();
 DragonmaxUP.src = "grafix/powers/heartup/redheart.png";
+var ThiefLuckUP = new Image();
+ThiefLuckUP.src = "grafix/powers/heartup/blueheart.png";
 // Particle
 var particle1 = new Image();
 particle1.src = "grafix/effects/hpup/hpup1.png";
@@ -692,21 +947,24 @@ var longpulse = document.getElementsByTagName("audio")[24];
 var lowpulse = document.getElementsByTagName("audio")[25];
 var radiofailure = document.getElementsByTagName("audio")[26];
 var trailingbeeps = document.getElementsByTagName("audio")[27];
+var rainsound = document.getElementsByTagName("audio")[33];
 var AllSounds = {1: Beam, 2: Killed, 3: Pickup, 4: Explosion, 5: Frozen, 6: Fwave, 7: Thunder, 8: Wind, 9: onDmg, 10: SpawnerSpawn,
 				11: zapLaser, 12: Plucky, 13: multiLaser, 14: midBoop, 15: lowDouble, 16: lowBomb, 17: highDouble, 18: flatBoop, 19: fastbeepsLow, 20: fastbeepsHigh,
-				21: hum, 22: longfuzz, 23: longlaser, 24: longpew, 25: longpulse, 26: lowpulse, 27: radiofailure, 28: trailingbeeps};
+				21: hum, 22: longfuzz, 23: longlaser, 24: longpew, 25: longpulse, 26: lowpulse, 27: radiofailure, 28: trailingbeeps, 29: rainsound};
 //Music
 var Spells = document.getElementsByTagName("audio")[28];
 var OverwhelmedByGoblins = document.getElementsByTagName("audio")[29];
 var BadWizards = document.getElementsByTagName("audio")[30];
 var DumblebeatsNormal = document.getElementsByTagName("audio")[31];
 var CaseysQuest = document.getElementsByTagName("audio")[32];
-var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: DumblebeatsNormal, 5: CaseysQuest};
+var swampSong = document.getElementsByTagName("audio")[34];
+var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: DumblebeatsNormal, 5: CaseysQuest, 6: swampSong};
 for(M in AllMusic){
 	AllMusic[M].volume = 0.5;
 }
 DumblebeatsNormal.volume = 0.4;
 CaseysQuest.volume = 0.4;
+swampSong.volume = 0.4;
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 //reset by changing the strings, change in gameover() too
 var highscore1 = $.jStorage.get("v70highscore1");
@@ -734,6 +992,31 @@ if(!highscore5){
 		var highscore5 = 0;
 		$.jStorage.set("v70highscore5",highscore5);
 }
+var highscore6 = $.jStorage.get("v70highscore6");
+if(!highscore6){
+		var highscore6 = 0;
+		$.jStorage.set("v70highscore6",highscore6);
+}
+var highscore7 = $.jStorage.get("v70highscore7");
+if(!highscore7){
+		var highscore7 = 0;
+		$.jStorage.set("v70highscore7",highscore7);
+}
+var highscore8 = $.jStorage.get("v70highscore8");
+if(!highscore8){
+		var highscore8 = 0;
+		$.jStorage.set("v70highscore8",highscore8);
+}
+var highscore9 = $.jStorage.get("v70highscore9");
+if(!highscore9){
+		var highscore9 = 0;
+		$.jStorage.set("v70highscore9",highscore9);
+}
+var highscore10 = $.jStorage.get("v70highscore10");
+if(!highscore10){
+		var highscore10 = 0;
+		$.jStorage.set("v70highscore10",highscore10);
+}
 //Get Initials
 var hs1init = $.jStorage.get("v70hs1init");
 if(!hs1init){
@@ -759,6 +1042,31 @@ var hs5init = $.jStorage.get("v70hs5init");
 if(!hs5init){
 		var hs5init = "        ";
 		$.jStorage.set("v70hs5init",hs5init);
+}
+var hs6init = $.jStorage.get("v70hs6init");
+if(!hs6init){
+		var hs6init = "        ";
+		$.jStorage.set("v70hs6init",hs6init);
+}
+var hs7init = $.jStorage.get("v70hs7init");
+if(!hs7init){
+		var hs7init = "        ";
+		$.jStorage.set("v70hs7init",hs7init);
+}
+var hs8init = $.jStorage.get("v70hs8init");
+if(!hs8init){
+		var hs8init = "        ";
+		$.jStorage.set("v70hs8init",hs8init);
+}
+var hs9init = $.jStorage.get("v70hs9init");
+if(!hs9init){
+		var hs9init = "        ";
+		$.jStorage.set("v70hs9init",hs9init);
+}
+var hs10init = $.jStorage.get("v70hs10init");
+if(!hs10init){
+		var hs10init = "        ";
+		$.jStorage.set("v70hs10init",hs10init);
 }
 //Remove _ in initials
 var chars = hs1init.split('');
@@ -796,6 +1104,41 @@ for(C in chars){
 	}
 }
 hs5init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs6init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs6init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs7init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs7init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs8init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs8init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs9init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs9init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
+var chars = hs10init.split('');
+for(C in chars){
+	if(chars[C] == "_"){
+		chars[C] = " ";
+	}
+}
+hs10init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
 //Get options
 var dispCntrls = $.jStorage.get("cntrls");
 if(!dispCntrls){
@@ -876,7 +1219,7 @@ var Menu = {
 		ctx.strokeStyle = "white";
 		ctx.drawImage(Title, 0, 0);
 		ctx.drawImage(textmenu, 0, 0);
-		ctx.fillText("Version 0.7.0 Alpha: May 6 2012", this.x-3*this.width/3, this.y+8.75*this.height);
+		ctx.fillText("Version 0.7.5 Alpha: May 23 2012", this.x-3*this.width/3, this.y+8.75*this.height);
 		//Menu controls, keys is never called so copy pasted
 		if(keytimer > 0){
 			keytimer-=1;
@@ -1304,8 +1647,7 @@ var player = {
 	dir: "W",
 	LR: "",
 	zapIndex: 1,
-	ox: 0,
-	oy: 0,
+	lucky: false,
 	// Draws the player on the canvas when called
 	draw: function(){
 		// Flash if the player has been hit
@@ -1348,52 +1690,41 @@ var player = {
 		else{
 			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 				this.LR = "Left";
-				ctx.drawImage(WizzurdL, this.x - this.width / 2, this.y - this.height / 2);
+				//Check speed instead of water collision to use less system shit
+				if(this.speed ==4 && STATE == "Swamp"){
+					ctx.drawImage(swimWizzL, this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else{
+					ctx.drawImage(WizzurdL, this.x - this.width / 2, this.y - this.height / 2);
+				}
 			}
 			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-				ctx.drawImage(WizzurdR, this.x - this.width / 2, this.y - this.height / 2);
+				if(this.speed ==4 && STATE == "Swamp"){
+					ctx.drawImage(swimWizzR, this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else{
+					ctx.drawImage(WizzurdR, this.x - this.width / 2, this.y - this.height / 2);
+				}
 				this.LR = "Right";
 			}
 			else if(this.LR == "Left"){
-				ctx.drawImage(WizzurdL, this.x - this.width / 2, this.y - this.height / 2);
+				if(this.speed ==4 && STATE == "Swamp"){
+					ctx.drawImage(swimWizzL, this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else{
+					ctx.drawImage(WizzurdL, this.x - this.width / 2, this.y - this.height / 2);
+				}
 			}
 			else{
-				ctx.drawImage(WizzurdR, this.x - this.width / 2, this.y - this.height / 2);
+				if(this.speed ==4 && STATE == "Swamp"){
+					ctx.drawImage(swimWizzR, this.x - this.width / 2, this.y - this.height / 2);
+				}
+				else{
+					ctx.drawImage(WizzurdR, this.x - this.width / 2, this.y - this.height / 2);
+				}
 			}
 		}
-		ctx.fillStyle = "red";
-		if(this.hp == 6){
-			ctx.fillStyle = "yellow";
-			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
-		else if(this.hp == 5){
-			ctx.fillStyle = "yellow";
-			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
-		else if(this.hp == 4){
-			ctx.fillStyle = "yellow";
-			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
-		else if(this.hp == 3){
-			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/2) + 6, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
-		else if(this.hp == 2){
-			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-			ctx.fillRect(this.x - (this.width/2 - this.width/4)+5, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
-		else{
-			ctx.fillRect(this.x - this.width/2 + 4, this.y - this.height/2 - this.height/4, this.width/4, this.height/4);
-		}
+		hpBarDraw(this);
 	},
 	onhit: function(){
 		if(this.dirct > 0){
@@ -1461,6 +1792,48 @@ var player = {
 			else{
 				this.hp = this.hp;
 			}
+		}
+	},
+	//Handle speed, swamp only
+	speedHandle: function(){
+		for(O in obstacle1){
+			if(obstacle1[O].LR == "Right"){
+				obstacle1[O].x+=256;
+				obstacle1[O].y-=64;
+				obstacle1[O].width+=64;
+			}
+			else{
+				obstacle1[O].x-=256;
+				obstacle1[O].y-=64;
+				obstacle1[O].width+=64;
+			}
+			if(collision(this.dir, this, obstacle1[O])){
+				this.speed = 8;
+				var noswim = true;
+			}
+			if(obstacle1[O].LR == "Right"){
+				obstacle1[O].x-=256;
+				obstacle1[O].y+=64;
+				obstacle1[O].width-=64;
+			}
+			else{
+				obstacle1[O].x+=256;
+				obstacle1[O].y+=64;
+				obstacle1[O].width-=64;
+			}
+		}
+		for(O in obstacle2){
+			obstacle2[O].x+=32;
+			obstacle2[O].y+=obstacle2[O].height/2;
+			if(collision("D", this, obstacle2[O]) || collision("A", this, obstacle2[O]) || collision("S", this, obstacle2[O]) || collision("W", this, obstacle2[O])){
+				this.speed = 8;
+				var noswim = true;
+			}
+			obstacle2[O].x-=32;
+			obstacle2[O].y-=obstacle2[O].height/2;
+		}
+		if(!noswim){
+			this.speed = 4;
 		}
 	}
 };
@@ -1564,6 +1937,22 @@ var SorcCastingBar = {
 //------------------------------------------------- Collision Detection -------------------------------------------------------------//
 // Collision detection
 function collision(dir, one, two){
+	if(STATE == "Swamp"){
+		if((one == obstacle11 || one == obstacle12 || one == obstacle13 || one == obstacle14 || one == obstacle15 || one == obstacle16 || one == obstacle17 || one == obstacle18 || 
+			two == obstacle11 || two == obstacle12 || two == obstacle13 || two == obstacle14 || two == obstacle15 || two == obstacle16 || two == obstacle17 || two == obstacle18 ||
+			two == obstacle21 || two == obstacle22 || two == obstacle23 || two == obstacle24 || one == obstacle21 || one == obstacle22 || one == obstacle23 || one == obstacle24)
+			&& one != player && two != player && one != Croc && two != Croc && one != Croc2 && two != Croc2 && one != Enemy && two != Enemy && one != EnemyB && two != EnemyB){
+			return false;
+		}
+	}
+	if(STATE == "Jungle"){
+		if(one == obstacle11 || one == obstacle12 || one == obstacle13 || one == obstacle14 || one == obstacle15 || one == obstacle16 || one == obstacle17 || one == obstacle18 || 
+			two == obstacle11 || two == obstacle12 || two == obstacle13 || two == obstacle14 || two == obstacle15 || two == obstacle16 || two == obstacle17 || two == obstacle18){
+			if(one.fallIndex == 46 || two.fallIndex == 46){
+				return false;
+			}
+		}
+	}
 	if(dir == "W"){
 		if(one.y <= two.y + two.height/2){
 			return false;
@@ -1633,6 +2022,7 @@ function Hcontained(a, b){
 		return false;
 	}
 }
+//------------------------------------------------------ Other Functions ------------------------------------------------------------//
 //DiffDir for rootstrike
 function DiffDir(dir){
 	if(dir == "W"){
@@ -1698,6 +2088,69 @@ function DiffDir(dir){
 		else{
 			return "WD";
 		}
+	}
+}
+function hpBarDraw(H){
+	if(H.type == "MasterThief"){
+		var G = 4;
+	}
+	else{
+		var G = 2;
+	}
+	if(H.hp == 9){
+		ctx.fillStyle = "green";
+		ctx.fillRect(H.x - (H.width/G), H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 13, H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 26, H.y - H.height/G - H.height/4, 8, 8);
+	}
+	else if(H.hp == 8){
+		ctx.fillStyle = "green";
+		ctx.fillRect(H.x - (H.width/G), H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 13, H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillStyle = "yellow";
+		ctx.fillRect(H.x - (H.width/G) + 26, H.y - H.height/G - H.height/4, 8, 8);
+	}
+	else if(H.hp == 7){
+		ctx.fillStyle = "green";
+		ctx.fillRect(H.x - (H.width/G), H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillStyle = "yellow";
+		ctx.fillRect(H.x - (H.width/G) + 13, H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 26, H.y - H.height/G - H.height/4, 8, 8);
+	}
+	else if(H.hp == 6){
+		ctx.fillStyle = "yellow";
+		ctx.fillRect(H.x - (H.width/G), H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 13, H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 26, H.y - H.height/G - H.height/4, 8, 8);
+	}
+	else if(H.hp == 5){
+		ctx.fillStyle = "yellow";
+		ctx.fillRect(H.x - (H.width/G), H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 13, H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillStyle = "red";
+		ctx.fillRect(H.x - (H.width/G) + 26, H.y - H.height/G - H.height/4, 8, 8);
+	}
+	else if(H.hp == 4){
+		ctx.fillStyle = "yellow";
+		ctx.fillRect(H.x - (H.width/G), H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillStyle = "red";
+		ctx.fillRect(H.x - (H.width/G) + 13, H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 26, H.y - H.height/G - H.height/4, 8, 8);
+	}
+	else if(H.hp == 3){
+		ctx.fillStyle = "red";
+		ctx.fillRect(H.x - (H.width/G), H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 13, H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 26, H.y - H.height/G - H.height/4, 8, 8);
+	}
+	else if(H.hp == 2){
+		ctx.fillStyle = "red";
+		ctx.fillRect(H.x - (H.width/G), H.y - H.height/G - H.height/4, 8, 8);
+		ctx.fillRect(H.x - (H.width/G) + 13, H.y - H.height/G - H.height/4, 8, 8);
+	}
+	else{
+		ctx.fillStyle = "red";
+		ctx.fillRect(H.x - (H.width/G), H.y - H.height/G - H.height/4, 8, 8);
 	}
 }
 //------------------------------------------------- Point and Element Markers -------------------------------------------------------//
@@ -1832,7 +2285,7 @@ function drawtypeMarker(M){
 		else if(M.text == "+1"){
 			M.color = "#00FFFF";
 		}
-		else if(M.text == "+ Max Hp" || M.text == "+ Damage"){
+		else if(M.text == "+ Max Hp" || M.text == "+ Damage" || M.text == "+ Luck"){
 			M.color = colorz[colorNum];
 			colorNum++;
 			if(colorNum > 6){
@@ -1901,7 +2354,7 @@ if(ctx.globalAlpha == 1){
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
-	if(STATE != 1 && STATE != "Jungle" && STATE != "Scorched"){
+	if(STATE != 1 && STATE != "Jungle" && STATE != "Scorched" && STATE != "Swamp"){
 		ctx.drawImage(menuBack, 0, 0);
 	}
 	else if(STATE == 1){
@@ -1912,6 +2365,43 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 	}
 	else if(STATE == "Scorched"){
 		ctx.drawImage(backGround3, 0, 0);
+	}
+	else if(STATE == "Swamp"){
+		if(Swindex < 15){
+			ctx.drawImage(backGround2, 0, 0);
+			ctx.globalAlpha = Alpha*1/(60-swampIndex);
+			ctx.drawImage(swampbkg1, 0, 0 - swampIndex*2.4);
+			ctx.glonalAlpha = Alpha;
+			Swindex++;
+		}
+		else if(Swindex < 30){
+			ctx.drawImage(backGround2, 0, 0);
+			ctx.globalAlpha = Alpha*1/(60-swampIndex);
+			ctx.drawImage(swampbkg2, 0, 0- swampIndex*2.4);
+			ctx.glonalAlpha = Alpha;
+			Swindex++;
+		}
+		else if(Swindex < 45){
+			ctx.drawImage(backGround2, 0, 0);
+			ctx.globalAlpha = Alpha*1/(60-swampIndex);
+			ctx.drawImage(swampbkg3, 0, 0- swampIndex*2.4);
+			ctx.glonalAlpha = Alpha;
+			Swindex++;
+		}
+		else if(Swindex < 60){
+			ctx.drawImage(backGround2, 0, 0);
+			ctx.globalAlpha = Alpha*1/(60-swampIndex);
+			ctx.drawImage(swampbkg4, 0, 0- swampIndex*2.4);
+			ctx.glonalAlpha = Alpha;
+			Swindex++;
+		}
+		else{
+			ctx.drawImage(backGround2, 0, 0);
+			ctx.globalAlpha = Alpha*1/(60-swampIndex);
+			ctx.drawImage(swampbkg1, 0, 0- swampIndex*2.4);
+			ctx.glonalAlpha = Alpha;
+			Swindex=0;
+		}
 	}
 };
 //-------------------------------------------------- HUD and Spell Calculation ------------------------------------------------------//
@@ -2075,10 +2565,12 @@ function UI(){
 		spell = "Piercing Shots";
 	}
 	if((spell1 == "Dark" && spell2 == "Water") || (spell2 == "Dark" && spell1 == "Water")){
-		spell = "Shadow Cloak";
-	}
-	if(darkwater.onScreen == 1){
-		spell = "Shield Charge";
+		if(darkwater.onScreen == 1){
+			spell = "Shield Charge";
+		}
+		else{
+			spell = "Shadow Cloak";
+		}
 	}
 	if(spell1 == "Fire"){
 		spell1pic = Firebox;
@@ -2157,179 +2649,179 @@ function UI(){
 	// Recharge
 	if(spell == "Fire"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(fire.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(fire.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Inferno"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(fire2.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(fire2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Frozen Fireball"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(fireice.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(fireice.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Ice"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(ice.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(ice.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Absolute Zero"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(ice2.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(ice2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Earth Heal"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(earth.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(earth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Synthesis"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(earth2.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(earth2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Fire and Heal"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(fireheal.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(fireheal.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Ice and Heal"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(iceheal.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(iceheal.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Lightning"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(lightning.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(lightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Chain Lightning"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(lightning2.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(lightning2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Frozen Web"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(icelightning.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(icelightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Ragnarok"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(firelightning.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(firelightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Lightning and Heal"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(lightningheal.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(lightningheal.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Dash"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(air.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(air.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Twister"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(air2.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(air2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Fire Wave"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(airfire.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(airfire.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Maelstrom"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(airice.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(airice.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Dash and Heal"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(airearth.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(airearth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Thunderstorm"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(airlightning.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(airlightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Teleport"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Mirage"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(mystic2.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(mystic2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Teleport and Heal"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(mysticearth.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(mysticearth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Explosive Shots"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Ice Shots"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Conductive Shots"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Homing Shots"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Bubble Shield"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(water.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(water.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Heavy Bubble Shield"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(water.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(water.cd2/30) + "s", 32, 544);
 	}
 	else if(spell == "Explosive Orbs"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(waterfire.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(waterfire.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Frozen Orbs"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(waterfire.cd2/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(waterfire.cd2/30) + "s", 32, 544);
 	}
 	else if(spell == "Bubble Shield and Heal"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(waterearth.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(waterearth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Zap Trap"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(waterlightning.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(waterlightning.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Bubble Blast"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(waterair.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(waterair.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Bubblebeam"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Traps"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(dark.cd/30) + "s Traps: " + dark.inventory, 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(dark.cd/30) + "s Traps: " + dark.inventory, 32, 544);
 	}
 	else if(spell == "Deathbound"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(dark2.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(dark2.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Flame Trap"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(darkfire.cd/30) + "s Traps: " + darkfire.inventory, 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(darkfire.cd/30) + "s Traps: " + darkfire.inventory, 32, 544);
 	}
 	else if(spell == "Ice Trap"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(darkice.cd/30) + "s Traps: " + darkice.inventory, 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(darkice.cd/30) + "s Traps: " + darkice.inventory, 32, 544);
 	}
 	else if(spell == "Moonlight"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(darkearth.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(darkearth.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Static Field"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(darklightning.cd/30) + "s Traps: " + darklightning.inventory, 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(darklightning.cd/30) + "s Traps: " + darklightning.inventory, 32, 544);
 	}
 	else if(spell == "Boosters"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(darkair.cd/30) + "s Boosters: " + darkair.inventory, 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(darkair.cd/30) + "s Boosters: " + darkair.inventory, 32, 544);
 	}
 	else if(spell == "Piercing Shots"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(mystic.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(mystic.cd/30) + "s", 32, 544);
 	}
 	else if(spell == "Shadow Cloak" || spell == "Shield Charge"){
 		ctx.font = "16pt Arial";
-		ctx.fillText("Recharge: " + Math.round(darkwater.cd/30) + "s", 32, 544);
+		ctx.fillText("Recharge: " + Math.ceil(darkwater.cd/30) + "s", 32, 544);
 	}
 	ctx.fillStyle = "black";
 	if(darkearth.blackTimer > 0){
@@ -2367,6 +2859,35 @@ var keys = function(){
 		}
 	}
 	else if(player.hp>0){
+		//Fix enemy snap
+		player.x = Math.floor(player.x);
+		player.y = Math.floor(player.y);
+		if(Math.round(player.x/4) != player.x/4 && player.speed/4 == Math.round(player.speed/4)){
+			player.x+=1;
+			for(W in bubbleRotate){
+				if(bubbleRotate[W].onScreen == 1){
+					bubbleRotate[W].x+=1;
+				}
+			}
+			for(W in wairParticles){
+				if(wairParticles[W].onScreen == 1){
+					wairParticles[W].x+=1;
+				}
+			}
+		}
+		if(Math.round(player.y/4) != player.y/4 && player.speed/4 == Math.round(player.speed/4)){
+			player.y+=1;
+			for(W in bubbleRotate){
+				if(bubbleRotate[W].onScreen == 1){
+					bubbleRotate[W].y+=1;
+				}
+			}
+			for(W in wairParticles){
+				if(wairParticles[W].onScreen == 1){
+					wairParticles[W].y+=1;
+				}
+			}
+		}
 		var Up = true;
 		var Down = true;
 		var Left = true;
@@ -2389,30 +2910,38 @@ var keys = function(){
 			player.dir = "D";
 		}
 		if(87 in keysDown && player.dirct <= 0){
-			for(O in ObsList){
-				if(collision("W", player, ObsList[O])){
-					Up = false;
+			if(STATE != "Swamp"){
+				for(O in ObsList){
+					if(collision("W", player, ObsList[O])){
+						Up = false;
+					}
 				}
 			}
 		}
 		if(68 in keysDown && player.dirct <= 0){
-			for(O in ObsList){
-				if(collision("D", player, ObsList[O])){
-					Right = false;
+			if(STATE != "Swamp"){
+				for(O in ObsList){
+					if(collision("D", player, ObsList[O])){
+						Right = false;
+					}
 				}
 			}
 		}
 		if(83 in keysDown && player.dirct <= 0){
-			for(O in ObsList){
-				if(collision("S", player, ObsList[O])){
-					Down = false;
+			if(STATE != "Swamp"){
+				for(O in ObsList){
+					if(collision("S", player, ObsList[O])){
+						Down = false;
+					}
 				}
 			}
 		}
 		if(65 in keysDown && player.dirct <= 0){
-			for(O in ObsList){
-				if(collision("A", player, ObsList[O])){
-					Left = false;
+			if(STATE != "Swamp"){
+				for(O in ObsList){
+					if(collision("A", player, ObsList[O])){
+						Left = false;
+					}
 				}
 			}
 		}
@@ -2688,7 +3217,7 @@ var initsInd = 1;
 var hsColor = 1;
 var hsNum = 0;
 var wait = 0;
-var lowestScore = highscore5;
+var lowestScore = highscore10;
 function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.globalAlpha = 1;
@@ -2723,6 +3252,9 @@ function gameOver(){
 			}
 			if(8 in keysDown && wait <= 0){
 				initsInd--;
+				if(initsInd < 1){
+					initsInd = 1;
+				}
 				inits[initsInd] = "_";
 				wait = 4;
 			}
@@ -2732,8 +3264,26 @@ function gameOver(){
 		}
 	}
 	if(highscore1 < score && nu == 1){
-		$.jStorage.set("v70highscore5",highscore4);
-		$.jStorage.set("v70hs5init",hs4init);
+		highscore10 = highscore9;
+		hs10init = hs9init;
+		$.jStorage.set("v70highscore10",highscore9);
+		$.jStorage.set("v70hs10init",hs9init);
+		highscore9 = highscore8;
+		hs9init = hs8init;
+		$.jStorage.set("v70highscore9",highscore8);
+		$.jStorage.set("v70hs9init",hs8init);
+		highscore8 = highscore7;
+		hs8init = hs7init;
+		$.jStorage.set("v70highscore8",highscore7);
+		$.jStorage.set("v70hs8init",hs7init);
+		highscore7 = highscore6;
+		hs7init = hs6init;
+		$.jStorage.set("v70highscore7",highscore6);
+		$.jStorage.set("v70hs7init",hs6init);
+		highscore6 = highscore5;
+		hs6init = hs5init;
+		$.jStorage.set("v70highscore6",highscore5);
+		$.jStorage.set("v70hs6init",hs5init);
 		highscore5 = highscore4;
 		hs5init = hs4init;
 		$.jStorage.set("v70highscore4",highscore3);
@@ -2755,6 +3305,26 @@ function gameOver(){
 		hsNum = 1;
 	}
 	else if(highscore2 < score && nu == 1){
+		highscore10 = highscore9;
+		hs10init = hs9init;
+		$.jStorage.set("v70highscore10",highscore9);
+		$.jStorage.set("v70hs10init",hs9init);
+		highscore9 = highscore8;
+		hs9init = hs8init;
+		$.jStorage.set("v70highscore9",highscore8);
+		$.jStorage.set("v70hs9init",hs8init);
+		highscore8 = highscore7;
+		hs8init = hs7init;
+		$.jStorage.set("v70highscore8",highscore7);
+		$.jStorage.set("v70hs8init",hs7init);
+		highscore7 = highscore6;
+		hs7init = hs6init;
+		$.jStorage.set("v70highscore7",highscore6);
+		$.jStorage.set("v70hs7init",hs6init);
+		highscore6 = highscore5;
+		hs6init = hs5init;
+		$.jStorage.set("v70highscore6",highscore5);
+		$.jStorage.set("v70hs6init",hs5init);
 		$.jStorage.set("v70highscore5",highscore4);
 		highscore5 = highscore4;
 		$.jStorage.set("v70hs5init",hs4init);
@@ -2774,6 +3344,26 @@ function gameOver(){
 		hsNum = 2;
 	}
 	else if(highscore3 < score && nu == 1){
+		highscore10 = highscore9;
+		hs10init = hs9init;
+		$.jStorage.set("v70highscore10",highscore9);
+		$.jStorage.set("v70hs10init",hs9init);
+		highscore9 = highscore8;
+		hs9init = hs8init;
+		$.jStorage.set("v70highscore9",highscore8);
+		$.jStorage.set("v70hs9init",hs8init);
+		highscore8 = highscore7;
+		hs8init = hs7init;
+		$.jStorage.set("v70highscore8",highscore7);
+		$.jStorage.set("v70hs8init",hs7init);
+		highscore7 = highscore6;
+		hs7init = hs6init;
+		$.jStorage.set("v70highscore7",highscore6);
+		$.jStorage.set("v70hs7init",hs6init);
+		highscore6 = highscore5;
+		hs6init = hs5init;
+		$.jStorage.set("v70highscore6",highscore5);
+		$.jStorage.set("v70hs6init",hs5init);
 		$.jStorage.set("v70highscore5",highscore4);
 		highscore5 = highscore4;
 		$.jStorage.set("v70hs5init",hs4init);
@@ -2789,6 +3379,26 @@ function gameOver(){
 		hsNum = 3;
 	}
 	else if(highscore4 < score && nu == 1){
+		highscore10 = highscore9;
+		hs10init = hs9init;
+		$.jStorage.set("v70highscore10",highscore9);
+		$.jStorage.set("v70hs10init",hs9init);
+		highscore9 = highscore8;
+		hs9init = hs8init;
+		$.jStorage.set("v70highscore9",highscore8);
+		$.jStorage.set("v70hs9init",hs8init);
+		highscore8 = highscore7;
+		hs8init = hs7init;
+		$.jStorage.set("v70highscore8",highscore7);
+		$.jStorage.set("v70hs8init",hs7init);
+		highscore7 = highscore6;
+		hs7init = hs6init;
+		$.jStorage.set("v70highscore7",highscore6);
+		$.jStorage.set("v70hs7init",hs6init);
+		highscore6 = highscore5;
+		hs6init = hs5init;
+		$.jStorage.set("v70highscore6",highscore5);
+		$.jStorage.set("v70hs6init",hs5init);
 		$.jStorage.set("v70highscore5",highscore4);
 		highscore5 = highscore4;
 		$.jStorage.set("v70hs5init",hs4init);
@@ -2800,11 +3410,106 @@ function gameOver(){
 		hsNum = 4;
 	}
 	else if(highscore5 < score && nu == 1){
+		highscore10 = highscore9;
+		hs10init = hs9init;
+		$.jStorage.set("v70highscore10",highscore9);
+		$.jStorage.set("v70hs10init",hs9init);
+		highscore9 = highscore8;
+		hs9init = hs8init;
+		$.jStorage.set("v70highscore9",highscore8);
+		$.jStorage.set("v70hs9init",hs8init);
+		highscore8 = highscore7;
+		hs8init = hs7init;
+		$.jStorage.set("v70highscore8",highscore7);
+		$.jStorage.set("v70hs8init",hs7init);
+		highscore7 = highscore6;
+		hs7init = hs6init;
+		$.jStorage.set("v70highscore7",highscore6);
+		$.jStorage.set("v70hs7init",hs6init);
+		highscore6 = highscore5;
+		hs6init = hs5init;
+		$.jStorage.set("v70highscore6",highscore5);
+		$.jStorage.set("v70hs6init",hs5init);
 		$.jStorage.set("v70highscore5",score);
 		highscore5 = score;
 		hs = 1;
 		nu = 0;
 		hsNum = 5;
+	}
+	else if(highscore6 < score && nu == 1){
+		highscore10 = highscore9;
+		hs10init = hs9init;
+		$.jStorage.set("v70highscore10",highscore9);
+		$.jStorage.set("v70hs10init",hs9init);
+		highscore9 = highscore8;
+		hs9init = hs8init;
+		$.jStorage.set("v70highscore9",highscore8);
+		$.jStorage.set("v70hs9init",hs8init);
+		highscore8 = highscore7;
+		hs8init = hs7init;
+		$.jStorage.set("v70highscore8",highscore7);
+		$.jStorage.set("v70hs8init",hs7init);
+		highscore7 = highscore6;
+		hs7init = hs6init;
+		$.jStorage.set("v70highscore7",highscore6);
+		$.jStorage.set("v70hs7init",hs6init);
+		$.jStorage.set("v70highscore6",score);
+		highscore6 = score;
+		hs = 1;
+		nu = 0;
+		hsNum = 6;
+	}
+	else if(highscore7 < score && nu == 1){
+		highscore10 = highscore9;
+		hs10init = hs9init;
+		$.jStorage.set("v70highscore10",highscore9);
+		$.jStorage.set("v70hs10init",hs9init);
+		highscore9 = highscore8;
+		hs9init = hs8init;
+		$.jStorage.set("v70highscore9",highscore8);
+		$.jStorage.set("v70hs9init",hs8init);
+		highscore8 = highscore7;
+		hs8init = hs7init;
+		$.jStorage.set("v70highscore8",highscore7);
+		$.jStorage.set("v70hs8init",hs7init);
+		$.jStorage.set("v70highscore7",score);
+		highscore7 = score;
+		hs = 1;
+		nu = 0;
+		hsNum = 7;
+	}
+	else if(highscore8 < score && nu == 1){
+		highscore10 = highscore9;
+		hs10init = hs9init;
+		$.jStorage.set("v70highscore10",highscore9);
+		$.jStorage.set("v70hs10init",hs9init);
+		highscore9 = highscore8;
+		hs9init = hs8init;
+		$.jStorage.set("v70highscore9",highscore8);
+		$.jStorage.set("v70hs9init",hs8init);
+		$.jStorage.set("v70highscore8",score);
+		highscore8 = score;
+		hs = 1;
+		nu = 0;
+		hsNum = 8;
+	}
+	else if(highscore9 < score && nu == 1){
+		highscore10 = highscore9;
+		hs10init = hs9init;
+		$.jStorage.set("v70highscore10",highscore9);
+		$.jStorage.set("v70hs10init",hs9init);
+		$.jStorage.set("v70highscore9",score);
+		highscore9 = score;
+		hs = 1;
+		nu = 0;
+		hsNum = 9;
+	}
+	else if(highscore10 < score && nu == 1){
+		$.jStorage.set("v70highscore10",score);
+		highscore10 = score;
+		hs = 1;
+		nu = 0;
+		hsNum = 10;
 	}
 	if(hsNum == 1){
 		$.jStorage.set("v70hs1init",init);
@@ -2826,6 +3531,26 @@ function gameOver(){
 		$.jStorage.set("v70hs5init",init);
 		hs5init = init;
 	}
+	if(hsNum == 6){
+		$.jStorage.set("v70hs6init",init);
+		hs6init = init;
+	}
+	if(hsNum == 7){
+		$.jStorage.set("v70hs7init",init);
+		hs7init = init;
+	}
+	if(hsNum == 8){
+		$.jStorage.set("v70hs8init",init);
+		hs8init = init;
+	}
+	if(hsNum == 9){
+		$.jStorage.set("v70hs9init",init);
+		hs9init = init;
+	}
+	if(hsNum == 10){
+		$.jStorage.set("v70hs10init",init);
+		hs10init = init;
+	}
 	if(hs == 1){
 		ctx.fillStyle = colorz[hsColor];
 		hsColor++;
@@ -2833,7 +3558,7 @@ function gameOver(){
 			hsColor = 1;
 		}
 		ctx.font = "18pt Arial";
-		if(!(score > gscore5)){
+		if(!(score > gscore10)){
 			ctx.fillText("New High Score! Please Enter Your Name!", 176, 64);
 		}
 		else{
@@ -2844,7 +3569,7 @@ function gameOver(){
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	ctx.font = "18pt Arial";
-	ctx.fillText("Version 0.7.0 Alpha: May 6 2012", 244, 96);
+	ctx.fillText("Version 0.7.5 Alpha: May 23 2012", 244, 96);
 	ctx.fillText("Personal High Scores:", 128, 208);
 	ctx.fillText("Global High Scores:", 450, 208);
 	ctx.font = "16pt Arial";
@@ -2872,6 +3597,31 @@ function gameOver(){
 		ctx.fillStyle = colorz[hsColor];
 	}
 	ctx.fillText("5th: " + highscore5 + "    " + hs5init, 128, 368);
+	ctx.fillStyle = "white";
+	if(hsNum == 6){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("6th: " + highscore6 + "    " + hs6init, 128, 400);
+	ctx.fillStyle = "white";
+	if(hsNum == 7){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("7th: " + highscore7 + "    " + hs7init, 128, 432);
+	ctx.fillStyle = "white";
+	if(hsNum == 8){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("8th: " + highscore8 + "    " + hs8init, 128, 464);
+	ctx.fillStyle = "white";
+	if(hsNum == 9){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("9th: " + highscore9 + "    " + hs9init, 128, 496);
+	ctx.fillStyle = "white";
+	if(hsNum == 10){
+		ctx.fillStyle = colorz[hsColor];
+	}
+	ctx.fillText("10th: " + highscore10 + "    " + hs10init, 128, 528);
 	//Global scores
 	//remove underscores
 	var gnamez1 = gname1.split('');
@@ -2909,15 +3659,55 @@ function gameOver(){
 		}
 	}
 	gname5 = gnamez5[0] + gnamez5[1] + gnamez5[2] + gnamez5[3] + gnamez5[4] + gnamez5[5] + gnamez5[6] + gnamez5[7];
+	var gnamez6 = gname6.split('');
+	for(H in gnamez6){
+		if(gnamez6[H] == "_"){
+			gnamez6[H] = " ";
+		}
+	}
+	gname6 = gnamez6[0] + gnamez6[1] + gnamez6[2] + gnamez6[3] + gnamez6[4] + gnamez6[5] + gnamez6[6] + gnamez6[7];
+	var gnamez7 = gname7.split('');
+	for(H in gnamez7){
+		if(gnamez7[H] == "_"){
+			gnamez7[H] = " ";
+		}
+	}
+	gname7 = gnamez7[0] + gnamez7[1] + gnamez7[2] + gnamez7[3] + gnamez7[4] + gnamez7[5] + gnamez7[6] + gnamez7[7];
+	var gnamez8 = gname8.split('');
+	for(H in gnamez8){
+		if(gnamez8[H] == "_"){
+			gnamez8[H] = " ";
+		}
+	}
+	gname8 = gnamez8[0] + gnamez8[1] + gnamez8[2] + gnamez8[3] + gnamez8[4] + gnamez8[5] + gnamez8[6] + gnamez8[7];
+	var gnamez9 = gname9.split('');
+	for(H in gnamez9){
+		if(gnamez9[H] == "_"){
+			gnamez9[H] = " ";
+		}
+	}
+	gname9 = gnamez9[0] + gnamez9[1] + gnamez9[2] + gnamez9[3] + gnamez9[4] + gnamez9[5] + gnamez9[6] + gnamez9[7];
+	var gnamez10 = gname10.split('');
+	for(H in gnamez10){
+		if(gnamez10[H] == "_"){
+			gnamez10[H] = " ";
+		}
+	}
+	gname10 = gnamez10[0] + gnamez10[1] + gnamez10[2] + gnamez10[3] + gnamez10[4] + gnamez10[5] + gnamez10[6] + gnamez10[7];
 	ctx.fillStyle = "white";
 	ctx.fillText("1st: " + gscore1 + "    " + gname1, 450, 240);
 	ctx.fillText("2nd: " + gscore2 + "    " + gname2, 450, 272);
 	ctx.fillText("3rd: " + gscore3 + "    " + gname3, 450, 304);
 	ctx.fillText("4th: " + gscore4 + "    " + gname4, 450, 336);
 	ctx.fillText("5th: " + gscore5 + "    " + gname5, 450, 368);
+	ctx.fillText("6th: " + gscore6 + "    " + gname6, 450, 400);
+	ctx.fillText("7th: " + gscore7 + "    " + gname7, 450, 432);
+	ctx.fillText("8th: " + gscore8 + "    " + gname8, 450, 464);
+	ctx.fillText("9th: " + gscore9 + "    " + gname9, 450, 498);
+	ctx.fillText("10th: " + gscore10 + "    " + gname10, 450, 528);
 	ctx.fillStyle = "white";
 	ctx.font = "16pt Arial";
-	if(score > gscore5){
+	if(score > gscore10){
 		ctx.fillStyle = colorz[hsColor];
 		ctx.fillText("Submit", bx-8, by);
 	}
@@ -2933,7 +3723,7 @@ function gameOver(){
 		fastbeepsLow.currentTime=0;
 		fastbeepsLow.play();
 		if(STATE == 4){
-			if(score > gscore5){
+			if(score > gscore10){
 				phpwindow = window.open("submit.php?name=" + init + "&score=" + score + "&hash=" + Stacktrace(score));
 				setTimeout("phpwindow.close()",500);
 			}
@@ -3036,13 +3826,15 @@ if(Music==2 && STATE != "PAUSE"){
 		DumblebeatsNormal.pause();
 		Spells.pause();
 		BadWizards.pause();
+		swampSong.pause();
 		CaseysQuest.pause();
 		OverwhelmedByGoblins.play();
 	}
-	else if(STATE == "Jungle"){
+	else if(STATE == "Jungle" && MasterThief.onScreen == 0){
 		OverwhelmedByGoblins.pause();
 		Spells.pause();
 		BadWizards.pause();
+		swampSong.pause();
 		CaseysQuest.pause();
 		DumblebeatsNormal.play();
 	}
@@ -3050,6 +3842,7 @@ if(Music==2 && STATE != "PAUSE"){
 		OverwhelmedByGoblins.pause();
 		Spells.pause();
 		DumblebeatsNormal.pause();
+		swampSong.pause();
 		CaseysQuest.pause();
 		BadWizards.play();
 	}
@@ -3058,6 +3851,15 @@ if(Music==2 && STATE != "PAUSE"){
 		Spells.pause();
 		DumblebeatsNormal.pause();
 		CaseysQuest.pause();
+		swampSong.pause();
+		BadWizards.play();
+	}
+	else if(MasterThief.onScreen==1){
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.pause();
+		CaseysQuest.pause();
+		swampSong.pause();
 		BadWizards.play();
 	}
 	else if(STATE=="Scorched"){
@@ -3065,7 +3867,18 @@ if(Music==2 && STATE != "PAUSE"){
 		Spells.pause();
 		DumblebeatsNormal.pause();
 		BadWizards.pause();
+		swampSong.pause();
 		CaseysQuest.play();
+	}
+	else if(STATE=="Swamp"){
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.pause();
+		BadWizards.pause();
+		CaseysQuest.pause();
+		if(hpUp.x == -100){
+			swampSong.play();
+		}
 	}
 	else{
 		DumblebeatsNormal.pause();
@@ -3073,12 +3886,18 @@ if(Music==2 && STATE != "PAUSE"){
 		BadWizards.pause();
 		CaseysQuest.pause();
 		Spells.play();
+		swampSong.pause();
 	}
 }
 }
 //---------------------------------------------------------- Big-Bang ---------------------------------------------------------------//
 setInterval(function(){
-	clear();
+	if(STATE == "Swamp" && !swampFront){
+		clear();
+	}
+	else{
+		clear();
+	}
 	MusicPlayer();
 	if(STATE == 0){
 		Menu.draw();
@@ -3147,7 +3966,7 @@ setInterval(function(){
 			ctx.globalAlpha = Alpha;
 		}
 	}
-	else if(STATE == 1 || STATE == "Jungle" || STATE == "Scorched"){
+	else if(STATE == 1 || STATE == "Jungle" || STATE == "Scorched" || STATE == "Swamp"){
 		if(deathTimer > 0){
 			deathTimer-=1;
 		}
@@ -3156,7 +3975,7 @@ setInterval(function(){
 			STATE = 4;
 		}
 		else{
-			if(STATE == "Jungle" || STATE == "Scorched"){
+			if(STATE == "Scorched" || STATE == "Swamp"){
 				StateTimer+=1;
 			}
 			//enemy pts change
@@ -3169,6 +3988,27 @@ setInterval(function(){
 			ctx.globalAlpha = Alpha;
 			keys();
 			multiply();
+			//Must be on below trees
+			for(F in treeFallExplosions){
+				treeFallExplosions[F].draw();
+			}
+			//Fallen trees
+			for(O in allObs){
+				drawObstacle(allObs[O]);
+			}
+			treeFall = 2;
+			if(STATE == "Swamp" && swampFront){
+				player.draw();
+				if(swampIndex<60){
+					swampIndex++;
+				}
+				else{
+					swampFront = false;
+				}
+				ctx.globalAlpha = 0.25*Alpha;
+				ctx.drawImage(RainPics[rainIndex], 0, 0);
+				ctx.globalAlpha = Alpha;
+			}
 			if(player.hp <= 0){
 				if(nu != 1){
 					deathTimer = 30;
@@ -3176,10 +4016,32 @@ setInterval(function(){
 					typemarker3.y = player.y-player.height/2;
 					typemarker3.timeLeft = 30;
 					typemarker3.text = "Dead!";
+					earth.cast = -1;
+					earth2.cast = -1;
+					lightning.cast = -1;
+					lightning2.cast = -1;
+					firelightning.cast = -1;
+					dark2.cast = -1;
+					airice.cast = -1;
+					darkwater.cast = -1;
+					castingBar.x = player.x - player.width/2;
+					castingBar.y = player.y + player.height/2;
+					castingBar.width = player.width;
+					castingBar.height = player.height/4;
+					castingBar.width2 = 0;
+					castingBar.onScreen = 0;
+					castingBar.cast = -1;
+					castingBar.castmax = 0;
 				}
 				nu = 1;
 			}
 			else{
+				//speed handling (slow in water etc)
+				if(STATE == "Swamp"){
+					player.speedHandle();
+					speedhandle(Enemy);
+					speedhandle(EnemyB);
+				}
 				player.draw();
 				player.onhit();
 			}
@@ -3189,6 +4051,10 @@ setInterval(function(){
 				pickup(Boxes[B]);
 			}
 			RandEffect.draw();
+			RandEffect2.draw();
+			RandEffect3.draw();
+			RandEffect4.draw();
+			RandEffect5.draw();
 			for(H in hpParticles){
 				hpParticles[H].draw();
 				hpParticles[H].onHit();
@@ -3386,6 +4252,12 @@ setInterval(function(){
 			sLightning.draw();
 			sLightning.effect();
 			
+			sAir.draw();
+			sAir.effect();
+			for(F in treeFallExplosions){
+				treeFallExplosions[F].move();
+			}
+			
 			rootBlastW.draw();
 			rootBlastW.effect();
 			rootBlastA.draw();
@@ -3396,6 +4268,8 @@ setInterval(function(){
 			rootBlastD.effect();
 			LeafHeal.draw();
 			LeafHeal.move();
+			MThiefHeal.draw();
+			MThiefHeal.move();
 			for(R in roots1){
 				roots1[R].draw();
 			}
@@ -3409,6 +4283,7 @@ setInterval(function(){
 			Dragon.attack();
 			DragonR.attack();
 			DragonL.attack();
+			MasterThief.spawn();
 			for(D in Dragonflame){
 				Dragonflame[D].draw();
 				Dragonflame[D].effect();
@@ -3423,8 +4298,16 @@ setInterval(function(){
 				}
 				if(AllEnemies[E].type != "Dragon" && AllEnemies[E].type != "DragonL" && AllEnemies[E].type != "DragonR"){
 					AI(AllEnemies[E]);
-					spawn(AllEnemies[E]);
+					if(AllEnemies[E].type != "MasterThief"){
+						spawn(AllEnemies[E]);
+					}
 				}
+			}
+			Swudge.draw();
+			Swudge2.draw();
+			for(F in Feet){
+				Feet[F].draw();
+				Feet[F].tick();
 			}
 			for(M in BigMeteors){
 				MeteorAI(BigMeteors[M]);
@@ -3446,11 +4329,15 @@ setInterval(function(){
 			SmokeBomb.draw();
 			SmokeBombA.draw();
 			SmokeBombB.draw();
+			MSmokeBomb.draw();
 			
 			for(O in allObs){
-				drawObstacle(allObs[O]);
+				if(allObs[O].fallIndex < 46 || !allObs[O].fallIndex){
+					drawObstacle(allObs[O]);
+				}
 				obsTick(allObs[O]);
 			}
+			treeFall = 1;
 			if(STATE == "Jungle" && jungleAni == true){
 				for(O in obstacle1){
 					if(obstacle1[O].growTimer > 0){
@@ -3469,6 +4356,7 @@ setInterval(function(){
 			}
 			TwizEffect.draw();
 			DragonEffect2.draw();
+			MasterTEffect.draw();
 			
 			// black out screen
 			ctx.globalAlpha = 1;
@@ -3517,7 +4405,18 @@ setInterval(function(){
 			castingBar.tick();
 			TreecastingBar.draw();
 			SorcCastingBar.draw();
-
+			if(MasterThief.onScreen == 1 || (STATE == "Swamp" && hpUp.x != -100) || (STATE == "Swamp" && hpParticleSD.x != -100) || swampFront){
+				ctx.globalAlpha = 0.25*Alpha;
+				ctx.drawImage(RainPics[rainIndex], 0, 0);
+				rainIndex++;
+				if(rainIndex > 10){
+					rainIndex = 1;
+				}
+				if(vol == 2){
+					rainsound.play();
+				}
+				ctx.globalAlpha = Alpha;
+			}
 			if(dim == 2){
 				ctx.globalAlpha = Alpha*0.25;
 				ctx.fillStyle = "#FF0000";

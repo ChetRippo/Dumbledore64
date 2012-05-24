@@ -95,15 +95,20 @@ var lightning = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		this.hx = 400;
-		this.vx = -2000;
-		this.hy = player.y;
-		this.cd = 300;
-		this.onScreen = 1;
-		this.timeLeft = 120;
-		this.used = 0;
-	}
+		if(this.cd == 0){
+			this.hx = 400;
+			this.vx = -2000;
+			this.hy = player.y;
+			this.cd = 450;
+			this.onScreen = 1;
+			this.timeLeft = 120;
+			this.used = 0;
+			this.cast = 30;
+			cd = 30;
+			castingBar.onScreen = 1;
+			castingBar.cast = 30;
+			castingBar.castmax = 30;
+		}
 	}
 	
 };
@@ -211,7 +216,12 @@ var lightning2 = {
 	onScreen: 0,
 	
 	draw: function(){
-		if(this.onScreen == 1){
+		if(this.onScreen == 1 && this.cast == 0){
+			if(this.used == 0){
+				Thunder.currentTime=0;
+				Thunder.play();
+				this.used = 1;
+			}
 			if(this.hstate == 0){
 				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy);
 				this.hstate+=1;
@@ -244,7 +254,10 @@ var lightning2 = {
 		if(this.cd > 0){
 			this.cd-=1;
 		}
-		if(this.onScreen == 1){
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+		if(this.onScreen == 1 && this.cast == 0){
 			if(this.timeLeft <= 0){
 				this.onScreen = 0;
 				this.vx = -2000;
@@ -280,19 +293,19 @@ var lightning2 = {
 	},
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		Thunder.currentTime=0;
-		Thunder.play();
-		this.hx = 400;
-		this.vx = -2000;
-		this.hy = player.y;
-		this.cd = 1050;
-		this.onScreen = 1;
-		this.timeLeft = 240;
-	}
-	else{
-		return 0;
-	}
+		if(this.cd == 0){
+			this.hx = 400;
+			this.vx = -2000;
+			this.hy = player.y;
+			this.cd = 1050;
+			this.onScreen = 1;
+			this.timeLeft = 240;
+			this.cast = 30;
+			cd = 30;
+			castingBar.onScreen = 1;
+			castingBar.cast = 30;
+			castingBar.castmax = 30;
+		}
 	}
 	
 };

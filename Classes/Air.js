@@ -140,34 +140,42 @@ var air = {
 		if(this.isdark){
 			if(player.x > 740 && player.y < 48 && this.onScreen == 1){
 				player.dir = "A";
+				player.x-=64;
 				player.dirct = hptimer;
 			}
 			else if(player.x > 740 && player.y > 516 && this.onScreen == 1){
 				player.dir = "W";
+				player.y-=64;
 				player.dirct = hptimer;
 			}
 			else if(player.x < 48 && player.y > 516 && this.onScreen == 1){
 				player.dir = "D";
+				player.x+=64;
 				player.dirct = hptimer;
 			}
 			else if(player.x < 48 && player.y < 48 && this.onScreen == 1){
 				player.dir = "S";
+				player.y+=64;
 				player.dirct = hptimer;
 			}
-			else if(player.x > 772 && player.dir == "D" && this.onScreen == 1){
+			else if(player.x > 750 && player.dir == "D" && this.onScreen == 1){
 				player.dir = "W";
+				player.y-=64;
 				player.dirct = hptimer;
 			}
-			else if(player.x < 28 && player.dir == "A" && this.onScreen == 1){
+			else if(player.x < 60 && player.dir == "A" && this.onScreen == 1){
 				player.dir = "S";
+				player.y+=64;
 				player.dirct = hptimer;
 			}
-			else if(player.y > 548 && player.dir == "S" && this.onScreen == 1){
+			else if(player.y > 516 && player.dir == "S" && this.onScreen == 1){
 				player.dir = "D";
+				player.x+=64;
 				player.dirct = hptimer;
 			}
-			else if(player.y < 28 && player.dir == "W" && this.onScreen == 1){
+			else if(player.y < 60 && player.dir == "W" && this.onScreen == 1){
 				player.dir = "A";
+				player.x-=64;
 				player.dirct = hptimer;
 			}
 		}
@@ -318,24 +326,26 @@ var air2 = {
 			for(E in AllEnemies){
 				if(collision(player.dir, player, AllEnemies[E])){
 					onHit(AllEnemies[E]);
-					this.maxNum+=1;
-					if(typemarker5.x != -100 && typemarker6.x != -100){
-						typemarker4.text = "+ Time";
-						typemarker4.x = player.x-player.width*2;
-						typemarker4.y = player.y;
-						typemarker4.timeLeft = 20;
-					}
-					else if(typemarker6.x != -100){
-						typemarker5.text = "+ Time";
-						typemarker5.x = player.x-player.width*2;
-						typemarker5.y = player.y;
-						typemarker5.timeLeft = 20;
-					}
-					else{
-						typemarker6.text = "+ Time";
-						typemarker6.x = player.x-player.width*2;
-						typemarker6.y = player.y;
-						typemarker6.timeLeft = 20;
+					if(this.maxNum < 9){
+						this.maxNum+=1;
+						if(typemarker5.x != -100 && typemarker6.x != -100){
+							typemarker4.text = "+ Time";
+							typemarker4.x = player.x-player.width*2;
+							typemarker4.y = player.y;
+							typemarker4.timeLeft = 20;
+						}
+						else if(typemarker6.x != -100){
+							typemarker5.text = "+ Time";
+							typemarker5.x = player.x-player.width*2;
+							typemarker5.y = player.y;
+							typemarker5.timeLeft = 20;
+						}
+						else{
+							typemarker6.text = "+ Time";
+							typemarker6.x = player.x-player.width*2;
+							typemarker6.y = player.y;
+							typemarker6.timeLeft = 20;
+						}
 					}
 				}
 			}
