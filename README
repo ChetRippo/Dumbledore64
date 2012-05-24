@@ -14,53 +14,33 @@
   0. You just DO WHAT THE FUCK YOU WANT TO.
 
 
-	Version 0.7.0 Changes(5/6/2012):
+	Version 0.7.5 Changes(5/23/2012):
 		-Bug fixes:
-			-Removed sound effect for thunderstorm because it is repetitive
-			-Made tree wizard's RootBlast move easier to see, especially in ice
-			-Made tree wizard's RootBlast have better collisions, specifically the 'right' part of it
-			-Fixed thunderstorm sound effect
-			-Fixed bug where you could hit enemies with lightning at the top of the map
-			-Got rid of underscores on global names
-		-Balancing:
-			-Reset global and personal high scores
-			-Lowered points in fire level:
-				-Regular enemies give 25 base
-				-Spawner enemies give 10 base
-			-Air spells redirect you when you hit the edge of the map
 		-Additions:
-			-New website is up: glassknuckle.com
-			-Added global high score board
-				-Submits when you hit 'back' from the high scores
-				-Only works if popups are allowed
-				-Saves top 5 score/name combos
-				-Changes don't show up until you refresh
-				-Cannot submit with buttons, must click
-			-Encrypted high score info
-			-High score submit button now only shows up when your score is greater than global score 5
-			-Added different text for getting global score, and added rainbow effect to it
-			-Added small player animation for when Zap Trap is in effect
-			-Added right-facing 'on damage' sprite for the player
-			-Added 3D Compatibility
-			-Added Dark Element
-				-Dark = Trap: Drop a death trap. Maximum of 7 on screen. Does +1 damage
-				-Dark + Dark = DeathBound: Charge for 1 second and release a wave of Spike Traps around your location. Does +1 damage
-				-Dark + Fire = Flame Trap: Drop a fire trap. Max of 5 on screen. Does +1 damage and creates a +1 damage explosion
-				-Dark + Ice = Ice Trap: Drop an ice trap. Max of 5 on screen. Freezes enemy for 3 seconds
-				-Dark + Earth = Moonlight: Fully heals player, but reduces vision for 5 seconds. 12 second recharge
-				-Dark + Lightning = Static Field: Drop a static field. Max of 2 on screen. When hit it releases a static field that can chain up to 5 times
-									All static fields deal +1 extra damage
-				-Dark + Air = Boosters: Drop a booster. Max of 5 on screen. Apply Dash effect to you when you walk over them.
-				-Dark + Mystic = Piercing Shots: Passively icreases your damage output. Casting the spell teleports you.
-				-Dark + Water = Shadow Cloak/Shield Charge: Applies a Shadow Cloak around you. Blocks 1 damage. 
-								Cast again to do a Shield Charge, increasing the shield's health. Can have a max of 3 health. 
-								Damages enemies on contact but loses 1 hp. Casting time of shield charge increases based on its hp.
+			-Added new boss: Master Thief
+			-Added swamp level
+				-Fallen trees give 8 movement speed
+				-Rest of map gives 4
+				-Crocodile enemy
+				-Fallen trees turn into walkways, vertical ones randomly generate
+				-Corner walkways appear based on location
+				-Mosquito enemy
+					-When they hit you they steal 1hp and run away for 1 second, then continue
+				-Transition from jungle:
+					-Trees all fall down when boss dies
+					-When powerup animation finishes the water rises and fades in
+					-Continues raining until water is fully extended
+					-When water is extended the trees disappear
+					-After a couple seconds the walkways float up to the top
+				-Swudges: Giant hudges that explode added
+			
 	TODO:
-		+Bugs/Other
+		-Bugs/Other
 			-High Priority:
 			-Maybe issues:
 				-obs always take 1 dmg, maybe an issue?
 				-casting bars appear on top of everything, maybe issue?
+				-Add boss timer for thief?
 			-Issues for later stuff:
 				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
 			-Current issues:
@@ -69,22 +49,19 @@
 				-Add globbly exploding on hitting you etc
 				-Improve globbly and meteor explosion effects
 				-Air in enemy ice is weird
+				-Add 3d icon?
 		-Optimize
-			-Arrays
+			-Don't loop through stuff that never will happen ex: trying to draw all obs first when it doesn do anything unless they fell
+			-Set all the globbly and meteor explosions to one function
+			-Make speeds a list of factors so that multiple things can effect it easier
 		-Map System
+		-Sandbox Mode
 		-Spells
 			-Summon (?)
 				-Minions
-		-More enemies and AI **NOTE: ADD ALL MOVING ENEMIES TO ICELIGHTNING ARRAY**
-			-Bosses:
-				-Swamp boss?
-				-Boss that uses stolen spells?
+		-More enemies and AI **NOTE: ADD ALL MOVING ENEMIES TO ICELIGHTNING ARRAY AND RESET ICE LIGHTNING**
 		-Terrain
-			-Swamp level, has boardwalks and lots of water that slows you if you go in it
-				-Crocodiles appear in water if you stay still
-				-Flying enemy who has no speed changes
-				-After Jungle?
-				-Slightly haunted? Bats?
+			-Tier 3: Desert, Graveyard
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
 
