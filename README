@@ -1,5 +1,4 @@
-
-        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+/*        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                  Version 2, December 2004
 
  Copyright (C) 2012 Brett Davis <bdavis1000@gmail.com>
@@ -13,56 +12,62 @@
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 
-
-	Version 0.7.6 Changes(5/25/2012):
+*/
+/*
+	Version 0.8.0 Changes(6/7/2012):
 		-Bug fixes:
-			-Optimized some code, removed approximately 1000 lines
-			-Mystic no longer teleports you to the end of the map in the Swamp
-			-Fixed bug where water and dark were not available from random elements
+			-Fixed bug where after having a spell stolen fire, ice, dash, and bubble ring would not work
 		-Balancing:
-			-Increased radius of Swudge explosion
-			-Swudge explosion now hits enemies as well as the player
-			-Swudges now have a base respawn of 10 seconds instead of 3
-			-Globblies now spawn faster
+			-Reset High Scores
 		-Additions:
-			-Improved explosion effects on Swudges, Globblies, and Meteors slightly
-			-Added Version Info page (click on version number on main screen)	
-			-Replaced Sorceror, Thief, and MasterThief element icons with new cropped versions
-			-Encrypted and hid the score related variables
-			-Added right-facing graphic for lavamen
+			-3D mode now saves with scores- if you got a score in 3d mode, glasses are displayed next to the name
+			-Added new HP bar graphics
+			-Added new loading screen graphics (preloaded before script)
+			-Changed loading bar mechanics:
+				-Does not preload sounds due to size limit
+				-Does not preload all graphics, cache limit is approx. 425 images
+				-Extra content -should- be ready by the time game starts
+			-Added new graphics for the score
+			
 			
 	TODO:
 		-Bugs/Other
 			-High Priority:
 			-Maybe issues:
+				-Game effect freezes on thief boss kill sometimes (maybe fixed)
+				-Boosters not working?
 				-obs always take 1 dmg, maybe an issue?
-				-casting bars appear on top of everything, maybe issue?
-			-Issues for later stuff:
 				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
-			-Current issues:
 				-Ice spells make jungle trees transparent *Don't know how to fix yet*
+				-Loading bar doesn't preload everything (sounds, only 400 graphics, load graphics, etc)
 			-Backlog:
-				-Add globbly exploding on hitting you etc
-				-Air in enemy ice is weird
-				-Add 3d icon?
 		-Optimize
-			-Don't loop through stuff that never will happen ex: trying to draw all obs first when it doesn do anything unless they fell
 			-Make speeds a list of factors so that multiple things can effect it easier
+			-Remove division
 		-Map System
 		-Sandbox Mode
 		-Spells
 			-Summon (?)
 				-Minions
 		-More enemies and AI **NOTE: ADD ALL MOVING ENEMIES TO ICELIGHTNING ARRAY AND RESET ICE LIGHTNING**
+			-Boss that takes you to desert from fire level
+				-Genie
+				-On a timer (temporarily at least)
 		-Terrain
 			-Tier 3: Desert, Graveyard
+				-Desert level
+					-Heavy sandstorm winds occasionally
+					-Banditos?
+					-Cacti obstacles, maybe also enemies
+				-Graveyard level
+					-Day/night cycle
 			-Each level has its own element drops and enemies
 				Forest = Earth(rare), Water, Air?
 
 **********************************************************************************************************
 
 Have you ever wanted to be just like Dumbledore? Well now you can with this AMAZING wizard simulator!
-Originally released for the Nintendo 64, this lifetime classic is now available at your leisure! All you need to do is click on the html!
+Cast spells! Combine elements! Access many unique levels! With over 40 unique spells, Dumbledore64 is by far the best wizard simulator!
 It's that simple!
 
 
@@ -78,6 +83,3 @@ Spacebar: Use spell
 
 Q: Drop spell1
 E: Drop spell2
-
-How to play: Kill enemies! Acquire points! Pick up boxes to get elements! Each element corresponds to a unique spell,
-and you can combine up to 2 elements for MORE unique spells!!!
