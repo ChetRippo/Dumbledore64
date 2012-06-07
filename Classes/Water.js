@@ -5,7 +5,9 @@ var water = {
 	height: 16,
 	timeLeft: 0,
 	cd: 0,
+	cdTop: 1020,
 	cd2: 0,
+	cd2Top: 1020,
 	speed: 4,
 	onScreen: 0,
 	cast: 0,
@@ -47,7 +49,7 @@ var water = {
 			water12.shoot();
 			water13.shoot();
 			water14.shoot();
-			if(spell == "Heavy Bubble Shield" && water21.used == 0 && water22.used == 0 && water23.used == 0 && water24.used == 0){
+			if(spell == "Max Bubble Ring" && water21.used == 0 && water22.used == 0 && water23.used == 0 && water24.used == 0){
 				water21.shoot();
 				water22.shoot();
 				water23.shoot();
@@ -80,7 +82,7 @@ var water = {
 	},
 	// Spawn
 	shoot: function(){
-		if(this.cd == 0 && (spell == "Bubble Shield" || spell == "Bubble Shield and Heal")){
+		if(this.cd == 0 && (spell == "Bubble Ring" || spell == "Bubble+Heal")){
 			for(B in bubbleRotate){
 				bubbleRotate[B].onScreen = 0;
 				bubbleRotate[B].x = -100;
@@ -90,12 +92,15 @@ var water = {
 			this.x = player.x - 48;
 			this.y = player.y;
 			this.dir = "WD";
-			this.cd = 1020;
+			this.cd = this.cdTop;
 			this.onScreen = 1;
 			this.used = 0;
 			this.timeLeft = 600;
+			if(this.cast <0){
+				this.cast = 0;
+			}
 		}
-		else if(this.cd2 == 0 && spell == "Heavy Bubble Shield"){
+		else if(this.cd2 == 0 && spell == "Max Bubble Ring"){
 			for(B in bubbleRotate){
 				bubbleRotate[B].onScreen = 0;
 				bubbleRotate[B].x = -100;
@@ -105,10 +110,13 @@ var water = {
 			this.x = player.x - 48;
 			this.y = player.y;
 			this.dir = "WD";
-			this.cd2 = 1020;
+			this.cd2 = this.cd2Top;
 			this.onScreen = 1;
 			this.used = 0;
 			this.timeLeft = 600;
+			if(this.cast <0){
+				this.cast = 0;
+			}
 		}
 	}
 };

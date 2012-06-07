@@ -8,6 +8,7 @@ var mystic = {
 	x1: 0,
 	y1: 0,
 	cd: 0,
+	cdTop: 90,
 	onScreen: 0,
 	cast: 0,
 	mult: 6,
@@ -64,19 +65,21 @@ var mystic = {
 		if(player.dir == "W"){
 			this.x = player.x;
 			this.y = player.y - 32*this.mult;
-			for(Z in obstacle1){
-				if(contained(this, obstacle1[Z])){
-					this.mult2 +=1;
+			if(STATE != "Swamp"){
+				for(Z in obstacle1){
+					if(contained(this, obstacle1[Z])){
+						this.mult2 +=1;
+					}
 				}
-			}
-			for(Z in obstacle2){
-				if(contained(this, obstacle2[Z])){
-					this.mult2 +=1;
+				for(Z in obstacle2){
+					if(contained(this, obstacle2[Z])){
+						this.mult2 +=1;
+					}
 				}
-			}
-			for(Z in obstacle3){
-				if(contained(this, obstacle3[Z])){
-					this.mult2 +=1;
+				for(Z in obstacle3){
+					if(contained(this, obstacle3[Z])){
+						this.mult2 +=1;
+					}
 				}
 			}
 			this.y = this.y - 32*this.mult2;			
@@ -84,19 +87,21 @@ var mystic = {
 		else if(player.dir == "A"){
 			this.x = player.x-32*this.mult;
 			this.y = player.y;
-			for(Z in obstacle1){
-				if(contained(this, obstacle1[Z])){
-					this.mult2 +=1;
+			if(STATE != "Swamp"){
+				for(Z in obstacle1){
+					if(contained(this, obstacle1[Z])){
+						this.mult2 +=1;
+					}
 				}
-			}
-			for(Z in obstacle2){
-				if(contained(this, obstacle2[Z])){
-					this.mult2 +=1;
+				for(Z in obstacle2){
+					if(contained(this, obstacle2[Z])){
+						this.mult2 +=1;
+					}
 				}
-			}
-			for(Z in obstacle3){
-				if(contained(this, obstacle3[Z])){
-					this.mult2 +=1;
+				for(Z in obstacle3){
+					if(contained(this, obstacle3[Z])){
+						this.mult2 +=1;
+					}
 				}
 			}
 			this.x = this.x - 32*this.mult2;			
@@ -104,19 +109,21 @@ var mystic = {
 		else if(player.dir == "S"){
 			this.x = player.x;
 			this.y = player.y + 32*this.mult;
-			for(Z in obstacle1){
-				if(contained(this, obstacle1[Z])){
-					this.mult2 +=1;
+			if(STATE != "Swamp"){
+				for(Z in obstacle1){
+					if(contained(this, obstacle1[Z])){
+						this.mult2 +=1;
+					}
 				}
-			}
-			for(Z in obstacle2){
-				if(contained(this, obstacle2[Z])){
-					this.mult2 +=1;
+				for(Z in obstacle2){
+					if(contained(this, obstacle2[Z])){
+						this.mult2 +=1;
+					}
 				}
-			}
-			for(Z in obstacle3){
-				if(contained(this, obstacle3[Z])){
-					this.mult2 +=1;
+				for(Z in obstacle3){
+					if(contained(this, obstacle3[Z])){
+						this.mult2 +=1;
+					}
 				}
 			}
 			this.y = this.y + 32*this.mult2;			
@@ -124,19 +131,21 @@ var mystic = {
 		else if(player.dir == "D"){
 			this.x = player.x+32*this.mult;
 			this.y = player.y;
-			for(Z in obstacle1){
-				if(contained(this, obstacle1[Z])){
-					this.mult2 +=1;
+			if(STATE != "Swamp"){
+				for(Z in obstacle1){
+					if(contained(this, obstacle1[Z])){
+						this.mult2 +=1;
+					}
 				}
-			}
-			for(Z in obstacle2){
-				if(contained(this, obstacle2[Z])){
-					this.mult2 +=1;
+				for(Z in obstacle2){
+					if(contained(this, obstacle2[Z])){
+						this.mult2 +=1;
+					}
 				}
-			}
-			for(Z in obstacle3){
-				if(contained(this, obstacle3[Z])){
-					this.mult2 +=1;
+				for(Z in obstacle3){
+					if(contained(this, obstacle3[Z])){
+						this.mult2 +=1;
+					}
 				}
 			}
 			this.x = this.x + 32*this.mult2;	
@@ -182,7 +191,7 @@ var mystic = {
 		this.draaw = 1;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 90;
+		this.cd = this.cdTop;
 		this.loop = 2;
 		this.onScreen = 1;
 		this.used = 0;
@@ -199,6 +208,7 @@ var mystic2 = {
 	x1: 0,
 	y1: 0,
 	cd: 0,
+	cdTop: 450,
 	onScreen: 0,
 	cast: 0,
 	mult: 6,
@@ -365,7 +375,7 @@ var mystic2 = {
 		this.draaw = 1;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 450;
+		this.cd = this.cdTop;
 		this.loop = 2;
 		this.onScreen = 1;
 	}

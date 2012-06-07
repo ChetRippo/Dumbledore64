@@ -687,26 +687,31 @@ var RandomCube = {
 	height: 32,
 	timeLeft: 0,
 	index: 1,
+	index2: 1,
 	stage: "up",
 	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
 	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
 			this.timeLeft-=1;
+			this.index++;
 			if(this.stage == "up"){
-				this.index++;
+				this.index2++;
 			}
 			else{
-				this.index-=1;
+				this.index2-=1;
 			}
-			if(this.index == 6){
-				this.index = 5;
+			if(this.index2 == 6){
+				this.index2 = 5;
 				this.stage = "down";
 			}
-			else if(this.index == 0){
-				this.index = 1;
+			else if(this.index2 == 0){
+				this.index2 = 1;
 				this.stage = "up";
+			}
+			if(this.index > 8){
+				this.index = 1;
 			}
 		}
 		else{
@@ -717,7 +722,7 @@ var RandomCube = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -738,7 +743,7 @@ var RandomCube = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -812,26 +817,31 @@ var RandomCube2 = {
 	height: 32,
 	timeLeft: 0,
 	index: 1,
+	index2: 1,
 	stage: "up",
 	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
 	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
 			this.timeLeft-=1;
+			this.index++;
 			if(this.stage == "up"){
-				this.index++;
+				this.index2++;
 			}
 			else{
-				this.index-=1;
+				this.index2-=1;
 			}
-			if(this.index == 6){
-				this.index = 5;
+			if(this.index2 == 6){
+				this.index2 = 5;
 				this.stage = "down";
 			}
-			else if(this.index == 0){
-				this.index = 1;
+			else if(this.index2 == 0){
+				this.index2 = 1;
 				this.stage = "up";
+			}
+			if(this.index > 8){
+				this.index = 1;
 			}
 		}
 		else{
@@ -842,7 +852,7 @@ var RandomCube2 = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -863,7 +873,7 @@ var RandomCube2 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -937,26 +947,31 @@ var RandomCube3 = {
 	height: 32,
 	timeLeft: 0,
 	index: 1,
+	index2: 1,
 	stage: "up",
 	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
 	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
 			this.timeLeft-=1;
+			this.index++;
 			if(this.stage == "up"){
-				this.index++;
+				this.index2++;
 			}
 			else{
-				this.index-=1;
+				this.index2-=1;
 			}
-			if(this.index == 6){
-				this.index = 5;
+			if(this.index2 == 6){
+				this.index2 = 5;
 				this.stage = "down";
 			}
-			else if(this.index == 0){
-				this.index = 1;
+			else if(this.index2 == 0){
+				this.index2 = 1;
 				this.stage = "up";
+			}
+			if(this.index > 8){
+				this.index = 1;
 			}
 		}
 		else{
@@ -967,7 +982,7 @@ var RandomCube3 = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -988,7 +1003,7 @@ var RandomCube3 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1062,26 +1077,31 @@ var RandomCube4 = {
 	height: 32,
 	timeLeft: 0,
 	index: 1,
+	index2: 1,
 	stage: "up",
 	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
 	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
 			this.timeLeft-=1;
+			this.index++;
 			if(this.stage == "up"){
-				this.index++;
+				this.index2++;
 			}
 			else{
-				this.index-=1;
+				this.index2-=1;
 			}
-			if(this.index == 6){
-				this.index = 5;
+			if(this.index2 == 6){
+				this.index2 = 5;
 				this.stage = "down";
 			}
-			else if(this.index == 0){
-				this.index = 1;
+			else if(this.index2 == 0){
+				this.index2 = 1;
 				this.stage = "up";
+			}
+			if(this.index > 8){
+				this.index = 1;
 			}
 		}
 		else{
@@ -1092,7 +1112,7 @@ var RandomCube4 = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1113,7 +1133,7 @@ var RandomCube4 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1187,26 +1207,31 @@ var RandomCube5 = {
 	height: 32,
 	timeLeft: 0,
 	index: 1,
+	index2: 1,
 	stage: "up",
 	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
 	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index], this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
 			this.timeLeft-=1;
+			this.index++;
 			if(this.stage == "up"){
-				this.index++;
+				this.index2++;
 			}
 			else{
-				this.index-=1;
+				this.index2-=1;
 			}
-			if(this.index == 6){
-				this.index = 5;
+			if(this.index2 == 6){
+				this.index2 = 5;
 				this.stage = "down";
 			}
-			else if(this.index == 0){
-				this.index = 1;
+			else if(this.index2 == 0){
+				this.index2 = 1;
 				this.stage = "up";
+			}
+			if(this.index > 8){
+				this.index = 1;
 			}
 		}
 		else{
@@ -1217,7 +1242,7 @@ var RandomCube5 = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1238,7 +1263,7 @@ var RandomCube5 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 7) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1828,7 +1853,33 @@ function pickup(C){
 					marker.y = player.y;
 					marker.timeLeft = 20;
 				}
-				score+=50;
+				Error = Aes.Ctr.encrypt(parseInt(Aes.Ctr.decrypt(Error, ErrorLogs, 256))+50 + "", ErrorLogs, 256);
+			}
+			else{
+				if(prevSpellRC[1] == "N/A"){
+					prevSpellRC[1] = spell;
+				}
+				else if(prevSpellRC[2] == "N/A"){
+					prevSpellRC[2] = spell;
+				}
+				else if(prevSpellRC[3] == "N/A"){
+					prevSpellRC[3] = spell;
+				}
+				else if(prevSpellRC[4] == "N/A"){
+					prevSpellRC[4] = spell;
+				}
+				else if(prevSpellRC[5] == "N/A"){
+					prevSpellRC[5] = spell;
+				}
+				else if(prevSpellRC[6] == "N/A"){
+					prevSpellRC[6] = spell;
+				}
+				else if(prevSpellRC[7] == "N/A"){
+					prevSpellRC[7] = spell;
+				}
+				else if(prevSpellRC[8] == "N/A"){
+					prevSpellRC[8] = spell;
+				}
 			}
 		}
 		Pickup.currentTime=0;

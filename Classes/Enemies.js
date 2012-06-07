@@ -123,7 +123,20 @@ var EnemyA = {
 			}
 		}
 		if(STATE == "Scorched"){
-			ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else{
+				ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			}
 		}
 		else if(STATE == "Jungle"){
 			if(this.onTree == 1){
@@ -280,7 +293,20 @@ var EnemyC = {
 			}
 		}
 		if(STATE == "Scorched"){
-			ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			}
+			else{
+				ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			}
 		}
 		else if(STATE == "Jungle"){
 			if(this.onTree == 1){
@@ -327,9 +353,9 @@ var Tenemy = {
 	speed2: 4,
 	dirct: 0,
 	dir: "W",
-	respawn: 600,
+	respawn: 450,
 	pts: 50,
-	rp: 600,
+	rp: 450,
 	frame: 1,
 	onScreen: 0,
 	movement: false,
@@ -339,6 +365,9 @@ var Tenemy = {
 		this.frame+=1;
 		if(this.frame > 8){
 			this.frame = 1;
+		}
+		if(collision(this.dir, this, player)){
+			onHit(this);
 		}
 	}
 };
@@ -355,9 +384,9 @@ var TenemyA = {
 	speed2: 4,
 	dirct: 0,
 	dir: "W",
-	respawn: 2400,
+	respawn: 1200,
 	pts: 50,
-	rp: 600,
+	rp: 450,
 	frame: 1,
 	onScreen: 0,
 	movement: false,
@@ -367,6 +396,9 @@ var TenemyA = {
 		this.frame+=1;
 		if(this.frame > 8){
 			this.frame = 1;
+		}
+		if(collision(this.dir, this, player)){
+			onHit(this);
 		}
 	}
 };
@@ -384,9 +416,9 @@ var TenemyB = {
 	speed2: 4,
 	dirct: 0,
 	dir: "W",
-	respawn: 1800,
+	respawn: 900,
 	pts: 50,
-	rp: 600,
+	rp: 450,
 	frame: 1,
 	onScreen: 0,
 	movement: false,
@@ -396,6 +428,9 @@ var TenemyB = {
 		this.frame+=1;
 		if(this.frame > 8){
 			this.frame = 1;
+		}
+		if(collision(this.dir, this, player)){
+			onHit(this);
 		}
 	}
 };
@@ -420,7 +455,20 @@ var Lavaman = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 var Lavaman2 = {
@@ -442,7 +490,20 @@ var Lavaman2 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 var Lavaman3 = {
@@ -464,7 +525,20 @@ var Lavaman3 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 var Lavaman4 = {
@@ -486,7 +560,20 @@ var Lavaman4 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 // Lavaman
@@ -509,7 +596,20 @@ var Lavaman5 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 var Lavaman6 = {
@@ -531,7 +631,20 @@ var Lavaman6 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 var Lavaman7 = {
@@ -553,7 +666,20 @@ var Lavaman7 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 var Lavaman8 = {
@@ -575,7 +701,20 @@ var Lavaman8 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Lavamanpic, this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+		}
+		else{
+			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+		}
 	}
 };
 var lavamenlist = {1: Lavaman, 2: Lavaman2, 3: Lavaman3, 4: Lavaman4, 5: Lavaman5, 6: Lavaman6, 7: Lavaman7, 8: Lavaman8};
@@ -777,13 +916,13 @@ var Sorceror = {
 		}
 		hpBarDraw(this);
 		if(this.spell == "Fire"){
-			ctx.drawImage(Firebox, this.x-this.width/2, this.y - 60);
+			ctx.drawImage(FireIcon, this.x-this.width/4, this.y - 48);
 		}
 		if(this.spell == "Ice"){
-			ctx.drawImage(Icebox, this.x-this.width/2, this.y - 60);
+			ctx.drawImage(IceIcon, this.x-this.width/4, this.y - 48);
 		}
 		if(this.spell == "Lightning"){
-			ctx.drawImage(Thunderbox, this.x-this.width/2, this.y - 60);
+			ctx.drawImage(LightningIcon, this.x-this.width/4, this.y - 48);
 		}
 	},
 	cast: function(){
@@ -1062,7 +1201,7 @@ var Thief = {
 			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
-			this.respawn = 2;
+			this.respawn = this.rp;
 			this.x = 9000;
 			this.y = -9000;
 			this.movement = false;
@@ -1106,28 +1245,28 @@ var Thief = {
 		}
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
-				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(FireIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Ice"){
-				ctx.drawImage(Icebox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(IceIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Earth"){
-				ctx.drawImage(Earthbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(EarthIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Lightning"){
-				ctx.drawImage(Thunderbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(LightningIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Air"){
-				ctx.drawImage(Windbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(AirIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Mystic"){
-				ctx.drawImage(Mysticbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(MysticIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Water"){
-				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(WaterIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Dark"){
-				ctx.drawImage(Darkbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(DarkIcon, this.x-this.width/4, this.y - 48);
 			}
 		}
 		}
@@ -1140,10 +1279,62 @@ var Thief = {
 				if(spell2 != "N/A"){
 					this.spell = spell2;
 					spell2 = "N/A";
+					typemarker3.x = player.x-player.width/2 - 32;
+					typemarker3.y = player.y-player.height/2;
+					typemarker3.timeLeft = 30;
+					typemarker3.text = "Stolen!";
+					earth.cast = -1;
+					earth2.cast = -1;
+					lightning.cast = -1;
+					lightning2.cast = -1;
+					firelightning.cast = -1;
+					dark2.cast = -1;
+					airice.cast = -1;
+					darkwater.cast = -1;
+					ice.cast = -1;
+					fire.cast = -1;
+					air.cast = -1;
+					mystic.cast = -1;
+					water.cast = -1;
+					player.speed = 8;
+					castingBar.x = player.x - player.width/2;
+					castingBar.y = player.y + player.height/2;
+					castingBar.width = player.width;
+					castingBar.height = player.height/4;
+					castingBar.width2 = 0;
+					castingBar.onScreen = 0;
+					castingBar.cast = -1;
+					castingBar.castmax = 0;
 				}
 				else if(spell1 != "N/A"){
 					this.spell = spell1;
 					spell1 = "N/A";
+					typemarker3.x = player.x-player.width/2 - 32;
+					typemarker3.y = player.y-player.height/2;
+					typemarker3.timeLeft = 30;
+					typemarker3.text = "Stolen!";
+					earth.cast = -1;
+					earth2.cast = -1;
+					lightning.cast = -1;
+					lightning2.cast = -1;
+					firelightning.cast = -1;
+					dark2.cast = -1;
+					airice.cast = -1;
+					darkwater.cast = -1;
+					ice.cast = -1;
+					fire.cast = -1;
+					air.cast = -1;
+					mystic.cast = -1;
+					water.cast = -1;
+					player.speed = 8;
+					castingBar.x = player.x - player.width/2;
+					castingBar.y = player.y + player.height/2;
+					castingBar.width = player.width;
+					castingBar.height = player.height/4;
+					castingBar.width2 = 0;
+					castingBar.onScreen = 0;
+					castingBar.cast = -1;
+					castingBar.castmax = 0;
 				}
 				this.speed = 8;
 				this.speed2 = 4;
@@ -1210,7 +1401,7 @@ var ThiefA = {
 			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
-			this.respawn = 2;
+			this.respawn = this.rp;
 			this.x = 9000;
 			this.y = -9000;
 			this.movement = false;
@@ -1254,28 +1445,28 @@ var ThiefA = {
 		}
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
-				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(FireIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Ice"){
-				ctx.drawImage(Icebox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(IceIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Earth"){
-				ctx.drawImage(Earthbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(EarthIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Lightning"){
-				ctx.drawImage(Thunderbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(LightningIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Air"){
-				ctx.drawImage(Windbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(AirIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Mystic"){
-				ctx.drawImage(Mysticbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(MysticIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Water"){
-				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(WaterIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Dark"){
-				ctx.drawImage(Darkbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(DarkIcon, this.x-this.width/4, this.y - 48);
 			}
 		}
 		}
@@ -1288,10 +1479,62 @@ var ThiefA = {
 				if(spell2 != "N/A"){
 					this.spell = spell2;
 					spell2 = "N/A";
+					typemarker3.x = player.x-player.width/2 - 32;
+					typemarker3.y = player.y-player.height/2;
+					typemarker3.timeLeft = 30;
+					typemarker3.text = "Stolen!";
+					earth.cast = -1;
+					earth2.cast = -1;
+					lightning.cast = -1;
+					lightning2.cast = -1;
+					firelightning.cast = -1;
+					dark2.cast = -1;
+					airice.cast = -1;
+					ice.cast = -1;
+					fire.cast = -1;
+					air.cast = -1;
+					mystic.cast = -1;
+					water.cast = -1;
+					darkwater.cast = -1;
+					player.speed = 8;
+					castingBar.x = player.x - player.width/2;
+					castingBar.y = player.y + player.height/2;
+					castingBar.width = player.width;
+					castingBar.height = player.height/4;
+					castingBar.width2 = 0;
+					castingBar.onScreen = 0;
+					castingBar.cast = -1;
+					castingBar.castmax = 0;
 				}
 				else if(spell1 != "N/A"){
 					this.spell = spell1;
 					spell1 = "N/A";
+					typemarker3.x = player.x-player.width/2 - 32;
+					typemarker3.y = player.y-player.height/2;
+					typemarker3.timeLeft = 30;
+					typemarker3.text = "Stolen!";
+					earth.cast = -1;
+					earth2.cast = -1;
+					lightning.cast = -1;
+					lightning2.cast = -1;
+					firelightning.cast = -1;
+					dark2.cast = -1;
+					airice.cast = -1;
+					darkwater.cast = -1;
+					ice.cast = -1;
+					fire.cast = -1;
+					air.cast = -1;
+					mystic.cast = -1;
+					player.speed = 8;
+					water.cast = -1;
+					castingBar.x = player.x - player.width/2;
+					castingBar.y = player.y + player.height/2;
+					castingBar.width = player.width;
+					castingBar.height = player.height/4;
+					castingBar.width2 = 0;
+					castingBar.onScreen = 0;
+					castingBar.cast = -1;
+					castingBar.castmax = 0;
 				}
 				this.speed = 8;
 				this.speed2 = 4;
@@ -1358,7 +1601,7 @@ var ThiefB = {
 			this.onScreen = 0;
 			this.state = 1;
 			this.stole = false;
-			this.respawn = 2;
+			this.respawn = this.rp;
 			this.x = 9000;
 			this.y = -9000;
 			this.movement = false;
@@ -1402,28 +1645,28 @@ var ThiefB = {
 		}
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
-				ctx.drawImage(Firebox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(FireIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Ice"){
-				ctx.drawImage(Icebox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(IceIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Earth"){
-				ctx.drawImage(Earthbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(EarthIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Lightning"){
-				ctx.drawImage(Thunderbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(LightningIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Air"){
-				ctx.drawImage(Windbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(AirIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Mystic"){
-				ctx.drawImage(Mysticbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(MysticIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Water"){
-				ctx.drawImage(Waterbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(WaterIcon, this.x-this.width/4, this.y - 48);
 			}
 			if(this.spell == "Dark"){
-				ctx.drawImage(Darkbox, this.x-this.width/2, this.y - 48);
+				ctx.drawImage(DarkIcon, this.x-this.width/4, this.y - 48);
 			}
 		}
 		}
@@ -1436,10 +1679,62 @@ var ThiefB = {
 				if(spell2 != "N/A"){
 					this.spell = spell2;
 					spell2 = "N/A";
+					typemarker3.x = player.x-player.width/2 - 32;
+					typemarker3.y = player.y-player.height/2;
+					typemarker3.timeLeft = 30;
+					typemarker3.text = "Stolen!";
+					earth.cast = -1;
+					earth2.cast = -1;
+					lightning.cast = -1;
+					lightning2.cast = -1;
+					firelightning.cast = -1;
+					dark2.cast = -1;
+					airice.cast = -1;
+					ice.cast = -1;
+					fire.cast = -1;
+					air.cast = -1;
+					mystic.cast = -1;
+					water.cast = -1;
+					darkwater.cast = -1;
+					player.speed = 8;
+					castingBar.x = player.x - player.width/2;
+					castingBar.y = player.y + player.height/2;
+					castingBar.width = player.width;
+					castingBar.height = player.height/4;
+					castingBar.width2 = 0;
+					castingBar.onScreen = 0;
+					castingBar.cast = -1;
+					castingBar.castmax = 0;
 				}
 				else if(spell1 != "N/A"){
 					this.spell = spell1;
 					spell1 = "N/A";
+					typemarker3.x = player.x-player.width/2 - 32;
+					typemarker3.y = player.y-player.height/2;
+					typemarker3.timeLeft = 30;
+					typemarker3.text = "Stolen!";
+					earth.cast = -1;
+					earth2.cast = -1;
+					lightning.cast = -1;
+					lightning2.cast = -1;
+					firelightning.cast = -1;
+					ice.cast = -1;
+					fire.cast = -1;
+					air.cast = -1;
+					mystic.cast = -1;
+					water.cast = -1;
+					dark2.cast = -1;
+					airice.cast = -1;
+					darkwater.cast = -1;
+					player.speed = 8;
+					castingBar.x = player.x - player.width/2;
+					castingBar.y = player.y + player.height/2;
+					castingBar.width = player.width;
+					castingBar.height = player.height/4;
+					castingBar.width2 = 0;
+					castingBar.onScreen = 0;
+					castingBar.cast = -1;
+					castingBar.castmax = 0;
 				}
 				this.speed = 8;
 				this.speed2 = 4;
@@ -1830,6 +2125,8 @@ function onHit(E){
 			}
 		}
 		if(STATE == "Swamp" && E.bug == 0){
+			//Make rarer
+			E.rp = 300;
 			if(Swudge.onScreen){
 				Swudge2.x = E.x;
 				Swudge2.y = E.y;
@@ -2225,28 +2522,28 @@ function onHit(E){
 			}
 			if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 				marker4.points = E.pts;
-				marker4.mult = multiplier;
+				marker4.mult = staticm;
 				marker4.x = E.x;
 				marker4.y = E.y;
 				marker4.timeLeft = 20;
 			}
 			else if(marker.x != -100 && marker2.x != -100){
 				marker3.points = "" + E.pts;
-				marker3.mult = multiplier;
+				marker3.mult = staticm;
 				marker3.x = E.x;
 				marker3.y = E.y;
 				marker3.timeLeft = 20;
 			}
 			else if(marker.x != -100){
 				marker2.points = "" + E.pts;
-				marker2.mult = multiplier;
+				marker2.mult = staticm;
 				marker2.x = E.x;
 				marker2.y = E.y;
 				marker2.timeLeft = 20;
 			}
 			else{
 				marker.points = "" + E.pts;
-				marker.mult = multiplier;
+				marker.mult = staticm;
 				marker.x = E.x;
 				marker.y = E.y;
 				marker.timeLeft = 20;
@@ -2315,28 +2612,28 @@ function onHit(E){
 		}
 		if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 			marker4.points = E.pts;
-			marker4.mult = multiplier;
+			marker4.mult = staticm;
 			marker4.x = E.x;
 			marker4.y = E.y;
 			marker4.timeLeft = 20;
 		}
 		else if(marker.x != -100 && marker2.x != -100){
 			marker3.points = "" + E.pts;
-			marker3.mult = multiplier;
+			marker3.mult = staticm;
 			marker3.x = E.x;
 			marker3.y = E.y;
 			marker3.timeLeft = 20;
 		}
 		else if(marker.x != -100){
 			marker2.points = "" + E.pts;
-			marker2.mult = multiplier;
+			marker2.mult = staticm;
 			marker2.x = E.x;
 			marker2.y = E.y;
 			marker2.timeLeft = 20;
 		}
 		else{
 			marker.points = "" + E.pts;
-			marker.mult = multiplier;
+			marker.mult = staticm;
 			marker.x = E.x;
 			marker.y = E.y;
 			marker.timeLeft = 20;
@@ -2346,8 +2643,8 @@ function onHit(E){
 		E.respawn = E.rp;
 		E.movement = false;
 		E.onScreen = 0;
-		score+=(E.pts * multiplier);
-		multiplier++;
+		Error = Aes.Ctr.encrypt(parseInt(Aes.Ctr.decrypt(Error, ErrorLogs, 256))+(E.pts * staticm) + "", ErrorLogs, 256);
+		staticm++;
 		multtimer = 30;
 		//Makes it harder
 		if(StateTimer/30 > 60){
@@ -2673,6 +2970,7 @@ function spawn(E){
 					E.movement=false;
 					E.hp = 2;
 					E.counter = 60;
+					E.hptimer = 0;
 				}
 				else{
 					E.respawn+=1;

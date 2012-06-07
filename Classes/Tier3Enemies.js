@@ -906,63 +906,57 @@ var MasterThief = {
 			if(this.hp > 3){
 				hpBarDraw(this);
 			}
-			if(MThiefHeal.onScreen == 0){
-				var Q = 32;
-			}
-			else{
-				var Q = 2 + MThiefHeal.timeLeft*2;
-			}
 			if(this.hp > 3){
 				if(this.spell1 != "N/A"){
 					if(this.spell1 == "Fire"){
-						ctx.drawImage(Firebox, this.x-this.width/3, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(FireIcon, this.x-this.width/4, this.y - this.height + 16);
 					}
 					if(this.spell1 == "Ice"){
-						ctx.drawImage(Icebox, this.x-this.width/3, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(IceIcon, this.x-this.width/4, this.y - this.height + 16);
 					}
 					if(this.spell1 == "Earth"){
-						ctx.drawImage(Earthbox, this.x-this.width/3, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(EarthIcon, this.x-this.width/4, this.y - this.height + 16);
 					}
 					if(this.spell1 == "Lightning"){
-						ctx.drawImage(Thunderbox, this.x-this.width/3, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(LightningIcon, this.x-this.width/4, this.y - this.height + 16);
 					}
 					if(this.spell1 == "Air"){
-						ctx.drawImage(Windbox, this.x-this.width/3, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(AirIcon, this.x-this.width/4, this.y - this.height + 16);
 					}
 					if(this.spell1 == "Mystic"){
-						ctx.drawImage(Mysticbox, this.x-this.width/3, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(MysticIcon, this.x-this.width/4, this.y - this.height + 16);
 					}
 					if(this.spell1 == "Water"){
-						ctx.drawImage(Waterbox, this.x-this.width/3, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(WaterIcon, this.x-this.width/4, this.y - this.height + 16);
 					}
 					if(this.spell1 == "Dark"){
-						ctx.drawImage(Darkbox, this.x-this.width/3, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(DarkIcon, this.x-this.width/4, this.y - this.height + 16);
 					}
 				}
 				if(this.spell2 != "N/A"){
 					if(this.spell2 == "Fire"){
-						ctx.drawImage(Firebox, this.x-this.width/8, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(FireIcon, this.x-this.width/9, this.y - this.height + 16);
 					}
 					if(this.spell2 == "Ice"){
-						ctx.drawImage(Icebox, this.x-this.width/8, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(IceIcon, this.x-this.width/9, this.y - this.height + 16);
 					}
 					if(this.spell2 == "Earth"){
-						ctx.drawImage(Earthbox, this.x-this.width/8, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(EarthIcon, this.x-this.width/9, this.y - this.height + 16);
 					}
 					if(this.spell2 == "Lightning"){
-						ctx.drawImage(Thunderbox, this.x-this.width/8, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(LightningIcon, this.x-this.width/9, this.y - this.height + 16);
 					}
 					if(this.spell2 == "Air"){
-						ctx.drawImage(Windbox, this.x-this.width/8, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(AirIcon, this.x-this.width/9, this.y - this.height + 16);
 					}
 					if(this.spell2 == "Mystic"){
-						ctx.drawImage(Mysticbox, this.x-this.width/8, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(MysticIcon, this.x-this.width/9, this.y - this.height + 16);
 					}
 					if(this.spell2 == "Water"){
-						ctx.drawImage(Waterbox, this.x-this.width/8, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(WaterIcon, this.x-this.width/9, this.y - this.height + 16);
 					}
 					if(this.spell2 == "Dark"){
-						ctx.drawImage(Darkbox, this.x-this.width/8, this.y - this.height + 16, Q, Q);
+						ctx.drawImage(DarkIcon, this.x-this.width/9, this.y - this.height + 16);
 					}
 				}
 			}
@@ -1005,6 +999,32 @@ var MasterThief = {
 					this.spell2 = spell2;
 				}
 				spell2 = "N/A";
+				typemarker3.x = player.x-player.width/2 - 32;
+				typemarker3.y = player.y-player.height/2;
+				typemarker3.timeLeft = 30;
+				typemarker3.text = "Stolen!";
+				earth.cast = -1;
+				earth2.cast = -1;
+				lightning.cast = -1;
+				lightning2.cast = -1;
+				firelightning.cast = -1;
+				dark2.cast = -1;
+				airice.cast = -1;
+				darkwater.cast = -1;
+				ice.cast = -1;
+				fire.cast = -1;
+				air.cast = -1;
+				mystic.cast = -1;
+				water.cast = -1;
+				player.speed = 8;
+				castingBar.x = player.x - player.width/2;
+				castingBar.y = player.y + player.height/2;
+				castingBar.width = player.width;
+				castingBar.height = player.height/4;
+				castingBar.width2 = 0;
+				castingBar.onScreen = 0;
+				castingBar.cast = -1;
+				castingBar.castmax = 0;
 			}
 			else if(spell1 != "N/A"){
 				if(this.spell1 == "N/A"){
@@ -1014,6 +1034,32 @@ var MasterThief = {
 					this.spell2 = spell1;
 				}
 				spell1 = "N/A";
+				typemarker3.x = player.x-player.width/2 - 32;
+				typemarker3.y = player.y-player.height/2;
+				typemarker3.timeLeft = 30;
+				typemarker3.text = "Stolen!";
+				earth.cast = -1;
+				earth2.cast = -1;
+				lightning.cast = -1;
+				lightning2.cast = -1;
+				firelightning.cast = -1;
+				dark2.cast = -1;
+				airice.cast = -1;
+				darkwater.cast = -1;
+				ice.cast = -1;
+				fire.cast = -1;
+				air.cast = -1;
+				mystic.cast = -1;
+				water.cast = -1;
+				player.speed = 8;
+				castingBar.x = player.x - player.width/2;
+				castingBar.y = player.y + player.height/2;
+				castingBar.width = player.width;
+				castingBar.height = player.height/4;
+				castingBar.width2 = 0;
+				castingBar.onScreen = 0;
+				castingBar.cast = -1;
+				castingBar.castmax = 0;
 			}
 		}
 		if(this.cd == 0 && this.onScreen == 1){

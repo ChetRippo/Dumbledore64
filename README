@@ -14,25 +14,22 @@
   0. You just DO WHAT THE FUCK YOU WANT TO.
 
 
-	Version 0.7.5 Changes(5/23/2012):
+	Version 0.7.6 Changes(5/25/2012):
 		-Bug fixes:
+			-Optimized some code, removed approximately 1000 lines
+			-Mystic no longer teleports you to the end of the map in the Swamp
+			-Fixed bug where water and dark were not available from random elements
+		-Balancing:
+			-Increased radius of Swudge explosion
+			-Swudge explosion now hits enemies as well as the player
+			-Swudges now have a base respawn of 10 seconds instead of 3
+			-Globblies now spawn faster
 		-Additions:
-			-Added new boss: Master Thief
-			-Added swamp level
-				-Fallen trees give 8 movement speed
-				-Rest of map gives 4
-				-Crocodile enemy
-				-Fallen trees turn into walkways, vertical ones randomly generate
-				-Corner walkways appear based on location
-				-Mosquito enemy
-					-When they hit you they steal 1hp and run away for 1 second, then continue
-				-Transition from jungle:
-					-Trees all fall down when boss dies
-					-When powerup animation finishes the water rises and fades in
-					-Continues raining until water is fully extended
-					-When water is extended the trees disappear
-					-After a couple seconds the walkways float up to the top
-				-Swudges: Giant hudges that explode added
+			-Improved explosion effects on Swudges, Globblies, and Meteors slightly
+			-Added Version Info page (click on version number on main screen)	
+			-Replaced Sorceror, Thief, and MasterThief element icons with new cropped versions
+			-Encrypted and hid the score related variables
+			-Added right-facing graphic for lavamen
 			
 	TODO:
 		-Bugs/Other
@@ -40,19 +37,16 @@
 			-Maybe issues:
 				-obs always take 1 dmg, maybe an issue?
 				-casting bars appear on top of everything, maybe issue?
-				-Add boss timer for thief?
 			-Issues for later stuff:
 				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
 			-Current issues:
 				-Ice spells make jungle trees transparent *Don't know how to fix yet*
 			-Backlog:
 				-Add globbly exploding on hitting you etc
-				-Improve globbly and meteor explosion effects
 				-Air in enemy ice is weird
 				-Add 3d icon?
 		-Optimize
 			-Don't loop through stuff that never will happen ex: trying to draw all obs first when it doesn do anything unless they fell
-			-Set all the globbly and meteor explosions to one function
 			-Make speeds a list of factors so that multiple things can effect it easier
 		-Map System
 		-Sandbox Mode

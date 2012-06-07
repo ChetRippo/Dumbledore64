@@ -19,6 +19,7 @@ function reset(){
 	nu = 0;
 	hs = 0;
 	cd = 0;
+	cdTop = 20;
 	hptimer = 0;
 	spell1 = "N/A";
 	spell2 = "N/A";
@@ -26,11 +27,12 @@ function reset(){
 	spell1pic = "N/A";
 	spell2pic = "N/A";
 	//Score
-	score = 0;
+	Error = Aes.Ctr.encrypt("0", ErrorLogs, 256);
 	muliplier = 1;
 	multtimer = 0;
 	//colors
 	colorNum = 1;
+	prevSpellRC = {1: "N/A", 2: "N/A", 3: "N/A", 4: "N/A", 5: "N/A", 6: "N/A", 7: "N/A", 8: "N/A"};
 	// Environment
 	planted = false;
 	jungleAni = false;
@@ -68,6 +70,7 @@ function reset(){
 	player.LR = "";
 	player.zapIndex = 1;
 	player.lucky = false;
+	player.shadowed = false;
 	castingBar.x = player.x - player.width/2;
 	castingBar.y = player.y + player.height/2;
 	castingBar.width = player.width;
@@ -117,7 +120,6 @@ function reset(){
 	initsInd = 1;
 	hsColor = 1;
 	hsNum = 0;
-	wait = 0;
 	lowestScore = highscore10;
 	for(S in AllSounds){
 		AllSounds[S].currentTime = 0;
@@ -240,6 +242,7 @@ function reset(){
 	RandomCube.height = 32;
 	RandomCube.timeLeft = 0;
 	RandomCube.index = 1;
+	RandomCube.index2 = 1;
 	RandomCube.stage = "up";
 	
 	RandEffect.color = "#FF00FF";
@@ -258,6 +261,7 @@ function reset(){
 	RandomCube2.height = 32;
 	RandomCube2.timeLeft = 0;
 	RandomCube2.index = 1;
+	RandomCube2.index2 = 1;
 	RandomCube2.stage = "up";
 	
 	RandEffect2.color = "#FF00FF";
@@ -276,6 +280,7 @@ function reset(){
 	RandomCube3.height = 32;
 	RandomCube3.timeLeft = 0;
 	RandomCube3.index = 1;
+	RandomCube3.index2 = 1;
 	RandomCube3.stage = "up";
 	
 	RandEffect3.color = "#FF00FF";
@@ -294,6 +299,7 @@ function reset(){
 	RandomCube4.height = 32;
 	RandomCube4.timeLeft = 0;
 	RandomCube4.index = 1;
+	RandomCube4.index2 = 1;
 	RandomCube4.stage = "up";
 	
 	RandEffect4.color = "#FF00FF";
@@ -312,6 +318,7 @@ function reset(){
 	RandomCube5.height = 32;
 	RandomCube5.timeLeft = 0;
 	RandomCube5.index = 1;
+	RandomCube5.index2 = 1;
 	RandomCube5.stage = "up";
 	
 	RandEffect5.color = "#FF00FF";
@@ -502,8 +509,8 @@ function reset(){
 	Tenemy.speed2 = 4;
 	Tenemy.dirct = 0;
 	Tenemy.dir = "W";
-	Tenemy.respawn = 600;
-	Tenemy.rp = 600;
+	Tenemy.respawn = 450;
+	Tenemy.rp = 450;
 	Tenemy.pts = 50;
 	Tenemy.frame = 1;
 	Tenemy.onScreen = 0;
@@ -520,8 +527,8 @@ function reset(){
 	TenemyA.speed2 = 4;
 	TenemyA.dirct = 0;
 	TenemyA.dir = "W";
-	TenemyA.respawn = 2400;
-	TenemyA.rp = 600;
+	TenemyA.respawn = 1200;
+	TenemyA.rp = 450;
 	TenemyA.pts = 50;
 	TenemyA.frame = 1;
 	TenemyA.onScreen = 0;
@@ -538,8 +545,8 @@ function reset(){
 	TenemyB.speed2 = 4;
 	TenemyB.dirct = 0;
 	TenemyB.dir = "W";
-	TenemyB.respawn = 1800;
-	TenemyB.rp = 600;
+	TenemyB.respawn = 900;
+	TenemyB.rp = 450;
 	TenemyB.pts = 50;
 	TenemyB.frame = 1;
 	TenemyB.onScreen = 0;
@@ -823,6 +830,7 @@ function reset(){
 	Globblyfire.height = 16;
 	Globblyfire.frame = 0;
 	Globblyfire.onScreen = 0;
+	Globblyfire.growth = 16;
 	
 	Globblyfire2.color = "#FF6600";
 	Globblyfire2.x = -100;
@@ -832,6 +840,7 @@ function reset(){
 	Globblyfire2.height = 16;
 	Globblyfire2.frame = 0;
 	Globblyfire2.onScreen = 0;
+	Globblyfire2.growth = 16;
 	
 	Globblyfire3.color = "#FF6600";
 	Globblyfire3.x = -100;
@@ -841,6 +850,7 @@ function reset(){
 	Globblyfire3.height = 16;
 	Globblyfire3.frame = 0;
 	Globblyfire3.onScreen = 0;
+	Globblyfire3.growth = 16;
 	
 	for(E in EMplosions){
 		EMplosions[E].color = "#FF6600";
@@ -1432,16 +1442,20 @@ function reset(){
 	fireice.height = 32;
 	fireice.frame = 0;
 	fireice.cd = 0;
+	fireice.cdTop = 120;
 	fireice.onScreen = 0;
 	fireice.dir = "W";
 	fireice.speed = 16;
 	fireice.flicker = 600;
 	
 	fireheal.cd = 0;
+	fireheal.cdTop = 600;
 	
 	iceheal.cd = 0;
+	iceheal.cdTop = 600;
 	
 	lightningheal.cd = 0;
+	lightningheal.cdTop = 600;
 	
 	firelightning.timeLeft = 0;
 	firelightning.vwidth = 32;
@@ -1455,6 +1469,7 @@ function reset(){
 	firelightning.vx = -2000;
 	firelightning.vy = 288;
 	firelightning.cd = 0;
+	firelightning.cdTop = 900;
 	firelightning.onScreen = 0;
 	firelightning.cast = 0;
 	firelightning.used = 0;
@@ -1493,6 +1508,7 @@ function reset(){
 	}
 	icelightning.color = "#00CCFF";
 	icelightning.cd = 0;
+	icelightning.cdTop = 900;
 	icelightning.timeLeft = 0;
 	icelightning.end = false;
 	icelightning.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner, 14: treeWizz, 15: Thief, 16: ThiefA, 17: ThiefB, 18: Lavaman5, 19: Lavaman6, 20: Lavaman7, 21: Lavaman8, 22: Spawner2, 23: MasterThief,
@@ -1508,6 +1524,7 @@ function reset(){
 	airfire.height = 8;
 	airfire.frame = 0;
 	airfire.cd = 0;
+	airfire.cdTop = 60;
 	airfire.speed = 16;
 	airfire.onScreen = 0;
 	
@@ -1539,11 +1556,13 @@ function reset(){
 	airice.width = 64;
 	airice.height = 64;
 	airice.cd = 0;
+	airice.cdTop = 450;
 	airice.onScreen = 0;
 	airice.cast = 0;
 	airice.used = 0;
 	
 	airearth.cd = 0;
+	airearth.cdTop = 300;
 	
 	airlightning.timeLeft = 0;
 	airlightning.vwidth = 32;
@@ -1555,11 +1574,13 @@ function reset(){
 	airlightning.vx = -2000;
 	airlightning.vy = 288;
 	airlightning.cd = 0;
+	airlightning.cdTop = 120;
 	airlightning.onScreen = 0;
 	airlightning.LonScreen = 0;
 	airlightning.frame = 0;
 	
 	mysticearth.cd = 0;
+	mysticearth.cdTop = 300;
 	
 	waterfire.x = -100;
 	waterfire.y = -200;
@@ -1567,7 +1588,9 @@ function reset(){
 	waterfire.height = 16;
 	waterfire.timeLeft = 0;
 	waterfire.cd = 0;
+	waterfire.cdTop = 300;
 	waterfire.cd2 = 0;
+	waterfire.cd2Top = 300;
 	waterfire.index = 1;
 	waterfire.Iindex = 0;
 	waterfire.speed = 12;
@@ -1611,10 +1634,12 @@ function reset(){
 	}
 	
 	waterearth.cd = 0;
+	waterearth.cdTop = 1020;
 	
 	waterair.x = -100;
 	waterair.y = -200;
 	waterair.cd = 0;
+	waterair.cdTop = 150;
 	waterair.onScreen = 0;
 	waterair.frame = 0;
 	waterair.mode = 0;
@@ -1699,6 +1724,7 @@ function reset(){
 	
 	waterlightning.onScreen = 0;
 	waterlightning.cd = 0;
+	waterlightning.cdTop = 900;
 	waterlightning.frame = 0;
 	for(W in Wpools){
 		Wpools[W].color = "#0000FF";
@@ -1714,6 +1740,7 @@ function reset(){
 	}
 	
 	darkfire.cd = 0;
+	darkfire.cdTop = 30;
 	darkfire.inventory = 5;
 	for(S in darkfireSpikes){
 		darkfireSpikes[S].x = -100;
@@ -1739,6 +1766,7 @@ function reset(){
 	}
 	
 	darkice.cd = 0;
+	darkice.cdTop = 30;
 	darkice.inventory = 5;
 	for(S in darkiceSpikes){
 		darkiceSpikes[S].x = -100;
@@ -1772,6 +1800,7 @@ function reset(){
 	darkearth.width = 2400;
 	darkearth.height = 1000;
 	darkearth.cd = 0;
+	darkearth.cdTop = 360;
 	darkearth.speed = 4;
 	darkearth.used = 0;
 	darkearth.HealAmount = 0;
@@ -1782,6 +1811,7 @@ function reset(){
 	darklightning.width = 32;
 	darklightning.height = 32;
 	darklightning.cd = 0;
+	darklightning.cdTop = 30;
 	darklightning.onScreen = 0;
 	darklightning.timeLeft = -1;
 	darklightning.used = 0;
@@ -1814,6 +1844,7 @@ function reset(){
 	}
 	
 	darkair.cd = 0;
+	darkair.cdTop = 30;
 	darkair.inventory = 5;
 	darkair.ccd = 0;
 	darkair.x = -100;
@@ -1867,6 +1898,7 @@ function reset(){
 	darkwater.width = 32;
 	darkwater.height = 32;
 	darkwater.cd = 0;
+	darkwater.cdTop = 15;
 	darkwater.onScreen = 0;
 	darkwater.hp = 0;
 	darkwater.cast = -1;
@@ -1881,6 +1913,7 @@ function reset(){
 	fire.height = 32;
 	fire.frame = 0;
 	fire.cd = 0;
+	fire.cdTop = 150;
 	fire.onScreen = 0;
 	fire.cast = 0;
 	fire.used = 0;
@@ -1892,6 +1925,7 @@ function reset(){
 	fire2.height = 32;
 	fire2.frame = 0;
 	fire2.cd = 0;
+	fire2.cdTop = 300;
 	fire2.onScreen = 0;
 	Mfire.color = "#FF6600";
 	Mfire.x = -100;
@@ -1930,6 +1964,7 @@ function reset(){
 	ice.y = -200;
 	ice.frame = 0;
 	ice.cd = 0;
+	ice.cdTop = 450;
 	ice.onScreen = 0;
 	ice.end = false;
 	ice.cast = 0;
@@ -1942,6 +1977,7 @@ function reset(){
 	ice2.y = -200;
 	ice2.frame = 0;
 	ice2.cd = 0;
+	ice2.cdTop = 450;
 	ice2.onScreen = 0;
 	ice2.end = false;
 	Mice.color = "#00CCFF";
@@ -1982,10 +2018,12 @@ function reset(){
 	earth.x = -100;
 	earth.y = -200;
 	earth.cd = 0;
+	earth.cdTop = 720;
 	earth.speed = 4;
 	earth.cast = 0;
 	earth.used = 0;
 	earth2.cd = 0;
+	earth2.cdTop = 720;
 	earth2.cast = 0;
 	earth2.used = 0;
 	earth2.timeLeft = -1;
@@ -2052,6 +2090,7 @@ function reset(){
 	lightning.hstate = 0;
 	lightning.vstate = 0;
 	lightning.cd = 0;
+	lightning.cdTop = 450;
 	lightning.onScreen = 0;
 	lightning.cast = 0;
 	lightning.used = 0;
@@ -2079,6 +2118,7 @@ function reset(){
 	lightning2.vx = -2000;
 	lightning2.vy = 288;
 	lightning2.cd = 0;
+	lightning2.cdTop = 1050;
 	lightning2.onScreen = 0;
 	lightning22.timeLeft = 0;
 	lightning22.vwidth = 32;
@@ -2108,6 +2148,7 @@ function reset(){
 	//------------------------ Air.js ---------------------------//
 	air.timeLeft = 0;
 	air.cd = 0;
+	air.cdTop = 120;
 	air.speed = 16;
 	air.onScreen = 0;
 	air.cast = 0;
@@ -2115,6 +2156,7 @@ function reset(){
 	air.isdark = false;
 	air2.timeLeft = 0;
 	air2.cd = 0;
+	air2.cdTop = 300;
 	air2.speed = 16;
 	air2.onScreen = 0;
 	air2.cast = 0;
@@ -2130,6 +2172,7 @@ function reset(){
 	mystic.x1 = 0;
 	mystic.y1 = 0;
 	mystic.cd = 0;
+	mystic.cdTop = 90;
 	mystic.onScreen = 0;
 	mystic.cast = 0;
 	mystic.mult = 6;
@@ -2147,6 +2190,7 @@ function reset(){
 	mystic2.x1 = 0;
 	mystic2.y1 = 0;
 	mystic2.cd = 0;
+	mystic2.cdTop = 450;
 	mystic2.onScreen = 0;
 	mystic2.cast = 0;
 	mystic2.mult = 6;
@@ -2175,7 +2219,9 @@ function reset(){
 	//------------------------ Water.js -------------------------//
 	water.timeLeft = 0;
 	water.cd = 0;
+	water.cdTop = 1020;
 	water.cd2 = 0;
+	water.cd2Top = 1020;
 	water.cast = 0;
 	for(B in bubbleRotate){
 		bubbleRotate[B].x = -100;
@@ -2189,6 +2235,7 @@ function reset(){
 	}
 	//------------------------- Dark.js -------------------------//
 	dark.cd = 0;
+	dark.cdTop = 30;
 	dark.inventory = 7;
 	for(S in darkSpikes){
 		darkSpikes[S].x = -100;
@@ -2202,6 +2249,7 @@ function reset(){
 		darkSpikes[S].timeLeft = -1;
 	}
 	dark2.cd = 0;
+	dark2.cdTop = 210;
 	dark2.cast = -1;
 	for(S in dark2Spikes){
 		dark2Spikes[S].x = -100;

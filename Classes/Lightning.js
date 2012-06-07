@@ -12,6 +12,7 @@ var lightning = {
 	hstate: 0,
 	vstate: 0,
 	cd: 0,
+	cdTop: 450,
 	onScreen: 0,
 	cast: 0,
 	used: 0,
@@ -99,7 +100,7 @@ var lightning = {
 			this.hx = 400;
 			this.vx = -2000;
 			this.hy = player.y;
-			this.cd = 450;
+			this.cd = this.cdTop;
 			this.onScreen = 1;
 			this.timeLeft = 120;
 			this.used = 0;
@@ -213,6 +214,7 @@ var lightning2 = {
 	vx: -2000,
 	vy: 288,
 	cd: 0,
+	cdTop: 1050,
 	onScreen: 0,
 	
 	draw: function(){
@@ -297,7 +299,7 @@ var lightning2 = {
 			this.hx = 400;
 			this.vx = -2000;
 			this.hy = player.y;
-			this.cd = 1050;
+			this.cd = this.cdTop;
 			this.onScreen = 1;
 			this.timeLeft = 240;
 			this.cast = 30;

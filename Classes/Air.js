@@ -2,6 +2,7 @@
 var air = {
 	timeLeft: 0,
 	cd: 0,
+	cdTop: 120,
 	speed: 16,
 	onScreen: 0,
 	cast: 0,
@@ -201,10 +202,13 @@ var air = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		this.cd = 120;
+		this.cd = this.cdTop;
 		this.timeLeft = 15;
 		this.onScreen = 1;
 		this.used = 0;
+		if(this.cast <0){
+			this.cast = 0;
+		}
 	}
 	}
 };
@@ -212,6 +216,7 @@ var air = {
 var air2 = {
 	timeLeft: 0,
 	cd: 0,
+	cdTop: 300,
 	speed: 16,
 	onScreen: 0,
 	cast: 0,
@@ -416,7 +421,7 @@ var air2 = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		this.cd = 300;
+		this.cd = this.cdTop;
 		this.timeLeft = 10;
 		this.onScreen = 1;
 		this.used = 0;

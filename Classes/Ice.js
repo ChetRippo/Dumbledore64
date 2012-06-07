@@ -8,6 +8,7 @@ var ice = {
 	y: -200,
 	frame: 0,
 	cd: 0,
+	cdTop: 450,
 	onScreen: 0,
 	end: false,
 	cast: 0,
@@ -71,10 +72,13 @@ var ice = {
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 450;
+		this.cd = this.cdTop;
 		this.frame = 0;
 		this.onScreen = 1;
 		this.used = 0;
+		if(this.cast <0){
+			this.cast = 0;
+		}
 	}
 	}
 };
@@ -89,6 +93,7 @@ var ice2 = {
 	y: -200,
 	frame: 0,
 	cd: 0,
+	cdTop: 450,
 	onScreen: 0,
 	end: false,
 	
@@ -137,24 +142,21 @@ var ice2 = {
 		
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		Frozen.currentTime=0;
-		Frozen.play();
-		this.height = 32;
-		this.width = 32;
-		this.x = player.x;
-		this.y = player.y;
-		this.cd = 450;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-	else{
-		return 0;
-	}
+		if(this.cd == 0){
+			Frozen.currentTime=0;
+			Frozen.play();
+			this.height = 32;
+			this.width = 32;
+			this.x = player.x;
+			this.y = player.y;
+			this.cd = this.cdTop;
+			this.frame = 0;
+			this.onScreen = 1;
+		}
 	}
 	
 };
-//----------------------------------------------------------- Mystic Ice Shots ------------------------------------------------------//
+//----------------------------------------------------------- Mystic Ice Beam ------------------------------------------------------//
 var Mice = {
 	color: "#00CCFF",
 	timeLeft: 0,

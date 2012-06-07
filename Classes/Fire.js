@@ -8,6 +8,7 @@ var fire = {
 	height: 32,
 	frame: 0,
 	cd: 0,
+	cdTop: 150,
 	onScreen: 0,
 	cast: 0,
 	used: 0,
@@ -81,10 +82,13 @@ var fire = {
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 150;
+		this.cd = this.cdTop;
 		this.frame = 0;
 		this.onScreen = 1;
 		this.used = 0;
+		if(this.cast <0){
+			this.cast = 0;
+		}
 	}
 	}
 };
@@ -99,6 +103,7 @@ var fire2 = {
 	height: 32,
 	frame: 0,
 	cd: 0,
+	cdTop: 300,
 	onScreen: 0,
 	
 	draw: function(){
@@ -164,7 +169,7 @@ var fire2 = {
 		this.width = 32;
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 300;
+		this.cd = this.cdTop;
 		this.frame = 0;
 		this.onScreen = 1;
 	}

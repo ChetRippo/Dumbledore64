@@ -1,0 +1,20 @@
+EMPTY: 495080
+FULL: f76c5f
+CHARGE: d5331e
+
+ICE: 5ea89f
+MYSTIC: 570f80
+LIGHTNING: e8da39
+WATER: 325dd9
+AIR: 94abb0
+EARTH: 267332
+FIRE: bd2023
+DARK: 05121a
+DEVV: bfe3b6
+
+
+SCORE BKG: 0a1655
+OPACITY: 60
+NUMBER: 12x20
+BKG HEIGHT: 28
+Leave at least 4x pixels in between each number

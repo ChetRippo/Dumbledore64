@@ -5,6 +5,7 @@ var dark = {
 	width: 32,
 	height: 32,
 	cd: 0,
+	cdTop: 30,
 	onScreen: 0,
 	used: 0,
 	inventory: 7,
@@ -17,49 +18,49 @@ var dark = {
 			if(this.onScreen == 0){
 				this.x = player.x;
 				this.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				this.onScreen = 1;
 				this.used = 0;
 			}
 			else if(dark12.onScreen == 0){
 				dark12.x = player.x;
 				dark12.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				dark12.onScreen = 1;
 				dark12.used = 0;
 			}
 			else if(dark13.onScreen == 0){
 				dark13.x = player.x;
 				dark13.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				dark13.onScreen = 1;
 				dark13.used = 0;
 			}
 			else if(dark14.onScreen == 0){
 				dark14.x = player.x;
 				dark14.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				dark14.onScreen = 1;
 				dark14.used = 0;
 			}
 			else if(dark15.onScreen == 0){
 				dark15.x = player.x;
 				dark15.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				dark15.onScreen = 1;
 				dark15.used = 0;
 			}
 			else if(dark16.onScreen == 0){
 				dark16.x = player.x;
 				dark16.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				dark16.onScreen = 1;
 				dark16.used = 0;
 			}
 			else if(dark17.onScreen == 0){
 				dark17.x = player.x;
 				dark17.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				dark17.onScreen = 1;
 				dark17.used = 0;
 			}
@@ -142,6 +143,7 @@ var dark2 = {
 	width: 32,
 	height: 32,
 	cd: 0,
+	cdTop: 210,
 	onScreen: 0,
 	frame: 0,
 	arrIndex: 1,
@@ -195,7 +197,7 @@ var dark2 = {
 			castingBar.castmax = 30;
 			cd = 30;
 			this.cast = 30;
-			this.cd = 210;
+			this.cd = this.cdTop;
 		}
 	}
 };
@@ -993,7 +995,7 @@ function spikeMove(S){
 			}
 		}
 		for (E in AllEnemies){
-			if(collision(AllEnemies[E].dir, AllEnemies[E], S)){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], S) && AllEnemies[E].onTree == 0){
 				player.currpower = player.power;
 				if(S.arrIndex){
 					player.power = player.maxhp-player.hp + 1;
@@ -1004,7 +1006,7 @@ function spikeMove(S){
 				onHit(AllEnemies[E]);
 				player.power = player.currpower;
 				for(D in darkSpikes){
-					if(S == darkSpikes[D] && !S.active){
+					if(S == darkSpikes[D] && !S.active && AllEnemies[E].onTree == 0){
 						S.active = true;
 						S.timeLeft = 30;
 						Explosion.currentTime = 0;

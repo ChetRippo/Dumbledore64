@@ -6,6 +6,7 @@ echo "Submitting High Scores...\n";
 (int) $score=$_GET["score"];
 (string) $hash=$_GET["hash"];
 (string) $scorestring=$score;
+(int) $glass=$_GET["glass"];
 
 if(md5($scorestring) === $hash){
 	$scoredoc = fopen("HighScores.txt", "r") or die("Error: HighScores.txt could not be opened");
@@ -33,6 +34,20 @@ if(md5($scorestring) === $hash){
 	(string) $name9 = fgets($namedoc);
 	(string) $name10 = fgets($namedoc);
 	fclose($namedoc);
+	
+	$glassdoc = fopen("Glasses.txt", "r") or die("Error: Glasses.txt could not be opened");
+	$glass1 = intval(fgets($glassdoc));
+	$glass2 = intval(fgets($glassdoc));
+	$glass3 = intval(fgets($glassdoc));
+	$glass4 = intval(fgets($glassdoc));
+	$glass5 = intval(fgets($glassdoc));
+	$glass6 = intval(fgets($glassdoc));
+	$glass7 = intval(fgets($glassdoc));
+	$glass8 = intval(fgets($glassdoc));
+	$glass9 = intval(fgets($glassdoc));
+	$glass10 = intval(fgets($glassdoc));
+	fclose($glassdoc);
+	
 	if ($score10<$score){
 		if ($score9<$score){
 			if ($score8<$score){
@@ -63,6 +78,16 @@ if(md5($scorestring) === $hash){
 											$name3=$name2;	
 											$name2=$name1;
 											$name1=$name;
+											$glass10=$glass9;
+											$glass9=$glass8;
+											$glass8=$glass7;	
+											$glass7=$glass6;
+											$glass6=$glass5;
+											$glass5=$glass4;
+											$glass4=$glass3;
+											$glass3=$glass2;	
+											$glass2=$glass1;
+											$glass1=$glass;
 										}
 										else{
 											$score10=$score9;
@@ -83,6 +108,15 @@ if(md5($scorestring) === $hash){
 											$name4=$name3;	
 											$name3=$name2;
 											$name2=$name;
+											$glass10=$glass9;
+											$glass9=$glass8;
+											$glass8=$glass7;	
+											$glass7=$glass6;
+											$glass6=$glass5;
+											$glass5=$glass4;
+											$glass4=$glass3;	
+											$glass3=$glass2;
+											$glass2=$glass;
 										}
 									}			
 									else{
@@ -102,6 +136,14 @@ if(md5($scorestring) === $hash){
 										$name5=$name4;
 										$name4=$name3;
 										$name3=$name;
+										$glass10=$glass9;
+										$glass9=$glass8;
+										$glass8=$glass7;	
+										$glass7=$glass6;
+										$glass6=$glass5;
+										$glass5=$glass4;
+										$glass4=$glass3;
+										$glass3=$glass;
 									}
 								}		
 								else{
@@ -119,6 +161,13 @@ if(md5($scorestring) === $hash){
 									$name6=$name5;
 									$name5=$name4;
 									$name4=$name;
+									$glass10=$glass9;
+									$glass9=$glass8;
+									$glass8=$glass7;	
+									$glass7=$glass6;
+									$glass6=$glass5;
+									$glass5=$glass4;
+									$glass4=$glass;
 								}
 							}
 							else{
@@ -134,6 +183,12 @@ if(md5($scorestring) === $hash){
 								$name7=$name6;
 								$name6=$name5;
 								$name5=$name;
+								$glass10=$glass9;
+								$glass9=$glass8;
+								$glass8=$glass7;	
+								$glass7=$glass6;
+								$glass6=$glass5;
+								$glass5=$glass;
 							}
 						}
 						else{
@@ -147,6 +202,11 @@ if(md5($scorestring) === $hash){
 							$name8=$name7;	
 							$name7=$name6;
 							$name6=$name;
+							$glass10=$glass9;
+							$glass9=$glass8;
+							$glass8=$glass7;	
+							$glass7=$glass6;
+							$glass6=$glass;
 						}
 					}
 					else{
@@ -158,6 +218,10 @@ if(md5($scorestring) === $hash){
 						$name9=$name8;
 						$name8=$name7;	
 						$name7=$name;
+						$glass10=$glass9;
+						$glass9=$glass8;
+						$glass8=$glass7;	
+						$glass7=$glass;
 					}
 				}
 				else{
@@ -166,7 +230,10 @@ if(md5($scorestring) === $hash){
 					$score8=$score;
 					$name10=$name9;
 					$name9=$name8;
-					$name8=$name;	
+					$name8=$name;
+					$glass10=$glass9;
+					$glass9=$glass8;
+					$glass8=$glass;					
 				}
 			}
 			else{
@@ -174,11 +241,14 @@ if(md5($scorestring) === $hash){
 				$score9=$score;
 				$name10=$name9;
 				$name9=$name;
+				$glass10=$glass9;
+				$glass9=$glass;
 			}
 		}
 		else{
 			$score10=$score;
 			$name10=$name;
+			$glass10=$glass;
 		}
 	}
 	$scoresave = fopen("HighScores.txt", "w") or die("Error: HighScores.txt could not be opened");
@@ -245,6 +315,29 @@ if(md5($scorestring) === $hash){
 	$stringData = str_replace("\n",'',$stringData);
 	fwrite($namesave, $stringData);
 	fclose($namesave);
+	
+	$glasssave = fopen("Glasses.txt", "w") or die("Error: Glasses.txt could not be opened");
+	(string) $stringData = (int) $glass1 . "\n";
+	fwrite($glasssave, $stringData);
+	(string) $stringData = (int) $glass2 . "\n";
+	fwrite($glasssave, $stringData);
+	(string) $stringData = (int) $glass3 . "\n";
+	fwrite($glasssave, $stringData);
+	(string) $stringData = (int) $glass4 . "\n";
+	fwrite($glasssave, $stringData);
+	(string) $stringData = (int) $glass5 . "\n";
+	fwrite($glasssave, $stringData);
+	(string) $stringData = (int) $glass6 . "\n";
+	fwrite($glasssave, $stringData);
+	(string) $stringData = (int) $glass7 . "\n";
+	fwrite($glasssave, $stringData);
+	(string) $stringData = (int) $glass8 . "\n";
+	fwrite($glasssave, $stringData);
+	(string) $stringData = (int) $glass9 . "\n";
+	fwrite($glasssave, $stringData);
+	(string) $stringData = (int) $glass10;
+	fwrite($glasssave, $stringData);
+	fclose($glasssave);
 	echo "Submission complete";
 }
 else{

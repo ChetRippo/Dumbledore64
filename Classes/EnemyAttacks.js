@@ -9,58 +9,7 @@ var Globblyfire = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}				
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
+	growth: 16,
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -81,61 +30,7 @@ var Globblyfire2 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 16,
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -156,61 +51,7 @@ var Globblyfire3 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 16,
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -231,61 +72,7 @@ var EMplosion1 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (8*this.frame);
-			this.height = 16 + (8*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 8,
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -305,61 +92,7 @@ var EMplosion2 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (8*this.frame);
-			this.height = 16 + (8*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 8,	
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -379,61 +112,7 @@ var EMplosion3 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (8*this.frame);
-			this.height = 16 + (8*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 8,
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -453,61 +132,7 @@ var EMplosion4 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (8*this.frame);
-			this.height = 16 + (8*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 8,
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -527,61 +152,7 @@ var EMplosion5 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (8*this.frame);
-			this.height = 16 + (8*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 8,
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -601,61 +172,7 @@ var EMplosion6 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (8*this.frame);
-			this.height = 16 + (8*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 8,		
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -675,61 +192,7 @@ var EMplosion7 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (8*this.frame);
-			this.height = 16 + (8*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 8,
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -749,61 +212,7 @@ var EMplosion8 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (8*this.frame);
-			this.height = 16 + (8*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 8,		
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -823,61 +232,7 @@ var EMplosion9 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 16,			
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -897,61 +252,7 @@ var EMplosion10 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 16,			
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -971,61 +272,7 @@ var EMplosion11 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 16,		
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -1045,61 +292,7 @@ var EMplosion12 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 16,
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -1119,61 +312,7 @@ var EMplosion13 = {
 	height: 16,
 	frame: 0,
 	onScreen: 0,
-	
-	draw: function(){
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
-			this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	
-	move: function(){
-		if(this.frame == 10){
-			this.x = -100;
-			this.y = -200;
-			this.width = 16;
-			this.height = 16;
-			this.onScreen = 0;
-		}
-		else{
-			this.width = 16 + (16*this.frame);
-			this.height = 16 + (16*this.frame);
-			this.frame++;
-			if(contained(player, this)){
-				if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
-					darkwater.hptimer = 20;
-					darkwater.hp-=1;
-					hptimer = 20;
-				}	
-				else if(hptimer <= 0){
-					player.hp-=1;
-					onDmg.currentTime=0;
-					onDmg.play();
-					hptimer = 30;
-				}
-			}
-			for (O in obstacle1){
-				if(contained(obstacle1[O], this)){
-					obsHit(obstacle1[O]);
-				}
-			}
-			for (O in obstacle2){
-				if(contained(obstacle2[O], this)){
-					obsHit(obstacle2[O]);
-				}
-			}
-			for (O in obstacle3){
-				if(contained(obstacle3[O], this)){
-					obsHit(obstacle3[O]);
-				}
-			}
-		}
-	},
-		
+	growth: 16,		
 	// Spawn
 	shoot: function(){
 		Explosion.currentTime=0;
@@ -1184,8 +323,80 @@ var EMplosion13 = {
 		this.onScreen = 1;
 	}
 };
+function exploderDraw(E){
+	if(E.onScreen == 1){
+		ctx.globalAlpha = Alpha*0.5;
+		if(E.frame/2 != Math.round(E.frame/2)){
+			if(E.color == "#FF6600"){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = "#33CC00";
+			}
+		}
+		else{
+			ctx.fillStyle = E.color;
+		}
+		ctx.fillRect(E.x - E.width / 2, E.y - E.height / 2,	E.width, E.height);
+		ctx.globalAlpha = Alpha;
+	}
+}
+function exploderMove(E){
+	if(E.frame == 10){
+		E.x = -100;
+		E.y = -200;
+		E.width = 16;
+		E.height = 16;
+		E.onScreen = 0;
+	}
+	else{
+		E.width = 16 + (E.growth*E.frame);
+		E.height = 16 + (E.growth*E.frame);
+		E.frame++;
+		if(contained(player, E)){
+			if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
+				darkwater.hptimer = 20;
+				darkwater.hp-=1;
+				hptimer = 20;
+			}	
+			else if(hptimer <= 0){
+				player.hp-=1;
+				onDmg.currentTime=0;
+				onDmg.play();
+				hptimer = 30;
+			}
+		}
+		if(E.color != "#FF6600"){
+			E.growth = 32;
+			for (B in AllEnemies){
+				if(contained(AllEnemies[B], E)){
+					onHit(AllEnemies[B]);
+				}
+			}
+		}
+		if(E == Globblyfire || E == Globblyfire2 || E == Globblyfire3){
+			for (O in obstacle1){
+				if(contained(obstacle1[O], E)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], E)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], E)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+	}
+}
 var EMplosions = {1: EMplosion1, 2: EMplosion2, 3: EMplosion3, 4: EMplosion4, 5: EMplosion5, 6: EMplosion6, 7: EMplosion7, 8: EMplosion8, 9: EMplosion9, 10: EMplosion10, 11: EMplosion11,
 					12: EMplosion12, 13: EMplosion13};
+var Exploders = {1: EMplosion1, 2: EMplosion2, 3: EMplosion3, 4: EMplosion4, 5: EMplosion5, 6: EMplosion6, 7: EMplosion7, 8: EMplosion8, 9: EMplosion9, 10: EMplosion10, 11: EMplosion11,
+					12: EMplosion12, 13: EMplosion13, 14: Globblyfire, 15: Globblyfire2, 16: Globblyfire3};
 // sIce: Slows player down by halving speed
 var sIce = {
 	color: "#00CCFF",
@@ -1241,7 +452,7 @@ var sIce = {
 	// Slow all enemies in radius
 	effect: function(){
 		if(this.cast <= 0){
-			if(this.onScreen == 1){
+			if(this.onScreen == 1 && air.onScreen != 1 && air2.onScreen != 1){
 				player.speed = 4;
 			}
 			else if(this.end == true){
@@ -1734,904 +945,429 @@ var rootstr = {
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-	}
-		
-	}
+	onScreen: 0
 };
 var rootstr2 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr3 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-		if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-		
-	}
+	onScreen: 0
 };
 var rootstr4 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-		if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-		
-	}
+	onScreen: 0
 };
 var rootstr5 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-	}	
-	}
+	onScreen: 0
 };
 var rootstr6 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr7 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr8 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr9 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr10 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr11 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr12 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr13 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr14 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr15 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr21 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr22 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr23 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr24 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr25 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr26 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr27 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr28 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr29 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr210 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr211 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr212 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr213 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr214 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr215 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr31 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr32 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr33 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr34 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr35 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr36 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr37 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr38 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr39 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr310 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr311 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr312 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr313 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr314 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr315 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr41 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr42 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr43 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr44 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr45 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr46 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr47 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr48 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr49 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr410 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr411 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr412 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr413 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr414 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
-		ctx.globalAlpha = Alpha*0.5;
-		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-		ctx.globalAlpha = Alpha;
-		}
-	}
+	onScreen: 0
 };
 var rootstr415 = {
 	x: -500,
 	y: -500,
 	width: 16,
 	height: 16,
-	onScreen: 0,
-	draw: function(){
-	if(this.onScreen == 1){
+	onScreen: 0
+};
+function drawRoots(R){
+	if(R.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(R.x - R.width / 2, R.y - R.height / 2, R.width, R.height);
 		ctx.globalAlpha = Alpha;
-		}
 	}
-};
+}
 var roots1 = {1: rootstr, 2: rootstr2, 3: rootstr3, 4: rootstr4, 5: rootstr5, 6: rootstr6, 7: rootstr7, 8: rootstr8, 9: rootstr9, 10: rootstr10,
 			11: rootstr11, 12: rootstr12, 13: rootstr13, 14: rootstr14, 15: rootstr15, 16: rootstr21, 17: rootstr22, 18: rootstr23, 19: rootstr24,
 			20: rootstr25, 21: rootstr26, 22: rootstr27, 23: rootstr28, 24: rootstr29, 25: rootstr210, 26: rootstr211, 27: rootstr212, 28: rootstr213, 29: rootstr214, 30: rootstr215,

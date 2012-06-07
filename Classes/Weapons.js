@@ -63,11 +63,11 @@ var bullet = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		if(spell == "Homing Shots"){
+		if(spell == "Homing Beam"){
 			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
-			cd = 20;
+			cd = cdTop;
 			this.height = 16;
 			this.width = 16;
 			bullet11.dir = "D" + this.dir;
@@ -84,7 +84,7 @@ var bullet = {
 			bullet12.y = player.y;
 		}
 		else{
-			cd = 20;
+			cd = cdTop;
 		}
 	}
 	}
@@ -111,11 +111,11 @@ var bullet2 = {
 			this.width = w;
 			this.x = player.x;
 			this.y = player.y;
-			if(spell == "Homing Shots"){
+			if(spell == "Homing Beam"){
 				cd = 35;
 			}
 			else if(spell == "Bubblebeam"){
-				cd = 20;
+				cd = cdTop;
 				this.height = 16;
 				this.width = 16;
 				bullet21.dir = "D" + this.dir;
@@ -132,7 +132,7 @@ var bullet2 = {
 				bullet22.y = player.y;
 			}
 			else{
-				cd = 20;
+				cd = cdTop;
 			}
 		}
 	}
@@ -157,11 +157,11 @@ var bullet3 = {
 			this.width = w;
 			this.x = player.x;
 			this.y = player.y;
-			if(spell == "Homing Shots"){
+			if(spell == "Homing Beam"){
 				cd = 35;
 			}
 			else if(spell == "Bubblebeam"){
-				cd = 20;
+				cd = cdTop;
 				this.height = 16;
 				this.width = 16;
 				bullet31.dir = "D" + this.dir;
@@ -178,7 +178,7 @@ var bullet3 = {
 				bullet32.y = player.y;
 			}
 			else{
-				cd = 20;
+				cd = cdTop;
 			}
 		}
 	}
@@ -205,11 +205,11 @@ var bullet4 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		if(spell == "Homing Shots"){
+		if(spell == "Homing Beam"){
 			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
-			cd = 20;
+			cd = cdTop;
 			this.height = 16;
 			this.width = 16;
 			bullet41.dir = "D" + this.dir;
@@ -226,7 +226,7 @@ var bullet4 = {
 			bullet42.y = player.y;
 		}
 		else{
-			cd = 20;
+			cd = cdTop;
 		}
 	}
 	}
@@ -253,11 +253,11 @@ var bullet5 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		if(spell == "Homing Shots"){
+		if(spell == "Homing Beam"){
 			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
-			cd = 20;
+			cd = cdTop;
 			this.height = 16;
 			this.width = 16;
 			bullet51.dir = "D" + this.dir;
@@ -274,7 +274,7 @@ var bullet5 = {
 			bullet52.y = player.y;
 		}
 		else{
-			cd = 20;
+			cd = cdTop;
 		}
 	}
 	}
@@ -301,11 +301,11 @@ var bullet6 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		if(spell == "Homing Shots"){
+		if(spell == "Homing Beam"){
 			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
-			cd = 20;
+			cd = cdTop;
 			this.height = 16;
 			this.width = 16;
 			bullet61.dir = "D" + this.dir;
@@ -322,7 +322,7 @@ var bullet6 = {
 			bullet62.y = player.y;
 		}
 		else{
-			cd = 20;
+			cd = cdTop;
 		}
 	}
 	}
@@ -349,11 +349,11 @@ var bullet7 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		if(spell == "Homing Shots"){
+		if(spell == "Homing Beam"){
 			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
-			cd = 20;
+			cd = cdTop;
 			this.height = 16;
 			this.width = 16;
 			bullet71.dir = "D" + this.dir;
@@ -370,7 +370,7 @@ var bullet7 = {
 			bullet72.y = player.y;
 		}
 		else{
-			cd = 20;
+			cd = cdTop;
 		}
 	}
 	}
@@ -397,11 +397,11 @@ var bullet8 = {
 		this.width = w;
 		this.x = player.x;
 		this.y = player.y;
-		if(spell == "Homing Shots"){
+		if(spell == "Homing Beam"){
 			cd = 35;
 		}
 		else if(spell == "Bubblebeam"){
-			cd = 20;
+			cd = cdTop;
 			this.height = 16;
 			this.width = 16;
 			bullet81.dir = "D" + this.dir;
@@ -418,7 +418,7 @@ var bullet8 = {
 			bullet82.y = player.y;
 		}
 		else{
-			cd = 20;
+			cd = cdTop;
 		}
 	}
 	}
@@ -573,19 +573,19 @@ var Bullets = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: bullet5, 6: bul
 var mystIndex = 1;
 function drawBullet(B){
 	if (B.timeLeft > 0){
-		if(spell == "Explosive Shots"){
+		if(spell == "Explosive Beam"){
 			ctx.fillStyle = "#CC0000";
 		}
-		else if(spell == "Ice Shots"){
+		else if(spell == "Ice Beam"){
 			ctx.fillStyle = "#66CCFF";
 		}
-		else if(spell == "Conductive Shots"){
+		else if(spell == "Conductive Beam"){
 			ctx.fillStyle = "#FFFF00";
 		}
-		else if(spell == "Homing Shots"){
+		else if(spell == "Homing Beam"){
 			ctx.fillStyle = "#FF00FF";
 		}
-		else if(spell == "Piercing Shots"){
+		else if(spell == "Piercing Beam"){
 			ctx.fillStyle = "black";
 		}
 		else if(spell != "Bubblebeam"){
@@ -641,7 +641,7 @@ function drawBullet(B){
 }
 // Increment
 function Bulletmove(B){
-	if(spell == "Homing Shots"){
+	if(spell == "Homing Beam"){
 		//Fix snapping
 		B.x = Math.floor(B.x);
 		B.y = Math.floor(B.y);
@@ -711,19 +711,19 @@ function Bulletmove(B){
 			
 		}
 	}
-	if(spell != "Homing Shots" && STATE != "Swamp"){
+	if(spell != "Homing Beam" && STATE != "Swamp"){
 		for(O in obstacle1){
 			if(obstacle1[O].fallIndex != 46){
 				if(collision(B.dir, B, obstacle1[O])){
-					if(spell == "Piercing Shots"){
+					if(spell == "Piercing Beam"){
 						player.currpower = player.power;
 						player.power+=1;
 					}
 					obsHit(obstacle1[O]);
-					if(spell == "Piercing Shots"){
+					if(spell == "Piercing Beam"){
 						player.power = player.currpower;
 					}
-					if(spell == "Explosive Shots"){
+					if(spell == "Explosive Beam"){
 						if(Mfire.onScreen == 0){
 							Mfire.onScreen = 1;
 							Mfire.frame = 0;
@@ -749,7 +749,7 @@ function Bulletmove(B){
 							Mfire4.y = B.y;
 						}
 					}
-					else if(spell == "Ice Shots"){
+					else if(spell == "Ice Beam"){
 						if(Mice.onScreen == 0){
 							Mice.onScreen = 1;
 							Mice.frame = 0;
@@ -775,7 +775,7 @@ function Bulletmove(B){
 							Mice4.y = B.y;
 						}
 					}
-					if(spell == "Conductive Shots"){
+					if(spell == "Conductive Beam"){
 						if(B.dir == "W" || B.dir == "S"){
 							B.width = 32;
 							B.height = 4;
@@ -825,15 +825,15 @@ function Bulletmove(B){
 		}
 		for(O in obstacle2){
 			if(collision(B.dir, B, obstacle2[O])){
-				if(spell == "Piercing Shots"){
+				if(spell == "Piercing Beam"){
 					player.currpower = player.power;
 					player.power+=1;
 				}
 				obsHit(obstacle2[O]);
-				if(spell == "Piercing Shots"){
+				if(spell == "Piercing Beam"){
 					player.power = player.currpower;
 				}
-				if(spell == "Explosive Shots"){
+				if(spell == "Explosive Beam"){
 					if(Mfire.onScreen == 0){
 						Mfire.onScreen = 1;
 						Mfire.frame = 0;
@@ -859,7 +859,7 @@ function Bulletmove(B){
 						Mfire4.y = B.y;
 					}
 				}
-				else if(spell == "Ice Shots"){
+				else if(spell == "Ice Beam"){
 					if(Mice.onScreen == 0){
 						Mice.onScreen = 1;
 						Mice.frame = 0;
@@ -885,7 +885,7 @@ function Bulletmove(B){
 						Mice4.y = B.y;
 					}
 				}
-				if(spell == "Conductive Shots"){
+				if(spell == "Conductive Beam"){
 					if(B.dir == "W" || B.dir == "S"){
 						B.width = 32;
 						B.height = 4;
@@ -934,15 +934,15 @@ function Bulletmove(B){
 		}
 		for(O in obstacle3){
 			if(collision(B.dir, B, obstacle3[O])){
-				if(spell == "Piercing Shots"){
+				if(spell == "Piercing Beam"){
 					player.currpower = player.power;
 					player.power+=1;
 				}
 				obsHit(obstacle3[O]);
-				if(spell == "Piercing Shots"){
+				if(spell == "Piercing Beam"){
 					player.power = player.currpower;
 				}
-				if(spell == "Explosive Shots"){
+				if(spell == "Explosive Beam"){
 					if(Mfire.onScreen == 0){
 						Mfire.onScreen = 1;
 						Mfire.frame = 0;
@@ -968,7 +968,7 @@ function Bulletmove(B){
 						Mfire4.y = B.y;
 					}
 				}
-				else if(spell == "Ice Shots"){
+				else if(spell == "Ice Beam"){
 					if(Mice.onScreen == 0){
 						Mice.onScreen = 1;
 						Mice.frame = 0;
@@ -994,7 +994,7 @@ function Bulletmove(B){
 						Mice4.y = B.y;
 					}
 				}
-				if(spell == "Conductive Shots"){
+				if(spell == "Conductive Beam"){
 					if(B.dir == "W" || B.dir == "S"){
 						B.width = 32;
 						B.height = 4;
@@ -1044,11 +1044,11 @@ function Bulletmove(B){
 	}
 	for (E in AllEnemies){
 		if(collision(B.dir, B, AllEnemies[E]) && AllEnemies[E].onTree == 0){
-			if(spell == "Piercing Shots"){
+			if(spell == "Piercing Beam"){
 				player.currpower = player.power;
 				player.power+=1;
 			}
-			if(spell == "Explosive Shots"){
+			if(spell == "Explosive Beam"){
 				if(Mfire.onScreen == 0){
 					Mfire.onScreen = 1;
 					Mfire.frame = 0;
@@ -1075,7 +1075,7 @@ function Bulletmove(B){
 				}
 				B.timeLeft = 0;
 			}
-			else if(spell == "Ice Shots"){
+			else if(spell == "Ice Beam"){
 				if(Mice.onScreen == 0){
 					Mice.onScreen = 1;
 					Mice.frame = 0;
@@ -1102,7 +1102,7 @@ function Bulletmove(B){
 				}
 				B.timeLeft = 0;
 			}
-			else if(spell == "Conductive Shots"){
+			else if(spell == "Conductive Beam"){
 				if(B.dir == "W" || B.dir == "S"){
 					B.width = 32;
 					B.height = 4;
@@ -1148,7 +1148,7 @@ function Bulletmove(B){
 				B.timeLeft = 0;
 			}
 			onHit(AllEnemies[E]);
-			if(spell == "Piercing Shots"){
+			if(spell == "Piercing Beam"){
 				player.power = player.currpower;
 			}
 		}
@@ -1283,6 +1283,7 @@ var fireice = {
 	height: 32,
 	frame: 0,
 	cd: 0,
+	cdTop: 120,
 	onScreen: 0,
 	dir: "W",
 	speed: 16,
@@ -1422,7 +1423,7 @@ var fireice = {
 		this.x = player.x;
 		this.y = player.y;
 		this.dir = player.dir;
-		this.cd = 120;
+		this.cd = this.cdTop;
 		this.frame = 0;
 		this.onScreen = 1;
 		this.color = this.color1;
@@ -1432,9 +1433,10 @@ var fireice = {
 	
 };
 
-// Fire and Heal: Heals user by 1 and casts Fire
+// Fire+Heal: Heals user by 1 and casts Fire
 var fireheal = {
 	cd: 0,
+	cdTop: 600,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
@@ -1442,7 +1444,7 @@ var fireheal = {
 	},
 	shoot: function(){
 		if(this.cd == 0){
-			this.cd = 600;
+			this.cd = this.cdTop;
 			var currentEarthcd = earth.cd;
 			var currentFirecd = fire.cd;
 			fire.cd = 0;
@@ -1456,9 +1458,10 @@ var fireheal = {
 	}	
 };
 
-// Ice and Heal: Heals user by 1 and casts Ice
+// Ice+Heal: Heals user by 1 and casts Ice
 var iceheal = {
 	cd: 0,
+	cdTop: 600,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
@@ -1468,7 +1471,7 @@ var iceheal = {
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
 			var currentIcecd = ice.cd;
-			this.cd = 600;
+			this.cd = this.cdTop;
 			ice.cd = 0;
 			earth.cd = 0;
 			ice.shoot();
@@ -1480,9 +1483,10 @@ var iceheal = {
 	}	
 };
 
-// Lightning and Heal: Heals user by 1 and casts Lightning
+// Lightning+Heal: Heals user by 1 and casts Lightning
 var lightningheal = {
 	cd: 0,
+	cdTop: 600,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
@@ -1492,7 +1496,7 @@ var lightningheal = {
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
 			var currentLightningcd = lightning.cd;
-			this.cd = 600;
+			this.cd = this.cdTop;
 			lightning.cd = 0;
 			earth.cd = 0;
 			lightning.shoot();
@@ -1518,6 +1522,7 @@ var firelightning = {
 	vx: -2000,
 	vy: 288,
 	cd: 0,
+	cdTop: 900,
 	onScreen: 0,
 	cast: 0,
 	used: 0,
@@ -1632,7 +1637,7 @@ var firelightning = {
 		this.hx = 400;
 		this.vx = player.x;
 		this.hy = player.y;
-		this.cd = 900;
+		this.cd = this.cdTop;
 		this.timeLeft = 150;
 		this.cast = 30;
 		cd = 30;
@@ -1657,7 +1662,12 @@ var firelightningf1 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -1724,7 +1734,12 @@ var firelightningf2 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -1792,7 +1807,12 @@ var firelightningf3 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -1859,7 +1879,12 @@ var firelightningf4 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
-			ctx.fillStyle = this.color;
+			if(this.frame/2 != Math.round(this.frame/2)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
 			ctx.fillRect(this.x - this.width / 2,
 			this.y - this.height / 2,
 			this.width, this.height);
@@ -2308,6 +2333,7 @@ var webvertil = {1: vertil5, 2: vertil4, 3: vertil3, 4: vertil2, 5: vertil};
 var icelightning = {
 	color: "#00CCFF",
 	cd: 0,
+	cdTop: 900,
 	timeLeft: 0,
 	end: false,
 	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner, 14: treeWizz, 15: Thief, 16: ThiefA, 17: ThiefB,
@@ -2459,7 +2485,7 @@ var icelightning = {
 		horil.y = player.y
 		horil.frame = 0;
 		horil.onScreen = 1;
-		this.cd = 900;
+		this.cd = this.cdTop;
 		this.timeLeft = 300;
 		this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
 	}
@@ -2478,6 +2504,7 @@ var airfire = {
 	height: 8,
 	frame: 0,
 	cd: 0,
+	cdTop: 60,
 	speed: 16,
 	onScreen: 0,
 	
@@ -2578,7 +2605,7 @@ var airfire = {
 		this.ox = player.x;
 		this.oy = player.y;
 		this.dir = player.dir;
-		this.cd = 60;
+		this.cd = this.cdTop;
 		this.frame = 0;
 		this.onScreen = 1;
 		if(this.dir == "S" || this.dir == "W"){
@@ -2798,6 +2825,7 @@ var airice = {
 	width: 64,
 	height: 64,
 	cd: 0,
+	cdTop: 450,
 	onScreen: 0,
 	cast: 0,
 	used: 0,
@@ -2889,7 +2917,7 @@ var airice = {
 	if(this.cd == 0){
 		this.x = player.x;
 		this.y = player.y;
-		this.cd = 450;
+		this.cd = this.cdTop;
 		this.width = 64;
 		this.height = 64;
 		this.onScreen = 1;
@@ -2906,9 +2934,10 @@ var airice = {
 	}
 	}
 };
-// Dash and Heal: Heals user by 1 and casts Dash
+// Dash+Heal: Heals user by 1 and casts Dash
 var airearth = {
 	cd: 0,
+	cdTop: 300,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
@@ -2918,7 +2947,7 @@ var airearth = {
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
 			var currentAircd = air.cd;
-			this.cd = 300;
+			this.cd = this.cdTop;
 			air.cd = 0;
 			earth.cd = 0;
 			air.shoot();
@@ -2941,6 +2970,7 @@ var airlightning = {
 	vx: -2000,
 	vy: 288,
 	cd: 0,
+	cdTop: 120,
 	onScreen: 0,
 	LonScreen: 0,
 	frame: 0,
@@ -2994,7 +3024,7 @@ var airlightning = {
 	// Spawn
 	shoot: function(){
 	if(this.cd == 0){
-		this.cd = 120;
+		this.cd = this.cdTop;
 		this.onScreen = 1;
 		this.timeLeft = 360;
 		this.frame = 0;
@@ -3005,9 +3035,10 @@ var airlightning = {
 	}
 	
 };
-// Teleport and Heal: Heals user by 1 and casts Ice
+// Teleport+Heal: Heals user by 1 and casts Ice
 var mysticearth = {
 	cd: 0,
+	cdTop: 300,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
@@ -3017,7 +3048,7 @@ var mysticearth = {
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
 			var currentMysticcd = mystic.cd;
-			this.cd = 300;
+			this.cd = this.cdTop;
 			mystic.cd = 0;
 			earth.cd = 0;
 			mystic.shoot();
@@ -3035,7 +3066,9 @@ var waterfire = {
 	height: 16,
 	timeLeft: 0,
 	cd: 0,
+	cdTop: 300,
 	cd2: 0,
+	cd2Top: 300,
 	index: 1,
 	Iindex: 0,
 	speed: 12,
@@ -3051,7 +3084,7 @@ var waterfire = {
 				longpulse.play();
 				this.played = 1;
 			}
-			if(spell == "Explosive Orbs"){
+			if(spell == "Explosive Ring"){
 				if(this.index < 3){
 					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
 					this.index++;
@@ -3064,7 +3097,7 @@ var waterfire = {
 					}
 				}
 			}
-			if(spell == "Frozen Orbs"){
+			if(spell == "Frozen Ring"){
 				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
 				this.Iindex++;
 				if(this.Iindex >= 6){
@@ -3085,13 +3118,13 @@ var waterfire = {
 			for(E in AllEnemies){
 				if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
-					if(spell == "Explosive Orbs"){
+					if(spell == "Explosive Ring"){
 						Wfire.x = this.x;
 						Wfire.y = this.y;
 						Wfire.onScreen = 1;
 						Wfire.shoot();
 					}	
-					else if(spell == "Frozen Orbs"){
+					else if(spell == "Frozen Ring"){
 						IBubble.x = this.x;
 						IBubble.y = this.y;
 						IBubble.onScreen = 1;
@@ -3102,13 +3135,13 @@ var waterfire = {
 			}
 			if(obsCollision(obstacle1, this, this.dir) || obsCollision(obstacle2, this, this.dir) || obsCollision(obstacle3, this, this.dir)
 				|| this.x < 8 || this.y < 8 || this.x > 792 || this.y > 568){
-				if(spell == "Explosive Orbs"){
+				if(spell == "Explosive Ring"){
 					Wfire.x = this.x;
 					Wfire.y = this.y;
 					Wfire.onScreen = 1;
 					Wfire.shoot();
 				}
-				else if(spell == "Frozen Orbs"){
+				else if(spell == "Frozen Ring"){
 					IBubble.x = this.x;
 					IBubble.y = this.y;
 					IBubble.onScreen = 1;
@@ -3122,12 +3155,12 @@ var waterfire = {
 	},
 	// Spawn
 	shoot: function(){
-	if(spell == "Explosive Orbs"){
+	if(spell == "Explosive Ring"){
 		if(this.cd == 0){
 			this.x = player.x;
 			this.y = player.y;
 			this.dir = "W";
-			this.cd = 300;
+			this.cd = this.cdTop;
 			this.onScreen = 1;
 			this.played=0;
 			for(W in waterFires){
@@ -3142,13 +3175,13 @@ var waterfire = {
 			waterfire8.shoot();
 		}
 	}
-	else if(spell == "Frozen Orbs"){
+	else if(spell == "Frozen Ring"){
 		if(this.cd2 == 0){
 			this.x = player.x;
 			this.y = player.y;
 			this.dir = "W";
 			this.played=0;
-			this.cd2 = 300;
+			this.cd2 = this.cd2Top;
 			this.onScreen = 1;
 			for(W in waterFires){
 				waterFires[W].used = 0;
@@ -3178,7 +3211,7 @@ var waterfire2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(spell == "Explosive Orbs"){
+			if(spell == "Explosive Ring"){
 				if(this.index < 3){
 					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
 					this.index++;
@@ -3191,7 +3224,7 @@ var waterfire2 = {
 					}
 				}
 			}
-			if(spell == "Frozen Orbs"){
+			if(spell == "Frozen Ring"){
 				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
 				this.Iindex++;
 				if(this.Iindex >= 6){
@@ -3206,13 +3239,13 @@ var waterfire2 = {
 			for(E in AllEnemies){
 				if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
-					if(spell == "Explosive Orbs"){
+					if(spell == "Explosive Ring"){
 						Wfire2.x = this.x;
 						Wfire2.y = this.y;
 						Wfire2.onScreen = 1;
 						Wfire2.shoot();
 					}	
-					else if(spell == "Frozen Orbs"){
+					else if(spell == "Frozen Ring"){
 						IBubble2.x = this.x;
 						IBubble2.y = this.y;
 						IBubble2.onScreen = 1;
@@ -3223,13 +3256,13 @@ var waterfire2 = {
 			}
 			if(obsCollision(obstacle1, this, this.dir) || obsCollision(obstacle2, this, this.dir) || obsCollision(obstacle3, this, this.dir)
 				|| this.x < 8 || this.y < 8 || this.x > 792 || this.y > 568){
-				if(spell == "Explosive Orbs"){
+				if(spell == "Explosive Ring"){
 					Wfire2.x = this.x;
 					Wfire2.y = this.y;
 					Wfire2.onScreen = 1;
 					Wfire2.shoot();
 				}
-				else if(spell == "Frozen Orbs"){
+				else if(spell == "Frozen Ring"){
 					IBubble2.x = this.x;
 					IBubble2.y = this.y;
 					IBubble2.onScreen = 1;
@@ -3264,7 +3297,7 @@ var waterfire3 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(spell == "Explosive Orbs"){
+			if(spell == "Explosive Ring"){
 				if(this.index < 3){
 					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
 					this.index++;
@@ -3277,7 +3310,7 @@ var waterfire3 = {
 					}
 				}
 			}
-			if(spell == "Frozen Orbs"){
+			if(spell == "Frozen Ring"){
 				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
 				this.Iindex++;
 				if(this.Iindex >= 6){
@@ -3292,13 +3325,13 @@ var waterfire3 = {
 			for(E in AllEnemies){
 				if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
-					if(spell == "Explosive Orbs"){
+					if(spell == "Explosive Ring"){
 						Wfire3.x = this.x;
 						Wfire3.y = this.y;
 						Wfire3.onScreen = 1;
 						Wfire3.shoot();
 					}	
-					else if(spell == "Frozen Orbs"){
+					else if(spell == "Frozen Ring"){
 						IBubble3.x = this.x;
 						IBubble3.y = this.y;
 						IBubble3.onScreen = 1;
@@ -3309,13 +3342,13 @@ var waterfire3 = {
 			}
 			if(obsCollision(obstacle1, this, this.dir) || obsCollision(obstacle2, this, this.dir) || obsCollision(obstacle3, this, this.dir)
 				|| this.x < 8 || this.y < 8 || this.x > 792 || this.y > 568){
-				if(spell == "Explosive Orbs"){
+				if(spell == "Explosive Ring"){
 					Wfire3.x = this.x;
 					Wfire3.y = this.y;
 					Wfire3.onScreen = 1;
 					Wfire3.shoot();
 				}
-				else if(spell == "Frozen Orbs"){
+				else if(spell == "Frozen Ring"){
 					IBubble3.x = this.x;
 					IBubble3.y = this.y;
 					IBubble3.onScreen = 1;
@@ -3350,7 +3383,7 @@ var waterfire4 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(spell == "Explosive Orbs"){
+			if(spell == "Explosive Ring"){
 				if(this.index < 3){
 					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
 					this.index++;
@@ -3363,7 +3396,7 @@ var waterfire4 = {
 					}
 				}
 			}
-			if(spell == "Frozen Orbs"){
+			if(spell == "Frozen Ring"){
 				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
 				this.Iindex++;
 				if(this.Iindex >= 6){
@@ -3378,13 +3411,13 @@ var waterfire4 = {
 			for(E in AllEnemies){
 				if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
-					if(spell == "Explosive Orbs"){
+					if(spell == "Explosive Ring"){
 						Wfire4.x = this.x;
 						Wfire4.y = this.y;
 						Wfire4.onScreen = 1;
 						Wfire4.shoot();
 					}	
-					else if(spell == "Frozen Orbs"){
+					else if(spell == "Frozen Ring"){
 						IBubble4.x = this.x;
 						IBubble4.y = this.y;
 						IBubble4.onScreen = 1;
@@ -3395,13 +3428,13 @@ var waterfire4 = {
 			}
 			if(obsCollision(obstacle1, this, this.dir) || obsCollision(obstacle2, this, this.dir) || obsCollision(obstacle3, this, this.dir)
 				|| this.x < 8 || this.y < 8 || this.x > 792 || this.y > 568){
-				if(spell == "Explosive Orbs"){
+				if(spell == "Explosive Ring"){
 					Wfire4.x = this.x;
 					Wfire4.y = this.y;
 					Wfire4.onScreen = 1;
 					Wfire4.shoot();
 				}
-				else if(spell == "Frozen Orbs"){
+				else if(spell == "Frozen Ring"){
 					IBubble4.x = this.x;
 					IBubble4.y = this.y;
 					IBubble4.onScreen = 1;
@@ -3436,7 +3469,7 @@ var waterfire5 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(spell == "Explosive Orbs"){
+			if(spell == "Explosive Ring"){
 				if(this.index < 3){
 					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
 					this.index++;
@@ -3449,7 +3482,7 @@ var waterfire5 = {
 					}
 				}
 			}
-			if(spell == "Frozen Orbs"){
+			if(spell == "Frozen Ring"){
 				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
 				this.Iindex++;
 				if(this.Iindex >= 6){
@@ -3464,13 +3497,13 @@ var waterfire5 = {
 			for(E in AllEnemies){
 				if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
-					if(spell == "Explosive Orbs"){
+					if(spell == "Explosive Ring"){
 						Wfire5.x = this.x;
 						Wfire5.y = this.y;
 						Wfire5.onScreen = 1;
 						Wfire5.shoot();
 					}	
-					else if(spell == "Frozen Orbs"){
+					else if(spell == "Frozen Ring"){
 						IBubble5.x = this.x;
 						IBubble5.y = this.y;
 						IBubble5.onScreen = 1;
@@ -3481,13 +3514,13 @@ var waterfire5 = {
 			}
 			if(obsCollision(obstacle1, this, this.dir) || obsCollision(obstacle2, this, this.dir) || obsCollision(obstacle3, this, this.dir)
 				|| this.x < 8 || this.y < 8 || this.x > 792 || this.y > 568){
-				if(spell == "Explosive Orbs"){
+				if(spell == "Explosive Ring"){
 					Wfire5.x = this.x;
 					Wfire5.y = this.y;
 					Wfire5.onScreen = 1;
 					Wfire5.shoot();
 				}
-				else if(spell == "Frozen Orbs"){
+				else if(spell == "Frozen Ring"){
 					IBubble5.x = this.x;
 					IBubble5.y = this.y;
 					IBubble5.onScreen = 1;
@@ -3522,7 +3555,7 @@ var waterfire6 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(spell == "Explosive Orbs"){
+			if(spell == "Explosive Ring"){
 				if(this.index < 3){
 					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
 					this.index++;
@@ -3535,7 +3568,7 @@ var waterfire6 = {
 					}
 				}
 			}
-			if(spell == "Frozen Orbs"){
+			if(spell == "Frozen Ring"){
 				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
 				this.Iindex++;
 				if(this.Iindex >= 6){
@@ -3550,13 +3583,13 @@ var waterfire6 = {
 			for(E in AllEnemies){
 				if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
-					if(spell == "Explosive Orbs"){
+					if(spell == "Explosive Ring"){
 						Wfire6.x = this.x;
 						Wfire6.y = this.y;
 						Wfire6.onScreen = 1;
 						Wfire6.shoot();
 					}	
-					else if(spell == "Frozen Orbs"){
+					else if(spell == "Frozen Ring"){
 						IBubble6.x = this.x;
 						IBubble6.y = this.y;
 						IBubble6.onScreen = 1;
@@ -3567,13 +3600,13 @@ var waterfire6 = {
 			}
 			if(obsCollision(obstacle1, this, this.dir) || obsCollision(obstacle2, this, this.dir) || obsCollision(obstacle3, this, this.dir)
 				|| this.x < 8 || this.y < 8 || this.x > 792 || this.y > 568){
-				if(spell == "Explosive Orbs"){
+				if(spell == "Explosive Ring"){
 					Wfire6.x = this.x;
 					Wfire6.y = this.y;
 					Wfire6.onScreen = 1;
 					Wfire6.shoot();
 				}
-				else if(spell == "Frozen Orbs"){
+				else if(spell == "Frozen Ring"){
 					IBubble6.x = this.x;
 					IBubble6.y = this.y;
 					IBubble6.onScreen = 1;
@@ -3608,7 +3641,7 @@ var waterfire7 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(spell == "Explosive Orbs"){
+			if(spell == "Explosive Ring"){
 				if(this.index < 3){
 					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
 					this.index++;
@@ -3621,7 +3654,7 @@ var waterfire7 = {
 					}
 				}
 			}
-			if(spell == "Frozen Orbs"){
+			if(spell == "Frozen Ring"){
 				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
 				this.Iindex++;
 				if(this.Iindex >= 6){
@@ -3636,13 +3669,13 @@ var waterfire7 = {
 			for(E in AllEnemies){
 				if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
-					if(spell == "Explosive Orbs"){
+					if(spell == "Explosive Ring"){
 						Wfire7.x = this.x;
 						Wfire7.y = this.y;
 						Wfire7.onScreen = 1;
 						Wfire7.shoot();
 					}	
-					else if(spell == "Frozen Orbs"){
+					else if(spell == "Frozen Ring"){
 						IBubble7.x = this.x;
 						IBubble7.y = this.y;
 						IBubble7.onScreen = 1;
@@ -3653,13 +3686,13 @@ var waterfire7 = {
 			}
 			if(obsCollision(obstacle1, this, this.dir) || obsCollision(obstacle2, this, this.dir) || obsCollision(obstacle3, this, this.dir)
 				|| this.x < 8 || this.y < 8 || this.x > 792 || this.y > 568){
-				if(spell == "Explosive Orbs"){
+				if(spell == "Explosive Ring"){
 					Wfire7.x = this.x;
 					Wfire7.y = this.y;
 					Wfire7.onScreen = 1;
 					Wfire7.shoot();
 				}
-				else if(spell == "Frozen Orbs"){
+				else if(spell == "Frozen Ring"){
 					IBubble7.x = this.x;
 					IBubble7.y = this.y;
 					IBubble7.onScreen = 1;
@@ -3694,7 +3727,7 @@ var waterfire8 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(spell == "Explosive Orbs"){
+			if(spell == "Explosive Ring"){
 				if(this.index < 3){
 					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
 					this.index++;
@@ -3707,7 +3740,7 @@ var waterfire8 = {
 					}
 				}
 			}
-			if(spell == "Frozen Orbs"){
+			if(spell == "Frozen Ring"){
 				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
 				this.Iindex++;
 				if(this.Iindex >= 6){
@@ -3722,13 +3755,13 @@ var waterfire8 = {
 			for(E in AllEnemies){
 				if(collision(this.dir, this, AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
-					if(spell == "Explosive Orbs"){
+					if(spell == "Explosive Ring"){
 						Wfire8.x = this.x;
 						Wfire8.y = this.y;
 						Wfire8.onScreen = 1;
 						Wfire8.shoot();
 					}	
-					else if(spell == "Frozen Orbs"){
+					else if(spell == "Frozen Ring"){
 						IBubble8.x = this.x;
 						IBubble8.y = this.y;
 						IBubble8.onScreen = 1;
@@ -3739,13 +3772,13 @@ var waterfire8 = {
 			}
 			if(obsCollision(obstacle1, this, this.dir) || obsCollision(obstacle2, this, this.dir) || obsCollision(obstacle3, this, this.dir)
 				|| this.x < 8 || this.y < 8 || this.x > 792 || this.y > 568){
-				if(spell == "Explosive Orbs"){
+				if(spell == "Explosive Ring"){
 					Wfire8.x = this.x;
 					Wfire8.y = this.y;
 					Wfire8.onScreen = 1;
 					Wfire8.shoot();
 				}
-				else if(spell == "Frozen Orbs"){
+				else if(spell == "Frozen Ring"){
 					IBubble8.x = this.x;
 					IBubble8.y = this.y;
 					IBubble8.onScreen = 1;
@@ -4762,9 +4795,10 @@ var IBubble8 = {
 	}
 };
 var IBubbles = {1: IBubble, 2: IBubble2, 3: IBubble3, 4: IBubble4, 5: IBubble5, 6: IBubble6, 7: IBubble7, 8: IBubble8};
-// Shield and Heal: Heals user by 1 and casts Bubble Shield
+// Shield and Heal: Heals user by 1 and casts Bubble Ring
 var waterearth = {
 	cd: 0,
+	cdTop: 1020,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
@@ -4774,7 +4808,7 @@ var waterearth = {
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
 			var currentWatercd = water.cd;
-			this.cd = 1020;
+			this.cd = this.cdTop;
 			water.cd = 0;
 			earth.cd = 0;
 			water.shoot();
@@ -4790,6 +4824,7 @@ var waterair = {
 	x: -100,
 	y: -200,
 	cd: 0,
+	cdTop: 150,
 	onScreen: 0,
 	frame: 0,
 	mode: 0,
@@ -4809,7 +4844,7 @@ var waterair = {
 				wairParticles[W].y = this.y;
 				wairParticles[W].dir = wairParticles[W].mdir;
 			}
-			this.cd = 150;
+			this.cd = this.cdTop;
 			this.frame = 0;
 			this.onScreen = 1;
 			longpew.currentTime=0;
@@ -5211,6 +5246,7 @@ var wairParticles = {1: wairParticleW, 2: wairParticleA, 3: wairParticleS, 4: wa
 var waterlightning = {	
 	onScreen: 0,
 	cd: 0,
+	cdTop: 900,
 	frame: 0,
 	tick: function(){
 		if(this.cd > 0){
@@ -5266,7 +5302,7 @@ var waterlightning = {
 	shoot: function(){
 		if(this.cd == 0){
 			this.onScreen = 1;
-			this.cd = 900;
+			this.cd = this.cdTop;
 			this.frame = 0;
 		}
 	}
@@ -5629,6 +5665,7 @@ var darkfire = {
 	width: 32,
 	height: 32,
 	cd: 0,
+	cdTop: 30,
 	onScreen: 0,
 	used: 0,
 	inventory: 5,
@@ -5641,35 +5678,35 @@ var darkfire = {
 			if(this.onScreen == 0){
 				this.x = player.x;
 				this.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				this.onScreen = 1;
 				this.used = 0;
 			}
 			else if(darkfire12.onScreen == 0){
 				darkfire12.x = player.x;
 				darkfire12.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkfire12.onScreen = 1;
 				darkfire12.used = 0;
 			}
 			else if(darkfire13.onScreen == 0){
 				darkfire13.x = player.x;
 				darkfire13.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkfire13.onScreen = 1;
 				darkfire13.used = 0;
 			}
 			else if(darkfire14.onScreen == 0){
 				darkfire14.x = player.x;
 				darkfire14.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkfire14.onScreen = 1;
 				darkfire14.used = 0;
 			}
 			else if(darkfire15.onScreen == 0){
 				darkfire15.x = player.x;
 				darkfire15.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkfire15.onScreen = 1;
 				darkfire15.used = 0;
 			}
@@ -6159,7 +6196,7 @@ function firespikeMove(S){
 	}
 	else if(S.onScreen == 1){
 		for (E in AllEnemies){
-			if(collision(AllEnemies[E].dir, AllEnemies[E], S) || contained(AllEnemies[E], S)){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], S) || contained(AllEnemies[E], S) && AllEnemies[E].onTree == 0){
 				if(!S.ice && !S.light){
 					player.currpower = player.power;
 					player.power+=1;
@@ -6266,6 +6303,7 @@ var darkice = {
 	width: 32,
 	height: 32,
 	cd: 0,
+	cdTop: 30,
 	onScreen: 0,
 	used: 0,
 	inventory: 5,
@@ -6278,35 +6316,35 @@ var darkice = {
 			if(this.onScreen == 0){
 				this.x = player.x;
 				this.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				this.onScreen = 1;
 				this.used = 0;
 			}
 			else if(darkice12.onScreen == 0){
 				darkice12.x = player.x;
 				darkice12.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkice12.onScreen = 1;
 				darkice12.used = 0;
 			}
 			else if(darkice13.onScreen == 0){
 				darkice13.x = player.x;
 				darkice13.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkice13.onScreen = 1;
 				darkice13.used = 0;
 			}
 			else if(darkice14.onScreen == 0){
 				darkice14.x = player.x;
 				darkice14.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkice14.onScreen = 1;
 				darkice14.used = 0;
 			}
 			else if(darkice15.onScreen == 0){
 				darkice15.x = player.x;
 				darkice15.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkice15.onScreen = 1;
 				darkice15.used = 0;
 			}
@@ -6664,6 +6702,7 @@ var darkearth = {
 	width: 2400,
 	height: 1000,
 	cd: 0,
+	cdTop: 360,
 	speed: 4,
 	used: 0,
 	HealAmount: 0,
@@ -6712,7 +6751,7 @@ var darkearth = {
 		if(this.cd == 0){
 			this.x = player.x;
 			this.y = player.y;
-			this.cd = 360;
+			this.cd = this.cdTop;
 			this.timeLeft = 15;
 			this.used = 0;
 			this.HealAmount = player.maxhp - player.hp;
@@ -6720,13 +6759,14 @@ var darkearth = {
 		}
 	}	
 };
-// Static Field: Makes a Static Trap, which chains up to 5 times
+// staticm Field: Makes a staticm Trap, which chains up to 5 times
 var darklightning = {
 	x: -100,
 	y: -200,
 	width: 32,
 	height: 32,
 	cd: 0,
+	cdTop: 30,
 	onScreen: 0,
 	timeLeft: -1,
 	used: 0,
@@ -6741,14 +6781,14 @@ var darklightning = {
 			if(this.onScreen == 0){
 				this.x = player.x;
 				this.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				this.onScreen = 1;
 				this.used = 0;
 			}
 			else if(darklightning12.onScreen == 0){
 				darklightning12.x = player.x;
 				darklightning12.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darklightning12.onScreen = 1;
 				darklightning12.used = 0;
 			}
@@ -6806,7 +6846,7 @@ var darklightningExplosion = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					if(this.chained == 0){
 						darklightningExplosion2.x = AllEnemies[E].x;
 						darklightningExplosion2.y = AllEnemies[E].y;
@@ -6889,7 +6929,7 @@ var darklightningExplosion2 = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					if(this.chained == 0){
 						darklightningExplosion3.x = AllEnemies[E].x;
 						darklightningExplosion3.y = AllEnemies[E].y;
@@ -6973,7 +7013,7 @@ var darklightningExplosion3 = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					if(this.chained == 0){
 						darklightningExplosion4.x = AllEnemies[E].x;
 						darklightningExplosion4.y = AllEnemies[E].y;
@@ -7057,7 +7097,7 @@ var darklightningExplosion4 = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					if(this.chained == 0){
 						darklightningExplosion5.x = AllEnemies[E].x;
 						darklightningExplosion5.y = AllEnemies[E].y;
@@ -7141,7 +7181,7 @@ var darklightningExplosion5 = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					player.currpower = player.power;
 					player.power+=1;
 					onHit(AllEnemies[E]);
@@ -7218,7 +7258,7 @@ var darklightningExplosion6 = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					if(this.chained == 0){
 						darklightningExplosion7.x = AllEnemies[E].x;
 						darklightningExplosion7.y = AllEnemies[E].y;
@@ -7302,7 +7342,7 @@ var darklightningExplosion7 = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					if(this.chained == 0){
 						darklightningExplosion8.x = AllEnemies[E].x;
 						darklightningExplosion8.y = AllEnemies[E].y;
@@ -7386,7 +7426,7 @@ var darklightningExplosion8 = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					if(this.chained == 0){
 						darklightningExplosion9.x = AllEnemies[E].x;
 						darklightningExplosion9.y = AllEnemies[E].y;
@@ -7470,7 +7510,7 @@ var darklightningExplosion9 = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					if(this.chained == 0){
 						darklightningExplosion10.x = AllEnemies[E].x;
 						darklightningExplosion10.y = AllEnemies[E].y;
@@ -7554,7 +7594,7 @@ var darklightningExplosion10 = {
 		}
 		else if(this.onScreen ==1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			for (E in AllEnemies){
-				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this) || collision(AllEnemies[E].dir, AllEnemies[E], this) && AllEnemies[E].onTree == 0){
 					player.currpower = player.power;
 					player.power+=1;
 					onHit(AllEnemies[E]);
@@ -7607,6 +7647,7 @@ var darkair = {
 	width: 32,
 	height: 32,
 	cd: 0,
+	cdTop: 30,
 	onScreen: 0,
 	used: 0,
 	timer: 0,
@@ -7619,7 +7660,7 @@ var darkair = {
 			if(this.onScreen == 0 && !(collision(player.dir, player, darkair2) || collision(player.dir, player, darkair3) || collision(player.dir, player, darkair4) || collision(player.dir, player, darkair5))){
 				this.x = player.x;
 				this.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				this.onScreen = 1;
 				this.used = 0;
 				this.timer = 5;
@@ -7631,7 +7672,7 @@ var darkair = {
 			else if(darkair2.onScreen == 0 && !(collision(player.dir, player, this) || collision(player.dir, player, darkair3) || collision(player.dir, player, darkair4) || collision(player.dir, player, darkair5))){
 				darkair2.x = player.x;
 				darkair2.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkair2.onScreen = 1;
 				darkair2.used = 0;
 				darkair2.timer = 5;
@@ -7643,7 +7684,7 @@ var darkair = {
 			else if(darkair3.onScreen == 0 && !(collision(player.dir, player, darkair2) || collision(player.dir, player, this) || collision(player.dir, player, darkair4) || collision(player.dir, player, darkair5))){
 				darkair3.x = player.x;
 				darkair3.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkair3.onScreen = 1;
 				darkair3.used = 0;
 				darkair3.timer = 5;
@@ -7655,7 +7696,7 @@ var darkair = {
 			else if(darkair4.onScreen == 0 && !(collision(player.dir, player, darkair2) || collision(player.dir, player, darkair3) || collision(player.dir, player, this) || collision(player.dir, player, darkair5))){
 				darkair4.x = player.x;
 				darkair4.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkair4.onScreen = 1;
 				darkair4.used = 0;
 				darkair4.timer = 5;
@@ -7667,7 +7708,7 @@ var darkair = {
 			else if(darkair5.onScreen == 0 && !(collision(player.dir, player, darkair2) || collision(player.dir, player, darkair3) || collision(player.dir, player, darkair4) || collision(player.dir, player, this))){
 				darkair5.x = player.x;
 				darkair5.y = player.y;
-				this.cd = 30;
+				this.cd = this.cdTop;
 				darkair5.onScreen = 1;
 				darkair5.used = 0;
 				darkair5.timer = 5;
@@ -7897,6 +7938,7 @@ var darkwater = {
 	cd: 0,
 	onScreen: 0,
 	hp: 0,
+	cdTop: 15+this.hp*30,
 	cast: -1,
 	index: 1,
 	hptimer: 0,
@@ -7996,6 +8038,7 @@ var darkwater = {
 		if(this.cd == 0){
 			if(this.hp < 3){
 				this.cd = 15+this.hp*30;
+				this.cdTop = 15+this.hp*30;
 				castingBar.onScreen = 1;
 				castingBar.cast = 15+this.hp*30;
 				castingBar.castmax = 15+this.hp*30;
@@ -8007,4 +8050,4 @@ var darkwater = {
 };
 //--------------------------------------------------------------- Spell Array -------------------------------------------------------//
 var AllFire = {1: fire, 2: fire2, 3: fireice, 4: firelightningf1, 5: firelightningf2, 6: firelightningf3, 7: firelightningf4,
-				8: Mfire, 9: Mfire2, 10: Mfire3, 11: Mfire4, 12: Globblyfire, 13: Globblyfire2, 14: Globblyfire3};
+				8: Mfire, 9: Mfire2, 10: Mfire3, 11: Mfire4};
