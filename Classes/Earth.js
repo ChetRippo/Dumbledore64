@@ -5,7 +5,7 @@ var earth = {
 	x: -100,
 	y: -200,
 	cd: 0,
-	cdTop: 720,
+	cdTop: 600,
 	speed: 4,
 	cast: 0,
 	used: 0,
@@ -49,12 +49,12 @@ var earth = {
 		this.x = player.x;
 		this.y = player.y;
 		this.cd = this.cdTop;
-		this.cast = 30;
-		cd = 30;
+		this.cast = 20;
+		cd = 20;
 		this.timeLeft = 15;
 		castingBar.onScreen = 1;
-		castingBar.cast = 30;
-		castingBar.castmax = 30;
+		castingBar.cast = 20;
+		castingBar.castmax = 20;
 		this.used = 0;
 	}
 	}	
@@ -62,7 +62,7 @@ var earth = {
 //earth2: Heals 1 hp every 3 seconds for 6 seconds. Every 3 seconds a rootstrike is launched. You are immobile.
 var earth2 = {
 	cd: 0,
-	cdTop: 720,
+	cdTop: 600,
 	cast: 0,
 	used: 0,
 	timeLeft: -1,
@@ -76,7 +76,7 @@ var earth2 = {
 		if(this.timeLeft >= 0){
 			this.timeLeft-=1;
 		}
-		if(this.timeLeft == 90 && deathTimer == -1){
+		if(this.timeLeft == 45 && deathTimer == -1){
 			Fwave.currentTime=0;
 			Fwave.play();
 			earth2rootStrike5.x = player.x + 32;
@@ -100,8 +100,8 @@ var earth2 = {
 			earth.shoot();
 			earth.cast = 0;
 			castingBar.onScreen = 1;
-			castingBar.cast = 90;
-			castingBar.castmax = 180;
+			castingBar.cast = 45;
+			castingBar.castmax = 90;
 			earth.cd = currentEarthcd;
 		}
 		if(this.timeLeft == 0 && deathTimer == -1){
@@ -151,7 +151,7 @@ var earth2 = {
 			earth.cast = 0;
 			castingBar.onScreen = 1;
 			castingBar.cast = 0;
-			castingBar.castmax = 180;
+			castingBar.castmax = 90;
 			earth.cd = currentEarthcd;
 			for(R in earth2roots1){
 				earth2roots1[R].onScreen = 0;
@@ -182,6 +182,9 @@ var earth2 = {
 		}
 	},
 	shoot: function(){
+		if(this.cast == -1){
+			this.cast = 0;
+		}
 		if(this.cd == 0 && this.cast == 0 && deathTimer == -1){
 			Fwave.currentTime=0;
 			Fwave.play();
@@ -202,12 +205,12 @@ var earth2 = {
 			earth2rootStrike4.onScreen = 1;
 			earth2rootStrike4.movement = true;
 			this.cd = this.cdTop;
-			this.cast = 180;
-			this.timeLeft = 180;
-			cd = 180;
+			this.cast = 90;
+			this.timeLeft = 90;
+			cd = 90;
 			castingBar.onScreen = 1;
-			castingBar.cast = 180;
-			castingBar.castmax = 180;
+			castingBar.cast = 90;
+			castingBar.castmax = 90;
 			this.used = 0;
 		}
 	}
@@ -1107,13 +1110,13 @@ var earth2rootStrike = {
 			this.hptimer-=1;
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
+		if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
 		}
 		else{
 			ctx.fillStyle = "#330000";
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.dirct <= 0){
@@ -1136,7 +1139,7 @@ var earth2rootStrike = {
 				}
 			}
 		}
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(earth2rootstr.onScreen == 0){
 				earth2rootstr.onScreen = 1;
 				earth2rootstr.x = this.x;
@@ -1247,13 +1250,13 @@ var earth2rootStrike2 = {
 			this.hptimer-=1;
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
+		if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
 		}
 		else{
 			ctx.fillStyle = "#330000";
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.dirct <= 0){
@@ -1276,7 +1279,7 @@ var earth2rootStrike2 = {
 				}
 			}
 		}
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(earth2rootstr21.onScreen == 0){
 				earth2rootstr21.onScreen = 1;
 				earth2rootstr21.x = this.x;
@@ -1387,13 +1390,13 @@ var earth2rootStrike3 = {
 			this.hptimer-=1;
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
+		if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
 		}
 		else{
 			ctx.fillStyle = "#330000";
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.dirct <= 0){
@@ -1416,7 +1419,7 @@ var earth2rootStrike3 = {
 				}
 			}
 		}
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(earth2rootstr31.onScreen == 0){
 				earth2rootstr31.onScreen = 1;
 				earth2rootstr31.x = this.x;
@@ -1527,13 +1530,13 @@ var earth2rootStrike4 = {
 			this.hptimer-=1;
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
+		if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
 		}
 		else{
 			ctx.fillStyle = "#330000";
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.dirct <= 0){
@@ -1556,7 +1559,7 @@ var earth2rootStrike4 = {
 				}
 			}
 		}
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(earth2rootstr41.onScreen == 0){
 				earth2rootstr41.onScreen = 1;
 				earth2rootstr41.x = this.x;
@@ -1666,13 +1669,13 @@ var earth2rootStrike5 = {
 			this.hptimer-=1;
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
+		if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
 		}
 		else{
 			ctx.fillStyle = "#330000";
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.dirct <= 0){
@@ -1695,7 +1698,7 @@ var earth2rootStrike5 = {
 				}
 			}
 		}
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(earth3rootstr.onScreen == 0){
 				earth3rootstr.onScreen = 1;
 				earth3rootstr.x = this.x;
@@ -1806,13 +1809,13 @@ var earth2rootStrike6 = {
 			this.hptimer-=1;
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
+		if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
 		}
 		else{
 			ctx.fillStyle = "#330000";
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.dirct <= 0){
@@ -1835,7 +1838,7 @@ var earth2rootStrike6 = {
 				}
 			}
 		}
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(earth3rootstr21.onScreen == 0){
 				earth3rootstr21.onScreen = 1;
 				earth3rootstr21.x = this.x;
@@ -1946,13 +1949,13 @@ var earth2rootStrike7 = {
 			this.hptimer-=1;
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
+		if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
 		}
 		else{
 			ctx.fillStyle = "#330000";
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.dirct <= 0){
@@ -1975,7 +1978,7 @@ var earth2rootStrike7 = {
 				}
 			}
 		}
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(earth3rootstr31.onScreen == 0){
 				earth3rootstr31.onScreen = 1;
 				earth3rootstr31.x = this.x;
@@ -2086,13 +2089,13 @@ var earth2rootStrike8 = {
 			this.hptimer-=1;
 		}
 		ctx.globalAlpha = Alpha*0.5;
-		if(this.hptimer/2 != Math.round(this.hptimer/2)){
+		if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
 		}
 		else{
 			ctx.fillStyle = "#330000";
 		}
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
 		if(this.dirct <= 0){
@@ -2115,7 +2118,7 @@ var earth2rootStrike8 = {
 				}
 			}
 		}
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(earth3rootstr41.onScreen == 0){
 				earth3rootstr41.onScreen = 1;
 				earth3rootstr41.x = this.x;

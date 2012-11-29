@@ -7,14 +7,41 @@ var redCube = {
 	width: 32,
 	height: 32,
 	timeLeft: 0,
-	
 	index: 1,
 	stage: "up",
-	
+	faded: false,
+	fadeCounter: 0,	
+	arrowIndex: 1,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(Fires[this.index], this.x-this.width/2, this.y-this.height/2);
-			this.timeLeft-=1;
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			if(STATE == "Tutorial" && (spell1 == "N/A" || spell2 == "N/A")){
+				if(this.arrowIndex < 6){
+					ctx.drawImage(PickupArrow1, this.x-this.width*0.5, this.y-this.height*0.5 - 36);
+				}
+				else{
+					ctx.drawImage(PickupArrow2, this.x-this.width*0.5, this.y-this.height*0.5 - 36);
+				}
+				this.arrowIndex++;
+				if(this.arrowIndex >= 11){
+					this.arrowIndex = 1;
+				}
+			}
+			ctx.drawImage(Fires[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
+			if(STATE != "Tutorial"){
+				this.timeLeft-=1;
+			}
 			if(this.stage == "up"){
 				this.index++;
 			}
@@ -34,6 +61,8 @@ var redCube = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
@@ -95,10 +124,23 @@ var tealCube = {
 	timeLeft: 0,
 	index: 1,
 	stage: "up",
-	
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(Ices[this.index], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(Ices[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			if(this.stage == "up"){
 				this.index++;
@@ -119,6 +161,8 @@ var tealCube = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
@@ -180,10 +224,23 @@ var greenCube = {
 	timeLeft: 0,
 	index: 1,
 	stage: "up",
-	
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(Earths[this.index], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(Earths[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			if(this.stage == "up"){
 				this.index++;
@@ -204,6 +261,8 @@ var greenCube = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
@@ -265,10 +324,23 @@ var yellowCube = {
 	timeLeft: 0,
 	index: 1,
 	stage: "up",
-	
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(Thunders[this.index], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(Thunders[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			if(this.stage == "up"){
 				this.index++;
@@ -289,6 +361,8 @@ var yellowCube = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
@@ -350,11 +424,41 @@ var greyCube = {
 	timeLeft: 0,
 	index: 1,
 	stage: "up",
-	
+	faded: false,
+	fadeCounter: 0,
+	arrowIndex: 1,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(Winds[this.index], this.x-this.width/2, this.y-this.height/2);
-			this.timeLeft-=1;
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			if(STATE == "Tutorial" && (spell1 == "N/A" || spell2 == "N/A")){
+				if(this.arrowIndex < 6){
+					ctx.drawImage(PickupArrow1, this.x-this.width*0.5, this.y-this.height*0.5 - 36);
+				}
+				else{
+					ctx.drawImage(PickupArrow2, this.x-this.width*0.5, this.y-this.height*0.5 - 36);
+				}
+				this.arrowIndex++;
+				if(this.arrowIndex >= 11){
+					this.arrowIndex = 1;
+				}
+			}
+			ctx.drawImage(Winds[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
+			
+			if(STATE != "Tutorial"){
+				this.timeLeft-=1;
+			}
+			
 			if(this.stage == "up"){
 				this.index++;
 			}
@@ -374,6 +478,8 @@ var greyCube = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
@@ -435,10 +541,23 @@ var purpleCube = {
 	timeLeft: 0,
 	index: 1,
 	stage: "up",
-	
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(Mystics[this.index], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(Mystics[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			if(this.stage == "up"){
 				this.index++;
@@ -459,6 +578,8 @@ var purpleCube = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
@@ -519,10 +640,23 @@ var blueCube = {
 	timeLeft: 0,
 	index: 1,
 	stage: "up",
-	
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(Waters[this.index], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(Waters[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			if(this.stage == "up"){
 				this.index++;
@@ -543,6 +677,8 @@ var blueCube = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
@@ -603,10 +739,23 @@ var blackCube = {
 	timeLeft: 0,
 	index: 1,
 	stage: "up",
-	
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(Darks[this.index], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(Darks[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			if(this.stage == "up"){
 				this.index++;
@@ -627,6 +776,8 @@ var blackCube = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
@@ -677,7 +828,109 @@ var blackCube = {
 		this.timeLeft = 0;
 	}
 };
-var allEleCubes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: blackCube};
+
+// light drop
+var whiteCube = {
+	type: 1,
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	timeLeft: 0,
+	index: 1,
+	stage: "up",
+	faded: false,
+	fadeCounter: 0,
+	arrowIndex: 1,
+	draw: function(){
+		if(this.timeLeft > 0){
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(Lights[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
+			this.timeLeft-=1;
+			if(this.stage == "up"){
+				this.index++;
+			}
+			else{
+				this.index-=1;
+			}
+			if(this.index == 6){
+				this.index = 5;
+				this.stage = "down";
+			}
+			else if(this.index == 0){
+				this.index = 1;
+				this.stage = "up";
+			}
+		}
+		else{
+			this.x = -100;
+			this.y = -200;
+			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
+		}
+	},
+	onHit: function(){
+		if(spell1 == "N/A"){
+			spell1 = "Light";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Light";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Light";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Light";
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		else if(spell2 == "N/A"){
+			spell2 = "Light";
+			if(typemarker.x != -100 && typemarker2.x != -100){
+				typemarker3.text = "+ Light";
+				typemarker3.x = player.x-player.width*2;
+				typemarker3.y = player.y;
+				typemarker3.timeLeft = 20;
+			}
+			else if(typemarker.x != -100){
+				typemarker2.text = "+ Light";
+				typemarker2.x = player.x-player.width*2;
+				typemarker2.y = player.y;
+				typemarker2.timeLeft = 20;
+			}
+			else{
+				typemarker.text = "+ Light";
+				typemarker.x = player.x-player.width*2;
+				typemarker.y = player.y;
+				typemarker.timeLeft = 20;
+			}
+		}
+		this.x = -100;
+		this.y = -200;
+		this.timeLeft = 0;
+	}
+};
+
+var allEleCubes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: blackCube, 9: whiteCube};
 // Random drop
 var RandomCube = {
 	type: 1,
@@ -689,11 +942,25 @@ var RandomCube = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
 			if(this.stage == "up"){
@@ -710,7 +977,7 @@ var RandomCube = {
 				this.index2 = 1;
 				this.stage = "up";
 			}
-			if(this.index > 8){
+			if(this.index > 9){
 				this.index = 1;
 			}
 		}
@@ -718,11 +985,13 @@ var RandomCube = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -743,7 +1012,7 @@ var RandomCube = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -787,13 +1056,13 @@ var RandEffect = {
 				this.used = 1;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
@@ -819,11 +1088,25 @@ var RandomCube2 = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
 			if(this.stage == "up"){
@@ -840,7 +1123,7 @@ var RandomCube2 = {
 				this.index2 = 1;
 				this.stage = "up";
 			}
-			if(this.index > 8){
+			if(this.index > 9){
 				this.index = 1;
 			}
 		}
@@ -848,11 +1131,13 @@ var RandomCube2 = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -873,7 +1158,7 @@ var RandomCube2 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -917,13 +1202,13 @@ var RandEffect2 = {
 				this.used = 1;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
@@ -949,11 +1234,25 @@ var RandomCube3 = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
 			if(this.stage == "up"){
@@ -970,7 +1269,7 @@ var RandomCube3 = {
 				this.index2 = 1;
 				this.stage = "up";
 			}
-			if(this.index > 8){
+			if(this.index > 9){
 				this.index = 1;
 			}
 		}
@@ -978,11 +1277,13 @@ var RandomCube3 = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1003,7 +1304,7 @@ var RandomCube3 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1047,13 +1348,13 @@ var RandEffect3 = {
 				this.used = 1;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
@@ -1079,11 +1380,25 @@ var RandomCube4 = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
 			if(this.stage == "up"){
@@ -1100,7 +1415,7 @@ var RandomCube4 = {
 				this.index2 = 1;
 				this.stage = "up";
 			}
-			if(this.index > 8){
+			if(this.index > 9){
 				this.index = 1;
 			}
 		}
@@ -1108,11 +1423,13 @@ var RandomCube4 = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1133,7 +1450,7 @@ var RandomCube4 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1177,13 +1494,13 @@ var RandEffect4 = {
 				this.used = 1;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
@@ -1209,11 +1526,25 @@ var RandomCube5 = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark"},
+	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
+	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	faded: false,
+	fadeCounter: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width/2, this.y-this.height/2);
+			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
+				this.faded = true;
+				this.fadeCounter = 5;
+			}
+			if(this.faded == true){
+				ctx.globalAlpha = Alpha*0.25;
+				this.fadeCounter--;
+				if(this.fadeCounter <= 0){
+					this.faded = false;
+				}
+			}
+			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
 			if(this.stage == "up"){
@@ -1230,7 +1561,7 @@ var RandomCube5 = {
 				this.index2 = 1;
 				this.stage = "up";
 			}
-			if(this.index > 8){
+			if(this.index > 9){
 				this.index = 1;
 			}
 		}
@@ -1238,11 +1569,13 @@ var RandomCube5 = {
 			this.x = -100;
 			this.y = -200;
 			this.timeLeft = 0;
+			this.faded = false;
+			this.fadeCounter = 0;
 		}
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1263,7 +1596,7 @@ var RandomCube5 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 8) + 1];
+			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1307,13 +1640,13 @@ var RandEffect5 = {
 				this.used = 1;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
@@ -1339,25 +1672,32 @@ var hpUp = {
 	
 	draw: function(){
 		if(this.boss == "treeW"){
-			ctx.drawImage(maxUP, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(maxUP, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		if(this.boss == "Dragon"){
-			ctx.drawImage(DragonmaxUP, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(DragonmaxUP, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		if(this.boss == "MasterThief"){
-			ctx.drawImage(ThiefLuckUP, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(ThiefLuckUP, this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
+		if(this.boss == "Genie"){
+			ctx.drawImage(GenieUp, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	},
 	onHit: function(){
+		StateTimer = 0;
 		if(typemarker.x != -100 && typemarker2.x != -100){
 			if(this.boss == "treeW"){
 				typemarker3.text = "+ Max Hp";
 			}
 			else if(this.boss == "Dragon"){
-				typemarker.text = "+ Damage";
+				typemarker3.text = "+ Damage";
 			}
 			else if(this.boss == "MasterThief"){
-				typemarker.text = "+ Luck";
+				typemarker3.text = "+ Luck";
+			}
+			else if(this.boss == "Genie"){
+				typemarker3.text = "+ Regen";
 			}
 			typemarker3.x = player.x-player.width*2;
 			typemarker3.y = player.y;
@@ -1369,10 +1709,13 @@ var hpUp = {
 				typemarker2.text = "+ Max Hp";
 			}
 			else if(this.boss == "Dragon"){
-				typemarker.text = "+ Damage";
+				typemarker2.text = "+ Damage";
 			}
 			else if(this.boss == "MasterThief"){
-				typemarker.text = "+ Luck";
+				typemarker2.text = "+ Luck";
+			}
+			else if(this.boss == "Genie"){
+				typemarker2.text = "+ Regen";
 			}
 			typemarker2.x = player.x-player.width*2;
 			typemarker2.y = player.y;
@@ -1388,6 +1731,9 @@ var hpUp = {
 			}
 			else if(this.boss == "MasterThief"){
 				typemarker.text = "+ Luck";
+			}
+			else if(this.boss == "Genie"){
+				typemarker.text = "+ Regen";
 			}
 			typemarker.x = player.x-player.width*2;
 			typemarker.y = player.y;
@@ -1405,6 +1751,10 @@ var hpUp = {
 		else if(this.boss == "MasterThief"){
 			player.hp = player.maxhp;
 			player.lucky=true;
+		}
+		else if(this.boss == "Genie"){
+			player.regen=true;
+			player.hp = player.maxhp;
 		}
 		Frozen.currentTime=0;
 		Frozen.play();
@@ -1460,6 +1810,15 @@ var hpUp = {
 				rainsound.pause();
 			}
 		}
+		if(this.boss == "Genie"){
+			GenieEffect.x = 500;
+			GenieEffect.y = -400;
+			GenieEffect.width = 0;
+			GenieEffect.height = 0;
+			GenieEffect.onScreen = 0;
+			GenieEffect.frame = 0;
+			Alpha = 0.15;
+		}
 		this.x = -100;
 		this.y = -200;
 	}
@@ -1479,7 +1838,7 @@ var hpParticleW = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1511,7 +1870,7 @@ var hpParticleA = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1543,7 +1902,7 @@ var hpParticleS = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1575,7 +1934,7 @@ var hpParticleD = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1607,7 +1966,7 @@ var hpParticleWA = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1639,7 +1998,7 @@ var hpParticleWD = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1671,7 +2030,7 @@ var hpParticleAS = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1705,7 +2064,7 @@ var hpParticleSD = {
 	draw: function(){
 		if(this.x != -100){
 			player.speed = player.speed2;
-			ctx.drawImage(colorParticles[this.index], this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1818,72 +2177,74 @@ function HpAi(E){
 		E.dirct-=1;
 	}
 }
-var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 9: RandomCube, 10: blackCube, 11: RandomCube2, 12: RandomCube3, 13: RandomCube4, 14: RandomCube5};
+var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 9: RandomCube, 10: blackCube, 11: RandomCube2, 12: RandomCube3, 13: RandomCube4, 14: RandomCube5, 15: whiteCube};
 var hpParticles = {1: hpParticleW, 2: hpParticleA, 3: hpParticleS, 4: hpParticleD, 5: hpParticleWA, 6: hpParticleWD, 7: hpParticleAS, 8: hpParticleSD};
 // If you pick it up
 function pickup(C){
-	if(collision(player.dir, player, C)){
-		if(C.type != 0){
-			if((spell1 != "N/A") && (spell2 != "N/A")){
-				if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
-					marker4.points = "50";
-					marker4.mult = 1;
-					marker4.x = player.x;
-					marker4.y = player.y;
-					marker4.timeLeft = 20;
-				}
-				else if(marker.x != -100 && marker2.x != -100){
-					marker3.points = "50";
-					marker3.mult = 1;
-					marker3.x = player.x;
-					marker3.y = player.y;
-					marker3.timeLeft = 20;
-				}
-				else if(marker.x != -100){
-					marker2.points = "50";
-					marker2.mult = 1;
-					marker2.x = player.x;
-					marker2.y = player.y;
-					marker2.timeLeft = 20;
+	if(STATE != "Tutorial" || (STATE == "Tutorial" && (spell1 == "N/A" || spell2 == "N/A"))){
+		if(collision(player.dir, player, C)){
+			if(C.type != 0){
+				if((spell1 != "N/A") && (spell2 != "N/A")){
+					if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
+						marker4.points = "50";
+						marker4.mult = 1;
+						marker4.x = player.x;
+						marker4.y = player.y;
+						marker4.timeLeft = 20;
+					}
+					else if(marker.x != -100 && marker2.x != -100){
+						marker3.points = "50";
+						marker3.mult = 1;
+						marker3.x = player.x;
+						marker3.y = player.y;
+						marker3.timeLeft = 20;
+					}
+					else if(marker.x != -100){
+						marker2.points = "50";
+						marker2.mult = 1;
+						marker2.x = player.x;
+						marker2.y = player.y;
+						marker2.timeLeft = 20;
+					}
+					else{
+						marker.points = "50";
+						marker.mult = 1;
+						marker.x = player.x;
+						marker.y = player.y;
+						marker.timeLeft = 20;
+					}
+					Error = Aes.Ctr.encrypt(parseInt(Aes.Ctr.decrypt(Error, ErrorLogs, 256))+50 + "", ErrorLogs, 256);
 				}
 				else{
-					marker.points = "50";
-					marker.mult = 1;
-					marker.x = player.x;
-					marker.y = player.y;
-					marker.timeLeft = 20;
-				}
-				Error = Aes.Ctr.encrypt(parseInt(Aes.Ctr.decrypt(Error, ErrorLogs, 256))+50 + "", ErrorLogs, 256);
-			}
-			else{
-				if(prevSpellRC[1] == "N/A"){
-					prevSpellRC[1] = spell;
-				}
-				else if(prevSpellRC[2] == "N/A"){
-					prevSpellRC[2] = spell;
-				}
-				else if(prevSpellRC[3] == "N/A"){
-					prevSpellRC[3] = spell;
-				}
-				else if(prevSpellRC[4] == "N/A"){
-					prevSpellRC[4] = spell;
-				}
-				else if(prevSpellRC[5] == "N/A"){
-					prevSpellRC[5] = spell;
-				}
-				else if(prevSpellRC[6] == "N/A"){
-					prevSpellRC[6] = spell;
-				}
-				else if(prevSpellRC[7] == "N/A"){
-					prevSpellRC[7] = spell;
-				}
-				else if(prevSpellRC[8] == "N/A"){
-					prevSpellRC[8] = spell;
+					if(prevSpellRC[1] == "N/A"){
+						prevSpellRC[1] = spell;
+					}
+					else if(prevSpellRC[2] == "N/A"){
+						prevSpellRC[2] = spell;
+					}
+					else if(prevSpellRC[3] == "N/A"){
+						prevSpellRC[3] = spell;
+					}
+					else if(prevSpellRC[4] == "N/A"){
+						prevSpellRC[4] = spell;
+					}
+					else if(prevSpellRC[5] == "N/A"){
+						prevSpellRC[5] = spell;
+					}
+					else if(prevSpellRC[6] == "N/A"){
+						prevSpellRC[6] = spell;
+					}
+					else if(prevSpellRC[7] == "N/A"){
+						prevSpellRC[7] = spell;
+					}
+					else if(prevSpellRC[8] == "N/A"){
+						prevSpellRC[8] = spell;
+					}
 				}
 			}
+			Pickup.currentTime=0;
+			Pickup.play();
+			C.onHit();
 		}
-		Pickup.currentTime=0;
-		Pickup.play();
-		C.onHit();
 	}
 }

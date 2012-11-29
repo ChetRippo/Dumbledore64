@@ -21,7 +21,7 @@ var water = {
 				midBoop.play();
 				this.used = 1;
 			}
-			ctx.drawImage(Bubble, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(Bubble, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 	},
 	effect: function(){
@@ -135,7 +135,7 @@ var water12 = {
 			if(this.used == 0){
 				this.used = 1;
 			}
-			ctx.drawImage(Bubble, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(Bubble, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 	},
 	effect: function(){
@@ -187,7 +187,7 @@ var water13 = {
 			if(this.used == 0){
 				this.used = 1;
 			}
-			ctx.drawImage(Bubble, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(Bubble, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 	},
 	effect: function(){
@@ -239,7 +239,7 @@ var water14 = {
 			if(this.used == 0){
 				this.used = 1;
 			}
-			ctx.drawImage(Bubble, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(Bubble, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 	},
 	effect: function(){
@@ -291,7 +291,7 @@ var water21 = {
 			if(this.used == 0){
 				this.used = 1;
 			}
-			ctx.drawImage(Bubble, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(Bubble, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 	},
 	effect: function(){
@@ -343,7 +343,7 @@ var water22 = {
 			if(this.used == 0){
 				this.used = 1;
 			}
-			ctx.drawImage(Bubble, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(Bubble, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 	},
 	effect: function(){
@@ -395,7 +395,7 @@ var water23 = {
 			if(this.used == 0){
 				this.used = 1;
 			}
-			ctx.drawImage(Bubble, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(Bubble, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 	},
 	effect: function(){
@@ -447,7 +447,7 @@ var water24 = {
 			if(this.used == 0){
 				this.used = 1;
 			}
-			ctx.drawImage(Bubble, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(Bubble, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 	},
 	effect: function(){

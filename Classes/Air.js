@@ -13,91 +13,91 @@ var air = {
 		if(this.onScreen == 1 && this.cast == 0){
 			if(player.dir == "W"){
 				if(player.LR == "Left"){
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 8);
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 24);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 40);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 56);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 8);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 24);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 40);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 56);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 72);
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 72);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 88);
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 88);
 				}
 				else{
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 8);
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 24);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 40);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 56);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 8);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 24);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 40);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 56);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 72);
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 72);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 88);
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 88);
 				}
 			}
 			if(player.dir == "S"){
 				if(player.LR == "Left"){
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 8);
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 24);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 40);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 56);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 8);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 24);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 40);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 56);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 72);
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 72);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 88);
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 88);
 				}
 				else{
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 8);
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 24);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 40);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 56);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 8);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 24);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 40);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 56);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 72);
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 72);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 88);
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 88);
 				}
 			}
 			if(player.dir == "A"){
-				ctx.globalAlpha = Alpha/2;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 8, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/2;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 24, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/4;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 40, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/4;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 56, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 8, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 24, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 40, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 56, player.y - player.height * 0.5);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 72, player.y - player.height / 2);
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 72, player.y - player.height * 0.5);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 88, player.y - player.height / 2);
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 88, player.y - player.height * 0.5);
 			}
 			if(player.dir == "D"){
-				ctx.globalAlpha = Alpha/2;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 8, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/2;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 24, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/4;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 40, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/4;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 56, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 8, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 24, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 40, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 56, player.y - player.height * 0.5);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 72, player.y - player.height / 2);
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 72, player.y - player.height * 0.5);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 88, player.y - player.height / 2);
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 88, player.y - player.height * 0.5);
 			}
 			ctx.globalAlpha = Alpha;
 		}
@@ -228,91 +228,91 @@ var air2 = {
 		if(this.onScreen == 1 && this.cast == 0){
 			if(player.dir == "W"){
 				if(player.LR == "Left"){
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 8);
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 24);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 40);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 56);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 8);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 24);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 40);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 56);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 72);
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 72);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 + 88);
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 + 88);
 				}
 				else{
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 8);
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 24);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 40);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 56);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 8);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 24);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 40);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 56);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 72);
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 72);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 + 88);
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 + 88);
 				}
 			}
 			if(player.dir == "S"){
 				if(player.LR == "Left"){
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 8);
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 24);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 40);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 56);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 8);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 24);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 40);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 56);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 72);
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 72);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdL, player.x - player.width / 2, player.y - player.height / 2 - 88);
+					ctx.drawImage(WizzurdL, player.x - player.width * 0.5, player.y - player.height * 0.5 - 88);
 				}
 				else{
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 8);
-					ctx.globalAlpha = Alpha/2;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 24);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 40);
-					ctx.globalAlpha = Alpha/4;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 56);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 8);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 24);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 40);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 56);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 72);
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 72);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(WizzurdR, player.x - player.width / 2, player.y - player.height / 2 - 88);
+					ctx.drawImage(WizzurdR, player.x - player.width * 0.5, player.y - player.height * 0.5 - 88);
 				}
 			}
 			if(player.dir == "A"){
-				ctx.globalAlpha = Alpha/2;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 8, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/2;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 24, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/4;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 40, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/4;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 56, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 8, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 24, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 40, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 56, player.y - player.height * 0.5);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 72, player.y - player.height / 2);
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 72, player.y - player.height * 0.5);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(WizzurdL, player.x - player.width / 2 + 88, player.y - player.height / 2);
+				ctx.drawImage(WizzurdL, player.x - player.width * 0.5 + 88, player.y - player.height * 0.5);
 			}
 			if(player.dir == "D"){
-				ctx.globalAlpha = Alpha/2;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 8, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/2;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 24, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/4;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 40, player.y - player.height / 2);
-				ctx.globalAlpha = Alpha/4;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 56, player.y - player.height / 2);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 8, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 24, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 40, player.y - player.height * 0.5);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 56, player.y - player.height * 0.5);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 72, player.y - player.height / 2);
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 72, player.y - player.height * 0.5);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(WizzurdR, player.x - player.width / 2 - 88, player.y - player.height / 2);
+				ctx.drawImage(WizzurdR, player.x - player.width * 0.5 - 88, player.y - player.height * 0.5);
 			}
 			ctx.globalAlpha = Alpha;
 		}

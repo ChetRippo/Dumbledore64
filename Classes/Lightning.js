@@ -25,28 +25,28 @@ var lightning = {
 				this.used = 1;
 			}
 			if(this.hstate == 0){
-				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning1, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 1){
-				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning2, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 2){
-				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning3, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate=0;
 			}
 			if(this.vx != -2000){
 				if(this.vstate == 0){
-					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 1){
-					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 2){
-					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight*0.5);
 					this.vstate=0;
 				}
 			}
@@ -70,25 +70,29 @@ var lightning = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
-						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
-						if(lightning12.hy == -2000){
-							lightning12.hy = AllEnemies[E].y;
-							lightning12.shoot();
+					if(!AllEnemies[E].hptimer){
+						if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth)
+							|| (this.vx >= AllEnemies[E].x - AllEnemies[E].width*0.5 && this.vx <= AllEnemies[E].x + AllEnemies[E].width*0.5))){
+							if(lightning12.hy == -2000){
+								lightning12.hy = AllEnemies[E].y;
+								lightning12.shoot();
+							}
+							onHit(AllEnemies[E]);
 						}
-						onHit(AllEnemies[E]);
 					}
 				}
 			}
 			
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
-						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
-						if(this.vx == -2000){
-							this.vx = AllEnemies[E].x
+					if(!AllEnemies[E].hptimer){
+						if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy)
+							|| (this.hy >= AllEnemies[E].y-AllEnemies[E].height*0.5 && this.hy <= AllEnemies[E].y + AllEnemies[E].height*0.5))){
+							if(this.vx == -2000){
+								this.vx = AllEnemies[E].x
+							}
+							onHit(AllEnemies[E]);
 						}
-						onHit(AllEnemies[E]);
 					}
 				}			
 			}
@@ -132,28 +136,28 @@ var lightning12 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.hstate == 0){
-				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning1, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 1){
-				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning2, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 2){
-				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning3, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate=0;
 			}
 			if(this.vx != -2000){
 				if(this.vstate == 0){
-					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 1){
-					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 2){
-					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight*0.5);
 					this.vstate=0;
 				}
 			}
@@ -171,20 +175,24 @@ var lightning12 = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
-						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
-						onHit(AllEnemies[E]);
+					if(!AllEnemies[E].hptimer){
+						if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth)
+							|| (this.vx >= AllEnemies[E].x - AllEnemies[E].width*0.5 && this.vx <= AllEnemies[E].x + AllEnemies[E].width*0.5))){
+							onHit(AllEnemies[E]);
+						}
 					}
 				}
 			}
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
-						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
-						if(this.vx == -2000){
-							this.vx = AllEnemies[E].x
+					if(!AllEnemies[E].hptimer){
+						if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy)
+							|| (this.hy >= AllEnemies[E].y-AllEnemies[E].height*0.5 && this.hy <= AllEnemies[E].y + AllEnemies[E].height*0.5))){
+							if(this.vx == -2000){
+								this.vx = AllEnemies[E].x
+							}
+							onHit(AllEnemies[E]);
 						}
-						onHit(AllEnemies[E]);
 					}
 				}			
 			}
@@ -225,28 +233,28 @@ var lightning2 = {
 				this.used = 1;
 			}
 			if(this.hstate == 0){
-				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning1, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 1){
-				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning2, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 2){
-				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning3, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate=0;
 			}
 			if(this.vx != -2000){
 				if(this.vstate == 0){
-					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 1){
-					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 2){
-					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight*0.5);
 					this.vstate=0;
 				}
 			}
@@ -270,24 +278,28 @@ var lightning2 = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
-						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
-						if(lightning22.hy == -2000){
-							lightning22.hy = AllEnemies[E].y;
-							lightning22.shoot();
+					if(!AllEnemies[E].hptimer){
+						if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth)
+							|| (this.vx >= AllEnemies[E].x - AllEnemies[E].width*0.5 && this.vx <= AllEnemies[E].x + AllEnemies[E].width*0.5))){
+							if(lightning22.hy == -2000){
+								lightning22.hy = AllEnemies[E].y;
+								lightning22.shoot();
+							}
+							onHit(AllEnemies[E]);
 						}
-						onHit(AllEnemies[E]);
 					}
 				}
 			}
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
-						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
-						if(this.vx == -2000){
-							this.vx = AllEnemies[E].x
+					if(!AllEnemies[E].hptimer){
+						if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy)
+							|| (this.hy >= AllEnemies[E].y-AllEnemies[E].height*0.5 && this.hy <= AllEnemies[E].y + AllEnemies[E].height*0.5))){
+							if(this.vx == -2000){
+								this.vx = AllEnemies[E].x
+							}
+							onHit(AllEnemies[E]);
 						}
-						onHit(AllEnemies[E]);
 					}
 				}			
 			}
@@ -330,28 +342,28 @@ var lightning22 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.hstate == 0){
-				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning1, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 1){
-				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning2, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 2){
-				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning3, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate=0;
 			}
 			if(this.vx != -2000){
 				if(this.vstate == 0){
-					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 1){
-					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 2){
-					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight*0.5);
 					this.vstate=0;
 				}
 			}
@@ -369,26 +381,30 @@ var lightning22 = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
-						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
-						if(lightning23.hy == -2000){
-							lightning23.hy = AllEnemies[E].y;
-							lightning23.shoot();
+					if(!AllEnemies[E].hptimer){
+						if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth)
+							|| (this.vx >= AllEnemies[E].x - AllEnemies[E].width*0.5 && this.vx <= AllEnemies[E].x + AllEnemies[E].width*0.5))){
+							if(lightning23.hy == -2000){
+								lightning23.hy = AllEnemies[E].y;
+								lightning23.shoot();
+							}
+							onHit(AllEnemies[E]);
 						}
-						onHit(AllEnemies[E]);
 					}
 				}
 			}
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
-						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
-						if(this.vx == -2000){
-							this.vx = AllEnemies[E].x
+					if(!AllEnemies[E].hptimer){
+						if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy)
+							|| (this.hy >= AllEnemies[E].y-AllEnemies[E].height*0.5 && this.hy <= AllEnemies[E].y + AllEnemies[E].height*0.5))){
+							if(this.vx == -2000){
+								this.vx = AllEnemies[E].x
+							}
+							onHit(AllEnemies[E]);
 						}
-						onHit(AllEnemies[E]);
-					}
-				}			
+					}			
+				}
 			}
 		}
 	},
@@ -421,28 +437,28 @@ var lightning23 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.hstate == 0){
-				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning1, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 1){
-				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning2, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 2){
-				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, this.hy);
+				ctx.drawImage(hlightning3, this.hx - this.hwidth*0.5, this.hy);
 				this.hstate=0;
 			}
 			if(this.vx != -2000){
 				if(this.vstate == 0){
-					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning1, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 1){
-					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning2, this.vx, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 2){
-					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning3, this.vx, this.vy - this.vheight*0.5);
 					this.vstate=0;
 				}
 			}
@@ -460,20 +476,22 @@ var lightning23 = {
 			}
 			if(this.vx != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth && AllEnemies[E].onScreen == 1
-						|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2)){
+					if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].x >= this.vx && AllEnemies[E].x <= this.vx + this.vwidth)
+						|| (this.vx >= AllEnemies[E].x - AllEnemies[E].width*0.5 && this.vx <= AllEnemies[E].x + AllEnemies[E].width*0.5))){
 						onHit(AllEnemies[E]);
 					}
 				}
 			}
 			if(this.hy != -2000){
 				for (E in AllEnemies){
-					if(AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy && AllEnemies[E].onScreen == 1
-						|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2)){
-						if(this.vx == -2000){
-							this.vx = AllEnemies[E].x
+					if(!AllEnemies[E].hptimer){
+						if(AllEnemies[E].onScreen == 1 && ((AllEnemies[E].y <= this.hy + this.hheight && AllEnemies[E].y >= this.hy)
+							|| (this.hy >= AllEnemies[E].y-AllEnemies[E].height*0.5 && this.hy <= AllEnemies[E].y + AllEnemies[E].height*0.5))){
+							if(this.vx == -2000){
+								this.vx = AllEnemies[E].x
+							}
+							onHit(AllEnemies[E]);
 						}
-						onHit(AllEnemies[E]);
 					}
 				}			
 			}

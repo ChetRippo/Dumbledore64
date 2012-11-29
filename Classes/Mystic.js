@@ -29,17 +29,25 @@ var mystic = {
 				this.used = 1;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
-				ctx.fillRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+				//ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
+				//ctx.fillRect(player.x-this.width*0.5, player.y-this.height*0.5, this.width, this.height);
+				player.width-=8;
+				if(player.LR == "Left"){
+					player.x-=4;
+				}
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
-				ctx.fillRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+				//ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
+				//ctx.fillRect(player.x-this.width*0.5, player.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
+				player.width+=8;
+				if(player.LR == "Left"){
+					player.x+=4;
+				}
 				this.frame++;
 			}
 			else{
@@ -47,6 +55,17 @@ var mystic = {
 				this.draaw = 0;
 				this.width = 32;
 				this.height = 32;
+				player.width = 32;
+			}
+			for(B in bubbleRotate){
+				if(bubbleRotate[B].onScreen == 1){
+					bubbleRotate[B].shoot();
+				}
+			}
+			if(water.onScreen == 1){
+				water.x = player.x - 48;
+				water.y = player.y;
+				water.dir = "WD";
 			}
 			ctx.globalAlpha = Alpha;
 		}
@@ -59,7 +78,7 @@ var mystic = {
 	if(this.cast > 0){
 		this.cast-=1;
 	}
-	if(this.onScreen == 1 && this.cast <=0){
+	if(this.onScreen == 1 && this.cast <=0 && this.frame >= 4){
 		this.x1 = player.x;
 		this.y1 = player.y;
 		if(player.dir == "W"){
@@ -154,7 +173,6 @@ var mystic = {
 			this.loop -= 1;
 			this.move();
 		}
-		hptimer = 30;
 		this.mult2 = 0;
 		if(this.x < 8){
 			this.x = 8;
@@ -170,16 +188,6 @@ var mystic = {
 		}
 		player.x = this.x;
 		player.y = this.y;
-		for(B in bubbleRotate){
-			if(bubbleRotate[B].onScreen == 1){
-				bubbleRotate[B].shoot();
-			}
-		}
-		if(water.onScreen == 1){
-			water.x = player.x - 48;
-			water.y = player.y;
-			water.dir = "WD";
-		}
 		this.onScreen = 0;
 		}
 	},
@@ -195,6 +203,7 @@ var mystic = {
 		this.loop = 2;
 		this.onScreen = 1;
 		this.used = 0;
+		hptimer = 30;
 	}
 	}
 };
@@ -223,15 +232,15 @@ var mystic2 = {
 			ctx.fillStyle = this.color;
 			ctx.globalAlpha = Alpha*0.25;
 			if(this.frame < 4){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
-				ctx.fillRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
+				ctx.fillRect(player.x-this.width*0.5, player.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
-				ctx.fillRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
+				ctx.fillRect(player.x-this.width*0.5, player.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
@@ -394,7 +403,7 @@ var Illusion = {
 	
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.drawImage(MonoWizzurd, this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+		ctx.drawImage(MonoWizzurd, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 		ctx.drawImage(MonoWizzurd, this.x-16, this.y-16, 32, 32);
 		this.frame++;
 		if(this.frame<=5){
@@ -442,14 +451,14 @@ var IllusionBlast = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#660099";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}

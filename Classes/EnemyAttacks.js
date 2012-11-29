@@ -62,271 +62,10 @@ var Globblyfire3 = {
 		this.onScreen = 1;
 	}
 };
-//------------------------------------------------------------- Tiny Meteor Explosions ----------------------------------------------//
-var EMplosion1 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 8,
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion2 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 8,	
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion3 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 8,
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion4 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 8,
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion5 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 8,
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion6 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 8,		
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion7 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 8,
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion8 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 8,		
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion9 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 16,			
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion10 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 16,			
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion11 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 16,		
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion12 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 16,
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
-var EMplosion13 = {
-	color: "#FF6600",
-	x: -100,
-	y: -200,
-	timeLeft: 0,
-	width: 16,
-	height: 16,
-	frame: 0,
-	onScreen: 0,
-	growth: 16,		
-	// Spawn
-	shoot: function(){
-		Explosion.currentTime=0;
-		Explosion.play();
-		this.height = 16;
-		this.width = 16;
-		this.frame = 0;
-		this.onScreen = 1;
-	}
-};
 function exploderDraw(E){
 	if(E.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
-		if(E.frame/2 != Math.round(E.frame/2)){
+		if(E.frame*0.5 != Math.round(E.frame*0.5)){
 			if(E.color == "#FF6600"){
 				ctx.fillStyle = "#CC0000";
 			}
@@ -337,7 +76,7 @@ function exploderDraw(E){
 		else{
 			ctx.fillStyle = E.color;
 		}
-		ctx.fillRect(E.x - E.width / 2, E.y - E.height / 2,	E.width, E.height);
+		ctx.fillRect(E.x - E.width * 0.5, E.y - E.height * 0.5,	E.width, E.height);
 		ctx.globalAlpha = Alpha;
 	}
 }
@@ -367,11 +106,13 @@ function exploderMove(E){
 			}
 		}
 		if(E.color != "#FF6600"){
-			E.growth = 32;
-			for (B in AllEnemies){
-				if(contained(AllEnemies[B], E)){
-					onHit(AllEnemies[B]);
-				}
+			E.growth = 24;
+		}
+		var currPwr = player.power;
+		player.power = 1;
+		for (B in AllEnemies){
+			if(contained(AllEnemies[B], E)){
+				onHit(AllEnemies[B]);
 			}
 		}
 		if(E == Globblyfire || E == Globblyfire2 || E == Globblyfire3){
@@ -391,12 +132,10 @@ function exploderMove(E){
 				}
 			}
 		}
+		player.power = currPwr;
 	}
 }
-var EMplosions = {1: EMplosion1, 2: EMplosion2, 3: EMplosion3, 4: EMplosion4, 5: EMplosion5, 6: EMplosion6, 7: EMplosion7, 8: EMplosion8, 9: EMplosion9, 10: EMplosion10, 11: EMplosion11,
-					12: EMplosion12, 13: EMplosion13};
-var Exploders = {1: EMplosion1, 2: EMplosion2, 3: EMplosion3, 4: EMplosion4, 5: EMplosion5, 6: EMplosion6, 7: EMplosion7, 8: EMplosion8, 9: EMplosion9, 10: EMplosion10, 11: EMplosion11,
-					12: EMplosion12, 13: EMplosion13, 14: Globblyfire, 15: Globblyfire2, 16: Globblyfire3};
+var Exploders = {1: Globblyfire, 2: Globblyfire2, 3: Globblyfire3};
 // sIce: Slows player down by halving speed
 var sIce = {
 	color: "#00CCFF",
@@ -415,7 +154,7 @@ var sIce = {
 		if(this.onScreen == 1 && this.cast == 0){
 			Alpha = 0.15;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 		}
 	},
 	
@@ -492,14 +231,14 @@ var sFire = {
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -542,6 +281,14 @@ var sFire = {
 					onDmg.currentTime=0;
 					onDmg.play();
 					hptimer = 30;
+					if(this.caster == Dragon){
+						AList[3] = false;
+					}
+				}
+			}
+			for(O in ObsList){
+				if(contained(ObsList[O], this)){
+					obsHit(ObsList[O]);
 				}
 			}
 		}
@@ -587,28 +334,28 @@ var sLightning = {
 	draw: function(){
 		if(this.onScreen == 1 && this.cast == 0){
 			if(this.hstate == 0){
-				ctx.drawImage(ehlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				ctx.drawImage(ehlightning1, this.hx - this.hwidth*0.5, this.hy - this.hheight*0.5);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 1){
-				ctx.drawImage(ehlightning2, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				ctx.drawImage(ehlightning2, this.hx - this.hwidth*0.5, this.hy - this.hheight*0.5);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 2){
-				ctx.drawImage(ehlightning3, this.hx - this.hwidth/2, this.hy - this.hheight/2);
+				ctx.drawImage(ehlightning3, this.hx - this.hwidth*0.5, this.hy - this.hheight*0.5);
 				this.hstate=0;
 			}
 			if(this.vx != -2000){
 				if(this.vstate == 0){
-					ctx.drawImage(evlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+					ctx.drawImage(evlightning1, this.vx-this.vwidth*0.5, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 1){
-					ctx.drawImage(evlightning2, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+					ctx.drawImage(evlightning2, this.vx-this.vwidth*0.5, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 				}
 				else if(this.vstate == 2){
-					ctx.drawImage(evlightning3, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+					ctx.drawImage(evlightning3, this.vx-this.vwidth*0.5, this.vy - this.vheight*0.5);
 					this.vstate=0;
 				}
 			}
@@ -631,8 +378,8 @@ var sLightning = {
 				this.timeLeft-=1;
 			}
 			if(this.vx != -2000){
-				if(player.x >= this.vx-this.vwidth/2 && player.x <= this.vx + this.vwidth/2
-					|| (this.vx >= player.x && this.vx <= player.x + player.height/2)){
+				if(player.x >= this.vx-this.vwidth*0.5 && player.x <= this.vx + this.vwidth*0.5
+					|| (this.vx >= player.x && this.vx <= player.x + player.height*0.5)){
 					if(darkwater.onScreen == 1 && darkwater.hptimer == 0){
 						darkwater.hptimer = 20;
 						darkwater.hp-=1;
@@ -647,8 +394,8 @@ var sLightning = {
 				}
 			}
 			if(this.hy != -2000){
-				if(player.y <= this.hy + this.hheight/2 && player.y >= this.hy-this.hheight/2
-					|| (this.hy >= player.y && this.hy <= player.y + player.height/2)){
+				if(player.y <= this.hy + this.hheight*0.5 && player.y >= this.hy-this.hheight*0.5
+					|| (this.hy >= player.y && this.hy <= player.y + player.height*0.5)){
 					if(this.vx == -2000){
 						this.vx = player.x
 					}
@@ -699,7 +446,7 @@ var rootBlastW = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -724,6 +471,7 @@ var rootBlastW = {
 				}	
 				else if(!(hptimer > 0)){
 					player.hp-=1;
+					AList[2] = false;
 					hptimer = 30;
 				}
 			}
@@ -762,7 +510,7 @@ var rootBlastA = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -787,6 +535,7 @@ var rootBlastA = {
 				}	
 				else if(!(hptimer > 0)){
 					player.hp-=1;
+					AList[2] = false;
 					hptimer = 30;
 				}
 			}
@@ -825,8 +574,8 @@ var rootBlastS = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = this.color;
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
+				ctx.fillRect(this.x - this.width * 0.5,
+				this.y - this.height * 0.5,
 				this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -852,6 +601,7 @@ var rootBlastS = {
 				}	
 				else if(!(hptimer > 0)){
 					player.hp-=1;
+					AList[2] = false;
 					hptimer = 30;
 				}
 			}
@@ -890,7 +640,7 @@ var rootBlastD = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -918,6 +668,7 @@ var rootBlastD = {
 				}	
 				else if(!(hptimer > 0)){
 					player.hp-=1;
+					AList[2] = false;
 					hptimer = 30;
 				}
 			}
@@ -1364,7 +1115,7 @@ function drawRoots(R){
 	if(R.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "#330000";
-		ctx.fillRect(R.x - R.width / 2, R.y - R.height / 2, R.width, R.height);
+		ctx.fillRect(R.x - R.width * 0.5, R.y - R.height * 0.5, R.width, R.height);
 		ctx.globalAlpha = Alpha;
 	}
 }
@@ -1409,6 +1160,7 @@ var rootStrike = {
 				}	
 				else if(hptimer <= 0){
 					player.hp-=1;
+					AList[2] = false;
 					hptimer = 30;
 				}
 			}
@@ -1436,10 +1188,10 @@ var rootStrike = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = "#330000";
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			ctx.globalAlpha = Alpha;
 			this.frame++;
-			if(this.frame/2 == Math.round(this.frame/2)){
+			if(this.frame*0.5 == Math.round(this.frame*0.5)){
 				if(rootstr.onScreen == 0){
 					rootstr.onScreen = 1;
 					rootstr.x = this.x;
@@ -1565,10 +1317,10 @@ var rootStrike2 = {
 		}
 		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(rootstr21.onScreen == 0){
 				rootstr21.onScreen = 1;
 				rootstr21.x = this.x;
@@ -1694,10 +1446,10 @@ var rootStrike3 = {
 		}
 		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(rootstr31.onScreen == 0){
 				rootstr31.onScreen = 1;
 				rootstr31.x = this.x;
@@ -1823,10 +1575,10 @@ var rootStrike4 = {
 		}
 		ctx.globalAlpha = Alpha*0.5;
 		ctx.fillStyle = "#330000";
-		ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		ctx.globalAlpha = Alpha;
 		this.frame++;
-		if(this.frame/2 == Math.round(this.frame/2)){
+		if(this.frame*0.5 == Math.round(this.frame*0.5)){
 			if(rootstr41.onScreen == 0){
 				rootstr41.onScreen = 1;
 				rootstr41.x = this.x;
@@ -1984,13 +1736,13 @@ var SmokeBomb = {
 				this.used = 1;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
@@ -2027,13 +1779,13 @@ var SmokeBombA = {
 				this.used = 1;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
@@ -2070,13 +1822,13 @@ var SmokeBombB = {
 				this.used = 1;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x1-this.width/2, this.y1-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x1-this.width*0.5, this.y1-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
@@ -2118,8 +1870,8 @@ var DragonFire = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2213,6 +1965,7 @@ var DragonFire = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2270,8 +2023,8 @@ var Dfire2 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2295,6 +2048,7 @@ var Dfire2 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2346,8 +2100,8 @@ var Dfire3 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2371,6 +2125,7 @@ var Dfire3 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2422,8 +2177,8 @@ var Dfire4 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2447,6 +2202,7 @@ var Dfire4 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2498,8 +2254,8 @@ var Dfire5 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2523,6 +2279,7 @@ var Dfire5 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2574,8 +2331,8 @@ var Dfire6 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2599,6 +2356,7 @@ var Dfire6 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2650,8 +2408,8 @@ var Dfire7 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2675,6 +2433,7 @@ var Dfire7 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2726,8 +2485,8 @@ var Dfire8 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2751,6 +2510,7 @@ var Dfire8 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2802,8 +2562,8 @@ var Dfire9 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2827,6 +2587,7 @@ var Dfire9 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2878,8 +2639,8 @@ var Dfire10 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2903,6 +2664,7 @@ var Dfire10 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -2954,8 +2716,8 @@ var Dfire11 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -2979,6 +2741,7 @@ var Dfire11 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -3030,8 +2793,8 @@ var Dfire12 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -3055,6 +2818,7 @@ var Dfire12 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -3106,8 +2870,8 @@ var Dfire13 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -3131,6 +2895,7 @@ var Dfire13 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -3182,8 +2947,8 @@ var Dfire14 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -3207,6 +2972,7 @@ var Dfire14 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -3258,8 +3024,8 @@ var Dfire15 = {
 			else if(color == 3){
 				ctx.fillStyle = this.color3;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 		}
 	},
@@ -3283,6 +3049,7 @@ var Dfire15 = {
 				else if(hptimer<=0){
 					hptimer = 30;
 					player.hp-=1;
+					AList[3] = false;
 				}
 			}
 			for (O in obstacle1){
@@ -3332,19 +3099,19 @@ var BigMeteor1 = {
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
 			if(this.dir == "D"){
-				ctx.drawImage(BigMeteorF0, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF0, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 			if(this.dir == "WD"){
-				ctx.drawImage(BigMeteorF45u, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF45u, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 			if(this.dir == "SD"){
-				ctx.drawImage(BigMeteorF45d, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF45d, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 			if(this.dir == "DWD"){
-				ctx.drawImage(BigMeteorF30u, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF30u, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 			if(this.dir == "D2D"){
-				ctx.drawImage(BigMeteorF30d, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF30d, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 		}
 		if(this.timeLeft == 0){
@@ -3376,7 +3143,7 @@ var Meteor1 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF45d, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF45d, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3410,7 +3177,7 @@ var Meteor2 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF45u, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF45u, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3444,7 +3211,7 @@ var Meteor3 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF30d, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF30d, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3478,7 +3245,7 @@ var Meteor4 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF30u, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF30u, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3513,19 +3280,19 @@ var BigMeteor2 = {
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
 			if(this.dir == "D"){
-				ctx.drawImage(BigMeteorF0, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF0, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 			if(this.dir == "WD"){
-				ctx.drawImage(BigMeteorF45u, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF45u, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 			if(this.dir == "SD"){
-				ctx.drawImage(BigMeteorF45d, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF45d, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 			if(this.dir == "DWD"){
-				ctx.drawImage(BigMeteorF30u, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF30u, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 			if(this.dir == "D2D"){
-				ctx.drawImage(BigMeteorF30d, this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(BigMeteorF30d, this.x-this.width*0.5, this.y-this.height*0.5);
 			}
 		}
 		if(this.timeLeft == 0){
@@ -3557,7 +3324,7 @@ var Meteor5 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF45d, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF45d, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3591,7 +3358,7 @@ var Meteor6 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF45u, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF45u, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3625,7 +3392,7 @@ var Meteor7 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF30d, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF30d, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3659,7 +3426,7 @@ var Meteor8 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF30u, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF30u, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3693,7 +3460,7 @@ var MeteorD1 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF0, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3727,7 +3494,7 @@ var MeteorD2 = {
 	draw: function(){
 		if(this.timeLeft > 0){
 			this.timeLeft-=1;
-			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(MeteorF0, this.x-this.width*0.5, this.y-this.height*0.5);
 		}
 		if(this.timeLeft == 0){
 			this.x = -9000;
@@ -3744,434 +3511,209 @@ var MeteorD2 = {
 var BigMeteors = {1: BigMeteor1, 2: BigMeteor2};
 //------------------------------------------------------ Effect Meteors -------------------------------------------------------------//
 var EMeteor1 = {
+	LR: 1,
 	type: "Meteor",
-	x: 64,
-	y: 256,
-	timeLeft: -1,
-	speed: 4,
-	width: 32,
-	height: 32,
-	//cancel out allenemies[e].movement
-	respawn: -1,
-	dir: "D",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(BigMeteorF0, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			Globblyfire.x = this.x;
-			Globblyfire.y = this.y;
-			Globblyfire.shoot();
-			obstacle31.x = this.x;
-			obstacle31.y = this.y;
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor2 = {
+	LR: 1,
 	type: "Meteor",
-	x: -50,
-	y: 400,
-	timeLeft: -1,
-	speed: 4,
-	width: 32,
-	height: 32,
-	//cancel out allenemies[e].movement
-	respawn: -1,
-	dir: "DWD",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(BigMeteorF30u, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			Globblyfire2.x = this.x;
-			Globblyfire2.y = this.y;
-			Globblyfire2.shoot();
-			obstacle32.x = this.x;
-			obstacle32.y = this.y;
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor3 = {
+	LR: 1,
 	type: "Meteor",
-	x: 0,
-	y: -32,
-	timeLeft: -1,
-	speed: 4,
-	width: 32,
-	height: 32,
-	//cancel out allenemies[e].movement
-	respawn: -1,
-	dir: "D2D",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(BigMeteorF30d, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			Globblyfire3.x = this.x;
-			Globblyfire3.y = this.y;
-			Globblyfire3.shoot();
-			obstacle33.x = this.x;
-			obstacle33.y = this.y;
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor4 = {
+	LR: 1,
 	type: "Meteor",
-	x: 0,
-	y: 576,
-	timeLeft: -1,
-	speed: 4,
-	width: 16,
-	height: 16,
-	//cancel out allenemies[e].movement
-	respawn: -1,
-	dir: "DWD",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(MeteorF30u, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion1.x = this.x;
-			EMplosion1.y = this.y;
-			EMplosion1.shoot();
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor5 = {
+	LR: 1,
 	type: "Meteor",
-	x: 0,
-	y: 64,
-	timeLeft: -1,
-	speed: 4,
-	width: 16,
-	height: 16,
-	//cancel out allenemies[e].movement
-	respawn: -1,
-	dir: "D",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion2.x = this.x;
-			EMplosion2.y = this.y;
-			EMplosion2.shoot();
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor6 = {
+	LR: 1,
 	type: "Meteor",
-	x: -32,
-	y: 128,
-	timeLeft: -1,
-	speed: 4,
-	width: 16,
-	height: 16,
-	respawn: -1,
-	dir: "D2D",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(MeteorF30d, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion3.x = this.x;
-			EMplosion3.y = this.y;
-			EMplosion3.shoot();
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor7 = {
+	LR: 1,
 	type: "Meteor",
-	x: 0,
-	y: 376,
-	timeLeft: -1,
-	speed: 4,
-	width: 16,
-	height: 16,
-	respawn: -1,
-	dir: "WD",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(MeteorF45u, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion4.x = this.x;
-			EMplosion4.y = this.y;
-			EMplosion4.shoot();
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor8 = {
+	LR: 1,
 	type: "Meteor",
-	x: 0,
-	y: 64,
-	timeLeft: -1,
-	speed: 4,
-	width: 16,
-	height: 16,
-	respawn: -1,
-	dir: "D",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion5.x = this.x;
-			EMplosion5.y = this.y;
-			EMplosion5.shoot();
-		}
-	}
-};
-var EMeteor9 = {
-	type: "Meteor",
-	x: 0,
-	y: 420,
-	timeLeft: -1,
-	speed: 4,
-	width: 16,
-	height: 16,
-	respawn: -1,
-	dir: "D2D",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(MeteorF30d, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion6.x = this.x;
-			EMplosion6.y = this.y;
-			EMplosion6.shoot();
-		}
-	}
-};
-var EMeteor10 = {
-	type: "Meteor",
-	x: 0,
-	y: 128,
-	timeLeft: -1,
-	speed: 4,
-	width: 16,
-	height: 16,
-	respawn: -1,
-	dir: "WD",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(MeteorF45u, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion7.x = this.x;
-			EMplosion7.y = this.y;
-			EMplosion7.shoot();
-		}
-	}
-};
-var EMeteor11 = {
-	type: "Meteor",
-	x: -64,
-	y: 256,
-	timeLeft: -1,
-	speed: 6,
-	width: 16,
-	height: 16,
-	respawn: -1,
-	dir: "D",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(MeteorF0, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion8.x = this.x;
-			EMplosion8.y = this.y;
-			EMplosion8.shoot();
-		}
-	}
-};
-var EMeteor12 = {
-	type: "Meteor",
-	x: 0,
-	y: 576,
-	timeLeft: -1,
-	speed: 6,
-	width: 32,
-	height: 32,
-	respawn: -1,
-	dir: "WD",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(BigMeteorF45u, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion9.x = this.x;
-			EMplosion9.y = this.y;
-			EMplosion9.shoot();
-			obstacle34.x = this.x;
-			obstacle34.y = this.y;
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor13 = {
+	LR: 1,
 	type: "Meteor",
-	x: 0,
-	y: 64,
-	timeLeft: -1,
-	speed: 4,
-	width: 32,
-	height: 32,
-	respawn: -1,
-	dir: "SD",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(BigMeteorF45d, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion10.x = this.x;
-			EMplosion10.y = this.y;
-			EMplosion10.shoot();
-			obstacle21.x = this.x;
-			obstacle21.y = this.y;
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor14 = {
+	LR: 1,
 	type: "Meteor",
-	x: 0,
-	y: 320,
-	timeLeft: -1,
-	speed: 6,
-	width: 32,
-	height: 32,
-	respawn: -1,
-	dir: "D",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(BigMeteorF0, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion11.x = this.x;
-			EMplosion11.y = this.y;
-			EMplosion11.shoot();
-			obstacle22.x = this.x;
-			obstacle22.y = this.y;
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor15 = {
+	LR: 1,
 	type: "Meteor",
-	x: -128,
-	y: 640,
-	timeLeft: -1,
-	speed: 6,
-	width: 32,
-	height: 32,
-	respawn: -1,
-	dir: "DWD",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(BigMeteorF30u, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion12.x = this.x;
-			EMplosion12.y = this.y;
-			EMplosion12.shoot();
-			obstacle23.x = this.x;
-			obstacle23.y = this.y;
-		}
-	}
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
 };
 var EMeteor16 = {
+	LR: 1,
 	type: "Meteor",
-	x: -128,
-	y: -128,
-	timeLeft: -1,
-	speed: 6,
-	width: 32,
-	height: 32,
-	respawn: -1,
-	dir: "D2D",
-	draw: function(){
-		if(this.timeLeft > 0){
-			ctx.drawImage(BigMeteorF30d, this.x-this.width/2, this.y-this.height/2);
-		}
-		if(this.timeLeft == 0){
-			this.timeLeft-=1;
-			EMplosion13.x = this.x;
-			EMplosion13.y = this.y;
-			EMplosion13.shoot();
-			obstacle24.x = this.x;
-			obstacle24.y = this.y;
+	x: -9000,
+	y: -2000,
+	width: 96,
+	height: 96,
+	timer: -1,
+	index: 1,
+	launched: false
+};
+var EMeteors = {1: EMeteor1, 2: EMeteor2, 3: EMeteor3, 4: EMeteor4, 5: EMeteor5, 6: EMeteor6, 7: EMeteor7, 8: EMeteor8, 9: EMeteor13, 10: EMeteor14, 11: EMeteor15, 12: EMeteor16};
+function MeteorMove(B){
+	//Damage enemies on landing
+	if(B.index >= 21){
+		for(E in AllEnemies){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], B)){
+				var currPwr = player.power;
+				player.power = 2;
+				onHit(AllEnemies[E]);
+				player.power = currPwr;
+			}
 		}
 	}
-};
-var EMeteors = {1: EMeteor1, 2: EMeteor2, 3: EMeteor3, 4: EMeteor4, 5: EMeteor5, 6: EMeteor6, 7: EMeteor7, 8: EMeteor8, 9: EMeteor9, 10: EMeteor10, 11: EMeteor11, 12: EMeteor12,
-				13: EMeteor13, 14: EMeteor14, 15: EMeteor15, 16: EMeteor16};
-function MeteorMove(B){
 	if (B.timeLeft > 0 && B.dir == "D"){
 		B.timeLeft--;
-		B.x += B.speed;
+		Math.floor(B.x += B.speed);
 	}
 	else if (B.timeLeft > 0 && B.dir == "SD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y += B.speed;
+		Math.floor(B.x += B.speed);
+		Math.floor(B.y += B.speed);
 	}
 	else if (B.timeLeft > 0 && B.dir == "WD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y -= B.speed;
+		Math.floor(B.x += B.speed);
+		Math.floor(B.y -= B.speed);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2W"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y -= B.speed;
+		Math.floor(B.x += B.speed*0.5);
+		Math.floor(B.y -= B.speed);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2S"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y += B.speed;
+		Math.floor(B.x += B.speed*0.5);
+		Math.floor(B.y += B.speed);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y -= B.speed/2;
+		Math.floor(B.x += B.speed);
+		Math.floor(B.y -= B.speed*0.5);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2D"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y += B.speed/2;
+		Math.floor(B.x += B.speed);
+		Math.floor(B.y += B.speed*0.5);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DWD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y -= B.speed/2;
+		Math.floor(B.x += B.speed);
+		Math.floor(B.y -= B.speed*0.5);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2WD"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y -= B.speed;
+		Math.floor(B.x += B.speed*0.5);
+		Math.floor(B.y -= B.speed);
 	}
 	else if (B.timeLeft > 0 && B.dir == "DSD"){
 		B.timeLeft--;
-		B.x += B.speed;
-		B.y += B.speed/2;
+		Math.floor(B.x += B.speed);
+		Math.floor(B.y += B.speed*0.5);
 	}
 	else if (B.timeLeft > 0 && B.dir == "D2SD"){
 		B.timeLeft--;
-		B.x += B.speed/2;
-		B.y += B.speed;
+		Math.floor(B.x += B.speed*0.5);
+		Math.floor(B.y += B.speed);
+	}
+	while(B.x*0.25 != Math.round(B.x*0.25)){
+			B.x++;
+	}
+	while(B.y*0.25 != Math.round(B.y*0.25)){
+			B.y++;
 	}
 }
 function MeteorAI(E){	
@@ -4200,5 +3742,174 @@ function MeteorAI(E){
 	}
 	else{
 		E.dir = "D";
+	}
+}
+function EMeteorDraw(E){
+	if(E.timer > 0){
+			E.timer-=1;
+	}
+	else if(E.timer == 0 && !E.launched){
+		//spawn
+		if(E == EMeteor13 || E == EMeteor14 || E == EMeteor15 || E == EMeteor16){
+			if(Genie.LR == "Left"){
+				E.LR = 2;
+			}
+			else{
+				E.LR = 1;
+			}
+			E.x = player.x;
+			E.y = player.y
+		}
+		else{
+			E.LR = Math.floor(Math.random() * 2) + 1;
+			E.x = (Math.floor(Math.random() * 12) + 3)*48;
+			E.y = (Math.floor(Math.random() * 12) + 4)*32;
+		}
+		E.launched = true;
+		//if it is on another meteor, or in lava, redo the calculation next frame
+		//y: 56 to 130, 162 to 224, 392 to 508
+		//x: 196 to 800, 504 to 800, 0 to 562
+		if(E != EMeteor13 && E != EMeteor14 && E != EMeteor15 && E != EMeteor16){
+			if((E.x > 196 && E.x < 800 && E.y > 56 && E.y < 130) || (E.x > 504 && E.x < 800 && E.y > 162 && E.y < 224) || (E.x > 0 && E.x < 562 && E.y > 392 && E.y < 508)){
+				E.launched = false;
+			}
+			for(O in ObsList){
+				if(contained(E, ObsList[O]) || collision("W", E, ObsList[O]) || collision("D", E, ObsList[O])){
+					E.launched = false;
+				}
+			}
+			for(O in EMeteors){
+				if(EMeteors[O] != EMeteor13 && EMeteors[O] != EMeteor14 && EMeteors[O] != EMeteor15 && EMeteors[O] != EMeteor16 && EMeteors[O] != E){
+					if(contained(E, EMeteors[O]) || collision("W", E, EMeteors[O]) || collision("D", E, EMeteors[O])){
+						E.launched = false;
+					}
+				}
+			}
+			//make it not next to stuff
+			E.x+=32;
+			for(O in ObsList){
+				if(contained(E, ObsList[O]) || collision("W", E, ObsList[O]) || collision("D", E, ObsList[O])){
+					E.launched = false;
+				}
+			}
+			for(O in EMeteors){
+				if(EMeteors[O] != EMeteor13 && EMeteors[O] != EMeteor14 && EMeteors[O] != EMeteor15 && EMeteors[O] != EMeteor16 && EMeteors[O] != E){
+					if(contained(E, EMeteors[O]) || collision("W", E, EMeteors[O]) || collision("D", E, EMeteors[O])){
+						E.launched = false;
+					}
+				}
+			}
+			E.x-=64;
+			for(O in ObsList){
+				if(contained(E, ObsList[O]) || collision("W", E, ObsList[O]) || collision("D", E, ObsList[O])){
+					E.launched = false;
+				}
+			}
+			for(O in EMeteors){
+				if(EMeteors[O] != EMeteor13 && EMeteors[O] != EMeteor14 && EMeteors[O] != EMeteor15 && EMeteors[O] != EMeteor16 && EMeteors[O] != E){
+					if(contained(E, EMeteors[O]) || collision("W", E, EMeteors[O]) || collision("D", E, EMeteors[O])){
+						E.launched = false;
+					}
+				}
+			}
+			E.y+=32;
+			E.x+=32;
+			for(O in ObsList){
+				if(contained(E, ObsList[O]) || collision("W", E, ObsList[O]) || collision("D", E, ObsList[O])){
+					E.launched = false;
+				}
+			}
+			for(O in EMeteors){
+				if(EMeteors[O] != EMeteor13 && EMeteors[O] != EMeteor14 && EMeteors[O] != EMeteor15 && EMeteors[O] != EMeteor16 && EMeteors[O] != E){
+					if(contained(E, EMeteors[O]) || collision("W", E, EMeteors[O]) || collision("D", E, EMeteors[O])){
+						E.launched = false;
+					}
+				}
+			}
+			E.y-=64;
+			for(O in ObsList){
+				if(contained(E, ObsList[O]) || collision("W", E, ObsList[O]) || collision("D", E, ObsList[O])){
+					E.launched = false;
+				}
+			}
+			for(O in EMeteors){
+				if(EMeteors[O] != EMeteor13 && EMeteors[O] != EMeteor14 && EMeteors[O] != EMeteor15 && EMeteors[O] != EMeteor16 && EMeteors[O] != E){
+					if(contained(E, EMeteors[O]) || collision("W", E, EMeteors[O]) || collision("D", E, EMeteors[O])){
+						E.launched = false;
+					}
+				}
+			}
+			E.y+=32;
+			//dont collide
+			for(O in ObsList){
+				if(E.x == ObsList[O].x && E.y == ObsList[O].y){
+					E.launched = false;
+				}
+			}
+			for(O in EMeteors){
+				if(EMeteors[O] != EMeteor13 && EMeteors[O] != EMeteor14 && EMeteors[O] != EMeteor15 && EMeteors[O] != EMeteor16 && EMeteors[O] != E){
+					if(E.x == EMeteors[O].x && E.y == EMeteors[O].y){
+						E.launched = false;
+					}
+				}
+			}
+		}
+	}
+	else if(E.timer == 0){
+		if(E.LR == 2){
+			ctx.drawImage(FallingMeteorsL[Math.ceil(E.index/3)], E.x-E.width*0.5 - 88, E.y-E.height*0.5 - 494);
+		}
+		else{
+			ctx.drawImage(FallingMeteorsR[Math.ceil(E.index/3)], E.x-E.width*0.5 - 600, E.y-E.height*0.5 - 494);
+		}
+		E.index++;
+		if(E.index ==21){
+			Explosion.currentTime=0;
+			Explosion.play();
+			var landed = false;
+			if(E == EMeteor13 || E == EMeteor14 || E == EMeteor15 || E == EMeteor16){
+				landed = true;
+			}
+			if(!landed){
+				for(O in obstacle2){
+					if(obstacle2[O].x == 2000){
+						landed = true;
+						obstacle2[O].x = E.x;
+						obstacle2[O].y = E.y;
+						obstacle2[O].hp = 3;
+						break;
+					}
+				}
+			}
+			if(!landed){
+				for(O in obstacle3){
+					if(obstacle3[O].x == 2000){
+						landed = true;
+						obstacle3[O].x = E.x;
+						obstacle3[O].y = E.y;
+						obstacle3[O].hp = 3;
+						break;
+					}
+				}
+			}
+			if(!landed){
+				for(O in obstacle1){
+					if(obstacle1[O].x == 2000){
+						landed = true;
+						obstacle1[O].x = E.x;
+						obstacle1[O].y = E.y;
+						obstacle1[O].hp = 3;
+						break;
+					}
+				}
+			}
+		}
+		if(E.index ==36){
+			E.timer--;
+			E.launched = false;
+			E.index = 1;
+			E.x = -9000;
+			E.y = -2000;
+		}
 	}
 }

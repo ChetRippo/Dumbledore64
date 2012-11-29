@@ -23,7 +23,7 @@ var ice = {
 			}
 			Alpha = 0.15;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 		}
 	},
 	
@@ -101,7 +101,7 @@ var ice2 = {
 		if(this.onScreen == 1){
 			Alpha = 0.15;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 		}
 	},
 	
@@ -171,7 +171,7 @@ var Mice = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -220,7 +220,7 @@ var Mice2 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -269,7 +269,7 @@ var Mice3 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -318,7 +318,7 @@ var Mice4 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},

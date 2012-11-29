@@ -1,0 +1,109 @@
+DEATH ANI: 2 frames per image
+
+CAST ANI:
+frame - hold
+1:6
+2:9
+3:2
+4:2
+5:2
+6:1
+7:5
+8:5
+9:5
+10:1
+11:8
+
+anibus walk collision box:
+LEFT:
+56x32
+x:180
+y:136
+
+hit box:
+56x56
+x:180
+y:112
+
+RIGHT:
+same dimensions
+x:24
+y:136
+
+hit:
+x:24
+y:112
+
+topleft on rightface still:
+x:44
+y:60
+
+ATTACK ANIMATION HOLD ONTO YOUR BUTT:
+
+rightSIDE: 1: 2 frams, 2: 5, 3: 4
+STAGE 1:
+-COLLIS:
+62X32
+X: 28
+Y: 138
+
+-HIT:
+62x64
+X: 28
+Y: 104
+
+STAGE 2:
+-COLLIS
+56x43
+X: 76
+Y: 125
+
+-HIT:
+56x64
+X: 76
+Y: 103
+
+STAGE 3:
+-COLLIS
+56x33
+X: 124
+Y: 136
+
+-HIT
+56x53
+X: 124
+Y: 115
+
+leftSIDE:
+STAGE 1:
+=COLLIS
+54x34
+X: 172
+Y: 135
+
+-HIT:
+54x62
+X: 172
+Y: 106
+
+STAGE 2:
+-COOLLLIS
+50x36
+X: 127
+Y: 132
+
+-hit
+50x57
+X: 127
+Y: 110
+
+STAGE 3:
+-COLLIS
+51x52
+x: 79
+y: 117
+
+-HIT
+51x75
+x: 79
+y: 94

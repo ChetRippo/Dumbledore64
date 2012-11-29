@@ -1,0 +1,19 @@
+image:frame hold
+
+c1:7f
+c2:3f
+c3:4f
+c4:4f
+c5:7f
+c6:2f
+--
+sp1:8f <change for time between spawn
+sp2:2f
+sp3:2f
+sp4:6f
+sp5:1f <spawn
+sp6:2f
+
+40,100 <winamp
+164,148 <meator
+124,48 <diff

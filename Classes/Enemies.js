@@ -1,5 +1,4 @@
 //--------------------------------------------- Enemies -----------------------------------------------------------------------------//
-
 // Enemy 1 - Hudge
 var Enemy = {
 	type: 0,
@@ -20,56 +19,196 @@ var Enemy = {
 	onScreen: 0,
 	movement: false,
 	swimming: true,
+	index: 1,
+	hudgeIndex: 1,
+	mudgeIndex: 1,
+	color: Math.floor(Math.random() * 2) + 1,
 	// Draws the enemy on the canvas when called
 	draw: function(){
 		if(this.onScreen){
 			if(STATE != "Swamp"){
 				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 					this.LR = "Left";
-					ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					if(STATE == "Jungle"){
+						ctx.drawImage(HudgeLs[Math.ceil(this.hudgeIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.hudgeIndex++;
+						if(this.hudgeIndex > 16){
+							this.hudgeIndex = 1;
+						}
+					}
+					else if(STATE == 1 || STATE == "Tutorial"){
+						if(this.index == 1){
+							if(this.color == 1){
+								ctx.drawImage(BeeL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index++;
+						}
+						else{
+							if(this.color == 1){
+								ctx.drawImage(BeeL2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeL2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index--;
+						}
+						ctx.drawImage(santaL, this.x-this.width*0.5, this.y-this.height*0.5-2);
+					}
+					else{
+						ctx.drawImage(MudgeL[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.mudgeIndex++;
+						if(this.mudgeIndex>3){
+							this.mudgeIndex = 1;
+						}
+					}
 				}
 				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-					ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					if(STATE == "Jungle"){
+						ctx.drawImage(HudgeRs[Math.ceil(this.hudgeIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.hudgeIndex++;
+						if(this.hudgeIndex > 16){
+							this.hudgeIndex = 1;
+						}
+					}
+					else if(STATE == 1 || STATE == "Tutorial"){
+						if(this.index == 1){
+							if(this.color == 1){
+								ctx.drawImage(BeeR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index++;
+						}
+						else{
+							if(this.color == 1){
+								ctx.drawImage(BeeR2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeR2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index--;
+						}
+						ctx.drawImage(santaR, this.x-this.width*0.5+4, this.y-this.height*0.5-2);
+					}
+					else{
+						ctx.drawImage(MudgeR[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.mudgeIndex++;
+						if(this.mudgeIndex>3){
+							this.mudgeIndex = 1;
+						}
+					}
 					this.LR = "Right";
 				}
 				else if(this.LR == "Left"){
-					ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					if(STATE == "Jungle"){
+						ctx.drawImage(HudgeLs[Math.ceil(this.hudgeIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.hudgeIndex++;
+						if(this.hudgeIndex > 16){
+							this.hudgeIndex = 1;
+						}
+					}
+					else if(STATE == 1 || STATE == "Tutorial"){
+						if(this.index == 1){
+							if(this.color == 1){
+								ctx.drawImage(BeeL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index++;
+						}
+						else{
+							if(this.color == 1){
+								ctx.drawImage(BeeL2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeL2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index--;
+						}
+						ctx.drawImage(santaL, this.x-this.width*0.5, this.y-this.height*0.5-2);
+					}
+					else{
+						ctx.drawImage(MudgeL[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.mudgeIndex++;
+						if(this.mudgeIndex>3){
+							this.mudgeIndex = 1;
+						}
+					}
 				}
 				else{
-					ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					if(STATE == "Jungle"){
+						ctx.drawImage(HudgeRs[Math.ceil(this.hudgeIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.hudgeIndex++;
+						if(this.hudgeIndex > 16){
+							this.hudgeIndex = 1;
+						}
+					}
+					else if(STATE == 1 || STATE == "Tutorial"){
+						if(this.index == 1){
+							if(this.color == 1){
+								ctx.drawImage(BeeR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index++;
+						}
+						else{
+							if(this.color == 1){
+								ctx.drawImage(BeeR2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeR2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index--;
+						}
+						ctx.drawImage(santaR, this.x-this.width*0.5+4, this.y-this.height*0.5-2);
+					}
+					else{
+						ctx.drawImage(MudgeR[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.mudgeIndex++;
+						if(this.mudgeIndex>3){
+							this.mudgeIndex = 1;
+						}
+					}
 				}
 			}
 			else{
 				if(this.swimming){
 					if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 						this.LR = "Left";
-						ctx.drawImage(SwimswudgeL, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(SwimswudgeL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 					else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-						ctx.drawImage(SwimswudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(SwimswudgeR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 						this.LR = "Right";
 					}
 					else if(this.LR == "Left"){
-						ctx.drawImage(SwimswudgeL, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(SwimswudgeL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 					else{
-						ctx.drawImage(SwimswudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(SwimswudgeR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 				}
 				else{
 					if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 						this.LR = "Left";
-						ctx.drawImage(swudgeL, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(swudgeL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 					else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-						ctx.drawImage(swudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(swudgeR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 						this.LR = "Right";
 					}
 					else if(this.LR == "Left"){
-						ctx.drawImage(swudgeL, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(swudgeL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 					else{
-						ctx.drawImage(swudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(swudgeR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 				}
 			}
@@ -95,8 +234,11 @@ var EnemyA = {
 	rp: 100,
 	onScreen: 0,
 	index: 1,
+	mudgeIndex: 1,
 	dindex: 1,
 	LR: "",
+	growIndex: 1,
+	color: "",
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
@@ -106,36 +248,96 @@ var EnemyA = {
 		if(this.onTree == 1){
 			this.speed = 8;
 		}
-		if(STATE == 1){
-			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
-				this.LR = "Left";
-				ctx.drawImage(PikkitL, this.x - this.width / 2, this.y - this.height / 2);
+		if((STATE == 1 || STATE == "Tutorial") && this.onScreen == 1){
+			if(this.growIndex <= 60){
+				if(this.color=="Red"){
+					ctx.drawImage(RGrowArray[Math.ceil(this.growIndex/15)], 9000 + this.x-this.width*0.5, 9000 + this.y-this.height*0.5);
+				}
+				else if(this.color=="Blue"){
+					ctx.drawImage(BGrowArray[Math.ceil(this.growIndex/15)], 9000 + this.x-this.width*0.5, 9000 + this.y-this.height*0.5);
+				}
+				else if(this.color=="Yellow"){
+					ctx.drawImage(YGrowArray[Math.ceil(this.growIndex/15)], 9000 + this.x-this.width*0.5, 9000 + this.y-this.height*0.5);
+				}
+				this.growIndex++;
 			}
-			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-				ctx.drawImage(PikkitR, this.x - this.width / 2, this.y - this.height / 2);
-				this.LR = "Right";
+			if(this.growIndex == 61){
+				this.growIndex++;
+				this.x+=9000;
+				this.y+=9000;
+				this.movement = true;				
 			}
-			else if(this.LR == "Left"){
-				ctx.drawImage(PikkitL, this.x - this.width / 2, this.y - this.height / 2);
-			}
-			else{
-				ctx.drawImage(PikkitR, this.x - this.width / 2, this.y - this.height / 2);
+			if(this.growIndex > 61){
+				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+					this.LR = "Left";
+					if(this.color == "Blue"){
+						ctx.drawImage(BFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else if(this.color == "Red"){
+						ctx.drawImage(RFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else{
+						ctx.drawImage(YFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					ctx.drawImage(santaL, this.x-this.width*0.5+8, this.y-this.height*0.5-2);
+				}
+				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+					if(this.color == "Blue"){
+						ctx.drawImage(BFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else if(this.color == "Red"){
+						ctx.drawImage(RFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else{
+						ctx.drawImage(YFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					this.LR = "Right";
+					ctx.drawImage(santaR, this.x-this.width*0.5, this.y-this.height*0.5-2);
+				}
+				else if(this.LR == "Left"){
+					if(this.color == "Blue"){
+						ctx.drawImage(BFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else if(this.color == "Red"){
+						ctx.drawImage(RFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else{
+						ctx.drawImage(YFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					ctx.drawImage(santaL, this.x-this.width*0.5+8, this.y-this.height*0.5-2);
+				}
+				else{
+					if(this.color == "Blue"){
+						ctx.drawImage(BFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else if(this.color == "Red"){
+						ctx.drawImage(RFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else{
+						ctx.drawImage(YFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					ctx.drawImage(santaR, this.x-this.width*0.5, this.y-this.height*0.5-2);
+				}
 			}
 		}
 		if(STATE == "Scorched"){
 			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 				this.LR = "Left";
-				ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(MudgeL[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			}
 			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-				ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(MudgeR[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				this.LR = "Right";
 			}
 			else if(this.LR == "Left"){
-				ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(MudgeL[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			}
 			else{
-				ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(MudgeR[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			this.mudgeIndex++;
+			if(this.mudgeIndex>3){
+				this.mudgeIndex = 1;
 			}
 		}
 		else if(STATE == "Jungle"){
@@ -143,7 +345,7 @@ var EnemyA = {
 				if(this.dindex > 2){
 					this.dindex = 1;
 				}
-				ctx.drawImage(humpdList[this.dindex], this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(humpdList[this.dindex], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				this.dindex++;
 			}
 			else{
@@ -152,24 +354,23 @@ var EnemyA = {
 				}
 				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 					this.LR = "Left";
-					ctx.drawImage(humplList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(humplList[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				}
 				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-					ctx.drawImage(humprList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(humprList[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 					this.LR = "Right";
 				}
 				else if(this.LR == "Left"){
-					ctx.drawImage(humplList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(humplList[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				}
 				else{
-					ctx.drawImage(humprList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(humprList[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				}
 				this.index++;
 			}
 		}
 	}
 };
-
 // Enemy 3 - Hudge
 var EnemyB = {
 	type: 0,
@@ -190,56 +391,192 @@ var EnemyB = {
 	onScreen: 0,
 	movement: false,
 	swimming: true,
+	index: 1,
+	mudgeIndex: 1,
+	hudgeIndex: 1,
+	color: Math.floor(Math.random() * 2) + 1,
 	// Draws the enemy on the canvas when called
 	draw: function(){
 		if(this.onScreen){
 			if(STATE != "Swamp"){
 				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 					this.LR = "Left";
-					ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					if(STATE == "Jungle"){
+						ctx.drawImage(HudgeLs[Math.ceil(this.hudgeIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.hudgeIndex++;
+						if(this.hudgeIndex > 16){
+							this.hudgeIndex = 1;
+						}
+					}
+					else if(STATE == 1){
+						if(this.index == 1){
+							if(this.color == 1){
+								ctx.drawImage(BeeL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index++;
+						}
+						else{
+							if(this.color == 1){
+								ctx.drawImage(BeeL2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeL2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index--;
+						}
+					}
+					else{
+						ctx.drawImage(MudgeL[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.mudgeIndex++;
+						if(this.mudgeIndex>3){
+							this.mudgeIndex = 1;
+						}
+					}
 				}
 				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-					ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					if(STATE == "Jungle"){
+						ctx.drawImage(HudgeRs[Math.ceil(this.hudgeIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.hudgeIndex++;
+						if(this.hudgeIndex > 16){
+							this.hudgeIndex = 1;
+						}
+					}
+					else if(STATE == 1){
+						if(this.index == 1){
+							if(this.color == 1){
+								ctx.drawImage(BeeR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index++;
+						}
+						else{
+							if(this.color == 1){
+								ctx.drawImage(BeeR2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeR2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index--;
+						}
+					}
+					else{
+						ctx.drawImage(MudgeR[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.mudgeIndex++;
+						if(this.mudgeIndex>3){
+							this.mudgeIndex = 1;
+						}
+					}
 					this.LR = "Right";
 				}
 				else if(this.LR == "Left"){
-					ctx.drawImage(HudgeL, this.x - this.width / 2, this.y - this.height / 2);
+					if(STATE == "Jungle"){
+						ctx.drawImage(HudgeLs[Math.ceil(this.hudgeIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.hudgeIndex++;
+						if(this.hudgeIndex > 16){
+							this.hudgeIndex = 1;
+						}
+					}
+					else if(STATE == 1){
+						if(this.index == 1){
+							if(this.color == 1){
+								ctx.drawImage(BeeL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index++;
+						}
+						else{
+							if(this.color == 1){
+								ctx.drawImage(BeeL2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeL2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index--;
+						}
+					}
+					else{
+						ctx.drawImage(MudgeL[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.mudgeIndex++;
+						if(this.mudgeIndex>3){
+							this.mudgeIndex = 1;
+						}
+					}
 				}
 				else{
-					ctx.drawImage(HudgeR, this.x - this.width / 2, this.y - this.height / 2);
+					if(STATE == "Jungle"){
+						ctx.drawImage(HudgeRs[Math.ceil(this.hudgeIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.hudgeIndex++;
+						if(this.hudgeIndex > 16){
+							this.hudgeIndex = 1;
+						}
+					}
+					else if(STATE == 1){
+						if(this.index == 1){
+							if(this.color == 1){
+								ctx.drawImage(BeeR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index++;
+						}
+						else{
+							if(this.color == 1){
+								ctx.drawImage(BeeR2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							else{
+								ctx.drawImage(YBeeR2, this.x - this.width * 0.5, this.y - this.height * 0.5);
+							}
+							this.index--;
+						}
+					}
+					else{
+						ctx.drawImage(MudgeR[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+						this.mudgeIndex++;
+						if(this.mudgeIndex>3){
+							this.mudgeIndex = 1;
+						}
+					}
 				}
 			}
 			else{
 				if(this.swimming){
 					if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 						this.LR = "Left";
-						ctx.drawImage(SwimswudgeL, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(SwimswudgeL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 					else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-						ctx.drawImage(SwimswudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(SwimswudgeR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 						this.LR = "Right";
 					}
 					else if(this.LR == "Left"){
-						ctx.drawImage(SwimswudgeL, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(SwimswudgeL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 					else{
-						ctx.drawImage(SwimswudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(SwimswudgeR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 				}
 				else{
 					if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 						this.LR = "Left";
-						ctx.drawImage(swudgeL, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(swudgeL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 					else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-						ctx.drawImage(swudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(swudgeR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 						this.LR = "Right";
 					}
 					else if(this.LR == "Left"){
-						ctx.drawImage(swudgeL, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(swudgeL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 					else{
-						ctx.drawImage(swudgeR, this.x - this.width / 2, this.y - this.height / 2);
+						ctx.drawImage(swudgeR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 					}
 				}
 			}
@@ -265,7 +602,10 @@ var EnemyC = {
 	rp: 100,
 	onScreen: 0,
 	index: 1,
+	mudgeIndex: 1,
 	dindex: 1,
+	growIndex: 1,
+	color: "",
 	LR: "",
 	movement: false,
 	// Draws the enemy on the canvas when called
@@ -276,36 +616,92 @@ var EnemyC = {
 		if(this.onTree == 1){
 			this.speed = 8;
 		}
-		if(STATE == 1 || STATE == "Swamp"){
-			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
-				this.LR = "Left";
-				ctx.drawImage(PikkitL, this.x - this.width / 2, this.y - this.height / 2);
+		if(STATE == 1 && this.onScreen == 1){
+			if(this.growIndex <= 60){
+				if(this.color=="Red"){
+					ctx.drawImage(RGrowArray[Math.ceil(this.growIndex/15)], 9000 + this.x-this.width*0.5, 9000 + this.y-this.height*0.5);
+				}
+				else if(this.color=="Blue"){
+					ctx.drawImage(BGrowArray[Math.ceil(this.growIndex/15)], 9000 + this.x-this.width*0.5, 9000 + this.y-this.height*0.5);
+				}
+				else if(this.color=="Yellow"){
+					ctx.drawImage(YGrowArray[Math.ceil(this.growIndex/15)], 9000 + this.x-this.width*0.5, 9000 + this.y-this.height*0.5);
+				}
+				this.growIndex++;
 			}
-			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-				ctx.drawImage(PikkitR, this.x - this.width / 2, this.y - this.height / 2);
-				this.LR = "Right";
+			if(this.growIndex == 61){
+				this.growIndex++;
+				this.x+=9000;
+				this.y+=9000;
+				this.movement = true;				
 			}
-			else if(this.LR == "Left"){
-				ctx.drawImage(PikkitL, this.x - this.width / 2, this.y - this.height / 2);
-			}
-			else{
-				ctx.drawImage(PikkitR, this.x - this.width / 2, this.y - this.height / 2);
+			if(this.growIndex > 61){
+				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+					this.LR = "Left";
+					if(this.color == "Blue"){
+						ctx.drawImage(BFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else if(this.color == "Red"){
+						ctx.drawImage(RFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else{
+						ctx.drawImage(YFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+				}
+				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+					if(this.color == "Blue"){
+						ctx.drawImage(BFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else if(this.color == "Red"){
+						ctx.drawImage(RFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else{
+						ctx.drawImage(YFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					this.LR = "Right";
+				}
+				else if(this.LR == "Left"){
+					if(this.color == "Blue"){
+						ctx.drawImage(BFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else if(this.color == "Red"){
+						ctx.drawImage(RFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else{
+						ctx.drawImage(YFlowerL, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+				}
+				else{
+					if(this.color == "Blue"){
+						ctx.drawImage(BFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else if(this.color == "Red"){
+						ctx.drawImage(RFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+					else{
+						ctx.drawImage(YFlowerR, this.x - this.width * 0.5, this.y - this.height * 0.5);
+					}
+				}
 			}
 		}
 		if(STATE == "Scorched"){
 			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 				this.LR = "Left";
-				ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(MudgeL[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			}
 			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-				ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(MudgeR[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				this.LR = "Right";
 			}
 			else if(this.LR == "Left"){
-				ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(MudgeL[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
 			}
 			else{
-				ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(MudgeR[this.mudgeIndex], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			this.mudgeIndex++;
+			if(this.mudgeIndex>3){
+				this.mudgeIndex = 1;
 			}
 		}
 		else if(STATE == "Jungle"){
@@ -313,7 +709,7 @@ var EnemyC = {
 				if(this.dindex > 2){
 					this.dindex = 1;
 				}
-				ctx.drawImage(humpdList[this.dindex], this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(humpdList[this.dindex], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				this.dindex++;
 			}
 			else{
@@ -322,17 +718,17 @@ var EnemyC = {
 				}
 				if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 					this.LR = "Left";
-					ctx.drawImage(humplList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(humplList[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				}
 				else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-					ctx.drawImage(humprList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(humprList[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 					this.LR = "Right";
 				}
 				else if(this.LR == "Left"){
-					ctx.drawImage(humplList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(humplList[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				}
 				else{
-					ctx.drawImage(humprList[this.index], this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(humprList[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
 				}
 				this.index++;
 			}
@@ -361,9 +757,22 @@ var Tenemy = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Globblys[this.frame], this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(GlobblyL[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(GlobblyR[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(GlobblyL[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
+		else{
+			ctx.drawImage(GlobblyR[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
 		this.frame+=1;
-		if(this.frame > 8){
+		if(this.frame > 3){
 			this.frame = 1;
 		}
 		if(collision(this.dir, this, player)){
@@ -392,9 +801,22 @@ var TenemyA = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Globblys[this.frame], this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(GlobblyL[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(GlobblyR[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(GlobblyL[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
+		else{
+			ctx.drawImage(GlobblyR[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
 		this.frame+=1;
-		if(this.frame > 8){
+		if(this.frame > 3){
 			this.frame = 1;
 		}
 		if(collision(this.dir, this, player)){
@@ -424,9 +846,22 @@ var TenemyB = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		ctx.drawImage(Globblys[this.frame], this.x - this.width / 2, this.y - this.height / 2);
+		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			this.LR = "Left";
+			ctx.drawImage(GlobblyL[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
+		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+			ctx.drawImage(GlobblyR[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			this.LR = "Right";
+		}
+		else if(this.LR == "Left"){
+			ctx.drawImage(GlobblyL[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
+		else{
+			ctx.drawImage(GlobblyR[this.frame], this.x - this.width * 0.5, this.y - this.height * 0.5);
+		}
 		this.frame+=1;
-		if(this.frame > 8){
+		if(this.frame > 3){
 			this.frame = 1;
 		}
 		if(collision(this.dir, this, player)){
@@ -455,19 +890,23 @@ var Lavaman = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.respawn == 0){
+			this.respawn = -1;
+			console.log("what the fuck");
+		}
 		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 			this.LR = "Left";
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.LR = "Right";
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else{
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	}
 };
@@ -490,19 +929,23 @@ var Lavaman2 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.respawn == 0){
+			this.respawn = -1;
+			console.log("what the fuck");
+		}
 		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 			this.LR = "Left";
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.LR = "Right";
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else{
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	}
 };
@@ -525,19 +968,23 @@ var Lavaman3 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.respawn == 0){
+			this.respawn = -1;
+			console.log("what the fuck");
+		}
 		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 			this.LR = "Left";
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.LR = "Right";
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else{
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	}
 };
@@ -560,19 +1007,23 @@ var Lavaman4 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.respawn == 0){
+			this.respawn = -1;
+			console.log("what the fuck");
+		}
 		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 			this.LR = "Left";
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.LR = "Right";
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else{
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	}
 };
@@ -596,19 +1047,23 @@ var Lavaman5 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.respawn == 0){
+			this.respawn = -1;
+			console.log("what the fuck");
+		}
 		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 			this.LR = "Left";
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.LR = "Right";
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else{
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	}
 };
@@ -631,19 +1086,23 @@ var Lavaman6 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.respawn == 0){
+			this.respawn = -1;
+			console.log("what the fuck");
+		}
 		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 			this.LR = "Left";
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.LR = "Right";
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else{
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	}
 };
@@ -666,19 +1125,23 @@ var Lavaman7 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.respawn == 0){
+			this.respawn = -1;
+			console.log("what the fuck");
+		}
 		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 			this.LR = "Left";
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.LR = "Right";
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else{
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	}
 };
@@ -701,19 +1164,23 @@ var Lavaman8 = {
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
+		if(this.respawn == 0){
+			this.respawn = -1;
+			console.log("what the fuck");
+		}
 		if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
 			this.LR = "Left";
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 			this.LR = "Right";
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(LavamanpicL, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicL, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else{
-			ctx.drawImage(LavamanpicR, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(LavamanpicR, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	}
 };
@@ -724,80 +1191,199 @@ var Spawner = {
 	x: 2000,
 	y: -9000,
 	onTree: 0,
-	width: 64,
-	height: 64,
+	width: 88,
+	height: 92,
 	speed: 2,
 	speed2: 1,
 	dirct: 0,
-	hp: 5,
+	hp: 6,
 	hptimer: 0,
 	respawn: 300,
 	dir: "W",
+	LR: "",
+	TargetObj: "",
 	rp: 450,
 	pts: 500,
 	onScreen: 0,
-	cd: 60,
+	casted: false,
+	cast: false,
+	castIndex: 1,
+	walkIndex: 1,
+	spawnIndex: 1,
+	waitIndex: 30,
+	attckPlayer: false,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
 		if(this.hptimer >0){
 			this.hptimer-=1;
 		}
-		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+		if (this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			if(this.cast || this.casted){
+				if(this.LR == "Left"){
+					ctx.fillRect(this.x - this.width * 0.5 - 16, this.y - this.height * 0.5 - 24, this.width+16, this.height+24);
+				}
+				else{
+					ctx.fillRect(this.x - this.width * 0.5 - 16, this.y - this.height * 0.5 - 24, this.width+16, this.height+24);
+				}
+			}
+			else{
+				ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+			}
+		}
+		else if(!this.cast){
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				ctx.drawImage(SplavamanLWalk[Math.ceil(this.walkIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(SplavamanRWalk[Math.ceil(this.walkIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(SplavamanLWalk[Math.ceil(this.walkIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			else{
+				ctx.drawImage(SplavamanRWalk[Math.ceil(this.walkIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			this.walkIndex++;
+			if(this.walkIndex > 16){
+				this.walkIndex = 1;
+			}
+		}
+		else if(!this.casted){
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				//offset b/c graphic is diff dimension 
+				ctx.drawImage(SplavamanLCast[this.castIndex], this.x - this.width * 0.5 - 164, this.y - this.height * 0.5 - 68);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(SplavamanRCast[this.castIndex], this.x - this.width * 0.5 - 36, this.y - this.height * 0.5 - 68);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(SplavamanLCast[this.castIndex], this.x - this.width * 0.5 - 164, this.y - this.height * 0.5 - 68);
+			}
+			else{
+				ctx.drawImage(SplavamanRCast[this.castIndex], this.x - this.width * 0.5 - 36, this.y - this.height * 0.5 - 68);
+			}
+			this.castIndex++;
+			if(this.castIndex > 27){
+				this.casted = true;
+				this.castIndex = 1;
+			}
 		}
 		else{
-			ctx.drawImage(Splavaman, this.x - this.width / 2, this.y - this.height / 2);
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				//offset b/c graphic is diff dimension. this.cd-20 = frame #
+				ctx.drawImage(SplavamanLSpawn[this.spawnIndex], this.x - this.width * 0.5 - 164, this.y - this.height * 0.5 - 68);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(SplavamanRSpawn[this.spawnIndex], this.x - this.width * 0.5 - 36, this.y - this.height * 0.5 - 68);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(SplavamanLSpawn[this.spawnIndex], this.x - this.width * 0.5 - 164, this.y - this.height * 0.5 - 68);
+			}
+			else{
+				ctx.drawImage(SplavamanRSpawn[this.spawnIndex], this.x - this.width * 0.5 - 36, this.y - this.height * 0.5 - 68);
+			}
+			if(this.waitIndex <=0){
+				this.spawnIndex++;
+			}
+			else{
+				this.waitIndex--;
+			}
+			if(this.spawnIndex > 21){
+				this.spawnIndex = 1;
+				this.waitIndex = 30;
+			}
 		}
 		hpBarDraw(this);
 	},
 	fire: function(){
 		if(this.onScreen == 1){
-			if(this.cd<= 0){
+			if(Lavaman.onScreen == 1 && Lavaman2.onScreen == 1 && Lavaman3.onScreen == 1 && Lavaman4.onScreen == 1){
+				this.casted = false;
+				this.cast = false;
+				this.castIndex = 1;
+				this.walkIndex = 1;
+				this.spawnIndex = 1;
+				this.waitIndex = 30;
+				//target player
+				this.attckPlayer = true;
+				this.movement = true;
+			}
+			else{
+				this.attckPlayer = false;
+			}
+			if(this.spawnIndex == 19){
 				if(Lavaman.onScreen == 0){
 					SpawnerSpawn.currentTime=0;
 					SpawnerSpawn.play();
 					Lavaman.onScreen = 1;
-					Lavaman.x = this.x-this.width/2;
-					Lavaman.y = this.y-this.height/2;
+					if(this.dir == "D"){
+						Lavaman.x = this.x + 156;
+						Lavaman.y = this.y+64;
+					}
+					else{
+						Lavaman.x = this.x-164;
+						Lavaman.y = this.y+64;
+					}
 					Lavaman.movement = true;
-					Lavaman.cd = 15;
-					this.cd = 60;
 				}
 				else if(Lavaman2.onScreen == 0){
 					SpawnerSpawn.currentTime=0;
 					SpawnerSpawn.play();
 					Lavaman2.onScreen = 1;
-					Lavaman2.x = this.x-this.width/2;
-					Lavaman2.y = this.y-this.height/2;
+					if(this.dir == "D"){
+						Lavaman2.x = this.x + 156;
+						Lavaman2.y = this.y+64;
+					}
+					else{
+						Lavaman2.x = this.x-164;
+						Lavaman2.y = this.y+64;
+					}
 					Lavaman2.movement = true;
-					Lavaman2.cd = 15;
-					this.cd = 60;
 				}
 				else if(Lavaman3.onScreen == 0){
 					SpawnerSpawn.currentTime=0;
 					SpawnerSpawn.play();
 					Lavaman3.onScreen = 1;
-					Lavaman3.x = this.x-this.width/2;
-					Lavaman3.y = this.y-this.height/2;
+					if(this.dir == "D"){
+						Lavaman3.x = this.x + 156;
+						Lavaman3.y = this.y+64;
+					}
+					else{
+						Lavaman3.x = this.x-164;
+						Lavaman3.y = this.y+64;
+					}
 					Lavaman3.movement = true;
-					Lavaman3.cd = 15;
-					this.cd = 60;
 				}
 				else if(Lavaman4.onScreen == 0){
 					SpawnerSpawn.currentTime=0;
 					SpawnerSpawn.play();
 					Lavaman4.onScreen = 1;
-					Lavaman4.x = this.x-this.width/2;
-					Lavaman4.y = this.y-this.height/2;
+					if(this.dir == "D"){
+						Lavaman4.x = this.x + 156;
+						Lavaman4.y = this.y+64;
+					}
+					else{
+						Lavaman4.x = this.x-164;
+						Lavaman4.y = this.y+64;
+					}
 					Lavaman4.movement = true;
-					Lavaman4.cd = 15;
-					this.cd = 60;
 				}
-			}
-			else{
-				this.cd-=1;
+				else{
+					this.casted = false;
+					this.cast = false;
+					this.castIndex = 1;
+					this.walkIndex = 1;
+					this.spawnIndex = 1;
+					this.waitIndex = 30;
+				}
 			}
 		}
 	}
@@ -807,80 +1393,199 @@ var Spawner2 = {
 	x: 2000,
 	y: -9000,
 	onTree: 0,
-	width: 64,
-	height: 64,
+	width: 88,
+	height: 92,
 	speed: 2,
 	speed2: 1,
 	dirct: 0,
-	hp: 5,
+	hp: 6,
 	hptimer: 0,
 	respawn: 900,
 	dir: "W",
+	LR: "",
+	TargetObj: "",
 	rp: 450,
 	pts: 500,
 	onScreen: 0,
-	cd: 60,
+	casted: false,
+	cast: false,
+	castIndex: 1,
+	walkIndex: 1,
+	spawnIndex: 1,
+	waitIndex: 30,
+	attckPlayer: false,
 	movement: false,
 	// Draws the enemy on the canvas when called
 	draw: function(){
 		if(this.hptimer >0){
 			this.hptimer-=1;
 		}
-		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+		if (this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white";
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			if(this.cast || this.casted){
+				if(this.LR == "Left"){
+					ctx.fillRect(this.x - this.width * 0.5 - 24, this.y - this.height * 0.5 - 16, this.width+16, this.height+24);
+				}
+				else{
+					ctx.fillRect(this.x - this.width * 0.5 - 24, this.y - this.height * 0.5 - 16, this.width+16, this.height+24);
+				}
+			}
+			else{
+				ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+			}
+		}
+		else if(!this.cast){
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				ctx.drawImage(SplavamanLWalk[Math.ceil(this.walkIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(SplavamanRWalk[Math.ceil(this.walkIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(SplavamanLWalk[Math.ceil(this.walkIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			else{
+				ctx.drawImage(SplavamanRWalk[Math.ceil(this.walkIndex*0.25)], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			this.walkIndex++;
+			if(this.walkIndex > 16){
+				this.walkIndex = 1;
+			}
+		}
+		else if(!this.casted){
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				//offset b/c graphic is diff dimension 
+				ctx.drawImage(SplavamanLCast[this.castIndex], this.x - this.width * 0.5 - 164, this.y - this.height * 0.5 - 68);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(SplavamanRCast[this.castIndex], this.x - this.width * 0.5 - 36, this.y - this.height * 0.5 - 68);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(SplavamanLCast[this.castIndex], this.x - this.width * 0.5 - 164, this.y - this.height * 0.5 - 68);
+			}
+			else{
+				ctx.drawImage(SplavamanRCast[this.castIndex], this.x - this.width * 0.5 - 36, this.y - this.height * 0.5 - 68);
+			}
+			this.castIndex++;
+			if(this.castIndex > 27){
+				this.casted = true;
+				this.castIndex = 1;
+			}
 		}
 		else{
-			ctx.drawImage(Splavaman, this.x - this.width / 2, this.y - this.height / 2);
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				//offset b/c graphic is diff dimension. this.cd-20 = frame #
+				ctx.drawImage(SplavamanLSpawn[this.spawnIndex], this.x - this.width * 0.5 - 164, this.y - this.height * 0.5 - 68);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(SplavamanRSpawn[this.spawnIndex], this.x - this.width * 0.5 - 36, this.y - this.height * 0.5 - 68);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(SplavamanLSpawn[this.spawnIndex], this.x - this.width * 0.5 - 164, this.y - this.height * 0.5 - 68);
+			}
+			else{
+				ctx.drawImage(SplavamanRSpawn[this.spawnIndex], this.x - this.width * 0.5 - 36, this.y - this.height * 0.5 - 68);
+			}
+			if(this.waitIndex <=0){
+				this.spawnIndex++;
+			}
+			else{
+				this.waitIndex--;
+			}
+			if(this.spawnIndex > 21){
+				this.spawnIndex = 1;
+				this.waitIndex = 30;
+			}
 		}
 		hpBarDraw(this);
 	},
 	fire: function(){
 		if(this.onScreen == 1){
-			if(this.cd<= 0){
+			if(Lavaman5.onScreen == 1 && Lavaman6.onScreen == 1 && Lavaman7.onScreen == 1 && Lavaman8.onScreen == 1){
+				this.casted = false;
+				this.cast = false;
+				this.castIndex = 1;
+				this.walkIndex = 1;
+				this.spawnIndex = 1;
+				this.waitIndex = 30;
+				//target player
+				this.attckPlayer = true;
+				this.movement = true;
+			}
+			else{
+				this.attckPlayer = false;
+			}
+			if(this.spawnIndex == 19){
 				if(Lavaman5.onScreen == 0){
 					SpawnerSpawn.currentTime=0;
 					SpawnerSpawn.play();
 					Lavaman5.onScreen = 1;
-					Lavaman5.x = this.x-this.width/2;
-					Lavaman5.y = this.y-this.height/2;
+					if(this.dir == "D"){
+						Lavaman5.x = this.x + 156;
+						Lavaman5.y = this.y+64;
+					}
+					else{
+						Lavaman5.x = this.x-164;
+						Lavaman5.y = this.y+64;
+					}
 					Lavaman5.movement = true;
-					Lavaman5.cd = 15;
-					this.cd = 60;
 				}
 				else if(Lavaman6.onScreen == 0){
 					SpawnerSpawn.currentTime=0;
 					SpawnerSpawn.play();
 					Lavaman6.onScreen = 1;
-					Lavaman6.x = this.x-this.width/2;
-					Lavaman6.y = this.y-this.height/2;
+					if(this.dir == "D"){
+						Lavaman6.x = this.x + 156;
+						Lavaman6.y = this.y+64;
+					}
+					else{
+						Lavaman6.x = this.x-164;
+						Lavaman6.y = this.y+64;
+					}
 					Lavaman6.movement = true;
-					Lavaman6.cd = 15;
-					this.cd = 60;
 				}
 				else if(Lavaman7.onScreen == 0){
 					SpawnerSpawn.currentTime=0;
 					SpawnerSpawn.play();
 					Lavaman7.onScreen = 1;
-					Lavaman7.x = this.x-this.width/2;
-					Lavaman7.y = this.y-this.height/2;
+					if(this.dir == "D"){
+						Lavaman7.x = this.x + 156;
+						Lavaman7.y = this.y+64;
+					}
+					else{
+						Lavaman7.x = this.x-164;
+						Lavaman7.y = this.y+64;
+					}
 					Lavaman7.movement = true;
-					Lavaman7.cd = 15;
-					this.cd = 60;
 				}
 				else if(Lavaman8.onScreen == 0){
 					SpawnerSpawn.currentTime=0;
 					SpawnerSpawn.play();
 					Lavaman8.onScreen = 1;
-					Lavaman8.x = this.x-this.width/2;
-					Lavaman8.y = this.y-this.height/2;
+					if(this.dir == "D"){
+						Lavaman8.x = this.x + 156;
+						Lavaman8.y = this.y+64;
+					}
+					else{
+						Lavaman8.x = this.x-164;
+						Lavaman8.y = this.y+64;
+					}
 					Lavaman8.movement = true;
-					Lavaman8.cd = 15;
-					this.cd = 60;
 				}
-			}
-			else{
-				this.cd-=1;
+				else{
+					this.casted = false;
+					this.cast = false;
+					this.castIndex = 1;
+					this.walkIndex = 1;
+					this.spawnIndex = 1;
+					this.waitIndex = 30;
+				}
 			}
 		}
 	}
@@ -908,21 +1613,21 @@ var Sorceror = {
 	onScreen: 0,
 	// Draws the enemy on the canvas when called
 	draw: function(){
-		if (this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2);
+		if (this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
+			ctx.drawImage(Wizzurd2, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		else{
-			ctx.drawImage(Sorcerorpng, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(Sorcerorpng, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 		hpBarDraw(this);
 		if(this.spell == "Fire"){
-			ctx.drawImage(FireIcon, this.x-this.width/4, this.y - 48);
+			ctx.drawImage(FireIcon, this.x-this.width*0.25, this.y - 48);
 		}
 		if(this.spell == "Ice"){
-			ctx.drawImage(IceIcon, this.x-this.width/4, this.y - 48);
+			ctx.drawImage(IceIcon, this.x-this.width*0.25, this.y - 48);
 		}
 		if(this.spell == "Lightning"){
-			ctx.drawImage(LightningIcon, this.x-this.width/4, this.y - 48);
+			ctx.drawImage(LightningIcon, this.x-this.width*0.25, this.y - 48);
 		}
 	},
 	cast: function(){
@@ -944,7 +1649,7 @@ var treeWizz = {
 	onTree: 0,
 	y: -400,
 	width: 32,
-	height: 32,
+	height: 44,
 	speed: 4,
 	speed2: 2,
 	dirct: 0,
@@ -954,7 +1659,7 @@ var treeWizz = {
 	onScreen: 0,
 	movement: false,
 	cd: 90,
-	hp: 6,
+	hp: 5,
 	hptimer: 0,
 	width2: 0,
 	height2: 0,
@@ -963,16 +1668,26 @@ var treeWizz = {
 	frame: 0,
 	pts: 5000,
 	spawned: 0,
-	index: 1,
+	LR: "",
 	draw: function(){
-		if (this.hptimer/2 != Math.round(this.hptimer/2)){
-			ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+		if (this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
+			ctx.fillStyle = "white";
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		else{
-			ctx.drawImage(Treewizzez[this.index], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-			this.index++;
-			if(this.index > 8){
-				this.index = 1;
+			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+				this.LR = "Left";
+				ctx.drawImage(TWizzurdL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
+				ctx.drawImage(TWizzurdR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+				this.LR = "Right";
+			}
+			else if(this.LR == "Left"){
+				ctx.drawImage(TWizzurdL1, this.x - this.width * 0.5, this.y - this.height * 0.5);
+			}
+			else{
+				ctx.drawImage(TWizzurdR1, this.x - this.width * 0.5, this.y - this.height * 0.5);
 			}
 		}
 		hpBarDraw(this);
@@ -1013,6 +1728,7 @@ var treeWizz = {
 				if(queue){
 					this.respawn = 0;
 					spawn(this);
+					AList[2] = true;
 					this.herp = 0;
 				}
 			}
@@ -1096,7 +1812,7 @@ var treeWizz = {
 				rootBlastS.shoot();
 				rootBlastD.shoot();
 			}
-			if(attack == 3 && this.hp < 6){
+			if(attack == 3 && this.hp < 5){
 				LeafHeal.shoot();
 			}
 		}
@@ -1118,9 +1834,14 @@ var TwizEffect = {
 				trailingbeeps.currentTime=0;
 				trailingbeeps.play();
 			}
-			ctx.globalAlpha = Alpha/2;
+			if(Alpha/(2+this.frame*0.1) < 0.1){
+				ctx.globalAlpha = 0;
+			}
+			else{
+				ctx.globalAlpha = Alpha/(2+this.frame*0.1);
+			}
 			ctx.fillStyle = "#228b22";
-			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+			ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 			this.width = this.width + 8*this.frame;
 			this.height = this.height + 8*this.frame;
 			this.frame++;
@@ -1182,7 +1903,7 @@ var Thief = {
 			this.runCounter-=1;
 		}
 		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)
-			|| (this.x >= MasterThief.x-MasterThief.width/2 && this.x <= MasterThief.x + MasterThief.width/2 && this.y >= MasterThief.y-MasterThief.height/2 && this.y <= MasterThief.y+MasterThief.height/2 && this.stole)){
+			|| (this.x >= MasterThief.x-MasterThief.width*0.5 && this.x <= MasterThief.x + MasterThief.width*0.5 && this.y >= MasterThief.y-MasterThief.height*0.5 && this.y <= MasterThief.y+MasterThief.height*0.5 && this.stole)){
 			SmokeBomb.x1 = this.x;
 			SmokeBomb.y1 = this.y;
 			this.runCounter = -1;
@@ -1220,15 +1941,15 @@ var Thief = {
 			ctx.globalAlpha = Alpha/3;
 			this.alphaChange = true;
 		}
-		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+		if (this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white"
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(ThievesL[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.drawImage(ThievesL[this.state], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		else if(this.LR == "Right"){
-			ctx.drawImage(ThievesR[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.drawImage(ThievesR[this.state], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		if(this.movement){
 			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
@@ -1245,42 +1966,45 @@ var Thief = {
 		}
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
-				ctx.drawImage(FireIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(FireIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Ice"){
-				ctx.drawImage(IceIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(IceIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Earth"){
-				ctx.drawImage(EarthIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(EarthIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Lightning"){
-				ctx.drawImage(LightningIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(LightningIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Air"){
-				ctx.drawImage(AirIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(AirIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Mystic"){
-				ctx.drawImage(MysticIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(MysticIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Water"){
-				ctx.drawImage(WaterIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(WaterIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Dark"){
-				ctx.drawImage(DarkIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(DarkIcon, this.x-this.width*0.25, this.y - 48);
+			}
+			if(this.spell == "Light"){
+				ctx.drawImage(LightIcon, this.x-this.width*0.25, this.y - 48);
 			}
 		}
 		}
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
-			if((collision(this.dir, this, player) || contained(player, this)) && (hptimer <= 0 || hptimer == 30)){
+			if((collision(this.dir, this, player) || contained(player, this)) && (hptimer <= 0 || hptimer == 30 || hptimer == 29)){
 				this.stole = true;
 				this.runCounter = 45;
 				if(spell2 != "N/A"){
 					this.spell = spell2;
 					spell2 = "N/A";
-					typemarker3.x = player.x-player.width/2 - 32;
-					typemarker3.y = player.y-player.height/2;
+					typemarker3.x = player.x-player.width*0.5 - 32;
+					typemarker3.y = player.y-player.height*0.5;
 					typemarker3.timeLeft = 30;
 					typemarker3.text = "Stolen!";
 					earth.cast = -1;
@@ -1296,11 +2020,14 @@ var Thief = {
 					air.cast = -1;
 					mystic.cast = -1;
 					water.cast = -1;
+					lightearth.cast = -1;
 					player.speed = 8;
-					castingBar.x = player.x - player.width/2;
-					castingBar.y = player.y + player.height/2;
+					Alpha = 1;
+					lightearth.onScreen = 0;
+					castingBar.x = player.x - player.width*0.5;
+					castingBar.y = player.y + player.height*0.5;
 					castingBar.width = player.width;
-					castingBar.height = player.height/4;
+					castingBar.height = player.height*0.25;
 					castingBar.width2 = 0;
 					castingBar.onScreen = 0;
 					castingBar.cast = -1;
@@ -1309,8 +2036,8 @@ var Thief = {
 				else if(spell1 != "N/A"){
 					this.spell = spell1;
 					spell1 = "N/A";
-					typemarker3.x = player.x-player.width/2 - 32;
-					typemarker3.y = player.y-player.height/2;
+					typemarker3.x = player.x-player.width*0.5 - 32;
+					typemarker3.y = player.y-player.height*0.5;
 					typemarker3.timeLeft = 30;
 					typemarker3.text = "Stolen!";
 					earth.cast = -1;
@@ -1326,11 +2053,14 @@ var Thief = {
 					air.cast = -1;
 					mystic.cast = -1;
 					water.cast = -1;
+					lightearth.cast = -1;
+					Alpha = 1;
+					lightearth.onScreen = 0;
 					player.speed = 8;
-					castingBar.x = player.x - player.width/2;
-					castingBar.y = player.y + player.height/2;
+					castingBar.x = player.x - player.width*0.5;
+					castingBar.y = player.y + player.height*0.5;
 					castingBar.width = player.width;
-					castingBar.height = player.height/4;
+					castingBar.height = player.height*0.25;
 					castingBar.width2 = 0;
 					castingBar.onScreen = 0;
 					castingBar.cast = -1;
@@ -1382,7 +2112,7 @@ var ThiefA = {
 			this.runCounter-=1;
 		}
 		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)
-			|| (this.x >= MasterThief.x-MasterThief.width/2 && this.x <= MasterThief.x + MasterThief.width/2 && this.y >= MasterThief.y-MasterThief.height/2 && this.y <= MasterThief.y+MasterThief.height/2 && this.stole)){
+			|| (this.x >= MasterThief.x-MasterThief.width*0.5 && this.x <= MasterThief.x + MasterThief.width*0.5 && this.y >= MasterThief.y-MasterThief.height*0.5 && this.y <= MasterThief.y+MasterThief.height*0.5 && this.stole)){
 			SmokeBombA.x1 = this.x;
 			SmokeBombA.y1 = this.y;
 			this.runCounter = -1;
@@ -1420,15 +2150,15 @@ var ThiefA = {
 			ctx.globalAlpha = Alpha/3;
 			this.alphaChange = true;
 		}
-		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+		if (this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white"
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(ThievesL[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.drawImage(ThievesL[this.state], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		else if(this.LR == "Right"){
-			ctx.drawImage(ThievesR[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.drawImage(ThievesR[this.state], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		if(this.movement){
 			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
@@ -1445,42 +2175,45 @@ var ThiefA = {
 		}
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
-				ctx.drawImage(FireIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(FireIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Ice"){
-				ctx.drawImage(IceIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(IceIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Earth"){
-				ctx.drawImage(EarthIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(EarthIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Lightning"){
-				ctx.drawImage(LightningIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(LightningIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Air"){
-				ctx.drawImage(AirIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(AirIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Mystic"){
-				ctx.drawImage(MysticIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(MysticIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Water"){
-				ctx.drawImage(WaterIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(WaterIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Dark"){
-				ctx.drawImage(DarkIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(DarkIcon, this.x-this.width*0.25, this.y - 48);
+			}
+			if(this.spell == "Light"){
+				ctx.drawImage(LightIcon, this.x-this.width*0.25, this.y - 48);
 			}
 		}
 		}
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
-			if((collision(this.dir, this, player) || contained(player, this)) && (hptimer <= 0 || hptimer == 30)){
+			if((collision(this.dir, this, player) || contained(player, this)) && (hptimer <= 0 || hptimer == 30 || hptimer == 29)){
 				this.stole = true;
 				this.runCounter = 45;
 				if(spell2 != "N/A"){
 					this.spell = spell2;
 					spell2 = "N/A";
-					typemarker3.x = player.x-player.width/2 - 32;
-					typemarker3.y = player.y-player.height/2;
+					typemarker3.x = player.x-player.width*0.5 - 32;
+					typemarker3.y = player.y-player.height*0.5;
 					typemarker3.timeLeft = 30;
 					typemarker3.text = "Stolen!";
 					earth.cast = -1;
@@ -1496,11 +2229,14 @@ var ThiefA = {
 					mystic.cast = -1;
 					water.cast = -1;
 					darkwater.cast = -1;
+					lightearth.cast = -1;
+					Alpha = 1;
+					lightearth.onScreen = 0;
 					player.speed = 8;
-					castingBar.x = player.x - player.width/2;
-					castingBar.y = player.y + player.height/2;
+					castingBar.x = player.x - player.width*0.5;
+					castingBar.y = player.y + player.height*0.5;
 					castingBar.width = player.width;
-					castingBar.height = player.height/4;
+					castingBar.height = player.height*0.25;
 					castingBar.width2 = 0;
 					castingBar.onScreen = 0;
 					castingBar.cast = -1;
@@ -1509,8 +2245,8 @@ var ThiefA = {
 				else if(spell1 != "N/A"){
 					this.spell = spell1;
 					spell1 = "N/A";
-					typemarker3.x = player.x-player.width/2 - 32;
-					typemarker3.y = player.y-player.height/2;
+					typemarker3.x = player.x-player.width*0.5 - 32;
+					typemarker3.y = player.y-player.height*0.5;
 					typemarker3.timeLeft = 30;
 					typemarker3.text = "Stolen!";
 					earth.cast = -1;
@@ -1525,12 +2261,15 @@ var ThiefA = {
 					fire.cast = -1;
 					air.cast = -1;
 					mystic.cast = -1;
+					lightearth.cast = -1;
 					player.speed = 8;
+					Alpha = 1;
+					lightearth.onScreen = 0;
 					water.cast = -1;
-					castingBar.x = player.x - player.width/2;
-					castingBar.y = player.y + player.height/2;
+					castingBar.x = player.x - player.width*0.5;
+					castingBar.y = player.y + player.height*0.5;
 					castingBar.width = player.width;
-					castingBar.height = player.height/4;
+					castingBar.height = player.height*0.25;
 					castingBar.width2 = 0;
 					castingBar.onScreen = 0;
 					castingBar.cast = -1;
@@ -1582,7 +2321,7 @@ var ThiefB = {
 			this.runCounter-=1;
 		}
 		if(this.runCounter == 0 || (this.x > 792 && this.onScreen == 1) || (this.x < 8 && this.onScreen == 1) || (this.y < 8 && this.onScreen == 1) || (this.y > 568 && this.onScreen == 1)
-			|| (this.x >= MasterThief.x-MasterThief.width/2 && this.x <= MasterThief.x + MasterThief.width/2 && this.y >= MasterThief.y-MasterThief.height/2 && this.y <= MasterThief.y+MasterThief.height/2 && this.stole)){
+			|| (this.x >= MasterThief.x-MasterThief.width*0.5 && this.x <= MasterThief.x + MasterThief.width*0.5 && this.y >= MasterThief.y-MasterThief.height*0.5 && this.y <= MasterThief.y+MasterThief.height*0.5 && this.stole)){
 			SmokeBombB.x1 = this.x;
 			SmokeBombB.y1 = this.y;
 			this.runCounter = -1;
@@ -1620,15 +2359,15 @@ var ThiefB = {
 			ctx.globalAlpha = Alpha/3;
 			this.alphaChange = true;
 		}
-		if (this.hptimer/2 != Math.round(this.hptimer/2)){
+		if (this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 			ctx.fillStyle = "white"
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		else if(this.LR == "Left"){
-			ctx.drawImage(ThievesL[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.drawImage(ThievesL[this.state], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		else if(this.LR == "Right"){
-			ctx.drawImage(ThievesR[this.state], this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+			ctx.drawImage(ThievesR[this.state], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 		}
 		if(this.movement){
 			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
@@ -1645,42 +2384,45 @@ var ThiefB = {
 		}
 		if(this.spell != "N/A"){
 			if(this.spell == "Fire"){
-				ctx.drawImage(FireIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(FireIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Ice"){
-				ctx.drawImage(IceIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(IceIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Earth"){
-				ctx.drawImage(EarthIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(EarthIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Lightning"){
-				ctx.drawImage(LightningIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(LightningIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Air"){
-				ctx.drawImage(AirIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(AirIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Mystic"){
-				ctx.drawImage(MysticIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(MysticIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Water"){
-				ctx.drawImage(WaterIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(WaterIcon, this.x-this.width*0.25, this.y - 48);
 			}
 			if(this.spell == "Dark"){
-				ctx.drawImage(DarkIcon, this.x-this.width/4, this.y - 48);
+				ctx.drawImage(DarkIcon, this.x-this.width*0.25, this.y - 48);
+			}
+			if(this.spell == "Light"){
+				ctx.drawImage(LightIcon, this.x-this.width*0.25, this.y - 48);
 			}
 		}
 		}
 	},
 	steal: function(){
 		if(this.spell == "N/A" && this.stole == false){
-			if((collision(this.dir, this, player) || contained(player, this)) && (hptimer <= 0 || hptimer == 30)){
+			if((collision(this.dir, this, player) || contained(player, this)) && (hptimer <= 0 || hptimer == 30 || hptimer == 29)){
 				this.stole = true;
 				this.runCounter = 45;
 				if(spell2 != "N/A"){
 					this.spell = spell2;
 					spell2 = "N/A";
-					typemarker3.x = player.x-player.width/2 - 32;
-					typemarker3.y = player.y-player.height/2;
+					typemarker3.x = player.x-player.width*0.5 - 32;
+					typemarker3.y = player.y-player.height*0.5;
 					typemarker3.timeLeft = 30;
 					typemarker3.text = "Stolen!";
 					earth.cast = -1;
@@ -1696,11 +2438,14 @@ var ThiefB = {
 					mystic.cast = -1;
 					water.cast = -1;
 					darkwater.cast = -1;
+					lightearth.cast = -1;
 					player.speed = 8;
-					castingBar.x = player.x - player.width/2;
-					castingBar.y = player.y + player.height/2;
+					Alpha = 1;
+					lightearth.onScreen = 0;
+					castingBar.x = player.x - player.width*0.5;
+					castingBar.y = player.y + player.height*0.5;
 					castingBar.width = player.width;
-					castingBar.height = player.height/4;
+					castingBar.height = player.height*0.25;
 					castingBar.width2 = 0;
 					castingBar.onScreen = 0;
 					castingBar.cast = -1;
@@ -1709,8 +2454,8 @@ var ThiefB = {
 				else if(spell1 != "N/A"){
 					this.spell = spell1;
 					spell1 = "N/A";
-					typemarker3.x = player.x-player.width/2 - 32;
-					typemarker3.y = player.y-player.height/2;
+					typemarker3.x = player.x-player.width*0.5 - 32;
+					typemarker3.y = player.y-player.height*0.5;
 					typemarker3.timeLeft = 30;
 					typemarker3.text = "Stolen!";
 					earth.cast = -1;
@@ -1726,11 +2471,14 @@ var ThiefB = {
 					dark2.cast = -1;
 					airice.cast = -1;
 					darkwater.cast = -1;
+					lightearth.cast = -1;
 					player.speed = 8;
-					castingBar.x = player.x - player.width/2;
-					castingBar.y = player.y + player.height/2;
+					Alpha = 1;
+					lightearth.onScreen = 0;
+					castingBar.x = player.x - player.width*0.5;
+					castingBar.y = player.y + player.height*0.5;
 					castingBar.width = player.width;
-					castingBar.height = player.height/4;
+					castingBar.height = player.height*0.25;
 					castingBar.width2 = 0;
 					castingBar.onScreen = 0;
 					castingBar.cast = -1;
@@ -1755,6 +2503,7 @@ var Dragon = {
 	dirct: 0,
 	dir: "D",
 	respawn: 2000,
+	fall: 150,
 	rp: -1,
 	onScreen: 0,
 	movement: false,
@@ -1766,53 +2515,42 @@ var Dragon = {
 	frame: 0,
 	pts: 5000,
 	spawned: 0,
+	drawShadow: false,
 	draw: function(){
 		if(this.onScreen == 1){
-			if(this.hptimer/2 != Math.round(this.hptimer/2)){
+			if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 				ctx.fillStyle = "white";
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 			}
 			else{
 				ctx.drawImage(FbossIdle, 0, 0);
 			}
-		ctx.fillStyle = "yellow";
-		if(this.hp == 6){
-			ctx.fillRect(this.x, this.y - this.height/2 - 32, player.width/4, player.height/4);
-			ctx.fillRect(this.x + 13, this.y - this.height/2 - 32, player.width/4, player.height/4);
-			ctx.fillRect(this.x + 26, this.y - this.height/2 - 32, player.width/4, player.height/4);
+		hpBarDraw(this);
 		}
-		else if(this.hp == 5){
-			ctx.fillRect(this.x, this.y - this.height/2 - 32, player.width/4, player.height/4);
-			ctx.fillRect(this.x + 13, this.y - this.height/2 - 32, player.width/4, player.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x + 26, this.y - this.height/2 - 32, player.width/4, player.height/4);
+		if(this.drawShadow){
+			ctx.fillStyle = "black";
+			ctx.globalAlpha = Alpha*0.2;
+			ctx.fillRect(156-(150-this.fall*0.5), 312-(150-this.fall*0.5), 200-this.fall, 200-this.fall);
+			ctx.globalAlpha = Alpha;
+			if(this.fall > 0){
+				this.fall--;
+			}
+			else{
+				this.drawShadow = false;
+			}
 		}
-		else if(this.hp == 4){
-			ctx.fillRect(this.x, this.y - this.height/2 - 32, player.width/4, player.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x + 13, this.y - this.height/2 - 32, player.width/4, player.height/4);
-			ctx.fillRect(this.x + 26, this.y - this.height/2 - 32, player.width/4, player.height/4);
-		}
-		else if(this.hp == 3){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x, this.y - this.height/2 - 32, player.width/4, player.height/4);
-			ctx.fillRect(this.x + 13, this.y - this.height/2 - 32, player.width/4, player.height/4);
-			ctx.fillRect(this.x + 26, this.y - this.height/2 - 32, player.width/4, player.height/4);
-		}
-		else if(this.hp == 2){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x, this.y - this.height/2 - 32, player.width/4, player.height/4);
-			ctx.fillRect(this.x + 13, this.y - this.height/2 - 32, player.width/4, player.height/4);
-		}
-		else{
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x, this.y - this.height/2 - 32, player.width/4, player.height/4);
-		}
-	}
 	},
 	spawn: function(){
 		if(this.hptimer > 0){
 			this.hptimer-=1;
+		}
+		if(this.fall == 0){
+			this.x = 64;
+			this.y = 280;
+			this.onScreen = 1;
+			sFire.shoot(this);
+			AList[3] = true;
+			this.fall-=1;
 		}
 		if(this.cd > 0 && this.onScreen == 1){
 			this.cd-=1;
@@ -1832,10 +2570,7 @@ var Dragon = {
 			}
 			if(queue){
 				this.respawn-=1;
-				this.x = 64;
-				this.y = 280;
-				this.onScreen = 1;
-				sFire.shoot(this);
+				this.drawShadow = true;
 			}
 		}
 	},
@@ -1874,47 +2609,15 @@ var DragonR = {
 	pts: 2000,
 	draw: function(){
 		if(this.onScreen == 1){
-			if(this.hptimer/2 != Math.round(this.hptimer/2)){
+			if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 				ctx.fillStyle = "white";
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 			}
 			else{
 				ctx.drawImage(FbossTotemD, 0, 0);
 			}
-		ctx.fillStyle = "yellow";
-		if(this.hp == 6){
-			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
+		hpBarDraw(this);
 		}
-		else if(this.hp == 5){
-			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-		}
-		else if(this.hp == 4){
-			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-		}
-		else if(this.hp == 3){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-		}
-		else if(this.hp == 2){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-		}
-		else{
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y + this.height/2 + this.height/4 - 16, player.width/4, player.height/4);
-		}
-	}
 	},
 	spawn: function(){
 		if(this.hptimer > 0){
@@ -1964,47 +2667,15 @@ var DragonL = {
 	spawned: 0,
 	draw: function(){
 		if(this.onScreen == 1){
-			if(this.hptimer/2 != Math.round(this.hptimer/2)){
+			if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 				ctx.fillStyle = "white";
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 			}
 			else{
 				ctx.drawImage(FbossTotemU, 0, 0);
 			}
-		ctx.fillStyle = "yellow";
-		if(this.hp == 6){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
+		hpBarDraw(this);
 		}
-		else if(this.hp == 5){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-		}
-		else if(this.hp == 4){
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-		}
-		else if(this.hp == 3){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 26, this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-		}
-		else if(this.hp == 2){
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-			ctx.fillRect(this.x - (this.width/2) + 13, this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-		}
-		else{
-			ctx.fillStyle = "red";
-			ctx.fillRect(this.x - (this.width/2), this.y - this.height/2 - this.height/4 + 16, player.width/4, player.height/4);
-		}
-	}
 	},
 	spawn: function(){
 		if(this.hptimer > 0){
@@ -2038,15 +2709,18 @@ var DragonEffect = {
 	cd: 90,
 	draw: function(){
 		if(Dragon.onScreen == 1 && (DragonL.onScreen == 1 || DragonR.onScreen == 1)){
-			ctx.globalAlpha = Alpha/4;
+			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = "red";
-			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+			ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 			this.x = Dragon.x + 32;
 			this.y = Dragon.y;
 			this.frame++;
 			ctx.globalAlpha = Alpha;
 			for(O in ObsList){
-				if(contained(ObsList[O], Dragon) || contained(ObsList[O], DragonR) || contained(ObsList[O], DragonL)){
+				if(contained(ObsList[O], Dragon) || contained(ObsList[O], DragonR) || contained(ObsList[O], DragonL)
+					|| collision("W", Dragon, ObsList[O]) || collision("W", DragonL, ObsList[O]) || collision("W", DragonR, ObsList[O])
+					|| collision("D", Dragon, ObsList[O]) || collision("D", DragonL, ObsList[O]) || collision("D", DragonR, ObsList[O])
+					|| collision("W", this, ObsList[O]) || collision("D", this, ObsList[O])){
 					ObsList[O].x = 2000;
 					ObsList[O].y = 2000;
 				}
@@ -2079,34 +2753,57 @@ var DragonEffect2 = {
 	played: 0,
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.2;
+			if(Alpha/(2+this.frame*0.1) < 0.1){
+				ctx.globalAlpha = 0;
+			}
+			else{
+				ctx.globalAlpha = Alpha/(2+this.frame*0.1);
+			}
 			if(this.played == 0){
 				this.played = 1;
 				radiofailure.currentTime=0;
 				radiofailure.play();
-				for(M in EMeteors){
-					EMeteors[M].timeLeft = Math.floor(Math.random() * 150) + 30;
+				for(E in EMeteors){
+					if(EMeteors[E] != EMeteor13 && EMeteors[E] != EMeteor14 && EMeteors[E] != EMeteor15 && EMeteors[E] != EMeteor16){
+						EMeteors[E].timer = (Math.floor(Math.random() * 60));
+					}
 				}
 				STATE = "Scorched";
 				planted = false;
 				rePlant();
+				//place steams
+				for(S in Steams){
+					Steams[S].cd = Math.floor(Math.random() * 15) + 75;
+				}
 			}
 			ctx.fillStyle = "#CC0000";
-			ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+			ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 			this.width = this.width + 8*this.frame;
 			this.height = this.height + 8*this.frame;
 			this.frame++;
+			ctx.globalAlpha = Alpha;
 		}
 	}
 };
+//mutate for each state
 var AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner,
 					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4, 19: Thief, 20: ThiefA, 21: ThiefB, 22: Dragon, 23: DragonR, 24: DragonL,
 					25: BigMeteor1, 26: Meteor1, 27: Meteor2, 28: Meteor3, 29: Meteor4, 30: BigMeteor2, 31: Meteor5, 32: Meteor6, 33: Meteor7, 34: Meteor8, 35: MeteorD1, 36: MeteorD2,
-					37: Lavaman5, 38: Lavaman6, 39: Lavaman7, 40: Lavaman8, 41: Spawner2, 42: MasterThief, 43: Croc, 44: Croc2, 45: Mosquito, 46: Mosquito2, 47: Mosquito3, 48: Mosquito4};
+					37: Lavaman5, 38: Lavaman6, 39: Lavaman7, 40: Lavaman8, 41: Spawner2, 42: MasterThief, 43: Croc, 44: Croc2, 45: Mosquito, 46: Mosquito2, 47: Mosquito3, 48: Mosquito4,
+					49: MiniMum1, 50: MiniMum2, 51: MiniMum3, 52: MiniMum4, 53: Genie, 54: Lamp, 55: Scorp1, 56: Scorp2, 57: Scorp3, 58: Scorp4, 59: Anubis1, 60: MegaMummy, 61: Anubis2,
+					62: Scorp5, 63: Scorp6, 64: Scorp7, 65: Scorp8};
 function onHit(E){
 	var deadz = false;
 	if(E.type == 0){
 		deadz = true;
+		if(E == Scorp1 || E == Scorp2 || E == Scorp3 || E == Scorp4 || E == Scorp5 || E == Scorp6){
+			E.index = 1;
+			E.casting = false;
+			E.castIndex = 1;
+			E.cd = 0;
+			E.moved = false;
+			E.width = 96;
+		}
 		if(E.speed2*2 == 8){
 			if(Globblyfire.onScreen == 1 && Globblyfire2.onScreen == 1){
 				Globblyfire3.x = E.x;
@@ -2202,8 +2899,31 @@ function onHit(E){
 			}
 		}
 	}
+	//genie damage
+	if(E == Lamp){
+		if(!(Genie.hptimer > 0)){
+			Genie.hp-=player.power;
+			Genie.hptimer = 30;
+			if(Genie.hp < 1){
+				Genie.hp = 0;
+				deadz = true;
+			}
+			LampPoof.onScreen = 1;
+			LampPoof.x = E.x-16;
+			LampPoof.y = E.y-16;
+			Lamp.onScreen = 0;
+			Lamp.cd = 90;
+			if(!Genie.hp<= 0){
+				E.x = -9000;
+				E.y = -9000;
+			}
+			onDmg.currentTime=0;
+			onDmg.play();
+		}
+	}
 	if(E.type == 1 || E.type == 2 || E.type == -1 || E.type == "Thief" || (E.type == "Dragon" && DragonR.onScreen == 0 && DragonL.onScreen == 0)
-		|| E.type == "DragonR" || E.type == "DragonL" || E.type == "MasterThief" || E.type == "Crocodile" || E.type == "Mosquito"){
+		|| E.type == "DragonR" || E.type == "DragonL" || E.type == "MasterThief" || E.type == "Crocodile" || E.type == "Mosquito" ||
+		E.type == "MiniMummy" || (E.type == "Anubis" && E.deadIndex == 0) || (E.type == "MegaMummy" && E.frame > 240)){
 		if(!(E.hptimer > 0)){
 			E.hp-=player.power;
 			E.hptimer = 30;
@@ -2222,13 +2942,20 @@ function onHit(E){
 				Killed.play();
 				deadz = true;
 				if(E.type == 2){
-					E.hp = 5;
+					E.hp = 6;
+					E.casted = false;
+					E.cast = false;
+					E.castIndex = 1;
+					E.walkIndex = 1;
+					E.spawnIndex = 1;
+					E.waitIndex = 30;
+					E.attckPlayer = false;
 				}
 				if(E.type == 1){
 					SorcCastingBar.x = -100;
 					SorcCastingBar.y = -200;
 					SorcCastingBar.width = Sorceror.width;
-					SorcCastingBar.height = Sorceror.height/4;
+					SorcCastingBar.height = Sorceror.height*0.25;
 					SorcCastingBar.width2 = 0;
 					SorcCastingBar.onScreen = 0;
 					SorcCastingBar.cast = -1;
@@ -2319,6 +3046,34 @@ function onHit(E){
 					E.hp = 1;
 					E.hptimer = 0;
 				}
+				if(E.type == "MegaMummy"){
+					E.hp = 12;
+					E.hptimer = 0;
+					//sandstorm
+					SandStorm.onScreen = 1;
+					var LR = Math.round(Math.random()*2)+1;
+					if(LR == 1){
+						SandStorm.dir = "D";
+					}
+					else{
+						SandStorm.dir = "A";
+					}
+					SandStorm.timeLeft = SandStorm.maxtimeLeft;
+					if(!Anubis1.onScreen){
+						Anubis1.x = MegaMummy.x;
+						Anubis1.y = MegaMummy.y - 128;
+						if(Anubis1.y < 32){
+							Anubis1.y = MegaMummy.y+256;
+						}
+					}
+					if(!Anubis2.onScreen){
+						Anubis2.x = MegaMummy.x;
+						Anubis2.y = MegaMummy.y + 128;
+						if(Anubis2.y > 544){
+							Anubis2.y = MegaMummy.y-256;
+						}
+					}
+				}
 			}
 			else{
 				onDmg.currentTime=0;
@@ -2328,7 +3083,76 @@ function onHit(E){
 	}
 	if(deadz == true){
 		deadz = false;
-		E.onScreen = 0;
+		//reset goods
+		E.good = false;
+		E.goodTimer = 0;
+		E.goodNum = 0;
+		E.goodTimerMax = 0;
+		if(E.type == "Anubis"){
+			E.hp = 8;
+			E.hptimer = 0;
+			//make sandpit
+			E.deadIndex = 1;
+			//make immmune
+			E.onTree = 1;
+		}
+		if(E.type == "Lamp"){
+			for(F in EMeteors){
+				EMeteors[F].LR = 1;
+				EMeteors[F].type = "Meteor";
+				EMeteors[F].x = -9000;
+				EMeteors[F].y = -2000;
+				EMeteors[F].width = 32;
+				EMeteors[F].height = 32;
+				EMeteors[F].timer = -1;
+				EMeteors[F].index = 1;
+				EMeteors[F].launched = false;
+			}
+			Genie.onScreen = 0;
+			Genie.movement = false;
+			Genie.respawn = Genie.rp;
+			Genie.x = -9000;
+			Genie.y = -9000;
+			hpUp.x = E.x;
+			hpUp.y = E.y;
+			hpUp.boss = "Genie";
+			GenieEffect.x = E.x;
+			GenieEffect.y = E.y;
+			GenieEffect.onScreen = 1;
+			GenieEffect.played = 0;
+			var currPwr = player.power;
+			player.power = 4;
+			MiniMum1.hptimer = 0;
+			MiniMum2.hptimer = 0;
+			MiniMum3.hptimer = 0;
+			MiniMum4.hptimer = 0;
+			if(MiniMum1.onScreen){
+				onHit(MiniMum1);
+			}
+			if(MiniMum2.onScreen){
+				onHit(MiniMum2);
+			}
+			if(MiniMum3.onScreen){
+				onHit(MiniMum3);
+			}
+			if(MiniMum4.onScreen){
+				onHit(MiniMum4);
+			}
+			staticm = 1;
+			player.power = currPwr;
+			RandomCube.x = -100;
+			RandomCube.y = -200;
+			RandomCube.timeLeft = 0;
+			RandomCube.index = 1;
+			RandomCube.stage = "up";
+			RandEffect.width = 32;
+			RandEffect.height = 32;
+			RandEffect.x = -100;
+			RandEffect.y = -200;
+			RandEffect.onScreen = 0;
+			RandEffect.frame = 0;
+			RandEffect.used = 0;
+		}
 		Killed.currentTime=0;
 		Killed.play();
 		if(E.type == -1){
@@ -2376,6 +3200,9 @@ function onHit(E){
 			DragonEffect2.onScreen = 1;
 		}
 		else if(E.type == "MasterThief"){
+			//slow swudge spawn
+			Enemy.respawn = 60;
+			EnemyB.respawn = 60;
 			if(Thief.onScreen == 1){
 				Thief.hptimer = 0;
 				Thief.hp = 1;
@@ -2391,6 +3218,7 @@ function onHit(E){
 				ThiefB.hp = 1;
 				onHit(ThiefB);
 			}
+			staticm = 1;
 			hpUp.x = E.x;
 			hpUp.y = E.y;
 			hpUp.boss = "MasterThief";
@@ -2483,42 +3311,47 @@ function onHit(E){
 			if(E.spell == "Fire"){
 				redCube.x = E.x;
 				redCube.y = E.y;
-				redCube.timeLeft = 90;
+				redCube.timeLeft = 120;
 			}
 			else if(E.spell == "Ice"){
 				tealCube.x = E.x;
 				tealCube.y = E.y;
-				tealCube.timeLeft = 90;
+				tealCube.timeLeft = 120;
 			}
 			else if(E.spell == "Earth"){
 				greenCube.x = E.x;
 				greenCube.y = E.y;
-				greenCube.timeLeft = 90;
+				greenCube.timeLeft = 120;
 			}
 			else if(E.spell == "Lightning"){
 				yellowCube.x = E.x;
 				yellowCube.y = E.y;
-				yellowCube.timeLeft = 90;
+				yellowCube.timeLeft = 120;
 			}
 			else if(E.spell == "Air"){
 				greyCube.x = E.x;
 				greyCube.y = E.y;
-				greyCube.timeLeft = 90;
+				greyCube.timeLeft = 120;
 			}
 			else if(E.spell == "Mystic"){
 				purpleCube.x = E.x;
 				purpleCube.y = E.y;
-				purpleCube.timeLeft = 90;
+				purpleCube.timeLeft = 120;
 			}
 			else if(E.spell == "Water"){
 				blueCube.x = E.x;
 				blueCube.y = E.y;
-				blueCube.timeLeft = 90;
+				blueCube.timeLeft = 120;
 			}
 			else if(E.spell == "Dark"){
 				blackCube.x = E.x;
 				blackCube.y = E.y;
-				blackCube.timeLeft = 90;
+				blackCube.timeLeft = 120;
+			}
+			else if(E.spell == "Light"){
+				whiteCube.x = E.x;
+				whiteCube.y = E.y;
+				whiteCube.timeLeft = 120;
 			}
 			if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
 				marker4.points = E.pts;
@@ -2550,107 +3383,145 @@ function onHit(E){
 			}
 			E.spell = "N/A";
 		}
-		else if(E.type != "DragonR" && E.type != "DragonL" && E.type != "Dragon" && E.type != -1 && E.type != "MasterThief"){
-			var drop = Math.floor(Math.random() * 3) + 1;
-			if(player.lucky){
-				drop = 1;
-			}
-			if(drop == 1){
-				var dropped = Math.floor(Math.random() * 8) + 1;
+		else if(E.type != "DragonR" && E.type != "DragonL" && E.type != "Dragon" && E.type != -1 && E.type != "MasterThief" && E.type != "Lamp" && E.type != "Genie"){
+			if(STATE == "Tutorial"){
+				if(E == Enemy){
+					redCube.x = E.x;
+					redCube.y = E.y;
+					redCube.timeLeft = 120;
+					if(TutKill1 && !EnemyA.onScreen){
+						TutKill2 = true;
+					}
+				}
+				if(E == EnemyA){
+					greyCube.x = E.x;
+					greyCube.y = E.y;
+					greyCube.timeLeft = 120;
+					if(!Enemy.onScreen){
+						TutKill2 = true;
+					}
+				}
+				E.onScreen = 0;
+				E.movement = false;
+				E.x = -9000;
+				E.y = -9000;
+				TutKill1 = true;
 			}
 			else{
-				var dropped = 0;
-			}
-			if(dropped == 1 && redCube.x == -100 && Thief.spell != "Fire" && ThiefA.spell != "Fire"
-				 && ThiefB.spell != "Fire"){
-				redCube.x = E.x;
-				redCube.y = E.y;
-				redCube.timeLeft = 90;
-			}
-			else if(dropped == 2 && tealCube.x == -100 && Thief.spell != "Ice" && ThiefA.spell != "Ice"
-				 && ThiefB.spell != "Ice"){
-				tealCube.x = E.x;
-				tealCube.y = E.y;
-				tealCube.timeLeft = 90;
-			}
-			else if(dropped == 3 && greenCube.x == -100 && Thief.spell != "Earth" && ThiefA.spell != "Earth"
-				 && ThiefB.spell != "Earth"){
-				greenCube.x = E.x;
-				greenCube.y = E.y;
-				greenCube.timeLeft = 90;
-			}
-			else if(dropped == 4 && yellowCube.x == -100 && Thief.spell != "Lightning" && ThiefA.spell != "Lightning"
-				 && ThiefB.spell != "Lightning"){
-				yellowCube.x = E.x;
-				yellowCube.y = E.y;
-				yellowCube.timeLeft = 90;
-			}
-			else if(dropped == 5 && greyCube.x == -100 && Thief.spell != "Air" && ThiefA.spell != "Air"
-				 && ThiefB.spell != "Air"){
-				greyCube.x = E.x;
-				greyCube.y = E.y;
-				greyCube.timeLeft = 90;
-			}
-			else if(dropped == 6 && purpleCube.x == -100 && Thief.spell != "Mystic" && ThiefA.spell != "Mystic"
-				 && ThiefB.spell != "Mystic"){
-				purpleCube.x = E.x;
-				purpleCube.y = E.y;
-				purpleCube.timeLeft = 90;
-			}
-			else if(dropped == 7 && blueCube.x == -100 && Thief.spell != "Water" && ThiefA.spell != "Water"
-				 && ThiefB.spell != "Water"){
-				blueCube.x = E.x;
-				blueCube.y = E.y;
-				blueCube.timeLeft = 90;
-			}
-			else if(dropped == 8 && blackCube.x == -100 && Thief.spell != "Dark" && ThiefA.spell != "Dark"
-				 && ThiefB.spell != "Dark"){
-				blackCube.x = E.x;
-				blackCube.y = E.y;
-				blackCube.timeLeft = 90;
+				var drop = Math.floor(Math.random() * 3) + 1;
+				if(player.lucky){
+					drop = 1;
+				}
+				if(drop == 1){
+					var dropped = Math.floor(Math.random() * 9) + 1;
+				}
+				else{
+					var dropped = 0;
+				}
+				if(dropped == 1 && redCube.x == -100 && Thief.spell != "Fire" && ThiefA.spell != "Fire"
+					 && ThiefB.spell != "Fire"){
+					redCube.x = E.x;
+					redCube.y = E.y;
+					redCube.timeLeft = 120;
+				}
+				else if(dropped == 2 && tealCube.x == -100 && Thief.spell != "Ice" && ThiefA.spell != "Ice"
+					 && ThiefB.spell != "Ice"){
+					tealCube.x = E.x;
+					tealCube.y = E.y;
+					tealCube.timeLeft = 120;
+				}
+				else if(dropped == 3 && greenCube.x == -100 && Thief.spell != "Earth" && ThiefA.spell != "Earth"
+					 && ThiefB.spell != "Earth"){
+					greenCube.x = E.x;
+					greenCube.y = E.y;
+					greenCube.timeLeft = 120;
+				}
+				else if(dropped == 4 && yellowCube.x == -100 && Thief.spell != "Lightning" && ThiefA.spell != "Lightning"
+					 && ThiefB.spell != "Lightning"){
+					yellowCube.x = E.x;
+					yellowCube.y = E.y;
+					yellowCube.timeLeft = 120;
+				}
+				else if(dropped == 5 && greyCube.x == -100 && Thief.spell != "Air" && ThiefA.spell != "Air"
+					 && ThiefB.spell != "Air"){
+					greyCube.x = E.x;
+					greyCube.y = E.y;
+					greyCube.timeLeft = 120;
+				}
+				else if(dropped == 6 && purpleCube.x == -100 && Thief.spell != "Mystic" && ThiefA.spell != "Mystic"
+					 && ThiefB.spell != "Mystic"){
+					purpleCube.x = E.x;
+					purpleCube.y = E.y;
+					purpleCube.timeLeft = 120;
+				}
+				else if(dropped == 7 && blueCube.x == -100 && Thief.spell != "Water" && ThiefA.spell != "Water"
+					 && ThiefB.spell != "Water"){
+					blueCube.x = E.x;
+					blueCube.y = E.y;
+					blueCube.timeLeft = 120;
+				}
+				else if(dropped == 8 && blackCube.x == -100 && Thief.spell != "Dark" && ThiefA.spell != "Dark"
+					 && ThiefB.spell != "Dark"){
+					blackCube.x = E.x;
+					blackCube.y = E.y;
+					blackCube.timeLeft = 120;
+				}
+				else if(dropped == 9 && whiteCube.x == -100 && Thief.spell != "Light" && ThiefA.spell != "Light"
+					 && ThiefB.spell != "Light"){
+					whiteCube.x = E.x;
+					whiteCube.y = E.y;
+					whiteCube.timeLeft = 120;
+				}
 			}
 		}
-		if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
-			marker4.points = E.pts;
-			marker4.mult = staticm;
-			marker4.x = E.x;
-			marker4.y = E.y;
-			marker4.timeLeft = 20;
-		}
-		else if(marker.x != -100 && marker2.x != -100){
-			marker3.points = "" + E.pts;
-			marker3.mult = staticm;
-			marker3.x = E.x;
-			marker3.y = E.y;
-			marker3.timeLeft = 20;
-		}
-		else if(marker.x != -100){
-			marker2.points = "" + E.pts;
-			marker2.mult = staticm;
-			marker2.x = E.x;
-			marker2.y = E.y;
-			marker2.timeLeft = 20;
-		}
-		else{
-			marker.points = "" + E.pts;
-			marker.mult = staticm;
-			marker.x = E.x;
-			marker.y = E.y;
-			marker.timeLeft = 20;
-		}
-		E.x = -9000;
-		E.y = -9000;
-		E.respawn = E.rp;
-		E.movement = false;
-		E.onScreen = 0;
-		Error = Aes.Ctr.encrypt(parseInt(Aes.Ctr.decrypt(Error, ErrorLogs, 256))+(E.pts * staticm) + "", ErrorLogs, 256);
-		staticm++;
-		multtimer = 30;
-		//Makes it harder
-		if(StateTimer/30 > 60){
-			E.respawn-=Math.floor(StateTimer/30);
-			if(E.respawn<30){
-				E.respawn = 30;
+		if(STATE != "Tutorial"){
+			if(marker.x != -100 && marker2.x != -100 && marker3.x != -100){
+				marker4.points = E.pts;
+				marker4.mult = staticm;
+				marker4.x = E.x;
+				marker4.y = E.y;
+				marker4.timeLeft = 20;
+			}
+			else if(marker.x != -100 && marker2.x != -100){
+				marker3.points = "" + E.pts;
+				marker3.mult = staticm;
+				marker3.x = E.x;
+				marker3.y = E.y;
+				marker3.timeLeft = 20;
+			}
+			else if(marker.x != -100){
+				marker2.points = "" + E.pts;
+				marker2.mult = staticm;
+				marker2.x = E.x;
+				marker2.y = E.y;
+				marker2.timeLeft = 20;
+			}
+			else{
+				marker.points = "" + E.pts;
+				marker.mult = staticm;
+				marker.x = E.x;
+				marker.y = E.y;
+				marker.timeLeft = 20;
+			}
+			if(E.type != "Anubis"){
+				E.x = -9000;
+				E.y = -9000;
+			}
+			E.onScreen = 0;
+			E.respawn = E.rp;
+			E.movement = false;
+			Error = Aes.Ctr.encrypt(parseInt(Aes.Ctr.decrypt(Error, ErrorLogs, 256))+(E.pts * staticm) + "", ErrorLogs, 256);
+			if(staticm < 10 && !SandStorm.onScreen){
+				staticm++;
+			}
+			multtimer = 30;
+			//Makes it harder - also stops specific enemies from getting short spawns. SHouldnt be a problem when game is done
+			if(StateTimer/30 > 30 && E.type != "MiniMummy" && E.type != "MasterThief"  && E.type != "MegaMummy" && E.type != "Lamp" && E.type != "Genie" && E != Lavaman && E != Lavaman2 && E != Lavaman3 && E != Lavaman4 && E != Lavaman5 && E != Lavaman6 && E != Lavaman7 && E != Lavaman8
+				&& E != Scorp7 && E != Scorp8){
+				E.respawn-=Math.floor(StateTimer/30);
+				if(E.respawn<30){
+					E.respawn = 30;
+				}
 			}
 		}
 	}
@@ -2661,68 +3532,199 @@ function move(E){
 		MeteorMove(E);
 	}
 	else if(E.movement == true){
-		if(E.dir == "W" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+		if(E.dir == "W" && (STATE == "Swamp" || E.type == "Genie" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
 			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			Math.floor(E.y-=E.speed);
 		}
-		if(E.dir == "A" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+		if(E.dir == "A" && (STATE == "Swamp" || E.type == "Genie" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
 			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			Math.floor(E.x-=E.speed);
 		}
-		if(E.dir == "S" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+		if(E.dir == "S" && (STATE == "Swamp" || E.type == "Genie" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
 			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion)) && E.onTree != 1){
 			Math.floor(E.y+=E.speed);
 		}
 		if(E.dir == "S" && E.onTree == 1){
 			Math.floor(E.y+=E.speed);
 		}
-		if(E.dir == "D" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+		if(E.dir == "D" && (STATE == "Swamp" || E.type == "Genie" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
 			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			Math.floor(E.x+=E.speed);
 		}
-		if(E.dir == "AS" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+		if(E.dir == "AS" && (STATE == "Swamp" || E.type == "Genie" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
 			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			Math.floor(E.y+=E.speed);
 			Math.floor(E.x-=E.speed);
 		}
-		if(E.dir == "WA" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+		if(E.dir == "WA" && (STATE == "Swamp" || E.type == "Genie" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
 			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			Math.floor(E.y-=E.speed);
 			Math.floor(E.x-=E.speed);
 		}
-		if(E.dir == "WD" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+		if(E.dir == "WD" && (STATE == "Swamp" || E.type == "Genie" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
 			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			Math.floor(E.y-=E.speed);
 			Math.floor(E.x+=E.speed);
 		}
-		if(E.dir == "SD" && (STATE == "Swamp" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
+		if(E.dir == "SD" && (STATE == "Swamp" || E.type == "Genie" || (!(obsCollision(obstacle1, E, E.dir)) && !(obsCollision(obstacle2, E, E.dir))
 			&& !(obsCollision(obstacle3, E, E.dir)))) && !(collision(E.dir, E, player)) && !(collision(E.dir, E, Illusion))){
 			Math.floor(E.y+=E.speed);
 			Math.floor(E.x+=E.speed);
 		}
-		if(E.x/4 != Math.round(E.x/4) && E.speed/4 == Math.round(E.speed/4)){
+		//fix enemy zig zag
+		if(E.x*0.25 != Math.round(E.x*0.25) && E.speed*0.25 == Math.round(E.speed*0.25)){
 			E.x+=1;
 		}
-		if(E.y/4 != Math.round(E.y/4) && E.speed/4 == Math.round(E.speed/4)){
+		if(E.y*0.25 != Math.round(E.y*0.25) && E.speed*0.25 == Math.round(E.speed*0.25)){
 			E.y+=1;
 		}
-		if(E.x/2 != Math.round(E.x/2) && E.speed/2 == Math.round(E.speed/2)){
+		if(E.x*0.5 != Math.round(E.x*0.5) && E.speed*0.5 == Math.round(E.speed*0.5)){
 			E.x+=1;
 		}
-		if(E.y/2 != Math.round(E.y/2) && E.speed/2 == Math.round(E.speed/2)){
+		if(E.y*0.5 != Math.round(E.y*0.5) && E.speed*0.5 == Math.round(E.speed*0.5)){
+			E.y+=1;
+		}
+		if(E.x/8 != Math.round(E.x/8) && E.speed/8 == Math.round(E.speed/8)){
+			E.x+=1;
+		}
+		if(E.y/8 != Math.round(E.y/8) && E.speed/8 == Math.round(E.speed/8)){
 			E.y+=1;
 		}
 	}	
 }
 // Enemy AI
 function AI(E){	
-if(E.type != "Meteor"){	
-	if(E.type == 0 && STATE == "Jungle" && E.bug == 1 && E.onTree == 1 && E.dirct == 0){
-		E.onTree = 0;
-		E.speed = E.speed2*2;
-	}
-		var xdiff = player.x - E.x;
-		var ydiff = player.y - E.y;
+	if(E.type != "Meteor"){	
+		if(E.type == 0 && STATE == "Jungle" && E.bug == 1 && E.onTree == 1 && E.dirct == 0){
+			E.onTree = 0;
+			E.speed = E.speed2*2;
+		}
+		//do confusion stuff
+		if(E.good){
+			E.goodTimer-=1;
+			if(E.goodTimer <=0){
+				E.good = false;
+			}
+			var targx = 0;
+			var targy = 0;
+			for(A in AllEnemies){
+				if(AllEnemies[A] != E && AllEnemies[A].onScreen && Math.sqrt((targx-E.x)*(targx-E.x) + (targy-E.y)*(targy-E.y))
+				> Math.sqrt((AllEnemies[A].x-E.x)*(AllEnemies[A].x-E.x) + (AllEnemies[A].y-E.y)*(AllEnemies[A].y-E.y))){
+					targx = AllEnemies[A].x;
+					targy = AllEnemies[A].y;
+					var xdiff = AllEnemies[A].x-E.x;
+					var ydiff = AllEnemies[A].y-E.y;
+					if(collision(E.dir, E, AllEnemies[A])){
+						onHit(AllEnemies[A]);
+					}
+				}
+			}
+		}
+		else{
+			var xdiff = player.x - E.x;
+			var ydiff = player.y - E.y;
+		}
+		//aim higher if genie
+		if(E.type == "Genie"){
+			ydiff-=32;
+		}
+		if(STATE == "Scorched" && E.type == 2 && E.onScreen == 1 && !E.attckPlayer){
+		//find closest meteor, then closest side. Aim at meteor x +-124  -48
+			xdiff = 2000;
+			ydiff = 2000;
+			var side = "";
+			for(O in ObsList){
+				if(ObsList[O].x != 2000){
+					if((E == Spawner && Spawner2.TargetObj != ObsList[O]) || (E == Spawner2 && Spawner.TargetObj != ObsList[O])){
+						//side1
+						if(Math.sqrt(xdiff*xdiff + ydiff*ydiff) > Math.sqrt((ObsList[O].x-124-E.x)*(ObsList[O].x-124-E.x) + (ObsList[O].y-48-E.y)*(ObsList[O].y-48-E.y))){
+							xdiff = ObsList[O].x-124-E.x;
+							ydiff = ObsList[O].y-48-E.y;
+							//tell other spawner it's targeting this meteor
+							E.TargetObj = ObsList[O];
+							side = "Left";
+						}
+						//side2
+						if(Math.sqrt(xdiff*xdiff + ydiff*ydiff) > Math.sqrt((ObsList[O].x+124-E.x)*(ObsList[O].x+124-E.x) + (ObsList[O].y-48-E.y)*(ObsList[O].y-48-E.y))){
+							xdiff = ObsList[O].x+124-E.x;
+							ydiff = ObsList[O].y-48-E.y;
+							//tell other spawner it's targeting this meteor
+							E.TargetObj = ObsList[O];
+							side = "Right";
+						}
+					}
+				}
+			}
+			//AI: if at correct spot relative to meteor, movement = false, cast mode
+			if(Math.abs(xdiff) < 5 && Math.abs(ydiff) < 5){
+				E.movement = false;
+				if(side == "Left"){
+					E.dir = "D";
+				}
+				else{
+					E.dir = "A";
+				}
+				E.cast = true;
+				E.dirct = 2;
+				if(xdiff == 4){
+					E.x+=4;
+				}
+				else if(xdiff == 3){
+					E.x+=3;
+				}
+				else if(xdiff == 2){
+					E.x+=2;
+				}
+				else if(xdiff == 1){
+					E.x+=1;
+				}
+				if(xdiff == -4){
+					E.x-=4;
+				}
+				else if(xdiff == -3){
+					E.x-=3;
+				}
+				else if(xdiff == -2){
+					E.x-=2;
+				}
+				else if(xdiff == -1){
+					E.x-=1;
+				}
+				if(ydiff == 4){
+					E.y+=4;
+				}
+				else if(ydiff == 3){
+					E.y+=3;
+				}
+				else if(ydiff == 2){
+					E.y+=2;
+				}
+				else if(ydiff == 1){
+					E.y+=1;
+				}
+				if(ydiff == -4){
+					E.y-=4;
+				}
+				else if(ydiff == -3){
+					E.y-=3;
+				}
+				else if(ydiff == -2){
+					E.y-=2;
+				}
+				else if(ydiff == -1){
+					E.y-=1;
+				}
+			}
+			else{
+				E.cast = false;
+				E.castIndex = 1;
+				E.walkIndex = 1;
+				E.spawnIndex = 1;
+				E.movement = true;
+				E.casted = false;
+				E.waitIndex = 30;
+			}
+		}
 		if(Illusion.onScreen == 1){
 			xdiff = Illusion.x - E.x;
 			ydiff = Illusion.y - E.y;
@@ -2737,7 +3739,7 @@ if(E.type != "Meteor"){
 			var q3dir = {1: "W", 2: "D", 3: "WD"};
 			var q4dir = {1: "W", 2: "A", 3: "WA"};
 			var alldir = {1: "W", 2: "A", 3: "S", 4: "D", 5: "WA", 6: "WD", 7: "AS", 8: "SD"};
-			E.dirct = 15;
+			E.dirct = Math.floor(Math.random()*30) + 5;
 			var numbz = Math.floor(Math.random() * 3) + 1;
 			var allnumbz = Math.floor(Math.random() * 8) + 1;
 			if(E.x > 224 && E.x < 576 && E.y > 128 && E.y < 348){
@@ -2796,7 +3798,7 @@ if(E.type != "Meteor"){
 				}
 			}
 			else if(E.spell == "Lightning"){
-				if(E.y <= player.y + sLightning.hheight/2 && E.y >= player.y && E.y> 32 && E.y < 560
+				if(E.y <= player.y + sLightning.hheight*0.5 && E.y >= player.y && E.y> 32 && E.y < 560
 					&& E.x > 32 && E.x < 768 && E.cd <= 0){
 					E.cast();
 				}
@@ -2805,7 +3807,7 @@ if(E.type != "Meteor"){
 				}	
 			}
 		}
-		if((obsCollision(obstacle1, E, E.dir) || obsCollision(obstacle2, E, E.dir) || obsCollision(obstacle3, E, E.dir)) && STATE != "Swamp"){
+		if((obsCollision(obstacle1, E, E.dir) || obsCollision(obstacle2, E, E.dir) || obsCollision(obstacle3, E, E.dir)) && STATE != "Swamp" && E.type != "Genie"){
 			if((E.onTree != 1 && E.type != "MasterThief") || (E.type == "MasterThief" && sAir.onScreen != 1)){
 				if(E.dir == "W"){
 					E.dirct = 20;
@@ -2858,52 +3860,105 @@ if(E.type != "Meteor"){
 				var xdiff = MasterThief.x - E.x;
 				var ydiff = MasterThief.y - E.y;
 			}
-			if(xdiff < 4 && ydiff < 4){
-				E.dir = "WA";
-				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
-					E.dir = "SD";
-				}
-			}
-			else if(xdiff < 4 && ydiff > 4){
-				E.dir = "AS";
-				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
-					E.dir = "WD";
-				}
-			}
-			else if(xdiff > 4 && ydiff < 4){
-				E.dir = "WD";
-				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
-					E.dir = "AS";
-				}
-			}
-			else if (xdiff > 4 && ydiff > 4){
-				E.dir = "SD";
-				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+			if(E.speed != 8){
+				if(xdiff < 4 && ydiff < 4){
 					E.dir = "WA";
+					if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+						E.dir = "SD";
+					}
 				}
-			}
-			else if (xdiff == 4 && ydiff > 4){
-				E.dir = "S";
-				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
-					E.dir = "W";
+				else if(xdiff < 4 && ydiff > 4){
+					E.dir = "AS";
+					if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+						E.dir = "WD";
+					}
 				}
-			}
-			else if(xdiff == 4 && ydiff < 4){
-				E.dir = "W";
-				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+				else if(xdiff > 4 && ydiff < 4){
+					E.dir = "WD";
+					if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+						E.dir = "AS";
+					}
+				}
+				else if (xdiff > 4 && ydiff > 4){
+					E.dir = "SD";
+					if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+						E.dir = "WA";
+					}
+				}
+				else if (xdiff == 4 && ydiff > 4){
 					E.dir = "S";
+					if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+						E.dir = "W";
+					}
 				}
-			}
-			else if(xdiff < 4 && ydiff == 4){
-				E.dir = "A";
-				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
-					E.dir = "D";
+				else if(xdiff == 4 && ydiff < 4){
+					E.dir = "W";
+					if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+						E.dir = "S";
+					}
 				}
-			}
-			else{
-				E.dir = "D";
-				if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+				else if(xdiff < 4 && ydiff == 4){
 					E.dir = "A";
+					if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+						E.dir = "D";
+					}
+				}
+				else{
+					E.dir = "D";
+					if((E.type == "Mosquito" && E.runTimer > 0) || (E.type == "Thief" && E.stole && MasterThief.onScreen == 0)){
+						E.dir = "A";
+					}
+				}
+			}
+			//fix globbly zig zag
+			else{
+				if(xdiff < 8 && ydiff < 8){
+					E.dir = "WA";
+					if(E.type == "Thief" && E.stole && MasterThief.onScreen == 0){
+						E.dir = "SD";
+					}
+				}
+				else if(xdiff < 8 && ydiff > 8){
+					E.dir = "AS";
+					if(E.type == "Thief" && E.stole && MasterThief.onScreen == 0){
+						E.dir = "WD";
+					}
+				}
+				else if(xdiff > 8 && ydiff < 8){
+					E.dir = "WD";
+					if(E.type == "Thief" && E.stole && MasterThief.onScreen == 0){
+						E.dir = "AS";
+					}
+				}
+				else if (xdiff > 8 && ydiff > 8){
+					E.dir = "SD";
+					if(E.type == "Thief" && E.stole && MasterThief.onScreen == 0){
+						E.dir = "WA";
+					}
+				}
+				else if (xdiff == 8 && ydiff > 8){
+					E.dir = "S";
+					if(E.type == "Thief" && E.stole && MasterThief.onScreen == 0){
+						E.dir = "W";
+					}
+				}
+				else if(xdiff == 8 && ydiff < 8){
+					E.dir = "W";
+					if(E.type == "Thief" && E.stole && MasterThief.onScreen == 0){
+						E.dir = "S";
+					}
+				}
+				else if(xdiff < 8 && ydiff == 8){
+					E.dir = "A";
+					if(E.type == "Thief" && E.stole && MasterThief.onScreen == 0){
+						E.dir = "D";
+					}
+				}
+				else{
+					E.dir = "D";
+					if(E.type == "Thief" && E.stole && MasterThief.onScreen == 0){
+						E.dir = "A";
+					}
 				}
 			}
 		}
@@ -2914,220 +3969,247 @@ if(E.type != "Meteor"){
 }
 
 function spawn(E){
-	if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft == 0 && typemarker3.timeLeft == 0 && hpUp.x == -100
-		&& Dragon.onScreen != 1 && (!(Dragon.spawned == 1 && player.power < 2) && !(treeWizz.spawned == 1 && player.maxhp < 4) && (!(MasterThief.spawned == 1 && !player.lucky) || E.type == "Thief")
-		|| E.type == "Dragon" || E.type == -1)){
-		if(E.type == 1){
-			if(E.respawn == 0 && STATE == 1){
-				E.movement = true;
-				E.hp = 3;
-				E.onScreen = 1;
-				E.cd = 0;
-				E.spawned = 60;
-				var SpellType = Math.floor(Math.random() * 3) + 1;
-				if(SpellType == 1){
-					E.spell = "Ice";
-				}
-				else if(SpellType == 2){
-					E.spell = "Fire";
-				}
-				else{
-					E.spell = "Lightning";
-				}
-			}
-			else if(STATE != 1){
-				E.respawn = -1;
-			}
-		}
-		if(E.respawn == 0){
-			E.movement = true;
-			if(E.type == "Thief"){
-				var spawnspot = Math.floor(Math.random() * 8) + 1;
-				var LR = Math.floor(Math.random() * 2) + 1;
-				if(E.counter == 1){
+	//make nothing happen on fadein
+	if(STATE != 1 || (STATE == 1 && !FadeIn)){
+		if(treeWizz.onScreen != 1 && typemarker.timeLeft == 0 && typemarker2.timeLeft == 0 && typemarker3.timeLeft == 0 && hpUp.x == -100
+			&& Dragon.onScreen != 1 && (!(Dragon.spawned == 1 && player.power < 2) && !(treeWizz.spawned == 1 && player.maxhp < 4) && (!(MasterThief.spawned == 1 && !player.lucky) || E.type == "Thief")
+			&& !(Genie.spawned == 1 && !player.regen) && E.type != "Genie" || E.type == "Dragon" || E.type == -1)){
+			if(E.type == 1){
+				if(E.respawn == 0 && STATE == 1){
 					E.movement = true;
-					E.state = 2;
-					E.respawn-=1;
-					E.counter-=1;
-				}
-				if(obstacle1[spawnspot].x != 2000 && !obstacle1[spawnspot].falling){
-					if(LR == 1){
-						E.x = obstacle1[spawnspot].x-48;
-						E.y = obstacle1[spawnspot].y-32;
-						E.LR = "Left"
-					}
-					else if(LR == 2){
-						E.x = obstacle1[spawnspot].x+48;
-						E.y = obstacle1[spawnspot].y-32;
-						E.LR = "Right"
-					}
+					E.hp = 3;
 					E.onScreen = 1;
-					E.respawn-=1;
-					E.speed = 4;
-					E.state = 1;
-					E.spell = "N/A";
-					E.stole = false;
-					E.movement=false;
-					E.hp = 2;
-					E.counter = 60;
-					E.hptimer = 0;
-				}
-				else{
-					E.respawn+=1;
-				}
-			}
-			if(E.type == 0 && E.bug == 1 && STATE == "Jungle"){
-				var spawnTree = Math.floor(Math.random() * 8) + 1;
-				if(obstacle1[spawnTree].x != 2000){
-					E.x = obstacle1[spawnTree].x;
-					E.y = obstacle1[spawnTree].y-576;
-					E.onScreen = 1;
-					E.respawn-=1;
-					E.dir = "S";
-					E.dirct = 72;
-					E.onTree = 1;
-					E.speed = 8;
-				}
-				else{
-					E.respawn+=1;
-				}
-			}
-			else if(E.type == "Crocodile" && STATE == "Swamp"){
-				//spawn in random spot from player. If not in water try to spawn next frame
-				var spawnLoc = Math.floor(Math.random() * 4) + 1;
-				if(spawnLoc == 1){
-					E.x = player.x-128;
-					E.y = player.y;
-				}
-				else if(spawnLoc == 2){
-					E.x = player.x+128;
-					E.y = player.y;
-				}
-				else if(spawnLoc == 3){
-					E.x = player.x;
-					E.y = player.y+128;
-				}
-				else if(spawnLoc == 4){
-					E.x = player.x;
-					E.y = player.y-128;
-				}
-				var landed = false;
-				for(O in obstacle1){
-					if(obstacle1[O].LR == "Right"){
-						obstacle1[O].x+=256;
-						obstacle1[O].y-=64;
-						obstacle1[O].width+=64;
+					E.cd = 0;
+					E.spawned = 60;
+					var SpellType = Math.floor(Math.random() * 3) + 1;
+					if(SpellType == 1){
+						E.spell = "Ice";
+					}
+					else if(SpellType == 2){
+						E.spell = "Fire";
 					}
 					else{
-						obstacle1[O].x-=256;
-						obstacle1[O].y-=64;
-						obstacle1[O].width+=64;
-					}
-					if(collision(E.dir, E, obstacle1[O])){
-						landed = true;
-					}
-					if(obstacle1[O].LR == "Right"){
-						obstacle1[O].x-=256;
-						obstacle1[O].y+=64;
-						obstacle1[O].width-=64;
-					}
-					else{
-						obstacle1[O].x+=256;
-						obstacle1[O].y+=64;
-						obstacle1[O].width-=64;
+						E.spell = "Lightning";
 					}
 				}
-				for(O in obstacle2){
-					obstacle2[O].x+=32;
-					obstacle2[O].y+=obstacle2[O].height/2;
-					if(collision("D", E, obstacle2[O]) || collision("A", E, obstacle2[O]) || collision("S", E, obstacle2[O]) || collision("W", E, obstacle2[O]) ||
-						collision("WD", E, obstacle2[O]) || collision("WA", E, obstacle2[O]) || collision("AS", E, obstacle2[O]) || collision("SD", E, obstacle2[O])){
-						landed = true;
+				else if(STATE != 1){
+					E.respawn = -1;
+				}
+			}
+			if(E.respawn == 0){
+				if(E.bug == 1 && STATE == 1){
+					var spawnSpotx = Math.floor(Math.random() * 23) + 2;
+					var spawnSpoty = Math.floor(Math.random() * 16) + 2;
+					E.x = spawnSpotx*32;
+					E.y = spawnSpoty*32;
+					var queue = true;
+					for(O in ObsList){
+						if(collision(E.dir, E, ObsList[O])){
+							queue = false;
+						}
 					}
-					obstacle2[O].x-=32;
-					obstacle2[O].y-=obstacle2[O].height/2;
-				}
-				if(!landed){
-					E.onScreen = 1;
-					E.hp = 5;
-					E.hptimer = 0;
-					E.respawn-=1;
-				}
-				else{
 					E.x = -9000;
 					E.y = -9000;
-				}
-			}
-			else if(E.type != "Thief" && E.type != "Crocodile"){
-				var spawnPoint = Math.floor(Math.random() * 8) + 1;
-				if(spawnPoint == 1){
-					E.x = 0;
-					E.y = 0;
-					E.onScreen = 1;
-					E.respawn-=1;
-				}
-				else if(spawnPoint == 2){
-					E.x = 400;
-					E.y = 0;
-					E.onScreen = 1;
-					E.respawn-=1;
-				}
-				else if(spawnPoint == 3){
-					E.x = 800;
-					E.y = 0;
-					E.onScreen = 1;
-					E.respawn-=1;
-				}
-				else if(spawnPoint == 4){
-					E.x = 0;
-					E.y = 288;
-					E.onScreen = 1;
-					E.respawn-=1;
-				}
-				else if(spawnPoint == 5){
-					E.x = 800;
-					E.y = 288;
-					E.onScreen = 1;
-					E.respawn-=1;
-				}
-				else if(spawnPoint == 6){
-					E.x = 0;
-					E.y = 576;
-					E.onScreen = 1;
-					E.respawn-=1;
-				}
-				else if(spawnPoint == 7){
-					E.x = 400;
-					E.y = 576;
-					E.onScreen = 1;
-					E.respawn-=1;
+					if(queue){
+						E.x+= spawnSpotx*32;
+						E.y += spawnSpoty*32;
+						E.growIndex = 1;
+						var colorz = Math.floor(Math.random() * 3) + 1;
+						if(colorz == 3){
+							E.color = "Red";
+						}
+						else if(colorz == 2){
+							E.color = "Blue";
+						}
+						else{
+							E.color = "Yellow";
+						}
+						E.onScreen = 1;
+						E.respawn-=1;
+					}
 				}
 				else{
-					E.x = 800;
-					E.y = 576;
-					E.onScreen = 1;
-					E.respawn-=1;
+					E.movement = true;
+					if(E.type == "Thief"){
+						var spawnspot = Math.floor(Math.random() * 8) + 1;
+						var LR = Math.floor(Math.random() * 2) + 1;
+						if(E.counter == 1){
+							E.movement = true;
+							E.state = 2;
+							E.respawn-=1;
+							E.counter-=1;
+						}
+						if(obstacle1[spawnspot].x != 2000 && !obstacle1[spawnspot].falling){
+							if(LR == 1){
+								E.x = obstacle1[spawnspot].x-48;
+								E.y = obstacle1[spawnspot].y-32;
+								E.LR = "Left"
+							}
+							else if(LR == 2){
+								E.x = obstacle1[spawnspot].x+48;
+								E.y = obstacle1[spawnspot].y-32;
+								E.LR = "Right"
+							}
+							E.onScreen = 1;
+							E.respawn-=1;
+							E.speed = 4;
+							E.state = 1;
+							E.spell = "N/A";
+							E.stole = false;
+							E.movement=false;
+							E.hp = 2;
+							E.counter = 60;
+							E.hptimer = 0;
+						}
+						else{
+							E.respawn+=1;
+						}
+					}
+					if(E.type == 0 && E.bug == 1 && STATE == "Jungle"){
+						var spawnTree = Math.floor(Math.random() * 8) + 1;
+						if(obstacle1[spawnTree].x != 2000){
+							E.x = obstacle1[spawnTree].x;
+							E.y = obstacle1[spawnTree].y-576;
+							E.onScreen = 1;
+							E.respawn-=1;
+							E.dir = "S";
+							E.dirct = 72;
+							E.onTree = 1;
+							E.speed = 8;
+						}
+						else{
+							E.respawn+=1;
+						}
+					}
+					else if(E.type == "Crocodile" && STATE == "Swamp"){
+						//spawn in random spot from player. If not in water try to spawn next frame
+						var spawnLoc = Math.floor(Math.random() * 4) + 1;
+						if(spawnLoc == 1){
+							E.x = player.x-128;
+							E.y = player.y;
+						}
+						else if(spawnLoc == 2){
+							E.x = player.x+128;
+							E.y = player.y;
+						}
+						else if(spawnLoc == 3){
+							E.x = player.x;
+							E.y = player.y+128;
+						}
+						else if(spawnLoc == 4){
+							E.x = player.x;
+							E.y = player.y-128;
+						}
+						var landed = false;
+						for(O in obstacle1){
+							if(obstacle1[O].LR == "Right"){
+								obstacle1[O].x+=256;
+								obstacle1[O].y-=64;
+								obstacle1[O].width+=64;
+							}
+							else{
+								obstacle1[O].x-=256;
+								obstacle1[O].y-=64;
+								obstacle1[O].width+=64;
+							}
+							if(collision(E.dir, E, obstacle1[O])){
+								landed = true;
+							}
+							if(obstacle1[O].LR == "Right"){
+								obstacle1[O].x-=256;
+								obstacle1[O].y+=64;
+								obstacle1[O].width-=64;
+							}
+							else{
+								obstacle1[O].x+=256;
+								obstacle1[O].y+=64;
+								obstacle1[O].width-=64;
+							}
+						}
+						for(O in obstacle2){
+							obstacle2[O].x+=32;
+							obstacle2[O].y+=obstacle2[O].height*0.5;
+							if(collision("D", E, obstacle2[O]) || collision("A", E, obstacle2[O]) || collision("S", E, obstacle2[O]) || collision("W", E, obstacle2[O]) ||
+								collision("WD", E, obstacle2[O]) || collision("WA", E, obstacle2[O]) || collision("AS", E, obstacle2[O]) || collision("SD", E, obstacle2[O])){
+								landed = true;
+							}
+							obstacle2[O].x-=32;
+							obstacle2[O].y-=obstacle2[O].height*0.5;
+						}
+						if(!landed){
+							E.onScreen = 1;
+							E.hp = 5;
+							E.hptimer = 0;
+							E.respawn-=1;
+						}
+						else{
+							E.x = -9000;
+							E.y = -9000;
+						}
+					}
+					else if(E.type != "Thief" && E.type != "Crocodile"){
+						var spawnPoint = Math.floor(Math.random() * 8) + 1;
+						if(spawnPoint == 1){
+							E.x = 0;
+							E.y = 0;
+							E.onScreen = 1;
+							E.respawn-=1;
+						}
+						else if(spawnPoint == 2){
+							E.x = 400;
+							E.y = 0;
+							E.onScreen = 1;
+							E.respawn-=1;
+						}
+						else if(spawnPoint == 3){
+							E.x = 800;
+							E.y = 0;
+							E.onScreen = 1;
+							E.respawn-=1;
+						}
+						else if(spawnPoint == 4){
+							E.x = 0;
+							E.y = 288;
+							E.onScreen = 1;
+							E.respawn-=1;
+						}
+						else if(spawnPoint == 5){
+							E.x = 800;
+							E.y = 288;
+							E.onScreen = 1;
+							E.respawn-=1;
+						}
+						else if(spawnPoint == 6){
+							E.x = 0;
+							E.y = 576;
+							E.onScreen = 1;
+							E.respawn-=1;
+						}
+						else if(spawnPoint == 7){
+							E.x = 400;
+							E.y = 576;
+							E.onScreen = 1;
+							E.respawn-=1;
+						}
+						else{
+							E.x = 800;
+							E.y = 576;
+							E.onScreen = 1;
+							E.respawn-=1;
+						}
+					}
 				}
 			}
-		}
-		else if(E.type == "Thief" && STATE == "Jungle" && E.respawn > 0){
-			E.respawn-=1;
-		}
-		else if(E.type == 2 && STATE == "Scorched" && E.respawn > 0){
-			E.respawn-=1;
-		}
-		//if globbly not in fire level
-		if(E.type == 0 && STATE != "Scorched" && E.bug == 0 && E.speed2*2 == 8){
-			E.respawn= E.respawn;
-		}
-		else if(E.type != "Thief" && E.type != 2 && E.type != "Crocodile" && E.type != "Mosquito"){
-			E.respawn-=1;
-		}
-		else if(E.type == "Crocodile" && STATE == "Swamp" && !landed){
-			E.respawn-=1;
-		}
-		else if(E.type == "Mosquito" && STATE == "Swamp"){
-			E.respawn-=1;
+			else if(E.type != "Crocodile"){
+				//if flower needs to recalc spawn
+				if(E.respawn == 0 && E.bug == 1 && STATE == 1){
+					E.respawn+=1;
+				}
+				E.respawn-=1;
+			}
+			else if(E.type == "Crocodile" && STATE == "Swamp" && !landed){
+				E.respawn-=1;
+			}
 		}
 	}
 }
@@ -3160,14 +4242,14 @@ function speedhandle(E){
 	}
 	for(O in obstacle2){
 		obstacle2[O].x+=32;
-		obstacle2[O].y+=obstacle2[O].height/2;
+		obstacle2[O].y+=obstacle2[O].height*0.5;
 		if(collision("D", E, obstacle2[O]) || collision("A", E, obstacle2[O]) || collision("S", E, obstacle2[O]) || collision("W", E, obstacle2[O]) ||
 			collision("WD", E, obstacle2[O]) || collision("WA", E, obstacle2[O]) || collision("AS", E, obstacle2[O]) || collision("SD", E, obstacle2[O])){
 			var noswim = true;
 			E.swimming = false;
 		}
 		obstacle2[O].x-=32;
-		obstacle2[O].y-=obstacle2[O].height/2;
+		obstacle2[O].y-=obstacle2[O].height*0.5;
 	}
 	if(!noswim){
 		E.speed = 2;

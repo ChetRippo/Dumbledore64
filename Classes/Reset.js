@@ -37,6 +37,7 @@ function reset(){
 	planted = false;
 	jungleAni = false;
 	treeFall = 1;
+	fogNum = 1;
 	// Alpha
 	Alpha = 1;
 	ctx.globalAlpha = 1;
@@ -49,6 +50,14 @@ function reset(){
 	swampIndex = 0;
 	swampBoardindex = 0;
 	jungleIndex = 0;
+	AList = {0: true, 1: false, 2: false, 3: false, 4: false, 5: false};
+	Achiev = 0;
+	moved = false;
+	shot = false;
+	TutKill1 = false;
+	TutKill2 = false;
+	TutFadeIndex = 0;
+	FadeIn = false;
 	Menu.newgameSelect = false;
 	Menu.howtoplaySelect = false;
 	Menu.optionsSelect = false;
@@ -71,18 +80,33 @@ function reset(){
 	player.zapIndex = 1;
 	player.lucky = false;
 	player.shadowed = false;
-	castingBar.x = player.x - player.width/2;
-	castingBar.y = player.y + player.height/2;
+	player.regen = false;
+	player.regenFrame = 0;
+	player.knocked = 0;
+	player.knockDir = "";
+	player.stunTimer = 0;
+	for(b in bloodList){
+		bloodList[b].x = 0;
+		bloodList[b].y = 0;
+		bloodList[b].width = 4;
+		bloodList[b].height = 4;
+		bloodList[b].speed = 4;
+		bloodList[b].onScreen = false;
+		bloodList[b].dir = "right";
+		bloodList[b].timerLeft = 15;
+	}
+	castingBar.x = player.x - player.width*0.5;
+	castingBar.y = player.y + player.height*0.5;
 	castingBar.width = player.width;
-	castingBar.height = player.height/4;
+	castingBar.height = player.height*0.25;
 	castingBar.width2 = 0;
 	castingBar.onScreen = 0;
 	castingBar.cast = -1;
 	castingBar.castmax = 0;
-	TreecastingBar.x = treeWizz.x - treeWizz.width/2;
-	TreecastingBar.y = treeWizz.y + treeWizz.height/2;
+	TreecastingBar.x = treeWizz.x - treeWizz.width*0.5;
+	TreecastingBar.y = treeWizz.y + treeWizz.height*0.5;
 	TreecastingBar.width = treeWizz.width;
-	TreecastingBar.height = treeWizz.height/4;
+	TreecastingBar.height = treeWizz.height*0.25;
 	TreecastingBar.width2 = 0;
 	TreecastingBar.onScreen = 0;
 	TreecastingBar.cast = -1;
@@ -90,7 +114,7 @@ function reset(){
 	SorcCastingBar.x = -100;
 	SorcCastingBar.y = -200;
 	SorcCastingBar.width = Sorceror.width;
-	SorcCastingBar.height = Sorceror.height/4;
+	SorcCastingBar.height = Sorceror.height*0.25;
 	SorcCastingBar.width2 = 0;
 	SorcCastingBar.onScreen = 0;
 	SorcCastingBar.cast = -1;
@@ -114,13 +138,20 @@ function reset(){
 		typemarkerlist[M].x = -100;
 		typemarkerlist[M].y = -100;
 		typemarkerlist[M].text = "";
+		typemarkerlist[M].regen = false;
 	}
+	
 	inits = {1: "_", 2: "_", 3: "_", 4: "_", 5: "_", 6: "_", 7: "_", 8: "_"};
 	init = "_____";
 	initsInd = 1;
 	hsColor = 1;
 	hsNum = 0;
 	lowestScore = highscore10;
+	AchScrollPic = 1;
+	LocalState = 1;
+	GlobalState = 1;
+	cursorIndex = 1;
+	indicatorIndex = 1;
 	for(S in AllSounds){
 		AllSounds[S].currentTime = 0;
 		AllSounds[S].pause;
@@ -223,6 +254,48 @@ function reset(){
 		ObsList[O].hptimer = 0;
 		ObsList[O].index = 1;
 	}
+	EnvFog1.x = -1600;
+	EnvFog1.y = -104;
+	EnvFog2.x = -1600;
+	EnvFog2.y = 154;
+	EnvFog3.x = -1920;
+	EnvFog3.y = 416;
+	
+	for(E in Steams){
+		Steams[E].x = -100;
+		Steams[E].y = -100;
+		Steams[E].cd = -1;
+		Steams[E].frame = 1;
+		Steams[E].onScreen = 0;
+	}
+	
+	for(G in tallGrasses){
+		tallGrasses[G].x = -1000;
+		tallGrasses[G].y = -1000;
+		tallGrasses[G].width = 36;
+		tallGrasses[G].height = 12;
+	}
+	
+	for(S in Sandpits){
+		Sandpits[S].x = -9000;
+		Sandpits[S].y = -9000;
+		Sandpits[S].width = 244;
+		Sandpits[S].height = 156;
+		Sandpits[S].frame = 1;
+		Sandpits[S].headFrame = 1;
+		Sandpits[S].onScreen = 0;
+		Sandpits[S].Mummy = false;
+	}
+	
+	SandStorm.dir = "";
+	SandStorm.timeLeft = 0;
+	SandStorm.maxtimeLeft = 200;
+	SandStorm.onScreen = 0;
+	SandStorm.lightIndex = 1;
+	SandStorm.darkIndex = 1;
+	SandStorm.sandIndex = 1;
+	SandStorm.frame = 0;
+	SandStorm.y = 12;
 	//------------------------ Pickups.js -----------------------//
 	for(E in allEleCubes){
 		allEleCubes[E].type = 1;
@@ -233,7 +306,11 @@ function reset(){
 		allEleCubes[E].timeLeft = 0;
 		allEleCubes[E].index = 1;
 		allEleCubes[E].stage = "up";
+		allEleCubes[E].faded = false;
+		allEleCubes[E].fadeCounter = 0;
 	}
+	redCube.arrowIndex = 1;
+	greyCube.arrowIndex = 1;
 	
 	RandomCube.type = 1;
 	RandomCube.x = -100;
@@ -244,6 +321,8 @@ function reset(){
 	RandomCube.index = 1;
 	RandomCube.index2 = 1;
 	RandomCube.stage = "up";
+	RandomCube.faded = false;
+	RandomCube.fadeCounter = 0;
 	
 	RandEffect.color = "#FF00FF";
 	RandEffect.width = 32;
@@ -263,6 +342,8 @@ function reset(){
 	RandomCube2.index = 1;
 	RandomCube2.index2 = 1;
 	RandomCube2.stage = "up";
+	RandomCube2.faded = false;
+	RandomCube2.fadeCounter = 0;
 	
 	RandEffect2.color = "#FF00FF";
 	RandEffect2.width = 32;
@@ -282,6 +363,8 @@ function reset(){
 	RandomCube3.index = 1;
 	RandomCube3.index2 = 1;
 	RandomCube3.stage = "up";
+	RandomCube3.faded = false;
+	RandomCube3.fadeCounter = 0;
 	
 	RandEffect3.color = "#FF00FF";
 	RandEffect3.width = 32;
@@ -301,6 +384,8 @@ function reset(){
 	RandomCube4.index = 1;
 	RandomCube4.index2 = 1;
 	RandomCube4.stage = "up";
+	RandomCube4.faded = false;
+	RandomCube4.fadeCounter = 0;
 	
 	RandEffect4.color = "#FF00FF";
 	RandEffect4.width = 32;
@@ -320,6 +405,8 @@ function reset(){
 	RandomCube5.index = 1;
 	RandomCube5.index2 = 1;
 	RandomCube5.stage = "up";
+	RandomCube5.faded = false;
+	RandomCube5.fadeCounter = 0;
 	
 	RandEffect5.color = "#FF00FF";
 	RandEffect5.width = 32;
@@ -438,6 +525,10 @@ function reset(){
 	Enemy.onScreen = 0;
 	Enemy.movement = false;
 	Enemy.swimming = true;
+	Enemy.index = 1;
+	Enemy.mudgeIndex = 1;
+	Enemy.hudgeIndex = 1;
+	Enemy.color = Math.floor(Math.random() * 2) + 1;
 	
 	EnemyA.type = 0;
 	EnemyA.bug = 1;
@@ -457,7 +548,10 @@ function reset(){
 	EnemyA.onScreen = 0;
 	EnemyA.movement = false;
 	EnemyA.index = 1;
+	EnemyA.mudgeIndex = 1;
 	EnemyA.dindex = 1;
+	EnemyA.growIndex = 1;
+	EnemyA.color = "";
 	
 	EnemyB.type = 0;
 	EnemyB.bug = 0;
@@ -477,6 +571,10 @@ function reset(){
 	EnemyB.onScreen = 0;
 	EnemyB.movement = false;
 	EnemyB.swimming = true;
+	EnemyB.index = 1;
+	EnemyB.mudgeIndex = 1;
+	EnemyB.hudgeIndex = 1;
+	EnemyB.color = Math.floor(Math.random() * 2) + 1;
 	
 	EnemyC.type = 0;
 	EnemyC.bug = 1;
@@ -496,7 +594,10 @@ function reset(){
 	EnemyC.onScreen = 0;
 	EnemyC.movement = false;
 	EnemyC.index = 1;
+	EnemyC.mudgeIndex = 1;
 	EnemyC.dindex = 1;
+	EnemyC.growIndex = 1;
+	EnemyC.color = "";
 	
 	Tenemy.type = 0;
 	Tenemy.bug = 0;
@@ -575,38 +676,54 @@ function reset(){
 	Spawner.x = 2000;
 	Spawner.y = -9000;
 	Spawner.onTree = 0;
-	Spawner.width = 64;
-	Spawner.height = 64;
+	Spawner.width = 88;
+	Spawner.height = 92;
 	Spawner.speed = 2;
 	Spawner.speed2 = 1;
 	Spawner.dirct = 0;
-	Spawner.hp = 5;
+	Spawner.hp = 6;
 	Spawner.hptimer = 0;
 	Spawner.respawn = 300;
 	Spawner.dir = "W";
+	Spawner.LR = "";
+	Spawner.TargetObj = "";
 	Spawner.rp = 450;
 	Spawner.pts = 500;
 	Spawner.onScreen = 0;
-	Spawner.cd = 60;
+	Spawner.cast = false;
+	Spawner.casted = false;
+	Spawner.castIndex = 1;
+	Spawner.walkIndex = 1;
+	Spawner.spawnIndex = 1;
+	Spawner.waitIndex = 30;
+	Spawner.attckPlayer = false;
 	Spawner.movement = false;
 	
 	Spawner2.type = 2;
 	Spawner2.x = 2000;
 	Spawner2.y = -9000;
 	Spawner2.onTree = 0;
-	Spawner2.width = 64;
-	Spawner2.height = 64;
+	Spawner2.width = 88;
+	Spawner2.height = 92;
 	Spawner2.speed = 2;
 	Spawner2.speed2 = 1;
 	Spawner2.dirct = 0;
-	Spawner2.hp = 5;
+	Spawner2.hp = 6;
 	Spawner2.hptimer = 0;
 	Spawner2.respawn = 900;
 	Spawner2.dir = "W";
+	Spawner2.LR = "";
+	Spawner2.TargetObj = "";
 	Spawner2.rp = 450;
 	Spawner2.pts = 500;
 	Spawner2.onScreen = 0;
-	Spawner2.cd = 60;
+	Spawner2.cast = false;
+	Spawner2.casted = false;
+	Spawner2.castIndex = 1;
+	Spawner2.walkIndex = 1;
+	Spawner2.spawnIndex = 1;
+	Spawner2.waitIndex = 30;
+	Spawner2.attckPlayer = false;
 	Spawner2.movement = false;
 	
 	Sorceror.type = 1;
@@ -635,7 +752,7 @@ function reset(){
 	treeWizz.onTree = 0;
 	treeWizz.y = -400;
 	treeWizz.width = 32;
-	treeWizz.height = 32;
+	treeWizz.height = 44;
 	treeWizz.speed = 4;
 	treeWizz.speed2 = 2;
 	treeWizz.dirct = 0;
@@ -645,7 +762,7 @@ function reset(){
 	treeWizz.onScreen = 0;
 	treeWizz.movement = false;
 	treeWizz.cd = 90;
-	treeWizz.hp = 6;
+	treeWizz.hp = 5;
 	treeWizz.hptimer = 0;
 	treeWizz.width2 = 0;
 	treeWizz.height2 = 0;
@@ -654,7 +771,7 @@ function reset(){
 	treeWizz.frame = 0;
 	treeWizz.pts = 5000;
 	treeWizz.spawned = 0;
-	treeWizz.index = 1;
+	treeWizz.LR = "";
 	
 	TwizEffect.x = 500;
 	TwizEffect.y = -400;
@@ -751,6 +868,7 @@ function reset(){
 	Dragon.dirct = 0;
 	Dragon.dir = "D";
 	Dragon.respawn = 2000;
+	Dragon.fall = 150;
 	Dragon.rp = -1;
 	Dragon.onScreen = 0;
 	Dragon.movement = false;
@@ -762,6 +880,7 @@ function reset(){
 	Dragon.frame = 0;
 	Dragon.pts = 5000;
 	Dragon.spawned = 0;
+	Dragon.drawShadow = false;
 	
 	DragonR.type = "DragonR";
 	DragonR.x = 9000;
@@ -821,6 +940,22 @@ function reset(){
 	DragonEffect2.onScreen = 0;
 	DragonEffect2.frame = 0;
 	DragonEffect2.played = 0;
+	
+	AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner,
+					14: treeWizz, 15: rootStrike, 16: rootStrike2, 17: rootStrike3, 18: rootStrike4, 19: Thief, 20: ThiefA, 21: ThiefB, 22: Dragon, 23: DragonR, 24: DragonL,
+					25: BigMeteor1, 26: Meteor1, 27: Meteor2, 28: Meteor3, 29: Meteor4, 30: BigMeteor2, 31: Meteor5, 32: Meteor6, 33: Meteor7, 34: Meteor8, 35: MeteorD1, 36: MeteorD2,
+					37: Lavaman5, 38: Lavaman6, 39: Lavaman7, 40: Lavaman8, 41: Spawner2, 42: MasterThief, 43: Croc, 44: Croc2, 45: Mosquito, 46: Mosquito2, 47: Mosquito3, 48: Mosquito4,
+					49: MiniMum1, 50: MiniMum2, 51: MiniMum3, 52: MiniMum4, 53: Genie, 54: Lamp, 55: Scorp1, 56: Scorp2, 57: Scorp3, 58: Scorp4, 59: Scorp5, 60: Scorp6, 61: Scorp7, 62: Scorp8,
+					63: Anubis1, 64: Anubis2, 65: MegaMummy};
+	//reset confusion +	
+	//remove icelightning iced
+	for(E in AllEnemies){
+		AllEnemies[E].iced = false;
+		AllEnemies[E].good = false;
+		AllEnemies[E].goodTimer = 0;
+		AllEnemies[E].goodNum = 0;
+		AllEnemies[E].goodTimerMax = 0;
+	}
 	//------------------------ EnemyAttacks.js ------------------//
 	Globblyfire.color = "#FF6600";
 	Globblyfire.x = -100;
@@ -851,17 +986,6 @@ function reset(){
 	Globblyfire3.frame = 0;
 	Globblyfire3.onScreen = 0;
 	Globblyfire3.growth = 16;
-	
-	for(E in EMplosions){
-		EMplosions[E].color = "#FF6600";
-		EMplosions[E].x = -100;
-		EMplosions[E].y = -200;
-		EMplosions[E].timeLeft = 0;
-		EMplosions[E].width = 16;
-		EMplosions[E].height = 16;
-		EMplosions[E].frame = 0;
-		EMplosions[E].onScreen = 0;
-	}
 	
 	sIce.color = "#00CCFF";
 	sIce.timeLeft = 0;
@@ -1264,171 +1388,24 @@ function reset(){
 	MeteorD2.rs = -1;
 	MeteorD2.dir = "D";
 	
-	EMeteor1.type = "Meteor";
-	EMeteor1.x = 64;
-	EMeteor1.y = 256;
-	EMeteor1.timeLeft = -1;
-	EMeteor1.speed = 4;
-	EMeteor1.width = 32;
-	EMeteor1.height = 32;
-	EMeteor1.respawn = -1;
-	EMeteor1.dir = "D";
-	
-	EMeteor2.type = "Meteor";
-	EMeteor2.x = -50;
-	EMeteor2.y = 400;
-	EMeteor2.timeLeft = -1;
-	EMeteor2.speed = 4;
-	EMeteor2.width = 32;
-	EMeteor2.height = 32;
-	EMeteor2.respawn = -1;
-	EMeteor2.dir = "DWD";
-	
-	EMeteor3.type = "Meteor";
-	EMeteor3.x = 0;
-	EMeteor3.y = -32;
-	EMeteor3.timeLeft = -1;
-	EMeteor3.speed = 4;
-	EMeteor3.width = 32;
-	EMeteor3.height = 32;
-	EMeteor3.respawn = -1;
-	EMeteor3.dir = "D2D";
-	
-	EMeteor4.type = "Meteor";
-	EMeteor4.x = 0;
-	EMeteor4.y = 576;
-	EMeteor4.timeLeft = -1;
-	EMeteor4.speed = 4;
-	EMeteor4.width = 16;
-	EMeteor4.height = 16;
-	EMeteor4.respawn = -1;
-	EMeteor4.dir = "DWD";
-	
-	EMeteor5.type = "Meteor";
-	EMeteor5.x = 0;
-	EMeteor5.y = 64;
-	EMeteor5.timeLeft = -1;
-	EMeteor5.speed = 4;
-	EMeteor5.width = 16;
-	EMeteor5.height = 16;
-	EMeteor5.respawn = -1;
-	EMeteor5.dir = "D";
-	
-	EMeteor6.type = "Meteor";
-	EMeteor6.x = -32;
-	EMeteor6.y = 128;
-	EMeteor6.timeLeft = -1;
-	EMeteor6.speed = 4;
-	EMeteor6.width = 16;
-	EMeteor6.height = 16;
-	EMeteor6.respawn = -1;
-	EMeteor6.dir = "D2D";
-	
-	EMeteor7.type = "Meteor";
-	EMeteor7.x = 0;
-	EMeteor7.y = 376;
-	EMeteor7.timeLeft = -1;
-	EMeteor7.speed = 4;
-	EMeteor7.width = 16;
-	EMeteor7.height = 16;
-	EMeteor7.respawn = -1;
-	EMeteor7.dir = "WD";
-	
-	EMeteor8.type = "Meteor";
-	EMeteor8.x = 0;
-	EMeteor8.y = 64;
-	EMeteor8.timeLeft = -1;
-	EMeteor8.speed = 4;
-	EMeteor8.width = 16;
-	EMeteor8.height = 16;
-	EMeteor8.respawn = -1;
-	EMeteor8.dir = "D";
-	
-	EMeteor9.type = "Meteor";
-	EMeteor9.x = 0;
-	EMeteor9.y = 420;
-	EMeteor9.timeLeft = -1;
-	EMeteor9.speed = 4;
-	EMeteor9.width = 16;
-	EMeteor9.height = 16;
-	EMeteor9.respawn = -1;
-	EMeteor9.dir = "D2D";
-	
-	EMeteor10.type = "Meteor";
-	EMeteor10.x = 0;
-	EMeteor10.y = 128;
-	EMeteor10.timeLeft = -1;
-	EMeteor10.speed = 4;
-	EMeteor10.width = 16;
-	EMeteor10.height = 16;
-	EMeteor10.respawn = -1;
-	EMeteor10.dir = "WD";
-	
-	EMeteor11.type = "Meteor";
-	EMeteor11.x = -64;
-	EMeteor11.y = 256;
-	EMeteor11.timeLeft = -1;
-	EMeteor11.speed = 6;
-	EMeteor11.width = 16;
-	EMeteor11.height = 16;
-	EMeteor11.respawn = -1;
-	EMeteor11.dir = "D";
-	
-	EMeteor12.type = "Meteor";
-	EMeteor12.x = 0;
-	EMeteor12.y = 576;
-	EMeteor12.timeLeft = -1;
-	EMeteor12.speed = 6;
-	EMeteor12.width = 32;
-	EMeteor12.height = 32;
-	EMeteor12.respawn = -1;
-	EMeteor12.dir = "WD";
-	
-	EMeteor13.type = "Meteor";
-	EMeteor13.x = 0;
-	EMeteor13.y = 64;
-	EMeteor13.timeLeft = -1;
-	EMeteor13.speed = 4;
-	EMeteor13.width = 32;
-	EMeteor13.height = 32;
-	EMeteor13.respawn = -1;
-	EMeteor13.dir = "SD";
-	
-	EMeteor14.type = "Meteor";
-	EMeteor14.x = 0;
-	EMeteor14.y = 320;
-	EMeteor14.timeLeft = -1;
-	EMeteor14.speed = 6;
-	EMeteor14.width = 32;
-	EMeteor14.height = 32;
-	EMeteor14.respawn = -1;
-	EMeteor14.dir = "D";
-	
-	EMeteor15.type = "Meteor";
-	EMeteor15.x = -128;
-	EMeteor15.y = 640;
-	EMeteor15.timeLeft = -1;
-	EMeteor15.speed = 6;
-	EMeteor15.width = 32;
-	EMeteor15.height = 32;
-	EMeteor15.respawn = -1;
-	EMeteor15.dir = "DWD";
-	
-	EMeteor16.type = "Meteor";
-	EMeteor16.x = -128;
-	EMeteor16.y = -128;
-	EMeteor16.timeLeft = -1;
-	EMeteor16.speed = 6;
-	EMeteor16.width = 32;
-	EMeteor16.height = 32;
-	EMeteor16.respawn = -1;
-	EMeteor16.dir = "D2D";
+	for(E in EMeteors){
+		EMeteors[E].LR = 1;
+		EMeteors[E].type = "Meteor";
+		EMeteors[E].x = -9000;
+		EMeteors[E].y = -2000;
+		EMeteors[E].width = 32;
+		EMeteors[E].height = 32;
+		EMeteors[E].timer = -1;
+		EMeteors[E].index = 1;
+		EMeteors[E].launched = false;
+	}
 	//------------------------ Weapons.js -----------------------//
 	for(B in Bullets){
 		Bullets[B].x = -100;
 		Bullets[B].y = -200;
 		Bullets[B].timeLeft = 0;
 		Bullets[B].speed = 16;
+		Bullets[B].splitTimer = 0;
 	}
 	mystIndex = 1;
 	
@@ -1442,17 +1419,30 @@ function reset(){
 	fireice.height = 32;
 	fireice.frame = 0;
 	fireice.cd = 0;
-	fireice.cdTop = 120;
+	fireice.cdTop = 60;
 	fireice.onScreen = 0;
 	fireice.dir = "W";
 	fireice.speed = 16;
 	fireice.flicker = 600;
+	fireice2.color1 = "#FF6600";
+	fireice2.color2 = "#00CCFF";
+	fireice2.color = "#FF6600";
+	fireice2.state = 0;
+	fireice2.x = -1000;
+	fireice2.y = -200;
+	fireice2.width = 32;
+	fireice2.height = 32;
+	fireice2.frame = 0;
+	fireice2.onScreen = 0;
+	fireice2.dir = "W";
+	fireice2.speed = 16;
+	fireice2.flicker = 600;
 	
 	fireheal.cd = 0;
-	fireheal.cdTop = 600;
+	fireheal.cdTop = 450;
 	
 	iceheal.cd = 0;
-	iceheal.cdTop = 600;
+	iceheal.cdTop = 450;
 	
 	lightningheal.cd = 0;
 	lightningheal.cdTop = 600;
@@ -1473,6 +1463,7 @@ function reset(){
 	firelightning.onScreen = 0;
 	firelightning.cast = 0;
 	firelightning.used = 0;
+	firelightning.framecd = 0;
 	for(F in fireLightnings){
 		fireLightnings[F].color = "#FF6600";
 		fireLightnings[F].x = -1000;
@@ -1511,8 +1502,7 @@ function reset(){
 	icelightning.cdTop = 900;
 	icelightning.timeLeft = 0;
 	icelightning.end = false;
-	icelightning.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner, 14: treeWizz, 15: Thief, 16: ThiefA, 17: ThiefB, 18: Lavaman5, 19: Lavaman6, 20: Lavaman7, 21: Lavaman8, 22: Spawner2, 23: MasterThief,
-								24: Croc, 25: Croc2, 26: Mosquito, 27: Mosquito2, 28: Mosquito3, 29: Mosquito4};
+	icelightning.AllEnemiesil = AllEnemies;
 	
 	airfire.color1 = "#FF6600";
 	airfire.color2 = "#990000";
@@ -1588,9 +1578,9 @@ function reset(){
 	waterfire.height = 16;
 	waterfire.timeLeft = 0;
 	waterfire.cd = 0;
-	waterfire.cdTop = 300;
+	waterfire.cdTop = 240;
 	waterfire.cd2 = 0;
-	waterfire.cd2Top = 300;
+	waterfire.cd2Top = 240;
 	waterfire.index = 1;
 	waterfire.Iindex = 0;
 	waterfire.speed = 12;
@@ -1724,8 +1714,7 @@ function reset(){
 	
 	waterlightning.onScreen = 0;
 	waterlightning.cd = 0;
-	waterlightning.cdTop = 900;
-	waterlightning.frame = 0;
+	waterlightning.cdTop = 750;
 	for(W in Wpools){
 		Wpools[W].color = "#0000FF";
 		Wpools[W].color2 = "#FFFF00";
@@ -1735,6 +1724,7 @@ function reset(){
 		Wpools[W].x = -100;
 		Wpools[W].y = -200;
 		Wpools[W].frame = 0;
+		Wpools[W].used = false;
 		Wpools[W].onScreen = 0;
 		Wpools[W].charged = 0;
 	}
@@ -1904,6 +1894,244 @@ function reset(){
 	darkwater.cast = -1;
 	darkwater.index = 1;
 	darkwater.hptimer = 0;
+	
+	flameBreath1.color = "#FF6600";
+	flameBreath1.x = -100;
+	flameBreath1.y = -200;
+	flameBreath1.timeLeft = 0;
+	flameBreath1.width = 16;
+	flameBreath1.height = 16;
+	flameBreath1.frame = 0;
+	flameBreath1.dir = "A";
+	
+	flameBreath2.color = "#FF6600";
+	flameBreath2.x = -100;
+	flameBreath2.y = -200;
+	flameBreath2.timeLeft = 0;
+	flameBreath2.width = 16;
+	flameBreath2.height = 16;
+	flameBreath2.frame = 0;
+	flameBreath2.dir = "A";
+	
+	flameBreath3.color = "#FF6600";
+	flameBreath3.x = -100;
+	flameBreath3.y = -200;
+	flameBreath3.timeLeft = 0;
+	flameBreath3.width = 16;
+	flameBreath3.height = 16;
+	flameBreath3.frame = 0;
+	flameBreath3.dir = "A";
+	
+	flameBreath4.color = "#FF6600";
+	flameBreath4.x = -100;
+	flameBreath4.y = -200;
+	flameBreath4.timeLeft = 0;
+	flameBreath4.width = 16;
+	flameBreath4.height = 16;
+	flameBreath4.frame = 0;
+	flameBreath4.dir = "A";
+	
+	flameBreath5.color = "#FF6600";
+	flameBreath5.x = -100;
+	flameBreath5.y = -200;
+	flameBreath5.timeLeft = 0;
+	flameBreath5.width = 16;
+	flameBreath5.height = 16;
+	flameBreath5.frame = 0;
+	flameBreath5.dir = "A";
+	
+	lightfire.x = -100;
+	lightfire.y = -200;
+	lightfire.width = 48;
+	lightfire.height = 32;
+	lightfire.width2 = 32;
+	lightfire.height2 = 32;
+	lightfire.frame = 0;
+	lightfire.timeLeft = 0;
+	lightfire.cd = 0;
+	lightfire.cdTop = 1200;
+	lightfire.breathcd = 90;
+	lightfire.speed = 2;
+	lightfire.onScreen = 0;
+	lightfire.dir = "";
+	lightfire.LR = "Left";
+	lightfire.dirct = 0;
+	lightfire.casting = false;
+	
+	for(I in IceTrails){
+		IceTrails[I].x = -100;
+		IceTrails[I].y = -200;
+		IceTrails[I].width = 48;
+		IceTrails[I].height = 32;
+		IceTrails[I].frame = 0;
+		IceTrails[I].onScreen = 0;
+	}
+	
+	lightice.x = -100;
+	lightice.y = -200;
+	lightice.width = 32;
+	lightice.height = 32;
+	lightice.width2 = 32;
+	lightice.height2 = 32;
+	lightice.frame = 0;
+	lightice.timeLeft = 0;
+	lightice.cd = 0;
+	lightice.cdTop = 1200;
+	lightice.breathcd = 45;
+	lightice.speed = 2;
+	lightice.onScreen = 0;
+	lightice.dir = "";
+	lightice.LR = "Left";
+	lightice.dirct = 0;
+	
+	lightearth.onScreen = 0;
+	lightearth.cd = 0;
+	lightearth.cdTop = 600;
+	lightearth.cast = 0;
+	lightearth.used = 0;
+	lightearth.normAlpha = 0;
+	lightearth.prevEarthcd = 0;
+	
+	lightlightning.x = -100;
+	lightlightning.y = -200;
+	lightlightning.width = 16;
+	lightlightning.height = 16;
+	lightlightning.width2 = 32;
+	lightlightning.height2 = 32;
+	lightlightning.frame = 0;
+	lightlightning.timeLeft = 0;
+	lightlightning.cd = 0;
+	lightlightning.cdTop = 1800;
+	lightlightning.breathcd = 0;
+	lightlightning.speed = 4;
+	lightlightning.onScreen = 0;
+	lightlightning.dir = "";
+	lightlightning.LR = "Left";
+	lightlightning.dirct = 0;
+	lightlightning.spell = false;
+	lightlightning.slope = 1;
+	lightlightning.closestSlope = 1;
+	lightlightning.slopeIndex = 11;
+	lightlightning.dirSwitch = false;
+	lightlightning.destDir = "";
+	lightlightning.movement = true;
+	lightlightning.index = 0;
+	
+	lightair.x = -100;
+	lightair.y = -200;
+	lightair.width = 32;
+	lightair.height = 32;
+	lightair.width2 = 32;
+	lightair.height2 = 32;
+	lightair.frame = 0;
+	lightair.timeLeft = 0;
+	lightair.cd = 0;
+	lightair.cdTop = 1200;
+	lightair.speed = 16;
+	lightair.onScreen = 0;
+	lightair.dir = "";
+	lightair.LR = "Left";
+	lightair.dirct = 0;
+	lightair.index = 1;
+	
+	for(W in lightwaterBubbles1){
+		lightwaterBubbles1[W].timeLeft = 0;
+		lightwaterBubbles1[W].x = -100;
+		lightwaterBubbles1[W].y = -200;
+	}
+	for(W in lightwaterBubbles2){
+		lightwaterBubbles2[W].timeLeft = 0;
+		lightwaterBubbles2[W].x = -100;
+		lightwaterBubbles2[W].y = -200;
+	}
+	lightwater.x = -100;
+	lightwater.y = -200;
+	lightwater.width = 16;
+	lightwater.height = 16;
+	lightwater.width2 = 32;
+	lightwater.height2 = 32;
+	lightwater.frame = 0;
+	lightwater.timeLeft = 0;
+	lightwater.cd = 0;
+	lightwater.cdTop = 1500;
+	lightwater.breathcd = 0;
+	lightwater.speed = 6;
+	lightwater.onScreen = 0;
+	lightwater.dir = "";
+	lightwater.LR = "Left";
+	lightwater.dirct = 0;
+	lightwater.spell = false;
+	lightwater.slope = 1;
+	lightwater.closestSlope = 1;
+	lightwater.slopeIndex = 11;
+	lightwater.dirSwitch = false;
+	lightwater.destDir = "";
+	lightwater.size = "grow";
+	lightwater.shotNum = 1;
+	
+	AngelTrap1.x = -100;
+	AngelTrap1.y = -200;
+	AngelTrap1.width = 32;
+	AngelTrap1.height = 32;
+	AngelTrap1.onScreen = 0;
+	AngelTrap1.used = 0;
+	AngelTrap1.dark1 = true;
+	AngelTrap1.active = false;
+	AngelTrap1.timeLeft = -1;
+	
+	AngelTrap2.x = -100;
+	AngelTrap2.y = -200;
+	AngelTrap2.width = 32;
+	AngelTrap2.height = 32;
+	AngelTrap2.onScreen = 0;
+	AngelTrap2.used = 0;
+	AngelTrap2.dark1 = true;
+	AngelTrap2.active = false;
+	AngelTrap2.timeLeft = -1;
+	
+	AngelTrap3.x = -100;
+	AngelTrap3.y = -200;
+	AngelTrap3.width = 32;
+	AngelTrap3.height = 32;
+	AngelTrap3.onScreen = 0;
+	AngelTrap3.used = 0;
+	AngelTrap3.dark1 = true;
+	AngelTrap3.active = false;
+	AngelTrap3.timeLeft = -1;
+	
+	AngelTrap4.x = -100;
+	AngelTrap4.y = -200;
+	AngelTrap4.width = 32;
+	AngelTrap4.height = 32;
+	AngelTrap4.onScreen = 0;
+	AngelTrap4.used = 0;
+	AngelTrap4.dark1 = true;
+	AngelTrap4.active = false;
+	AngelTrap4.timeLeft = -1;
+	
+	lightdark.x = -100;
+	lightdark.y = -200;
+	lightdark.width = 16;
+	lightdark.height = 16;
+	lightdark.width2 = 32;
+	lightdark.height2 = 32;
+	lightdark.frame = 0;
+	lightdark.timeLeft = 0;
+	lightdark.cd = 0;
+	lightdark.cdTop = 1500;
+	lightdark.breathcd = 0;
+	lightdark.speed = 6;
+	lightdark.onScreen = 0;
+	lightdark.dir = "";
+	lightdark.LR = "Left";
+	lightdark.dirct = 0;
+	lightdark.spell = false;
+	lightdark.slope = 1;
+	lightdark.closestSlope = 1;
+	lightdark.slopeIndex = 11;
+	lightdark.dirSwitch = false;
+	lightdark.destDir = "";
+	lightdark.inventory = 4;
 	//------------------------ Fire.js --------------------------//
 	fire.color = "#FF6600";
 	fire.x = -100;
@@ -2018,12 +2246,12 @@ function reset(){
 	earth.x = -100;
 	earth.y = -200;
 	earth.cd = 0;
-	earth.cdTop = 720;
+	earth.cdTop = 600;
 	earth.speed = 4;
 	earth.cast = 0;
 	earth.used = 0;
 	earth2.cd = 0;
-	earth2.cdTop = 720;
+	earth2.cdTop = 600;
 	earth2.cast = 0;
 	earth2.used = 0;
 	earth2.timeLeft = -1;
@@ -2259,6 +2487,121 @@ function reset(){
 		dark2Spikes[S].onScreen = 0;
 		dark2Spikes[S].frame = 0;
 	}
+	//------------------------ Light.js -------------------------//
+	arrow.x = -100;
+	arrow.y = -200;
+	arrow.timeLeft = 0;
+	arrow.speed = 16;
+	arrow.width = 16;
+	arrow.height = 16;
+	arrow.dir = "A";
+	arrow.active = true;
+	
+	arrow2.x = -100;
+	arrow2.y = -200;
+	arrow2.timeLeft = 0;
+	arrow2.speed = 16;
+	arrow2.width = 16;
+	arrow2.height = 16;
+	arrow2.dir = "A";
+	arrow2.active = true;
+	
+	arrow3.x = -100;
+	arrow3.y = -200;
+	arrow3.timeLeft = 0;
+	arrow3.speed = 16;
+	arrow3.width = 16;
+	arrow3.height = 16;
+	arrow3.dir = "A";
+	arrow3.active = true;
+	
+	arrow4.x = -100;
+	arrow4.y = -200;
+	arrow4.timeLeft = 0;
+	arrow4.speed = 16;
+	arrow4.width = 16;
+	arrow4.height = 16;
+	arrow4.dir = "A";
+	arrow4.active = true;
+	
+	light.x = -100;
+	light.y = -200;
+	light.width = 20;
+	light.height = 20;
+	light.width2 = 32;
+	light.height2 = 32;
+	light.frame = 0;
+	light.timeLeft = 0;
+	light.cd = 0;
+	light.cdTop = 1200;
+	light.speed = 6;
+	light.onScreen = 0;
+	light.dir = "";
+	light.dirct = 0;
+	light.slope = 1;
+	light.closestSlope = 1;
+	light.slopeIndex = 11;
+	light.dirSwitch = false;
+	light.destDir = "";
+	
+	light2.x = -100;
+	light2.y = -200;
+	light2.width = 20;
+	light2.height = 20;
+	light2.width2 = 32;
+	light2.height2 = 32;
+	light2.frame = 0;
+	light2.timeLeft = 0;
+	light2.cd = 0;
+	light2.cdTop = 1800;
+	light2.speed = 6;
+	light2.onScreen = 0;
+	light2.dir = "";
+	light2.dirct = 0;
+	light2.slope = 1;
+	light2.closestSlope = 1;
+	light2.slopeIndex = 11;
+	light2.dirSwitch = false;
+	light2.destDir = "";
+	light2.arrownum = 2;
+	
+	light3.x = -100;
+	light3.y = -200;
+	light3.width = 20;
+	light3.height = 20;
+	light3.width2 = 32;
+	light3.height2 = 32;
+	light3.frame = 0;
+	light3.timeLeft = 0;
+	light3.speed = 4;
+	light3.onScreen = 0;
+	light3.dir = "";
+	light3.dirct = 0;
+	light3.slope = 1;
+	light3.closestSlope = 1;
+	light3.slopeIndex = 11;
+	light3.dirSwitch = false;
+	light3.destDir = "";
+	light3.arrownum = 3;
+	
+	light4.x = -100;
+	light4.y = -200;
+	light4.width = 20;
+	light4.height = 20;
+	light4.width2 = 32;
+	light4.height2 = 32;
+	light4.frame = 0;
+	light4.timeLeft = 0;
+	light4.speed = 2;
+	light4.onScreen = 0;
+	light4.dir = "";
+	light4.dirct = 0;
+	light4.slope = 1;
+	light4.closestSlope = 1;
+	light4.slopeIndex = 11;
+	light4.dirSwitch = false;
+	light4.destDir = "";
+	light4.arrownum = 4;
 	//----------------- Tier 3 Enemies --------------------------//
 	MasterThief.type = "MasterThief";
 	MasterThief.spell1 = "N/A";
@@ -2431,6 +2774,393 @@ function reset(){
 	Swudge2.LR = "";
 	Swudge2.onScreen = 0;
 	Swudge2.index = 1;
+	
+	Scorp1.type = 0;
+	Scorp1.x = 9000;
+	Scorp1.onTree = 0;
+	Scorp1.y = -400;
+	Scorp1.width = 40;
+	Scorp1.height = 36;
+	Scorp1.speed = 4;
+	Scorp1.speed2 = 2;
+	Scorp1.dirct = 0;
+	Scorp1.dir = "W";
+	Scorp1.LR = "";
+	Scorp1.respawn = 90;
+	Scorp1.rp = 300;
+	Scorp1.onScreen = 0;
+	Scorp1.movement = false;
+	Scorp1.index = 1;
+	Scorp1.pts = 100;
+	Scorp1.casting = false;
+	Scorp1.castIndex = 1;
+	Scorp1.rollIndex = 1;
+	Scorp1.cd = 0;
+	Scorp1.moved = false;
+	
+	Scorp2.type = 0;
+	Scorp2.x = 9000;
+	Scorp2.onTree = 0;
+	Scorp2.y = -400;
+	Scorp2.width = 40;
+	Scorp2.height = 36;
+	Scorp2.speed = 4;
+	Scorp2.speed2 = 2;
+	Scorp2.dirct = 0;
+	Scorp2.dir = "W";
+	Scorp2.LR = "";
+	Scorp2.respawn = 150;
+	Scorp2.rp = 300;
+	Scorp2.onScreen = 0;
+	Scorp2.movement = false;
+	Scorp2.index = 1;
+	Scorp2.pts = 100;
+	Scorp2.casting = false;
+	Scorp2.castIndex = 1;
+	Scorp2.rollIndex = 1;
+	Scorp2.cd = 0;
+	Scorp2.moved = false;
+	
+	Scorp3.type = 0;
+	Scorp3.x = 9000;
+	Scorp3.onTree = 0;
+	Scorp3.y = -400;
+	Scorp3.width = 40;
+	Scorp3.height = 36;
+	Scorp3.speed = 4;
+	Scorp3.speed2 = 2;
+	Scorp3.dirct = 0;
+	Scorp3.dir = "W";
+	Scorp3.LR = "";
+	Scorp3.respawn = 210;
+	Scorp3.rp = 300;
+	Scorp3.onScreen = 0;
+	Scorp3.movement = false;
+	Scorp3.index = 1;
+	Scorp3.pts = 100;
+	Scorp3.casting = false;
+	Scorp3.castIndex = 1;
+	Scorp3.rollIndex = 1;
+	Scorp3.cd = 0;
+	Scorp3.moved = false;
+	
+	Scorp4.type = 0;
+	Scorp4.x = 9000;
+	Scorp4.onTree = 0;
+	Scorp4.y = -400;
+	Scorp4.width = 40;
+	Scorp4.height = 36;
+	Scorp4.speed = 4;
+	Scorp4.speed2 = 2;
+	Scorp4.dirct = 0;
+	Scorp4.dir = "W";
+	Scorp4.LR = "";
+	Scorp4.respawn = 300;
+	Scorp4.rp = 300;
+	Scorp4.onScreen = 0;
+	Scorp4.movement = false;
+	Scorp4.index = 1;
+	Scorp4.pts = 100;
+	Scorp4.casting = false;
+	Scorp4.castIndex = 1;
+	Scorp4.rollIndex = 1;
+	Scorp4.cd = 0;
+	Scorp4.moved = false;
+	
+	Scorp5.type = 0;
+	Scorp5.x = 9000;
+	Scorp5.onTree = 0;
+	Scorp5.y = -400;
+	Scorp5.width = 40;
+	Scorp5.height = 36;
+	Scorp5.speed = 4;
+	Scorp5.speed2 = 2;
+	Scorp5.dirct = 0;
+	Scorp5.dir = "W";
+	Scorp5.LR = "";
+	Scorp5.respawn = 390;
+	Scorp5.rp = 300;
+	Scorp5.onScreen = 0;
+	Scorp5.movement = false;
+	Scorp5.index = 1;
+	Scorp5.pts = 100;
+	Scorp5.casting = false;
+	Scorp5.castIndex = 1;
+	Scorp5.rollIndex = 1;
+	Scorp5.cd = 0;
+	Scorp5.moved = false;
+	
+	Scorp6.type = 0;
+	Scorp6.x = 9000;
+	Scorp6.onTree = 0;
+	Scorp6.y = -400;
+	Scorp6.width = 40;
+	Scorp6.height = 36;
+	Scorp6.speed = 4;
+	Scorp6.speed2 = 2;
+	Scorp6.dirct = 0;
+	Scorp6.dir = "W";
+	Scorp6.LR = "";
+	Scorp6.respawn = 480;
+	Scorp6.rp = 300;
+	Scorp6.onScreen = 0;
+	Scorp6.movement = false;
+	Scorp6.index = 1;
+	Scorp6.pts = 100;
+	Scorp6.casting = false;
+	Scorp6.castIndex = 1;
+	Scorp6.rollIndex = 1;
+	Scorp6.cd = 0;
+	Scorp6.moved = false;
+	
+	Scorp7.type = 0;
+	Scorp7.x = 9000;
+	Scorp7.onTree = 0;
+	Scorp7.y = -400;
+	Scorp7.width = 40;
+	Scorp7.height = 36;
+	Scorp7.speed = 4;
+	Scorp7.speed2 = 2;
+	Scorp7.dirct = 0;
+	Scorp7.dir = "W";
+	Scorp7.LR = "";
+	Scorp7.respawn = -1;
+	Scorp7.rp = -1;
+	Scorp7.onScreen = 0;
+	Scorp7.movement = false;
+	Scorp7.index = 1;
+	Scorp7.pts = 100;
+	Scorp7.casting = false;
+	Scorp7.castIndex = 1;
+	Scorp7.rollIndex = 1;
+	Scorp7.cd = 0;
+	Scorp7.moved = false;
+	
+	Scorp8.type = 0;
+	Scorp8.x = 9000;
+	Scorp8.onTree = 0;
+	Scorp8.y = -400;
+	Scorp8.width = 40;
+	Scorp8.height = 36;
+	Scorp8.speed = 4;
+	Scorp8.speed2 = 2;
+	Scorp8.dirct = 0;
+	Scorp8.dir = "W";
+	Scorp8.LR = "";
+	Scorp8.respawn = -1;
+	Scorp8.rp = -1;
+	Scorp8.onScreen = 0;
+	Scorp8.movement = false;
+	Scorp8.index = 1;
+	Scorp8.pts = 100;
+	Scorp8.casting = false;
+	Scorp8.castIndex = 1;
+	Scorp8.rollIndex = 1;
+	Scorp8.cd = 0;
+	Scorp8.moved = false;
+	
+	for(A in Anubises){
+		Anubises[A].type = "Anubis";
+		Anubises[A].x = 2000;
+		Anubises[A].y = -9000;
+		Anubises[A].x2 = 2000;
+		Anubises[A].y2 = -9000;
+		Anubises[A].onTree = 0;
+		Anubises[A].width = 60;
+		Anubises[A].height = 90;
+		Anubises[A].speed = 4;
+		Anubises[A].speed2 = 2;
+		Anubises[A].dirct = 0;
+		Anubises[A].hp = 8;
+		Anubises[A].hptimer = 0;
+		Anubises[A].dir = "W";
+		Anubises[A].LR = "";
+		Anubises[A].rp = 300;
+		Anubises[A].pts = 4000;
+		Anubises[A].onScreen = 0;
+		Anubises[A].movement = false;
+		Anubises[A].moveTime = 0;
+		Anubises[A].index = 1;
+		Anubises[A].waitTime = 0;
+		Anubises[A].deadIndex = 0;
+		Anubises[A].cd = 90;
+		Anubises[A].casting = false;
+		Anubises[A].castIndex = 1;
+		Anubises[A].Statue = false;
+		Anubises[A].Mummy = false;
+	}
+	Anubis1.respawn = 150;
+	Anubis2.respawn = 450;
+	
+	MegaMummy.type = "MegaMummy";
+	MegaMummy.x = 9000;
+	MegaMummy.onTree = 0;
+	MegaMummy.y = -400;
+	MegaMummy.xqueue = 9000;
+	MegaMummy.yqueue = -400;
+	MegaMummy.bandX = 9000;
+	MegaMummy.bandY = -400;
+	MegaMummy.width = 224;
+	MegaMummy.height = 168;
+	MegaMummy.speed = 2;
+	MegaMummy.speed2 = 1;
+	MegaMummy.dirct = 0;
+	MegaMummy.dir = "W";
+	MegaMummy.LR = "";
+	MegaMummy.hp = 12;
+	MegaMummy.hptimer = 0;
+	MegaMummy.spawnTimer = -1;
+	MegaMummy.respawn = -1;
+	MegaMummy.rp = -1;
+	MegaMummy.onScreen = 0;
+	MegaMummy.movement = false;
+	MegaMummy.pts = 10000;
+	MegaMummy.index = 1;
+	MegaMummy.lastWalkIndex = 1;
+	MegaMummy.frame = 0;
+	MegaMummy.bandageFrame = 0;
+	
+	Genie.type = "Genie";
+	Genie.x = 9000;
+	Genie.y = -400;
+	Genie.onTree = 0;
+	Genie.width = 64;
+	Genie.height = 64;
+	Genie.speed = 2;
+	Genie.speed2 = 1;
+	Genie.dirct = 0;
+	Genie.dir = "W";
+	Genie.LR = "Left";
+	Genie.respawn = 1350;
+	Genie.rp = -1;
+	Genie.onScreen = 0;
+	Genie.spawned = 0;
+	Genie.movement = false;
+	Genie.hp = 10;
+	Genie.hptimer = 0;
+	Genie.spell = "N/A";
+	Genie.pts = 25000;
+	Genie.cd = 90;
+	Genie.spawnIndex = 1;
+	Genie.spawnDone = false;
+	Genie.lasering = false;
+	Genie.lasered = false;
+	Genie.laserIndex = 1;
+	Genie.laserable = false;
+	
+	Lamp.type = "Lamp";
+	Lamp.x = 500;
+	Lamp.y = -9000;
+	Lamp.onTree = 0;
+	Lamp.width = 32;
+	Lamp.height = 32;
+	Lamp.onScreen = 0;
+	Lamp.pts = 25000;
+	Lamp.dir = "W";
+	Lamp.cd = 0;
+	Lamp.index = 1;
+	Lamp.glowIndex = 1;
+	Lamp.target = "N/A";
+	Lamp.targetting = false;
+	Lamp.targx = 0;
+	Lamp.targy = 0;
+	
+	LampPoof.x = 500;
+	LampPoof.y = -400;
+	LampPoof.width = 32;
+	LampPoof.height = 32;
+	LampPoof.onScreen = 0;
+	LampPoof.index = 1;
+	
+	GenieEffect.x = 500;
+	GenieEffect.y = -400;
+	GenieEffect.width = 32;
+	GenieEffect.height = 32;
+	GenieEffect.onScreen = 0;
+	GenieEffect.frame = 0;
+	GenieEffect.played = 0;
+	GenieEffect.cd = 0;
+	
+	MiniMum1.type = "MiniMummy";
+	MiniMum1.x = 2000;
+	MiniMum1.y = -9000;
+	MiniMum1.onTree = 0;
+	MiniMum1.width = 20;
+	MiniMum1.height = 24;
+	MiniMum1.speed = 4;
+	MiniMum1.speed2 = 2;
+	MiniMum1.dirct = 0;
+	MiniMum1.hp = 4;
+	MiniMum1.hptimer = 0;
+	MiniMum1.respawn = -1;
+	MiniMum1.dir = "W";
+	MiniMum1.LR = "";
+	MiniMum1.rp = -1;
+	MiniMum1.pts = 1;
+	MiniMum1.onScreen = 0;
+	MiniMum1.spawned = false;
+	MiniMum1.spawnIndex = 1;
+	MiniMum1.movement = false;
+	MiniMum2.type = "MiniMummy";
+	MiniMum2.x = 2000;
+	MiniMum2.y = -9000;
+	MiniMum2.onTree = 0;
+	MiniMum2.width = 20;
+	MiniMum2.height = 24;
+	MiniMum2.speed = 4;
+	MiniMum2.speed2 = 2;
+	MiniMum2.dirct = 0;
+	MiniMum2.hp = 4;
+	MiniMum2.hptimer = 0;
+	MiniMum2.respawn = -1;
+	MiniMum2.dir = "W";
+	MiniMum2.LR = "";
+	MiniMum2.rp = -1;
+	MiniMum2.pts = 1;
+	MiniMum2.onScreen = 0;
+	MiniMum2.spawned = false;
+	MiniMum2.spawnIndex = 1;
+	MiniMum2.movement = false;
+	MiniMum3.type = "MiniMummy";
+	MiniMum3.x = 2000;
+	MiniMum3.y = -9000;
+	MiniMum3.onTree = 0;
+	MiniMum3.width = 20;
+	MiniMum3.height = 24;
+	MiniMum3.speed = 4;
+	MiniMum3.speed2 = 2;
+	MiniMum3.dirct = 0;
+	MiniMum3.hp = 4;
+	MiniMum3.hptimer = 0;
+	MiniMum3.respawn = -1;
+	MiniMum3.dir = "W";
+	MiniMum3.LR = "";
+	MiniMum3.rp = -1;
+	MiniMum3.pts = 1;
+	MiniMum3.onScreen = 0;
+	MiniMum3.spawned = false;
+	MiniMum3.spawnIndex = 1;
+	MiniMum3.movement = false;
+	MiniMum4.type = "MiniMummy";
+	MiniMum4.x = 2000;
+	MiniMum4.y = -9000;
+	MiniMum4.onTree = 0;
+	MiniMum4.width = 20;
+	MiniMum4.height = 24;
+	MiniMum4.speed = 4;
+	MiniMum4.speed2 = 2;
+	MiniMum4.dirct = 0;
+	MiniMum4.hp = 4;
+	MiniMum4.hptimer = 0;
+	MiniMum4.respawn = -1;
+	MiniMum4.dir = "W";
+	MiniMum4.LR = "";
+	MiniMum4.rp = -1;
+	MiniMum4.pts = 1;
+	MiniMum4.onScreen = 0;
+	MiniMum4.spawned = false;
+	MiniMum4.spawnIndex = 1;
+	MiniMum4.movement = false;
 	//------------------- Tier 3 Enemy Attacks ------------------//
 	sAir.timeLeft = 0;
 	sAir.speed = 8;
@@ -2462,6 +3192,48 @@ function reset(){
 		treeFallExplosions[F].frame = 0;
 		treeFallExplosions[F].onScreen = 0;
 	}
+	LaserUpAttack.width = 5;
+	LaserUpAttack.height = 5;
+	LaserUpAttack.frame = 1;
+	LaserUpAttack.onScreen = 0;
+	LaserUpAttack.LR = "Right";
+	LaserFdAttack.width = 5;
+	LaserFdAttack.height = 5;
+	LaserFdAttack.frame = 1;
+	LaserFdAttack.onScreen = 0;
+	LaserFdAttack.LR = "Right";
+	LaserDAttack.width = 5;
+	LaserDAttack.height = 5;
+	LaserDAttack.frame = 1;
+	LaserDAttack.onScreen = 0;
+	LaserDAttack.LR = "Right";
+	
+	for(A in AnubisProjectileList){
+		AnubisProjectileList[A].type = "Proj";
+		AnubisProjectileList[A].x = 9000;
+		AnubisProjectileList[A].onTree = 0;
+		AnubisProjectileList[A].y = -400;
+		AnubisProjectileList[A].width = 16;
+		AnubisProjectileList[A].height = 16;
+		AnubisProjectileList[A].speed = 6;
+		AnubisProjectileList[A].speed2 = 1;
+		AnubisProjectileList[A].dirct = 0;
+		AnubisProjectileList[A].dir = "A";
+		AnubisProjectileList[A].slope = 1;
+		AnubisProjectileList[A].closestSlope = 1;
+		AnubisProjectileList[A].slopeIndex = 11;
+		AnubisProjectileList[A].respawn = -1;
+		AnubisProjectileList[A].rp = -1;
+		AnubisProjectileList[A].onScreen = 0;
+		AnubisProjectileList[A].found = true;
+		AnubisProjectileList[A].index = 1;
+		AnubisProjectileList[A].pts = 0;
+		AnubisProjectileList[A].frame = 0;
+		AnubisProjectileList[A].dirct = 0;
+		AnubisProjectileList[A].dirSwitch = false;
+		AnubisProjectileList[A].destDir = "";
+	}
+	
 	//end
 	if(vol != 1){
 		for(S in AllSounds){
@@ -2469,6 +3241,8 @@ function reset(){
 			AllSounds[S].pause();
 			AllSounds[S].volume = 0.8;
 		}
+		grit.volume = 1;
+		Plucky.volume = 0.3;
 	}
 	fastbeepsLow.play();
 }

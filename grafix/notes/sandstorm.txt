@@ -1,0 +1,11 @@
+EVERYTHING ON 2f
+
+Both front.dark and front.light should do the same movements, they line up exactly. Light should draw on top. Front ontop of speck.
+
+SPAWN-
+FRONT: 22 frames after start move from 12 to 0 on y + go from 0 to 80 transparency over 36 frames.
+
+SPECKS: at start of storm start at 0 transparency then go to 100% at frame 29
+
+DESPAWN-
+BOTH: Take transparency down to 0 over 29 frames.

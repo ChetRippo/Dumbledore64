@@ -135,7 +135,7 @@ var dark17 = {
 	active: false,
 	timeLeft: -1
 }
-var darkSpikes = {1: dark, 2: dark12, 3: dark13, 4: dark14, 5: dark15, 6: dark16, 7: dark17};
+var darkSpikes = {1: dark, 2: dark12, 3: dark13, 4: dark14, 5: dark15, 6: dark16, 7: dark17, 8: AngelTrap1, 9: AngelTrap2, 10: AngelTrap3, 11: AngelTrap4};
 // DeathBound: Creates a bunch of spikes around you that go up and disappear.
 var dark2 = {
 	x: -100,
@@ -692,45 +692,45 @@ function spikeDraw(S){
 		}
 		if(S.dark1){
 			if(S.active){
-				ctx.drawImage(darkTrapActive, S.x-S.width/2, S.y-S.height/2);
+				ctx.drawImage(darkTrapActive[Math.ceil((S.timeLeft/30)*4)], S.x-S.width*0.5, S.y-S.height*0.5 - 16);
 			}
 			else{
-				ctx.drawImage(darkTrap, S.x-S.width/2, S.y-S.height/2);
+				ctx.drawImage(darkTrap, S.x-S.width*0.5, S.y-S.height*0.5 - 16);
 			}
 		}
 		else if(S.arrIndex){
 			if(S.frame < 4){
-				ctx.drawImage(dark2img[1], S.x-S.width/2, S.y-S.height/2);
+				ctx.drawImage(dark2img[1], S.x-S.width*0.5, S.y-S.height*0.5);
 			}
 			else if(S.frame < 7){
-				ctx.drawImage(dark2img[2], S.x-S.width/2, S.y-S.height/2);
+				ctx.drawImage(dark2img[2], S.x-S.width*0.5, S.y-S.height*0.5);
 			}
 			else if(S.frame < 10){
-				ctx.drawImage(dark2img[3], S.x-S.width/2, S.y-S.height/2);
+				ctx.drawImage(dark2img[3], S.x-S.width*0.5, S.y-S.height*0.5);
 			}
 			else if(S.frame < 13){
-				ctx.drawImage(dark2img[4], S.x-S.width/2, S.y-S.height/2);
+				ctx.drawImage(dark2img[4], S.x-S.width*0.5, S.y-S.height*0.5);
 			}
 			else{
-				ctx.drawImage(dark2img[5], S.x-S.width/2, S.y-S.height/2);
+				ctx.drawImage(dark2img[5], S.x-S.width*0.5, S.y-S.height*0.5);
 			}
 		}
 		else if(!S.ice && !S.light){
-			ctx.drawImage(darkfireimg[Math.floor(S.index/2)], S.x-S.width/2, S.y-S.height/2);
+			ctx.drawImage(darkfireimg[Math.floor(S.index*0.5)], S.x-S.width*0.5, S.y-S.height*0.5);
 			S.index++;
-			if(S.index > 5){
+			if(S.index > 7){
 				S.index = 0;
 			}
 		}
 		else if(S.ice){
-			ctx.drawImage(darkiceimg[Math.floor(S.index/2)], S.x-S.width/2, S.y-S.height/2);
+			ctx.drawImage(darkiceimg[Math.floor(S.index*0.5)], S.x-S.width*0.5, S.y-S.height*0.5);
 			S.index++;
 			if(S.index > 10){
 				S.index = 0;
 			}
 		}
 		else if(S.light){
-			ctx.drawImage(darklightningimg[Math.floor(S.index/2)], S.x-S.width/2, S.y-S.height/2);
+			ctx.drawImage(darklightningimg[Math.floor(S.index*0.5)], S.x-S.width*0.5, S.y-S.height*0.5);
 			S.index++;
 			if(S.index > 5){
 				S.index = 0;

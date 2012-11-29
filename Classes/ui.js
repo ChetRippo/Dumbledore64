@@ -7,6 +7,12 @@ function UI(){
 		ctx.globalAlpha = 1;
 	}
 	ctx.drawImage(eleSlots, 0, 0);
+	if(spell == "Earth Heal" || spell == "Lightning" || spell == "Synthesis" || spell == "Fire+Heal" ||
+		spell == "Ice+Heal" || spell == "Chain Lightning" || spell == "Lightning+Heal" || spell == "Ragnarok" ||
+		spell == "Maelstrom" || spell == "Dash+Heal" || spell == "Bubble+Heal" || spell == "Deathbound" || spell == "Cloak Charge" ||
+		spell == "Shadow Cloak"){
+		ctx.drawImage(CastRings, 0, 0);
+	}
 	//Calculate spell
 	if(spell2 == "N/A"){
 		if(spell1 == "Fire"){
@@ -32,6 +38,9 @@ function UI(){
 		}
 		else if(spell1 == "Dark"){
 			spell = "Traps";
+		}
+		else if(spell1 == "Light"){
+			spell = "Angel";
 		}
 		else if(spell1 == "N/A"){
 			spell = "N/A";
@@ -61,6 +70,9 @@ function UI(){
 		}
 		else if(spell2 == "Dark"){
 			spell = "Traps";
+		}
+		else if(spell2 == "Light"){
+			spell = "Angel";
 		}
 	}
 	else if(spell1 == "Fire" && spell2 == "Fire"){
@@ -176,6 +188,33 @@ function UI(){
 			spell = "Shadow Cloak";
 		}
 	}
+	else if(spell1 == "Light" && spell2 == "Light"){
+		spell = "Army of God";
+	}
+	else if((spell1 == "Light" && spell2 == "Fire") || (spell2 == "Light" && spell1 == "Fire")){
+		spell = "Fire Elemental";
+	}
+	else if((spell1 == "Light" && spell2 == "Ice") || (spell2 == "Light" && spell1 == "Ice")){
+		spell = "Ice Elemental";
+	}
+	else if((spell1 == "Light" && spell2 == "Earth") || (spell2 == "Light" && spell1 == "Earth")){
+		spell = "Sunlight";
+	}
+	else if((spell1 == "Light" && spell2 == "Lightning") || (spell2 == "Light" && spell1 == "Lightning")){
+		spell = "Spark Elemental";
+	}
+	else if((spell1 == "Light" && spell2 == "Air") || (spell2 == "Light" && spell1 == "Air")){
+		spell = "Air Elemental";
+	}
+	else if((spell1 == "Light" && spell2 == "Mystic") || (spell2 == "Light" && spell1 == "Mystic")){
+		spell = "Light Beam";
+	}
+	else if((spell1 == "Light" && spell2 == "Water") || (spell2 == "Light" && spell1 == "Water")){
+		spell = "Water Elemental";
+	}
+	else if((spell1 == "Light" && spell2 == "Dark") || (spell2 == "Light" && spell1 == "Dark")){
+		spell = "Fallen Angel";
+	}
 	if(spell1 == "Fire"){
 		spell1pic = FireSlot;
 	}
@@ -199,7 +238,10 @@ function UI(){
 	}
 	else if(spell1 == "Dark"){
 		spell1pic = DarkSlot;
-	}		
+	}
+	else if(spell1 == "Light"){
+		spell1pic = LightSlot;
+	}	
 	else{
 		spell1pic = "N/A";
 	}
@@ -226,6 +268,9 @@ function UI(){
 	}
 	else if(spell2 == "Dark"){
 		spell2pic = DarkSlot;
+	}
+	else if(spell2 == "Light"){
+		spell2pic = LightSlot;
 	}
 	else{
 		spell2pic = "N/A";
@@ -270,7 +315,7 @@ function UI(){
 		var ender = 422;
 		ctx.fillStyle = emptyColor;
 		ctx.fillRect(138, 518, ender, 22);
-		if(fireice.cd <= 0){
+		if(fireice.cd <= 0 || fireice2.cd <= 0){
 			ctx.fillStyle = fullColor;
 			ctx.fillRect(138, 518, ender, 22);
 		}
@@ -698,6 +743,15 @@ function UI(){
 			ctx.fillStyle = chargeColor;
 			ctx.fillRect(138, 518, (ender*(waterlightning.cdTop-waterlightning.cd))/waterlightning.cdTop, 22);
 		}
+		if(waterlightning.inventory > 0){
+			ctx.drawImage(TrapHUDs[1], 0, 0);
+			if(waterlightning.inventory > 1){
+				ctx.drawImage(TrapHUDs[2], 0, 0);
+				if(waterlightning.inventory > 2){
+					ctx.drawImage(TrapHUDs[3], 0, 0);
+				}
+			}
+		}
 		ctx.drawImage(lightningwaterbar, 0, 0);
 	}
 	else if(spell == "Bubble Blast"){
@@ -941,6 +995,146 @@ function UI(){
 			}
 			ctx.drawImage(waterdarkbar2, 0, 0);
 		}
+	}
+	else if(spell == "Angel"){
+		var ender = 142;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(light.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(light.cdTop-light.cd))/light.cdTop, 22);
+		}
+		ctx.drawImage(lightbar, 0, 0);
+	}
+	else if(spell == "Army of God"){
+		var ender = 322;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(light2.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(light2.cdTop-light2.cd))/light2.cdTop, 22);
+		}
+		ctx.drawImage(light2bar, 0, 0);
+	}
+	else if(spell == "Fire Elemental"){
+		var ender = 406;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(lightfire.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(lightfire.cdTop-lightfire.cd))/lightfire.cdTop, 22);
+		}
+		ctx.drawImage(firelightbar, 0, 0);
+	}
+	else if(spell == "Ice Elemental"){
+		var ender = 378;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(lightice.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(lightice.cdTop-lightice.cd))/lightice.cdTop, 22);
+		}
+		ctx.drawImage(icelightbar, 0, 0);
+	}
+	else if(spell == "Sunlight"){
+		var ender = 230;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(lightearth.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(lightearth.cdTop-lightearth.cd))/lightearth.cdTop, 22);
+		}
+		ctx.drawImage(earthlightbar, 0, 0);
+	}
+	else if(spell == "Spark Elemental"){
+		var ender = 438;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(lightlightning.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(lightlightning.cdTop-lightlightning.cd))/lightlightning.cdTop, 22);
+		}
+		ctx.drawImage(lightninglightbar, 0, 0);
+	}
+	else if(spell == "Air Elemental"){
+		var ender = 378;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(lightair.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(lightair.cdTop-lightair.cd))/lightair.cdTop, 22);
+		}
+		ctx.drawImage(airlightbar, 0, 0);
+	}
+	else if(spell == "Light Beam"){
+		var ender = 290;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(mystic.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(mystic.cdTop-mystic.cd))/mystic.cdTop, 22);
+		}
+		ctx.drawImage(mysticlightbar, 0, 0);
+	}
+	else if(spell == "Water Elemental"){
+		var ender = 442;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(lightwater.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(lightwater.cdTop-lightwater.cd))/lightwater.cdTop, 22);
+		}
+		ctx.drawImage(waterlightbar, 0, 0);
+	}
+	else if(spell == "Fallen Angel"){
+		var ender = 346;
+		ctx.fillStyle = emptyColor;
+		ctx.fillRect(138, 518, ender, 22);
+		if(lightdark.cd <= 0){
+			ctx.fillStyle = fullColor;
+			ctx.fillRect(138, 518, ender, 22);
+		}
+		else{
+			ctx.fillStyle = chargeColor;
+			ctx.fillRect(138, 518, (ender*(lightdark.cdTop-lightdark.cd))/lightdark.cdTop, 22);
+		}
+		ctx.drawImage(darklightbar, 0, 0);
 	}
 	else{
 		var ender = 290;
@@ -1280,31 +1474,141 @@ function UI(){
 					numz[P] = "N/A";
 				}
 			}
+			else if(prevSpellRC[P] == "Angel"){
+				numz[P] = {1: light, 2: LightColor, 3: LightColor};
+				if(light.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
+			else if(prevSpellRC[P] == "Army of God"){
+				numz[P] = {1: light2, 2: LightColor, 3: LightColor};
+				if(light2.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
+			else if(prevSpellRC[P] == "Fire Elemental"){
+				numz[P] = {1: lightfire, 2: LightColor, 3: FireColor};
+				if(lightfire.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
+			else if(prevSpellRC[P] == "Ice Elemental"){
+				numz[P] = {1: lightice, 2: LightColor, 3: IceColor};
+				if(lightice.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
+			else if(prevSpellRC[P] == "Sunlight"){
+				numz[P] = {1: lightearth, 2: LightColor, 3: EarthColor};
+				if(lightearth.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
+			else if(prevSpellRC[P] == "Spark Elemental"){
+				numz[P] = {1: lightlightning, 2: LightColor, 3: LightningColor};
+				if(lightlightning.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
+			else if(prevSpellRC[P] == "Air Elemental"){
+				numz[P] = {1: lightair, 2: LightColor, 3: AirColor};
+				if(lightair.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
+			else if(prevSpellRC[P] == "Light Beam"){
+				numz[P] = {1: mystic, 2: MysticColor, 3: LightColor};
+				if(mystic.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
+			else if(prevSpellRC[P] == "Water Elemental"){
+				numz[P] = {1: lightwater, 2: LightColor, 3: WaterColor};
+				if(lightwater.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
+			else if(prevSpellRC[P] == "Fallen Angel"){
+				numz[P] = {1: lightdark, 2: LightColor, 3: DarkColor};
+				if(lightdark.cd == 0){
+					prevSpellRC[P] = "N/A";
+					numz[P] = "N/A";
+				}
+			}
 		}
 	}
 	if(prevSpellRC[1] != "N/A"){
 		spellRCnums++;
-		ctx.drawImage(CoolDown12, 0, 0);
-		if(prevSpellRC[1] == "Max Bubble Ring"){
-			ctx.fillStyle = WaterColor;
-			ctx.fillRect(240, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+		if(spellRCnums == 1){
+			ctx.drawImage(CoolDown12, 0, 0);
+			if(prevSpellRC[1] == "Max Bubble Ring"){
+				ctx.fillStyle = WaterColor;
+				ctx.fillRect(240, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+			}
+			else if(prevSpellRC[1] == "Frozen Ring"){
+				ctx.fillStyle = IceColor;
+				ctx.fillRect(240, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillStyle = WaterColor;
+				ctx.fillRect(240, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+			}
+			else{
+				ctx.fillStyle = numz[1][2];
+				ctx.fillRect(240, 548, 91*(numz[1][1].cdTop-numz[1][1].cd)/numz[1][1].cdTop, 4);
+				ctx.fillStyle = numz[1][3];
+				ctx.fillRect(240, 552, 91*(numz[1][1].cdTop-numz[1][1].cd)/numz[1][1].cdTop, 4);
+			}
 		}
-		else if(prevSpellRC[1] == "Frozen Ring"){
-			ctx.fillStyle = IceColor;
-			ctx.fillRect(240, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
-			ctx.fillStyle = WaterColor;
-			ctx.fillRect(240, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+		else if(spellRCnums == 2){
+			ctx.drawImage(CoolDown22, 0, 0);
+			if(prevSpellRC[1] == "Max Bubble Ring"){
+				ctx.fillStyle = WaterColor;
+				ctx.fillRect(356, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+			}
+			else if(prevSpellRC[1] == "Frozen Ring"){
+				ctx.fillStyle = IceColor;
+				ctx.fillRect(356, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillStyle = WaterColor;
+				ctx.fillRect(356, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+			}
+			else{
+				ctx.fillStyle = numz[1][2];
+				ctx.fillRect(356, 548, 91*(numz[1][1].cdTop-numz[1][1].cd)/numz[1][1].cdTop, 4);
+				ctx.fillStyle = numz[1][3];
+				ctx.fillRect(356, 552, 91*(numz[1][1].cdTop-numz[1][1].cd)/numz[1][1].cdTop, 4);
+			}
 		}
 		else{
-			ctx.fillStyle = numz[1][2];
-			ctx.fillRect(240, 548, 91*(numz[1][1].cdTop-numz[1][1].cd)/numz[1][1].cdTop, 4);
-			ctx.fillStyle = numz[1][3];
-			ctx.fillRect(240, 552, 91*(numz[1][1].cdTop-numz[1][1].cd)/numz[1][1].cdTop, 4);
+			ctx.drawImage(CoolDown32, 0, 0);
+			if(prevSpellRC[1] == "Max Bubble Ring"){
+				ctx.fillStyle = WaterColor;
+				ctx.fillRect(472, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+			}
+			else if(prevSpellRC[1] == "Frozen Ring"){
+				ctx.fillStyle = IceColor;
+				ctx.fillRect(472, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillStyle = WaterColor;
+				ctx.fillRect(472, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+			}
+			else{
+				ctx.fillStyle = numz[1][2];
+				ctx.fillRect(472, 548, 91*(numz[1][1].cdTop-numz[1][1].cd)/numz[1][1].cdTop, 4);
+				ctx.fillStyle = numz[1][3];
+				ctx.fillRect(472, 552, 91*(numz[1][1].cdTop-numz[1][1].cd)/numz[1][1].cdTop, 4);
+			}
 		}
 	}
 	if(prevSpellRC[2] != "N/A"){
 		spellRCnums++;
-		if(spellRCnums == 0){
+		if(spellRCnums == 1){
 			ctx.drawImage(CoolDown12, 0, 0);
 			if(prevSpellRC[2] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1323,7 +1627,7 @@ function UI(){
 				ctx.fillRect(240, 552, 91*(numz[2][1].cdTop-numz[2][1].cd)/numz[2][1].cdTop, 4);
 			}
 		}
-		else{
+		else if(spellRCnums == 2){
 			ctx.drawImage(CoolDown22, 0, 0);
 			if(prevSpellRC[2] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1342,10 +1646,29 @@ function UI(){
 				ctx.fillRect(356, 552, 91*(numz[2][1].cdTop-numz[2][1].cd)/numz[2][1].cdTop, 4);
 			}
 		}
+		else{
+			ctx.drawImage(CoolDown32, 0, 0);
+			if(prevSpellRC[2] == "Max Bubble Ring"){
+				ctx.fillStyle = WaterColor;
+				ctx.fillRect(472, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+			}
+			else if(prevSpellRC[2] == "Frozen Ring"){
+				ctx.fillStyle = IceColor;
+				ctx.fillRect(472, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillStyle = WaterColor;
+				ctx.fillRect(472, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+			}
+			else{
+				ctx.fillStyle = numz[2][2];
+				ctx.fillRect(472, 548, 91*(numz[2][1].cdTop-numz[2][1].cd)/numz[2][1].cdTop, 4);
+				ctx.fillStyle = numz[2][3];
+				ctx.fillRect(472, 552, 91*(numz[2][1].cdTop-numz[2][1].cd)/numz[2][1].cdTop, 4);
+			}
+		}
 	}
 	if(prevSpellRC[3] != "N/A"){
 		spellRCnums++;
-		if(spellRCnums == 0){
+		if(spellRCnums == 1){
 			ctx.drawImage(CoolDown12, 0, 0);
 			if(prevSpellRC[3] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1364,7 +1687,7 @@ function UI(){
 				ctx.fillRect(240, 552, 91*(numz[3][1].cdTop-numz[3][1].cd)/numz[3][1].cdTop, 4);
 			}
 		}
-		else if(spellRCnums == 1){
+		else if(spellRCnums == 2){
 			ctx.drawImage(CoolDown22, 0, 0);
 			if(prevSpellRC[3] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1387,25 +1710,25 @@ function UI(){
 			ctx.drawImage(CoolDown32, 0, 0);
 			if(prevSpellRC[3] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+				ctx.fillRect(472, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
 			}
 			else if(prevSpellRC[3] == "Frozen Ring"){
 				ctx.fillStyle = IceColor;
-				ctx.fillRect(474, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 			}
 			else{
 				ctx.fillStyle = numz[3][2];
-				ctx.fillRect(474, 548, 91*(numz[3][1].cdTop-numz[3][1].cd)/numz[3][1].cdTop, 4);
+				ctx.fillRect(472, 548, 91*(numz[3][1].cdTop-numz[3][1].cd)/numz[3][1].cdTop, 4);
 				ctx.fillStyle = numz[3][3];
-				ctx.fillRect(474, 552, 91*(numz[3][1].cdTop-numz[3][1].cd)/numz[3][1].cdTop, 4);
+				ctx.fillRect(472, 552, 91*(numz[3][1].cdTop-numz[3][1].cd)/numz[3][1].cdTop, 4);
 			}
 		}
 	}
 	if(prevSpellRC[4] != "N/A" && spellRCnums < 3){
 		spellRCnums++;
-		if(spellRCnums == 0){
+		if(spellRCnums == 1){
 			ctx.drawImage(CoolDown12, 0, 0);
 			if(prevSpellRC[4] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1424,7 +1747,7 @@ function UI(){
 				ctx.fillRect(240, 552, 91*(numz[4][1].cdTop-numz[4][1].cd)/numz[4][1].cdTop, 4);
 			}
 		}
-		else if(spellRCnums == 1){
+		else if(spellRCnums == 2){
 			ctx.drawImage(CoolDown22, 0, 0);
 			if(prevSpellRC[4] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1447,25 +1770,25 @@ function UI(){
 			ctx.drawImage(CoolDown32, 0, 0);
 			if(prevSpellRC[4] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+				ctx.fillRect(472, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
 			}
 			else if(prevSpellRC[4] == "Frozen Ring"){
 				ctx.fillStyle = IceColor;
-				ctx.fillRect(474, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 			}
 			else{
 				ctx.fillStyle = numz[4][2];
-				ctx.fillRect(474, 548, 91*(numz[4][1].cdTop-numz[4][1].cd)/numz[4][1].cdTop, 4);
+				ctx.fillRect(472, 548, 91*(numz[4][1].cdTop-numz[4][1].cd)/numz[4][1].cdTop, 4);
 				ctx.fillStyle = numz[4][3];
-				ctx.fillRect(474, 552, 91*(numz[4][1].cdTop-numz[4][1].cd)/numz[4][1].cdTop, 4);
+				ctx.fillRect(472, 552, 91*(numz[4][1].cdTop-numz[4][1].cd)/numz[4][1].cdTop, 4);
 			}
 		}
 	}
 	if(prevSpellRC[5] != "N/A" && spellRCnums < 3){
 		spellRCnums++;
-		if(spellRCnums == 0){
+		if(spellRCnums == 1){
 			ctx.drawImage(CoolDown12, 0, 0);
 			if(prevSpellRC[5] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1484,7 +1807,7 @@ function UI(){
 				ctx.fillRect(240, 552, 91*(numz[5][1].cdTop-numz[5][1].cd)/numz[5][1].cdTop, 4);
 			}
 		}
-		else if(spellRCnums == 1){
+		else if(spellRCnums == 2){
 			ctx.drawImage(CoolDown22, 0, 0);
 			if(prevSpellRC[5] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1507,25 +1830,25 @@ function UI(){
 			ctx.drawImage(CoolDown32, 0, 0);
 			if(prevSpellRC[5] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+				ctx.fillRect(472, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
 			}
 			else if(prevSpellRC[5] == "Frozen Ring"){
 				ctx.fillStyle = IceColor;
-				ctx.fillRect(474, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 			}
 			else{
 				ctx.fillStyle = numz[5][2];
-				ctx.fillRect(474, 548, 91*(numz[5][1].cdTop-numz[5][1].cd)/numz[5][1].cdTop, 4);
+				ctx.fillRect(472, 548, 91*(numz[5][1].cdTop-numz[5][1].cd)/numz[5][1].cdTop, 4);
 				ctx.fillStyle = numz[5][3];
-				ctx.fillRect(474, 552, 91*(numz[5][1].cdTop-numz[5][1].cd)/numz[5][1].cdTop, 4);
+				ctx.fillRect(472, 552, 91*(numz[5][1].cdTop-numz[5][1].cd)/numz[5][1].cdTop, 4);
 			}
 		}
 	}
 	if(prevSpellRC[6] != "N/A" && spellRCnums < 3){
 		spellRCnums++;
-		if(spellRCnums == 0){
+		if(spellRCnums == 1){
 			ctx.drawImage(CoolDown12, 0, 0);
 			if(prevSpellRC[6] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1544,7 +1867,7 @@ function UI(){
 				ctx.fillRect(240, 552, 91*(numz[6][1].cdTop-numz[6][1].cd)/numz[6][1].cdTop, 4);
 			}
 		}
-		else if(spellRCnums == 1){
+		else if(spellRCnums == 2){
 			ctx.drawImage(CoolDown22, 0, 0);
 			if(prevSpellRC[6] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1567,25 +1890,25 @@ function UI(){
 			ctx.drawImage(CoolDown32, 0, 0);
 			if(prevSpellRC[6] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+				ctx.fillRect(472, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
 			}
 			else if(prevSpellRC[6] == "Frozen Ring"){
 				ctx.fillStyle = IceColor;
-				ctx.fillRect(474, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 			}
 			else{
 				ctx.fillStyle = numz[6][2];
-				ctx.fillRect(474, 548, 91*(numz[6][1].cdTop-numz[6][1].cd)/numz[6][1].cdTop, 4);
+				ctx.fillRect(472, 548, 91*(numz[6][1].cdTop-numz[6][1].cd)/numz[6][1].cdTop, 4);
 				ctx.fillStyle = numz[6][3];
-				ctx.fillRect(474, 552, 91*(numz[6][1].cdTop-numz[6][1].cd)/numz[6][1].cdTop, 4);
+				ctx.fillRect(472, 552, 91*(numz[6][1].cdTop-numz[6][1].cd)/numz[6][1].cdTop, 4);
 			}
 		}
 	}
 	if(prevSpellRC[7] != "N/A" && spellRCnums < 3){
 		spellRCnums++;
-		if(spellRCnums == 0){
+		if(spellRCnums == 1){
 			ctx.drawImage(CoolDown12, 0, 0);
 			if(prevSpellRC[7] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1604,7 +1927,7 @@ function UI(){
 				ctx.fillRect(240, 552, 91*(numz[7][1].cdTop-numz[7][1].cd)/numz[7][1].cdTop, 4);
 			}
 		}
-		else if(spellRCnums == 1){
+		else if(spellRCnums == 2){
 			ctx.drawImage(CoolDown22, 0, 0);
 			if(prevSpellRC[7] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1627,25 +1950,25 @@ function UI(){
 			ctx.drawImage(CoolDown32, 0, 0);
 			if(prevSpellRC[7] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+				ctx.fillRect(472, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
 			}
 			else if(prevSpellRC[7] == "Frozen Ring"){
 				ctx.fillStyle = IceColor;
-				ctx.fillRect(474, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 			}
 			else{
 				ctx.fillStyle = numz[7][2];
-				ctx.fillRect(474, 548, 91*(numz[7][1].cdTop-numz[7][1].cd)/numz[7][1].cdTop, 4);
+				ctx.fillRect(472, 548, 91*(numz[7][1].cdTop-numz[7][1].cd)/numz[7][1].cdTop, 4);
 				ctx.fillStyle = numz[7][3];
-				ctx.fillRect(474, 552, 91*(numz[7][1].cdTop-numz[7][1].cd)/numz[7][1].cdTop, 4);
+				ctx.fillRect(472, 552, 91*(numz[7][1].cdTop-numz[7][1].cd)/numz[7][1].cdTop, 4);
 			}
 		}
 	}
 	if(prevSpellRC[8] != "N/A" && spellRCnums < 3){
 		spellRCnums++;
-		if(spellRCnums == 0){
+		if(spellRCnums == 1){
 			ctx.drawImage(CoolDown12, 0, 0);
 			if(prevSpellRC[8] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1664,7 +1987,7 @@ function UI(){
 				ctx.fillRect(240, 552, 91*(numz[7][1].cdTop-numz[7][1].cd)/numz[7][1].cdTop, 4);
 			}
 		}
-		else if(spellRCnums == 1){
+		else if(spellRCnums == 2){
 			ctx.drawImage(CoolDown22, 0, 0);
 			if(prevSpellRC[8] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
@@ -1687,34 +2010,21 @@ function UI(){
 			ctx.drawImage(CoolDown32, 0, 0);
 			if(prevSpellRC[8] == "Max Bubble Ring"){
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
+				ctx.fillRect(472, 548, 91*(water.cd2Top-water.cd2)/water.cd2Top, 8);
 			}
 			else if(prevSpellRC[8] == "Frozen Ring"){
 				ctx.fillStyle = IceColor;
-				ctx.fillRect(474, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 548, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 				ctx.fillStyle = WaterColor;
-				ctx.fillRect(474, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
+				ctx.fillRect(472, 552, 91*(waterfire.cd2Top-waterfire.cd2)/waterfire.cd2Top, 4);
 			}
 			else{
 				ctx.fillStyle = numz[8][2];
-				ctx.fillRect(474, 548, 91*(numz[8][1].cdTop-numz[8][1].cd)/numz[8][1].cdTop, 4);
+				ctx.fillRect(472, 548, 91*(numz[8][1].cdTop-numz[8][1].cd)/numz[8][1].cdTop, 4);
 				ctx.fillStyle = numz[8][3];
-				ctx.fillRect(474, 552, 91*(numz[8][1].cdTop-numz[8][1].cd)/numz[8][1].cdTop, 4);
+				ctx.fillRect(472, 552, 91*(numz[8][1].cdTop-numz[8][1].cd)/numz[8][1].cdTop, 4);
 			}
 		}
 	}
 	ctx.globalAlpha = Alpha;
-	if(dispCntrls == 2){
-		if(darkearth.blackTimer > 0){
-			ctx.fillStyle = "white";
-		}
-		else{
-			ctx.fillStyle = "black";
-		}
-		ctx.font = "16pt Arial";
-		ctx.fillText("Q: Drop Spell 1", 576, 96);
-		ctx.fillText("E: Drop Spell 2", 576, 128);
-		ctx.fillText("Spacebar: Use spell", 576, 64);
-		ctx.fillText("P: Pause", 576, 160);
-	}
 }

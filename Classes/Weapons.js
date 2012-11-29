@@ -9,49 +9,42 @@ var bullet = {
 	width: 8,
 	height: 6,
 	dir: "A",
-	
-	// Spawn
+	splitTimer: 0,
+	// pick which dumblebeam to shoot
 	shoot: function(dir, h, w){	
-	if(!(this.x == -100) && !(this.y == -200) && cd == 0
-		&& !(bullet2.x == -100) && !(bullet2.y == -200)
-		&& !(bullet3.x == -100) && !(bullet3.y == -200)
-		&& !(bullet4.x == -100) && !(bullet4.y == -200)
-		&& !(bullet5.x == -100) && !(bullet5.y == -200)
-		&& !(bullet6.x == -100) && !(bullet6.y == -200)
-		&& !(bullet7.x == -100) && !(bullet7.y == -200)){
+	if(cd == 0 && (spell == "Conductive Beam" || (bullet81.x == -100 && bullet81.y == -200
+		&& bullet82.x == -100 && bullet82.y == -200))
+		&& bullet8.x == -100 && bullet8.y == -200){
 		bullet8.shoot(dir, h, w);
 	}
-	else if(!(this.x == -100) && !(this.y == -200) && cd == 0
-		&& !(bullet2.x == -100) && !(bullet2.y == -200)
-		&& !(bullet3.x == -100) && !(bullet3.y == -200)
-		&& !(bullet4.x == -100) && !(bullet4.y == -200)
-		&& !(bullet5.x == -100) && !(bullet5.y == -200)
-		&& !(bullet6.x == -100) && !(bullet6.y == -200)){
+	else if(cd == 0	&& (spell == "Conductive Beam" || (bullet71.x == -100 && bullet71.y == -200
+		&& bullet72.x == -100 && bullet72.y == -200))
+		&& bullet7.x == -100 && bullet7.y == -200){
 		bullet7.shoot(dir, h, w);
 	}
-	else if(!(this.x == -100) && !(this.y == -200) && cd == 0
-		&& !(bullet2.x == -100) && !(bullet2.y == -200)
-		&& !(bullet3.x == -100) && !(bullet3.y == -200)
-		&& !(bullet4.x == -100) && !(bullet4.y == -200)
-		&& !(bullet5.x == -100) && !(bullet5.y == -200)){
+	else if(cd == 0 && (spell == "Conductive Beam" || (bullet61.x == -100 && bullet61.y == -200
+		&& bullet62.x == -100 && bullet62.y == -200))
+		&& bullet6.x == -100 && bullet6.y == -200){
 		bullet6.shoot(dir, h, w);
 	}
-	else if(!(this.x == -100) && !(this.y == -200) && cd == 0
-		&& !(bullet2.x == -100) && !(bullet2.y == -200)
-		&& !(bullet3.x == -100) && !(bullet3.y == -200)
-		&& !(bullet4.x == -100) && !(bullet4.y == -200)){
+	else if(cd == 0 && (spell == "Conductive Beam" || (bullet51.x == -100 && bullet51.y == -200
+		&& bullet52.x == -100 && bullet52.y == -200))
+		&& bullet5.x == -100 && bullet5.y == -200){
 		bullet5.shoot(dir, h, w);
 	}
-	else if(!(this.x == -100) && !(this.y == -200) && cd == 0
-		&& !(bullet2.x == -100) && !(bullet2.y == -200)
-		&& !(bullet3.x == -100) && !(bullet3.y == -200)){
+	else if(cd == 0	&& (spell == "Conductive Beam" || (bullet41.x == -100 && bullet41.y == -200
+		&& bullet42.x == -100 && bullet42.y == -200))
+		&& bullet4.x == -100 && bullet4.y == -200){
 		bullet4.shoot(dir, h, w);
 	}
-	else if(!(this.x == -100) && !(this.y == -200) && cd == 0
-		&& !(bullet2.x == -100) && !(bullet2.y == -200)){
+	else if(cd == 0	&& (spell == "Conductive Beam" || (bullet31.x == -100 && bullet31.y == -200
+		&& bullet32.x == -100 && bullet32.y == -200))
+		&& bullet3.x == -100 && bullet3.y == -200){
 		bullet3.shoot(dir, h, w);
 	}
-	else if(!(this.x == -100) && !(this.y == -200) && cd == 0){
+	else if(cd == 0 && (spell == "Conductive Beam" || (bullet21.x == -100 && bullet21.y == -200
+		&& bullet22.x == -100 && bullet22.y == -200))
+		&& bullet2.x == -100 && bullet2.y == -200){
 		bullet2.shoot(dir, h, w);
 	}
 	else if(cd == 0){
@@ -99,7 +92,7 @@ var bullet2 = {
 	width: 8,
 	height: 6,
 	dir: "A",
-
+	splitTimer: 0,
 	// Spawn
 	shoot: function(dir, h, w){
 		if(cd == 0){
@@ -147,6 +140,7 @@ var bullet3 = {
 	width: 8,
 	height: 6,
 	dir: "A",
+	splitTimer: 0,
 	shoot: function(dir, h, w){
 		if(cd == 0){
 			Beam.currentTime=0;
@@ -193,7 +187,7 @@ var bullet4 = {
 	width: 8,
 	height: 6,
 	dir: "A",
-
+	splitTimer: 0,
 	// Spawn
 	shoot: function(dir, h, w){
 	if(cd == 0){
@@ -241,7 +235,7 @@ var bullet5 = {
 	width: 8,
 	height: 6,
 	dir: "A",
-
+	splitTimer: 0,
 	// Spawn
 	shoot: function(dir, h, w){
 	if(cd == 0){
@@ -289,7 +283,7 @@ var bullet6 = {
 	width: 8,
 	height: 6,
 	dir: "A",
-
+	splitTimer: 0,
 	// Spawn
 	shoot: function(dir, h, w){
 	if(cd == 0){
@@ -337,7 +331,7 @@ var bullet7 = {
 	width: 8,
 	height: 6,
 	dir: "A",
-
+	splitTimer: 0,
 	// Spawn
 	shoot: function(dir, h, w){
 	if(cd == 0){
@@ -385,7 +379,7 @@ var bullet8 = {
 	width: 8,
 	height: 6,
 	dir: "A",
-
+	splitTimer: 0,
 	// Spawn
 	shoot: function(dir, h, w){
 	if(cd == 0){
@@ -430,7 +424,8 @@ var bullet11 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet12 = {
 	x: -100,
@@ -439,7 +434,8 @@ var bullet12 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet21 = {
 	x: -100,
@@ -448,7 +444,8 @@ var bullet21 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet22 = {
 	x: -100,
@@ -457,7 +454,8 @@ var bullet22 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet31 = {
 	x: -100,
@@ -466,7 +464,8 @@ var bullet31 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet32 = {
 	x: -100,
@@ -475,7 +474,8 @@ var bullet32 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet41 = {
 	x: -100,
@@ -484,7 +484,8 @@ var bullet41 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet42 = {
 	x: -100,
@@ -493,7 +494,8 @@ var bullet42 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet51 = {
 	x: -100,
@@ -502,7 +504,8 @@ var bullet51 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet52 = {
 	x: -100,
@@ -511,7 +514,8 @@ var bullet52 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet61 = {
 	x: -100,
@@ -520,7 +524,8 @@ var bullet61 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet62 = {
 	x: -100,
@@ -529,7 +534,8 @@ var bullet62 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet71 = {
 	x: -100,
@@ -538,7 +544,8 @@ var bullet71 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet72 = {
 	x: -100,
@@ -547,7 +554,8 @@ var bullet72 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet81 = {
 	x: -100,
@@ -556,7 +564,8 @@ var bullet81 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
 var bullet82 = {
 	x: -100,
@@ -565,72 +574,151 @@ var bullet82 = {
 	speed: 16,
 	width: 16,
 	height: 16,
-	dir: "A"
+	dir: "A",
+	splitTimer: 0
 };
+//used in conductive shots for cloning. also in mystic shots
+var ConductiveShots = {1: bullet11, 2: bullet12, 3: bullet21, 4: bullet22, 5: bullet31, 6: bullet32, 7: bullet41, 8: bullet42, 9: bullet51, 10: bullet52, 11: bullet61, 12: bullet62,
+				13: bullet71, 14: bullet72, 15: bullet81, 16: bullet82};
 var Bullets = {1: bullet, 2: bullet2, 3: bullet3, 4: bullet4, 5: bullet5, 6: bullet6, 7: bullet7, 8: bullet8, 9: bullet11, 10: bullet12,
 				11: bullet21, 12: bullet22, 13: bullet31, 14: bullet32, 15: bullet41, 16: bullet42, 17: bullet51, 18: bullet52, 19: bullet61, 20: bullet62,
 				21: bullet71, 22: bullet72, 23: bullet81, 24: bullet82};
 var mystIndex = 1;
 function drawBullet(B){
 	if (B.timeLeft > 0){
-		if(spell == "Explosive Beam"){
-			ctx.fillStyle = "#CC0000";
-		}
-		else if(spell == "Ice Beam"){
-			ctx.fillStyle = "#66CCFF";
-		}
-		else if(spell == "Conductive Beam"){
-			ctx.fillStyle = "#FFFF00";
-		}
-		else if(spell == "Homing Beam"){
-			ctx.fillStyle = "#FF00FF";
-		}
-		else if(spell == "Piercing Beam"){
-			ctx.fillStyle = "black";
-		}
-		else if(spell != "Bubblebeam"){
-			ctx.fillStyle = "blue";
-		}
 		if(spell == "Bubblebeam"){
 			if(mystIndex < 5){
-				ctx.drawImage(MysticBubble, B.x-B.width/2, B.y-B.height/2);
+				ctx.drawImage(MysticBubble, B.x-B.width*0.5, B.y-B.height*0.5);
 				mystIndex++;
 			}
 			else{
-				ctx.drawImage(MysticBubble2, B.x-B.width/2, B.y-B.height/2);
+				ctx.drawImage(MysticBubble2, B.x-B.width*0.5, B.y-B.height*0.5);
 				mystIndex++;
 				if(mystIndex > 10){
 					mystIndex = 1;
 				}
 			}
 		}
-		else{
-			if(B.dir == "W" || B.dir == "A" || B.dir == "S" || B.dir == "D"){
-				ctx.fillRect(B.x - B.width / 2,
-				B.y - B.height / 2,
-				B.width, B.height);
+		else if(spell == "Explosive Beam"){
+			if(B.dir == "W" || B.dir == "S"){
+				ctx.drawImage(RDBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "A" || B.dir == "D"){
+				ctx.drawImage(RDBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
 			}
 			else if(B.dir == "WA" || B.dir == "SD"){
-					ctx.fillRect(B.x - B.width / 2,
-					B.y - B.height / 2,
-					B.width, B.height);
-				ctx.fillRect(B.x + B.width / 2, B.y + B.height / 2, B.width, B.height);
-				ctx.fillRect(B.x + B.width / 2 + B.width, B.y + B.height / 2 + B.height, B.width, B.height);
-				ctx.fillRect(B.x + B.width / 2 + B.width + B.width,
-					B.y + B.height / 2 + B.height + B.height, B.width, B.height);
-				ctx.fillRect(B.x + B.width / 2 + B.width + B.width + B.width,
-					B.y + B.height / 2 + B.height + B.height + B.height, B.width, B.height);
+					ctx.drawImage(RDBeamWA, B.x - 16, B.y - 16);
 			}
 			else if(B.dir == "WD" || B.dir == "AS"){
-					ctx.fillRect(B.x,
-					B.y - B.height / 2,
-					B.width, B.height);
-				ctx.fillRect(B.x + B.width, B.y - B.height - B.height / 2, B.width, B.height);
-				ctx.fillRect(B.x + B.width + B.width, B.y - B.height - B.height - B.height / 2, B.width, B.height);
-				ctx.fillRect(B.x + B.width + B.width + B.width,
-					B.y - B.height - B.height - B.height - B.height / 2, B.width, B.height);
-				ctx.fillRect(B.x + B.width + B.width + B.width + B.width,
-					B.y - B.height - B.height - B.height - B.height - B.height / 2, B.width, B.height);
+					ctx.drawImage(RDBeamWD, B.x - 16, B.y - 16);
+			}
+		}
+		else if(spell == "Ice Beam"){
+			if(B.dir == "W" || B.dir == "S"){
+				ctx.drawImage(TDBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "A" || B.dir == "D"){
+				ctx.drawImage(TDBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "WA" || B.dir == "SD"){
+					ctx.drawImage(TDBeamWA, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "WD" || B.dir == "AS"){
+					ctx.drawImage(TDBeamWD, B.x - 16, B.y - 16);
+			}
+		}
+		else if(spell == "Conductive Beam"){
+			if(B.dir == "W"){
+				ctx.drawImage(YDBeamW, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "S"){
+				ctx.drawImage(YDBeamS, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "A"){
+				ctx.drawImage(YDBeamA, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "D"){
+				ctx.drawImage(YDBeamD, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "WA"){
+				ctx.drawImage(YDBeamWA, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "SD"){
+				ctx.drawImage(YDBeamSD, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "AS"){
+				ctx.drawImage(YDBeamAS, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "WD"){
+				ctx.drawImage(YDBeamWD, B.x - 16, B.y - 16);
+			}
+		}
+		else if(spell == "Light Beam"){
+			if(B.dir == "W"){
+				ctx.drawImage(WDBeamW, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "S"){
+				ctx.drawImage(WDBeamS, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "A"){
+				ctx.drawImage(WDBeamA, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "D"){
+				ctx.drawImage(WDBeamD, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "WA"){
+				ctx.drawImage(WDBeamWA, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "SD"){
+				ctx.drawImage(WDBeamSD, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "AS"){
+				ctx.drawImage(WDBeamAS, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "WD"){
+				ctx.drawImage(WDBeamWD, B.x - 16, B.y - 16);
+			}
+		}
+		else if(spell == "Homing Beam" || spell == "Confusion Beam"){
+			if(B.dir == "W" || B.dir == "S"){
+				ctx.drawImage(PDBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "A" || B.dir == "D"){
+				ctx.drawImage(PDBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "WA" || B.dir == "SD"){
+				ctx.drawImage(PDBeamWA, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "WD" || B.dir == "AS"){
+				ctx.drawImage(PDBeamWD, B.x - 16, B.y - 16);
+			}
+		}
+		else if(spell == "Piercing Beam"){
+			if(B.dir == "W" || B.dir == "S"){
+				ctx.drawImage(BDBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "A" || B.dir == "D"){
+				ctx.drawImage(BDBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "WA" || B.dir == "SD"){
+				ctx.drawImage(BDBeamWA, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "WD" || B.dir == "AS"){
+				ctx.drawImage(BDBeamWD, B.x - 16, B.y - 16);
+			}
+		}
+		else{
+			if(B.dir == "W" || B.dir == "S"){
+				ctx.drawImage(DBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "A" || B.dir == "D"){
+				ctx.drawImage(DBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
+			}
+			else if(B.dir == "WA" || B.dir == "SD"){
+				ctx.drawImage(DBeamWA, B.x - 16, B.y - 16);
+			}
+			else if(B.dir == "WD" || B.dir == "AS"){
+				ctx.drawImage(DBeamWD, B.x - 16, B.y - 16);
 			}
 		}
 	}
@@ -641,14 +729,17 @@ function drawBullet(B){
 }
 // Increment
 function Bulletmove(B){
+	if(B.splitTimer > 0){
+		B.splitTimer-=1;
+	}
 	if(spell == "Homing Beam"){
 		//Fix snapping
 		B.x = Math.floor(B.x);
 		B.y = Math.floor(B.y);
-		if(Math.round(B.x/4) != B.x/4 && B.speed/4 == Math.round(B.speed/4)){
+		if(Math.round(B.x*0.25) != B.x*0.25 && B.speed*0.25 == Math.round(B.speed*0.25)){
 			B.x+=1;
 		}
-		if(Math.round(B.y/4) != B.y/4 && B.speed/4 == Math.round(B.speed/4)){
+		if(Math.round(B.y*0.25) != B.y*0.25 && B.speed*0.25 == Math.round(B.speed*0.25)){
 			B.y+=1;
 		}
 		var closest = "";
@@ -668,22 +759,22 @@ function Bulletmove(B){
 			B.dir = B.dir;
 		}
 		else{
-			if (xdifference <= closest.width/2  && xdifference >= 0 && ydifference > closest.height/2){
+			if (xdifference <= closest.width*0.5  && xdifference >= 0 && ydifference > closest.height*0.5){
 				B.dir = "S";
 				B.width = 4;
 				B.height = 32;
 			}
-			else if(xdifference <= closest.width/2  && xdifference >= 0 && ydifference < closest.height/2){
+			else if(xdifference <= closest.width*0.5  && xdifference >= 0 && ydifference < closest.height*0.5){
 				B.dir = "W";
 				B.width = 4;
 				B.height = 32;
 			}
-			else if(xdifference < closest.width/2 && ydifference <= closest.height/2  && ydifference >= 0){
+			else if(xdifference < closest.width*0.5 && ydifference <= closest.height*0.5  && ydifference >= 0){
 				B.dir = "A";
 				B.width = 32;
 				B.height = 4;
 			}
-			else if(xdifference > closest.width/2 && ydifference <= closest.height/2 && ydifference >= 0){
+			else if(xdifference > closest.width*0.5 && ydifference <= closest.height*0.5 && ydifference >= 0){
 				B.dir = "D";
 				B.width = 32;
 				B.height = 4;
@@ -776,48 +867,83 @@ function Bulletmove(B){
 						}
 					}
 					if(spell == "Conductive Beam"){
-						if(B.dir == "W" || B.dir == "S"){
-							B.width = 32;
-							B.height = 4;
-							if(Math.floor(Math.random() * 2) + 1 == 2){
+						if(!B.splitTimer){
+							B.splitTimer = 3;
+							if(B.dir == "W" || B.dir == "S"){
+								B.width = 32;
+								B.height = 4;
 								B.dir = "A";
+								for(S in ConductiveShots){
+									if(ConductiveShots[S].timeLeft == 0){
+										ConductiveShots[S].dir = "D";
+										ConductiveShots[S].height = 4;
+										ConductiveShots[S].width = 32;
+										ConductiveShots[S].x = B.x;
+										ConductiveShots[S].y = B.y;
+										ConductiveShots[S].timeLeft = B.timeLeft;
+										ConductiveShots[S].splitTimer = 3;
+										break;
+									}
+								}
 							}
-							else{
-								B.dir = "D";
-							}
-						}
-						else if(B.dir == "A" || B.dir == "D"){
-							B.width = 4;
-							B.height = 32;
-							if(Math.floor(Math.random() * 2) + 1 == 2){
+							else if(B.dir == "A" || B.dir == "D"){
+								B.width = 4;
+								B.height = 32;
 								B.dir = "W";
+								for(S in ConductiveShots){
+									if(ConductiveShots[S].timeLeft == 0){
+										ConductiveShots[S].dir = "S";
+										ConductiveShots[S].height = 32;
+										ConductiveShots[S].width = 4;
+										ConductiveShots[S].x = B.x;
+										ConductiveShots[S].y = B.y;
+										ConductiveShots[S].timeLeft = B.timeLeft;
+										ConductiveShots[S].splitTimer = 3;
+										break;
+									}
+								}
 							}
-							else{
-								B.dir = "S";
-							}
-						}
-						else if(B.dir == "WD" || B.dir == "AS"){
-							B.width = 4;
-							B.height = 4;
-							if(Math.floor(Math.random() * 2) + 1 == 2){
+							else if(B.dir == "WD" || B.dir == "AS"){
+								B.width = 4;
+								B.height = 4;
 								B.dir = "WA";
+								for(S in ConductiveShots){
+									if(ConductiveShots[S].timeLeft == 0 && ConductiveShots[S].x == -100 && ConductiveShots[S].y == -200){
+										ConductiveShots[S].dir = "SD";
+										ConductiveShots[S].height = 4;
+										ConductiveShots[S].width = 4;
+										ConductiveShots[S].x = B.x+4;
+										ConductiveShots[S].y = B.y+4;
+										ConductiveShots[S].timeLeft = B.timeLeft;
+										ConductiveShots[S].splitTimer = 3;
+										break;
+									}
+								}
+								B.y-=4;
+								B.x-=4;
 							}
-							else{
-								B.dir = "SD";
-							}
-						}
-						else if(B.dir == "WA" || B.dir == "SD"){
-							B.width = 4;
-							B.height = 4;
-							if(Math.floor(Math.random() * 2) + 1 == 2){
+							else if(B.dir == "WA" || B.dir == "SD"){
+								B.width = 4;
+								B.height = 4;
 								B.dir = "WD";
-							}
-							else{
-								B.dir = "AS";
+								for(S in ConductiveShots){
+									if(ConductiveShots[S].timeLeft == 0 && ConductiveShots[S].x == -100 && ConductiveShots[S].y == -200){
+										ConductiveShots[S].dir = "AS";
+										ConductiveShots[S].height = 4;
+										ConductiveShots[S].width = 4;
+										ConductiveShots[S].x = B.x-4;
+										ConductiveShots[S].y = B.y+4;
+										ConductiveShots[S].timeLeft = B.timeLeft;
+										ConductiveShots[S].splitTimer = 3;
+										break;
+									}
+								}
+								B.x+=4;
+								B.y-=4;
 							}
 						}
 					}
-					else{
+					else if(spell != "Light Beam"){
 						B.timeLeft = 0;
 					}
 				}
@@ -886,48 +1012,83 @@ function Bulletmove(B){
 					}
 				}
 				if(spell == "Conductive Beam"){
-					if(B.dir == "W" || B.dir == "S"){
-						B.width = 32;
-						B.height = 4;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
+					if(!B.splitTimer){
+						B.splitTimer = 3;
+						if(B.dir == "W" || B.dir == "S"){
+							B.width = 32;
+							B.height = 4;
 							B.dir = "A";
+							for(S in ConductiveShots){
+								if(ConductiveShots[S].timeLeft == 0){
+									ConductiveShots[S].dir = "D";
+									ConductiveShots[S].height = 4;
+									ConductiveShots[S].width = 32;
+									ConductiveShots[S].x = B.x;
+									ConductiveShots[S].y = B.y;
+									ConductiveShots[S].timeLeft = B.timeLeft;
+									ConductiveShots[S].splitTimer = 3;
+									break;
+								}
+							}
 						}
-						else{
-							B.dir = "D";
-						}
-					}
-					else if(B.dir == "A" || B.dir == "D"){
-						B.width = 4;
-						B.height = 32;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
+						else if(B.dir == "A" || B.dir == "D"){
+							B.width = 4;
+							B.height = 32;
 							B.dir = "W";
+							for(S in ConductiveShots){
+								if(ConductiveShots[S].timeLeft == 0){
+									ConductiveShots[S].dir = "S";
+									ConductiveShots[S].height = 32;
+									ConductiveShots[S].width = 4;
+									ConductiveShots[S].x = B.x;
+									ConductiveShots[S].y = B.y;
+									ConductiveShots[S].timeLeft = B.timeLeft;
+									ConductiveShots[S].splitTimer = 3;
+									break;
+								}
+							}
 						}
-						else{
-							B.dir = "S";
-						}
-					}
-					else if(B.dir == "WD" || B.dir == "AS"){
-						B.width = 4;
-						B.height = 4;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
+						else if(B.dir == "WD" || B.dir == "AS"){
+							B.width = 4;
+							B.height = 4;
 							B.dir = "WA";
+							for(S in ConductiveShots){
+								if(ConductiveShots[S].timeLeft == 0 && ConductiveShots[S].x == -100 && ConductiveShots[S].y == -200){
+									ConductiveShots[S].dir = "SD";
+									ConductiveShots[S].height = 4;
+									ConductiveShots[S].width = 4;
+									ConductiveShots[S].x = B.x+4;
+									ConductiveShots[S].y = B.y+4;
+									ConductiveShots[S].timeLeft = B.timeLeft;
+									ConductiveShots[S].splitTimer = 3;
+									break;
+								}
+							}
+							B.y-=4;
+							B.x-=4;
 						}
-						else{
-							B.dir = "SD";
-						}
-					}
-					else if(B.dir == "WA" || B.dir == "SD"){
-						B.width = 4;
-						B.height = 4;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
+						else if(B.dir == "WA" || B.dir == "SD"){
+							B.width = 4;
+							B.height = 4;
 							B.dir = "WD";
-						}
-						else{
-							B.dir = "AS";
+							for(S in ConductiveShots){
+								if(ConductiveShots[S].timeLeft == 0 && ConductiveShots[S].x == -100 && ConductiveShots[S].y == -200){
+									ConductiveShots[S].dir = "AS";
+									ConductiveShots[S].height = 4;
+									ConductiveShots[S].width = 4;
+									ConductiveShots[S].x = B.x-4;
+									ConductiveShots[S].y = B.y+4;
+									ConductiveShots[S].timeLeft = B.timeLeft;
+									ConductiveShots[S].splitTimer = 3;
+									break;
+								}
+							}
+							B.x+=4;
+							B.y-=4;
 						}
 					}
 				}
-				else{
+				else if(spell != "Light Beam"){
 					B.timeLeft = 0;
 				}
 			}
@@ -995,48 +1156,83 @@ function Bulletmove(B){
 					}
 				}
 				if(spell == "Conductive Beam"){
-					if(B.dir == "W" || B.dir == "S"){
-						B.width = 32;
-						B.height = 4;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
+					if(!B.splitTimer){
+						B.splitTimer = 3;
+						if(B.dir == "W" || B.dir == "S"){
+							B.width = 32;
+							B.height = 4;
 							B.dir = "A";
+							for(S in ConductiveShots){
+								if(ConductiveShots[S].timeLeft == 0){
+									ConductiveShots[S].dir = "D";
+									ConductiveShots[S].height = 4;
+									ConductiveShots[S].width = 32;
+									ConductiveShots[S].x = B.x;
+									ConductiveShots[S].y = B.y;
+									ConductiveShots[S].timeLeft = B.timeLeft;
+									ConductiveShots[S].splitTimer = 3;
+									break;
+								}
+							}
 						}
-						else{
-							B.dir = "D";
-						}
-					}
-					else if(B.dir == "A" || B.dir == "D"){
-						B.width = 4;
-						B.height = 32;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
+						else if(B.dir == "A" || B.dir == "D"){
+							B.width = 4;
+							B.height = 32;
 							B.dir = "W";
+							for(S in ConductiveShots){
+								if(ConductiveShots[S].timeLeft == 0){
+									ConductiveShots[S].dir = "S";
+									ConductiveShots[S].height = 32;
+									ConductiveShots[S].width = 4;
+									ConductiveShots[S].x = B.x;
+									ConductiveShots[S].y = B.y;
+									ConductiveShots[S].timeLeft = B.timeLeft;
+									ConductiveShots[S].splitTimer = 3;
+									break;
+								}
+							}
 						}
-						else{
-							B.dir = "S";
-						}
-					}
-					else if(B.dir == "WD" || B.dir == "AS"){
-						B.width = 4;
-						B.height = 4;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
+						else if(B.dir == "WD" || B.dir == "AS"){
+							B.width = 4;
+							B.height = 4;
 							B.dir = "WA";
+							for(S in ConductiveShots){
+								if(ConductiveShots[S].timeLeft == 0 && ConductiveShots[S].x == -100 && ConductiveShots[S].y == -200){
+									ConductiveShots[S].dir = "SD";
+									ConductiveShots[S].height = 4;
+									ConductiveShots[S].width = 4;
+									ConductiveShots[S].x = B.x+4;
+									ConductiveShots[S].y = B.y+4;
+									ConductiveShots[S].timeLeft = B.timeLeft;
+									ConductiveShots[S].splitTimer = 3;
+									break;
+								}
+							}
+							B.y-=4;
+							B.x-=4;
 						}
-						else{
-							B.dir = "SD";
-						}
-					}
-					else if(B.dir == "WA" || B.dir == "SD"){
-						B.width = 4;
-						B.height = 4;
-						if(Math.floor(Math.random() * 2) + 1 == 2){
+						else if(B.dir == "WA" || B.dir == "SD"){
+							B.width = 4;
+							B.height = 4;
 							B.dir = "WD";
-						}
-						else{
-							B.dir = "AS";
+							for(S in ConductiveShots){
+								if(ConductiveShots[S].timeLeft == 0 && ConductiveShots[S].x == -100 && ConductiveShots[S].y == -200){
+									ConductiveShots[S].dir = "AS";
+									ConductiveShots[S].height = 4;
+									ConductiveShots[S].width = 4;
+									ConductiveShots[S].x = B.x-4;
+									ConductiveShots[S].y = B.y+4;
+									ConductiveShots[S].timeLeft = B.timeLeft;
+									ConductiveShots[S].splitTimer = 3;
+									break;
+								}
+							}
+							B.x+=4;
+							B.y-=4;
 						}
 					}
 				}
-				else{
+				else if(spell != "Light Beam"){
 					B.timeLeft = 0;
 				}
 			}
@@ -1044,6 +1240,9 @@ function Bulletmove(B){
 	}
 	for (E in AllEnemies){
 		if(collision(B.dir, B, AllEnemies[E]) && AllEnemies[E].onTree == 0){
+			if(!(spell == "Light Beam") && !(spell1 == "Mystic" && spell2 != "Mystic" && spell2 != "N/A" && spell2 != "Earth") && !(spell2 == "Mystic" && spell1 != "Mystic" && spell1 != "Earth" && spell1 != "N/A")){
+				createBlood(B);
+			}
 			if(spell == "Piercing Beam"){
 				player.currpower = player.power;
 				player.power+=1;
@@ -1103,51 +1302,102 @@ function Bulletmove(B){
 				B.timeLeft = 0;
 			}
 			else if(spell == "Conductive Beam"){
-				if(B.dir == "W" || B.dir == "S"){
-					B.width = 32;
-					B.height = 4;
-					if(Math.floor(Math.random() * 2) + 1 == 2){
+				if(!B.splitTimer){
+					B.splitTimer = 3;
+					if(B.dir == "W" || B.dir == "S"){
+						B.width = 32;
+						B.height = 4;
 						B.dir = "A";
+						for(S in ConductiveShots){
+							if(ConductiveShots[S].timeLeft == 0){
+								ConductiveShots[S].dir = "D";
+								ConductiveShots[S].height = 4;
+								ConductiveShots[S].width = 32;
+								ConductiveShots[S].x = B.x;
+								ConductiveShots[S].y = B.y;
+								ConductiveShots[S].timeLeft = B.timeLeft;
+								ConductiveShots[S].splitTimer = 3;
+								break;
+							}
+						}
 					}
-					else{
-						B.dir = "D";
-					}
-				}
-				else if(B.dir == "A" || B.dir == "D"){
-					B.width = 4;
-					B.height = 32;
-					if(Math.floor(Math.random() * 2) + 1 == 2){
+					else if(B.dir == "A" || B.dir == "D"){
+						B.width = 4;
+						B.height = 32;
 						B.dir = "W";
+						for(S in ConductiveShots){
+							if(ConductiveShots[S].timeLeft == 0){
+								ConductiveShots[S].dir = "S";
+								ConductiveShots[S].height = 32;
+								ConductiveShots[S].width = 4;
+								ConductiveShots[S].x = B.x;
+								ConductiveShots[S].y = B.y;
+								ConductiveShots[S].timeLeft = B.timeLeft;
+								ConductiveShots[S].splitTimer = 3;
+								break;
+							}
+						}
 					}
-					else{
-						B.dir = "S";
-					}
-				}
-				else if(B.dir == "WD" || B.dir == "AS"){
-					B.width = 4;
-					B.height = 4;
-					if(Math.floor(Math.random() * 2) + 1 == 2){
+					else if(B.dir == "WD" || B.dir == "AS"){
+						B.width = 4;
+						B.height = 4;
 						B.dir = "WA";
+						for(S in ConductiveShots){
+							if(ConductiveShots[S].timeLeft == 0 && ConductiveShots[S].x == -100 && ConductiveShots[S].y == -200){
+								ConductiveShots[S].dir = "SD";
+								ConductiveShots[S].height = 4;
+								ConductiveShots[S].width = 4;
+								ConductiveShots[S].x = B.x+4;
+								ConductiveShots[S].y = B.y+4;
+								ConductiveShots[S].timeLeft = B.timeLeft;
+								ConductiveShots[S].splitTimer = 3;
+								break;
+							}
+						}
+						B.y-=4;
+						B.x-=4;
 					}
-					else{
-						B.dir = "SD";
+					else if(B.dir == "WA" || B.dir == "SD"){
+						B.width = 4;
+						B.height = 4;
+						B.dir = "WD";
+						for(S in ConductiveShots){
+							if(ConductiveShots[S].timeLeft == 0 && ConductiveShots[S].x == -100 && ConductiveShots[S].y == -200){
+								ConductiveShots[S].dir = "AS";
+								ConductiveShots[S].height = 4;
+								ConductiveShots[S].width = 4;
+								ConductiveShots[S].x = B.x-4;
+								ConductiveShots[S].y = B.y+4;
+								ConductiveShots[S].timeLeft = B.timeLeft;
+								ConductiveShots[S].splitTimer = 3;
+								break;
+							}
+						}
+						B.x+=4;
+						B.y-=4;
 					}
 				}
-				else if(B.dir == "WA" || B.dir == "SD"){
-					B.width = 4;
-					B.height = 4;
-					if(Math.floor(Math.random() * 2) + 1 == 2){
-						B.dir = "WD";
+			}
+			else if(AllEnemies[E].type != "Genie" && spell != "Light Beam"){
+				B.timeLeft = 0;
+			}
+			if(spell == "Confusion Beam"){
+				if(!AllEnemies[E].good){
+					if(!AllEnemies[E].goodNum){
+						AllEnemies[E].goodNum = 0;
 					}
-					else{
-						B.dir = "AS";
+					AllEnemies[E].good = true;
+					AllEnemies[E].goodTimer = 60-20*AllEnemies[E].goodNum;
+					if(AllEnemies[E].goodTimer <= 0){
+						AllEnemies[E].goodTimer = 5;
 					}
+					AllEnemies[E].goodTimerMax = AllEnemies[E].goodTimer;
+					AllEnemies[E].goodNum++;
 				}
 			}
 			else{
-				B.timeLeft = 0;
+				onHit(AllEnemies[E]);
 			}
-			onHit(AllEnemies[E]);
 			if(spell == "Piercing Beam"){
 				player.power = player.currpower;
 			}
@@ -1283,7 +1533,7 @@ var fireice = {
 	height: 32,
 	frame: 0,
 	cd: 0,
-	cdTop: 120,
+	cdTop: 60,
 	onScreen: 0,
 	dir: "W",
 	speed: 16,
@@ -1291,11 +1541,11 @@ var fireice = {
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.state == 0){
-				if(this.flicker/2 != Math.round(this.flicker/2)){
+				if(this.flicker*0.5 != Math.round(this.flicker*0.5)){
 					ctx.globalAlpha = Alpha*0.5;
 					ctx.fillStyle = this.color2;
-					ctx.fillRect(this.x - this.width / 2,
-					this.y - this.height / 2,
+					ctx.fillRect(this.x - this.width * 0.5,
+					this.y - this.height * 0.5,
 					this.width, this.height);
 					ctx.globalAlpha = Alpha;
 					this.flicker-=1;
@@ -1303,8 +1553,8 @@ var fireice = {
 				else{
 					ctx.globalAlpha = Alpha*0.5;
 					ctx.fillStyle = this.color1;
-					ctx.fillRect(this.x - this.width / 2,
-					this.y - this.height / 2,
+					ctx.fillRect(this.x - this.width * 0.5,
+					this.y - this.height * 0.5,
 					this.width, this.height);
 					ctx.globalAlpha = Alpha;
 					this.flicker-=1;
@@ -1314,8 +1564,8 @@ var fireice = {
 			ctx.globalAlpha = Alpha;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 			}
@@ -1346,7 +1596,7 @@ var fireice = {
 					}
 				}
 			}
-			if(this.frame == 60){
+			if(this.frame == 90){
 				for (E in AllEnemies){
 					AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
 				}
@@ -1415,7 +1665,167 @@ var fireice = {
 		
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
+		if(this.cd == 0){
+			if(this.onScreen == 1){
+				fireice2.shoot();
+				this.cd = this.cdTop;
+			}
+			else{
+				Frozen.currentTime=0;
+				Frozen.play();
+				this.height = 32;
+				this.width = 32;
+				this.x = player.x;
+				this.y = player.y;
+				this.dir = player.dir;
+				this.cd = this.cdTop;
+				this.frame = 0;
+				this.onScreen = 1;
+				this.color = this.color1;
+				this.state = 0;
+			}
+		}
+	}
+};
+//second one because low rc
+var fireice2 = {
+	color1: "#FF6600",
+	color2: "#00CCFF",
+	color: "#FF6600",
+	state: 0,
+	x: -1000,
+	y: -200,
+	width: 32,
+	height: 32,
+	frame: 0,
+	onScreen: 0,
+	dir: "W",
+	speed: 16,
+	flicker: 600,
+	draw: function(){
+		if(this.onScreen == 1){
+			if(this.state == 0){
+				if(this.flicker*0.5 != Math.round(this.flicker*0.5)){
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.fillStyle = this.color2;
+					ctx.fillRect(this.x - this.width * 0.5,
+					this.y - this.height * 0.5,
+					this.width, this.height);
+					ctx.globalAlpha = Alpha;
+					this.flicker-=1;
+				}
+				else{
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.fillStyle = this.color1;
+					ctx.fillRect(this.x - this.width * 0.5,
+					this.y - this.height * 0.5,
+					this.width, this.height);
+					ctx.globalAlpha = Alpha;
+					this.flicker-=1;
+				}	
+			}
+			else{
+			ctx.globalAlpha = Alpha;
+			ctx.globalAlpha = Alpha*0.5;
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+			}
+		}
+	},
+	
+	move: function(){
+		if(this.state == 1){		
+			if(this.frame <= 10){
+				this.color = this.color2;
+				this.width = this.width + 8*this.frame;
+				this.height = this.height + 8*this.frame;
+				this.frame++;
+				for (E in AllEnemies){
+					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+						AllEnemies[E].speed = AllEnemies[E].speed2;
+					}
+				}
+			}
+			else{
+				this.frame++;
+				for (E in AllEnemies){
+					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
+						AllEnemies[E].speed = AllEnemies[E].speed2;
+					}
+				}
+			}
+			if(this.frame == 90){
+				for (E in AllEnemies){
+					AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
+				}
+				this.onScreen = 0;
+				this.state = 0;
+				this.frame = 0;
+			}
+		}
+		else if(this.onScreen == 1 && this.state == 0){
+			if(obsCollision(obstacle1, this, this.dir) || (obsCollision(obstacle2, this, this.dir)) || (obsCollision(obstacle3, this, this.dir)
+				|| this.x <= 32 || this.x >= 768 || this.y <= 32 || this.y >= 544)){
+				this.state = 1;
+				Fwave.currentTime=0;
+				Fwave.play();
+			}
+			for(O in obstacle1){
+				if(collision(this.dir, this, obstacle1[O])){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for(O in obstacle2){
+				if(collision(this.dir, this, obstacle2[O])){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for(O in obstacle3){
+				if(collision(this.dir, this, obstacle3[O])){
+					obsHit(obstacle3[O]);
+				}
+			}
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
+				}
+			}
+			if (this.dir == "W"){
+				this.y -= this.speed;
+			}
+			if (this.dir == "A"){
+				this.x -= this.speed;
+			}
+			if (this.dir == "S"){
+				this.y += this.speed;
+			}
+			if (this.dir == "D"){
+				this.x += this.speed;
+			}
+			if (this.dir == "WA"){
+				this.x -= this.speed;
+				this.y -= this.speed;
+			}
+			if (this.dir == "AS"){
+				this.x -= this.speed;
+				this.y += this.speed;
+			}
+			if (this.dir == "SD"){
+				this.x += this.speed;
+				this.y += this.speed;
+			}
+			if (this.dir == "WD"){
+				this.x += this.speed;
+				this.y -= this.speed;
+			}
+		}
+	},
+		
+	// Spawn
+	shoot: function(){
 		Frozen.currentTime=0;
 		Frozen.play();
 		this.height = 32;
@@ -1423,20 +1833,17 @@ var fireice = {
 		this.x = player.x;
 		this.y = player.y;
 		this.dir = player.dir;
-		this.cd = this.cdTop;
 		this.frame = 0;
 		this.onScreen = 1;
 		this.color = this.color1;
 		this.state = 0;
 	}
-	}
 	
 };
-
 // Fire+Heal: Heals user by 1 and casts Fire
 var fireheal = {
 	cd: 0,
-	cdTop: 600,
+	cdTop: 450,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
@@ -1453,7 +1860,7 @@ var fireheal = {
 			earth.shoot();
 			fire.cd = currentFirecd;
 			earth.cd = currentEarthcd;
-			fire.cast = 30;
+			fire.cast = 20;
 		}
 	}	
 };
@@ -1461,7 +1868,7 @@ var fireheal = {
 // Ice+Heal: Heals user by 1 and casts Ice
 var iceheal = {
 	cd: 0,
-	cdTop: 600,
+	cdTop: 450,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
@@ -1478,7 +1885,7 @@ var iceheal = {
 			earth.shoot();
 			ice.cd = currentIcecd;
 			earth.cd = currentEarthcd;
-			ice.cast = 30;
+			ice.cast = 20;
 		}
 	}	
 };
@@ -1503,7 +1910,7 @@ var lightningheal = {
 			earth.shoot();
 			lightning.cd = currentLightningcd;
 			earth.cd = currentEarthcd;
-			lightning.cast = 30;
+			lightning.cast = 20;
 		}
 	}	
 };
@@ -1526,6 +1933,7 @@ var firelightning = {
 	onScreen: 0,
 	cast: 0,
 	used: 0,
+	framecd: 0,
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.used == 0){
@@ -1534,27 +1942,27 @@ var firelightning = {
 				this.used = 1;
 			}
 			if(this.hstate == 0){
-				ctx.drawImage(hlightning1, this.hx - this.hwidth/2, player.y - this.hheight/2);
+				ctx.drawImage(hlightning1, this.hx - this.hwidth*0.5, player.y - this.hheight*0.5);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 1){
-				ctx.drawImage(hlightning2, this.hx - this.hwidth/2, player.y - this.hheight/2);
+				ctx.drawImage(hlightning2, this.hx - this.hwidth*0.5, player.y - this.hheight*0.5);
 				this.hstate+=1;
 			}
 			else if(this.hstate == 2){
-				ctx.drawImage(hlightning3, this.hx - this.hwidth/2, player.y - this.hheight/2);
+				ctx.drawImage(hlightning3, this.hx - this.hwidth*0.5, player.y - this.hheight*0.5);
 				this.hstate=0;
 			}
 			if(this.vstate == 0){
-					ctx.drawImage(vlightning1, player.x-this.vwidth/2, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning1, player.x-this.vwidth*0.5, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 			}
 			else if(this.vstate == 1){
-					ctx.drawImage(vlightning2, player.x-this.vwidth/2, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning2, player.x-this.vwidth*0.5, this.vy - this.vheight*0.5);
 					this.vstate+=1;
 			}
 			else if(this.vstate == 2){
-					ctx.drawImage(vlightning3, player.x-this.vwidth/2, this.vy - this.vheight/2);
+					ctx.drawImage(vlightning3, player.x-this.vwidth*0.5, this.vy - this.vheight*0.5);
 					this.vstate=0;
 			}
 		}
@@ -1570,6 +1978,9 @@ var firelightning = {
 		if(this.cast > 0){
 			this.cast-=1;
 		}
+		if(this.framecd > 0){
+			this.framecd-=1;
+		}
 		else if(this.onScreen == 1){
 			if(this.timeLeft <= 0){
 				this.onScreen = 0;
@@ -1580,52 +1991,60 @@ var firelightning = {
 				this.timeLeft-=1;
 			}
 			for (E in AllEnemies){
-				if(AllEnemies[E].x >= player.x && AllEnemies[E].x <= player.x + this.vwidth && AllEnemies[E].onScreen == 1
-					|| (player.x >= AllEnemies[E].x && player.x <= AllEnemies[E].x + AllEnemies[E].width/2)){
+				if(this.framecd <= 0 && AllEnemies[E].x >= player.x && AllEnemies[E].x <= player.x + this.vwidth && AllEnemies[E].onScreen == 1
+					|| (player.x >= AllEnemies[E].x - AllEnemies[E].width*0.5 && player.x <= AllEnemies[E].x + AllEnemies[E].width*0.5)){
 					if(firelightningf1.x == -1000){
 						firelightningf1.x = AllEnemies[E].x;
 						firelightningf1.y = AllEnemies[E].y;
 						firelightningf1.shoot();
+						this.framecd = 10;
 					}
 					else if(firelightningf2.x == -1000){
 						firelightningf2.x = AllEnemies[E].x;
 						firelightningf2.y = AllEnemies[E].y;
 						firelightningf2.shoot();
+						this.framecd = 10;
 					}
 					else if(firelightningf3.x == -1000){
 						firelightningf3.x = AllEnemies[E].x;
 						firelightningf3.y = AllEnemies[E].y;
 						firelightningf3.shoot();
+						this.framecd = 10;
 					}
 					else if(firelightningf4.x == -1000){
 						firelightningf4.x = AllEnemies[E].x;
 						firelightningf4.y = AllEnemies[E].y;
 						firelightningf4.shoot();
+						this.framecd = 10;
 					}
 				}
 			}			
 			for (E in AllEnemies){
-				if(AllEnemies[E].y <= player.y + this.hheight && AllEnemies[E].y >= player.y && AllEnemies[E].onScreen == 1
-					|| (player.y >= AllEnemies[E].y && player.y <= AllEnemies[E].y + AllEnemies[E].height/2)){
+				if(this.framecd <= 0 && AllEnemies[E].y <= player.y + this.hheight && AllEnemies[E].y >= player.y && AllEnemies[E].onScreen == 1
+					|| (player.y >= AllEnemies[E].y - AllEnemies[E].height*0.5 && player.y <= AllEnemies[E].y + AllEnemies[E].height*0.5)){
 					if(firelightningf1.x == -1000){
 						firelightningf1.x = AllEnemies[E].x;
 						firelightningf1.y = AllEnemies[E].y;
 						firelightningf1.shoot();
+						this.framecd = 10;
 					}
 					else if(firelightningf2.x == -1000){
 						firelightningf2.x = AllEnemies[E].x;
 						firelightningf2.y = AllEnemies[E].y;
 						firelightningf2.shoot();
+						this.framecd = 10;
 					}
 					else if(firelightningf3.x == -1000){
 						firelightningf3.x = AllEnemies[E].x;
 						firelightningf3.y = AllEnemies[E].y;
 						firelightningf3.shoot();
+						this.framecd = 10;
 					}
 					else if(firelightningf4.x == -1000){
 						firelightningf4.x = AllEnemies[E].x;
 						firelightningf4.y = AllEnemies[E].y;
 						firelightningf4.shoot();
+						this.framecd = 10;
 					}
 				}
 			}			
@@ -1639,11 +2058,11 @@ var firelightning = {
 		this.hy = player.y;
 		this.cd = this.cdTop;
 		this.timeLeft = 150;
-		this.cast = 30;
-		cd = 30;
+		this.cast = 20;
+		cd = 20;
 		castingBar.onScreen = 1;
-		castingBar.cast = 30;
-		castingBar.castmax = 30;
+		castingBar.cast = 20;
+		castingBar.castmax = 20;
 		this.used = 0;
 	}
 	}
@@ -1662,14 +2081,14 @@ var firelightningf1 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -1734,14 +2153,14 @@ var firelightningf2 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -1807,14 +2226,14 @@ var firelightningf3 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -1879,14 +2298,14 @@ var firelightningf4 = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -1947,35 +2366,7 @@ var vertil = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.height = this.height + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0
 };
 var vertil2 = {
 	color: "#00CCFF",
@@ -1986,35 +2377,7 @@ var vertil2 = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.height = this.height + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0
 };
 var vertil3 = {
 	color: "#00CCFF",
@@ -2025,35 +2388,7 @@ var vertil3 = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.height = this.height + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0
 };
 var vertil4 = {
 	color: "#00CCFF",
@@ -2064,35 +2399,7 @@ var vertil4 = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.height = this.height + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0
 };
 var vertil5 = {
 	color: "#00CCFF",
@@ -2103,35 +2410,7 @@ var vertil5 = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.height = this.height + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0	
 };
 var horil = {
 	color: "#00CCFF",
@@ -2142,35 +2421,7 @@ var horil = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.width = this.width + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0
 };
 var horil2 = {
 	color: "#00CCFF",
@@ -2181,35 +2432,7 @@ var horil2 = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.width = this.width + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0
 };
 var horil3 = {
 	color: "#00CCFF",
@@ -2220,35 +2443,7 @@ var horil3 = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.width = this.width + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0
 };
 var horil4 = {
 	color: "#00CCFF",
@@ -2259,35 +2454,7 @@ var horil4 = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.width = this.width + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0
 };
 var horil5 = {
 	color: "#00CCFF",
@@ -2298,36 +2465,42 @@ var horil5 = {
 	y: -2000,
 	frame: 0,
 	onScreen: 0,
-	split: 0,
-	draw: function(){
-		if(this.frame == 240){
-			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = AllEnemies[E].speed2*2;
-				}
-			}
-			this.frame = 0;
-			this.onScreen = 0;
-			this.x = -2000;
-			this.y = -2000;
-			this.width = 16;
-			this.height = 16;
-		}
-		if(this.onScreen == 1){
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-			this.width = this.width + (32*this.frame);
-			this.frame++;
-			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
-					AllEnemies[E].speed = 0;
-				}
-			}
-		}
-	}	
+	split: 0
 };
+//Draw/increment vertical bars
+function vertilDraw(V){
+	if(V.onScreen == 1){
+		ctx.globalAlpha = Alpha*0.25;
+		ctx.fillStyle = V.color;
+		ctx.fillRect(V.x - V.width * 0.5, V.y - V.height * 0.5,	V.width, V.height);
+		ctx.globalAlpha = Alpha;
+		V.height = V.height + (32*V.frame);
+		V.frame++;
+		for(E in AllEnemies){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], V) && AllEnemies[E].type != "Meteor" && AllEnemies[E].type != -2 && AllEnemies[E].type != -3 && AllEnemies[E].type != -4 && AllEnemies[E].type != -5){
+				AllEnemies[E].speed = 0;
+				AllEnemies[E].iced = true;
+			}
+		}
+	}
+}
+//Draw/increment horizontal bars
+function horilDraw(H){
+	if(H.onScreen == 1){
+		ctx.globalAlpha = Alpha*0.25;
+		ctx.fillStyle = H.color;
+		ctx.fillRect(H.x - H.width * 0.5, H.y - H.height * 0.5,	H.width, H.height);
+		ctx.globalAlpha = Alpha;
+		H.width = H.width + (32*H.frame);
+		H.frame++;
+		for(E in AllEnemies){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], H) && AllEnemies[E].type != "Meteor" && AllEnemies[E].type != -2 && AllEnemies[E].type != -3 && AllEnemies[E].type != -4 && AllEnemies[E].type != -5){
+				AllEnemies[E].speed = 0;
+				AllEnemies[E].iced = true;
+			}
+		}
+	}
+}
 var webhoril = {1: horil5, 2: horil4, 3: horil3, 4: horil2, 5: horil};
 var webvertil = {1: vertil5, 2: vertil4, 3: vertil3, 4: vertil2, 5: vertil};
 var icelightning = {
@@ -2336,8 +2509,7 @@ var icelightning = {
 	cdTop: 900,
 	timeLeft: 0,
 	end: false,
-	AllEnemiesil: {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner, 14: treeWizz, 15: Thief, 16: ThiefA, 17: ThiefB,
-					18: Lavaman5, 19: Lavaman6, 20: Lavaman7, 21: Lavaman8, 22: Spawner2, 23: MasterThief, 24: Croc, 25: Croc2, 26: Mosquito, 27: Mosquito2, 28: Mosquito3, 29: Mosquito4},
+	AllEnemiesil: AllEnemies,
 	tick: function(){
 		if(this.cd>0){
 			this.cd-=1;
@@ -2349,146 +2521,139 @@ var icelightning = {
 			}
 		}
 		else if(this.timeLeft<=0 && this.end == true){
-			horil.split = 0;
-			horil2.split = 0;
-			horil3.split = 0;
-			horil4.split = 0;
-			horil5.split = 0;
-			vertil.split = 0;
-			vertil2.split = 0;
-			vertil3.split = 0;
-			vertil4.split = 0;
-			vertil5.split = 0;
-			horil.onScreen = 0;
-			horil2.onScreen = 0;
-			horil3.onScreen = 0;
-			horil4.onScreen = 0;
-			horil5.onScreen = 0;
-			vertil.onScreen = 0;
-			vertil2.onScreen = 0;
-			vertil3.onScreen = 0;
-			vertil4.onScreen = 0;
-			vertil5.onScreen = 0;
-			horil.frame = 240;
-			horil2.frame = 240;
-			horil3.frame = 240;
-			horil4.frame = 240;
-			horil5.frame = 240;
-			vertil.frame = 240;
-			vertil2.frame = 240;
-			vertil3.frame = 240;
-			vertil4.frame = 240;
-			vertil5.frame = 240;
+			for(H in webhoril){
+				webhoril[H].split = 0;
+				webhoril[H].frame = 0;
+				webhoril[H].onScreen = 0;
+				webhoril[H].x = -2000;
+				webhoril[H].y = -2000;
+				webhoril[H].width = 16;
+				webhoril[H].height = 16;
+			}
+			for(V in webvertil){
+				webvertil[V].split = 0;
+				webvertil[V].frame = 0;
+				webvertil[V].onScreen = 0;
+				webvertil[V].x = -2000;
+				webvertil[V].y = -2000;
+				webvertil[V].width = 16;
+				webvertil[V].height = 16;
+			}
 			this.end = false;
 			for (E in AllEnemies){
-				if(AllEnemies[E].speed == 0){
+				if(AllEnemies[E].iced){
 					AllEnemies[E].speed = AllEnemies[E].speed2*2;
 				}
+				AllEnemies[E].iced = false;
 			}
-			this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
+			this.AllEnemiesil = AllEnemies;
 		}
 	},
 	// Slow all enemies in radius
 	effect: function(){
-	if(this.timeLeft>0){
-		for(A in webvertil){
-			for(E in this.AllEnemiesil){
-				if(collision(this.AllEnemiesil[E].dir, this.AllEnemiesil[E], webvertil[A])){
-					//Spawn more webs
-					if(horil2.onScreen == 0 && horil2.split == 0){
-						horil2.x = this.AllEnemiesil[E].x;
-						horil2.y = this.AllEnemiesil[E].y;
-						horil2.frame = 0;
-						horil2.onScreen = 1;
-						horil2.split = 1;
-						delete this.AllEnemiesil[E];
+		if(this.timeLeft>0){
+			for(A in webvertil){
+				for(E in this.AllEnemiesil){
+					if(this.AllEnemiesil[E].type != "Meteor"  && this.AllEnemiesil[E].type != -2 && this.AllEnemiesil[E].type != -3 && this.AllEnemiesil[E].type != -4 && this.AllEnemiesil[E].type != -5){
+						if(collision(this.AllEnemiesil[E].dir, this.AllEnemiesil[E], webvertil[A])){
+							//Spawn more webs
+							if(horil2.onScreen == 0 && horil2.split == 0){
+								horil2.x = this.AllEnemiesil[E].x;
+								horil2.y = this.AllEnemiesil[E].y;
+								horil2.frame = 0;
+								horil2.onScreen = 1;
+								horil2.split = 1;
+								delete this.AllEnemiesil[E];
+							}
+							else if(horil3.onScreen == 0 && horil3.split == 0){
+								horil3.x = this.AllEnemiesil[E].x;
+								horil3.y = this.AllEnemiesil[E].y;
+								horil3.frame = 0;
+								horil3.onScreen = 1;
+								horil3.split = 1;
+								delete this.AllEnemiesil[E];
+							}
+							else if(horil4.onScreen == 0 && horil4.split == 0){
+								horil4.x = this.AllEnemiesil[E].x;
+								horil4.y = this.AllEnemiesil[E].y;
+								horil4.frame = 0;
+								horil4.onScreen = 1;
+								horil4.split = 1;
+								delete this.AllEnemiesil[E];
+							}
+							else if(horil5.onScreen == 0 && horil5.split == 0){
+								horil5.x = this.AllEnemiesil[E].x;
+								horil5.y = this.AllEnemiesil[E].y;
+								horil5.frame = 0;
+								horil5.onScreen = 1;
+								horil5.split = 1;
+								delete this.AllEnemiesil[E];
+							}
+						}
 					}
-					else if(horil3.onScreen == 0 && horil3.split == 0){
-						horil3.x = this.AllEnemiesil[E].x;
-						horil3.y = this.AllEnemiesil[E].y;
-						horil3.frame = 0;
-						horil3.onScreen = 1;
-						horil3.split = 1;
-						delete this.AllEnemiesil[E];
-					}
-					else if(horil4.onScreen == 0 && horil4.split == 0){
-						horil4.x = this.AllEnemiesil[E].x;
-						horil4.y = this.AllEnemiesil[E].y;
-						horil4.frame = 0;
-						horil4.onScreen = 1;
-						horil4.split = 1;
-						delete this.AllEnemiesil[E];
-					}
-					else if(horil5.onScreen == 0 && horil5.split == 0){
-						horil5.x = this.AllEnemiesil[E].x;
-						horil5.y = this.AllEnemiesil[E].y;
-						horil5.frame = 0;
-						horil5.onScreen = 1;
-						horil5.split = 1;
-						delete this.AllEnemiesil[E];
+				}
+			}
+			for(A in webhoril){
+				for(E in this.AllEnemiesil){
+					if(this.AllEnemiesil[E].type != "Meteor"  && this.AllEnemiesil[E].type != -2 && this.AllEnemiesil[E].type != -3 && this.AllEnemiesil[E].type != -4 && this.AllEnemiesil[E].type != -5){
+						if(collision(this.AllEnemiesil[E].dir, this.AllEnemiesil[E], webhoril[A])){
+							//Spawn more webs
+							if(vertil2.onScreen == 0 && vertil2.split == 0){
+								vertil2.x = this.AllEnemiesil[E].x;
+								vertil2.y = this.AllEnemiesil[E].y;
+								vertil2.frame = 0;
+								vertil2.onScreen = 1;
+								vertil2.split = 1;
+								delete this.AllEnemiesil[E];
+							}
+							else if(vertil3.onScreen == 0 && vertil3.split == 0){
+								vertil3.x = this.AllEnemiesil[E].x;
+								vertil3.y = this.AllEnemiesil[E].y;
+								vertil3.frame = 0;
+								vertil3.onScreen = 1;
+								vertil3.split = 1;
+								delete this.AllEnemiesil[E];
+							}
+							else if(vertil4.onScreen == 0 && vertil4.split == 0){
+								vertil4.x = this.AllEnemiesil[E].x;
+								vertil4.y = this.AllEnemiesil[E].y;
+								vertil4.frame = 0;
+								vertil4.onScreen = 1;
+								vertil4.split = 1;
+								delete this.AllEnemiesil[E];
+							}
+							else if(vertil5.onScreen == 0 && vertil5.split == 0){
+								vertil5.x = this.AllEnemiesil[E].x;
+								vertil5.y = this.AllEnemiesil[E].y;
+								vertil5.frame = 0;
+								vertil5.onScreen = 1;
+								vertil5.split = 1;
+								delete this.AllEnemiesil[E];
+							}
+						}
 					}
 				}
 			}
 		}
-		for(A in webhoril){
-			for(E in this.AllEnemiesil){
-				if(collision(this.AllEnemiesil[E].dir, this.AllEnemiesil[E], webhoril[A])){
-					//Spawn more webs
-					if(vertil2.onScreen == 0 && vertil2.split == 0){
-						vertil2.x = this.AllEnemiesil[E].x;
-						vertil2.y = this.AllEnemiesil[E].y;
-						vertil2.frame = 0;
-						vertil2.onScreen = 1;
-						vertil2.split = 1;
-						delete this.AllEnemiesil[E];
-					}
-					else if(vertil3.onScreen == 0 && vertil3.split == 0){
-						vertil3.x = this.AllEnemiesil[E].x;
-						vertil3.y = this.AllEnemiesil[E].y;
-						vertil3.frame = 0;
-						vertil3.onScreen = 1;
-						vertil3.split = 1;
-						delete this.AllEnemiesil[E];
-					}
-					else if(vertil4.onScreen == 0 && vertil4.split == 0){
-						vertil4.x = this.AllEnemiesil[E].x;
-						vertil4.y = this.AllEnemiesil[E].y;
-						vertil4.frame = 0;
-						vertil4.onScreen = 1;
-						vertil4.split = 1;
-						delete this.AllEnemiesil[E];
-					}
-					else if(vertil5.onScreen == 0 && vertil5.split == 0){
-						vertil5.x = this.AllEnemiesil[E].x;
-						vertil5.y = this.AllEnemiesil[E].y;
-						vertil5.frame = 0;
-						vertil5.onScreen = 1;
-						vertil5.split = 1;
-						delete this.AllEnemiesil[E];
-					}
-				}
-			}
-		}
-	}
 	},
 		
 	// Spawn
 	shoot: function(){
-	if(this.cd == 0){
-		Fwave.currentTime=0;
-		Fwave.play();
-		vertil.x = player.x
-		vertil.y = player.y
-		vertil.frame = 0;
-		vertil.onScreen = 1;
-		horil.x = player.x
-		horil.y = player.y
-		horil.frame = 0;
-		horil.onScreen = 1;
-		this.cd = this.cdTop;
-		this.timeLeft = 300;
-		this.AllEnemiesil = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Tenemy, 6: TenemyA, 7: TenemyB, 8: Sorceror, 9: Lavaman, 10: Lavaman2, 11: Lavaman3, 12: Lavaman4, 13: Spawner};
-	}
+		if(this.cd == 0){
+			Fwave.currentTime=0;
+			Fwave.play();
+			vertil.x = player.x
+			vertil.y = player.y
+			vertil.frame = 0;
+			vertil.onScreen = 1;
+			horil.x = player.x
+			horil.y = player.y
+			horil.frame = 0;
+			horil.onScreen = 1;
+			this.cd = this.cdTop;
+			this.timeLeft = 300;
+			this.AllEnemiesil = AllEnemies;
+		}
 	}
 };
 
@@ -2510,23 +2675,23 @@ var airfire = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(this.frame/2 == Math.round(this.frame/2)){
+			if(this.frame*0.5 == Math.round(this.frame*0.5)){
 				ctx.fillStyle = this.color1;
 			}
 			else{
 				ctx.fillStyle = this.color2;
 			}
-			ctx.fillRect(this.ox - player.width / 2,
-				this.oy - player.height / 2,
+			ctx.fillRect(this.ox - player.width * 0.5,
+				this.oy - player.height * 0.5,
 				player.width, player.height);
 			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
+				ctx.fillRect(this.x - this.width * 0.5,
+				this.y - this.height * 0.5,
 				this.width, this.height);
 			}
 			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
+				ctx.fillRect(this.x - this.width * 0.5,
+				this.y - this.height * 0.5,
 				this.width, this.height);
 			}
 		}
@@ -2632,20 +2797,20 @@ var airfire12 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(this.frame/2 == Math.round(this.frame/2)){
+			if(this.frame*0.5 == Math.round(this.frame*0.5)){
 				ctx.fillStyle = this.color1;
 			}
 			else{
 				ctx.fillStyle = this.color2;
 			}
 			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
+				ctx.fillRect(this.x - this.width * 0.5,
+				this.y - this.height * 0.5,
 				this.width, this.height);
 			}
 			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
+				ctx.fillRect(this.x - this.width * 0.5,
+				this.y - this.height * 0.5,
 				this.width, this.height);
 			}
 		}
@@ -2730,20 +2895,20 @@ var airfire13 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			if(this.frame/2 == Math.round(this.frame/2)){
+			if(this.frame*0.5 == Math.round(this.frame*0.5)){
 				ctx.fillStyle = this.color1;
 			}
 			else{
 				ctx.fillStyle = this.color2;
 			}
 			if(this.dir == "W" || this.dir == "S"){
-				ctx.fillRect(this.x - this.width / 2,
-				this.y - this.height / 2,
+				ctx.fillRect(this.x - this.width * 0.5,
+				this.y - this.height * 0.5,
 				this.width, this.height);
 			}
 			else if(this.dir == "A" || this.dir == "D"){
-				ctx.fillRect(this.x - this.hwidth / 2,
-				this.y - this.height / 2,
+				ctx.fillRect(this.x - this.width * 0.5,
+				this.y - this.height * 0.5,
 				this.width, this.height);
 			}
 		}
@@ -2840,14 +3005,14 @@ var airice = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha * 2;
-			if(this.timeLeft/2 != Math.round(this.timeLeft/2)){
+			if(this.timeLeft*0.5 != Math.round(this.timeLeft*0.5)){
 				ctx.fillStyle = this.color1;
 			}
 			else{
 				ctx.fillStyle = this.color2;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -2954,7 +3119,7 @@ var airearth = {
 			earth.shoot();
 			air.cd = currentAircd;
 			earth.cd = currentEarthcd;
-			air.cast = 30;
+			air.cast = 20;
 		}
 	}	
 };
@@ -2978,8 +3143,8 @@ var airlightning = {
 	draw: function(){
 		if(this.LonScreen == 1){
 			this.LonScreen = 0;
-			ctx.drawImage(hlightning1, this.hx - this.hwidth/2, this.hy - this.hheight/2);
-			ctx.drawImage(vlightning1, this.vx-this.vwidth/2, this.vy - this.vheight/2);
+			ctx.drawImage(hlightning1, this.hx - this.hwidth*0.5, this.hy - this.hheight*0.5);
+			ctx.drawImage(vlightning1, this.vx-this.vwidth*0.5, this.vy - this.vheight*0.5);
 		}
 	},
 	effect: function(){
@@ -3004,16 +3169,16 @@ var airlightning = {
 				this.hy = -2000;
 			}
 			for (E in AllEnemies){
-				if((AllEnemies[E].x >= this.vx-this.vwidth/2 && AllEnemies[E].x <= this.vx + this.vwidth/2 && AllEnemies[E].onScreen == 1)
-					|| (this.vx >= AllEnemies[E].x && this.vx <= AllEnemies[E].x + AllEnemies[E].width/2 && AllEnemies[E].onScreen == 1)){
+				if((AllEnemies[E].x >= this.vx-this.vwidth*0.5 && AllEnemies[E].x <= this.vx + this.vwidth*0.5 && AllEnemies[E].onScreen == 1)
+					|| (this.vx >= AllEnemies[E].x - AllEnemies[E].width*0.5 && this.vx <= AllEnemies[E].x + AllEnemies[E].width*0.5 && AllEnemies[E].onScreen == 1)){
 					onHit(AllEnemies[E]);
 					Thunder.currentTime = 0;
 					Thunder.play();
 				}
 			}			
 			for (E in AllEnemies){
-				if((AllEnemies[E].y <= this.hy + this.hheight/2 && AllEnemies[E].y >= this.hy-this.hheight/2 && AllEnemies[E].onScreen == 1)
-					|| (this.hy >= AllEnemies[E].y && this.hy <= AllEnemies[E].y + AllEnemies[E].height/2 && AllEnemies[E].onScreen == 1)){
+				if((AllEnemies[E].y <= this.hy + this.hheight*0.5 && AllEnemies[E].y >= this.hy-this.hheight*0.5 && AllEnemies[E].onScreen == 1)
+					|| (this.hy >= AllEnemies[E].y - AllEnemies[E].height*0.5 && this.hy <= AllEnemies[E].y + AllEnemies[E].height*0.5 && AllEnemies[E].onScreen == 1)){
 					onHit(AllEnemies[E]);
 					Thunder.currentTime = 0;
 					Thunder.play();
@@ -3048,14 +3213,18 @@ var mysticearth = {
 		if(this.cd == 0){
 			var currentEarthcd = earth.cd;
 			var currentMysticcd = mystic.cd;
+			var prevCd = cd;
 			this.cd = this.cdTop;
 			mystic.cd = 0;
 			earth.cd = 0;
 			mystic.shoot();
 			earth.shoot();
+			earth.cast = 0;
+			cd = prevCd;
+			castingBar.onScreen = 0;
+			castingBar.cast = -1;
 			mystic.cd = currentMysticcd;
 			earth.cd = currentEarthcd;
-			mystic.cast = 30;
 		}
 	}	
 };
@@ -3066,9 +3235,9 @@ var waterfire = {
 	height: 16,
 	timeLeft: 0,
 	cd: 0,
-	cdTop: 300,
+	cdTop: 240,
 	cd2: 0,
-	cd2Top: 300,
+	cd2Top: 240,
 	index: 1,
 	Iindex: 0,
 	speed: 12,
@@ -3086,11 +3255,11 @@ var waterfire = {
 			}
 			if(spell == "Explosive Ring"){
 				if(this.index < 3){
-					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 				}
 				else{
-					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble2, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 					if(this.index >= 5){
 						this.index = 1;
@@ -3098,7 +3267,7 @@ var waterfire = {
 				}
 			}
 			if(spell == "Frozen Ring"){
-				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
 				this.Iindex++;
 				if(this.Iindex >= 6){
 					this.Iindex = 0;
@@ -3213,11 +3382,11 @@ var waterfire2 = {
 		if(this.onScreen == 1){
 			if(spell == "Explosive Ring"){
 				if(this.index < 3){
-					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 				}
 				else{
-					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble2, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 					if(this.index >= 5){
 						this.index = 1;
@@ -3225,7 +3394,7 @@ var waterfire2 = {
 				}
 			}
 			if(spell == "Frozen Ring"){
-				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
 				this.Iindex++;
 				if(this.Iindex >= 6){
 					this.Iindex = 0;
@@ -3299,11 +3468,11 @@ var waterfire3 = {
 		if(this.onScreen == 1){
 			if(spell == "Explosive Ring"){
 				if(this.index < 3){
-					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 				}
 				else{
-					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble2, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 					if(this.index >= 5){
 						this.index = 1;
@@ -3311,7 +3480,7 @@ var waterfire3 = {
 				}
 			}
 			if(spell == "Frozen Ring"){
-				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
 				this.Iindex++;
 				if(this.Iindex >= 6){
 					this.Iindex = 0;
@@ -3385,11 +3554,11 @@ var waterfire4 = {
 		if(this.onScreen == 1){
 			if(spell == "Explosive Ring"){
 				if(this.index < 3){
-					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 				}
 				else{
-					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble2, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 					if(this.index >= 5){
 						this.index = 1;
@@ -3397,7 +3566,7 @@ var waterfire4 = {
 				}
 			}
 			if(spell == "Frozen Ring"){
-				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
 				this.Iindex++;
 				if(this.Iindex >= 6){
 					this.Iindex = 0;
@@ -3471,11 +3640,11 @@ var waterfire5 = {
 		if(this.onScreen == 1){
 			if(spell == "Explosive Ring"){
 				if(this.index < 3){
-					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 				}
 				else{
-					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble2, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 					if(this.index >= 5){
 						this.index = 1;
@@ -3483,7 +3652,7 @@ var waterfire5 = {
 				}
 			}
 			if(spell == "Frozen Ring"){
-				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
 				this.Iindex++;
 				if(this.Iindex >= 6){
 					this.Iindex = 0;
@@ -3557,11 +3726,11 @@ var waterfire6 = {
 		if(this.onScreen == 1){
 			if(spell == "Explosive Ring"){
 				if(this.index < 3){
-					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 				}
 				else{
-					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble2, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 					if(this.index >= 5){
 						this.index = 1;
@@ -3569,7 +3738,7 @@ var waterfire6 = {
 				}
 			}
 			if(spell == "Frozen Ring"){
-				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
 				this.Iindex++;
 				if(this.Iindex >= 6){
 					this.Iindex = 0;
@@ -3643,11 +3812,11 @@ var waterfire7 = {
 		if(this.onScreen == 1){
 			if(spell == "Explosive Ring"){
 				if(this.index < 3){
-					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 				}
 				else{
-					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble2, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 					if(this.index >= 5){
 						this.index = 1;
@@ -3655,7 +3824,7 @@ var waterfire7 = {
 				}
 			}
 			if(spell == "Frozen Ring"){
-				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
 				this.Iindex++;
 				if(this.Iindex >= 6){
 					this.Iindex = 0;
@@ -3729,11 +3898,11 @@ var waterfire8 = {
 		if(this.onScreen == 1){
 			if(spell == "Explosive Ring"){
 				if(this.index < 3){
-					ctx.drawImage(FireBubble, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 				}
 				else{
-					ctx.drawImage(FireBubble2, this.x-this.width/2, this.y-this.height/2);
+					ctx.drawImage(FireBubble2, this.x-this.width*0.5, this.y-this.height*0.5);
 					this.index++;
 					if(this.index >= 5){
 						this.index = 1;
@@ -3741,7 +3910,7 @@ var waterfire8 = {
 				}
 			}
 			if(spell == "Frozen Ring"){
-				ctx.drawImage(iceBpics[Math.floor(this.Iindex/2)], this.x-this.width/2, this.y-this.height/2);
+				ctx.drawImage(iceBpics[Math.floor(this.Iindex*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
 				this.Iindex++;
 				if(this.Iindex >= 6){
 					this.Iindex = 0;
@@ -3819,14 +3988,14 @@ var Wfire = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -3894,14 +4063,14 @@ var Wfire2 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -3969,14 +4138,14 @@ var Wfire3 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -4044,14 +4213,14 @@ var Wfire4 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -4119,14 +4288,14 @@ var Wfire5 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -4194,14 +4363,14 @@ var Wfire6 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -4269,14 +4438,14 @@ var Wfire7 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -4344,14 +4513,14 @@ var Wfire8 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -4416,7 +4585,7 @@ var IBubble = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -4465,7 +4634,7 @@ var IBubble2 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -4514,7 +4683,7 @@ var IBubble3 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -4563,7 +4732,7 @@ var IBubble4 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -4612,7 +4781,7 @@ var IBubble5 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -4661,7 +4830,7 @@ var IBubble6 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -4710,7 +4879,7 @@ var IBubble7 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -4759,7 +4928,7 @@ var IBubble8 = {
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.25;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
+			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
 	},
@@ -4815,7 +4984,7 @@ var waterearth = {
 			earth.shoot();
 			water.cd = currentWatercd;
 			earth.cd = currentEarthcd;
-			water.cast = 30;
+			water.cast = 20;
 		}
 	}	
 };
@@ -4865,7 +5034,7 @@ var wairParticleW = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(Bubble, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	},
 	onHit: function(){
@@ -4913,7 +5082,7 @@ var wairParticleA = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(Bubble, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	},
 	onHit: function(){
@@ -4962,7 +5131,7 @@ var wairParticleS = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(Bubble, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	},
 	onHit: function(){
@@ -5011,7 +5180,7 @@ var wairParticleD = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(Bubble, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	},
 	onHit: function(){
@@ -5060,7 +5229,7 @@ var wairParticleWA = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(Bubble, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	},
 	onHit: function(){
@@ -5109,7 +5278,7 @@ var wairParticleWD = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(Bubble, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	},
 	onHit: function(){
@@ -5158,7 +5327,7 @@ var wairParticleAS = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(Bubble, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	},
 	onHit: function(){
@@ -5207,7 +5376,7 @@ var wairParticleSD = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(Bubble, this.x - this.width / 2, this.y - this.height / 2);
+			ctx.drawImage(Bubble, this.x - this.width * 0.5, this.y - this.height * 0.5);
 		}
 	},
 	onHit: function(){
@@ -5243,67 +5412,41 @@ var wairParticleSD = {
 	}
 };	
 var wairParticles = {1: wairParticleW, 2: wairParticleA, 3: wairParticleS, 4: wairParticleD, 5: wairParticleWA, 6: wairParticleWD, 7: wairParticleAS, 8: wairParticleSD};
-var waterlightning = {	
+var waterlightning = {
 	onScreen: 0,
 	cd: 0,
-	cdTop: 900,
-	frame: 0,
+	cdTop: 750,
 	tick: function(){
 		if(this.cd > 0){
 			this.cd-=1;
 		}
-		if(this.onScreen == 1){
-			this.frame++;
-			if(this.frame == 1){
-				SpawnerSpawn.crrentTime=0;
-				SpawnerSpawn.play();
-				Wpool.onScreen = 1;
-				Wpool.timeLeft = 300;
-				Wpool.x = player.x;
-				Wpool.y = player.y;
+		if(!Wpool.onScreen && !Wpool2.onScreen && !Wpool3.onScreen && !Wpool4.onScreen && !Wpool5.onScreen
+		&& !Wpool6.onScreen && !Wpool7.onScreen){
+			this.onScreen = 0;
+			for(w in Wpools){
+				Wpools[w].used = false;
 			}
-			if(this.frame == 60){
-				SpawnerSpawn.crrentTime=0;
-				SpawnerSpawn.play();
-				Wpool2.onScreen = 1;
-				Wpool2.timeLeft = 300;
-				Wpool2.x = player.x;
-				Wpool2.y = player.y;
-			}
-			if(this.frame == 120){
-				SpawnerSpawn.crrentTime=0;
-				SpawnerSpawn.play();
-				Wpool3.onScreen = 1;
-				Wpool3.timeLeft = 300;
-				Wpool3.x = player.x;
-				Wpool3.y = player.y;
-			}
-			if(this.frame == 180){
-				SpawnerSpawn.crrentTime=0;
-				SpawnerSpawn.play();
-				Wpool4.onScreen = 1;
-				Wpool4.timeLeft = 300;
-				Wpool4.x = player.x;
-				Wpool4.y = player.y;
-			}
-			if(this.frame == 240){
-				SpawnerSpawn.crrentTime=0;
-				SpawnerSpawn.play();
-				Wpool5.onScreen = 1;
-				Wpool5.timeLeft = 300;
-				Wpool5.x = player.x;
-				Wpool5.y = player.y;
-			}
-			if(Wpool.onScreen == 0 && Wpool2.onScreen == 0 && Wpool3.onScreen == 0 && Wpool4.onScreen == 0 && Wpool5.onScreen == 0){
-				this.onScreen = 0;
+		}
+		if(this.onScreen){
+			for(w in Wpools){
+				wpool_draw(Wpools[w]);
+				wpool_move(Wpools[w]);
 			}
 		}
 	},
 	shoot: function(){
 		if(this.cd == 0){
 			this.onScreen = 1;
+			if(!Wpool.onScreen && !Wpool.used){
+				SpawnerSpawn.currentTime=0;
+				SpawnerSpawn.play();
+				Wpool.onScreen = 1;
+				Wpool.timeLeft = 210;
+				Wpool.x = player.x;
+				Wpool.y = player.y;
+				Wpool.used = true;
+			}
 			this.cd = this.cdTop;
-			this.frame = 0;
 		}
 	}
 };
@@ -5316,66 +5459,9 @@ var Wpool = {
 	x: -100,
 	y: -200,
 	frame: 0,
+	used: false,
 	onScreen: 0,
-	charged: 0,
-	draw: function(){
-		if(this.onScreen == 1){
-			if(this.charged == 1){
-				if(this.frame/2 != Math.round(this.frame/2)){
-					ctx.fillStyle = this.color2;
-				}
-				else{
-					ctx.fillStyle = this.color;
-				}
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	move: function(){
-		if(contained(player, this)){
-			this.charged = 1;
-			longlaser.play();
-		}
-		else{
-			this.charged = 0;
-		}
-		if(this.frame <= 10 && this.onScreen == 1){
-			this.width = this.width + 2*this.frame;
-			this.height = this.height + 2*this.frame;
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
-					}
-				}
-			}
-		}
-		else if(this.frame < 300 && this.onScreen == 1){
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
-					}
-				}
-			}
-		}
-		if(this.frame >= 300 && this.onScreen == 1){
-			this.onScreen = 0;
-			this.frame = 0;
-			this.width = 32;
-			this.height = 32;
-			this.charged = 0;
-			this.x = -200;
-			this.y = -100;
-		}
-	}
+	charged: 0
 };
 var Wpool2 = {
 	color: "#0000FF",
@@ -5386,66 +5472,9 @@ var Wpool2 = {
 	x: -100,
 	y: -200,
 	frame: 0,
+	used: false,
 	onScreen: 0,
-	charged: 0,
-	draw: function(){
-		if(this.onScreen == 1){
-			if(this.charged == 1){
-				if(this.frame/2 != Math.round(this.frame/2)){
-					ctx.fillStyle = this.color2;
-				}
-				else{
-					ctx.fillStyle = this.color;
-				}
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	move: function(){
-		if(contained(player, this)){
-			this.charged = 1;
-			longlaser.play();
-		}
-		else{
-			this.charged = 0;
-		}
-		if(this.frame <= 10 && this.onScreen == 1){
-			this.width = this.width + 2*this.frame;
-			this.height = this.height + 2*this.frame;
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
-					}
-				}
-			}
-		}
-		else if(this.frame < 300 && this.onScreen == 1){
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
-					}
-				}
-			}
-		}
-		if(this.frame >= 300 && this.onScreen == 1){
-			this.onScreen = 0;
-			this.frame = 0;
-			this.width = 32;
-			this.height = 32;
-			this.charged = 0;
-			this.x = -200;
-			this.y = -100;
-		}
-	}
+	charged: 0
 };
 var Wpool3 = {
 	color: "#0000FF",
@@ -5456,66 +5485,9 @@ var Wpool3 = {
 	x: -100,
 	y: -200,
 	frame: 0,
+	used: false,
 	onScreen: 0,
-	charged: 0,
-	draw: function(){
-		if(this.onScreen == 1){
-			if(this.charged == 1){
-				if(this.frame/2 != Math.round(this.frame/2)){
-					ctx.fillStyle = this.color2;
-				}
-				else{
-					ctx.fillStyle = this.color;
-				}
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	move: function(){
-		if(contained(player, this)){
-			this.charged = 1;
-			longlaser.play();
-		}
-		else{
-			this.charged = 0;
-		}
-		if(this.frame <= 10 && this.onScreen == 1){
-			this.width = this.width + 2*this.frame;
-			this.height = this.height + 2*this.frame;
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
-					}
-				}
-			}
-		}
-		else if(this.frame < 300 && this.onScreen == 1){
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
-					}
-				}
-			}
-		}
-		if(this.frame >= 300 && this.onScreen == 1){
-			this.onScreen = 0;
-			this.frame = 0;
-			this.width = 32;
-			this.height = 32;
-			this.charged = 0;
-			this.x = -200;
-			this.y = -100;
-		}
-	}
+	charged: 0
 };
 var Wpool4 = {
 	color: "#0000FF",
@@ -5526,66 +5498,9 @@ var Wpool4 = {
 	x: -100,
 	y: -200,
 	frame: 0,
+	used: false,
 	onScreen: 0,
-	charged: 0,
-	draw: function(){
-		if(this.onScreen == 1){
-			if(this.charged == 1){
-				if(this.frame/2 != Math.round(this.frame/2)){
-					ctx.fillStyle = this.color2;
-				}
-				else{
-					ctx.fillStyle = this.color;
-				}
-			}
-			else{
-				ctx.fillStyle = this.color;
-			}
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	move: function(){
-		if(contained(player, this)){
-			this.charged = 1;
-			longlaser.play();
-		}
-		else{
-			this.charged = 0;
-		}
-		if(this.frame <= 10 && this.onScreen == 1){
-			this.width = this.width + 2*this.frame;
-			this.height = this.height + 2*this.frame;
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
-					}
-				}
-			}
-		}
-		else if(this.frame < 300 && this.onScreen == 1){
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
-					}
-				}
-			}
-		}
-		if(this.frame >= 300 && this.onScreen == 1){
-			this.onScreen = 0;
-			this.frame = 0;
-			this.width = 32;
-			this.height = 32;
-			this.charged = 0;
-			this.x = -200;
-			this.y = -100;
-		}
-	}
+	charged: 0
 };
 var Wpool5 = {
 	color: "#0000FF",
@@ -5596,68 +5511,143 @@ var Wpool5 = {
 	x: -100,
 	y: -200,
 	frame: 0,
+	used: false,
 	onScreen: 0,
-	charged: 0,
-	draw: function(){
-		if(this.onScreen == 1){
-			if(this.charged == 1){
-				if(this.frame/2 != Math.round(this.frame/2)){
-					ctx.fillStyle = this.color2;
-				}
-				else{
-					ctx.fillStyle = this.color;
-				}
+	charged: 0
+};
+var Wpool6 = {
+	color: "#0000FF",
+	color2: "#FFFF00",
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	frame: 0,
+	used: false,
+	onScreen: 0,
+	charged: 0
+};
+var Wpool7 = {
+	color: "#0000FF",
+	color2: "#FFFF00",
+	timeLeft: 0,
+	width: 32,
+	height: 32,
+	x: -100,
+	y: -200,
+	frame: 0,
+	used: false,
+	onScreen: 0,
+	charged: 0
+};
+//draw water pool
+function wpool_draw(p){
+	if(p.onScreen == 1){
+		if(p.charged == 1){
+			if(p.frame*0.5 != Math.round(p.frame*0.5)){
+				ctx.fillStyle = p.color2;
 			}
 			else{
-				ctx.fillStyle = this.color;
+				ctx.fillStyle = p.color;
 			}
-			ctx.globalAlpha = Alpha*0.25;
-			ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2,	this.width, this.height);
-			ctx.globalAlpha = Alpha;
-		}
-	},
-	move: function(){
-		if(contained(player, this)){
-			this.charged = 1;
-			longlaser.play();
 		}
 		else{
-			this.charged = 0;
+			ctx.fillStyle = p.color;
 		}
-		if(this.frame <= 10 && this.onScreen == 1){
-			this.width = this.width + 2*this.frame;
-			this.height = this.height + 2*this.frame;
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
+		ctx.globalAlpha = Alpha*0.25;
+		ctx.fillRect(p.x - p.width * 0.5, p.y - p.height * 0.5,	p.width, p.height);
+		ctx.globalAlpha = Alpha;
+	}
+}
+//increment/collisions for water pool
+function wpool_move(p){
+	if(contained(player, p)){
+		p.charged = 1;
+		longlaser.play();
+	}
+	else{
+		p.charged = 0;
+	}
+	if((p.frame <= 10 || p.frame < 210) && p.onScreen == 1){
+		if(p.frame<=10){
+			p.width = p.width + 2*p.frame;
+			p.height = p.height + 2*p.frame;
+		}
+		p.frame++;
+		if(p.charged == 1){
+			for (E in AllEnemies){
+				if(collision(AllEnemies[E].dir, AllEnemies[E], p) || contained(p, AllEnemies[E])){
+					if(!Wpool2.onScreen && !Wpool2.used){
+						SpawnerSpawn.currentTime=0;
+						SpawnerSpawn.play();
+						Wpool2.onScreen = 1;
+						Wpool2.timeLeft = 210;
+						Wpool2.used = true;
+						Wpool2.x = AllEnemies[E].x;
+						Wpool2.y = AllEnemies[E].y;
 					}
+					else if(!Wpool3.onScreen && !Wpool3.used){
+						SpawnerSpawn.currentTime=0;
+						SpawnerSpawn.play();
+						Wpool3.onScreen = 1;
+						Wpool3.timeLeft = 210;
+						Wpool3.used = true;
+						Wpool3.x = AllEnemies[E].x;
+						Wpool3.y = AllEnemies[E].y;
+					}
+					else if(!Wpool4.onScreen && !Wpool4.used){
+						SpawnerSpawn.currentTime=0;
+						SpawnerSpawn.play();
+						Wpool4.onScreen = 1;
+						Wpool4.timeLeft = 210;
+						Wpool4.used = true;
+						Wpool4.x = AllEnemies[E].x;
+						Wpool4.y = AllEnemies[E].y;
+					}
+					else if(!Wpool5.onScreen && !Wpool5.used){
+						SpawnerSpawn.currentTime=0;
+						SpawnerSpawn.play();
+						Wpool5.onScreen = 1;
+						Wpool5.timeLeft = 210;
+						Wpool5.used = true;
+						Wpool5.x = AllEnemies[E].x;
+						Wpool5.y = AllEnemies[E].y;
+					}
+					else if(!Wpool6.onScreen && !Wpool6.used){
+						SpawnerSpawn.currentTime=0;
+						SpawnerSpawn.play();
+						Wpool6.onScreen = 1;
+						Wpool6.timeLeft = 210;
+						Wpool6.used = true;
+						Wpool6.x = AllEnemies[E].x;
+						Wpool6.y = AllEnemies[E].y;
+					}
+					else if(!Wpool7.onScreen && !Wpool7.used){
+						SpawnerSpawn.currentTime=0;
+						SpawnerSpawn.play();
+						Wpool7.onScreen = 1;
+						Wpool7.timeLeft = 210;
+						Wpool7.used = true;
+						Wpool7.x = AllEnemies[E].x;
+						Wpool7.y = AllEnemies[E].y;
+					}
+					onHit(AllEnemies[E]);
 				}
 			}
-		}
-		else if(this.frame < 300 && this.onScreen == 1){
-			this.frame++;
-			if(this.charged == 1){
-				for (E in AllEnemies){
-					if(collision(AllEnemies[E].dir, AllEnemies[E], this) || contained(this, AllEnemies[E])){
-						onHit(AllEnemies[E]);
-					}
-				}
-			}
-		}
-		if(this.frame >= 300 && this.onScreen == 1){
-			this.onScreen = 0;
-			this.frame = 0;
-			this.width = 32;
-			this.height = 32;
-			this.charged = 0;
-			this.x = -200;
-			this.y = -100;
 		}
 	}
-};
-var Wpools = {1: Wpool, 2: Wpool2, 3: Wpool3, 4: Wpool4, 5: Wpool5};
+	if(p.frame >= 210 && p.onScreen == 1){
+		p.onScreen = 0;
+		p.frame = 0;
+		p.width = 32;
+		p.height = 32;
+		p.charged = 0;
+		p.x = -200;
+		p.y = -100;
+	}
+}
+var Wpools = {1: Wpool, 2: Wpool2, 3: Wpool3, 4: Wpool4, 5: Wpool5, 6: Wpool6, 7: Wpool7};
 // Flame Trap: Drops 2 dmg explosion trap on player's location
 var darkfire = {
 	x: -100,
@@ -5776,14 +5766,14 @@ var darkfireExplosion = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -5862,14 +5852,14 @@ var darkfireExplosion2 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -5948,14 +5938,14 @@ var darkfireExplosion3 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -6034,14 +6024,14 @@ var darkfireExplosion4 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -6120,14 +6110,14 @@ var darkfireExplosion5 = {
 				this.used = 1;
 			}
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "#CC0000";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -6419,20 +6409,20 @@ var darkiceEffect1 = {
 				this.prevSpeed = this.target.speed;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
-			else if(this.frame < 90){
+			else if(this.frame < 150){
 				this.frame++;
 				this.target.speed = 0;
 			}
@@ -6478,20 +6468,20 @@ var darkiceEffect2 = {
 				this.prevSpeed = this.target.speed;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
-			else if(this.frame < 90){
+			else if(this.frame < 150){
 				this.frame++;
 				this.target.speed = 0;
 			}
@@ -6537,20 +6527,20 @@ var darkiceEffect3 = {
 				this.prevSpeed = this.target.speed;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
-			else if(this.frame < 90){
+			else if(this.frame < 150){
 				this.frame++;
 				this.target.speed = 0;
 			}
@@ -6596,20 +6586,20 @@ var darkiceEffect4 = {
 				this.prevSpeed = this.target.speed;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
-			else if(this.frame < 90){
+			else if(this.frame < 150){
 				this.frame++;
 				this.target.speed = 0;
 			}
@@ -6655,20 +6645,20 @@ var darkiceEffect5 = {
 				this.prevSpeed = this.target.speed;
 			}
 			if(this.frame < 4){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width + 8 * this.frame;
 				this.height = this.height + 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
 			else if(this.frame < 8){
-				ctx.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				this.width = this.width - 8 * this.frame;
 				this.height = this.height - 8 * this.frame;
 				this.frame++;
 				this.target.speed = 0;
 			}
-			else if(this.frame < 90){
+			else if(this.frame < 150){
 				this.frame++;
 				this.target.speed = 0;
 			}
@@ -6722,10 +6712,10 @@ var darkearth = {
 		if(this.blackTimer > 0){
 			this.blackTimer -=1;
 			ctx.fillStyle = "black";
-			ctx.fillRect(player.x-this.width/2, player.y-this.height-64, this.width, this.height);
-			ctx.fillRect(player.x-this.width/2, player.y+64, this.width, this.height);
-			ctx.fillRect(player.x-this.height-64, player.y-this.width/2, this.height, this.width);
-			ctx.fillRect(player.x+64, player.y-this.width/2, this.height, this.width);
+			ctx.fillRect(player.x-this.width*0.5, player.y-this.height-64, this.width, this.height);
+			ctx.fillRect(player.x-this.width*0.5, player.y+64, this.width, this.height);
+			ctx.fillRect(player.x-this.height-64, player.y-this.width*0.5, this.height, this.width);
+			ctx.fillRect(player.x+64, player.y-this.width*0.5, this.height, this.width);
 			ctx.globalAlpha = Alpha*0.75;
 			ctx.fillStyle = "black";
 			ctx.fillRect(0, 0, 800, 576);
@@ -6822,14 +6812,14 @@ var darklightningExplosion = {
 		if(this.onScreen == 1 && this.timeLeft/30 == Math.round(this.timeLeft/30)){
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
-			if(this.frame/2 != Math.round(this.frame/2)){
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
 				ctx.fillStyle = "white";
 			}
 			else{
 				ctx.fillStyle = this.color;
 			}
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -6911,8 +6901,8 @@ var darklightningExplosion2 = {
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -6995,8 +6985,8 @@ var darklightningExplosion3 = {
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -7079,8 +7069,8 @@ var darklightningExplosion4 = {
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -7163,8 +7153,8 @@ var darklightningExplosion5 = {
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -7240,8 +7230,8 @@ var darklightningExplosion6 = {
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -7324,8 +7314,8 @@ var darklightningExplosion7 = {
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -7408,8 +7398,8 @@ var darklightningExplosion8 = {
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -7492,8 +7482,8 @@ var darklightningExplosion9 = {
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -7576,8 +7566,8 @@ var darklightningExplosion10 = {
 			this.frame++;
 			ctx.globalAlpha = Alpha*0.5;
 			ctx.fillStyle = this.color;
-			ctx.fillRect(this.x - this.width / 2,
-			this.y - this.height / 2,
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
 		}
@@ -7721,35 +7711,35 @@ var darkair = {
 	},
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(darkairimg[this.index], this.x-this.width/2, this.y-this.height/2);
+			ctx.drawImage(darkairimg[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
 			this.index++;
 			if(this.index > 4){
 				this.index = 1;
 			}
 		}
 		if(darkair2.onScreen == 1){
-			ctx.drawImage(darkairimg[darkair2.index], darkair2.x-darkair2.width/2, darkair2.y-darkair2.height/2);
+			ctx.drawImage(darkairimg[darkair2.index], darkair2.x-darkair2.width*0.5, darkair2.y-darkair2.height*0.5);
 			darkair2.index++;
 			if(darkair2.index > 4){
 				darkair2.index = 1;
 			}
 		}
 		if(darkair3.onScreen == 1){
-			ctx.drawImage(darkairimg[darkair3.index], darkair3.x-darkair3.width/2, darkair3.y-darkair3.height/2);
+			ctx.drawImage(darkairimg[darkair3.index], darkair3.x-darkair3.width*0.5, darkair3.y-darkair3.height*0.5);
 			darkair3.index++;
 			if(darkair3.index > 4){
 				darkair3.index = 1;
 			}
 		}
 		if(darkair4.onScreen == 1){
-			ctx.drawImage(darkairimg[darkair4.index], darkair4.x-darkair4.width/2, darkair4.y-darkair4.height/2);
+			ctx.drawImage(darkairimg[darkair4.index], darkair4.x-darkair4.width*0.5, darkair4.y-darkair4.height*0.5);
 			darkair4.index++;
 			if(darkair4.index > 4){
 				darkair4.index = 1;
 			}
 		}
 		if(darkair5.onScreen == 1){
-			ctx.drawImage(darkairimg[darkair5.index], darkair5.x-darkair5.width/2, darkair5.y-darkair5.height/2);
+			ctx.drawImage(darkairimg[darkair5.index], darkair5.x-darkair5.width*0.5, darkair5.y-darkair5.height*0.5);
 			darkair5.index++;
 			if(darkair5.index > 4){
 				darkair5.index = 1;
@@ -7945,19 +7935,19 @@ var darkwater = {
 	draw: function(){
 		if(this.onScreen == 1){
 			ctx.globalAlpha = Alpha*0.75;
-			if(this.hptimer/2 != Math.round(this.hptimer/2)){
+			if(this.hptimer*0.5 != Math.round(this.hptimer*0.5)){
 				ctx.fillStyle = "white";
-				ctx.fillRect(player.x-this.width/2, player.y-this.height/2, this.width, this.height);
+				ctx.fillRect(player.x-this.width*0.5, player.y-this.height*0.5, this.width, this.height);
 			}
 			else{
 				if(this.hp == 1){
-					ctx.drawImage(darksheildimg1[this.index], player.x-this.width/2, player.y-this.height/2);
+					ctx.drawImage(darksheildimg1[this.index], player.x-this.width*0.5, player.y-this.height*0.5);
 				}
 				else if(this.hp == 2){
-					ctx.drawImage(darksheildimg2[this.index], player.x-this.width/2, player.y-this.height/2);
+					ctx.drawImage(darksheildimg2[this.index], player.x-this.width*0.5, player.y-this.height*0.5);
 				}
 				else if(this.hp == 3){
-					ctx.drawImage(darksheildimg3[this.index], player.x-this.width/2, player.y-this.height/2);
+					ctx.drawImage(darksheildimg3[this.index], player.x-this.width*0.5, player.y-this.height*0.5);
 				}
 				this.index++;
 				if(this.index > 4){
@@ -7967,16 +7957,16 @@ var darkwater = {
 			ctx.globalAlpha = Alpha;
 			ctx.fillStyle = "#00FFCC";
 			if(this.hp == 3){
-				ctx.fillRect(player.x - player.width/2, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
-				ctx.fillRect(player.x - (player.width/2)+13, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
-				ctx.fillRect(player.x - (player.width/2) + 26, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
+				ctx.fillRect(player.x - player.width*0.5, player.y - player.height*0.5 - player.height*0.5, player.width*0.25, player.height*0.25);
+				ctx.fillRect(player.x - (player.width*0.5)+13, player.y - player.height*0.5 - player.height*0.5, player.width*0.25, player.height*0.25);
+				ctx.fillRect(player.x - (player.width*0.5) + 26, player.y - player.height*0.5 - player.height*0.5, player.width*0.25, player.height*0.25);
 			}
 			else if(this.hp == 2){
-				ctx.fillRect(player.x - player.width/2, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
-				ctx.fillRect(player.x - (player.width/2)+13, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
+				ctx.fillRect(player.x - player.width*0.5, player.y - player.height*0.5 - player.height*0.5, player.width*0.25, player.height*0.25);
+				ctx.fillRect(player.x - (player.width*0.5)+13, player.y - player.height*0.5 - player.height*0.5, player.width*0.25, player.height*0.25);
 			}
 			else if(this.hp == 1){
-				ctx.fillRect(player.x - player.width/2, player.y - player.height/2 - player.height/2, player.width/4, player.height/4);
+				ctx.fillRect(player.x - player.width*0.5, player.y - player.height*0.5 - player.height*0.5, player.width*0.25, player.height*0.25);
 			}
 			ctx.globalAlpha = Alpha;
 		}
@@ -8006,19 +7996,19 @@ var darkwater = {
 			Pickup.play();
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+1";
-				typemarker3.x = player.x-player.width/2;
+				typemarker3.x = player.x-player.width*0.5;
 				typemarker3.y = player.y;
 				typemarker3.timeLeft = 20;
 			}
 			else if(typemarker.x != -100){
 				typemarker2.text = "+1";
-				typemarker2.x = player.x-player.width/2;
+				typemarker2.x = player.x-player.width*0.5;
 				typemarker2.y = player.y;
 				typemarker2.timeLeft = 20;
 			}
 			else{
 				typemarker.text = "+1";
-				typemarker.x = player.x-player.width/2;
+				typemarker.x = player.x-player.width*0.5;
 				typemarker.y = player.y;
 				typemarker.timeLeft = 20;
 			}
@@ -8048,6 +8038,2327 @@ var darkwater = {
 		}
 	}
 };
+//light+fire:summon fire duder
+//attack
+var flameBreath1 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	dir: "A",
+	draw: function(){
+		if(this.timeLeft){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft--;
+			this.frame++;
+			this.width+=5;
+			this.height+=5;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+		if(this.timeLeft == 0){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.frame = 0;
+		}
+		if(this.timeLeft){
+			if(this.dir == "A"){
+				this.x-=8;
+			}
+			else{
+				this.x+=8;
+			}
+		}
+	}
+};
+var flameBreath2 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	dir: "A",
+	draw: function(){
+		if(this.timeLeft){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft--;
+			this.frame++;
+			this.width+=5;
+			this.height+=5;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+		if(this.timeLeft == 0){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.frame = 0;
+		}
+		if(this.timeLeft){
+			if(this.dir == "A"){
+				this.x-=8;
+			}
+			else{
+				this.x+=8;
+			}
+		}
+	}
+};
+var flameBreath3 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	dir: "A",
+	draw: function(){
+		if(this.timeLeft){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft--;
+			this.frame++;
+			this.width+=5;
+			this.height+=5;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+		if(this.timeLeft == 0){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.frame = 0;
+		}
+		if(this.timeLeft){
+			if(this.dir == "A"){
+				this.x-=8;
+			}
+			else{
+				this.x+=8;
+			}
+		}
+	}
+};
+var flameBreath4 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	dir: "A",
+	draw: function(){
+		if(this.timeLeft){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft--;
+			this.frame++;
+			this.width+=5;
+			this.height+=5;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+		if(this.timeLeft == 0){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.frame = 0;
+		}
+		if(this.timeLeft){
+			if(this.dir == "A"){
+				this.x-=8;
+			}
+			else{
+				this.x+=8;
+			}
+		}
+	}
+};
+var flameBreath5 = {
+	color: "#FF6600",
+	x: -100,
+	y: -200,
+	timeLeft: 0,
+	width: 16,
+	height: 16,
+	frame: 0,
+	dir: "A",
+	draw: function(){
+		if(this.timeLeft){
+			if(this.used == 0){
+				Explosion.currentTime=0;
+				Explosion.play();
+				this.used = 1;
+			}
+			ctx.globalAlpha = Alpha*0.5;
+			if(this.frame*0.5 != Math.round(this.frame*0.5)){
+				ctx.fillStyle = "#CC0000";
+			}
+			else{
+				ctx.fillStyle = this.color;
+			}
+			ctx.fillRect(this.x - this.width * 0.5,
+			this.y - this.height * 0.5,
+			this.width, this.height);
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	move: function(){
+		if(this.timeLeft > 0){
+			this.timeLeft--;
+			this.frame++;
+			this.width+=5;
+			this.height+=5;
+			for (E in AllEnemies){
+				if(contained(AllEnemies[E], this)){
+					onHit(AllEnemies[E]);
+				}
+			}
+			for (O in obstacle1){
+				if(contained(obstacle1[O], this)){
+					obsHit(obstacle1[O]);
+				}
+			}
+			for (O in obstacle2){
+				if(contained(obstacle2[O], this)){
+					obsHit(obstacle2[O]);
+				}
+			}
+			for (O in obstacle3){
+				if(contained(obstacle3[O], this)){
+					obsHit(obstacle3[O]);
+				}
+			}
+		}
+		if(this.timeLeft == 0){
+			this.x = -100;
+			this.y = -200;
+			this.width = 16;
+			this.height = 16;
+			this.frame = 0;
+		}
+		if(this.timeLeft){
+			if(this.dir == "A"){
+				this.x-=8;
+			}
+			else{
+				this.x+=8;
+			}
+		}
+	}
+};
+
+//angel
+var lightfire = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	width2: 32,
+	height2: 32,
+	frame: 0,
+	timeLeft: 0,
+	cd: 0,
+	cdTop: 1200,
+	breathcd: 90,
+	speed: 2,
+	onScreen: 0,
+	dir: "",
+	LR: "Left",
+	dirct: 0,
+	casting: false,
+	draw: function(){
+		if(this.onScreen){
+			if(this.casting){
+				if(this.LR == "Left"){
+					ctx.drawImage(FirehogFL1, this.x-this.width*0.5, this.y-this.height*0.5);
+				}
+				else{
+					ctx.drawImage(FirehogFR1, this.x-this.width*0.5, this.y-this.height*0.5);
+				}
+			}
+			else{
+				if(this.LR == "Left"){
+					ctx.drawImage(FirehogL1, this.x-this.width*0.5, this.y-this.height*0.5);
+				}
+				else{
+					ctx.drawImage(FirehogR1, this.x-this.width*0.5, this.y-this.height*0.5);
+				}
+			}
+			ctx.globalAlpha = Alpha*0.25;
+			ctx.fillStyle = FireColor;
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 + 8 * this.frame;
+				this.height2 = this.height2 + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 - 8 * this.frame;
+				this.height2 = this.height2 - 8 * this.frame;
+				this.frame++;
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	Shoot_AI: function(){
+		if(this.onScreen && this.breathcd <=0){
+			this.speed = 0;
+			this.casting = true;
+			Explosion.play();
+			if(!flameBreath1.timeLeft){
+				flameBreath1.timeLeft = 35;
+				flameBreath1.x = this.x;
+				flameBreath1.y = this.y;
+				if(this.LR == "Left"){
+					flameBreath1.dir = "A";
+				}
+				else{
+					flameBreath1.dir = "D";
+				}
+				this.breathcd = 5;				
+			}
+			else if(!flameBreath2.timeLeft){
+				flameBreath2.timeLeft = 35;
+				flameBreath2.x = this.x;
+				flameBreath2.y = this.y;
+				if(this.LR == "Left"){
+					flameBreath2.dir = "A";
+				}
+				else{
+					flameBreath2.dir = "D";
+				}
+				this.breathcd = 5;
+			}
+			else if(!flameBreath3.timeLeft){
+				flameBreath3.timeLeft = 35;
+				flameBreath3.x = this.x;
+				flameBreath3.y = this.y;
+				if(this.LR == "Left"){
+					flameBreath3.dir = "A";
+				}
+				else{
+					flameBreath3.dir = "D";
+				}
+				this.breathcd = 5;
+			}
+			else if(!flameBreath4.timeLeft){
+				flameBreath4.timeLeft = 35;
+				flameBreath4.x = this.x;
+				flameBreath4.y = this.y;
+				if(this.LR == "Left"){
+					flameBreath4.dir = "A";
+				}
+				else{
+					flameBreath4.dir = "D";
+				}
+				this.breathcd = 5;
+			}
+			else if(!flameBreath5.timeLeft){
+				flameBreath5.timeLeft = 35;
+				flameBreath5.x = this.x;
+				flameBreath5.y = this.y;
+				if(this.LR == "Left"){
+					flameBreath5.dir = "A";
+				}
+				else{
+					flameBreath5.dir = "D";
+				}
+				this.breathcd = 60;
+				this.casting = false;
+			}
+		}
+		else if(this.breathcd > 0){
+			this.breathcd-=1;
+			this.speed = 2;
+		}
+	},
+	shoot: function(){
+		if(this.cd <= 0){
+			fastbeepsHigh.currentTime=0;
+			fastbeepsHigh.play();
+			this.x = player.x;
+			this.y = player.y;
+			this.onScreen = 1;
+			this.timeLeft = 900;
+			this.width2 = 32;
+			this.height2 = 32;
+			this.frame = 0;
+			this.cd = this.cdTop;
+		}
+	}
+};
+
+var IceTrail1 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+
+var IceTrail2 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+
+var IceTrail3 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+
+var IceTrail4 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+
+var IceTrail5 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+
+var IceTrail6 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+
+var IceTrail7 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+
+var IceTrail8 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+
+var IceTrail9 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+
+var IceTrail10 = {
+	x: -100,
+	y: -200,
+	width: 48,
+	height: 32,
+	frame: 0,
+	onScreen: 0
+};
+var IceTrails = {1: IceTrail1, 2: IceTrail2, 3: IceTrail3, 4: IceTrail4, 5: IceTrail5, 6: IceTrail6, 7: IceTrail7, 8: IceTrail8, 9: IceTrail9, 10: IceTrail10};
+
+function MoveIceTrail(I){
+	if(I.frame <= 10 && I.onScreen){
+		I.width = I.width + 2*I.frame;
+		I.height = I.height + 2*I.frame;
+		I.frame++;
+		for (E in AllEnemies){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], I) || contained(I, AllEnemies[E])){
+				AllEnemies[E].speed = AllEnemies[E].speed2;
+			}
+		}
+	}
+	else if(I.frame < 150 && I.onScreen){
+		I.frame++;
+		for (E in AllEnemies){
+			if(collision(AllEnemies[E].dir, AllEnemies[E], I) || contained(I, AllEnemies[E])){
+				AllEnemies[E].speed = AllEnemies[E].speed2;
+			}
+		}
+	}
+	if(I.frame >= 150 && I.onScreen){
+		for (E in AllEnemies){
+			AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
+		}
+		I.onScreen = 0;
+		I.frame = 0;
+		I.width = 32;
+		I.height = 32;
+	}
+}
+
+var lightice = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	width2: 32,
+	height2: 32,
+	frame: 0,
+	timeLeft: 0,
+	cd: 0,
+	cdTop: 1200,
+	breathcd: 45,
+	speed: 2,
+	onScreen: 0,
+	dir: "",
+	LR: "Left",
+	dirct: 0,
+	draw: function(){
+		if(this.onScreen){
+			ctx.fillStyle = IceColor;
+			/*if(this.LR == "Left"){
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+			}
+			else{
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+			}*/
+			ctx.drawImage(IceMinionL1, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 + 8 * this.frame;
+				this.height2 = this.height2 + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 - 8 * this.frame;
+				this.height2 = this.height2 - 8 * this.frame;
+				this.frame++;
+			}
+			for(I in IceTrails){
+				if(IceTrails[I].onScreen){
+					ctx.fillRect(IceTrails[I].x-IceTrails[I].width*0.5, IceTrails[I].y-IceTrails[I].height*0.5, IceTrails[I].width, IceTrails[I].height);
+					MoveIceTrail(IceTrails[I]);
+				}
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	Shoot_AI: function(){
+		if(this.onScreen && this.breathcd <=0){
+			for(I in IceTrails){
+				if(!IceTrails[I].frame){
+					IceTrails[I].x = this.x;
+					IceTrails[I].y = this.y;
+					IceTrails[I].width = 32;
+					IceTrails[I].height = 32;
+					IceTrails[I].onScreen = 1;
+					this.breathcd = 45;
+					SpawnerSpawn.currentTime = 0;
+					SpawnerSpawn.play();
+					break;
+				}
+			}
+		}
+		else if(this.breathcd > 0){
+			this.breathcd-=1;
+		}
+	},
+	shoot: function(){
+		if(this.cd <= 0){
+			fastbeepsHigh.currentTime=0;
+			fastbeepsHigh.play();
+			this.x = player.x;
+			this.y = player.y;
+			this.onScreen = 1;
+			this.timeLeft = 900;
+			this.width2 = 32;
+			this.height2 = 32;
+			this.frame = 0;
+			this.cd = this.cdTop;
+		}
+	}
+};
+
+//Moonlight: Fully heals you but you can't see for x seconds
+var lightearth = {
+	onScreen: 0,
+	cd: 0,
+	cdTop: 600,
+	cast: 0,
+	used: 0,
+	normAlpha: 0,
+	prevEarthcd: 0,
+	draw: function(){
+		if(this.onScreen){
+			if(this.used == 0){
+				Sunlight.currentTime=0;
+				Sunlight.play();
+				this.used = 1;
+			}
+			Alpha *= 0.95;
+			ctx.globalAlpha = 1 - Alpha;
+			ctx.fillStyle = "white";
+			ctx.fillRect(-4, -4, 804, 580);
+			ctx.globalAlpha = Alpha;
+			if(this.cast == 30){
+				this.prevEarthcd = earth.cd;
+				earth.cd = 0;
+				earth.shoot();
+				castingBar.cast = 30;
+				castingBar.castmax = 60;
+			}
+			if(!this.cast){
+				Alpha = this.normAlpha;
+				this.onScreen = 0;
+				for(E in AllEnemies){
+					if(AllEnemies[E].onScreen){
+						onHit(AllEnemies[E]);
+					}
+				}
+				Fwave.currentTime = 0;
+				Fwave.play();
+				earth.cd = this.prevEarthcd;
+			}
+		}
+		if(this.cd > 0){
+			this.cd-=1;
+		}
+		if(this.cast > 0){
+			this.cast-=1;
+		}
+	},
+	shoot: function(){
+		if(this.cd == 0){
+			this.onScreen = 1;
+			this.cd = this.cdTop;
+			this.used = 0;
+			this.cast = 60;
+			cd = 60;
+			this.normAlpha = Alpha;
+			castingBar.onScreen = 1;
+			castingBar.cast = 60;
+			castingBar.castmax = 60;
+		}
+	}	
+};
+
+var lightlightning = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	width2: 32,
+	height2: 32,
+	frame: 0,
+	timeLeft: 0,
+	cd: 0,
+	cdTop: 1800,
+	breathcd: 0,
+	speed: 4,
+	onScreen: 0,
+	dir: "",
+	LR: "Left",
+	dirct: 0,
+	spell: false,
+	slope: 1,
+	closestSlope: 1,
+	slopeIndex: 11,
+	dirSwitch: false,
+	destDir: "",
+	movement: true,
+	index: 0,
+	draw: function(){
+		if(this.onScreen){
+			ctx.fillStyle = LightningColor;
+			/*if(this.LR == "Left"){
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+			}
+			else{
+				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+			}*/
+			ctx.drawImage(darklightningimg[Math.floor(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+			this.index++;
+			if(this.index > 5){
+				this.index = 0;
+			}
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 + 8 * this.frame;
+				this.height2 = this.height2 + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 - 8 * this.frame;
+				this.height2 = this.height2 - 8 * this.frame;
+				this.frame++;
+			}
+			if(this.spell == "H"){
+				ctx.drawImage(hLightnings[this.breathcd % 3], 0, this.y-this.height*0.5);
+			}
+			else if(this.spell == "V"){
+				ctx.drawImage(vLightnings[this.breathcd % 3], this.x-this.width*0.5, 0);
+			}
+			if(!this.breathcd){
+				this.spell = false;
+				this.movement = true;
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	Move_AI: function(){
+		if(this.cd > 0){
+			this.cd -=1;
+		}
+		if(this.onScreen){
+			if(this.timeLeft > 0){
+				this.timeLeft--;
+			}
+			//if off screen, remove
+			if(this.timeLeft <= 0){
+				this.x = 9000;
+				this.y = -400;
+				this.width = 16;
+				this.height = 16;
+				this.dirct = 0;
+				this.dir = "A";
+				this.slope = 1;
+				this.closestSlope = 1;
+				this.slopeIndex = 11;
+				this.onScreen = 0;
+				this.dirct = 0;
+				this.dirSwitch = false;
+				this.destDir = "";
+				this.spell = false;
+				this.breathcd = 0;
+				this.movement = true;
+			}
+			else{
+				if(this.dirct > 0){
+					this.dirct-=1;
+				}
+				//change direction
+				if(Math.sqrt((player.x-this.x)*(player.x- this.x) + (player.y-this.y)*(player.y-this.y)) > 96){
+					if(player.x-player.width*0.5 < this.x-this.width*0.5){
+						if(this.dir != "A"){
+							this.dirSwitch = true;
+							this.destDir = "A";
+						}
+						var playerSlope = (this.y-player.y)/(this.x-player.x);
+					}
+					else if(player.x - player.width*0.5 == this.x - this.width*0.5){
+						this.dir = this.dir;
+					}
+					else{
+						if(this.dir != "D"){
+							this.dirSwitch = true;
+							this.destDir = "D";
+						}
+						var playerSlope = (player.y-this.y)/(player.x-this.x);
+					}
+					if(this.dirSwitch){
+						if(this.slopeIndex <= 7){
+							this.slopeIndex-=1;
+							if(this.slopeIndex < 0){
+								this.slopeIndex = 14;
+								this.dir = this.destDir;
+								this.dirSwitch = false;
+							}
+							this.slope = lightSlopes[this.slopeIndex];
+						}
+						else{
+							this.slopeIndex+=1;
+							if(this.slopeIndex > 14){
+								this.slopeIndex = 0;
+								this.dir = this.destDir;
+								this.dirSwitch = false;
+							}
+							this.slope = lightSlopes[this.slopeIndex];
+						}
+					}
+					else{
+						//find ideal slope
+						for(N in lightSlopes){
+							if(Math.abs(lightSlopes[N] - playerSlope) < Math.abs(this.closestSlope - playerSlope)){
+								this.closestSlope = lightSlopes[N];
+							}
+						}
+						//change slope
+						if(this.closestSlope > this.slope){
+							if(this.closestSlope > 1 && this.slope < -1){
+								this.slopeIndex-=1;
+								this.slope = lightSlopes[this.slopeIndex];
+								if(this.slopeIndex < 0){
+									this.slopeIndex = 14;
+									this.slope = lightSlopes[this.slopeIndex];
+								}
+							}
+							else{
+								this.slopeIndex+=1;
+								this.slope = lightSlopes[this.slopeIndex];
+							}
+						}
+						if(this.closestSlope < this.slope || this.slope == "Vertical"){
+							if(this.closestSlope < -1 && this.slope > 1){
+								this.slopeIndex+=1;
+								this.slope = lightSlopes[this.slopeIndex];
+								if(this.slopeIndex > 14){
+									this.slopeIndex = 0;
+									this.slope = lightSlopes[this.slopeIndex];
+								}
+							}
+							else{
+								this.slopeIndex-=1;
+								this.slope = lightSlopes[this.slopeIndex];
+							}
+						}
+						//consider verticals
+						if(this.x >= player.x - player.width*0.5 && this.x <= player.x + player.width*0.5){
+							if(this.y-this.height*0.5 > player.y - player.height*0.5){
+								this.dir = "A";
+							}
+							else{
+								this.dir = "D";
+							}
+							this.slope = "Vertical";
+							this.slopeIndex = 15;
+						}
+					}
+				}
+			}
+			if(this.movement){
+				if(this.dir == "D"){
+					if(this.slope == "Vertical"){
+						var ymove = this.speed;
+						this.y+=ymove;
+						this.y = Math.floor(this.y);
+					}
+					else if(this.slope > 0 && this.slope < 1){
+						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+						var ymove = xmove*this.slope;
+						this.x+=xmove;
+						this.y+=ymove;
+						this.x = Math.ceil(this.x);
+						this.y = Math.floor(this.y);
+					}
+					else if(this.slope >= 0){
+						//get x distance, speed = total diag distance
+						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+						var ymove = xmove*this.slope;
+						this.x+=xmove;
+						this.y+=ymove;
+						this.x = Math.ceil(this.x);
+						this.y = Math.floor(this.y);
+					}
+					else if(this.slope <= -1){
+						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+						var ymove = xmove*this.slope;
+						this.x+=xmove;
+						this.y+=ymove;
+						this.x = Math.ceil(this.x);
+						this.y = Math.ceil(this.y);
+					}
+					else{
+						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+						var ymove = xmove*this.slope;
+						this.x+=xmove;
+						this.y+=ymove;
+					}
+				}
+				else{
+					if(this.slope == "Vertical"){
+						var ymove = this.speed;
+						this.y-=ymove;
+						this.y = Math.floor(this.y);
+					}
+					else if(this.slope > 0 && this.slope < 1){
+						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+						var ymove = xmove*this.slope;
+						this.x-=xmove;
+						this.y-=ymove;
+						this.x = Math.floor(this.x);
+						this.y = Math.ceil(this.y);
+					}
+					else if(this.slope >= 0){
+						//get x distance, speed = total diag distance
+						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+						var ymove = xmove*this.slope;
+						this.x-=xmove;
+						this.y-=ymove;
+						this.x = Math.ceil(this.x);
+						this.y = Math.floor(this.y);
+					}
+					else if(this.slope <= -1){
+						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+						var ymove = xmove*this.slope;
+						this.x-=xmove;
+						this.y-=ymove;
+						this.x = Math.floor(this.x);
+						this.y = Math.ceil(this.y);
+					}
+					else{
+						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+						var ymove = xmove*this.slope;
+						this.x-=xmove;
+						this.y-=ymove;
+						this.x = Math.ceil(this.x);
+						this.y = Math.floor(this.y);
+					}
+				}
+			}
+			this.Shoot_AI();
+		}
+	},
+	Shoot_AI: function(){
+		if(this.onScreen && this.breathcd <=0){
+			for(E in AllEnemies){
+				if(AllEnemies[E].onScreen){
+					if(AllEnemies[E].x <= this.x + this.width*0.5 && AllEnemies[E].x >= this.x - this.width*0.5){
+						this.breathcd = 9;
+						this.spell = "V";
+						this.y = AllEnemies[E].y;
+						onHit(AllEnemies[E]);
+						this.movement = false;
+						break;
+					}
+					else if(AllEnemies[E].y <= this.y + this.height*0.5 && AllEnemies[E].y >= this.y - this.height*0.5){
+						this.breathcd = 9;
+						this.spell = "H";
+						this.x = AllEnemies[E].x;
+						onHit(AllEnemies[E]);
+						this.movement = false;
+						break;
+					}
+				}
+			}
+		}
+		else if(this.breathcd > 0){
+			this.breathcd-=1;
+		}
+	},
+	shoot: function(){
+		if(this.cd <= 0){
+			fastbeepsHigh.currentTime=0;
+			fastbeepsHigh.play();
+			this.x = player.x;
+			this.y = player.y;
+			this.onScreen = 1;
+			this.timeLeft = 300;
+			this.width2 = 32;
+			this.height2 = 32;
+			this.frame = 0;
+			this.cd = this.cdTop;
+		}
+	}
+};
+
+var lightair = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	width2: 32,
+	height2: 32,
+	frame: 0,
+	timeLeft: 0,
+	cd: 0,
+	cdTop: 1200,
+	speed: 16,
+	onScreen: 0,
+	dir: "",
+	LR: "Left",
+	dirct: 0,
+	index: 1,
+	draw: function(){
+		if(this.onScreen){
+			ctx.fillStyle = AirColor;
+			if(this.dir == "W"){
+				if(this.LR == "Left"){
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5 + 8, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 24, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 40, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 56, this.width, this.height);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 72, this.width, this.height);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 88, this.width, this.height);
+				}
+				else{
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 8, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 24, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 40, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 56, this.width, this.height);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 72, this.width, this.height);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 88, this.width, this.height);
+				}
+			}
+			else if(this.dir == "S"){
+				if(this.LR == "Left"){
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 8, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 24, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 40, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 56, this.width, this.height);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 72, this.width, this.height);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 88, this.width, this.height);
+				}
+				else{
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 8, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.5;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 24, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 40, this.width, this.height);
+					ctx.globalAlpha = Alpha*0.25;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 56, this.width, this.height);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 72, this.width, this.height);
+					ctx.globalAlpha = Alpha/6;
+					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 88, this.width, this.height);
+				}
+			}
+			else if(this.dir == "A"){
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 8, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 24, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 40, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 56, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 72, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 88, this.y-this.height*0.5, this.width, this.height);
+			}
+			else if(this.dir == "D"){
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 8, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 24, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 40, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 56, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 72, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 88, this.y-this.height*0.5, this.width, this.height);
+			}
+			else if(this.dir == "WA"){
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 4, this.y-this.height*0.5 + 4, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 12, this.y-this.height*0.5 + 12, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 20, this.y-this.height*0.5 + 20, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 28, this.y-this.height*0.5 + 28, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 36, this.y-this.height*0.5 + 36, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 44, this.y-this.height*0.5 + 44, this.width, this.height);
+			}
+			else if(this.dir == "WD"){
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 4, this.y-this.height*0.5 + 4, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 12, this.y-this.height*0.5 + 12, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 20, this.y-this.height*0.5 + 20, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 28, this.y-this.height*0.5 + 28, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 36, this.y-this.height*0.5 + 36, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 44, this.y-this.height*0.5 + 44, this.width, this.height);
+			}
+			else if(this.dir == "AS"){
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 4, this.y-this.height*0.5 - 4, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 12, this.y-this.height*0.5 - 12, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 20, this.y-this.height*0.5 - 20, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 28, this.y-this.height*0.5 - 28, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 36, this.y-this.height*0.5 - 36, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 44, this.y-this.height*0.5 - 44, this.width, this.height);
+			}
+			else if(this.dir == "SD"){
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 4, this.y-this.height*0.5 - 4, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.5;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 12, this.y-this.height*0.5 - 12, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 20, this.y-this.height*0.5 - 20, this.width, this.height);
+				ctx.globalAlpha = Alpha*0.25;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 28, this.y-this.height*0.5 - 28, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 36, this.y-this.height*0.5 - 36, this.width, this.height);
+				ctx.globalAlpha = Alpha/6;
+				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 44, this.y-this.height*0.5 - 44, this.width, this.height);
+			}
+			this.index++;
+			if(this.index > 8){
+				this.index = 1;
+			}
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 + 8 * this.frame;
+				this.height2 = this.height2 + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 - 8 * this.frame;
+				this.height2 = this.height2 - 8 * this.frame;
+				this.frame++;
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	Shoot_AI: function(){
+		for(E in AllEnemies){
+			if(collision(this.dir, this, AllEnemies[E])){
+				onHit(AllEnemies[E]);
+			}
+		}
+	},
+	shoot: function(){
+		if(this.cd <= 0){
+			fastbeepsHigh.currentTime=0;
+			fastbeepsHigh.play();
+			this.x = player.x;
+			this.y = player.y;
+			this.onScreen = 1;
+			this.timeLeft = 600;
+			this.width2 = 32;
+			this.height2 = 32;
+			this.frame = 0;
+			this.cd = this.cdTop;
+		}
+	}
+};
+
+var lightwaterBubble1 = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	dir: "W",
+	speed: 16,
+	timeLeft: 0
+};
+var lightwaterBubble2 = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	dir: "A",
+	speed: 16,
+	timeLeft: 0
+};
+var lightwaterBubble3 = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	dir: "S",
+	speed: 16,
+	timeLeft: 0
+};
+var lightwaterBubble4 = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	dir: "D",
+	speed: 16,
+	timeLeft: 0
+};
+var lightwaterBubble5 = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	dir: "WD",
+	speed: 16,
+	timeLeft: 0
+};
+var lightwaterBubble6 = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	dir: "WA",
+	speed: 16,
+	timeLeft: 0
+};
+var lightwaterBubble7 = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	dir: "AS",
+	speed: 16,
+	timeLeft: 0
+};
+var lightwaterBubble8 = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	dir: "SD",
+	speed: 16,
+	timeLeft: 0
+};
+
+function movelwBubbles(){
+	for(W in lightwaterBubbles1){
+		if(lightwaterBubbles1[W].timeLeft > 0){
+			lightwaterBubbles1[W].timeLeft--;
+			if(lightwaterBubbles1[W].timeLeft <= 0){
+				lightwaterBubbles1[W].x = -100;
+				lightwaterBubbles1[W].y = -200;
+			}
+			for(E in AllEnemies){
+				if(collision(lightwaterBubbles1[W].dir, lightwaterBubbles1[W], AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], lightwaterBubbles1[W])){
+					onHit(AllEnemies[E]);
+					lightwaterBubbles1[W].timeLeft = 0;
+				}
+			}
+			if(lightwaterBubbles1[W].dir == "W"){
+				lightwaterBubbles1[W].y-=lightwaterBubbles1[W].speed;
+			}
+			else if(lightwaterBubbles1[W].dir == "A"){
+				lightwaterBubbles1[W].x-=lightwaterBubbles1[W].speed;
+			}
+			else if(lightwaterBubbles1[W].dir == "S"){
+				lightwaterBubbles1[W].y+=lightwaterBubbles1[W].speed;
+			}
+			else if(lightwaterBubbles1[W].dir == "D"){
+				lightwaterBubbles1[W].x+=lightwaterBubbles1[W].speed;
+			}
+			else if(lightwaterBubbles1[W].dir == "WA"){
+				lightwaterBubbles1[W].x-=lightwaterBubbles1[W].speed/Math.sqrt(2);
+				lightwaterBubbles1[W].y-=lightwaterBubbles1[W].speed/Math.sqrt(2);
+			}
+			else if(lightwaterBubbles1[W].dir == "WD"){
+				lightwaterBubbles1[W].x+=lightwaterBubbles1[W].speed/Math.sqrt(2);
+				lightwaterBubbles1[W].y-=lightwaterBubbles1[W].speed/Math.sqrt(2);
+			}
+			else if(lightwaterBubbles1[W].dir == "AS"){
+				lightwaterBubbles1[W].x-=lightwaterBubbles1[W].speed/Math.sqrt(2);
+				lightwaterBubbles1[W].y+=lightwaterBubbles1[W].speed/Math.sqrt(2);
+			}
+			else if(lightwaterBubbles1[W].dir == "SD"){
+				lightwaterBubbles1[W].x+=lightwaterBubbles1[W].speed/Math.sqrt(2);
+				lightwaterBubbles1[W].y+=lightwaterBubbles1[W].speed/Math.sqrt(2);
+			}
+			ctx.drawImage(Bubble, lightwaterBubbles1[W].x-lightwaterBubbles1[W].width*0.5, lightwaterBubbles1[W].y-lightwaterBubbles1[W].height*0.5);
+		}
+	}
+	for(W in lightwaterBubbles2){
+		if(lightwaterBubbles2[W].timeLeft > 0){
+			lightwaterBubbles2[W].timeLeft--;
+			if(lightwaterBubbles2[W].timeLeft <= 0){
+				lightwaterBubbles2[W].x = -100;
+				lightwaterBubbles2[W].y = -200;
+			}
+			for(E in AllEnemies){
+				if(collision(lightwaterBubbles2[W].dir, lightwaterBubbles2[W], AllEnemies[E]) || collision(AllEnemies[E].dir, AllEnemies[E], lightwaterBubbles2[W])){
+					onHit(AllEnemies[E]);
+					lightwaterBubbles2[W].timeLeft = 0;
+				}
+			}
+			if(lightwaterBubbles2[W].dir == "W"){
+				lightwaterBubbles2[W].y-=lightwaterBubbles2[W].speed;
+			}
+			else if(lightwaterBubbles2[W].dir == "A"){
+				lightwaterBubbles2[W].x-=lightwaterBubbles2[W].speed;
+			}
+			else if(lightwaterBubbles2[W].dir == "S"){
+				lightwaterBubbles2[W].y+=lightwaterBubbles2[W].speed;
+			}
+			else if(lightwaterBubbles2[W].dir == "D"){
+				lightwaterBubbles2[W].x+=lightwaterBubbles2[W].speed;
+			}
+			else if(lightwaterBubbles2[W].dir == "WA"){
+				lightwaterBubbles2[W].x-=lightwaterBubbles2[W].speed/Math.sqrt(2);
+				lightwaterBubbles2[W].y-=lightwaterBubbles2[W].speed/Math.sqrt(2);
+			}
+			else if(lightwaterBubbles2[W].dir == "WD"){
+				lightwaterBubbles2[W].x+=lightwaterBubbles2[W].speed/Math.sqrt(2);
+				lightwaterBubbles2[W].y-=lightwaterBubbles2[W].speed/Math.sqrt(2);
+			}
+			else if(lightwaterBubbles2[W].dir == "AS"){
+				lightwaterBubbles2[W].x-=lightwaterBubbles2[W].speed/Math.sqrt(2);
+				lightwaterBubbles2[W].y+=lightwaterBubbles2[W].speed/Math.sqrt(2);
+			}
+			else if(lightwaterBubbles2[W].dir == "SD"){
+				lightwaterBubbles2[W].x+=lightwaterBubbles2[W].speed/Math.sqrt(2);
+				lightwaterBubbles2[W].y+=lightwaterBubbles2[W].speed/Math.sqrt(2);
+			}
+			ctx.drawImage(Bubble, lightwaterBubbles2[W].x-lightwaterBubbles2[W].width*0.5, lightwaterBubbles2[W].y-lightwaterBubbles2[W].height*0.5);
+		}
+	}
+}
+var lightwaterBubbles1 = {1: lightwaterBubble1, 2: lightwaterBubble2, 3: lightwaterBubble3, 4: lightwaterBubble4};
+var lightwaterBubbles2 = {1: lightwaterBubble5, 2: lightwaterBubble6, 3: lightwaterBubble7, 4: lightwaterBubble8};
+var lightwater = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	width2: 32,
+	height2: 32,
+	frame: 0,
+	timeLeft: 0,
+	cd: 0,
+	cdTop: 1500,
+	breathcd: 0,
+	speed: 6,
+	onScreen: 0,
+	dir: "",
+	LR: "Left",
+	dirct: 0,
+	spell: false,
+	slope: 1,
+	closestSlope: 1,
+	slopeIndex: 11,
+	dirSwitch: false,
+	destDir: "",
+	size: "grow",
+	shotNum: 1,
+	draw: function(){
+		if(this.onScreen){
+			ctx.fillStyle = WaterColor;
+			ctx.drawImage(Bubble, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 + 8 * this.frame;
+				this.height2 = this.height2 + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 - 8 * this.frame;
+				this.height2 = this.height2 - 8 * this.frame;
+				this.frame++;
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	Move_AI: function(){
+		if(this.cd > 0){
+			this.cd -=1;
+		}
+		if(this.onScreen){
+			if(this.timeLeft > 0){
+				this.timeLeft--;
+			}
+			if(this.size == "grow"){
+				this.width+=2;
+				this.height+=2;
+				if(this.width >= 64){
+					this.size = "shrink";
+				}
+			}
+			else if(this.size == "shrink"){
+				this.width-=2;
+				this.height-=2;
+				if(this.width <= 32){
+					this.size = "grow";
+				}
+			}
+			//if off screen, remove
+			if(this.timeLeft <= 0){
+				this.x = 9000;
+				this.y = -400;
+				this.width = 16;
+				this.height = 16;
+				this.dirct = 0;
+				this.dir = "A";
+				this.slope = 1;
+				this.closestSlope = 1;
+				this.slopeIndex = 11;
+				this.onScreen = 0;
+				this.dirct = 0;
+				this.dirSwitch = false;
+				this.destDir = "";
+				this.breathcd = 0;
+			}
+			else{
+				if(this.dirct > 0){
+					this.dirct-=1;
+				}
+				//change direction
+				if(Math.sqrt((player.x-this.x)*(player.x- this.x) + (player.y-this.y)*(player.y-this.y)) > 96){
+					if(player.x-player.width*0.5 < this.x-this.width*0.5){
+						if(this.dir != "A"){
+							this.dirSwitch = true;
+							this.destDir = "A";
+						}
+						var playerSlope = (this.y-player.y)/(this.x-player.x);
+					}
+					else if(player.x - player.width*0.5 == this.x - this.width*0.5){
+						this.dir = this.dir;
+					}
+					else{
+						if(this.dir != "D"){
+							this.dirSwitch = true;
+							this.destDir = "D";
+						}
+						var playerSlope = (player.y-this.y)/(player.x-this.x);
+					}
+					if(this.dirSwitch){
+						if(this.slopeIndex <= 7){
+							this.slopeIndex-=1;
+							if(this.slopeIndex < 0){
+								this.slopeIndex = 14;
+								this.dir = this.destDir;
+								this.dirSwitch = false;
+							}
+							this.slope = lightSlopes[this.slopeIndex];
+						}
+						else{
+							this.slopeIndex+=1;
+							if(this.slopeIndex > 14){
+								this.slopeIndex = 0;
+								this.dir = this.destDir;
+								this.dirSwitch = false;
+							}
+							this.slope = lightSlopes[this.slopeIndex];
+						}
+					}
+					else{
+						//find ideal slope
+						for(N in lightSlopes){
+							if(Math.abs(lightSlopes[N] - playerSlope) < Math.abs(this.closestSlope - playerSlope)){
+								this.closestSlope = lightSlopes[N];
+							}
+						}
+						//change slope
+						if(this.closestSlope > this.slope){
+							if(this.closestSlope > 1 && this.slope < -1){
+								this.slopeIndex-=1;
+								this.slope = lightSlopes[this.slopeIndex];
+								if(this.slopeIndex < 0){
+									this.slopeIndex = 14;
+									this.slope = lightSlopes[this.slopeIndex];
+								}
+							}
+							else{
+								this.slopeIndex+=1;
+								this.slope = lightSlopes[this.slopeIndex];
+							}
+						}
+						if(this.closestSlope < this.slope || this.slope == "Vertical"){
+							if(this.closestSlope < -1 && this.slope > 1){
+								this.slopeIndex+=1;
+								this.slope = lightSlopes[this.slopeIndex];
+								if(this.slopeIndex > 14){
+									this.slopeIndex = 0;
+									this.slope = lightSlopes[this.slopeIndex];
+								}
+							}
+							else{
+								this.slopeIndex-=1;
+								this.slope = lightSlopes[this.slopeIndex];
+							}
+						}
+						//consider verticals
+						if(this.x >= player.x - player.width*0.5 && this.x <= player.x + player.width*0.5){
+							if(this.y-this.height*0.5 > player.y - player.height*0.5){
+								this.dir = "A";
+							}
+							else{
+								this.dir = "D";
+							}
+							this.slope = "Vertical";
+							this.slopeIndex = 15;
+						}
+					}
+				}
+			}
+			if(this.dir == "D"){
+				if(this.slope == "Vertical"){
+					var ymove = this.speed;
+					this.y+=ymove;
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope > 0 && this.slope < 1){
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x+=xmove;
+					this.y+=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope >= 0){
+					//get x distance, speed = total diag distance
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x+=xmove;
+					this.y+=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope <= -1){
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x+=xmove;
+					this.y+=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.ceil(this.y);
+				}
+				else{
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x+=xmove;
+					this.y+=ymove;
+				}
+			}
+			else{
+				if(this.slope == "Vertical"){
+					var ymove = this.speed;
+					this.y-=ymove;
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope > 0 && this.slope < 1){
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x-=xmove;
+					this.y-=ymove;
+					this.x = Math.floor(this.x);
+					this.y = Math.ceil(this.y);
+				}
+				else if(this.slope >= 0){
+					//get x distance, speed = total diag distance
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x-=xmove;
+					this.y-=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope <= -1){
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x-=xmove;
+					this.y-=ymove;
+					this.x = Math.floor(this.x);
+					this.y = Math.ceil(this.y);
+				}
+				else{
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x-=xmove;
+					this.y-=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.floor(this.y);
+				}
+			}
+			this.Shoot_AI();
+		}
+	},
+	Shoot_AI: function(){
+		if(this.breathcd <=0){
+			this.breathcd = 45;
+			Beam.currentTime = 0;
+			Beam.play();
+			if(this.shotNum == 1){
+				for(W in lightwaterBubbles1){
+					lightwaterBubbles1[W].x = this.x;
+					lightwaterBubbles1[W].y = this.y;
+					lightwaterBubbles1[W].timeLeft = 60;
+				}
+				this.shotNum++;
+			}
+			else{
+				for(W in lightwaterBubbles2){
+					lightwaterBubbles2[W].x = this.x;
+					lightwaterBubbles2[W].y = this.y;
+					lightwaterBubbles2[W].timeLeft = 60;
+				}
+				this.shotNum--;
+			}
+		}
+		else if(this.breathcd > 0){
+			this.breathcd-=1;
+		}
+	},
+	shoot: function(){
+		if(this.cd <= 0){
+			fastbeepsHigh.currentTime=0;
+			fastbeepsHigh.play();
+			this.x = player.x;
+			this.y = player.y;
+			this.onScreen = 1;
+			this.timeLeft = 450;
+			this.width2 = 32;
+			this.height2 = 32;
+			this.frame = 0;
+			this.cd = this.cdTop;
+		}
+	}
+};
+
+var AngelTrap1 = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	onScreen: 0,
+	used: 0,
+	dark1: true,
+	active: false,
+	timeLeft: -1
+};
+var AngelTrap2 = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	onScreen: 0,
+	used: 0,
+	dark1: true,
+	active: false,
+	timeLeft: -1
+};
+var AngelTrap3 = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	onScreen: 0,
+	used: 0,
+	dark1: true,
+	active: false,
+	timeLeft: -1
+};
+var AngelTrap4 = {
+	x: -100,
+	y: -200,
+	width: 32,
+	height: 32,
+	onScreen: 0,
+	used: 0,
+	dark1: true,
+	active: false,
+	timeLeft: -1
+};
+
+var lightdark = {
+	x: -100,
+	y: -200,
+	width: 16,
+	height: 16,
+	width2: 32,
+	height2: 32,
+	frame: 0,
+	timeLeft: 0,
+	cd: 0,
+	cdTop: 1500,
+	breathcd: 0,
+	speed: 6,
+	onScreen: 0,
+	dir: "",
+	LR: "Left",
+	dirct: 0,
+	spell: false,
+	slope: 1,
+	closestSlope: 1,
+	slopeIndex: 11,
+	dirSwitch: false,
+	destDir: "",
+	inventory: 4,
+	draw: function(){
+		if(this.onScreen){
+			ctx.fillStyle = DarkColor;
+			if(this.dir == "A"){
+				ctx.drawImage(DarkAngelL1, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+			}
+			else{
+				ctx.drawImage(DarkAngelR1, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+			}
+			ctx.globalAlpha = Alpha*0.25;
+			if(this.frame < 4){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 + 8 * this.frame;
+				this.height2 = this.height2 + 8 * this.frame;
+				this.frame++;
+			}
+			else if(this.frame < 8){
+				ctx.fillRect(this.x-this.width2*0.5, this.y-this.height2*0.5, this.width2, this.height2);
+				this.width2 = this.width2 - 8 * this.frame;
+				this.height2 = this.height2 - 8 * this.frame;
+				this.frame++;
+			}
+			ctx.globalAlpha = Alpha;
+		}
+	},
+	Move_AI: function(){
+		if(this.cd > 0){
+			this.cd -=1;
+		}
+		if(this.onScreen){
+			if(this.timeLeft > 0){
+				this.timeLeft--;
+			}
+			//if off screen, remove
+			if(this.timeLeft <= 0){
+				this.x = 9000;
+				this.y = -400;
+				this.width = 16;
+				this.height = 16;
+				this.dirct = 0;
+				this.dir = "A";
+				this.slope = 1;
+				this.closestSlope = 1;
+				this.slopeIndex = 11;
+				this.onScreen = 0;
+				this.dirct = 0;
+				this.dirSwitch = false;
+				this.destDir = "";
+				this.breathcd = 0;
+			}
+			else{
+				if(this.dirct > 0){
+					this.dirct-=1;
+				}
+				//change direction
+				if(Math.sqrt((player.x-this.x)*(player.x- this.x) + (player.y-this.y)*(player.y-this.y)) > 96){
+					if(player.x-player.width*0.5 < this.x-this.width*0.5){
+						if(this.dir != "A"){
+							this.dirSwitch = true;
+							this.destDir = "A";
+						}
+						var playerSlope = (this.y-player.y)/(this.x-player.x);
+					}
+					else if(player.x - player.width*0.5 == this.x - this.width*0.5){
+						this.dir = this.dir;
+					}
+					else{
+						if(this.dir != "D"){
+							this.dirSwitch = true;
+							this.destDir = "D";
+						}
+						var playerSlope = (player.y-this.y)/(player.x-this.x);
+					}
+					if(this.dirSwitch){
+						if(this.slopeIndex <= 7){
+							this.slopeIndex-=1;
+							if(this.slopeIndex < 0){
+								this.slopeIndex = 14;
+								this.dir = this.destDir;
+								this.dirSwitch = false;
+							}
+							this.slope = lightSlopes[this.slopeIndex];
+						}
+						else{
+							this.slopeIndex+=1;
+							if(this.slopeIndex > 14){
+								this.slopeIndex = 0;
+								this.dir = this.destDir;
+								this.dirSwitch = false;
+							}
+							this.slope = lightSlopes[this.slopeIndex];
+						}
+					}
+					else{
+						//find ideal slope
+						for(N in lightSlopes){
+							if(Math.abs(lightSlopes[N] - playerSlope) < Math.abs(this.closestSlope - playerSlope)){
+								this.closestSlope = lightSlopes[N];
+							}
+						}
+						//change slope
+						if(this.closestSlope > this.slope){
+							if(this.closestSlope > 1 && this.slope < -1){
+								this.slopeIndex-=1;
+								this.slope = lightSlopes[this.slopeIndex];
+								if(this.slopeIndex < 0){
+									this.slopeIndex = 14;
+									this.slope = lightSlopes[this.slopeIndex];
+								}
+							}
+							else{
+								this.slopeIndex+=1;
+								this.slope = lightSlopes[this.slopeIndex];
+							}
+						}
+						if(this.closestSlope < this.slope || this.slope == "Vertical"){
+							if(this.closestSlope < -1 && this.slope > 1){
+								this.slopeIndex+=1;
+								this.slope = lightSlopes[this.slopeIndex];
+								if(this.slopeIndex > 14){
+									this.slopeIndex = 0;
+									this.slope = lightSlopes[this.slopeIndex];
+								}
+							}
+							else{
+								this.slopeIndex-=1;
+								this.slope = lightSlopes[this.slopeIndex];
+							}
+						}
+						//consider verticals
+						if(this.x >= player.x - player.width*0.5 && this.x <= player.x + player.width*0.5){
+							if(this.y-this.height*0.5 > player.y - player.height*0.5){
+								this.dir = "A";
+							}
+							else{
+								this.dir = "D";
+							}
+							this.slope = "Vertical";
+							this.slopeIndex = 15;
+						}
+					}
+				}
+			}
+			if(this.dir == "D"){
+				if(this.slope == "Vertical"){
+					var ymove = this.speed;
+					this.y+=ymove;
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope > 0 && this.slope < 1){
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x+=xmove;
+					this.y+=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope >= 0){
+					//get x distance, speed = total diag distance
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x+=xmove;
+					this.y+=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope <= -1){
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x+=xmove;
+					this.y+=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.ceil(this.y);
+				}
+				else{
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x+=xmove;
+					this.y+=ymove;
+				}
+			}
+			else{
+				if(this.slope == "Vertical"){
+					var ymove = this.speed;
+					this.y-=ymove;
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope > 0 && this.slope < 1){
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x-=xmove;
+					this.y-=ymove;
+					this.x = Math.floor(this.x);
+					this.y = Math.ceil(this.y);
+				}
+				else if(this.slope >= 0){
+					//get x distance, speed = total diag distance
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x-=xmove;
+					this.y-=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.floor(this.y);
+				}
+				else if(this.slope <= -1){
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x-=xmove;
+					this.y-=ymove;
+					this.x = Math.floor(this.x);
+					this.y = Math.ceil(this.y);
+				}
+				else{
+					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
+					var ymove = xmove*this.slope;
+					this.x-=xmove;
+					this.y-=ymove;
+					this.x = Math.ceil(this.x);
+					this.y = Math.floor(this.y);
+				}
+			}
+			this.Shoot_AI();
+		}
+	},
+	Shoot_AI: function(){
+		if(this.breathcd <=0){
+			this.breathcd = 45;
+			if(!AngelTrap1.onScreen){
+				AngelTrap1.x = this.x;
+				AngelTrap1.y = this.y;
+				AngelTrap1.onScreen = 1;
+				AngelTrap1.used = 0;
+				flatBoop.currentTime=0;
+				flatBoop.play();
+			}
+			else if(!AngelTrap2.onScreen){
+				AngelTrap2.x = this.x;
+				AngelTrap2.y = this.y;
+				AngelTrap2.onScreen = 1;
+				AngelTrap2.used = 0;
+				flatBoop.currentTime=0;
+				flatBoop.play();
+			}
+			else if(!AngelTrap3.onScreen){
+				AngelTrap3.x = this.x;
+				AngelTrap3.y = this.y;
+				AngelTrap3.onScreen = 1;
+				AngelTrap3.used = 0;
+				flatBoop.currentTime=0;
+				flatBoop.play();
+			}
+			else if(!AngelTrap4.onScreen){
+				AngelTrap4.x = this.x;
+				AngelTrap4.y = this.y;
+				AngelTrap4.onScreen = 1;
+				AngelTrap4.used = 0;
+				flatBoop.currentTime=0;
+				flatBoop.play();
+			}
+		}
+		else if(this.breathcd > 0){
+			this.breathcd-=1;
+		}
+	},
+	shoot: function(){
+		if(this.cd <= 0){
+			fastbeepsHigh.currentTime=0;
+			fastbeepsHigh.play();
+			this.x = player.x;
+			this.y = player.y;
+			this.onScreen = 1;
+			this.timeLeft = 600;
+			this.width2 = 32;
+			this.height2 = 32;
+			this.frame = 0;
+			this.cd = this.cdTop;
+		}
+	}
+};
+function SummonMovementRand(S){
+	if(S.cd > 0){
+		S.cd -=1;
+	}
+	if(S.onScreen){
+		if(S.timeLeft > 0){
+			S.timeLeft--;
+		}
+		//if off screen, remove
+		if(S.timeLeft <= 0){
+			S.x = 9000;
+			S.y = -400;
+			S.width = 48;
+			S.height = 32;
+			S.dirct = 0;
+			S.dir = "A";
+			S.slope = 1;
+			S.closestSlope = 1;
+			S.slopeIndex = 11;
+			S.onScreen = 0;
+			S.dirct = 0;
+			S.dirSwitch = false;
+			S.destDir = "";
+			if(S == lightair){
+				S.width = 32;
+			}	
+			else if(S == lightice){
+				S.width = 32;
+				S.height = 48;
+				for(I in IceTrails){
+					IceTrails[I].onScreen = 0;
+					IceTrails[I].frame = 0;
+					IceTrails[I].width = 32;
+					IceTrails[I].height = 32;
+				}
+				for (E in AllEnemies){
+					AllEnemies[E].speed = AllEnemies[E].speed2 * 2;
+				}
+			}
+		}
+		else{
+			if(S.dirct > 0){
+				S.dirct-=1;
+			}
+			if(S != lightair){
+				if(obsCollision(obstacle1, S, S.dir) || obsCollision(obstacle2, S, S.dir) || obsCollision(obstacle3, S, S.dir)){
+					if(S.dir == "W"){
+						S.dirct = 20;
+						S.y+=2*S.speed;
+						S.dir = "D";
+						S.LR = "Right";
+					}
+					else if(S.dir == "A"){
+						S.dirct = 20;
+						S.x+=S.speed;
+						S.dir = "W";
+					}
+					else if(S.dir == "S"){
+						S.dirct = 20;
+						S.y-=2*S.speed;
+						S.dir = "A";
+						S.LR = "Left";
+					}
+					else if(S.dir == "D"){
+						S.dirct = 20;
+						S.x-=S.speed;
+						S.dir = "S";
+					}
+					else if(S.dir == "WD"){
+						S.dirct = 20;
+						S.x+=S.speed;
+						S.y-=S.speed;
+						S.dir = "W";
+					}
+					else if(S.dir == "WA"){
+						S.dirct = 20;
+						S.x-=S.speed;
+						S.y-=S.speed;
+						S.dir = "A";
+						S.LR = "Left";
+					}
+					else if(S.dir == "AS"){
+						S.dirct = 20;
+						S.x-=S.speed;
+						S.y+=S.speed;
+						S.dir = "S";
+					}
+					else if(S.dir == "SD"){
+						S.dirct = 20;
+						S.x+=S.speed;
+						S.y+=S.speed;
+						S.dir = "D";
+						S.LR = "Right";
+					}
+				}
+			}
+			if(S.x < 8){
+				S.dir = "D";
+				S.dirct = 2;
+			}
+			else if(S.x > 792){
+				S.dir = "A";
+				S.dirct = 2;
+			}
+			else if(S.y < 0){
+				S.dir = "S";
+				S.dirct = 2;
+			}
+			else if(S.y > 566){
+				S.dir = "W";
+				S.dirct = 2;
+			}
+			if(S.dirct <=0){
+				var quadrant = 0;
+				var q1dir = {1: "S", 2: "D", 3: "SD"};
+				var q2dir = {1: "S", 2: "A", 3: "AS"};
+				var q3dir = {1: "W", 2: "D", 3: "WD"};
+				var q4dir = {1: "W", 2: "A", 3: "WA"};
+				var alldir = {1: "W", 2: "A", 3: "S", 4: "D", 5: "WA", 6: "WD", 7: "AS", 8: "SD"};
+				S.dirct = 20;
+				var numbz = Math.floor(Math.random() * 3) + 1;
+				var allnumbz = Math.floor(Math.random() * 8) + 1;
+				if(S.x > 224 && S.x < 576 && S.y > 128 && S.y < 348){
+					quadrant = 5;
+				}
+				else if(S.x <= 400 && S.y <= 238){
+					quadrant = 1;
+				}
+				else if(S.x > 400 && S.y <= 238){
+					quadrant = 2;
+				}
+				else if(S.x <= 400 && S.y > 238){
+					quadrant = 3;
+				}
+				else if(S.x > 400 && S.y > 238){
+					quadrant = 4;
+				}
+				if(quadrant == 1){
+					S.dir = q1dir[numbz];
+				}
+				else if(quadrant == 2){
+					S.dir = q2dir[numbz];
+				}
+				else if(quadrant == 3){
+					S.dir = q3dir[numbz];
+				}
+				else if(quadrant == 4){
+					S.dir = q4dir[numbz];
+				}
+				else if(quadrant == 5){
+					S.dir = alldir[allnumbz];
+				}
+			}
+		}
+		if(S.dir == "W" && (S == lightair || (!(obsCollision(obstacle1, S, S.dir)) && !(obsCollision(obstacle2, S, S.dir))
+			&& !(obsCollision(obstacle3, S, S.dir))))){
+			Math.floor(S.y-=S.speed);
+		}
+		if(S.dir == "A" && (S == lightair || (!(obsCollision(obstacle1, S, S.dir)) && !(obsCollision(obstacle2, S, S.dir))
+			&& !(obsCollision(obstacle3, S, S.dir))))){
+			Math.floor(S.x-=S.speed);
+			S.LR = "Left";
+		}
+		if(S.dir == "S" && (S == lightair || (!(obsCollision(obstacle1, S, S.dir)) && !(obsCollision(obstacle2, S, S.dir))
+			&& !(obsCollision(obstacle3, S, S.dir))))){
+			Math.floor(S.y+=S.speed);
+		}
+		if(S.dir == "D" && (S == lightair || (!(obsCollision(obstacle1, S, S.dir)) && !(obsCollision(obstacle2, S, S.dir))
+			&& !(obsCollision(obstacle3, S, S.dir))))){
+			Math.floor(S.x+=S.speed);
+			S.LR = "Right";
+		}
+		if(S.dir == "AS" && (S == lightair || (!(obsCollision(obstacle1, S, S.dir)) && !(obsCollision(obstacle2, S, S.dir))
+			&& !(obsCollision(obstacle3, S, S.dir))))){
+			Math.floor(S.y+=S.speed);
+			Math.floor(S.x-=S.speed);
+			S.LR = "Left";
+		}
+		if(S.dir == "WA" && (S == lightair || ((!(obsCollision(obstacle1, S, S.dir)) && !(obsCollision(obstacle2, S, S.dir))
+			&& !(obsCollision(obstacle3, S, S.dir)))))){
+			Math.floor(S.y-=S.speed);
+			Math.floor(S.x-=S.speed);
+			S.LR = "Left";
+		}
+		if(S.dir == "WD" && (S == lightair || ((!(obsCollision(obstacle1, S, S.dir)) && !(obsCollision(obstacle2, S, S.dir))
+			&& !(obsCollision(obstacle3, S, S.dir)))))){
+			Math.floor(S.y-=S.speed);
+			Math.floor(S.x+=S.speed);
+			S.LR = "Right";
+		}
+		if(S.dir == "SD" && (S == lightair || (!(obsCollision(obstacle1, S, S.dir)) && !(obsCollision(obstacle2, S, S.dir))
+			&& !(obsCollision(obstacle3, S, S.dir))))){
+			Math.floor(S.y+=S.speed);
+			Math.floor(S.x+=S.speed);
+			S.LR = "Right";
+		}
+		S.Shoot_AI();
+	}
+}
+
 //--------------------------------------------------------------- Spell Array -------------------------------------------------------//
 var AllFire = {1: fire, 2: fire2, 3: fireice, 4: firelightningf1, 5: firelightningf2, 6: firelightningf3, 7: firelightningf4,
-				8: Mfire, 9: Mfire2, 10: Mfire3, 11: Mfire4};
+				8: Mfire, 9: Mfire2, 10: Mfire3, 11: Mfire4, 12: fireice2, 13: flameBreath1, 14: flameBreath2, 15: flameBreath3, 16: flameBreath4,
+				17: flameBreath5};

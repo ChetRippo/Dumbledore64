@@ -1,60 +1,9 @@
-/*
-	Version 0.8.0 Changes(6/7/2012):
-		-Bug fixes:
-			-Fixed bug where after having a spell stolen fire, ice, dash, and bubble ring would not work
-		-Balancing:
-			-Reset High Scores
-		-Additions:
-			-3D mode now saves with scores- if you got a score in 3d mode, glasses are displayed next to the name
-			-Added new HP bar graphics
-			-Added new loading screen graphics (preloaded before script)
-			-Changed loading bar mechanics:
-				-Does not preload sounds due to size limit
-				-Does not preload all graphics, cache limit is approx. 425 images
-				-Extra content -should- be ready by the time game starts
-			-Added new graphics for the score
-			
-			
-	TODO:
-		-Bugs/Other
-			-High Priority:
-			-Maybe issues:
-				-Game effect freezes on thief boss kill sometimes (maybe fixed)
-				-Boosters not working?
-				-obs always take 1 dmg, maybe an issue?
-				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
-				-Ice spells make jungle trees transparent *Don't know how to fix yet*
-				-Loading bar doesn't preload everything (sounds, only 400 graphics, load graphics, etc)
-			-Backlog:
-		-Optimize
-			-Make speeds a list of factors so that multiple things can effect it easier
-			-Remove division
-		-Map System
-		-Sandbox Mode
-		-Spells
-			-Summon (?)
-				-Minions
-		-More enemies and AI **NOTE: ADD ALL MOVING ENEMIES TO ICELIGHTNING ARRAY AND RESET ICE LIGHTNING**
-			-Boss that takes you to desert from fire level
-				-Genie
-				-On a timer (temporarily at least)
-		-Terrain
-			-Tier 3: Desert, Graveyard
-				-Desert level
-					-Heavy sandstorm winds occasionally
-					-Banditos?
-					-Cacti obstacles, maybe also enemies
-				-Graveyard level
-					-Day/night cycle
-			-Each level has its own element drops and enemies
-				Forest = Earth(rare), Water, Air?
+Dumbledore64 is a JavaScript HTML5 Canvas game currently under development by myself and Kyle Fleischer.
+A more recent version is playable at: www.glassknuckle.com/Dumbledore64
 
-**********************************************************************************************************
-
-Have you ever wanted to be just like Dumbledore? Well now you can with this AMAZING wizard simulator!
-Cast spells! Combine elements! Access many unique levels! With over 40 unique spells, Dumbledore64 is by far the best wizard simulator!
-It's that simple!
-
+Provided are all of the game's assets and code files, aside from the server side stuff (namely the php files for score submissions).
+It is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0). If you would like
+to do anything that violates the license please email me about it (bdavis1000@gmail.com).
 
 Controls:
 W: Move up
@@ -68,3 +17,6 @@ Spacebar: Use spell
 
 Q: Drop spell1
 E: Drop spell2
+
+How to play: Kill enemies! Acquire points! Pick up boxes to get elements! Each element corresponds to a unique spell,
+and you can combine up to 2 elements for MORE unique spells! The game currently features over 50 spells and 5 unique levels and bosses!

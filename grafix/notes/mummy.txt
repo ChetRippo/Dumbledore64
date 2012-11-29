@@ -1,0 +1,16 @@
+spawn:
+1:2
+2:5
+3:3
+4:4
+5:5
+6:3
+7:3
+8:5
+
+Mummy offset:
+x: -36
+y: 4
+
+Bandages:
+Spawn on mummy using same facing direction, move slowly in opposite direction. Hold each for 10 frames.

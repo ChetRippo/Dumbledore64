@@ -1,0 +1,61 @@
+SCROLL ARROWS:
+up left: x12 y100
+down left: x12 y532
+up right: x632 y100
+down right: x632 y532
+
+Rank numbers:
+local: x12 y148
+global: x632 y152
+
+NAME-SCORE-ACHIEVEMENT:
+LETTERS AND NUMBERS ARE 4 PIXELS APART
+LOCAL:
+1: NAME: x44 y148
+   SCORE: x40 y176
+   ACHIEVE: x144 y140
+
+2: NAME: x44 y228
+   SCORE: x40 y256
+   ACHIEVE: x144 y220
+
+3: NAME: x44 y312
+   SCORE: x40 y340
+   ACHIEVE: x144 y300        
+
+4: NAME: x44 y392
+   SCORE: x40 y420 (lol)
+   ACHIEVE: x144 384
+
+5: NAME: x44 y472
+   SCORE: x40 y500
+   ACHIEVE: x144 y464
+
+GLOBAL:z
+Use the y from above
+
+2: NAME: x664
+   SCORE: x660
+   ACHIEVE: x764
+
+STRIPES:
+X is always 0
+
+1: y136
+2: y216
+3: y300
+4: y380
+5: y460
+
+ARROW INDICATE:
+X always 188
+Y is the same as the local y for the corresponding name field
+
+
+SUBMIT:
+188x37
+x:300 y:535
+
+BACK:
+135x37
+x:335 y:535

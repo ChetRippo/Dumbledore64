@@ -1,53 +1,59 @@
  /*
-	Version 0.8.0 Changes(6/7/2012):
-		-Bug fixes:
-			-Fixed bug where after having a spell stolen fire, ice, dash, and bubble ring would not work
-		-Balancing:
-			-Reset High Scores
+	GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE
+	Version 0.9.3 Changes(11/22/2012):
+		--Misc Update--
 		-Additions:
-			-3D mode now saves with scores- if you got a score in 3d mode, glasses are displayed next to the name
-			-Added new HP bar graphics
-			-Added new loading screen graphics (preloaded before script)
-			-Changed loading bar mechanics:
-				-Does not preload sounds due to size limit
-				-Does not preload all graphics, cache limit is approx. 425 images
-				-Extra content -should- be ready by the time game starts
-			-Added new graphics for the score
-			
+			-CHRISTMAS GRAPHICS
+			-Teleport animation changed
+			-New score markers
+		-Balancing:
+		-Bug fixes:
 			
 	TODO:
 		-Bugs/Other
 			-High Priority:
-			-Maybe issues:
-				-Game effect freezes on thief boss kill sometimes (maybe fixed)
-				-Boosters not working?
-				-obs always take 1 dmg, maybe an issue?
-				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
-				-Ice spells make jungle trees transparent *Don't know how to fix yet*
-				-Loading bar doesn't preload everything (sounds, only 400 graphics, load graphics, etc)
+				-fix tutorial
+				-element rarities based on level/gameplay
+				-Redo mystics (all mystics have mirage effect, mystic2 = confusion beam
 			-Backlog:
-		-Optimize
-			-Make speeds a list of factors so that multiple things can effect it easier
-			-Remove division
-		-Map System
-		-Sandbox Mode
+				-array everything on screen and draw them e.g.
+					-onscreens[1] = {fire, fire fns}
+				-general draw functions for all level stuff
+				-shortcuts
+				-stunned text pops up when already stunned
+				-scorpions can try to hit you facing the wrong way (make them face based on you not target)
+				-Ice spells make jungle trees transparent *Don't know how to fix yet*
+				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
+				-sound for mummy spawn and wrapping change
+				-unlock bgm
+				-thief boss dies offscreen + powerup unreachable
+				-Changing modified beams causes all beams on screen to change
+			-Maybe issues:
+				-All ice slows do not end stun when enemy out of range
+				-light2 slows frame rate (light and light2 inefficient)
+				-Loading bar doesn't preload everything (sounds, only 400 graphics, load graphics, etc)
+				-too many assets
+				-icelightning technically deletes enemies before frame loops:
+					ex: dash (or any spell run after webs) and hit enemy at exact time it hits icelightning will not dmg it
+	GENERAL:
 		-Spells
-			-Summon (?)
-				-Minions
-		-More enemies and AI **NOTE: ADD ALL MOVING ENEMIES TO ICELIGHTNING ARRAY AND RESET ICE LIGHTNING**
-			-Boss that takes you to desert from fire level
-				-Genie
-				-On a timer (temporarily at least)
-		-Terrain
-			-Tier 3: Desert, Graveyard
-				-Desert level
-					-Heavy sandstorm winds occasionally
-					-Banditos?
-					-Cacti obstacles, maybe also enemies
+			-???
+		-Level select?
+		-Optimize
+			-Make speeds a list of factors so that multiple things can effect it easier (velocity?)
+		-Terrain/levels
+			-Tier 3: Swamp, Desert, Graveyard
 				-Graveyard level
 					-Day/night cycle
-			-Each level has its own element drops and enemies
-				Forest = Earth(rare), Water, Air?
+			-Tier 4: Cave, Ice
+				-Cave level
+					-Dark, moonlight effect, can see enemy eyes
+				-Ice level
+			-Tier 5: Final level
+				-multiplayer background?, 3 spell slots, cast pure spell of each element to beat giant boss?
+	NOTES:
+		-reset badwizards song on every boss
+		-music tracks- possible = multiplayer, seeker, arcane bits and pieces
 */
 //------------------------------------------------- Player --------------------------------------------------------------------------//
 // Player
@@ -69,39 +75,44 @@ var player = {
 	zapIndex: 1,
 	lucky: false,
 	shadowed: false,
+	regen: false,
+	regenFrame: 0,
+	knocked: 0,
+	knockDir: "",
+	stunTimer: 0,
 	// Draws the player on the canvas when called
 	draw: function(){
 		// Flash if the player has been hit
-		if (hptimer/2 != Math.round(hptimer/2)){
-			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+		if (hptimer*0.5 != Math.round(hptimer*0.5)){
+			if(this.dir == "A" || 65 in keysDown){
 				this.LR = "Left";
-				ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(Wizzurd2, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
-			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-				ctx.drawImage(Wizzurd2R, this.x - this.width / 2, this.y - this.height / 2);
+			else if(this.dir == "D" || 68 in keysDown){
+				ctx.drawImage(Wizzurd2R, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				this.LR = "Right";
 			}
 			else if(this.LR == "Left"){
-				ctx.drawImage(Wizzurd2, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(Wizzurd2, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 			else{
-				ctx.drawImage(Wizzurd2R, this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(Wizzurd2R, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 		}
-		else if(waterlightning.onScreen == 1){
-			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+		else if(waterlightning.onScreen){
+			if(this.dir == "A" || 65 in keysDown){
 				this.LR = "Left";
-				ctx.drawImage(ZapTrapL[this.zapIndex], this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(ZapTrapL[this.zapIndex], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
-			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-				ctx.drawImage(ZapTrapR[this.zapIndex], this.x - this.width / 2, this.y - this.height / 2);
+			else if(this.dir == "D" || 68 in keysDown){
+				ctx.drawImage(ZapTrapR[this.zapIndex], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				this.LR = "Right";
 			}
 			else if(this.LR == "Left"){
-				ctx.drawImage(ZapTrapL[this.zapIndex], this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(ZapTrapL[this.zapIndex], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 			else{
-				ctx.drawImage(ZapTrapR[this.zapIndex], this.x - this.width / 2, this.y - this.height / 2);
+				ctx.drawImage(ZapTrapR[this.zapIndex], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 			this.zapIndex++;
 			if(this.zapIndex > 5){
@@ -109,51 +120,51 @@ var player = {
 			}
 		}
 		else{
-			if(this.dir == "WA" || this.dir == "AS" || this.dir == "A"){
+			if(this.dir == "A" || 65 in keysDown){
 				this.LR = "Left";
 				//Check speed instead of water collision to use less system shit
-				if(this.speed ==4 && STATE == "Swamp"){
-					ctx.drawImage(swimWizzL, this.x - this.width / 2, this.y - this.height / 2);
+				if(this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
+					ctx.drawImage(swimWizzL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else if(STATE == "Jungle" && player.shadowed){
-					ctx.drawImage(shadeWizzL, this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(shadeWizzL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(WizzurdL, this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(WizzurdL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 			}
-			else if(this.dir == "WD" || this.dir == "SD" || this.dir == "D"){
-				if(this.speed ==4 && STATE == "Swamp"){
-					ctx.drawImage(swimWizzR, this.x - this.width / 2, this.y - this.height / 2);
+			else if(this.dir == "D" || 68 in keysDown){
+				if(this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
+					ctx.drawImage(swimWizzR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else if(STATE == "Jungle" && player.shadowed){
-					ctx.drawImage(shadeWizzR, this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(shadeWizzR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(WizzurdR, this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(WizzurdR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				this.LR = "Right";
 			}
 			else if(this.LR == "Left"){
-				if(this.speed ==4 && STATE == "Swamp"){
-					ctx.drawImage(swimWizzL, this.x - this.width / 2, this.y - this.height / 2);
+				if(this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
+					ctx.drawImage(swimWizzL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else if(STATE == "Jungle" && player.shadowed){
-					ctx.drawImage(shadeWizzL, this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(shadeWizzL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(WizzurdL, this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(WizzurdL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 			}
 			else{
-				if(this.speed ==4 && STATE == "Swamp"){
-					ctx.drawImage(swimWizzR, this.x - this.width / 2, this.y - this.height / 2);
+				if(this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
+					ctx.drawImage(swimWizzR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else if(STATE == "Jungle" && player.shadowed){
-					ctx.drawImage(shadeWizzR, this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(shadeWizzR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(WizzurdR, this.x - this.width / 2, this.y - this.height / 2);
+					ctx.drawImage(WizzurdR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 			}
 		}
@@ -161,17 +172,44 @@ var player = {
 			hpBarDraw(this);
 		}
 	},
+	//onhit: determines enemy collisions and handles hp regen
 	onhit: function(){
 		if(this.dirct > 0){
 			this.dirct-=1;
+		}
+		if(this.stunTimer > 0){
+			this.stunTimer-=1;
+			if(this.stunTimer == 0){
+				this.speed = this.speed2*4;
+			}
+		}
+		//slow player
+		if(STATE == "Desert"){
+			for(E in AllEnemies){
+				if((collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])) && this.stunTimer < 40 && AllEnemies[E].type == 0 && AllEnemies[E].castIndex >= 11 && AllEnemies[E].castIndex <= 17){
+					this.speed = this.speed2*2;
+					this.stunTimer = 45;
+					for(T in typemarkerlist){
+						if(typemarkerlist[T].x == -100){
+							typemarkerlist[T].text = "Stunned!";
+							typemarkerlist[T].x = player.x-player.width*2;
+							typemarkerlist[T].y = player.y;
+							typemarkerlist[T].timeLeft = 20;
+							break;
+						}
+					}
+				}
+			}
 		}
 		if(hptimer > 0){
 			hptimer-=1;
 		}
 		else{
 			for(E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])){
+				if((collision(AllEnemies[E].dir, AllEnemies[E], this) || collision(this.dir, this, AllEnemies[E])) && AllEnemies[E] != Lamp){
 					if(AllEnemies[E].onTree == 0){
+						this.knocked = 5;
+						this.knockDir = AllEnemies[E].dir;
 						if(darkwater.onScreen == 1){
 							darkwater.hptimer = 20;
 							darkwater.hp-=1;
@@ -182,13 +220,66 @@ var player = {
 							onDmg.currentTime=0;
 							onDmg.play();
 							this.dmg = true;
+							//boss achievements
+							if(AllEnemies[E] == treeWizz || AllEnemies[E] == rootStrike || AllEnemies[E] == rootStrike2 || AllEnemies[E] == rootStrike3 || AllEnemies[E] == rootStrike4){
+								AList[2] = false;
+							}
+							else if(AllEnemies[E].type == "Meteor" || AllEnemies[E].type == "Dragon" ||
+								AllEnemies[E].type == "DragonL" || AllEnemies[E].type == "DragonR"){
+								AList[3] = false;
+							}
+							else if(AllEnemies[E].type == "MasterThief" || (MasterThief.onScreen == 1 && AllEnemies[E].type == "Thief")){
+								AList[4] = false;
+							}
+							else if(Genie.onScreen == 1){
+								AList[5] = false;
+							}
 						}
 					}
 				}
 			}
 			for(E in EMeteors){
-				if(collision(EMeteors[E].dir, EMeteors[E], this) || collision(this.dir, this, EMeteors[E])){
-					if(EMeteors[E].timeLeft > 0){
+				if(EMeteors[E].index >= 21){
+					if(collision(this.dir, this, EMeteors[E])){
+						this.knocked = 5;
+						//extra knockback
+						if(EMeteors[E].LR == 1){
+							if(!(this.y>=568)){
+								this.y+=this.knocked*8;
+								for(W in bubbleRotate){
+									if(bubbleRotate[W].onScreen == 1){
+										bubbleRotate[W].y+=this.knocked*8;
+									}
+								}
+							}
+							if(!(this.x>=792)){
+								this.x+=this.knocked*8;
+								for(W in bubbleRotate){
+									if(bubbleRotate[W].onScreen == 1){
+										bubbleRotate[W].x+=this.knocked*8;
+									}
+								}
+							}
+						}
+						else{
+							if(!(this.y>=568)){
+								this.y+=this.knocked*8;
+								for(W in bubbleRotate){
+									if(bubbleRotate[W].onScreen == 1){
+										bubbleRotate[W].y+=this.knocked*8;
+									}
+								}
+							}
+							if(!(this.x<=8)){
+								this.x-=this.knocked*8;
+								for(W in bubbleRotate){
+									if(bubbleRotate[W].onScreen == 1){
+										bubbleRotate[W].x-=this.knocked*8;
+									}
+								}
+							}
+						}
+						this.knockDir = AllEnemies[E].dir;
 						if(darkwater.onScreen == 1){
 							darkwater.hptimer = 20;
 							darkwater.hp-=1;
@@ -198,23 +289,9 @@ var player = {
 							onDmg.currentTime=0;
 							onDmg.play();
 							this.dmg = true;
-						}
-					}
-				}
-			}
-			if(STATE == "Scorched"){
-				for(O in ObsList){
-					if(collision(this.dir, this, ObsList[O])){
-						if(darkwater.onScreen == 1){
-							darkwater.hptimer = 20;
-							darkwater.hp-=1;
-							hptimer = 20;
-							obsHit(ObsList[O]);
-						}
-						else{
-							onDmg.currentTime=0;
-							onDmg.play();
-							this.dmg = true;
+							if(Genie.onScreen == 1){
+								AList[5] = false;
+							}
 						}
 					}
 				}
@@ -228,63 +305,364 @@ var player = {
 				this.hp = this.hp;
 			}
 		}
+		//regen
+		if(this.regen && this.hp < this.maxhp){
+			this.regenFrame++;
+			if(this.regenFrame == 210){
+				this.regenFrame = 0;
+				if(this.hp<this.maxhp){
+					this.hp+=1;
+					Pickup.currentTime=0;
+					Pickup.play();
+					for(T in typemarkerlist){
+						if(typemarkerlist[T].x == -100){
+							typemarkerlist[T].x = this.x-8;
+							typemarkerlist[T].y = this.y;
+							typemarkerlist[T].text = "+1";
+							typemarkerlist[T].timeLeft = 20;
+							typemarkerlist[T].regen = true;
+							break;
+						}
+					}
+				}
+			}
+			//draw hp regen bar
+			ctx.fillStyle = "#0C9A16";
+			ctx.strokeStyle = "black";
+			ctx.strokeRect(this.x - this.width*0.5, this.y-this.height, this.width, this.height*0.15);
+			ctx.fillRect(this.x - this.width*0.5, this.y-this.height, this.width*this.regenFrame/210, this.height*0.15);
+		}
+		//don't regen if full hp
+		if(this.hp == this.maxhp){
+			this.regenFrame = 0;
+		}
 	},
 	//Handle speed, swamp only
 	speedHandle: function(){
-		for(O in obstacle1){
-			if(obstacle1[O].LR == "Right"){
-				obstacle1[O].x+=256;
-				obstacle1[O].y-=64;
-				obstacle1[O].width+=64;
+		if(STATE != "Desert"){
+			for(O in obstacle1){
+				if(obstacle1[O].LR == "Right"){
+					obstacle1[O].x+=256;
+					obstacle1[O].y-=64;
+					obstacle1[O].width+=64;
+				}
+				else{
+					obstacle1[O].x-=256;
+					obstacle1[O].y-=64;
+					obstacle1[O].width+=64;
+				}
+				if(collision(this.dir, this, obstacle1[O]) || ((collision("S", this, obstacle1[O]) || collision("A", this, obstacle1[O]) || collision("D", this, obstacle1[O])) && this.dir == "W")){
+					this.speed = 8;
+					var noswim = true;
+				}
+				if(obstacle1[O].LR == "Right"){
+					obstacle1[O].x-=256;
+					obstacle1[O].y+=64;
+					obstacle1[O].width-=64;
+				}
+				else{
+					obstacle1[O].x+=256;
+					obstacle1[O].y+=64;
+					obstacle1[O].width-=64;
+				}
 			}
-			else{
-				obstacle1[O].x-=256;
-				obstacle1[O].y-=64;
-				obstacle1[O].width+=64;
+			for(O in obstacle2){
+				obstacle2[O].x+=32;
+				obstacle2[O].y+=obstacle2[O].height*0.5;
+				//collisions are weird on W because W returns true too much
+				if(((this.dir == "A" || this.dir == "D" || this.dir == "S") && collision(this.dir, this, obstacle2[O])) ||
+					(this.dir == "W" && (collision("S", this, obstacle2[O]) || collision("D", this, obstacle2[O]) || collision("A", this, obstacle2[O])))){
+					this.speed = 8;
+					var noswim = true;
+				}
+				obstacle2[O].x-=32;
+				obstacle2[O].y-=obstacle2[O].height*0.5;
 			}
-			if(collision(this.dir, this, obstacle1[O])){
-				this.speed = 8;
-				var noswim = true;
-			}
-			if(obstacle1[O].LR == "Right"){
-				obstacle1[O].x-=256;
-				obstacle1[O].y+=64;
-				obstacle1[O].width-=64;
-			}
-			else{
-				obstacle1[O].x+=256;
-				obstacle1[O].y+=64;
-				obstacle1[O].width-=64;
+			//check ob 24 to stop water effect before swamp water appears
+			if(!noswim && obstacle24.swampBoardindex >= 90){
+				this.speed = 4;
 			}
 		}
-		for(O in obstacle2){
-			obstacle2[O].x+=32;
-			obstacle2[O].y+=obstacle2[O].height/2;
-			if(collision("D", this, obstacle2[O]) || collision("A", this, obstacle2[O]) || collision("S", this, obstacle2[O]) || collision("W", this, obstacle2[O])){
-				this.speed = 8;
-				var noswim = true;
+		else{
+			for(S in Sandpits){
+				Sandpits[S].x+=32;
+				Sandpits[S].y+=32;
+				if(collision("W", this, Sandpits[S]) || collision("D", this, Sandpits[S]) || collision("A", this, Sandpits[S]) || collision("S", this, Sandpits[S])){
+					if(player.x > Sandpits[S].x){
+						player.x-=4;
+						for(W in bubbleRotate){
+							if(bubbleRotate[W].onScreen == 1){
+								bubbleRotate[W].x-=4;
+							}
+						}
+					}
+					if(player.x < Sandpits[S].x){
+						player.x+=4;
+						for(W in bubbleRotate){
+							if(bubbleRotate[W].onScreen == 1){
+								bubbleRotate[W].x+=4;
+							}
+						}
+					}
+					if(player.y > Sandpits[S].y){
+						player.y-=4;
+						for(W in bubbleRotate){
+							if(bubbleRotate[W].onScreen == 1){
+								bubbleRotate[W].y-=4;
+							}
+						}
+					}
+					if(player.y < Sandpits[S].y){
+						player.y+=2;
+						for(W in bubbleRotate){
+							if(bubbleRotate[W].onScreen == 1){
+								bubbleRotate[W].y+=2;
+							}
+						}
+					}
+				}
+				Sandpits[S].x-=32;
+				Sandpits[S].y-=32;
 			}
-			obstacle2[O].x-=32;
-			obstacle2[O].y-=obstacle2[O].height/2;
 		}
-		if(!noswim){
-			this.speed = 4;
+	},
+	//knocks back player when hit
+	knockBack: function(){
+		if(this.knocked>0){
+			var collisionObs = false;
+			for(O in ObsList){
+				if(collision(this.dir, this, ObsList[O])){
+					collisionObs = true;
+					break;
+				}
+			}
+			if(!collisionObs){
+				if((this.knockDir == "W" || this.knockDir == "WA" || this.knockDir == "WD") && !(this.y<=8)){
+					this.y-=this.knocked*4;
+					for(W in bubbleRotate){
+						if(bubbleRotate[W].onScreen == 1){
+							bubbleRotate[W].y-=this.knocked*4;
+						}
+					}
+				}
+				if((this.knockDir == "A" || this.knockDir == "WA" || this.knockDir == "AS") && !(this.x<=8)){
+					this.x-=this.knocked*4;
+					for(W in bubbleRotate){
+						if(bubbleRotate[W].onScreen == 1){
+							bubbleRotate[W].x-=this.knocked*4;
+						}
+					}
+				}
+				if((this.knockDir == "S" || this.knockDir == "SD" || this.knockDir == "AS") && !(this.y>=568)){
+					this.y+=this.knocked*4;
+					for(W in bubbleRotate){
+						if(bubbleRotate[W].onScreen == 1){
+							bubbleRotate[W].y+=this.knocked*4;
+						}
+					}
+				}
+				if((this.knockDir == "D" || this.knockDir == "SD" || this.knockDir == "WD") && !(this.x>=792)){
+					this.x+=this.knocked*4;
+					for(W in bubbleRotate){
+						if(bubbleRotate[W].onScreen == 1){
+							bubbleRotate[W].x+=this.knocked*4;
+						}
+					}
+				}
+			}
+			this.knocked-=1;
 		}
 	}
 };
+
+// Blood particle 1
+var bloodParticle1 = {
+	x: 0,
+	y: 0,
+	width: 4,
+	height: 4,
+	speed: 4,
+	onScreen: false,
+	dir: "right",
+	timerLeft: 15
+};
+var bloodParticle2 = {
+	x: 0,
+	y: 0,
+	width: 4,
+	height: 4,
+	speed: 4,
+	onScreen: false,
+	dir: "rightD",
+	timerLeft: 15
+};
+var bloodParticle3 = {
+	x: 0,
+	y: 0,
+	width: 4,
+	height: 4,
+	speed: 4,
+	onScreen: false,
+	dir: "rightU",
+	timerLeft: 15
+};
+var bloodParticle4 = {
+	x: 0,
+	y: 0,
+	width: 4,
+	height: 4,
+	speed: 4,
+	onScreen: false,
+	dir: "rightD",
+	timerLeft: 15
+};
+var bloodParticle5 = {
+	x: 0,
+	y: 0,
+	width: 4,
+	height: 4,
+	speed: 4,
+	onScreen: false,
+	dir: "rightU",
+	timerLeft: 15
+};
+
+var bloodList = {1: bloodParticle1, 2: bloodParticle2, 3: bloodParticle3, 4: bloodParticle4, 5: bloodParticle5};
+var bloodDirR = {1: "right", 2: "rightU", 3: "rightD"};
+var bloodDirL = {1: "left", 2: "leftU", 3: "leftD"};
+var bloodDirU = {1: "up", 2: "upU", 3: "upD"};
+var bloodDirD = {1: "down", 2: "downU", 3: "downD"};
+function createBlood(B){
+	for(b in bloodList){
+		bloodList[b].onScreen = true;
+		if(B.dir == "A"){
+			bloodList[b].dir = bloodDirL[(Math.round(Math.random()*3)+1)];
+		}
+		else if(B.dir == "D"){
+			bloodList[b].dir = bloodDirR[(Math.round(Math.random()*3)+1)];
+		}
+		else if(B.dir == "W"){
+			bloodList[b].dir = bloodDirU[(Math.round(Math.random()*3)+1)];
+		}
+		else if(B.dir == "S"){
+			bloodList[b].dir = bloodDirD[(Math.round(Math.random()*3)+1)];
+		}
+		else if(B.dir == "WA"){
+			if(Math.round(Math.random()*1)){
+				bloodList[b].dir = bloodDirU[(Math.round(Math.random()*3)+1)];
+			}
+			else{
+				bloodList[b].dir = bloodDirL[(Math.round(Math.random()*3)+1)];
+			}
+		}
+		else if(B.dir == "AS"){
+			if(Math.round(Math.random()*1)){
+				bloodList[b].dir = bloodDirD[(Math.round(Math.random()*3)+1)];
+			}
+			else{
+				bloodList[b].dir = bloodDirL[(Math.round(Math.random()*3)+1)];
+			}
+		}
+		else if(B.dir == "SD"){
+			if(Math.round(Math.random()*1)){
+				bloodList[b].dir = bloodDirD[(Math.round(Math.random()*3)+1)];
+			}
+			else{
+				bloodList[b].dir = bloodDirR[(Math.round(Math.random()*3)+1)];
+			}
+		}
+		else if(B.dir == "WD"){
+			if(Math.round(Math.random()*1)){
+				bloodList[b].dir = bloodDirU[(Math.round(Math.random()*3)+1)];
+			}
+			else{
+				bloodList[b].dir = bloodDirR[(Math.round(Math.random()*3)+1)];
+			}
+		}
+		bloodList[b].speed = Math.round(Math.random() * 8) + 4;
+		var size = Math.round(Math.random() * 8) + 2;
+		bloodList[b].height = size;
+		bloodList[b].width = size;
+		bloodList[b].timeLeft = 7;
+		bloodList[b].x = B.x;
+		bloodList[b].y = B.y;
+	}
+}
+
+function drawBlood(p){
+	if(p.onScreen){
+		p.timeLeft-=1;
+		if(p.timeLeft == 0){
+			p.onScreen = false;
+			p.x = 0;
+			p.y = 0;
+		}
+		ctx.fillStyle = "#e22914";
+		ctx.fillRect(p.x-p.width*0.5, p.y-p.height*0.5, p.width, p.height);
+		if(p.dir == "right"){
+			p.x+=p.speed;
+		}
+		if(p.dir == "rightU"){
+			p.x+=p.speed;
+			p.y-=p.speed*0.5;
+		}
+		if(p.dir == "rightD"){
+			p.x+=p.speed;
+			p.y+=p.speed*0.5;
+		}
+		if(p.dir == "left"){
+			p.x-=p.speed;
+		}
+		if(p.dir == "leftU"){
+			p.x-=p.speed;
+			p.y-=p.speed*0.5;
+		}
+		if(p.dir == "leftD"){
+			p.x-=p.speed;
+			p.y+=p.speed*0.5;
+		}
+		if(p.dir == "up"){
+			p.y-=p.speed;
+		}
+		if(p.dir == "upU"){
+			p.x-=p.speed*0.5;
+			p.y-=p.speed;
+		}
+		if(p.dir == "upD"){
+			p.x+=p.speed*0.5;
+			p.y-=p.speed;
+		}
+		if(p.dir == "down"){
+			p.y+=p.speed;
+		}
+		if(p.dir == "downU"){
+			p.x-=p.speed*0.5;
+			p.y+=p.speed;
+		}
+		if(p.dir == "downD"){
+			p.x+=p.speed*0.5;
+			p.y+=p.speed;
+		}
+		p.height-=0.5;
+		p.width-=0.5;
+		if(p.height < 0 || p.width < 0){
+			p.timeLeft = 1;
+		}
+	}
+}
 //----------------------------------------------- Casting Bar -----------------------------------------------------------------------//
 var castingBar = {
-	x: player.x - player.width/2,
-	y: player.y + player.height/2,
+	x: player.x - player.width*0.5,
+	y: player.y + player.height*0.5,
 	width: player.width,
-	height: player.height/4,
+	height: player.height*0.25,
 	width2: 0,
 	onScreen: 0,
 	cast: -1,
 	castmax: 0,
 	draw: function(){
-		this.x = player.x - player.width/2;
-		this.y = player.y + player.height/2;
+		this.x = player.x - player.width*0.5;
+		this.y = player.y + player.height*0.5;
 		if(this.onScreen == 1){
 			ctx.fillStyle = "#0404B4";
 			ctx.strokeStyle = "black";
@@ -306,17 +684,17 @@ var castingBar = {
 	}
 }
 var TreecastingBar = {
-	x: treeWizz.x - treeWizz.width/2,
-	y: treeWizz.y + treeWizz.height/2,
+	x: treeWizz.x - treeWizz.width*0.5,
+	y: treeWizz.y + treeWizz.height*0.5,
 	width: treeWizz.width,
-	height: treeWizz.height/4,
+	height: treeWizz.height*0.25,
 	width2: 0,
 	onScreen: 0,
 	cast: -1,
 	castmax: 0,
 	draw: function(){
-		this.x = treeWizz.x - treeWizz.width/2;
-		this.y = treeWizz.y + treeWizz.height/2;
+		this.x = treeWizz.x - treeWizz.width*0.5;
+		this.y = treeWizz.y + treeWizz.height*0.5;
 		if(this.onScreen == 1){
 			ctx.fillStyle = "#0404B4";
 			ctx.strokeStyle = "black";
@@ -341,14 +719,14 @@ var SorcCastingBar = {
 	x: -100,
 	y: -200,
 	width: Sorceror.width,
-	height: Sorceror.height/4,
+	height: Sorceror.height*0.25,
 	width2: 0,
 	onScreen: 0,
 	cast: -1,
 	castmax: 0,
 	draw: function(){
-		this.x = Sorceror.x - Sorceror.width/2;
-		this.y = Sorceror.y + Sorceror.height/2;
+		this.x = Sorceror.x - Sorceror.width*0.5;
+		this.y = Sorceror.y + Sorceror.height*0.5;
 		if(this.onScreen == 1){
 			ctx.fillStyle = "#0404B4";
 			ctx.strokeStyle = "black";
@@ -366,6 +744,18 @@ var SorcCastingBar = {
 			this.cast-=1;
 			Sorceror.speed = Sorceror.speed2*2;
 			this.onScreen = 0;
+		}
+	}
+}
+//confuse bar
+function confuseBarDraw(){
+	for(E in AllEnemies){
+		if(AllEnemies[E].good){
+			ctx.fillStyle = "#0404B4";
+			ctx.strokeStyle = "black";
+			ctx.strokeRect(AllEnemies[E].x-AllEnemies[E].width*0.5, AllEnemies[E].y-AllEnemies[E].height-8, 32, 8);
+			ctx.fillRect(AllEnemies[E].x-AllEnemies[E].width*0.5+2, AllEnemies[E].y-AllEnemies[E].height -6, 
+						AllEnemies[E].goodTimer/AllEnemies[E].goodTimerMax * 32, 6);
 		}
 	}
 }
@@ -389,44 +779,44 @@ function collision(dir, one, two){
 		}
 	}
 	if(dir == "W"){
-		if(one.y <= two.y + two.height/2){
+		if(one.y <= two.y + two.height*0.5){
 			return false;
 		}
-		if((one.x-one.width/2<two.x+two.width/2 && one.x+one.width/2>two.x-two.width/2) &&
-			one.y - (one.height / 2) - one.speed < two.y + two.height / 2){
+		if((one.x-one.width*0.5<two.x+two.width*0.5 && one.x+one.width*0.5>two.x-two.width*0.5) &&
+			one.y - (one.height * 0.5) - one.speed < two.y + two.height * 0.5){
 			return true;
 		}else{
 			return false;
 		}
 	}
 	if(dir == "A" || dir == "AS" || dir == "WA"){
-		if(one.x <= two.x - two.width/2){
+		if(one.x <= two.x - two.width*0.5){
 			return false;
 		}
-		if((one.y-one.height/2 < two.y+two.height/2 && one.y+one.height/2>two.y-two.height/2) &&
-			one.x - (one.width / 2) - one.speed < two.x + two.width / 2){
+		if((one.y-one.height*0.5 < two.y+two.height*0.5 && one.y+one.height*0.5>two.y-two.height*0.5) &&
+			one.x - (one.width * 0.5) - one.speed < two.x + two.width * 0.5){
 			return true;
 		}else{
 			return false;
 		}
 	}
 	if(dir == "S"){
-		if(one.y >= two.y + two.height/2){
+		if(one.y >= two.y + two.height*0.5){
 			return false;
 		}
-		if((one.x-one.width/2 < two.x+two.width/2 && one.x+one.width/2>two.x-two.width/2) &&
-			one.y + (one.height / 2) + one.speed > two.y - two.height / 2){
+		if((one.x-one.width*0.5 < two.x+two.width*0.5 && one.x+one.width*0.5>two.x-two.width*0.5) &&
+			one.y + (one.height * 0.5) + one.speed > two.y - two.height * 0.5){
 			return true;
 		}else{
 			return false;
 		}
 	}
 	if(dir == "D" || dir == "WD" || dir == "SD"){
-		if(one.x >= two.x + two.width/2){
+		if(one.x >= two.x + two.width*0.5){
 			return false;
 		}
-		if((one.y-one.height/2 < two.y+two.height/2 && one.y+one.height/2>two.y-two.height/2) &&
-			one.x + (one.height / 2) + one.speed > two.x - two.width / 2){
+		if((one.y-one.height*0.5 < two.y+two.height*0.5 && one.y+one.height*0.5>two.y-two.height*0.5) &&
+			one.x + (one.height * 0.5) + one.speed > two.x - two.width * 0.5){
 			return true;
 		}else{
 			return false;
@@ -440,8 +830,8 @@ function collision(dir, one, two){
 // Collision detection cont'd
 function contained(a, b){
 	var dist = Math.sqrt(((b.x - a.x)*(b.x - a.x)) + ((b.y - a.y)*(b.y - a.y)));
-	if(dist <= b.width/2 || dist <= b.height/2 ||
-		dist <= a.width/2 || dist <= a.height/2){
+	if(dist <= b.width*0.5 || dist <= b.height*0.5 ||
+		dist <= a.width*0.5 || dist <= a.height*0.5){
 		return true;
 	}
 	else{
@@ -450,7 +840,7 @@ function contained(a, b){
 }
 //dragon flame
 function Hcontained(a, b){
-	if(a.y >= b.y-b.height/2 && a.y <= b.y + b.height/2 && a.x <= b.x + b.width/2 && a.x >= b.x-b.width/2){
+	if(a.y >= b.y-b.height*0.5 && a.y <= b.y + b.height*0.5 && a.x <= b.x + b.width*0.5 && a.x >= b.x-b.width*0.5){
 		return true;
 	}
 	else{
@@ -527,13 +917,32 @@ function DiffDir(dir){
 }
 function hpBarDraw(H){
 	if(H.hp > 0){
+		var X = H.x - H.width*0.5;
+		var Y = H.y - H.height*0.5 - H.height*0.25;
+		if(H.type == "MegaMummy"){
+			X = H.x;
+			Y+=32;
+		}
 		if(H.type == "MasterThief"){
-			var G = 4;
+			X = H.x - H.width*0.25;
+			Y = H.y - H.height*0.5;
 		}
-		else{
-			var G = 2;
+		else if(H.type == "DragonL" || H.type == "DragonR"){
+			X = H.x - H.width*0.5 + 8;
+			Y = H.y - H.height*0.5 - H.height*0.25 + 8;
 		}
-		ctx.drawImage(hpBarGraphics[H.hp], H.x - (H.width/G), H.y - H.height/G - H.height/4);
+		else if(H.type == "Dragon"){
+			X = H.x;
+			Y = H.y - H.height*0.5 - 32;
+		}
+		else if(H.type == "Genie"){
+			X = H.x -16;
+			Y = H.y - H.height*0.5 - 144;
+		}
+		else if(H.type == "Anubis"){
+			Y = H.y - H.height*0.5 - 64;
+		}
+		ctx.drawImage(hpBarGraphics[H.hp], X, Y);
 	}
 }
 //------------------------------------------------- Point and Element Markers -------------------------------------------------------//
@@ -584,7 +993,8 @@ var typemarker = {
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: ""
+	text: "",
+	regen: false
 };
 
 var typemarker2 = {
@@ -593,7 +1003,8 @@ var typemarker2 = {
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: ""
+	text: "",
+	regen: false
 };
 
 var typemarker3 = {
@@ -602,7 +1013,8 @@ var typemarker3 = {
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: ""
+	text: "",
+	regen: false
 };
 
 var typemarker4 = {
@@ -611,7 +1023,8 @@ var typemarker4 = {
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: ""
+	text: "",
+	regen: false
 };
 
 var typemarker5 = {
@@ -620,7 +1033,8 @@ var typemarker5 = {
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: ""
+	text: "",
+	regen: false
 };
 
 var typemarker6 = {
@@ -629,16 +1043,18 @@ var typemarker6 = {
 	timeLeft: 0,
 	x: -100,
 	y: -100,
-	text: ""
+	text: "",
+	regen: false
 };
 var typemarkerlist = {1: typemarker, 2: typemarker2, 3: typemarker3, 4: typemarker4, 5: typemarker5, 6: typemarker6};
 function drawtypeMarker(M){
 	if(M.timeLeft == 0){
 		M.x = -100;
 		M.y = -100;
+		M.regen = false;
 	}
 	if (M.timeLeft != 0){
-		if(M.text == "+ Air" || M.text == "+ Time"){
+		if(M.text == "+ Air" || M.text == "+ Time" || M.text == "Stunned!"){
 			M.color = "#D0D0D0";
 		}
 		else if(M.text == "+ Fire"){
@@ -662,6 +1078,9 @@ function drawtypeMarker(M){
 		else if(M.text == "+ Dark"){
 			M.color = "black";
 		}
+		else if(M.text == "+ Light"){
+			M.color = "white";
+		}
 		else if(M.text == "Dead!"){
 			M.color = "#CC0000";
 		}
@@ -669,9 +1088,15 @@ function drawtypeMarker(M){
 			M.color = "yellow";
 		}
 		else if(M.text == "+1"){
-			M.color = "#00FFFF";
+			//if for player hp green else shield blue
+			if(M.regen){
+				M.color = "#33CC00";
+			}
+			else{
+				M.color = "#00FFFF";
+			}
 		}
-		else if(M.text == "+ Max Hp" || M.text == "+ Damage" || M.text == "+ Luck"){
+		else if(M.text == "+ Max Hp" || M.text == "+ Damage" || M.text == "+ Luck" || M.text == "+ Regen"){
 			M.color = colorz[colorNum];
 			colorNum++;
 			if(colorNum > 6){
@@ -695,33 +1120,40 @@ function drawMarker(M){
 		M.y = -100;
 		M.speed = 4;
 	}
-	if (M.timeLeft != 0){
-		if(M.mult == 1){
-			M.color = "#00FF00";
+	var offset = 0;
+	var dispScore = M.points*M.mult+"";
+	if(M.mult > 2){
+		for(S in dispScore){
+			ctx.drawImage(RedScore[dispScore[S]], M.x-32 +24*offset , M.y);
+			offset++;
 		}
-		else if(M.mult == 2){
-			M.color = "#FFFF00";
+		var exclams = M.mult - 3;
+		while(exclams > 0){
+			ctx.drawImage(RScoreBurstEx, M.x-32 +24*offset , M.y);
+			offset++;
+			exclams--;
 		}
-		else if(M.mult == 3){
-			M.color = "#FF6600";
+	}
+	else if(M.mult > 1){
+		for(S in dispScore){
+			ctx.drawImage(OrangeScore[dispScore[S]], M.x-32 +24*offset , M.y);
+			offset++;
 		}
-		else if(M.mult == 4){
-			M.color = "#CC0000";
+	}
+	else{
+		for(S in dispScore){
+			ctx.drawImage(YellowScore[dispScore[S]], M.x-32 +24*offset , M.y);
+			offset++;
 		}
-		else if(M.mult >= 5){
-			M.color = "#FF99FF";
-		}
-	ctx.fillStyle = M.color;
-	ctx.font = "32pt Arial";
-	ctx.fillText(M.points * (M.mult), M.x, M.y);
 	}
 }
 
 function moveMarker(M){
 	if (M.timeLeft > 0){
 		M.y -= M.speed;
-		M.timeLeft--;}
+		M.timeLeft--;
 	}
+}
 //------------------------------------------------- Keep Track of Score Multiplier --------------------------------------------------//
 //Multiply
 var multiply = function(){
@@ -740,17 +1172,32 @@ if(ctx.globalAlpha == 1){
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
-	if(gameReady && STATE != 1 && STATE != "Jungle" && STATE != "Scorched" && STATE != "Swamp"){
+	if(gameReady && STATE != 1 && STATE != "Jungle" && STATE != "Scorched" && STATE != "Swamp" && STATE != "Desert" && STATE != "Tutorial"
+		&& STATE != 5 && STATE != 4){
 		ctx.drawImage(menuBack, 0, 0);
 	}
-	else if(STATE == 1){
-		ctx.drawImage(backGround1, 0, 0);
+	else if(STATE == 5 || STATE == 4){
+		ctx.drawImage(highscoreBack, 0, 0);
+	}
+	else if(STATE == 1 || STATE == "Tutorial"){
+		ctx.drawImage(forestbkgs[Math.ceil(forestIndex/15)], 0, 0);
+		forestIndex++;
+		if(forestIndex>120){
+			forestIndex = 1;
+		}
 	}
 	else if(STATE == "Jungle"){
 		ctx.drawImage(backGround2, 0, 0);
 	}
 	else if(STATE == "Scorched"){
-		ctx.drawImage(backGround3, 0, 0);
+		ctx.drawImage(FireBackGrounds[Math.ceil(firebkgIndex/15)], 0, 0);
+		firebkgIndex++;
+		if(firebkgIndex>60){
+			firebkgIndex = 1;
+		}
+	}
+	else if(STATE == "Desert"){
+		ctx.drawImage(DesertBackground, 0, 0);
 	}
 	else if(STATE == "Swamp"){
 		if(Swindex < 15){
@@ -799,44 +1246,55 @@ function SCORE(){
 		digits++;
 	}
 	ctx.fillStyle = "#0a1655";
-	ctx.globalAlpha = Alpha*0.6;
-	ctx.fillRect(56, 48, 36+16*(digits-2), 28);
-	ctx.globalAlpha = Alpha;
-	ctx.drawImage(ScoreLeft, 48, 48);
+	if(player.x>=32 && player.y >=32 && player.x <= 96+16*(digits-2) && player.y <=84){
+		ctx.globalAlpha = Alpha*0.6*0.1;
+	}
+	else{
+		ctx.globalAlpha = Alpha*0.6;
+	}
+	ctx.fillRect(40, 32, 36+16*(digits-2), 28);
+	if(player.x>=32 && player.y >=32 && player.x <= 96+16*(digits-2) && player.y <=84){
+		ctx.globalAlpha = Alpha*0.1;
+	}
+	else{
+		ctx.globalAlpha = Alpha;
+	}
+	ctx.drawImage(ScoreLeft, 32, 32);
 	while(i <= digits){
 		if(ScoreUI[i] == 0){
-			ctx.drawImage(Scorezero, 60+16*i, 52);
+			ctx.drawImage(Scorezero, 44+16*i, 36);
 		}
 		else if(ScoreUI[i] == 1){
-			ctx.drawImage(Scoreone, 60+16*i, 52);
+			ctx.drawImage(Scoreone, 44+16*i, 36);
 		}
 		else if(ScoreUI[i] == 2){
-			ctx.drawImage(Scoretwo, 60+16*i, 52);
+			ctx.drawImage(Scoretwo, 44+16*i, 36);
 		}
 		else if(ScoreUI[i] == 3){
-			ctx.drawImage(Scorethree, 60+16*i, 52);
+			ctx.drawImage(Scorethree, 44+16*i, 36);
 		}
 		else if(ScoreUI[i] == 4){
-			ctx.drawImage(Scorefour, 60+16*i, 52);
+			ctx.drawImage(Scorefour, 44+16*i, 36);
 		}
 		else if(ScoreUI[i] == 5){
-			ctx.drawImage(Scorefive, 60+16*i, 52);
+			ctx.drawImage(Scorefive, 44+16*i, 36);
 		}
 		else if(ScoreUI[i] == 6){
-			ctx.drawImage(Scoresix, 60+16*i, 52);
+			ctx.drawImage(Scoresix, 44+16*i, 36);
 		}
 		else if(ScoreUI[i] == 7){
-			ctx.drawImage(Scoreseven, 60+16*i, 52);
+			ctx.drawImage(Scoreseven, 44+16*i, 36);
 		}
 		else if(ScoreUI[i] == 8){
-			ctx.drawImage(Scoreeight, 60+16*i, 52);
+			ctx.drawImage(Scoreeight, 44+16*i, 36);
 		}
 		else if(ScoreUI[i] == 9){
-			ctx.drawImage(Scorenine, 60+16*i, 52);
+			ctx.drawImage(Scorenine, 44+16*i, 36);
 		}
 		i++;
 	}
-	ctx.drawImage(ScoreRight, 60+16*(i-1), 48);
+	ctx.drawImage(ScoreRight, 44+16*(i-1), 32);
+	ctx.globalAlpha = Alpha;
 }
 //--------------------------------------------- Keys and Activation -----------------------------------------------------------------//
 // Key bindings
@@ -855,7 +1313,7 @@ var keys = function(){
 		//Fix enemy snap
 		player.x = Math.floor(player.x);
 		player.y = Math.floor(player.y);
-		if(Math.round(player.x/4) != player.x/4 && player.speed/4 == Math.round(player.speed/4)){
+		if(Math.round(player.x/8) != player.x/8 && player.speed/8 == Math.round(player.speed/8)){
 			player.x+=1;
 			for(W in bubbleRotate){
 				if(bubbleRotate[W].onScreen == 1){
@@ -868,7 +1326,7 @@ var keys = function(){
 				}
 			}
 		}
-		if(Math.round(player.y/4) != player.y/4 && player.speed/4 == Math.round(player.speed/4)){
+		if(Math.round(player.y/8) != player.y/8 && player.speed/8 == Math.round(player.speed/8)){
 			player.y+=1;
 			for(W in bubbleRotate){
 				if(bubbleRotate[W].onScreen == 1){
@@ -1111,6 +1569,9 @@ var keys = function(){
 			if(spell1 == "Dark"){
 				dark.shoot();
 			}
+			if(spell1 == "Light"){
+				light.shoot();
+			}
 		}
 		if(32 in keysDown && spell2 != "N/A" && spell1 == "N/A"){
 			if(spell2 == "Fire"){
@@ -1136,6 +1597,9 @@ var keys = function(){
 			}
 			if(spell2 == "Dark"){
 				dark.shoot();
+			}
+			if(spell2 == "Light"){
+				light.shoot();
 			}
 		}
 		if(32 in keysDown && spell1 != "N/A" && spell2 != "N/A"){
@@ -1247,6 +1711,33 @@ var keys = function(){
 			if((spell1 == "Dark" && spell2 == "Water") || (spell2 == "Dark" && spell1 == "Water")){
 				darkwater.shoot();
 			}
+			if(spell1 == "Light" && spell2 == "Light"){
+				light2.shoot();
+			}
+			if((spell1 == "Light" && spell2 == "Fire") || (spell2 == "Light" && spell1 == "Fire")){
+				lightfire.shoot();
+			}
+			if((spell1 == "Light" && spell2 == "Ice") || (spell2 == "Light" && spell1 == "Ice")){
+				lightice.shoot();
+			}
+			if((spell1 == "Light" && spell2 == "Earth") || (spell2 == "Light" && spell1 == "Earth")){
+				lightearth.shoot();
+			}
+			if((spell1 == "Light" && spell2 == "Lightning") || (spell2 == "Light" && spell1 == "Lightning")){
+				lightlightning.shoot();
+			}
+			if((spell1 == "Light" && spell2 == "Air") || (spell2 == "Light" && spell1 == "Air")){
+				lightair.shoot();
+			}
+			if((spell1 == "Light" && spell2 == "Mystic") || (spell2 == "Light" && spell1 == "Mystic")){
+				mystic.shoot();
+			}
+			if((spell1 == "Light" && spell2 == "Water") || (spell2 == "Light" && spell1 == "Water")){
+				lightwater.shoot();
+			}
+			if((spell1 == "Light" && spell2 == "Dark") || (spell2 == "Light" && spell1 == "Dark")){
+				lightdark.shoot();
+			}
 		}
 	}
 };
@@ -1259,6 +1750,7 @@ if(Music==2 && STATE != "PAUSE"){
 		BadWizards.pause();
 		swampSong.pause();
 		CaseysQuest.pause();
+		DesertSong.pause();
 		OverwhelmedByGoblins.play();
 	}
 	else if(STATE == "Jungle" && MasterThief.onScreen == 0){
@@ -1267,30 +1759,50 @@ if(Music==2 && STATE != "PAUSE"){
 		BadWizards.pause();
 		swampSong.pause();
 		CaseysQuest.pause();
-		DumblebeatsNormal.play();
+		DesertSong.pause();
+		if(hpUp.x == -100){
+			DumblebeatsNormal.play();
+			SoothingSound.pause();
+			SoothingSound.currentTime = 0;
+		}
+		else{
+			SoothingSound.play();
+		}
 	}
-	else if(treeWizz.onScreen==1){
+	else if(treeWizz.onScreen==1 && STATE == 1){
 		OverwhelmedByGoblins.pause();
 		Spells.pause();
 		DumblebeatsNormal.pause();
 		swampSong.pause();
 		CaseysQuest.pause();
+		DesertSong.pause();
 		BadWizards.play();
 	}
-	else if(Dragon.onScreen==1){
+	else if(Dragon.onScreen==1 && STATE == 1){
 		OverwhelmedByGoblins.pause();
 		Spells.pause();
 		DumblebeatsNormal.pause();
 		CaseysQuest.pause();
 		swampSong.pause();
+		DesertSong.pause();
 		BadWizards.play();
 	}
-	else if(MasterThief.onScreen==1){
+	else if(MasterThief.onScreen==1 && STATE == "Jungle"){
 		OverwhelmedByGoblins.pause();
 		Spells.pause();
 		DumblebeatsNormal.pause();
 		CaseysQuest.pause();
 		swampSong.pause();
+		DesertSong.pause();
+		BadWizards.play();
+	}
+	else if(Genie.onScreen==1 && STATE == "Scorched"){
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.pause();
+		CaseysQuest.pause();
+		swampSong.pause();
+		DesertSong.pause();
 		BadWizards.play();
 	}
 	else if(STATE=="Scorched"){
@@ -1299,7 +1811,15 @@ if(Music==2 && STATE != "PAUSE"){
 		DumblebeatsNormal.pause();
 		BadWizards.pause();
 		swampSong.pause();
-		CaseysQuest.play();
+		DesertSong.pause();
+		if(hpUp.x == -100){
+			CaseysQuest.play();
+			SoothingSound.pause();
+			SoothingSound.currentTime = 0;
+		}
+		else{
+			SoothingSound.play();
+		}
 	}
 	else if(STATE=="Swamp"){
 		OverwhelmedByGoblins.pause();
@@ -1307,8 +1827,29 @@ if(Music==2 && STATE != "PAUSE"){
 		DumblebeatsNormal.pause();
 		BadWizards.pause();
 		CaseysQuest.pause();
+		DesertSong.pause();
 		if(hpUp.x == -100){
 			swampSong.play();
+			SoothingSound.pause();
+			SoothingSound.currentTime = 0;
+		}
+		else{
+			SoothingSound.play();
+		}
+	}
+	else if(STATE=="Desert"){
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.pause();
+		BadWizards.pause();
+		CaseysQuest.pause();
+		if(hpUp.x == -100){
+			DesertSong.play();
+			SoothingSound.pause();
+			SoothingSound.currentTime = 0;
+		}
+		else{
+			SoothingSound.play();
 		}
 	}
 	else{
@@ -1318,6 +1859,7 @@ if(Music==2 && STATE != "PAUSE"){
 		CaseysQuest.pause();
 		Spells.play();
 		swampSong.pause();
+		DesertSong.pause();
 	}
 }
 }
@@ -1403,13 +1945,14 @@ setInterval(function(){
 		}
 		if(deathTimer == 0){
 			deathTimer-=1;
+			Alpha = 1;
 			STATE = 4;
 		}
 		if(player.hp <= 0){
 			if(nu != 1){
 				deathTimer = 30;
-				typemarker3.x = player.x-player.width/2 - 32;
-				typemarker3.y = player.y-player.height/2;
+				typemarker3.x = player.x-player.width*0.5 - 32;
+				typemarker3.y = player.y-player.height*0.5;
 				typemarker3.timeLeft = 30;
 				typemarker3.text = "Dead!";
 				player.x = 5000;
@@ -1427,10 +1970,11 @@ setInterval(function(){
 				mystic.cast = -1;
 				water.cast = -1;
 				darkwater.cast = -1;
-				castingBar.x = player.x - player.width/2;
-				castingBar.y = player.y + player.height/2;
+				lightearth.cast = -1;
+				castingBar.x = player.x - player.width*0.5;
+				castingBar.y = player.y + player.height*0.5;
 				castingBar.width = player.width;
-				castingBar.height = player.height/4;
+				castingBar.height = player.height*0.25;
 				castingBar.width2 = 0;
 				castingBar.onScreen = 0;
 				castingBar.cast = -1;
@@ -1441,11 +1985,184 @@ setInterval(function(){
 		ctx.globalAlpha = Alpha;
 		keys();
 		multiply();
+		if(STATE == "Tutorial"){
+			AllEnemies = {1: Enemy, 2: EnemyA};
+			
+			ctx.drawImage(MoveShoot, 0, 0);
+			if(87 in keysDown){
+				ctx.drawImage(WPress, 0, 0);
+				moved = true;
+			}
+			if(65 in keysDown){
+				ctx.drawImage(APress, 0, 0);
+				moved = true;
+			}
+			if(83 in keysDown){
+				ctx.drawImage(SPress, 0, 0);
+				moved = true;
+			}
+			if(68 in keysDown){
+				ctx.drawImage(DPress, 0, 0);
+				moved = true;
+			}
+			if(38 in keysDown && 37 in keysDown){
+				ctx.drawImage(WAShootTut, 0, 0);
+				shot = true;
+			}
+			else if(38 in keysDown && 39 in keysDown){
+				ctx.drawImage(WDShootTut, 0, 0);
+				shot = true;
+			}
+			else if(37 in keysDown && 40 in keysDown){
+				ctx.drawImage(ASShootTut, 0, 0);
+				shot = true;
+			}
+			else if(40 in keysDown && 39 in keysDown){
+				ctx.drawImage(SDShootTut, 0, 0);
+				shot = true;
+			}
+			else{
+				if(38 in keysDown){
+					ctx.drawImage(WShootTut, 0, 0);
+					shot = true;
+				}
+				if(37 in keysDown){
+					ctx.drawImage(AShootTut, 0, 0);
+					shot = true;
+				}
+				if(40 in keysDown){
+					ctx.drawImage(SShootTut, 0, 0);
+					shot = true;
+				}
+				if(39 in keysDown){
+					ctx.drawImage(DShootTut, 0, 0);
+					shot = true;
+				}
+			}
+			ctx.drawImage(EnterSkip, 0, 0);
+			if(13 in keysDown && keytimer <= 0){
+				redCube.x = -100;
+				redCube.y = -200;
+				greyCube.x = -100;
+				greyCube.y = -200;
+				Enemy.movement = false;
+				Enemy.onScreen = 0;
+				Enemy.x = 9000;
+				Enemy.y = -400;
+				EnemyA.movement = false;
+				EnemyA.onScreen = 0;
+				EnemyA.x = -9000;
+				EnemyA.y = -9000;
+				TutKill1 = true;
+				TutKill2 = true;
+				ctx.drawImage(EnterSkipPress, 0, 0);
+			}
+			
+			if(shot && moved && !Enemy.onScreen && !TutKill1){
+				Enemy.x = 800;
+				Enemy.y = 288;
+				Enemy.movement = true;
+				Enemy.onScreen = 1;
+			}
+			if(spell != "N/A"){
+				ctx.drawImage(SpaceKey, 0, 0);
+				if(32 in keysDown){
+					ctx.drawImage(SpaceKeyPress, 0, 0);
+				}
+			}
+			
+			if(spell1 != "N/A" && spell2 != "N/A"){
+				if((forestIndex >= 10 && forestIndex < 20) || (forestIndex >= 30 && forestIndex < 40)
+					 || (forestIndex >= 50 && forestIndex < 60) || (forestIndex >= 70 && forestIndex < 80)
+					  || (forestIndex >= 90 && forestIndex < 100) || (forestIndex >= 110 && forestIndex < 120)){
+					ctx.drawImage(DropQ2, 0, 0);
+					ctx.drawImage(DropE2, 0, 0);
+				}
+				else{
+					ctx.drawImage(DropQ1, 0, 0);
+					ctx.drawImage(DropE1, 0, 0);
+				}
+			}
+			
+			if(TutKill1 && !TutKill2 && !Enemy.onScreen && !EnemyA.onScreen && redCube.x == -100){
+				Enemy.x = 800;
+				Enemy.y = 288;
+				Enemy.movement = true;
+				Enemy.onScreen = 1;
+				
+				EnemyA.x = 0;
+				EnemyA.y = 288;
+				EnemyA.movement = true;
+				EnemyA.onScreen = 1;
+				EnemyA.growIndex = 62;
+			}
+			
+			player.draw();
+			player.onhit();
+			//knock back when hit by enemies/meteors
+			player.knockBack();
+			
+			rePlant();
+			
+			for(B in Boxes){
+				Boxes[B].draw();
+				pickup(Boxes[B]);
+			}
+			
+			for(B in Bullets){
+				drawBullet(Bullets[B]);
+				Bulletmove(Bullets[B]);
+			}
+			
+			for(F in AllFire){
+				AllFire[F].draw();
+				AllFire[F].move();
+			}
+			
+			airfire.draw();
+			airfire.effect();
+			airfire12.draw();
+			airfire12.effect();
+			airfire13.draw();
+			airfire13.effect();
+			
+			for(E in AllEnemies){
+				AllEnemies[E].draw();
+				move(AllEnemies[E]);
+				AI(AllEnemies[E]);
+			}
+			
+			treeFall = 2;
+			for(O in allObs){
+				drawObstacle(allObs[O]);
+				obsTick(allObs[O]);
+			}
+			
+			castingBar.draw();
+			castingBar.tick();
+		}
 		//--------------------------------------------- Forest Level ------------------------------------------------------------//
-		if(STATE == 1){
+		else if(STATE == 1){
+			levelorder = 0;
+			//Enemy list optimization
+			AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Sorceror, 6: treeWizz, 7: rootStrike, 8: rootStrike2, 9: rootStrike3, 10: rootStrike4, 11: Dragon, 12: DragonR, 13: DragonL,
+					14: BigMeteor1, 15: Meteor1, 16: Meteor2, 17: Meteor3, 18: Meteor4, 19: BigMeteor2, 20: Meteor5, 21: Meteor6, 22: Meteor7, 23: Meteor8, 24: MeteorD1, 25: MeteorD2};
 			treeFall = 2;
 			player.draw();
 			player.onhit();
+			//knock back when hit by enemies/meteors
+			player.knockBack();
+			//make growing flowers collideable
+			if(EnemyA.onScreen == 1 && EnemyA.growIndex < 62){
+				EnemyA.x+=9000;
+				EnemyA.y+=9000;
+				var Alowered = true;
+			}
+			if(EnemyC.onScreen == 1 && EnemyC.growIndex < 62){
+				EnemyC.x+=9000;
+				EnemyC.y+=9000;
+				var Clowered = true;
+			}
 			rePlant();
 			for(B in Boxes){
 				Boxes[B].draw();
@@ -1458,189 +2175,8 @@ setInterval(function(){
 				HpMove(hpParticles[H]);
 				HpAi(hpParticles[H]);
 			}
-			for(B in Bullets){
-				drawBullet(Bullets[B]);
-				Bulletmove(Bullets[B]);
-			}
-			for(F in AllFire){
-				AllFire[F].draw();
-				AllFire[F].move();
-			}
-			ice.draw();
-			ice.move();
-			ice.effect();
-			ice2.draw();
-			ice2.move();
-			ice2.effect();
-			sIce.draw();
-			sIce.move();
-			sIce.effect();
-		
-			earth.draw();
-			earth.move();
-			for(R in earth2roots1){
-				drawRoots(earth2roots1[R]);
-			}
-			for(R in earth3roots1){
-				drawRoots(earth3roots1[R]);
-			}
-			earth2rootStrike.draw();
-			earth2Move(earth2rootStrike);
-			earth2AI(earth2rootStrike);
-			earth2rootStrike2.draw();
-			earth2Move(earth2rootStrike2);
-			earth2AI(earth2rootStrike2);
-			earth2rootStrike3.draw();
-			earth2Move(earth2rootStrike3);
-			earth2AI(earth2rootStrike3);
-			earth2rootStrike4.draw();
-			earth2Move(earth2rootStrike4);
-			earth2AI(earth2rootStrike4);
-			earth2rootStrike5.draw();
-			earth2Move(earth2rootStrike5);
-			earth2AI(earth2rootStrike5);
-			earth2rootStrike6.draw();
-			earth2Move(earth2rootStrike6);
-			earth2AI(earth2rootStrike6);
-			earth2rootStrike7.draw();
-			earth2Move(earth2rootStrike7);
-			earth2AI(earth2rootStrike7);
-			earth2rootStrike8.draw();
-			earth2Move(earth2rootStrike8);
-			earth2AI(earth2rootStrike8);
-			earth2.tick();
-			//All Tick spells, in mystic class do to imports
-			for(T in Ticks){
-				Ticks[T].tick();
-			}		
-			lightning.draw();
-			lightning.effect();
-		
-			lightning12.draw();
-			lightning12.effect();
-		
-			lightning2.draw();
-			lightning2.effect();
-		
-			lightning22.draw();
-			lightning22.effect();
-		
-			lightning23.draw();
-			lightning23.effect();
-		
-			firelightning.draw();
-			firelightning.effect();
-		
-			icelightning.effect();
-			horil.draw();
-			vertil.draw();
-			horil2.draw();
-			vertil2.draw();
-			horil3.draw();
-			vertil3.draw();
-			horil4.draw();
-			vertil4.draw();
-			horil5.draw();
-			vertil5.draw();
-			air.draw();
-			air.effect();
-			air2.draw();
-			air2.effect();
-			airfire.draw();
-			airfire.effect();
-			airfire12.draw();
-			airfire12.effect();
-			airfire13.draw();
-			airfire13.effect();
 			
-			airice.draw();
-			airice.effect();
-			
-			airlightning.draw();
-			airlightning.effect();
-			
-			mystic.move();
-			mystic.draw();
-			Mice.draw();
-			Mice.move();
-			Mice2.draw();
-			Mice2.move();
-			Mice3.draw();
-			Mice3.move();
-			Mice4.draw();
-			Mice4.move();
-			mystic2.draw();
-			mystic2.move();
-			Illusion.draw();
-			Illusion.shoot();
-			IllusionBlast.draw();
-			IllusionBlast.move();
-			
-			for(W in bubbleRotate){
-				bubbleRotate[W].draw();
-				bubbleRotate[W].effect();
-			}
-			for(W in waterFires){
-				waterFires[W].draw();
-				waterFires[W].effect();
-			}
-			for(W in WFires){
-				WFires[W].draw();
-				WFires[W].move();
-			}
-			for(I in IBubbles){
-				IBubbles[I].draw();
-				IBubbles[I].move();
-			}
-			
-			waterair.draw();
-			for(W in wairParticles){
-				wairParticles[W].draw();
-				wairParticles[W].onHit();
-				HpAi(wairParticles[W]);
-				HpMove(wairParticles[W]);
-			}
-			for(W in Wpools){
-				Wpools[W].draw();
-				Wpools[W].move();
-			}
-			
-			for(S in darkSpikes){
-				spikeDraw(darkSpikes[S]);
-				spikeMove(darkSpikes[S]);
-			}
-			for(S in dark2Spikes){
-				spikeDraw(dark2Spikes[S]);
-				spikeMove(dark2Spikes[S]);
-			}
-			for(S in darkfireSpikes){
-				spikeDraw(darkfireSpikes[S]);
-				firespikeMove(darkfireSpikes[S]);
-			}
-			for(S in darkfireExplosions){
-				darkfireExplosions[S].draw();
-				darkfireExplosions[S].move();
-			}
-			for(S in darkiceSpikes){
-				spikeDraw(darkiceSpikes[S]);
-				firespikeMove(darkiceSpikes[S]);
-			}
-			for(S in darkiceEffects){
-				darkiceEffects[S].draw();
-			}
-			for(S in darklightningSpikes){
-				spikeDraw(darklightningSpikes[S]);
-				firespikeMove(darklightningSpikes[S]);
-			}
-			for(S in darklightningExplosions){
-				darklightningExplosions[S].draw();
-				darklightningExplosions[S].move();
-			}
-			darkwater.draw();
-			darkwater.effect();
-			
-			darkair.draw();
-			darkair.effect();
+			drawSpells();
 			
 			sFire.draw();
 			sFire.move();
@@ -1678,6 +2214,14 @@ setInterval(function(){
 			//put here to negate ice abilities
 			TreecastingBar.tick();	
 			SorcCastingBar.tick();
+			if(EnemyA.onScreen == 1 && EnemyA.growIndex < 62 && Alowered){
+				EnemyA.x-=9000;
+				EnemyA.y-=9000;
+			}
+			if(EnemyC.onScreen == 1 && EnemyC.growIndex < 62 && Clowered){
+				EnemyC.x-=9000;
+				EnemyC.y-=9000;
+			}
 			for(E in AllEnemies){
 				if(AllEnemies[E].onTree == 0){
 					AllEnemies[E].draw();
@@ -1693,14 +2237,7 @@ setInterval(function(){
 			for(M in BigMeteors){
 				MeteorAI(BigMeteors[M]);
 			}
-			for(E in EMeteors){
-				EMeteors[E].draw();
-				MeteorMove(EMeteors[E]);
-			}
-			for(E in Exploders){
-				exploderDraw(Exploders[E]);
-				exploderMove(Exploders[E]);
-			}
+			
 			DragonEffect.draw();
 			
 			TwizEffect.draw();
@@ -1711,6 +2248,11 @@ setInterval(function(){
 				obsTick(allObs[O]);
 			}
 			
+			for(b in bloodList){
+				drawBlood(bloodList[b]);
+			}
+			
+			confuseBarDraw();
 			castingBar.draw();
 			castingBar.tick();
 			TreecastingBar.draw();
@@ -1718,6 +2260,23 @@ setInterval(function(){
 		}
 		//--------------------------------------------------------- Jungle Level ------------------------------------------------//
 		else if(STATE == "Jungle"){
+			levelorder = 11;
+			SeenJungle = 1;
+			$.jStorage.set("SeenJungle", SeenJungle);
+			
+			//change enemies
+			AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: treeWizz, 6: rootStrike, 7: rootStrike2, 8: rootStrike3,
+							9: rootStrike4, 10: Thief, 11: ThiefA, 12: ThiefB, 13: MasterThief};
+			StateTimer+=1;
+			//resize hudge
+			Enemy.width = 40;
+			Enemy.height = 28;
+			EnemyB.width = 40;
+			EnemyB.height = 28;
+			//draw grass
+			for(G in tallGrasses){
+				ctx.drawImage(tallG, tallGrasses[G].x-tallGrasses[G].width*0.5, tallGrasses[G].y-tallGrasses[G].height*0.5);
+			}
 			//Must be on below trees
 			for(F in treeFallExplosions){
 				treeFallExplosions[F].draw();
@@ -1731,7 +2290,7 @@ setInterval(function(){
 			var shade = false;
 			for(O in obstacle1){
 				if(!obstacle1[O].falling || FallingTreesL[obstacle1[O].fallIndex] == shakeTR || FallingTreesL[obstacle1[O].fallIndex] == shakeTL){
-					if(player.x <= obstacle1[O].x + obstacle1[O].width/2 && player.x >= obstacle1[O].x - obstacle1[O].width/2
+					if(player.x <= obstacle1[O].x + obstacle1[O].width*0.5 && player.x >= obstacle1[O].x - obstacle1[O].width*0.5
 						&& player.y <= obstacle1[O].y && obstacle1[O].index > 5){
 							shade = true;
 					}
@@ -1743,6 +2302,12 @@ setInterval(function(){
 				player.draw();
 			}
 			player.onhit();
+			//knock back when hit by enemies/meteors
+			//bug fix- make thieves steal before movement
+			Thief.steal();
+			ThiefA.steal();
+			ThiefB.steal();
+			player.knockBack();
 			rePlant();
 			for(B in Boxes){
 				Boxes[B].draw();
@@ -1759,189 +2324,12 @@ setInterval(function(){
 				HpMove(hpParticles[H]);
 				HpAi(hpParticles[H]);
 			}
-			for(B in Bullets){
-				drawBullet(Bullets[B]);
-				Bulletmove(Bullets[B]);
-			}
-			for(F in AllFire){
-				AllFire[F].draw();
-				AllFire[F].move();
-			}
-			ice.draw();
-			ice.move();
-			ice.effect();
-			ice2.draw();
-			ice2.move();
-			ice2.effect();
-		
-			earth.draw();
-			earth.move();
-			for(R in earth2roots1){
-				drawRoots(earth2roots1[R]);
-			}
-			for(R in earth3roots1){
-				drawRoots(earth3roots1[R]);
-			}
-			earth2rootStrike.draw();
-			earth2Move(earth2rootStrike);
-			earth2AI(earth2rootStrike);
-			earth2rootStrike2.draw();
-			earth2Move(earth2rootStrike2);
-			earth2AI(earth2rootStrike2);
-			earth2rootStrike3.draw();
-			earth2Move(earth2rootStrike3);
-			earth2AI(earth2rootStrike3);
-			earth2rootStrike4.draw();
-			earth2Move(earth2rootStrike4);
-			earth2AI(earth2rootStrike4);
-			earth2rootStrike5.draw();
-			earth2Move(earth2rootStrike5);
-			earth2AI(earth2rootStrike5);
-			earth2rootStrike6.draw();
-			earth2Move(earth2rootStrike6);
-			earth2AI(earth2rootStrike6);
-			earth2rootStrike7.draw();
-			earth2Move(earth2rootStrike7);
-			earth2AI(earth2rootStrike7);
-			earth2rootStrike8.draw();
-			earth2Move(earth2rootStrike8);
-			earth2AI(earth2rootStrike8);
-			earth2.tick();
-			//All Tick spells, in mystic class do to imports
-			for(T in Ticks){
-				Ticks[T].tick();
-			}		
-			lightning.draw();
-			lightning.effect();
-		
-			lightning12.draw();
-			lightning12.effect();
-		
-			lightning2.draw();
-			lightning2.effect();
-		
-			lightning22.draw();
-			lightning22.effect();
-		
-			lightning23.draw();
-			lightning23.effect();
-		
-			firelightning.draw();
-			firelightning.effect();
-		
-			icelightning.effect();
-			horil.draw();
-			vertil.draw();
-			horil2.draw();
-			vertil2.draw();
-			horil3.draw();
-			vertil3.draw();
-			horil4.draw();
-			vertil4.draw();
-			horil5.draw();
-			vertil5.draw();
-			air.draw();
-			air.effect();
-			air2.draw();
-			air2.effect();
-			airfire.draw();
-			airfire.effect();
-			airfire12.draw();
-			airfire12.effect();
-			airfire13.draw();
-			airfire13.effect();
 			
-			airice.draw();
-			airice.effect();
-			
-			airlightning.draw();
-			airlightning.effect();
-			
-			mystic.move();
-			mystic.draw();
-			Mice.draw();
-			Mice.move();
-			Mice2.draw();
-			Mice2.move();
-			Mice3.draw();
-			Mice3.move();
-			Mice4.draw();
-			Mice4.move();
-			mystic2.draw();
-			mystic2.move();
-			Illusion.draw();
-			Illusion.shoot();
-			IllusionBlast.draw();
-			IllusionBlast.move();
-			
-			for(W in bubbleRotate){
-				bubbleRotate[W].draw();
-				bubbleRotate[W].effect();
-			}
-			for(W in waterFires){
-				waterFires[W].draw();
-				waterFires[W].effect();
-			}
-			for(W in WFires){
-				WFires[W].draw();
-				WFires[W].move();
-			}
-			for(I in IBubbles){
-				IBubbles[I].draw();
-				IBubbles[I].move();
-			}
-			
-			waterair.draw();
-			for(W in wairParticles){
-				wairParticles[W].draw();
-				wairParticles[W].onHit();
-				HpAi(wairParticles[W]);
-				HpMove(wairParticles[W]);
-			}
-			for(W in Wpools){
-				Wpools[W].draw();
-				Wpools[W].move();
-			}
-			
-			for(S in darkSpikes){
-				spikeDraw(darkSpikes[S]);
-				spikeMove(darkSpikes[S]);
-			}
-			for(S in dark2Spikes){
-				spikeDraw(dark2Spikes[S]);
-				spikeMove(dark2Spikes[S]);
-			}
-			for(S in darkfireSpikes){
-				spikeDraw(darkfireSpikes[S]);
-				firespikeMove(darkfireSpikes[S]);
-			}
-			for(S in darkfireExplosions){
-				darkfireExplosions[S].draw();
-				darkfireExplosions[S].move();
-			}
-			for(S in darkiceSpikes){
-				spikeDraw(darkiceSpikes[S]);
-				firespikeMove(darkiceSpikes[S]);
-			}
-			for(S in darkiceEffects){
-				darkiceEffects[S].draw();
-			}
-			for(S in darklightningSpikes){
-				spikeDraw(darklightningSpikes[S]);
-				firespikeMove(darklightningSpikes[S]);
-			}
-			for(S in darklightningExplosions){
-				darklightningExplosions[S].draw();
-				darklightningExplosions[S].move();
-			}
-			darkwater.draw();
-			darkwater.effect();
-			
-			darkair.draw();
-			darkair.effect();
+			drawSpells();
 			
 			sAir.draw();
 			sAir.effect();
+			
 			for(F in treeFallExplosions){
 				treeFallExplosions[F].move();
 			}
@@ -1965,23 +2353,31 @@ setInterval(function(){
 				Feet[F].draw();
 				Feet[F].tick();
 			}
-
-			Thief.steal();
-			ThiefA.steal();
-			ThiefB.steal();
-		
 			SmokeBomb.draw();
 			SmokeBombA.draw();
 			SmokeBombB.draw();
 			MSmokeBomb.draw();
-			
+			//draw top trees
 			for(O in allObs){
-				if(allObs[O].fallIndex < 46 || !allObs[O].fallIndex){
-					drawObstacle(allObs[O]);
-				}
-				obsTick(allObs[O]);
+				drawObstacle(allObs[O]);
 			}
-			treeFall = 1;
+			//draw fog 1
+			ctx.drawImage(fog1, EnvFog1.x, EnvFog1.y);
+			EnvFog1.x++;
+			if(EnvFog1.x == -400){
+				EnvFog1.x = -1599;
+			}
+			fogNum = 2;
+			//draw mid trees
+			for(O in allObs){
+				drawObstacle(allObs[O]);
+			}
+			//draw fog 2
+			ctx.drawImage(fog2, EnvFog2.x, EnvFog2.y);
+			EnvFog2.x++;
+			if(EnvFog2.x == -400){
+				EnvFog2.x = -1599;
+			}
 			if(jungleAni == true){
 				for(O in obstacle1){
 					if(obstacle1[O].growTimer > 0){
@@ -1992,269 +2388,154 @@ setInterval(function(){
 					}
 				}
 			}
+			fogNum = 3;
+			//draw front trees
+			for(O in allObs){
+				drawObstacle(allObs[O]);
+				obsTick(allObs[O]);
+			}
+			//draw fog 3
+			ctx.drawImage(fog3, EnvFog3.x, EnvFog3.y);
+			EnvFog3.x++;
+			if(EnvFog3.x == -560){
+				EnvFog3.x = -1919;
+			}
+			fogNum = 1;
+			treeFall = 1;
 			//if players in a tree
 			if(player.shadowed){
 				player.draw();
 			}
+			//draw bugs
 			for(E in AllEnemies){
 				if(AllEnemies[E].onTree == 1){
 					AllEnemies[E].draw();
 					move(AllEnemies[E]);
 				}
 			}
+			
+			for(b in bloodList){
+				drawBlood(bloodList[b]);
+			}
+			
 			TwizEffect.draw();
 			MasterTEffect.draw();
 			
+			confuseBarDraw();
 			castingBar.draw();
-			castingBar.tick();	
+			castingBar.tick();
 		}
 		//------------------------------------------------------------ Fire Level -----------------------------------------------//
 		else if(STATE == "Scorched"){
+			levelorder = 12;
+			SeenFire = 1;
+			$.jStorage.set("SeenFire", SeenFire);
+			
+			//change enemies
+			AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 5: Tenemy, 6: TenemyA, 8: Lavaman, 9: Lavaman2, 10: Lavaman3, 11: Lavaman4, 12: Spawner, 13: Dragon, 14: DragonR, 15: DragonL,
+					16: BigMeteor1, 17: Meteor1, 18: Meteor2, 19: Meteor3, 20: Meteor4, 21: BigMeteor2, 22: Meteor5, 23: Meteor6, 24: Meteor7, 25: Meteor8, 26: MeteorD1, 27: MeteorD2,
+					28: Lavaman5, 29: Lavaman6, 30: Lavaman7, 31: Lavaman8, 32: Spawner2, 33: MiniMum1, 34: MiniMum2, 35: MiniMum3, 36: MiniMum4, 37: Genie, 38: Lamp};
 			StateTimer+=1;
 			//enemy pts change
 			Enemy.pts = 25;
 			EnemyA.pts = 25;
 			EnemyB.pts = 25;
 			EnemyC.pts = 25;
+			//change enemy sizes for mudge
+			Enemy.width = 40;
+			Enemy.height = 16;
+			EnemyA.width = 40;
+			EnemyA.height = 16;
+			EnemyB.width = 40;
+			EnemyB.height = 16;
+			EnemyC.width = 40;
+			EnemyC.height = 16;
 	
+			for(O in allObs){
+				drawObstacle(allObs[O]);
+				obsTick(allObs[O]);
+			}
 			player.draw();
 			player.onhit();
+			//knock back when hit by enemies/meteors
+			player.knockBack();
 			rePlant();
 			for(B in Boxes){
 				Boxes[B].draw();
 				pickup(Boxes[B]);
 			}
-			
+			RandEffect.draw();
 			for(H in hpParticles){
 				hpParticles[H].draw();
 				hpParticles[H].onHit();
 				HpMove(hpParticles[H]);
 				HpAi(hpParticles[H]);
 			}
-			for(B in Bullets){
-				drawBullet(Bullets[B]);
-				Bulletmove(Bullets[B]);
-			}
-			for(F in AllFire){
-				AllFire[F].draw();
-				AllFire[F].move();
-			}
-			ice.draw();
-			ice.move();
-			ice.effect();
-			ice2.draw();
-			ice2.move();
-			ice2.effect();
-		
-			earth.draw();
-			earth.move();
-			for(R in earth2roots1){
-				drawRoots(earth2roots1[R]);
-			}
-			for(R in earth3roots1){
-				drawRoots(earth3roots1[R]);
-			}
-			earth2rootStrike.draw();
-			earth2Move(earth2rootStrike);
-			earth2AI(earth2rootStrike);
-			earth2rootStrike2.draw();
-			earth2Move(earth2rootStrike2);
-			earth2AI(earth2rootStrike2);
-			earth2rootStrike3.draw();
-			earth2Move(earth2rootStrike3);
-			earth2AI(earth2rootStrike3);
-			earth2rootStrike4.draw();
-			earth2Move(earth2rootStrike4);
-			earth2AI(earth2rootStrike4);
-			earth2rootStrike5.draw();
-			earth2Move(earth2rootStrike5);
-			earth2AI(earth2rootStrike5);
-			earth2rootStrike6.draw();
-			earth2Move(earth2rootStrike6);
-			earth2AI(earth2rootStrike6);
-			earth2rootStrike7.draw();
-			earth2Move(earth2rootStrike7);
-			earth2AI(earth2rootStrike7);
-			earth2rootStrike8.draw();
-			earth2Move(earth2rootStrike8);
-			earth2AI(earth2rootStrike8);
-			earth2.tick();
-			//All Tick spells, in mystic class do to imports
-			for(T in Ticks){
-				Ticks[T].tick();
-			}		
-			lightning.draw();
-			lightning.effect();
-		
-			lightning12.draw();
-			lightning12.effect();
-		
-			lightning2.draw();
-			lightning2.effect();
-		
-			lightning22.draw();
-			lightning22.effect();
-		
-			lightning23.draw();
-			lightning23.effect();
-		
-			firelightning.draw();
-			firelightning.effect();
-		
-			icelightning.effect();
-			horil.draw();
-			vertil.draw();
-			horil2.draw();
-			vertil2.draw();
-			horil3.draw();
-			vertil3.draw();
-			horil4.draw();
-			vertil4.draw();
-			horil5.draw();
-			vertil5.draw();
-			air.draw();
-			air.effect();
-			air2.draw();
-			air2.effect();
-			airfire.draw();
-			airfire.effect();
-			airfire12.draw();
-			airfire12.effect();
-			airfire13.draw();
-			airfire13.effect();
 			
-			airice.draw();
-			airice.effect();
+			drawSpells();
 			
-			airlightning.draw();
-			airlightning.effect();
-			
-			mystic.move();
-			mystic.draw();
-			Mice.draw();
-			Mice.move();
-			Mice2.draw();
-			Mice2.move();
-			Mice3.draw();
-			Mice3.move();
-			Mice4.draw();
-			Mice4.move();
-			mystic2.draw();
-			mystic2.move();
-			Illusion.draw();
-			Illusion.shoot();
-			IllusionBlast.draw();
-			IllusionBlast.move();
-			
-			for(W in bubbleRotate){
-				bubbleRotate[W].draw();
-				bubbleRotate[W].effect();
-			}
-			for(W in waterFires){
-				waterFires[W].draw();
-				waterFires[W].effect();
-			}
-			for(W in WFires){
-				WFires[W].draw();
-				WFires[W].move();
-			}
-			for(I in IBubbles){
-				IBubbles[I].draw();
-				IBubbles[I].move();
-			}
-			
-			waterair.draw();
-			for(W in wairParticles){
-				wairParticles[W].draw();
-				wairParticles[W].onHit();
-				HpAi(wairParticles[W]);
-				HpMove(wairParticles[W]);
-			}
-			for(W in Wpools){
-				Wpools[W].draw();
-				Wpools[W].move();
-			}
-			
-			for(S in darkSpikes){
-				spikeDraw(darkSpikes[S]);
-				spikeMove(darkSpikes[S]);
-			}
-			for(S in dark2Spikes){
-				spikeDraw(dark2Spikes[S]);
-				spikeMove(dark2Spikes[S]);
-			}
-			for(S in darkfireSpikes){
-				spikeDraw(darkfireSpikes[S]);
-				firespikeMove(darkfireSpikes[S]);
-			}
-			for(S in darkfireExplosions){
-				darkfireExplosions[S].draw();
-				darkfireExplosions[S].move();
-			}
-			for(S in darkiceSpikes){
-				spikeDraw(darkiceSpikes[S]);
-				firespikeMove(darkiceSpikes[S]);
-			}
-			for(S in darkiceEffects){
-				darkiceEffects[S].draw();
-			}
-			for(S in darklightningSpikes){
-				spikeDraw(darklightningSpikes[S]);
-				firespikeMove(darklightningSpikes[S]);
-			}
-			for(S in darklightningExplosions){
-				darklightningExplosions[S].draw();
-				darklightningExplosions[S].move();
-			}
-			darkwater.draw();
-			darkwater.effect();
-			
-			darkair.draw();
-			darkair.effect();
-			
-			
+			//genie and lamp
+			Lamp.draw();
+			LampPoof.draw();
+			Genie.spawn();
 			for(E in AllEnemies){
-				if(AllEnemies[E].onTree == 0){
-					AllEnemies[E].draw();
-					move(AllEnemies[E]);
-				}
-				if(AllEnemies[E].type != "Dragon" && AllEnemies[E].type != "DragonL" && AllEnemies[E].type != "DragonR"){
-					AI(AllEnemies[E]);
-					if(AllEnemies[E].type != "MasterThief"){
-						spawn(AllEnemies[E]);
+				if(AllEnemies[E] != Lamp){
+					if(AllEnemies[E].onTree == 0){
+						AllEnemies[E].draw();
+						move(AllEnemies[E]);
+					}
+					if(AllEnemies[E].type != "Dragon" && AllEnemies[E].type != "DragonL" && AllEnemies[E].type != "DragonR"){
+						AI(AllEnemies[E]);
+						if(AllEnemies[E].type != "MasterThief" && E.type != "Genie"){
+							spawn(AllEnemies[E]);
+						}
 					}
 				}
 			}
+			LaserUpAttack.draw();
+			LaserUpAttack.move();
+			LaserFdAttack.draw();
+			LaserFdAttack.move();
+			LaserDAttack.draw();
+			LaserDAttack.move();
 			for(M in BigMeteors){
 				MeteorAI(BigMeteors[M]);
 			}
-			for(E in EMeteors){
-				EMeteors[E].draw();
-				MeteorMove(EMeteors[E]);
+			for(S in Steams){
+				drawSteam(Steams[S]);
 			}
 			for(E in Exploders){
 				exploderDraw(Exploders[E]);
 				exploderMove(Exploders[E]);
+			}
+			for(E in EMeteors){
+				EMeteorDraw(EMeteors[E]);
+				MeteorMove(EMeteors[E]);
 			}
 			DragonEffect.draw();
 
 			Spawner.fire();
 			Spawner2.fire();
 			treeFall = 2;	
-			for(O in allObs){
-				if(allObs[O].fallIndex < 46 || !allObs[O].fallIndex){
-					drawObstacle(allObs[O]);
-				}
-				obsTick(allObs[O]);
+			
+			for(b in bloodList){
+				drawBlood(bloodList[b]);
 			}
 			
 			DragonEffect2.draw();
-			
+			GenieEffect.draw();
+			confuseBarDraw();
 			castingBar.draw();
 			castingBar.tick();
 		}
 		//--------------------------------------------------- Swamp Level -------------------------------------------------------//
 		else if(STATE == "Swamp"){
+			levelorder = 21;
+			SeenSwamp = 1;
+			$.jStorage.set("SeenSwamp", SeenSwamp);
+			
+			//change enemy list
+			AllEnemies = {1: Enemy, 2: EnemyB, 3: MasterThief, 4: Croc, 5: Croc2, 6: Mosquito, 7: Mosquito2, 8: Mosquito3, 9: Mosquito4};
 			StateTimer+=1;
 			player.shadowed = false;
 			//Must be on below trees
@@ -2285,6 +2566,8 @@ setInterval(function(){
 			//for calculating shadow of player in jungle
 			player.draw();
 			player.onhit();
+			//knock back when hit by enemies/meteors
+			player.knockBack();
 			rePlant();
 			for(B in Boxes){
 				Boxes[B].draw();
@@ -2297,186 +2580,8 @@ setInterval(function(){
 				HpMove(hpParticles[H]);
 				HpAi(hpParticles[H]);
 			}
-			for(B in Bullets){
-				drawBullet(Bullets[B]);
-				Bulletmove(Bullets[B]);
-			}
-			for(F in AllFire){
-				AllFire[F].draw();
-				AllFire[F].move();
-			}
-			ice.draw();
-			ice.move();
-			ice.effect();
-			ice2.draw();
-			ice2.move();
-			ice2.effect();
-		
-			earth.draw();
-			earth.move();
-			for(R in earth2roots1){
-				drawRoots(earth2roots1[R]);
-			}
-			for(R in earth3roots1){
-				drawRoots(earth3roots1[R]);
-			}
-			earth2rootStrike.draw();
-			earth2Move(earth2rootStrike);
-			earth2AI(earth2rootStrike);
-			earth2rootStrike2.draw();
-			earth2Move(earth2rootStrike2);
-			earth2AI(earth2rootStrike2);
-			earth2rootStrike3.draw();
-			earth2Move(earth2rootStrike3);
-			earth2AI(earth2rootStrike3);
-			earth2rootStrike4.draw();
-			earth2Move(earth2rootStrike4);
-			earth2AI(earth2rootStrike4);
-			earth2rootStrike5.draw();
-			earth2Move(earth2rootStrike5);
-			earth2AI(earth2rootStrike5);
-			earth2rootStrike6.draw();
-			earth2Move(earth2rootStrike6);
-			earth2AI(earth2rootStrike6);
-			earth2rootStrike7.draw();
-			earth2Move(earth2rootStrike7);
-			earth2AI(earth2rootStrike7);
-			earth2rootStrike8.draw();
-			earth2Move(earth2rootStrike8);
-			earth2AI(earth2rootStrike8);
-			earth2.tick();
-			//All Tick spells, in mystic class do to imports
-			for(T in Ticks){
-				Ticks[T].tick();
-			}		
-			lightning.draw();
-			lightning.effect();
-		
-			lightning12.draw();
-			lightning12.effect();
-		
-			lightning2.draw();
-			lightning2.effect();
-		
-			lightning22.draw();
-			lightning22.effect();
-		
-			lightning23.draw();
-			lightning23.effect();
-		
-			firelightning.draw();
-			firelightning.effect();
-		
-			icelightning.effect();
-			horil.draw();
-			vertil.draw();
-			horil2.draw();
-			vertil2.draw();
-			horil3.draw();
-			vertil3.draw();
-			horil4.draw();
-			vertil4.draw();
-			horil5.draw();
-			vertil5.draw();
-			air.draw();
-			air.effect();
-			air2.draw();
-			air2.effect();
-			airfire.draw();
-			airfire.effect();
-			airfire12.draw();
-			airfire12.effect();
-			airfire13.draw();
-			airfire13.effect();
 			
-			airice.draw();
-			airice.effect();
-			
-			airlightning.draw();
-			airlightning.effect();
-			
-			mystic.move();
-			mystic.draw();
-			Mice.draw();
-			Mice.move();
-			Mice2.draw();
-			Mice2.move();
-			Mice3.draw();
-			Mice3.move();
-			Mice4.draw();
-			Mice4.move();
-			mystic2.draw();
-			mystic2.move();
-			Illusion.draw();
-			Illusion.shoot();
-			IllusionBlast.draw();
-			IllusionBlast.move();
-			
-			for(W in bubbleRotate){
-				bubbleRotate[W].draw();
-				bubbleRotate[W].effect();
-			}
-			for(W in waterFires){
-				waterFires[W].draw();
-				waterFires[W].effect();
-			}
-			for(W in WFires){
-				WFires[W].draw();
-				WFires[W].move();
-			}
-			for(I in IBubbles){
-				IBubbles[I].draw();
-				IBubbles[I].move();
-			}
-			
-			waterair.draw();
-			for(W in wairParticles){
-				wairParticles[W].draw();
-				wairParticles[W].onHit();
-				HpAi(wairParticles[W]);
-				HpMove(wairParticles[W]);
-			}
-			for(W in Wpools){
-				Wpools[W].draw();
-				Wpools[W].move();
-			}
-			
-			for(S in darkSpikes){
-				spikeDraw(darkSpikes[S]);
-				spikeMove(darkSpikes[S]);
-			}
-			for(S in dark2Spikes){
-				spikeDraw(dark2Spikes[S]);
-				spikeMove(dark2Spikes[S]);
-			}
-			for(S in darkfireSpikes){
-				spikeDraw(darkfireSpikes[S]);
-				firespikeMove(darkfireSpikes[S]);
-			}
-			for(S in darkfireExplosions){
-				darkfireExplosions[S].draw();
-				darkfireExplosions[S].move();
-			}
-			for(S in darkiceSpikes){
-				spikeDraw(darkiceSpikes[S]);
-				firespikeMove(darkiceSpikes[S]);
-			}
-			for(S in darkiceEffects){
-				darkiceEffects[S].draw();
-			}
-			for(S in darklightningSpikes){
-				spikeDraw(darklightningSpikes[S]);
-				firespikeMove(darklightningSpikes[S]);
-			}
-			for(S in darklightningExplosions){
-				darklightningExplosions[S].draw();
-				darklightningExplosions[S].move();
-			}
-			darkwater.draw();
-			darkwater.effect();
-			
-			darkair.draw();
-			darkair.effect();
+			drawSpells();
 			
 			for(F in treeFallExplosions){
 				treeFallExplosions[F].move();
@@ -2511,8 +2616,13 @@ setInterval(function(){
 				Feet[F].tick();
 			}
 		
+			for(b in bloodList){
+				drawBlood(bloodList[b]);
+			}
+			
 			MasterTEffect.draw();
 			
+			confuseBarDraw();
 			castingBar.draw();
 			castingBar.tick();
 			
@@ -2544,6 +2654,194 @@ setInterval(function(){
 				}
 			}
 		}
+		//------------------------------------------------------ Desert Level -------------------------------------------------------//
+		else if(STATE == "Desert"){
+			levelorder = 22;
+			SeenDesert = 1;
+			$.jStorage.set("SeenDesert", SeenDesert);
+			
+			//set enemies
+			AllEnemies = {1: Scorp5, 2: Scorp6, 3: Scorp7, 4: Scorp8, 5: Scorp1, 6: Scorp2, 7: Scorp3, 8: Scorp4, 9: Anubis1, 10: MegaMummy, 11: Anubis2};
+			StateTimer+=1;
+			//draw sand part
+			for(X in Sandpits){
+				drawSandpit(Sandpits[X], "Sand");
+			}
+			
+			//here onTree is used to determine if enemy is dying anubis, draw below everything
+			for(E in AllEnemies){
+				if(AllEnemies[E].onTree == 1){
+					AllEnemies[E].draw();
+				}
+			}
+			//Anubis resize
+			for(A in Anubises){
+				if(Anubises[A].casting){
+					if(Anubises[A].castIndex > 27){
+						if(Anubises[A].LR == "Right"){
+							Anubises[A].x+=100;
+							Anubises[A].width = 56+16;
+							Anubises[A].height = 33+16;
+						}
+						else{
+							Anubises[A].width = 51+16;
+							Anubises[A].height = 52+16;
+							Anubises[A].x-=101;
+							Anubises[A].y-=19;
+						}
+					}
+					else if(Anubises[A].castIndex > 15){
+						if(Anubises[A].LR == "Right"){
+							Anubises[A].x+=52;
+							Anubises[A].y-=1;
+							Anubises[A].width = 56+16;
+							Anubises[A].height = 43+16;
+						}
+						else{
+							Anubises[A].width = 50+16;
+							Anubises[A].height = 36+16;
+							Anubises[A].x-=53;
+							Anubises[A].y-=4;
+						}
+					}
+					else{
+						if(Anubises[A].LR == "Right"){
+							Anubises[A].x+=4;
+							Anubises[A].y+=2;
+							Anubises[A].width = 62+16;
+							Anubises[A].height = 32+16;
+						}
+						else{
+							Anubises[A].width = 54+16;
+							Anubises[A].height = 34+16;
+							Anubises[A].x-=8;
+							Anubises[A].y-=1;
+						}
+					}
+				}
+				else if(!Anubises[A].movement){
+					Anubises[A].width = 30+16;
+					Anubises[A].height = 28+16;
+					Anubises[A].y+=32;
+				}
+				else{
+					Anubises[A].width = 56+16;
+					Anubises[A].height = 32+16;
+				}
+				Anubises[A].y-=8;
+			}
+			player.draw();
+			player.onhit();
+			player.speedHandle();
+			for(A in Anubises){
+				if(Anubises[A].casting){
+					if(Anubises[A].castIndex > 27){
+						if(Anubises[A].LR == "Right"){
+							Anubises[A].x-=100;
+							Anubises[A].width = 56+8;
+							Anubises[A].height = 53+16;
+						}
+						else{
+							Anubises[A].x+=101;
+							Anubises[A].y+=19;
+							Anubises[A].width = 51+8;
+							Anubises[A].height = 75+16;
+						}
+					}
+					else if(Anubises[A].castIndex > 15){
+						if(Anubises[A].LR == "Right"){
+							Anubises[A].x-=52;
+							Anubises[A].y+=1;
+							Anubises[A].width = 56+8;
+							Anubises[A].height = 64+16;
+						}
+						else{
+							Anubises[A].x+=53;
+							Anubises[A].y+=4;
+							Anubises[A].width = 50+8;
+							Anubises[A].height = 57+16;
+						}
+					}
+					else{
+						if(Anubises[A].LR == "Right"){
+							Anubises[A].x-=4;
+							Anubises[A].y-=2;
+							Anubises[A].width = 62+8;
+							Anubises[A].height = 64+16;
+						}
+						else{
+							Anubises[A].x+=8;
+							Anubises[A].y+=1;
+							Anubises[A].width = 54+8;
+							Anubises[A].height = 62+16;
+						}
+					}
+				}
+				else if(!Anubises[A].movement){
+					Anubises[A].width = 30+8;
+					Anubises[A].height = 60+16;
+					Anubises[A].y-=32;
+				}
+				else{
+					Anubises[A].width = 56+8;
+					Anubises[A].height = 56+16;
+				}
+				Anubises[A].y+=8;
+			}
+			//knock back when hit by enemies/meteors
+			player.knockBack();
+
+			rePlant();
+			for(B in Boxes){
+				Boxes[B].draw();
+				pickup(Boxes[B]);
+			}
+			RandEffect.draw();
+			for(H in hpParticles){
+				hpParticles[H].draw();
+				hpParticles[H].onHit();
+				HpMove(hpParticles[H]);
+				HpAi(hpParticles[H]);
+			}
+			
+			drawSpells();
+			
+			for(E in AllEnemies){
+				if(AllEnemies[E] != Lamp){
+					if(AllEnemies[E].onTree == 0){
+						AllEnemies[E].draw();
+					}
+					move(AllEnemies[E]);
+					DesertUpAI(AllEnemies[E]);
+					if(AllEnemies[E].type != "MasterThief" && E.type != "Genie"){
+						DesertUpSpawn(AllEnemies[E]);
+					}
+				}
+			}
+			for(A in AnubisProjectileList){
+				AnubisProjectileList[A].draw();
+				moveAnubisProj(AnubisProjectileList[A]);
+			}
+			
+			//draw head part
+			for(X in Sandpits){
+				drawSandpit(Sandpits[X], "Head");
+			}
+			
+			LampPoof.draw();
+			
+			for(b in bloodList){
+				drawBlood(bloodList[b]);
+			}
+			
+			GenieEffect.draw();
+			confuseBarDraw();
+			castingBar.draw();
+			castingBar.tick();
+			
+			SandStorm.draw();
+		}
+		//----------------------------------------------------------- End -----------------------------------------------------------//
 		// black out screen
 		ctx.globalAlpha = 1;
 		if(darkearth.blackTimer > 0){
@@ -2553,7 +2851,9 @@ setInterval(function(){
 		darkearth.move();
 		
 		UI();
-		SCORE();
+		if(STATE != "Tutorial"){
+			SCORE();
+		}
 		
 		ctx.globalAlpha = Alpha;
 		
@@ -2597,6 +2897,65 @@ setInterval(function(){
 			if(vol == 2){
 				rainsound.play();
 			}
+			ctx.globalAlpha = Alpha;
+		}
+		else if(STATE != "Desert"){
+			rainsound.currentTime=0;
+			rainsound.pause();
+		}
+		
+		//fade out tutorial
+		if(TutKill2 && redCube.x == -100 && greyCube.x == -100 && STATE == "Tutorial"){
+			TutFadeIndex++;
+			ctx.globalAlpha = Alpha*0.1 + (0.1*TutFadeIndex*0.5);
+			if(ctx.globalAlpha >= 1){
+				FadeIn = true;
+				var setForestStuffOnce = true;
+			}
+			ctx.fillStyle = DarkColor;
+			ctx.fillRect(-5, -5, 805, 581);
+			ctx.globalAlpha = Alpha;
+		}
+		if(FadeIn){
+			if(setForestStuffOnce){
+				planted = false;
+				STATE = 1;
+				player.x = 400;
+				player.y = 256;
+				spell1 = "N/A";
+				spell2 = "N/A";
+				player.hp = player.maxhp;
+				fire.x = -100;
+				fire.y = -200;
+				fire.width = 32;
+				fire.height = 32;
+				fire.onScreen = 0;
+				airfire.x = -100;
+				airfire.y = -200;
+				airfire.width = 32;
+				airfire.onScreen = 0;
+				airfire.height = 8;
+				airfire.frame = 0;
+				airfire12.x = -100;
+				airfire12.y = -200;
+				airfire12.width = 32;
+				airfire12.onScreen = 0;
+				airfire12.height = 8;
+				airfire12.frame = 0;
+				airfire13.x = -100;
+				airfire13.y = -200;
+				airfire13.width = 32;
+				airfire13.onScreen = 0;
+				airfire13.height = 8;
+				airfire13.frame = 0;
+			}
+			TutFadeIndex--;
+			if(TutFadeIndex == 0){
+				FadeIn = false;
+			}
+			ctx.globalAlpha = Alpha*0.1 + (0.1*TutFadeIndex*0.5);
+			ctx.fillStyle = DarkColor;
+			ctx.fillRect(-5, -5, 805, 581);
 			ctx.globalAlpha = Alpha;
 		}
 		
