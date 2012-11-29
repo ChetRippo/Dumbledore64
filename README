@@ -5,6 +5,10 @@ Provided are all of the game's assets and code files, aside from the server side
 It is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0). If you would like
 to do anything that violates the license please email me about it (bdavis1000@gmail.com).
 
+
+************
+Dumbledore64 is an arcade style, top-down, powerup heavy wizard game playable in any HTML5 browser.
+
 Controls:
 W: Move up
 A: Move left
