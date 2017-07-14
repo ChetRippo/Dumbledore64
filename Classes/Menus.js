@@ -23,6 +23,7 @@ var Menu = {
 	creditSelect: false,
 	levelSelect: false,
 	godmode: "",
+	godmodeWait: false,
 	draw: function(){
 		//loading bar
 		if(!gameReady || !this.ready){
@@ -73,17 +74,21 @@ var Menu = {
 			ctx.font = "18pt Arial";
 			ctx.strokeStyle = "white";
 			ctx.drawImage(TitleReal, 0, 0);
-			if (54 in keysDown && Object.keys(keysDown).length == 1) {
+			if (this.godmodeWait && Object.keys(keysDown).length == 0) {
+				this.godmodeWait = false;
+			}else if (54 in keysDown && !this.godmodeWait && Object.keys(keysDown).length == 1) {
 				this.godmode += "6";
 				if (this.godmode == "666") {
 					GODMODE = !GODMODE;
 					fastbeepsLow.currentTime=0;
 					fastbeepsLow.play();
 					this.godmode = "";
+					this.godmodeWait = false;
 				}
-				delete keysDown[54];
-			} else if (Object.keys(keysDown).length > 0) {
+				this.godmodeWait = true;
+			} else if (Object.keys(keysDown).length > 0 && !(54 in keysDown && Object.keys(keysDown).length == 1)) {
 				this.godmode = "";
+				this.godmodeWait = false;
 			}
 			//Version Info (Just a pop up not a menu)this.x-3*this.width/3, this.y+8.75*this.height
 		//	ctx.fillText("v"+ VersionNumb + " " + upDate, this.x-2*this.width/3, this.y+8.75*this.height);
