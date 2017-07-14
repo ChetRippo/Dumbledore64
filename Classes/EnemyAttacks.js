@@ -691,426 +691,68 @@ var rootBlastD = {
 	}
 	}
 };
-var rootstr = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr2 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr3 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr4 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr5 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr6 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr7 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr8 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr9 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr10 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr11 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr12 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr13 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr14 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr15 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr21 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr22 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr23 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr24 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr25 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr26 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr27 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr28 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr29 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr210 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr211 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr212 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr213 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr214 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr215 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr31 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr32 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr33 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr34 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr35 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr36 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr37 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr38 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr39 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr310 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr311 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr312 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr313 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr314 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr315 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr41 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr42 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr43 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr44 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr45 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr46 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr47 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr48 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr49 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr410 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr411 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr412 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr413 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr414 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var rootstr415 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
+function rootstrx(){};
+rootstrx.prototype = {x: -500,y: -500,width: 16,height: 16,onScreen: 0};
+var rootstr = new rootstrx();
+var rootstr2 = new rootstrx();
+var rootstr3 = new rootstrx();
+var rootstr4 = new rootstrx();
+var rootstr5 = new rootstrx();
+var rootstr6 = new rootstrx();
+var rootstr7 = new rootstrx();
+var rootstr8 = new rootstrx();
+var rootstr9 = new rootstrx();
+var rootstr10 = new rootstrx();
+var rootstr11 = new rootstrx();
+var rootstr12 = new rootstrx();
+var rootstr13 = new rootstrx();
+var rootstr14 = new rootstrx();
+var rootstr15 = new rootstrx();
+var rootstr21 = new rootstrx();
+var rootstr22 = new rootstrx();
+var rootstr23 = new rootstrx();
+var rootstr24 = new rootstrx();
+var rootstr25 = new rootstrx();
+var rootstr26 = new rootstrx();
+var rootstr27 = new rootstrx();
+var rootstr28 = new rootstrx();
+var rootstr29 = new rootstrx();
+var rootstr210 = new rootstrx();
+var rootstr211 = new rootstrx();
+var rootstr212 = new rootstrx();
+var rootstr213 = new rootstrx();
+var rootstr214 = new rootstrx();
+var rootstr215 = new rootstrx();
+var rootstr31 = new rootstrx();
+var rootstr32 = new rootstrx();
+var rootstr33 = new rootstrx();
+var rootstr34 = new rootstrx();
+var rootstr35 = new rootstrx();
+var rootstr36 = new rootstrx();
+var rootstr37 = new rootstrx();
+var rootstr38 = new rootstrx();
+var rootstr39 = new rootstrx();
+var rootstr310 = new rootstrx();
+var rootstr311 = new rootstrx();
+var rootstr312 = new rootstrx();
+var rootstr313 = new rootstrx();
+var rootstr314 = new rootstrx();
+var rootstr315 = new rootstrx();
+var rootstr41 = new rootstrx();
+var rootstr42 = new rootstrx();
+var rootstr43 = new rootstrx();
+var rootstr44 = new rootstrx();
+var rootstr45 = new rootstrx();
+var rootstr46 = new rootstrx();
+var rootstr47 = new rootstrx();
+var rootstr48 = new rootstrx();
+var rootstr49 = new rootstrx();
+var rootstr410 = new rootstrx();
+var rootstr411 = new rootstrx();
+var rootstr412 = new rootstrx();
+var rootstr413 = new rootstrx();
+var rootstr414 = new rootstrx();
+var rootstr415 = new rootstrx();
 function drawRoots(R){
 	if(R.onScreen == 1){
 		ctx.globalAlpha = Alpha*0.5;
@@ -3854,18 +3496,26 @@ function EMeteorDraw(E){
 				}
 			}
 		}
+		if(FireGhost.onScreen){
+			E.timer = 0;
+			E.index = 20;
+		}
 	}
 	else if(E.timer == 0){
-		if(E.LR == 2){
-			ctx.drawImage(FallingMeteorsL[Math.ceil(E.index/3)], E.x-E.width*0.5 - 88, E.y-E.height*0.5 - 494);
-		}
-		else{
-			ctx.drawImage(FallingMeteorsR[Math.ceil(E.index/3)], E.x-E.width*0.5 - 600, E.y-E.height*0.5 - 494);
+		if(!FireGhost.onScreen){
+			if(E.LR == 2){
+				ctx.drawImage(FallingMeteorsL[Math.ceil(E.index/3)], E.x-E.width*0.5 - 88, E.y-E.height*0.5 - 494);
+			}
+			else{
+				ctx.drawImage(FallingMeteorsR[Math.ceil(E.index/3)], E.x-E.width*0.5 - 600, E.y-E.height*0.5 - 494);
+			}
 		}
 		E.index++;
 		if(E.index ==21){
-			Explosion.currentTime=0;
-			Explosion.play();
+			if(!FireGhost.onScreen){
+				Explosion.currentTime=0;
+				Explosion.play();
+			}
 			var landed = false;
 			if(E == EMeteor13 || E == EMeteor14 || E == EMeteor15 || E == EMeteor16){
 				landed = true;
@@ -3877,6 +3527,16 @@ function EMeteorDraw(E){
 						obstacle2[O].x = E.x;
 						obstacle2[O].y = E.y;
 						obstacle2[O].hp = 3;
+						if(!FireGhost.spawned && Genie.queue && !Genie.queue2){
+							var lampy = Math.floor(Math.random()*2)+1;
+							if(lampy == 2){
+								Lamp.target = obstacle2[O];
+								Genie.queue2 = 1;
+							}
+						}
+						if(FireGhost.onScreen){
+							obstacle2[O].fallIndex = 1;
+						}
 						break;
 					}
 				}
@@ -3888,6 +3548,16 @@ function EMeteorDraw(E){
 						obstacle3[O].x = E.x;
 						obstacle3[O].y = E.y;
 						obstacle3[O].hp = 3;
+						if(!FireGhost.spawned && Genie.queue && !Genie.queue2){
+							var lampy = Math.floor(Math.random()*2)+1;
+							if(lampy == 2){
+								Lamp.target = obstacle3[O];
+								Genie.queue2 = 1;
+							}
+						}
+						if(FireGhost.onScreen){
+							obstacle3[O].fallIndex = 1;
+						}
 						break;
 					}
 				}
@@ -3899,12 +3569,22 @@ function EMeteorDraw(E){
 						obstacle1[O].x = E.x;
 						obstacle1[O].y = E.y;
 						obstacle1[O].hp = 3;
+						if(!FireGhost.spawned && Genie.queue && !Genie.queue2){
+							var lampy = Math.floor(Math.random()*2)+1;
+							if(lampy == 2){
+								Lamp.target = obstacle1[O];
+								Genie.queue2 = 1;
+							}
+						}
+						if(FireGhost.onScreen){
+							obstacle1[O].fallIndex = 1;
+						}
 						break;
 					}
 				}
 			}
 		}
-		if(E.index ==36){
+		if(E.index ==36 || FireGhost.onScreen){
 			E.timer--;
 			E.launched = false;
 			E.index = 1;

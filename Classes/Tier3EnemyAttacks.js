@@ -762,7 +762,7 @@ var LaserUpAttack = {
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.LR == "Left"){
-				ctx.drawImage(LaserUpsL[this.frame], Genie.x-Genie.width*0.5-64-104-480, Genie.y-Genie.height*0.5-124 - 124+156);
+				ctx.drawImage(GenieSheet, 656*(LaserArray[this.frame]-1), 2512, 656, 448, Genie.x-Genie.width*0.5-64-104-480, Genie.y-Genie.height*0.5-124 - 124+156, 656, 448);
 				this.frame++;
 				if(this.frame>16){
 					this.frame = 1;
@@ -772,7 +772,7 @@ var LaserUpAttack = {
 				}
 			}
 			else{
-				ctx.drawImage(LaserUpsR[this.frame], Genie.x-Genie.width*0.5-64-104+200, Genie.y-Genie.height*0.5-124 - 124+156);
+				ctx.drawImage(GenieSheet, 656*(LaserArray[this.frame] - 1), 2960, 656, 448, Genie.x-Genie.width*0.5-64-104+200, Genie.y-Genie.height*0.5-124 - 124+156, 656, 448);
 				this.frame++;
 				if(this.frame>16){
 					this.frame = 1;
@@ -925,7 +925,7 @@ var LaserFdAttack = {
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.LR == "Left"){
-				ctx.drawImage(LaserFdsL[this.frame], Genie.x-Genie.width*0.5-64-104-480, Genie.y-Genie.height*0.5-124 - 124+156);
+				ctx.drawImage(GenieSheet, 656*(LaserArray[this.frame] - 1), 1616, 656, 448, Genie.x-Genie.width*0.5-64-104-480, Genie.y-Genie.height*0.5-124 - 124+156, 656, 448);
 				this.frame++;
 				if(this.frame>16){
 					this.frame = 1;
@@ -935,7 +935,7 @@ var LaserFdAttack = {
 				}
 			}
 			else{
-				ctx.drawImage(LaserFdsR[this.frame], Genie.x-Genie.width*0.5-64-104+200, Genie.y-Genie.height*0.5-124 - 124+156);
+				ctx.drawImage(GenieSheet, 656*(LaserArray[this.frame] - 1), 2064, 656, 448, Genie.x-Genie.width*0.5-64-104+200, Genie.y-Genie.height*0.5-124 - 124+156, 656, 448);
 				this.frame++;
 				if(this.frame>16){
 					this.frame = 1;
@@ -1088,7 +1088,7 @@ var LaserDAttack = {
 	draw: function(){
 		if(this.onScreen == 1){
 			if(this.LR == "Left"){
-				ctx.drawImage(LaserDsL[this.frame], Genie.x-Genie.width*0.5-64-104-480, Genie.y-Genie.height*0.5-124 - 124+156);
+				ctx.drawImage(GenieSheet, 656*(LaserArray[this.frame] - 1), 720, 656, 448, Genie.x-Genie.width*0.5-64-104-480, Genie.y-Genie.height*0.5-124 - 124+156, 656, 448);
 				this.frame++;
 				if(this.frame>16){
 					this.frame = 1;
@@ -1098,7 +1098,7 @@ var LaserDAttack = {
 				}
 			}
 			else{
-				ctx.drawImage(LaserDsR[this.frame], Genie.x-Genie.width*0.5-64-104+200, Genie.y-Genie.height*0.5-124 - 124+156);
+				ctx.drawImage(GenieSheet, 656*(LaserArray[this.frame] - 1), 1168, 656, 448, Genie.x-Genie.width*0.5-64-104+200, Genie.y-Genie.height*0.5-124 - 124+156, 656, 448);
 				this.frame++;
 				if(this.frame>16){
 					this.frame = 1;
@@ -1271,7 +1271,7 @@ var AnubisProj1 = {
 	destDir: "",
 	draw: function(){
 		if(this.onScreen){
-			ctx.drawImage(AnubisProjLoop[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(AnubisSheet, 16*(Math.ceil(this.index*0.5) - 1), 720, 16, 16, this.x-this.width*0.5, this.y-this.height*0.5, 16, 16);
 			this.index++;
 			if(this.index > 6){
 				this.index = 1;
@@ -1335,7 +1335,7 @@ var AnubisProj2 = {
 	destDir: "",
 	draw: function(){
 		if(this.onScreen){
-			ctx.drawImage(AnubisProjLoop[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(AnubisSheet, 16*(Math.ceil(this.index*0.5) - 1), 720, 16, 16, this.x-this.width*0.5, this.y-this.height*0.5, 16, 16);
 			this.index++;
 			if(this.index > 6){
 				this.index = 1;
@@ -1399,7 +1399,7 @@ var AnubisProj3 = {
 	destDir: "",
 	draw: function(){
 		if(this.onScreen){
-			ctx.drawImage(AnubisProjLoop[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(AnubisSheet, 16*(Math.ceil(this.index*0.5) - 1), 720, 16, 16, this.x-this.width*0.5, this.y-this.height*0.5, 16, 16);
 			this.index++;
 			if(this.index > 6){
 				this.index = 1;
@@ -1464,7 +1464,7 @@ var AnubisProj4 = {
 	destDir: "",
 	draw: function(){
 		if(this.onScreen){
-			ctx.drawImage(AnubisProjLoop[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(AnubisSheet, 16*(Math.ceil(this.index*0.5) - 1), 720, 16, 16, this.x-this.width*0.5, this.y-this.height*0.5, 16, 16);
 			this.index++;
 			if(this.index > 6){
 				this.index = 1;
@@ -1528,7 +1528,7 @@ var AnubisProj5 = {
 	destDir: "",
 	draw: function(){
 		if(this.onScreen){
-			ctx.drawImage(AnubisProjLoop[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(AnubisSheet, 16*(Math.ceil(this.index*0.5) - 1), 720, 16, 16, this.x-this.width*0.5, this.y-this.height*0.5, 16, 16);
 			this.index++;
 			if(this.index > 6){
 				this.index = 1;
@@ -1592,7 +1592,7 @@ var AnubisProj6 = {
 	destDir: "",
 	draw: function(){
 		if(this.onScreen){
-			ctx.drawImage(AnubisProjLoop[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(AnubisSheet, 16*(Math.ceil(this.index*0.5) - 1), 720, 16, 16, this.x-this.width*0.5, this.y-this.height*0.5, 16, 16);
 			this.index++;
 			if(this.index > 6){
 				this.index = 1;
@@ -1784,83 +1784,6 @@ function moveAnubisProj(P){
 				}
 			}
 		}
-		if(P.dir == "D"){
-			if(P.slope == "Vertical"){
-				var ymove = P.speed;
-				P.y+=ymove;
-				P.y = Math.floor(P.y);
-			}
-			else if(P.slope > 0 && P.slope < 1){
-				var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
-				var ymove = xmove*P.slope;
-				P.x+=xmove;
-				P.y+=ymove;
-				P.x = Math.ceil(P.x);
-				P.y = Math.floor(P.y);
-			}
-			else if(P.slope >= 0){
-				//get x distance, speed = total diag distance
-				var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
-				var ymove = xmove*P.slope;
-				P.x+=xmove;
-				P.y+=ymove;
-				P.x = Math.ceil(P.x);
-				P.y = Math.floor(P.y);
-			}
-			else if(P.slope <= -1){
-				var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
-				var ymove = xmove*P.slope;
-				P.x+=xmove;
-				P.y+=ymove;
-				P.x = Math.ceil(P.x);
-				P.y = Math.ceil(P.y);
-			}
-			else{
-				var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
-				var ymove = xmove*P.slope;
-				P.x+=xmove;
-				P.y+=ymove;
-			}
-		}
-		else{
-			if(P.slope == "Vertical"){
-				var ymove = P.speed;
-				P.y-=ymove;
-				P.y = Math.floor(P.y);
-			}
-			else if(P.slope > 0 && P.slope < 1){
-				var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
-				var ymove = xmove*P.slope;
-				P.x-=xmove;
-				P.y-=ymove;
-				P.x = Math.floor(P.x);
-				P.y = Math.ceil(P.y);
-			}
-			else if(P.slope >= 0){
-				//get x distance, speed = total diag distance
-				var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
-				var ymove = xmove*P.slope;
-				P.x-=xmove;
-				P.y-=ymove;
-				P.x = Math.ceil(P.x);
-				P.y = Math.floor(P.y);
-			}
-			else if(P.slope <= -1){
-				var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
-				var ymove = xmove*P.slope;
-				P.x-=xmove;
-				P.y-=ymove;
-				P.x = Math.floor(P.x);
-				P.y = Math.ceil(P.y);
-			}
-			else{
-				var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
-				var ymove = xmove*P.slope;
-				P.x-=xmove;
-				P.y-=ymove;
-				P.x = Math.ceil(P.x);
-				P.y = Math.floor(P.y);
-			}
-		}
+		move_particle_AI(P);
 	}
 }

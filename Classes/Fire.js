@@ -31,6 +31,41 @@ var fire = {
 			this.y - this.height * 0.5,
 			this.width, this.height);
 			ctx.globalAlpha = Alpha;
+			/*fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y-this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y-this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y-this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y-this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y-this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y-this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y-this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y-this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y-this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+randomInt(-1*this.width*0.5,this.width*0.5), this.y+this.height*0.5, randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			
+			fireParticles.particleArray.push(new fireParticle(this.x-this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x-this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x-this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x-this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x-this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x-this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x-this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			
+			fireParticles.particleArray.push(new fireParticle(this.x+this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));
+			fireParticles.particleArray.push(new fireParticle(this.x+this.width*0.5, this.y+randomInt(-1*this.height*0.5, this.height*0.5), randomInt(1, 8), randomInt(1, 8), randomInt(-4, 4), randomInt(-2, -6), 10));*/
 		}
 	},
 	

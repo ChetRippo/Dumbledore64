@@ -1,59 +1,16 @@
  /*
-	GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE GANGNAM STYLE
-	Version 0.9.3 Changes(11/22/2012):
-		--Misc Update--
-		-Additions:
-			-CHRISTMAS GRAPHICS
-			-Teleport animation changed
-			-New score markers
-		-Balancing:
-		-Bug fixes:
-			
-	TODO:
-		-Bugs/Other
-			-High Priority:
-				-fix tutorial
-				-element rarities based on level/gameplay
-				-Redo mystics (all mystics have mirage effect, mystic2 = confusion beam
-			-Backlog:
-				-array everything on screen and draw them e.g.
-					-onscreens[1] = {fire, fire fns}
-				-general draw functions for all level stuff
-				-shortcuts
-				-stunned text pops up when already stunned
-				-scorpions can try to hit you facing the wrong way (make them face based on you not target)
-				-Ice spells make jungle trees transparent *Don't know how to fix yet*
-				-Make multiples of sound effects so that hitting a bunch of people wont clip it (pierce through shots etc)
-				-sound for mummy spawn and wrapping change
-				-unlock bgm
-				-thief boss dies offscreen + powerup unreachable
-				-Changing modified beams causes all beams on screen to change
-			-Maybe issues:
-				-All ice slows do not end stun when enemy out of range
-				-light2 slows frame rate (light and light2 inefficient)
-				-Loading bar doesn't preload everything (sounds, only 400 graphics, load graphics, etc)
-				-too many assets
-				-icelightning technically deletes enemies before frame loops:
-					ex: dash (or any spell run after webs) and hit enemy at exact time it hits icelightning will not dmg it
-	GENERAL:
-		-Spells
-			-???
-		-Level select?
-		-Optimize
-			-Make speeds a list of factors so that multiple things can effect it easier (velocity?)
-		-Terrain/levels
-			-Tier 3: Swamp, Desert, Graveyard
-				-Graveyard level
-					-Day/night cycle
+	Version 0.9.8.5 Changes(Jan 12 2014):
+		-lots of bug fixes
+
+	TODO:	
+		-fix mouse coords fullscreen
+		-optimization
+			-dynamic score updating
+			-replace jstorage with localstorage
+	UPCOMING FEATURES:
+		-levels
 			-Tier 4: Cave, Ice
-				-Cave level
-					-Dark, moonlight effect, can see enemy eyes
-				-Ice level
-			-Tier 5: Final level
-				-multiplayer background?, 3 spell slots, cast pure spell of each element to beat giant boss?
-	NOTES:
-		-reset badwizards song on every boss
-		-music tracks- possible = multiplayer, seeker, arcane bits and pieces
+			-Tier 5: Final boss
 */
 //------------------------------------------------- Player --------------------------------------------------------------------------//
 // Player
@@ -65,14 +22,14 @@ var player = {
 	speed: 8,
 	speed2: 2,
 	dirct: 0,
-	hp: 3,
-	maxhp: 3,
+	hp: 6,
+	maxhp: 6,
 	power: 1,
 	currpower: 1,
 	dmg: false,
 	dir: "W",
 	LR: "",
-	zapIndex: 1,
+	zapIndex: 0,
 	lucky: false,
 	shadowed: false,
 	regen: false,
@@ -80,91 +37,171 @@ var player = {
 	knocked: 0,
 	knockDir: "",
 	stunTimer: 0,
+	number: 0,
+	w: 0,
+	a: 0,
+	s: 0,
+	d: 0,
+	walkIndex: 1,
+	waitIndex: 1,
+	blinking: 0,
 	// Draws the player on the canvas when called
 	draw: function(){
 		// Flash if the player has been hit
 		if (hptimer*0.5 != Math.round(hptimer*0.5)){
 			if(this.dir == "A" || 65 in keysDown){
 				this.LR = "Left";
-				ctx.drawImage(Wizzurd2, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				ctx.drawImage(Wiz_Sheet, 0, 192, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 			else if(this.dir == "D" || 68 in keysDown){
-				ctx.drawImage(Wizzurd2R, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				ctx.drawImage(Wiz_Sheet, 32, 192, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				this.LR = "Right";
 			}
 			else if(this.LR == "Left"){
-				ctx.drawImage(Wizzurd2, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				ctx.drawImage(Wiz_Sheet, 0, 192, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 			else{
-				ctx.drawImage(Wizzurd2R, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				ctx.drawImage(Wiz_Sheet, 32, 192, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 		}
-		else if(waterlightning.onScreen){
+		else if(waterlightning.onScreen && this.zapIndex < 3){
 			if(this.dir == "A" || 65 in keysDown){
 				this.LR = "Left";
-				ctx.drawImage(ZapTrapL[this.zapIndex], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				ctx.drawImage(Wiz_Sheet, 0, 224, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 			else if(this.dir == "D" || 68 in keysDown){
-				ctx.drawImage(ZapTrapR[this.zapIndex], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				ctx.drawImage(Wiz_Sheet, 32, 224, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				this.LR = "Right";
 			}
 			else if(this.LR == "Left"){
-				ctx.drawImage(ZapTrapL[this.zapIndex], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				ctx.drawImage(Wiz_Sheet, 0, 224, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 			else{
-				ctx.drawImage(ZapTrapR[this.zapIndex], this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				ctx.drawImage(Wiz_Sheet, 32, 224, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 			}
 			this.zapIndex++;
 			if(this.zapIndex > 5){
-				this.zapIndex = 1;
+				this.zapIndex = 0;
 			}
 		}
 		else{
 			if(this.dir == "A" || 65 in keysDown){
 				this.LR = "Left";
 				//Check speed instead of water collision to use less system shit
-				if(this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
-					ctx.drawImage(swimWizzL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				if(!(waterlightning.onScreen && this.zapIndex > 2) && this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
+					ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 64, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
-				else if(STATE == "Jungle" && player.shadowed){
-					ctx.drawImage(shadeWizzL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				else if(!(waterlightning.onScreen && this.zapIndex > 2) && STATE == "Jungle" && player.shadowed){
+					ctx.drawImage(Wiz_Sheet, 0, 128, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(WizzurdL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+					if(STATE == "Tutorial" && !Tutorial.staff){
+						if(this.waitIndex > 30){
+							ctx.drawImage(Wiz_Sheet, 0, 352, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}else{
+							ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 288, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}
+					}else{
+						if(this.waitIndex > 30){
+							ctx.drawImage(Wiz_Sheet, 0, 160, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}else{
+							ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 0, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+							if(waterlightning.onScreen && this.zapIndex > 2){
+								this.zapIndex++;
+								if(this.zapIndex > 5){
+									this.zapIndex = 0;
+								}
+							}
+						}
+					}
 				}
 			}
 			else if(this.dir == "D" || 68 in keysDown){
-				if(this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
-					ctx.drawImage(swimWizzR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				if(!(waterlightning.onScreen && this.zapIndex > 2) && this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
+					ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 96, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
-				else if(STATE == "Jungle" && player.shadowed){
-					ctx.drawImage(shadeWizzR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				else if(!(waterlightning.onScreen && this.zapIndex > 2) && STATE == "Jungle" && player.shadowed){
+					ctx.drawImage(Wiz_Sheet, 32, 128, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(WizzurdR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+					if(STATE == "Tutorial" && !Tutorial.staff){
+						if(this.waitIndex > 30){
+							ctx.drawImage(Wiz_Sheet, 32, 352, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}else{
+							ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 320, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}
+					}else{
+						if(this.waitIndex > 30){
+							ctx.drawImage(Wiz_Sheet, 32, 160, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}else{
+							ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 32, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+							if(waterlightning.onScreen && this.zapIndex > 2){
+								this.zapIndex++;
+								if(this.zapIndex > 5){
+									this.zapIndex = 0;
+								}
+							}
+						}
+					}
 				}
 				this.LR = "Right";
 			}
 			else if(this.LR == "Left"){
-				if(this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
-					ctx.drawImage(swimWizzL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				if(!(waterlightning.onScreen && this.zapIndex > 2) && this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
+					ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 64, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
-				else if(STATE == "Jungle" && player.shadowed){
-					ctx.drawImage(shadeWizzL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				else if(!(waterlightning.onScreen && this.zapIndex > 2) && STATE == "Jungle" && player.shadowed){
+					ctx.drawImage(Wiz_Sheet, 0, 128, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(WizzurdL, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+					if(STATE == "Tutorial" && !Tutorial.staff){
+						if(this.waitIndex > 30){
+							ctx.drawImage(Wiz_Sheet, 0, 352, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}else{
+							ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 288, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}
+					}else{
+						if(this.waitIndex > 30){
+							ctx.drawImage(Wiz_Sheet, 0, 160, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}else{
+							ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 0, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+							if(waterlightning.onScreen && this.zapIndex > 2){
+								this.zapIndex++;
+								if(this.zapIndex > 5){
+									this.zapIndex = 0;
+								}
+							}
+						}
+					}
 				}
 			}
 			else{
-				if(this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
-					ctx.drawImage(swimWizzR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				if(!(waterlightning.onScreen && this.zapIndex > 2) && this.speed ==4 && STATE == "Swamp" && obstacle24.swampBoardindex == 102){
+					ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 96, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
-				else if(STATE == "Jungle" && player.shadowed){
-					ctx.drawImage(shadeWizzR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+				else if(!(waterlightning.onScreen && this.zapIndex > 2) && STATE == "Jungle" && player.shadowed){
+					ctx.drawImage(Wiz_Sheet, 32, 128, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(WizzurdR, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+					if(STATE == "Tutorial" && !Tutorial.staff){
+						if(this.waitIndex > 30){
+							ctx.drawImage(Wiz_Sheet, 32, 352, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}else{
+							ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 320, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}
+					}else{
+						if(this.waitIndex > 30){
+							ctx.drawImage(Wiz_Sheet, 32, 160, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+						}else{
+							ctx.drawImage(Wiz_Sheet, 32*(Math.floor((this.walkIndex-1)/4)), 32, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+							if(waterlightning.onScreen && this.zapIndex > 2){
+								this.zapIndex++;
+								if(this.zapIndex > 5){
+									this.zapIndex = 0;
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -220,6 +257,9 @@ var player = {
 							onDmg.currentTime=0;
 							onDmg.play();
 							this.dmg = true;
+							if(dog1.skulled && dog1.onScreen){
+								var x2 = 1;
+							}
 							//boss achievements
 							if(AllEnemies[E] == treeWizz || AllEnemies[E] == rootStrike || AllEnemies[E] == rootStrike2 || AllEnemies[E] == rootStrike3 || AllEnemies[E] == rootStrike4){
 								AList[2] = false;
@@ -233,6 +273,9 @@ var player = {
 							}
 							else if(Genie.onScreen == 1){
 								AList[5] = false;
+							}
+							else if(FireGhost.spawned == 1 && STATE == "Scorched"){
+								AList[7] = false;
 							}
 						}
 					}
@@ -279,7 +322,7 @@ var player = {
 								}
 							}
 						}
-						this.knockDir = AllEnemies[E].dir;
+						this.knockDir = EMeteors[E].dir;
 						if(darkwater.onScreen == 1){
 							darkwater.hptimer = 20;
 							darkwater.hp-=1;
@@ -298,6 +341,9 @@ var player = {
 			}
 			if(this.dmg == true){
 				this.hp-=1;
+				if(x2){
+					this.hp -=1;
+				}
 				hptimer = 30;
 				this.dmg = false;
 			}
@@ -335,6 +381,9 @@ var player = {
 		//don't regen if full hp
 		if(this.hp == this.maxhp){
 			this.regenFrame = 0;
+		}
+		if (GODMODE) {
+			this.hp = this.maxhp;
 		}
 	},
 	//Handle speed, swamp only
@@ -475,6 +524,143 @@ var player = {
 	}
 };
 
+var player2 = {
+	x: 9000,
+	y: 9000,
+	width: 32,
+	height: 32,
+	w: 0,
+	a: 0,
+	s: 0,
+	d: 0,
+	up: 0,
+	left: 0,
+	down: 0,
+	right: 0,
+	space: 0,
+	speed: 8,
+	hp: 0,
+	maxhp: 3,
+	cd: 0,
+	spell1: "N/A",
+	spell2: "N/A",
+	draw: function(){
+		ctx.drawImage(Wiz_Sheet, 0, 192, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+		hpBarDraw(this);
+		if(this.spell1 != "N/A"){
+			if(this.spell1 == "Fire"){
+				var img = FireIcon;
+			}
+			if(this.spell1 == "Ice"){
+				var img = IceIcon;
+			}
+			if(this.spell1 == "Earth"){
+				var img = EarthIcon;
+			}
+			if(this.spell1 == "Lightning"){
+				var img = LightningIcon;
+			}
+			if(this.spell1 == "Air"){
+				var img = AirIcon;
+			}
+			if(this.spell1 == "Mystic"){
+				var img = MysticIcon;
+			}
+			if(this.spell1 == "Water"){
+				var img = WaterIcon;
+			}
+			if(this.spell1 == "Dark"){
+				var img = DarkIcon;
+			}
+			if(this.spell1 == "Light"){
+				var img = LightIcon;
+			}
+			ctx.drawImage(img, this.x-Math.floor(this.width*0.6), this.y - Math.floor(this.height*1.5));
+		}
+		if(this.spell2 != "N/A"){
+			if(this.spell2 == "Fire"){
+				var img = FireIcon;
+			}
+			if(this.spell2 == "Ice"){
+				var img = IceIcon;
+			}
+			if(this.spell2 == "Earth"){
+				var img = EarthIcon;
+			}
+			if(this.spell2 == "Lightning"){
+				var img = LightningIcon;
+			}
+			if(this.spell2 == "Air"){
+				var img = AirIcon;
+			}
+			if(this.spell2 == "Mystic"){
+				var img = MysticIcon;
+			}
+			if(this.spell2 == "Water"){
+				var img = WaterIcon;
+			}
+			if(this.spell2 == "Dark"){
+				var img = DarkIcon;
+			}
+			if(this.spell2 == "Light"){
+				var img = LightIcon;
+			}
+			ctx.drawImage(img, this.x, this.y - Math.floor(this.height*1.5));
+		}
+	},
+	move: function(){
+		if(this.w){
+			this.y-=this.speed;
+			this.dir = "W";
+		}
+		if(this.a){
+			this.x-=this.speed;
+			this.dir = "A";
+		}
+		if(this.s){
+			this.y+=this.speed;
+			this.dir = "S";
+		}
+		if(this.d){
+			this.x+=this.speed;
+			this.dir = "D";
+		}
+		if (this.up && this.left){
+			p2bullet.shoot("WA", 4, 4);
+		}	
+		else if (this.left && this.down){
+			p2bullet.shoot("AS", 4, 4);
+		}	
+		else if (this.down && this.right){
+			p2bullet.shoot("SD", 4, 4);
+		}	
+		else if (this.up && this.right){
+			p2bullet.shoot("WD", 4, 4);
+		}	
+		else if (this.up){
+			p2bullet.shoot("W", 32, 4);
+		}	
+		else if (this.left){
+			p2bullet.shoot("A", 4, 32);
+		}	
+		else if (this.down){
+			p2bullet.shoot("S", 32, 4);
+		}	
+		else if (this.right){
+			p2bullet.shoot("D", 4, 32);
+		}
+		if(this.space && (this.spell1 != "N/A" || this.spell2 != "N/A")){
+			SpellShoot(this.spell1, this.spell2, player2);
+		}
+		if(this.cd >0){
+			this.cd--;
+		}
+	}
+};
+//------------------------------------------ Particles --------------------------------------------------------------------------//
+var randomInt = function(min,max){
+	return (Math.round(min + Math.random()*(max - min)));
+};
 // Blood particle 1
 var bloodParticle1 = {
 	x: 0,
@@ -650,6 +836,49 @@ function drawBlood(p){
 		}
 	}
 }
+
+/*var fireParticles = {
+	particleArray: new Array(),
+	draw: function(){
+		for (var i = 0, particle; particle = this.particleArray[i]; i++) {
+			if (particle.timeLeft == 0){
+				this.particleArray.splice(i, 1);
+			}
+			else{
+				particle.move();
+				particle.draw();
+			}
+		}
+	},
+	run: function(){
+		this.draw();
+	}
+};
+var fireParticle = function(x, y, width, height, speedX, speedY, timeLeft){
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.speedX = speedX;
+	this.speedY = speedY;
+	this.timeLeft = timeLeft;
+};
+fireParticle.prototype.move = function(){
+	this.x+=this.speedX;
+	this.y+=this.speedY;
+	this.timeLeft--;
+};
+
+fireParticle.prototype.draw = function(){
+	if(this.timeLeft % 4 == 0){
+		this.speedX *= -1;
+	}
+	var colors = {0: "#bd2023", 1: "#05121a", 2: "#FF6600", 3: "#CC0000"};
+	ctx.fillStyle = colors[randomInt(0, 3)];
+	ctx.globalAlpha = Alpha/randomInt(1, 4);
+	ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5,this.width,this.height);
+	ctx.globalAlpha = 1;
+};*/
 //----------------------------------------------- Casting Bar -----------------------------------------------------------------------//
 var castingBar = {
 	x: player.x - player.width*0.5,
@@ -679,6 +908,36 @@ var castingBar = {
 		if(this.cast == 0){
 			this.cast-=1;
 			player.speed = 8;
+			this.onScreen = 0;
+		}
+	}
+}
+var p2castingBar = {
+	x: player2.x - player2.width*0.5,
+	y: player2.y + player2.height*0.5,
+	width: player2.width,
+	height: player2.height*0.25,
+	width2: 0,
+	onScreen: 0,
+	cast: -1,
+	castmax: 0,
+	draw: function(){
+		this.x = player2.x - player2.width*0.5;
+		this.y = player2.y + player2.height*0.5;
+		if(this.onScreen == 1){
+			ctx.fillStyle = "#0404B4";
+			ctx.strokeStyle = "black";
+			ctx.strokeRect(this.x, this.y, this.width, this.height);
+			ctx.fillRect(this.x + 2, this.y + 2, this.width2, this.height - 2);
+		}
+	},
+	tick: function(){
+		if(this.cast > 0){
+			this.cast-=1;
+			this.width2 = this.cast/this.castmax * this.width;
+		}
+		if(this.cast == 0){
+			this.cast-=1;
 			this.onScreen = 0;
 		}
 	}
@@ -770,7 +1029,7 @@ function collision(dir, one, two){
 			return false;
 		}
 	}
-	if(STATE == "Jungle"){
+	else if(STATE == "Jungle"){
 		if(one == obstacle11 || one == obstacle12 || one == obstacle13 || one == obstacle14 || one == obstacle15 || one == obstacle16 || one == obstacle17 || one == obstacle18 || 
 			two == obstacle11 || two == obstacle12 || two == obstacle13 || two == obstacle14 || two == obstacle15 || two == obstacle16 || two == obstacle17 || two == obstacle18){
 			if(one.fallIndex == 46 || two.fallIndex == 46){
@@ -942,7 +1201,7 @@ function hpBarDraw(H){
 		else if(H.type == "Anubis"){
 			Y = H.y - H.height*0.5 - 64;
 		}
-		ctx.drawImage(hpBarGraphics[H.hp], X, Y);
+		ctx.drawImage(HPGraphicSheet, 0, 9*(H.hp-1), 32, 9, X, Y, 32, 9);
 	}
 }
 //------------------------------------------------- Point and Element Markers -------------------------------------------------------//
@@ -1054,63 +1313,66 @@ function drawtypeMarker(M){
 		M.regen = false;
 	}
 	if (M.timeLeft != 0){
-		if(M.text == "+ Air" || M.text == "+ Time" || M.text == "Stunned!"){
-			M.color = "#D0D0D0";
+		if(M.text == "+ Time"){
+			ctx.drawImage(Ele_Bursts, 0, 352, 208, 32, M.x, M.y, 208, 32);
+		}
+		else if(M.text == "Stunned!"){
+			ctx.drawImage(Ele_Bursts, 0, 320, 208, 32, M.x, M.y, 208, 32);
+		}
+		else if(M.text == "+ Air"){
+			ctx.drawImage(Ele_Bursts, 0, 256, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "+ Fire"){
-			M.color = "#CC0000";
+			ctx.drawImage(Ele_Bursts, 0, 0, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "+ Ice"){
-			M.color = "#00FFFF";
+			ctx.drawImage(Ele_Bursts, 0, 96, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "+ Lightning"){
-			M.color = "yellow";
+			ctx.drawImage(Ele_Bursts, 0, 128, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "+ Earth"){
-			M.color = "#33FF00";
+			ctx.drawImage(Ele_Bursts, 0, 64, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "+ Mystic"){
-			M.color = "#663399";
+			ctx.drawImage(Ele_Bursts, 0, 224, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "+ Water"){
-			M.color = "#0000FF";
+			ctx.drawImage(Ele_Bursts, 0, 32, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "+ Dark"){
-			M.color = "black";
+			ctx.drawImage(Ele_Bursts, 0, 192, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "+ Light"){
-			M.color = "white";
+			ctx.drawImage(Ele_Bursts, 0, 160, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "Dead!"){
-			M.color = "#CC0000";
+			ctx.drawImage(Ele_Bursts, 0, 288, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "Stolen!"){
-			M.color = "yellow";
+			ctx.drawImage(Ele_Bursts, 0, 384, 208, 32, M.x, M.y, 208, 32);
 		}
 		else if(M.text == "+1"){
 			//if for player hp green else shield blue
 			if(M.regen){
-				M.color = "#33CC00";
+				ctx.drawImage(Ele_Bursts, 0, 416, 208, 32, M.x, M.y, 208, 32);
 			}
 			else{
-				M.color = "#00FFFF";
+				ctx.drawImage(Ele_Bursts, 0, 448, 208, 32, M.x, M.y, 208, 32);
 			}
 		}
-		else if(M.text == "+ Max Hp" || M.text == "+ Damage" || M.text == "+ Luck" || M.text == "+ Regen"){
-			M.color = colorz[colorNum];
-			colorNum++;
-			if(colorNum > 6){
-				colorNum = 1;
-			}
+		else if(M.text == "+ Max Hp"){
+			ctx.drawImage(Ele_Bursts, 0, 480, 208, 32, M.x, M.y, 208, 32);
 		}
-		ctx.fillStyle = M.color;
-		if(M.text == "+1"){
-			ctx.font = "18pt Arial";
+		else if(M.text == "+ Damage"){
+			ctx.drawImage(Ele_Bursts, 0, 512, 208, 32, M.x, M.y, 208, 32);
 		}
-		else{
-			ctx.font = "32pt Arial";
+		else if(M.text == "+ Luck"){
+			ctx.drawImage(Ele_Bursts, 0, 544, 208, 32, M.x, M.y, 208, 32);
 		}
-		ctx.fillText(M.text, M.x, M.y);
+		else if(M.text == "+ Regen"){
+			ctx.drawImage(Ele_Bursts, 0, 576, 208, 32, M.x, M.y, 208, 32);
+		}
 	}
 }
 
@@ -1122,29 +1384,19 @@ function drawMarker(M){
 	}
 	var offset = 0;
 	var dispScore = M.points*M.mult+"";
-	if(M.mult > 2){
-		for(S in dispScore){
-			ctx.drawImage(RedScore[dispScore[S]], M.x-32 +24*offset , M.y);
-			offset++;
-		}
-		var exclams = M.mult - 3;
-		while(exclams > 0){
-			ctx.drawImage(RScoreBurstEx, M.x-32 +24*offset , M.y);
-			offset++;
-			exclams--;
-		}
+	var temp = M.mult-1;
+	if(temp > 2){
+		temp = 2;
 	}
-	else if(M.mult > 1){
-		for(S in dispScore){
-			ctx.drawImage(OrangeScore[dispScore[S]], M.x-32 +24*offset , M.y);
-			offset++;
-		}
+	for(S in dispScore){
+		ctx.drawImage(Ele_Bursts, dispScore[S]*20, 640+temp*32, 20, 32, M.x-32 +24*offset , M.y, 20, 32);
+		offset++;
 	}
-	else{
-		for(S in dispScore){
-			ctx.drawImage(YellowScore[dispScore[S]], M.x-32 +24*offset , M.y);
-			offset++;
-		}
+	var exclams = M.mult - 3;
+	while(exclams > 0){
+		ctx.drawImage(Ele_Bursts, 200, 704, 20, 32, M.x-32 +24*offset, M.y, 20, 32);
+		offset++;
+		exclams--;
 	}
 }
 
@@ -1172,8 +1424,8 @@ if(ctx.globalAlpha == 1){
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
-	if(gameReady && STATE != 1 && STATE != "Jungle" && STATE != "Scorched" && STATE != "Swamp" && STATE != "Desert" && STATE != "Tutorial"
-		&& STATE != 5 && STATE != 4){
+	if(gameReady && STATE != 1 && STATE != "Graveyard" && STATE != "Jungle" && STATE != "Scorched" && STATE != "Swamp" && STATE != "Desert" && STATE != "Tutorial"
+		&& STATE != 5 && STATE != 4 && STATE != 7){
 		ctx.drawImage(menuBack, 0, 0);
 	}
 	else if(STATE == 5 || STATE == 4){
@@ -1204,36 +1456,122 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 			ctx.drawImage(backGround2, 0, 0);
 			ctx.globalAlpha = Alpha*1/(60-swampIndex);
 			ctx.drawImage(swampbkg1, 0, 0 - swampIndex*2.4);
-			ctx.glonalAlpha = Alpha;
+			ctx.globalAlpha = Alpha;
 			Swindex++;
 		}
 		else if(Swindex < 30){
 			ctx.drawImage(backGround2, 0, 0);
 			ctx.globalAlpha = Alpha*1/(60-swampIndex);
 			ctx.drawImage(swampbkg2, 0, 0- swampIndex*2.4);
-			ctx.glonalAlpha = Alpha;
+			ctx.globalAlpha = Alpha;
 			Swindex++;
 		}
 		else if(Swindex < 45){
 			ctx.drawImage(backGround2, 0, 0);
 			ctx.globalAlpha = Alpha*1/(60-swampIndex);
 			ctx.drawImage(swampbkg3, 0, 0- swampIndex*2.4);
-			ctx.glonalAlpha = Alpha;
+			ctx.globalAlpha = Alpha;
 			Swindex++;
 		}
 		else if(Swindex < 60){
 			ctx.drawImage(backGround2, 0, 0);
 			ctx.globalAlpha = Alpha*1/(60-swampIndex);
 			ctx.drawImage(swampbkg4, 0, 0- swampIndex*2.4);
-			ctx.glonalAlpha = Alpha;
+			ctx.globalAlpha = Alpha;
 			Swindex++;
 		}
 		else{
 			ctx.drawImage(backGround2, 0, 0);
 			ctx.globalAlpha = Alpha*1/(60-swampIndex);
 			ctx.drawImage(swampbkg1, 0, 0- swampIndex*2.4);
-			ctx.glonalAlpha = Alpha;
+			ctx.globalAlpha = Alpha;
 			Swindex=0;
+		}
+	}
+	else if(STATE == "Graveyard"){
+		if(GraveNight){
+			if(dayShift > 70){
+				ctx.drawImage(GraveyardSheet, 800, 1308, 800, 156, 0, 0, 800, 156);
+				ctx.globalAlpha = Alpha*0.25;
+			}
+			else if(dayShift > 50){
+				ctx.drawImage(GraveyardSheet, 800, 1464, 800, 156, 0, 0, 800, 156);
+				ctx.globalAlpha = Alpha*0.5;
+			}
+			else if(dayShift > 20){
+				ctx.drawImage(GraveyardSheet, 800, 1620, 800, 156, 0, 0, 800, 156);
+				ctx.globalAlpha = Alpha*0.75;
+			}
+			else{
+				ctx.drawImage(GraveyardSheet, 800, 1152, 800, 156, 0, 0, 800, 156);
+				var dontChange = true;
+			}
+			
+			ctx.drawImage(GraveyardSheet, 856, 1776, 52, 44, 386, 37+dayShift, 52, 44);
+			ctx.globalAlpha = Alpha;
+			if(dayShift){
+				if(dayShift > 70){
+					ctx.globalAlpha = Alpha*0.75;
+				}else if(dayShift > 50){
+					ctx.globalAlpha = Alpha*0.5;
+				}else if(dayShift > 20){
+					ctx.globalAlpha = Alpha*0.25;
+				}else{
+					ctx.globalAlpha = Alpha*0.1;
+				}
+				ctx.drawImage(GraveyardSheet, 800, 1776, 56, 44, 386, 37, 56, 44);
+			}
+			ctx.globalAlpha = Alpha;
+			if(dontChange){
+				ctx.drawImage(GraveyardSheet, 0, 0, 800, 576, 0, 0, 800, 576);
+			}else{
+				ctx.drawImage(GraveyardSheet, 800, 576, 800, 576, 0, 0, 800, 576);
+			}
+		}else{
+			if(nightShift > 70){
+				ctx.drawImage(GraveyardSheet, 800, 1152, 800, 156, 0, 0, 800, 156);
+				ctx.globalAlpha = Alpha*0.25;
+			}
+			else if(nightShift > 50){
+				ctx.drawImage(GraveyardSheet, 800, 1620, 800, 156, 0, 0, 800, 156);
+				ctx.globalAlpha = Alpha*0.5;
+			}
+			else if(nightShift > 20){
+				ctx.drawImage(GraveyardSheet, 800, 1464, 800, 156, 0, 0, 800, 156);
+				ctx.globalAlpha = Alpha*0.75;
+			}
+			else{
+				var dontChange = true;
+				ctx.drawImage(GraveyardSheet, 800, 1308, 800, 156, 0, 0, 800, 156);
+			}
+			//if(nightShift){
+				ctx.drawImage(GraveyardSheet, 800, 1776, 56, 44, 386, 37+nightShift, 56, 44);
+			//}
+			ctx.globalAlpha = Alpha;
+			if(nightShift){
+				if(nightShift > 70){
+					ctx.globalAlpha = Alpha*0.75;
+				}else if(nightShift > 50){
+					ctx.globalAlpha = Alpha*0.5;
+				}else if(nightShift > 20){
+					ctx.globalAlpha = Alpha*0.25;
+				}else{
+					ctx.globalAlpha = Alpha*0.1;
+				}
+				ctx.drawImage(GraveyardSheet, 856, 1776, 52, 44, 386, 37, 52, 44);
+			}
+			ctx.globalAlpha = Alpha;
+			if(nightShift && nightShift < 90){
+				nightShift++;
+			}else if(nightShift == 90){
+				nightShift = 0;
+				GraveNight = 1;
+			}
+			if(dontChange){
+				ctx.drawImage(GraveyardSheet, 800, 0, 800, 576, 0, 0, 800, 576);
+			}else{
+				ctx.drawImage(GraveyardSheet, 800, 576, 800, 576, 0, 0, 800, 576);
+			}
 		}
 	}
 };
@@ -1259,41 +1597,12 @@ function SCORE(){
 	else{
 		ctx.globalAlpha = Alpha;
 	}
-	ctx.drawImage(ScoreLeft, 32, 32);
+	ctx.drawImage(ScoreUISheet, 0, 20, 8, 28, 32, 32, 8, 28);
 	while(i <= digits){
-		if(ScoreUI[i] == 0){
-			ctx.drawImage(Scorezero, 44+16*i, 36);
-		}
-		else if(ScoreUI[i] == 1){
-			ctx.drawImage(Scoreone, 44+16*i, 36);
-		}
-		else if(ScoreUI[i] == 2){
-			ctx.drawImage(Scoretwo, 44+16*i, 36);
-		}
-		else if(ScoreUI[i] == 3){
-			ctx.drawImage(Scorethree, 44+16*i, 36);
-		}
-		else if(ScoreUI[i] == 4){
-			ctx.drawImage(Scorefour, 44+16*i, 36);
-		}
-		else if(ScoreUI[i] == 5){
-			ctx.drawImage(Scorefive, 44+16*i, 36);
-		}
-		else if(ScoreUI[i] == 6){
-			ctx.drawImage(Scoresix, 44+16*i, 36);
-		}
-		else if(ScoreUI[i] == 7){
-			ctx.drawImage(Scoreseven, 44+16*i, 36);
-		}
-		else if(ScoreUI[i] == 8){
-			ctx.drawImage(Scoreeight, 44+16*i, 36);
-		}
-		else if(ScoreUI[i] == 9){
-			ctx.drawImage(Scorenine, 44+16*i, 36);
-		}
+		ctx.drawImage(ScoreUISheet, 12*ScoreUI[i], 0, 12, 20, 44+16*i, 36, 12, 20);
 		i++;
 	}
-	ctx.drawImage(ScoreRight, 44+16*(i-1), 32);
+	ctx.drawImage(ScoreUISheet, 8, 20, 8, 28, 44+16*(i-1), 32, 8, 28);
 	ctx.globalAlpha = Alpha;
 }
 //--------------------------------------------- Keys and Activation -----------------------------------------------------------------//
@@ -1301,6 +1610,9 @@ function SCORE(){
 var keys = function(){
 	if(keytimer > 0){
 		keytimer-=1;
+	}
+	if(27 in keysDown){
+		exitFullscreen();
 	}
 	if(STATE == "PAUSE"){
 		if (80 in keysDown && keytimer == 0){
@@ -1343,10 +1655,13 @@ var keys = function(){
 		var Down = true;
 		var Left = true;
 		var Right = true;
-		if (80 in keysDown && keytimer == 0){
+		if (80 in keysDown && keytimer == 0 /*&& !opened*/){
 			preSTATE = STATE;
 			STATE = "PAUSE";
 			keytimer = 20;
+		}
+		if(STATE == "Tutorial" && (Tutorial.staffMessage == 1 || Tutorial.beamMessage == 1 || Tutorial.elemMessage == 1 || Tutorial.spellMessage == 1 || Tutorial.spell2Message == 1 || Tutorial.lastMessage == 1 || Tutorial.elem2Message == 1)){
+			return;
 		}
 		if (87 in keysDown && player.dirct <= 0){
 			player.dir = "W";
@@ -1365,7 +1680,13 @@ var keys = function(){
 				for(O in ObsList){
 					if(collision("W", player, ObsList[O])){
 						Up = false;
+						break;
 					}
+				}
+			}
+			if(STATE == "Scorched" && GhostRing.onScreen){
+				if(GhostRing.collision("W")){
+					Up = false;
 				}
 			}
 		}
@@ -1374,7 +1695,13 @@ var keys = function(){
 				for(O in ObsList){
 					if(collision("D", player, ObsList[O])){
 						Right = false;
+						break;
 					}
+				}
+			}
+			if(STATE == "Scorched" && GhostRing.onScreen){
+				if(GhostRing.collision("D")){
+					Right = false;
 				}
 			}
 		}
@@ -1383,7 +1710,13 @@ var keys = function(){
 				for(O in ObsList){
 					if(collision("S", player, ObsList[O])){
 						Down = false;
+						break;
 					}
+				}
+			}
+			if(STATE == "Scorched" && GhostRing.onScreen){
+				if(GhostRing.collision("S")){
+					Down = false;
 				}
 			}
 		}
@@ -1392,10 +1725,20 @@ var keys = function(){
 				for(O in ObsList){
 					if(collision("A", player, ObsList[O])){
 						Left = false;
+						break;
 					}
 				}
 			}
+			if(STATE == "Scorched" && GhostRing.onScreen){
+				if(GhostRing.collision("A")){
+					Left = false;
+				}
+			}
 		}
+		player.w = 0;
+		player.a = 0;
+		player.s = 0;
+		player.d = 0;
 		if ((87 in keysDown || (player.dirct > 0 && player.dir == "W")) && player.y - player.speed > 4 && Up == true){
 			if(player.dirct <= 0 || player.dir == "W"){
 				player.y-=player.speed;
@@ -1410,6 +1753,7 @@ var keys = function(){
 					}
 				}
 				player.dir = "W";
+				player.w = 1;
 			}
 		}
 		if ((65 in keysDown || (player.dirct > 0 && player.dir == "A")) && player.x - player.speed > 4 && Left == true){
@@ -1426,6 +1770,7 @@ var keys = function(){
 					}
 				}
 				player.dir = "A";
+				player.a = 1;
 			}
 		}
 		if ((83 in keysDown || (player.dirct > 0 && player.dir == "S")) && player.y + player.speed < canvas.height - 4 && Down == true){
@@ -1442,6 +1787,7 @@ var keys = function(){
 					}
 				}
 				player.dir = "S";
+				player.s = 1;
 			}
 		}
 		if ((68 in keysDown || (player.dirct > 0 && player.dir == "D")) && player.x + player.speed < canvas.width - 4 && Right == true){
@@ -1458,33 +1804,63 @@ var keys = function(){
 					}
 				}
 				player.dir = "D";
+				player.d = 1;
 			}
+		}
+		if(!player.a && !player.w && !player.s && !player.d){
+			player.walkIndex = 1;
+			player.waitIndex++;
+			if(player.waitIndex > 33){
+				if(player.blinking){
+					player.waitIndex = 1;
+					player.blinking = 0;
+				}else{
+					player.waitIndex = 28;
+					player.blinking = 1;
+				}
+			}
+		}
+		else{
+			player.walkIndex++;
+			if(player.walkIndex > 8){
+				player.walkIndex = 1;
+			}
+			player.waitIndex = 1;
+			
 		}
 		if (37 in keysDown && 38 in keysDown){
 			bullet.shoot("WA", 4, 4);
+			player.waitIndex = 1;
 		}	
 		if (37 in keysDown && 40 in keysDown){
 			bullet.shoot("AS", 4, 4);
+			player.waitIndex = 1;
 		}	
 		if (39 in keysDown && 40 in keysDown){
 			bullet.shoot("SD", 4, 4);
+			player.waitIndex = 1;
 		}	
 		if (38 in keysDown && 39 in keysDown){
 			bullet.shoot("WD", 4, 4);
+			player.waitIndex = 1;
 		}	
 		if (38 in keysDown){
 			bullet.shoot("W", 32, 4);
+			player.waitIndex = 1;
 		}	
 		if (37 in keysDown){
 			bullet.shoot("A", 4, 32);
+			player.waitIndex = 1;
 		}	
 		if (40 in keysDown){
 			bullet.shoot("S", 32, 4);
+			player.waitIndex = 1;
 		}	
 		if (39 in keysDown){
 			bullet.shoot("D", 4, 32);
+			player.waitIndex = 1;
 		}
-		if(81 in keysDown){
+		if(81 in keysDown && (STATE != "Tutorial" || Tutorial.drop)){
 			if(spell1 != "N/A"){
 				if(prevSpellRC[1] == "N/A"){
 					prevSpellRC[1] = spell;
@@ -1513,8 +1889,9 @@ var keys = function(){
 				spell1 = "N/A";
 				spell = spell2;
 			}
+			player.waitIndex = 1;
 		}
-		if(69 in keysDown){
+		if(69 in keysDown && (STATE != "Tutorial" || Tutorial.drop)){
 			if(spell2 != "N/A"){
 				if(prevSpellRC[1] == "N/A"){
 					prevSpellRC[1] = spell;
@@ -1543,212 +1920,24 @@ var keys = function(){
 				spell2 = "N/A";
 				spell = spell1;
 			}
+			player.waitIndex = 1;
 		}
-		if(32 in keysDown && spell1 != "N/A" && spell2 == "N/A"){
-			if(spell1 == "Fire"){
-				fire.shoot();
-			}
-			if(spell1 == "Ice"){
-				ice.shoot();
-			}
-			if(spell1 == "Earth"){
-				earth.shoot();
-			}
-			if(spell1 == "Lightning"){
-				lightning.shoot();
-			}
-			if(spell1 == "Air"){
-				air.shoot();
-			}
-			if(spell1 == "Mystic"){
-				mystic.shoot();
-			}
-			if(spell1 == "Water"){
-				water.shoot();
-			}
-			if(spell1 == "Dark"){
-				dark.shoot();
-			}
-			if(spell1 == "Light"){
-				light.shoot();
-			}
-		}
-		if(32 in keysDown && spell2 != "N/A" && spell1 == "N/A"){
-			if(spell2 == "Fire"){
-				fire.shoot();
-			}
-			if(spell2 == "Ice"){
-				ice.shoot();
-			}
-			if(spell2 == "Earth"){
-				earth.shoot();
-			}
-			if(spell2 == "Lightning"){
-				lightning.shoot();
-			}
-			if(spell2 == "Air"){
-				air.shoot();
-			}
-			if(spell2 == "Mystic"){
-				mystic.shoot();
-			}
-			if(spell2 == "Water"){
-				water.shoot();
-			}
-			if(spell2 == "Dark"){
-				dark.shoot();
-			}
-			if(spell2 == "Light"){
-				light.shoot();
-			}
-		}
-		if(32 in keysDown && spell1 != "N/A" && spell2 != "N/A"){
-			if(spell1 == "Fire" && spell2 == "Fire"){
-				fire2.shoot();
-			}
-			if((spell1 == "Ice" && spell2 == "Fire") || (spell1 == "Fire" && spell2 == "Ice")){
-				fireice.shoot();
-			}
-			if(spell1 == "Ice" && spell2 == "Ice"){
-				ice2.shoot();
-			}
-			if(spell1 == "Earth" && spell2 == "Earth"){
-				earth2.shoot();
-			}
-			if((spell1 == "Earth" && spell2 == "Ice") || (spell2 == "Earth" && spell1 == "Ice")){
-				iceheal.shoot();
-			}
-			if((spell1 == "Fire" && spell2 == "Earth") || (spell2 == "Fire" && spell1 == "Earth")){
-				fireheal.shoot();
-			}
-			if(spell1 == "Lightning" && spell2 == "Lightning"){
-				lightning2.shoot();
-			}
-			if((spell1 == "Fire" && spell2 == "Lightning") || (spell2 == "Fire" && spell1 == "Lightning")){
-				firelightning.shoot();
-			}
-			if((spell1 == "Ice" && spell2 == "Lightning") || (spell2 == "Ice" && spell1 == "Lightning")){
-				icelightning.shoot();
-			}
-			if((spell1 == "Earth" && spell2 == "Lightning") || (spell2 == "Earth" && spell1 == "Lightning")){
-				lightningheal.shoot();
-			}
-			if(spell1 == "Air" && spell2 == "Air"){
-				air2.shoot();
-			}
-			if((spell1 == "Air" && spell2 == "Fire") || (spell2 == "Air" && spell1 == "Fire")){
-				airfire.shoot();
-			}
-			if((spell1 == "Air" && spell2 == "Ice") || (spell2 == "Air" && spell1 == "Ice")){
-				airice.shoot();
-			}
-			if((spell1 == "Air" && spell2 == "Lightning") || (spell2 == "Air" && spell1 == "Lightning")){
-				airlightning.shoot();
-			}
-			if((spell1 == "Air" && spell2 == "Earth") || (spell2 == "Air" && spell1 == "Earth")){
-				airearth.shoot();
-			}
-			if(spell1 == "Mystic" && spell2 == "Mystic"){
-				mystic2.shoot();
-			}
-			if((spell1 == "Mystic" && spell2 == "Earth") || (spell2 == "Mystic" && spell1 == "Earth")){
-				mysticearth.shoot();
-			}
-			if((spell1 == "Mystic" && spell2 == "Fire") || (spell2 == "Mystic" && spell1 == "Fire")){
-				mystic.shoot();
-			}
-			if((spell1 == "Mystic" && spell2 == "Ice") || (spell2 == "Mystic" && spell1 == "Ice")){
-				mystic.shoot();
-			}
-			if((spell1 == "Mystic" && spell2 == "Lightning") || (spell2 == "Mystic" && spell1 == "Lightning")){
-				mystic.shoot();
-			}
-			if((spell1 == "Mystic" && spell2 == "Air") || (spell2 == "Mystic" && spell1 == "Air")){
-				mystic.shoot();
-			}
-			if(spell1 == "Water" && spell2 == "Water"){
-				water.shoot();
-			}
-			if((spell1 == "Water" && spell2 == "Earth") || (spell2 == "Water" && spell1 == "Earth")){
-				waterearth.shoot();
-			}
-			if((spell1 == "Water" && spell2 == "Fire") || (spell2 == "Water" && spell1 == "Fire")){
-				waterfire.shoot();
-			}
-			if((spell1 == "Water" && spell2 == "Ice") || (spell2 == "Water" && spell1 == "Ice")){
-				waterfire.shoot();
-			}
-			if((spell1 == "Water" && spell2 == "Lightning") || (spell2 == "Water" && spell1 == "Lightning")){
-				waterlightning.shoot();
-			}
-			if((spell1 == "Water" && spell2 == "Air") || (spell2 == "Water" && spell1 == "Air")){
-				waterair.shoot();
-			}
-			if((spell1 == "Water" && spell2 == "Mystic") || (spell2 == "Water" && spell1 == "Mystic")){
-				mystic.shoot();
-			}
-			if(spell1 == "Dark" && spell2 == "Dark"){
-				dark2.shoot();
-			}
-			if((spell1 == "Dark" && spell2 == "Earth") || (spell2 == "Dark" && spell1 == "Earth")){
-				darkearth.shoot();
-			}
-			if((spell1 == "Dark" && spell2 == "Fire") || (spell2 == "Dark" && spell1 == "Fire")){
-				darkfire.shoot();
-			}
-			if((spell1 == "Dark" && spell2 == "Ice") || (spell2 == "Dark" && spell1 == "Ice")){
-				darkice.shoot();
-			}
-			if((spell1 == "Dark" && spell2 == "Lightning") || (spell2 == "Dark" && spell1 == "Lightning")){
-				darklightning.shoot();
-			}
-			if((spell1 == "Dark" && spell2 == "Air") || (spell2 == "Dark" && spell1 == "Air")){
-				darkair.shoot();
-			}
-			if((spell1 == "Dark" && spell2 == "Mystic") || (spell2 == "Dark" && spell1 == "Mystic")){
-				mystic.shoot();
-			}
-			if((spell1 == "Dark" && spell2 == "Water") || (spell2 == "Dark" && spell1 == "Water")){
-				darkwater.shoot();
-			}
-			if(spell1 == "Light" && spell2 == "Light"){
-				light2.shoot();
-			}
-			if((spell1 == "Light" && spell2 == "Fire") || (spell2 == "Light" && spell1 == "Fire")){
-				lightfire.shoot();
-			}
-			if((spell1 == "Light" && spell2 == "Ice") || (spell2 == "Light" && spell1 == "Ice")){
-				lightice.shoot();
-			}
-			if((spell1 == "Light" && spell2 == "Earth") || (spell2 == "Light" && spell1 == "Earth")){
-				lightearth.shoot();
-			}
-			if((spell1 == "Light" && spell2 == "Lightning") || (spell2 == "Light" && spell1 == "Lightning")){
-				lightlightning.shoot();
-			}
-			if((spell1 == "Light" && spell2 == "Air") || (spell2 == "Light" && spell1 == "Air")){
-				lightair.shoot();
-			}
-			if((spell1 == "Light" && spell2 == "Mystic") || (spell2 == "Light" && spell1 == "Mystic")){
-				mystic.shoot();
-			}
-			if((spell1 == "Light" && spell2 == "Water") || (spell2 == "Light" && spell1 == "Water")){
-				lightwater.shoot();
-			}
-			if((spell1 == "Light" && spell2 == "Dark") || (spell2 == "Light" && spell1 == "Dark")){
-				lightdark.shoot();
-			}
+		if(32 in keysDown && (spell1 != "N/A" || spell2 != "N/A")){
+			SpellShoot(spell1, spell2, player);
+			player.waitIndex = 1;
 		}
 	}
 };
 //---------------------------------------------------------- Music Player -----------------------------------------------------------//
 function MusicPlayer(){
 if(Music==2 && STATE != "PAUSE"){
-	if(STATE == 1 && treeWizz.onScreen == 0 && Dragon.onScreen == 0){
+	if(STATE == "Tutorial" || (STATE == 1 && treeWizz.onScreen == 0 && Dragon.onScreen == 0)){
 		DumblebeatsNormal.pause();
 		Spells.pause();
 		BadWizards.pause();
 		swampSong.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		CaseysQuest.pause();
 		DesertSong.pause();
 		OverwhelmedByGoblins.play();
@@ -1758,6 +1947,8 @@ if(Music==2 && STATE != "PAUSE"){
 		Spells.pause();
 		BadWizards.pause();
 		swampSong.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		CaseysQuest.pause();
 		DesertSong.pause();
 		if(hpUp.x == -100){
@@ -1776,6 +1967,8 @@ if(Music==2 && STATE != "PAUSE"){
 		swampSong.pause();
 		CaseysQuest.pause();
 		DesertSong.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		BadWizards.play();
 	}
 	else if(Dragon.onScreen==1 && STATE == 1){
@@ -1784,6 +1977,8 @@ if(Music==2 && STATE != "PAUSE"){
 		DumblebeatsNormal.pause();
 		CaseysQuest.pause();
 		swampSong.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		DesertSong.pause();
 		BadWizards.play();
 	}
@@ -1793,6 +1988,8 @@ if(Music==2 && STATE != "PAUSE"){
 		DumblebeatsNormal.pause();
 		CaseysQuest.pause();
 		swampSong.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		DesertSong.pause();
 		BadWizards.play();
 	}
@@ -1801,7 +1998,20 @@ if(Music==2 && STATE != "PAUSE"){
 		Spells.pause();
 		DumblebeatsNormal.pause();
 		CaseysQuest.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		swampSong.pause();
+		DesertSong.pause();
+		BadWizards.play();
+	}
+	else if(FireGhost.onScreen==1 && STATE == "Scorched"){
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.pause();
+		CaseysQuest.pause();
+		swampSong.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		DesertSong.pause();
 		BadWizards.play();
 	}
@@ -1812,6 +2022,8 @@ if(Music==2 && STATE != "PAUSE"){
 		BadWizards.pause();
 		swampSong.pause();
 		DesertSong.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		if(hpUp.x == -100){
 			CaseysQuest.play();
 			SoothingSound.pause();
@@ -1828,6 +2040,8 @@ if(Music==2 && STATE != "PAUSE"){
 		BadWizards.pause();
 		CaseysQuest.pause();
 		DesertSong.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		if(hpUp.x == -100){
 			swampSong.play();
 			SoothingSound.pause();
@@ -1843,12 +2057,38 @@ if(Music==2 && STATE != "PAUSE"){
 		DumblebeatsNormal.pause();
 		BadWizards.pause();
 		CaseysQuest.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 		if(hpUp.x == -100){
 			DesertSong.play();
 			SoothingSound.pause();
 			SoothingSound.currentTime = 0;
 		}
 		else{
+			SoothingSound.play();
+		}
+	}
+	else if(STATE=="Graveyard"){
+		OverwhelmedByGoblins.pause();
+		Spells.pause();
+		DumblebeatsNormal.pause();
+		BadWizards.pause();
+		CaseysQuest.pause();
+		DesertSong.pause();
+		if(hpUp.x == -100){
+			if(GraveNight){
+				GraveNightSong.play();
+				GraveDaySong.pause();
+			}else{
+				GraveNightSong.pause();
+				GraveDaySong.play();
+			}
+			SoothingSound.pause();
+			SoothingSound.currentTime = 0;
+		}
+		else{
+			GraveDaySong.pause();
+			GraveNightSong.pause();
 			SoothingSound.play();
 		}
 	}
@@ -1860,6 +2100,8 @@ if(Music==2 && STATE != "PAUSE"){
 		Spells.play();
 		swampSong.pause();
 		DesertSong.pause();
+		GraveDaySong.pause();
+		GraveNightSong.pause();
 	}
 }
 }
@@ -1916,6 +2158,17 @@ setInterval(function(){
 			ctx.globalAlpha = Alpha;
 		}
 	}
+	else if(STATE == 7){
+		levelSelect();
+		if(dim == 2){
+			ctx.globalAlpha = Alpha*0.25;
+			ctx.fillStyle = "#FF0000";
+			ctx.fillRect(0,0,400,576);
+			ctx.fillStyle = "#000099";
+			ctx.fillRect(400,0,400,576);
+			ctx.globalAlpha = Alpha;
+		}
+	}
 	else if(STATE == "PAUSE"){
 		keys();
 		Pause.draw();
@@ -1939,14 +2192,46 @@ setInterval(function(){
 			ctx.globalAlpha = Alpha;
 		}
 	}
+	else if(STATE == "Mult"){
+		Multiplayer.draw();
+		if(player2.x != 9000){
+			STATE = 1;
+		}
+		if(dim == 2){
+			ctx.globalAlpha = Alpha*0.25;
+			ctx.fillStyle = "#FF0000";
+			ctx.fillRect(0,0,400,576);
+			ctx.fillStyle = "#000099";
+			ctx.fillRect(400,0,400,576);
+			ctx.globalAlpha = Alpha;
+		}
+		update_server();
+	}
+	else if(STATE == "Mult_Lobby"){
+		drawLobby.draw();
+		if(dim == 2){
+			ctx.globalAlpha = Alpha*0.25;
+			ctx.fillStyle = "#FF0000";
+			ctx.fillRect(0,0,400,576);
+			ctx.fillStyle = "#000099";
+			ctx.fillRect(400,0,400,576);
+			ctx.globalAlpha = Alpha;
+		}
+		update_lobby();
+	}
 	else{
 		if(deathTimer > 0){
 			deathTimer-=1;
 		}
-		if(deathTimer == 0){
+		if(deathTimer == 0 && (player2.x == 9000 || player2.x == 5000)){
 			deathTimer-=1;
 			Alpha = 1;
 			STATE = 4;
+			/*if(opened){
+				ws.send("c" + player.number);   
+				ws.close();
+				opened = false;
+			}*/
 		}
 		if(player.hp <= 0){
 			if(nu != 1){
@@ -1986,172 +2271,31 @@ setInterval(function(){
 		keys();
 		multiply();
 		if(STATE == "Tutorial"){
-			AllEnemies = {1: Enemy, 2: EnemyA};
-			
-			ctx.drawImage(MoveShoot, 0, 0);
-			if(87 in keysDown){
-				ctx.drawImage(WPress, 0, 0);
-				moved = true;
-			}
-			if(65 in keysDown){
-				ctx.drawImage(APress, 0, 0);
-				moved = true;
-			}
-			if(83 in keysDown){
-				ctx.drawImage(SPress, 0, 0);
-				moved = true;
-			}
-			if(68 in keysDown){
-				ctx.drawImage(DPress, 0, 0);
-				moved = true;
-			}
-			if(38 in keysDown && 37 in keysDown){
-				ctx.drawImage(WAShootTut, 0, 0);
-				shot = true;
-			}
-			else if(38 in keysDown && 39 in keysDown){
-				ctx.drawImage(WDShootTut, 0, 0);
-				shot = true;
-			}
-			else if(37 in keysDown && 40 in keysDown){
-				ctx.drawImage(ASShootTut, 0, 0);
-				shot = true;
-			}
-			else if(40 in keysDown && 39 in keysDown){
-				ctx.drawImage(SDShootTut, 0, 0);
-				shot = true;
-			}
-			else{
-				if(38 in keysDown){
-					ctx.drawImage(WShootTut, 0, 0);
-					shot = true;
-				}
-				if(37 in keysDown){
-					ctx.drawImage(AShootTut, 0, 0);
-					shot = true;
-				}
-				if(40 in keysDown){
-					ctx.drawImage(SShootTut, 0, 0);
-					shot = true;
-				}
-				if(39 in keysDown){
-					ctx.drawImage(DShootTut, 0, 0);
-					shot = true;
-				}
-			}
-			ctx.drawImage(EnterSkip, 0, 0);
-			if(13 in keysDown && keytimer <= 0){
-				redCube.x = -100;
-				redCube.y = -200;
-				greyCube.x = -100;
-				greyCube.y = -200;
-				Enemy.movement = false;
-				Enemy.onScreen = 0;
-				Enemy.x = 9000;
-				Enemy.y = -400;
-				EnemyA.movement = false;
-				EnemyA.onScreen = 0;
-				EnemyA.x = -9000;
-				EnemyA.y = -9000;
-				TutKill1 = true;
-				TutKill2 = true;
-				ctx.drawImage(EnterSkipPress, 0, 0);
-			}
-			
-			if(shot && moved && !Enemy.onScreen && !TutKill1){
-				Enemy.x = 800;
-				Enemy.y = 288;
-				Enemy.movement = true;
-				Enemy.onScreen = 1;
-			}
-			if(spell != "N/A"){
-				ctx.drawImage(SpaceKey, 0, 0);
-				if(32 in keysDown){
-					ctx.drawImage(SpaceKeyPress, 0, 0);
-				}
-			}
-			
-			if(spell1 != "N/A" && spell2 != "N/A"){
-				if((forestIndex >= 10 && forestIndex < 20) || (forestIndex >= 30 && forestIndex < 40)
-					 || (forestIndex >= 50 && forestIndex < 60) || (forestIndex >= 70 && forestIndex < 80)
-					  || (forestIndex >= 90 && forestIndex < 100) || (forestIndex >= 110 && forestIndex < 120)){
-					ctx.drawImage(DropQ2, 0, 0);
-					ctx.drawImage(DropE2, 0, 0);
-				}
-				else{
-					ctx.drawImage(DropQ1, 0, 0);
-					ctx.drawImage(DropE1, 0, 0);
-				}
-			}
-			
-			if(TutKill1 && !TutKill2 && !Enemy.onScreen && !EnemyA.onScreen && redCube.x == -100){
-				Enemy.x = 800;
-				Enemy.y = 288;
-				Enemy.movement = true;
-				Enemy.onScreen = 1;
-				
-				EnemyA.x = 0;
-				EnemyA.y = 288;
-				EnemyA.movement = true;
-				EnemyA.onScreen = 1;
-				EnemyA.growIndex = 62;
-			}
-			
-			player.draw();
-			player.onhit();
-			//knock back when hit by enemies/meteors
-			player.knockBack();
-			
-			rePlant();
-			
-			for(B in Boxes){
-				Boxes[B].draw();
-				pickup(Boxes[B]);
-			}
-			
-			for(B in Bullets){
-				drawBullet(Bullets[B]);
-				Bulletmove(Bullets[B]);
-			}
-			
-			for(F in AllFire){
-				AllFire[F].draw();
-				AllFire[F].move();
-			}
-			
-			airfire.draw();
-			airfire.effect();
-			airfire12.draw();
-			airfire12.effect();
-			airfire13.draw();
-			airfire13.effect();
-			
-			for(E in AllEnemies){
-				AllEnemies[E].draw();
-				move(AllEnemies[E]);
-				AI(AllEnemies[E]);
-			}
-			
-			treeFall = 2;
-			for(O in allObs){
-				drawObstacle(allObs[O]);
-				obsTick(allObs[O]);
-			}
-			
-			castingBar.draw();
-			castingBar.tick();
+			Tutorial.run();
 		}
 		//--------------------------------------------- Forest Level ------------------------------------------------------------//
 		else if(STATE == 1){
 			levelorder = 0;
 			//Enemy list optimization
-			AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: Sorceror, 6: treeWizz, 7: rootStrike, 8: rootStrike2, 9: rootStrike3, 10: rootStrike4, 11: Dragon, 12: DragonR, 13: DragonL,
-					14: BigMeteor1, 15: Meteor1, 16: Meteor2, 17: Meteor3, 18: Meteor4, 19: BigMeteor2, 20: Meteor5, 21: Meteor6, 22: Meteor7, 23: Meteor8, 24: MeteorD1, 25: MeteorD2};
+			//if(!opened){
+				AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: treeWizz, 6: rootStrike, 7: rootStrike2, 8: rootStrike3, 9: rootStrike4, 10: Dragon, 11: DragonR, 12: DragonL,
+						13: BigMeteor1, 14: Meteor1, 15: Meteor2, 16: Meteor3, 17: Meteor4, 18: BigMeteor2, 19: Meteor5, 20: Meteor6, 21: Meteor7, 22: Meteor8, 23: MeteorD1, 24: MeteorD2};
+			//}
+			//else{
+			//	AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 4: EnemyC, 5: p2Enemy, 6: p2EnemyA, 7: p2EnemyB, 8: p2EnemyC};
+			//}
 			treeFall = 2;
 			player.draw();
 			player.onhit();
 			//knock back when hit by enemies/meteors
 			player.knockBack();
+			
+			/*if(player.number){
+				player2.draw();
+				player2.move();
+				update_server();
+			}*/
+			
 			//make growing flowers collideable
 			if(EnemyA.onScreen == 1 && EnemyA.growIndex < 62){
 				EnemyA.x+=9000;
@@ -2163,6 +2307,16 @@ setInterval(function(){
 				EnemyC.y+=9000;
 				var Clowered = true;
 			}
+			/*if(p2EnemyA.onScreen == 1 && p2EnemyA.growIndex < 62){
+				p2EnemyA.x+=9000;
+				p2EnemyA.y+=9000;
+				var p2Alowered = true;
+			}
+			if(p2EnemyC.onScreen == 1 && p2EnemyC.growIndex < 62){
+				p2EnemyC.x+=9000;
+				p2EnemyC.y+=9000;
+				var p2Clowered = true;
+			}*/
 			rePlant();
 			for(B in Boxes){
 				Boxes[B].draw();
@@ -2222,6 +2376,14 @@ setInterval(function(){
 				EnemyC.x-=9000;
 				EnemyC.y-=9000;
 			}
+			/*if(p2EnemyA.onScreen == 1 && p2EnemyA.growIndex < 62 && p2Alowered){
+				p2EnemyA.x-=9000;
+				p2EnemyA.y-=9000;
+			}
+			if(p2EnemyC.onScreen == 1 && p2EnemyC.growIndex < 62 && p2Clowered){
+				p2EnemyC.x-=9000;
+				p2EnemyC.y-=9000;
+			}*/
 			for(E in AllEnemies){
 				if(AllEnemies[E].onTree == 0){
 					AllEnemies[E].draw();
@@ -2252,9 +2414,11 @@ setInterval(function(){
 				drawBlood(bloodList[b]);
 			}
 			
-			confuseBarDraw();
+			//confuseBarDraw();
 			castingBar.draw();
 			castingBar.tick();
+			/*p2castingBar.draw();
+			p2castingBar.tick();*/
 			TreecastingBar.draw();
 			SorcCastingBar.draw();
 		}
@@ -2421,9 +2585,11 @@ setInterval(function(){
 			TwizEffect.draw();
 			MasterTEffect.draw();
 			
-			confuseBarDraw();
+			//confuseBarDraw();
 			castingBar.draw();
 			castingBar.tick();
+			/*p2castingBar.draw();
+			p2castingBar.tick();*/
 		}
 		//------------------------------------------------------------ Fire Level -----------------------------------------------//
 		else if(STATE == "Scorched"){
@@ -2434,7 +2600,7 @@ setInterval(function(){
 			//change enemies
 			AllEnemies = {1: Enemy, 2: EnemyA, 3: EnemyB, 5: Tenemy, 6: TenemyA, 8: Lavaman, 9: Lavaman2, 10: Lavaman3, 11: Lavaman4, 12: Spawner, 13: Dragon, 14: DragonR, 15: DragonL,
 					16: BigMeteor1, 17: Meteor1, 18: Meteor2, 19: Meteor3, 20: Meteor4, 21: BigMeteor2, 22: Meteor5, 23: Meteor6, 24: Meteor7, 25: Meteor8, 26: MeteorD1, 27: MeteorD2,
-					28: Lavaman5, 29: Lavaman6, 30: Lavaman7, 31: Lavaman8, 32: Spawner2, 33: MiniMum1, 34: MiniMum2, 35: MiniMum3, 36: MiniMum4, 37: Genie, 38: Lamp};
+					28: Lavaman5, 29: Lavaman6, 30: Lavaman7, 31: Lavaman8, 32: Spawner2, 33: MiniMum1, 34: MiniMum2, 35: MiniMum3, 36: MiniMum4, 37: Genie, 38: Lamp, 39: FireGhost};
 			StateTimer+=1;
 			//enemy pts change
 			Enemy.pts = 25;
@@ -2450,10 +2616,12 @@ setInterval(function(){
 			EnemyB.height = 16;
 			EnemyC.width = 40;
 			EnemyC.height = 16;
-	
 			for(O in allObs){
 				drawObstacle(allObs[O]);
 				obsTick(allObs[O]);
+			}
+			if(GhostRing.onScreen){
+				GhostRing.run();
 			}
 			player.draw();
 			player.onhit();
@@ -2479,7 +2647,10 @@ setInterval(function(){
 			LampPoof.draw();
 			Genie.spawn();
 			for(E in AllEnemies){
-				if(AllEnemies[E] != Lamp){
+				if(typeof(AllEnemies[E].run) != "undefined"){
+					AllEnemies[E].run();
+				}
+				else if(AllEnemies[E] != Lamp){
 					if(AllEnemies[E].onTree == 0){
 						AllEnemies[E].draw();
 						move(AllEnemies[E]);
@@ -2524,9 +2695,12 @@ setInterval(function(){
 			
 			DragonEffect2.draw();
 			GenieEffect.draw();
-			confuseBarDraw();
+			FireGhostEffect.draw();
+			//confuseBarDraw();
 			castingBar.draw();
 			castingBar.tick();
+			/*p2castingBar.draw();
+			p2castingBar.tick();*/
 		}
 		//--------------------------------------------------- Swamp Level -------------------------------------------------------//
 		else if(STATE == "Swamp"){
@@ -2536,6 +2710,9 @@ setInterval(function(){
 			
 			//change enemy list
 			AllEnemies = {1: Enemy, 2: EnemyB, 3: MasterThief, 4: Croc, 5: Croc2, 6: Mosquito, 7: Mosquito2, 8: Mosquito3, 9: Mosquito4};
+			Enemy.pts = 300;
+			EnemyB.pts = 300;
+			
 			StateTimer+=1;
 			player.shadowed = false;
 			//Must be on below trees
@@ -2622,9 +2799,11 @@ setInterval(function(){
 			
 			MasterTEffect.draw();
 			
-			confuseBarDraw();
+			//confuseBarDraw();
 			castingBar.draw();
 			castingBar.tick();
+			/*p2castingBar.draw();
+			p2castingBar.tick();*/
 			
 			//If the swamp craziness happened
 			if(Alpha == 0.15 && counter > 0){
@@ -2835,11 +3014,130 @@ setInterval(function(){
 			}
 			
 			GenieEffect.draw();
-			confuseBarDraw();
+			//confuseBarDraw();
 			castingBar.draw();
 			castingBar.tick();
+			/*p2castingBar.draw();
+			p2castingBar.tick();*/
 			
 			SandStorm.draw();
+		}
+		//---------------------------------------------------------- Graveyard Level --------------------------------------------//
+		else if(STATE == "Graveyard"){
+			levelorder = 23;
+			if(player.y < 102){
+				var moved = 1;
+				player.y = 104;
+			}
+			else if(player.x + player.width*0.5 >= 776 - 40 && player.y - player.height*0.5 < 118+24){
+				var moved = 1;
+				player.y+=30;
+			}
+			else if(player.x + player.width*0.5 >= 704 - 100 && player.y - player.height*0.5 < 94+24){
+				var moved = 1;
+				player.y+=30;
+			}
+			else if(player.x + player.width*0.5 >= 0 && player.x <= 100 && player.y - player.height*0.5 < 150+50){
+				var moved = 1;
+				player.y+=30;
+			}
+			if(moved){
+				for(B in bubbleRotate){
+					if(bubbleRotate[B].onScreen){
+						bubbleRotate[B].shoot();
+					}
+				}
+			}
+			SeenGraveyard = 1;
+			$.jStorage.set("SeenGraveyard", SeenGraveyard);
+			
+			if(GraveNight){
+				nightTimer--;
+				if(nightTimer <= 0 && dayShift < 90){
+					dayShift++;
+				}
+				else if(nightTimer <= 0){
+					dayShift = 0;
+					GraveNight = 0;
+					GraveNum++;
+					vamp1.speed = 8;
+					vamp1.speed2 = 4;
+					for(E in AllEnemies){
+						if(AllEnemies[E].type != "Mosquito"){
+							AllEnemies[E].hp = 1;
+							onHit(AllEnemies[E]);
+						}
+					}
+					var LightsColors = {1: "Blue", 2: "Red"}; 
+					obstacle11.color = LightsColors[randomInt(1,2)];
+					obstacle12.color = LightsColors[randomInt(1,2)];
+					obstacle13.color = LightsColors[randomInt(1,2)];
+					obstacle15.color = LightsColors[randomInt(1,2)];
+					obstacle16.color = LightsColors[randomInt(1,2)];
+					obstacle17.color = LightsColors[randomInt(1,2)];
+					obstacle21.color = LightsColors[randomInt(1,2)];
+					obstacle22.color = LightsColors[randomInt(1,2)];
+					obstacle23.color = LightsColors[randomInt(1,2)];
+					obstacle24.color = "Blue";
+					nightTimer = 900;
+					dayone = 0;
+				}
+			}
+			//change enemies
+			AllEnemies = {1: skel1, 2: skel2, 3: skel3, 4: skel4, 5: skel5, 6: vamp1, 7: dog1};
+			StateTimer+=1;
+			
+			for(O in allObs){
+				drawObstacle(allObs[O]);
+				obsTick(allObs[O]);
+			}
+			
+			player.draw();
+			player.onhit();
+			//knock back when hit by enemies/meteors
+			player.knockBack();
+			rePlant();
+			for(B in Boxes){
+				Boxes[B].draw();
+				pickup(Boxes[B]);
+			}
+			RandEffect.draw();
+			for(H in hpParticles){
+				hpParticles[H].draw();
+				hpParticles[H].onHit();
+				HpMove(hpParticles[H]);
+				HpAi(hpParticles[H]);
+			}
+			
+			drawSpells();
+						
+			for(E in AllEnemies){
+				AllEnemies[E].run();
+			}
+			for(S in SkelHeads){
+				SkelHeads[S].draw();
+				moveSkelProj(SkelHeads[S]);
+			}
+			treeFall = 2;	
+			
+			for(b in bloodList){
+				drawBlood(bloodList[b]);
+			}
+			
+			graveDigger.draw();
+			
+			if(GraveNight){
+				ctx.drawImage(GraveyardSheet, 0, 1420, 276, 212, 1, 389, 276, 212);
+			}else{
+				ctx.drawImage(GraveyardSheet, 276, 1420, 276, 212, 1, 389, 276, 212);
+			}
+			
+			FireGhostEffect.draw();
+			//confuseBarDraw();
+			castingBar.draw();
+			castingBar.tick();
+			/*p2castingBar.draw();
+			p2castingBar.tick();*/
 		}
 		//----------------------------------------------------------- End -----------------------------------------------------------//
 		// black out screen
@@ -2849,7 +3147,10 @@ setInterval(function(){
 		}
 		darkearth.draw();
 		darkearth.move();
-		
+		/*if(player2.x != 9000){
+			p2darkearth.draw();
+			p2darkearth.move();
+		}*/
 		UI();
 		if(STATE != "Tutorial"){
 			SCORE();
@@ -2905,7 +3206,7 @@ setInterval(function(){
 		}
 		
 		//fade out tutorial
-		if(TutKill2 && redCube.x == -100 && greyCube.x == -100 && STATE == "Tutorial"){
+		if(Tutorial.done && STATE == "Tutorial"){
 			TutFadeIndex++;
 			ctx.globalAlpha = Alpha*0.1 + (0.1*TutFadeIndex*0.5);
 			if(ctx.globalAlpha >= 1){
@@ -2967,6 +3268,7 @@ setInterval(function(){
 			ctx.fillRect(400,0,400,576);
 			ctx.globalAlpha = Alpha;
 		}
+		
 		// Cooldown calculation
 		if(cd <= 0){
 			cd = cd;

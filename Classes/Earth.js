@@ -19,9 +19,7 @@ var earth = {
 			this.cast-=1;
 		}
 		if(this.cast == 0 && this.timeLeft > 0 && deathTimer == -1){
-			ctx.fillStyle = this.color;
-			ctx.font = "18pt Arial";
-			ctx.fillText("+1", this.x, this.y);
+			ctx.drawImage(Ele_Bursts, 0, 416, 208, 32, this.x-32, this.y, 208, 32);
 		}	
 	},
 	
@@ -215,847 +213,131 @@ var earth2 = {
 		}
 	}
 };
+
 //All root drawing is in EnemyAttacks.js: drawRoots
-var earth2rootstr = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr2 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr3 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr4 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr5 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr6 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr7 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr8 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr9 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr10 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr11 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr12 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr13 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr14 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr15 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr21 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr22 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr23 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr24 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr25 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr26 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr27 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr28 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr29 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr210 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr211 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr212 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr213 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr214 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr215 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr31 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr32 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr33 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr34 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr35 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr36 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr37 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr38 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr39 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr310 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr311 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr312 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr313 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr314 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr315 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr41 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr42 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr43 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr44 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr45 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr46 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr47 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr48 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr49 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr410 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr411 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr412 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr413 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr414 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth2rootstr415 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr2 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr3 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr4 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr5 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr6 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr7 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr8 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr9 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr10 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr11 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr12 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr13 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr14 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr15 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr21 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr22 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr23 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr24 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr25 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr26 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr27 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr28 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr29 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr210 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr211 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr212 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr213 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr214 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr215 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr31 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr32 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr33 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr34 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr35 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr36 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr37 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr38 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr39 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr310 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr311 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr312 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr313 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr314 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr315 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr41 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr42 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr43 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr44 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr45 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr46 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr47 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr48 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr49 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr410 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr411 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr412 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr413 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr414 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
-var earth3rootstr415 = {
-	x: -500,
-	y: -500,
-	width: 16,
-	height: 16,
-	onScreen: 0
-};
+//prototype
+function earthxrootstry(){};
+earthxrootstry.prototype = {x: -500,y: -500,width: 16,height: 16,onScreen: 0};
+var earth2rootstr = new earthxrootstry();
+var earth2rootstr2 = new earthxrootstry();
+var earth2rootstr3 = new earthxrootstry();
+var earth2rootstr4 = new earthxrootstry();
+var earth2rootstr5 = new earthxrootstry();
+var earth2rootstr6 = new earthxrootstry();
+var earth2rootstr7 = new earthxrootstry();
+var earth2rootstr8 = new earthxrootstry();
+var earth2rootstr9 = new earthxrootstry();
+var earth2rootstr10 = new earthxrootstry();
+var earth2rootstr11 = new earthxrootstry();
+var earth2rootstr12 = new earthxrootstry();
+var earth2rootstr13 = new earthxrootstry();
+var earth2rootstr14 = new earthxrootstry();
+var earth2rootstr15 = new earthxrootstry();
+var earth2rootstr21 = new earthxrootstry();
+var earth2rootstr22 = new earthxrootstry();
+var earth2rootstr23 = new earthxrootstry();
+var earth2rootstr24 = new earthxrootstry();
+var earth2rootstr25 = new earthxrootstry();
+var earth2rootstr26 = new earthxrootstry();
+var earth2rootstr27 = new earthxrootstry();
+var earth2rootstr28 = new earthxrootstry();
+var earth2rootstr29 = new earthxrootstry();
+var earth2rootstr210 = new earthxrootstry();
+var earth2rootstr211 = new earthxrootstry();
+var earth2rootstr212 = new earthxrootstry();
+var earth2rootstr213 = new earthxrootstry();
+var earth2rootstr214 = new earthxrootstry();
+var earth2rootstr215 = new earthxrootstry();
+var earth2rootstr31 = new earthxrootstry();
+var earth2rootstr32 = new earthxrootstry();
+var earth2rootstr33 = new earthxrootstry();
+var earth2rootstr34 = new earthxrootstry();
+var earth2rootstr35 = new earthxrootstry();
+var earth2rootstr36 = new earthxrootstry();
+var earth2rootstr37 = new earthxrootstry();
+var earth2rootstr38 = new earthxrootstry();
+var earth2rootstr39 = new earthxrootstry();
+var earth2rootstr310 = new earthxrootstry();
+var earth2rootstr311 = new earthxrootstry();
+var earth2rootstr312 = new earthxrootstry();
+var earth2rootstr313 = new earthxrootstry();
+var earth2rootstr314 = new earthxrootstry();
+var earth2rootstr315 = new earthxrootstry();
+var earth2rootstr41 = new earthxrootstry();
+var earth2rootstr42 = new earthxrootstry();
+var earth2rootstr43 = new earthxrootstry();
+var earth2rootstr44 = new earthxrootstry();
+var earth2rootstr45 = new earthxrootstry();
+var earth2rootstr46 = new earthxrootstry();
+var earth2rootstr47 = new earthxrootstry();
+var earth2rootstr48 = new earthxrootstry();
+var earth2rootstr49 = new earthxrootstry();
+var earth2rootstr410 = new earthxrootstry();
+var earth2rootstr411 = new earthxrootstry();
+var earth2rootstr412 = new earthxrootstry();
+var earth2rootstr413 = new earthxrootstry();
+var earth2rootstr414 = new earthxrootstry();
+var earth2rootstr415 = new earthxrootstry();
+var earth3rootstr = new earthxrootstry();
+var earth3rootstr2 = new earthxrootstry();
+var earth3rootstr3 = new earthxrootstry();
+var earth3rootstr4 = new earthxrootstry();
+var earth3rootstr5 = new earthxrootstry();
+var earth3rootstr6 = new earthxrootstry();
+var earth3rootstr7 = new earthxrootstry();
+var earth3rootstr8 = new earthxrootstry();
+var earth3rootstr9 = new earthxrootstry();
+var earth3rootstr10 = new earthxrootstry();
+var earth3rootstr11 = new earthxrootstry();
+var earth3rootstr12 = new earthxrootstry();
+var earth3rootstr13 = new earthxrootstry();
+var earth3rootstr14 = new earthxrootstry();
+var earth3rootstr15 = new earthxrootstry();
+var earth3rootstr21 = new earthxrootstry();
+var earth3rootstr22 = new earthxrootstry();
+var earth3rootstr23 = new earthxrootstry();
+var earth3rootstr24 = new earthxrootstry();
+var earth3rootstr25 = new earthxrootstry();
+var earth3rootstr26 = new earthxrootstry();
+var earth3rootstr27 = new earthxrootstry();
+var earth3rootstr28 = new earthxrootstry();
+var earth3rootstr29 = new earthxrootstry();
+var earth3rootstr210 = new earthxrootstry();
+var earth3rootstr211 = new earthxrootstry();
+var earth3rootstr212 = new earthxrootstry();
+var earth3rootstr213 = new earthxrootstry();
+var earth3rootstr214 = new earthxrootstry();
+var earth3rootstr215 = new earthxrootstry();
+var earth3rootstr31 = new earthxrootstry();
+var earth3rootstr32 = new earthxrootstry();
+var earth3rootstr33 = new earthxrootstry();
+var earth3rootstr34 = new earthxrootstry();
+var earth3rootstr35 = new earthxrootstry();
+var earth3rootstr36 = new earthxrootstry();
+var earth3rootstr37 = new earthxrootstry();
+var earth3rootstr38 = new earthxrootstry();
+var earth3rootstr39 = new earthxrootstry();
+var earth3rootstr310 = new earthxrootstry();
+var earth3rootstr311 = new earthxrootstry();
+var earth3rootstr312 = new earthxrootstry();
+var earth3rootstr313 = new earthxrootstry();
+var earth3rootstr314 = new earthxrootstry();
+var earth3rootstr315 = new earthxrootstry();
+var earth3rootstr41 = new earthxrootstry();
+var earth3rootstr42 = new earthxrootstry();
+var earth3rootstr43 = new earthxrootstry();
+var earth3rootstr44 = new earthxrootstry();
+var earth3rootstr45 = new earthxrootstry();
+var earth3rootstr46 = new earthxrootstry();
+var earth3rootstr47 = new earthxrootstry();
+var earth3rootstr48 = new earthxrootstry();
+var earth3rootstr49 = new earthxrootstry();
+var earth3rootstr410 = new earthxrootstry();
+var earth3rootstr411 = new earthxrootstry();
+var earth3rootstr412 = new earthxrootstry();
+var earth3rootstr413 = new earthxrootstry();
+var earth3rootstr414 = new earthxrootstry();
+var earth3rootstr415 = new earthxrootstry();
 var earth2roots1 = {1: earth2rootstr, 2: earth2rootstr2, 3: earth2rootstr3, 4: earth2rootstr4, 5: earth2rootstr5, 6: earth2rootstr6, 7: earth2rootstr7, 8: earth2rootstr8, 9: earth2rootstr9, 10: earth2rootstr10,
 			11: earth2rootstr11, 12: earth2rootstr12, 13: earth2rootstr13, 14: earth2rootstr14, 15: earth2rootstr15, 16: earth2rootstr21, 17: earth2rootstr22, 18: earth2rootstr23, 19: earth2rootstr24,
 			20: earth2rootstr25, 21: earth2rootstr26, 22: earth2rootstr27, 23: earth2rootstr28, 24: earth2rootstr29, 25: earth2rootstr210, 26: earth2rootstr211, 27: earth2rootstr212, 28: earth2rootstr213, 29: earth2rootstr214, 30: earth2rootstr215,

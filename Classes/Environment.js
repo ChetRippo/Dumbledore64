@@ -1,8 +1,9 @@
 //------------------------------------------------- Map -----------------------------------------------------------------------------//
+
 // Obstacle 1: 64 by 128, at 512 352
 var obstacle11 = {
-	x: 512,
-	y: 352,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -17,8 +18,8 @@ var obstacle11 = {
 	swampBoardindex: 0
 };
 var obstacle12 = {
-	x: 544,
-	y: 352,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -33,8 +34,8 @@ var obstacle12 = {
 	swampBoardindex: 0
 };
 var obstacle13 = {
-	x: 512,
-	y: 384,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -49,8 +50,8 @@ var obstacle13 = {
 	swampBoardindex: 0
 };
 var obstacle14 = {
-	x: 544,
-	y: 384,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -65,8 +66,8 @@ var obstacle14 = {
 	swampBoardindex: 0
 };
 var obstacle15 = {
-	x: 512,
-	y: 416,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -81,8 +82,8 @@ var obstacle15 = {
 	swampBoardindex: 0
 };
 var obstacle16 = {
-	x: 544,
-	y: 416,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -97,8 +98,8 @@ var obstacle16 = {
 	swampBoardindex: 0
 };
 var obstacle17 = {
-	x: 512,
-	y: 448,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -113,8 +114,8 @@ var obstacle17 = {
 	swampBoardindex: 0
 };
 var obstacle18 = {
-	x: 544,
-	y: 448,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -130,8 +131,8 @@ var obstacle18 = {
 };
 // Obstacle 2: 128 by 64, at 256 128
 var obstacle21 = {
-	x: 256,
-	y: 128,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -143,8 +144,8 @@ var obstacle21 = {
 	swampBoardindex: 0
 };
 var obstacle22 = {
-	x: 288,
-	y: 128,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -156,8 +157,8 @@ var obstacle22 = {
 	swampBoardindex: 0
 };
 var obstacle23 = {
-	x: 320,
-	y: 128,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -169,8 +170,8 @@ var obstacle23 = {
 	swampBoardindex: 0
 };
 var obstacle24 = {
-	x: 352,
-	y: 128,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -183,8 +184,8 @@ var obstacle24 = {
 };
 // Obstacle 3: 32 by 128, at 704 256
 var obstacle31 = {
-	x: 704,
-	y: 256,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -192,8 +193,8 @@ var obstacle31 = {
 	index: 1
 };
 var obstacle32 = {
-	x: 704,
-	y: 288,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -201,8 +202,8 @@ var obstacle32 = {
 	index: 1
 };
 var obstacle33 = {
-	x: 704,
-	y: 320,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
@@ -210,14 +211,15 @@ var obstacle33 = {
 	index: 1
 };
 var obstacle34 = {
-	x: 704,
-	y: 352,
+	x: 2000,
+	y: 2000,
 	width: 32,
 	height: 32,
 	hp: 3,
 	hptimer: 0,
 	index: 1
 };
+
 var vertBoardSpawn = false;
 var obstacle1 = {1: obstacle11, 2: obstacle12, 3: obstacle13, 4: obstacle14, 5: obstacle15, 6: obstacle16, 7: obstacle17, 8: obstacle18};
 var obstacle2 = {1: obstacle21, 2: obstacle22, 3: obstacle23, 4: obstacle24};
@@ -230,19 +232,19 @@ function drawObstacle(O){
 		if(O[Z].hp > 0){
 			if((STATE == 1 || STATE == "Tutorial") && treeFall == 2){
 				if (O[Z].hptimer*0.5 != Math.round(O[Z].hptimer*0.5)){
-					ctx.fillStyle = "white";
-					ctx.fillRect(O[Z].x - O[Z].width * 0.5, O[Z].y - O[Z].height * 0.5, O[Z].width, O[Z].height);
+					ctx.globalAlpha = Alpha*0.5;
 				}
-				else{
-					if(O[Z].hp == 3){
-						ctx.drawImage(Tree, O[Z].x - O[Z].width*0.5, O[Z].y - O[Z].height*0.5);
-					}
-					else if(O[Z].hp == 2){
-						ctx.drawImage(Tree2, O[Z].x - O[Z].width*0.5, O[Z].y - O[Z].height*0.5);
-					}
-					else if(O[Z].hp == 1){
-						ctx.drawImage(Tree3, O[Z].x - O[Z].width*0.5, O[Z].y - O[Z].height*0.5);
-					}
+				if(O[Z].hp == 3){
+					ctx.drawImage(Tree, O[Z].x - O[Z].width*0.5, O[Z].y - O[Z].height*0.5);
+				}
+				else if(O[Z].hp == 2){
+					ctx.drawImage(Tree2, O[Z].x - O[Z].width*0.5, O[Z].y - O[Z].height*0.5);
+				}
+				else if(O[Z].hp == 1){
+					ctx.drawImage(Tree3, O[Z].x - O[Z].width*0.5, O[Z].y - O[Z].height*0.5);
+				}
+				if (O[Z].hptimer*0.5 != Math.round(O[Z].hptimer*0.5)){
+					ctx.globalAlpha = Alpha;
 				}
 			}
 			if((STATE == "Jungle" || STATE == "Swamp") && treeFall == 2){
@@ -396,10 +398,10 @@ function drawObstacle(O){
 							}
 						}
 						if(collided){
-							ctx.drawImage(SqBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y);
+							ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 0, 64, 64, O[Z].x, O[Z].y, 64, 64);
 						}
 						else{
-							ctx.drawImage(vertBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y);
+							ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 128, 64, 64, O[Z].x, O[Z].y, 64, 64);
 						}
 						var collided = false;
 						for(G in obstacle1){
@@ -415,10 +417,10 @@ function drawObstacle(O){
 							}
 						}
 						if(collided){
-							ctx.drawImage(SqBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y+64);
+							ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 0, 64, 64, O[Z].x, O[Z].y+64, 64, 64);
 						}
 						else{
-							ctx.drawImage(vertBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y+64);
+							ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 128, 64, 64, O[Z].x, O[Z].y+64, 64, 64);
 						}
 						if(O[Z].cells > 2){
 							var collided = false;
@@ -435,10 +437,10 @@ function drawObstacle(O){
 								}
 							}
 							if(collided){
-								ctx.drawImage(SqBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y+128);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 0, 64, 64, O[Z].x, O[Z].y+128, 64, 64);
 							}
 							else{
-								ctx.drawImage(vertBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y+128);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 128, 64, 64, O[Z].x, O[Z].y+128, 64, 64);
 							}
 						}
 						if(O[Z].cells > 3){
@@ -456,10 +458,10 @@ function drawObstacle(O){
 								}
 							}
 							if(collided){
-								ctx.drawImage(SqBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y+192);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 0, 64, 64, O[Z].x, O[Z].y+192, 64, 64);
 							}
 							else{
-								ctx.drawImage(vertBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y+192);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 128, 64, 64, O[Z].x, O[Z].y+192, 64, 64);
 							}
 						}
 					}
@@ -500,29 +502,29 @@ function drawObstacle(O){
 						if(O[Z].swampBoardindex >=90){
 							if(O[Z].LR == "Right"){
 								O[Z].height = 36;
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x+512, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x+448, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x+384, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x+320, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x+256, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x+192, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x+128, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x+64, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-64, O[Z].y-88);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x+512, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x+448, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x+384, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x+320, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x+256, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x+192, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x+128, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x+64, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-64, O[Z].y-88, 64, 64);
 							}
 							else{
 								O[Z].height = 36;
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-576, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-512, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-448, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-384, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-320, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-256, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-192, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-128, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x-64, O[Z].y-88);
-								ctx.drawImage(horBoards[Math.floor((O[Z].swampBoardindex-90)/2)], O[Z].x, O[Z].y-88);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-576, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-512, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-448, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-384, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-320, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-256, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-192, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-128, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x-64, O[Z].y-88, 64, 64);
+								ctx.drawImage(boardSheet, 64*(Math.floor((O[Z].swampBoardindex-90)/2)), 64, 64, 64, O[Z].x, O[Z].y-88, 64, 64);
 							}
 						}
 					}
@@ -547,24 +549,58 @@ function drawObstacle(O){
 			}
 			if(STATE == "Scorched" && treeFall == 2){
 				if (O[Z].hptimer*0.5 != Math.round(O[Z].hptimer*0.5)){
-					ctx.fillStyle = "white";
-					ctx.fillRect(O[Z].x - O[Z].width*0.5 - 16, O[Z].y - O[Z].height*0.5 - 2, 68, 44);
+					ctx.globalAlpha = Alpha*0.5;
 				}
 				if(O[Z] == Lamp.target){
-					ctx.drawImage(MeteorGlows[Math.ceil(Lamp.glowIndex*0.25)], O[Z].x - O[Z].width*0.5 - 36, O[Z].y - O[Z].height*0.5 - 54);
+					ctx.drawImage(MeteorSheet, 128*(Math.ceil(Lamp.glowIndex*0.25)-1), 220, 128, 100, O[Z].x - O[Z].width*0.5 - 36, O[Z].y - O[Z].height*0.5 - 54, 128, 100);
 					Lamp.glowIndex++;
 					if(Lamp.glowIndex>16){
 						Lamp.glowIndex = 1;
 					}
 				}
+				else if(FireGhost.meteorDisappearIndex > -1){
+					ctx.drawImage(MeteorSheet, 56*(Math.floor(FireGhost.meteorDisappearIndex*0.25)), 108, 56, 56, O[Z].x - O[Z].width*0.5 - 16, O[Z].y - O[Z].height*0.5 - 2, 56, 56);
+				}
+				else if(FireGhost.meteorLiftIndex > -1 && ((Z == FireGhost.selectedMeteor[1] && ((FireGhost.selectedMeteor[0] == 3 && O == obstacle3) || (FireGhost.selectedMeteor[0] == 2 && O == obstacle2))) || (Z == FireGhost.selectedMeteor2[1] && ((FireGhost.selectedMeteor2[0] == 3 && O == obstacle3) || (FireGhost.selectedMeteor2[0] == 2 && O == obstacle2))))){
+					ctx.drawImage(MeteorSheet, 68*(Math.floor(FireGhost.meteorLiftIndex*0.25)), 36, 68, 36, O[Z].x - O[Z].width*0.5 - 16, O[Z].y - O[Z].height*0.5 - 2, 68, 36);
+				}
+				else if(O[Z].fallIndex && FireGhost.onScreen){
+					ctx.drawImage(MeteorSheet, 68*(Math.floor(O[Z].fallIndex*0.25)), 320, 68, 36, O[Z].x - O[Z].width*0.5 - 16, O[Z].y - O[Z].height*0.5 - 2, 68, 36);
+					O[Z].fallIndex++;
+					if(O[Z].fallIndex > 19){
+						O[Z].fallIndex = 0;
+					}
+				}
+				else if(FireGhost.meteorAppearIndex > -1){
+					ctx.drawImage(MeteorSheet, 68*(Math.floor(FireGhost.meteorAppearIndex*0.25)), 320, 68, 36, O[Z].x - O[Z].width*0.5 - 16, O[Z].y - O[Z].height*0.5 - 2, 68, 36);
+				}
 				else{
-					ctx.drawImage(Meteorcold, O[Z].x - O[Z].width*0.5 - 16, O[Z].y - O[Z].height*0.5 - 2);
+					ctx.drawImage(MeteorSheet, 0, 0, 68, 36, O[Z].x - O[Z].width*0.5 - 16, O[Z].y - O[Z].height*0.5 - 2, 68, 36);
+				}
+				if (O[Z].hptimer*0.5 != Math.round(O[Z].hptimer*0.5)){
+					ctx.globalAlpha = Alpha;
+				}
+			}
+			if(STATE == "Graveyard" && treeFall == 2 && O != obstacle3 && O[Z] != obstacle24){
+				if (O[Z].hptimer*0.5 != Math.round(O[Z].hptimer*0.5)){
+					ctx.globalAlpha = Alpha*0.5;
+				}
+				if(O[Z].color == "Blue"){
+					ctx.drawImage(GraveyardSheet, 32*(O[Z].type-1), 576, 32, 40, O[Z].x - 16, O[Z].y - 20, 32, 40);
+				}else{
+					ctx.drawImage(GraveyardSheet, 128+32*(O[Z].type-1), 576, 32, 40, O[Z].x - 16, O[Z].y - 20, 32, 40);
+				}
+				if(O[Z].hptimer*0.5 != Math.round(O[Z].hptimer*0.5)){
+					ctx.globalAlpha = Alpha;
 				}
 			}
 		}
 	}
 }
 function obsCollision(O, E, dir){
+	if(STATE == "Graveyard" && O == obstacle3 && E == player){
+		return false;
+	}
 	var col = false;
 	for(Z in O){
 		if(O[Z].hp > 0){
@@ -584,17 +620,44 @@ function obsTick(O){
 }
 function obsHit(O){
 	if(O.hptimer <= 0){
-		if(STATE != "Jungle" && STATE != "Swamp"){
+		if((STATE != "Graveyard" || (O != obstacle24 && O != obstacle34 && O != obstacle33 && O != obstacle32 && O != obstacle31)) && STATE != "Jungle" && STATE != "Swamp"){
 			Killed.currentTime=0;
 			Killed.play();
 		}
-		O.hp-=1;
-		if(O.hp < 0){
-			O.hp = 0;
+		if(STATE != "Graveyard"){
+			O.hp-=1;
+			if(O.hp < 0){
+				O.hp = 0;
+			}
+		}else if((O != obstacle24 && O != obstacle34 && O != obstacle33 && O != obstacle32 && O != obstacle31) && !GraveNight && hpUp.x == -100){
+			if(O.color == "Blue"){
+				O.color = "Red";
+			}
+			else{
+				O.color = "Blue";
+			}
+			if(GraveNum){
+				flipColors(O);
+			}
+			for(G in obstacle1){
+				if(obstacle1[G].color != "Blue"){
+					var GraveDay = 1;
+				}
+			}
+			for(G in obstacle2){
+				if(obstacle2[G].color != "Blue"){
+					var GraveDay = 1;
+				}
+			}
+			if(!GraveDay){
+				nightShift++;
+			}
 		}
 		O.hptimer = 20;
 	}
 	if(O.hp == 0){
+		var xx = O.x;
+		var yy = O.y;
 		O.x = 2000;
 		O.y = 2000;
 		O.hptimer = 0;
@@ -612,47 +675,63 @@ function obsHit(O){
 				//dont pick this target for next damaged meteor
 				Target.x += 1;
 			}
+			if(Genie.queue2 && Lamp.target == O){
+				Genie.spawned = 1;
+				Genie.spawnxy = {x: xx - 40, y: yy - 50};
+				Genie.spawn(1);
+				Lamp.x = xx;
+				Lamp.y = yy;
+				Lamp.onScreen = 1;
+				Lamp.target = 0;
+			}
 		}
 	}
 }
 function rePlant(){
-	if((STATE == 1 || STATE == "Tutorial") && planted == false){
-		for(Z in obstacle1){
-			obstacle1[Z].width = 32;
-			if(STATE == "Tutorial"){
-				obstacle1[Z].x = (Math.floor(Math.random() * 16) + 6)*32;
-				obstacle1[Z].y = (Math.floor(Math.random() * 7) + 6)*32;
-			}
-			else{
-				obstacle1[Z].x = (Math.floor(Math.random() * 18) + 4)*32;
-				obstacle1[Z].y = (Math.floor(Math.random() * 12) + 4)*32;
-			}
-			obstacle1[Z].hp = 3;
-			if(obstacle1[Z].x >= 336 && obstacle1[Z].x <= 464 && obstacle1[Z].y >= 192 && obstacle1[Z].y <= 320){
-				obstacle1[Z].x = 2000;
-				obstacle1[Z].y = 2000;
+	if((STATE == 1 || STATE == "Tutorial") && !planted){
+		if(player.number != "2"){
+			for(Z in obstacle1){
+				obstacle1[Z].width = 32;
+				if(STATE == "Tutorial"){
+					obstacle1[Z].x = (Math.floor(Math.random() * 16) + 6)*32;
+					obstacle1[Z].y = (Math.floor(Math.random() * 7) + 6)*32;
+				}
+				else{
+					obstacle1[Z].x = (Math.floor(Math.random() * 18) + 4)*32;
+					obstacle1[Z].y = (Math.floor(Math.random() * 12) + 4)*32;
+				}
+				obstacle1[Z].hp = 3;
+				if(obstacle1[Z].x >= 336 && obstacle1[Z].x <= 464 && obstacle1[Z].y >= 192 && obstacle1[Z].y <= 320){
+					obstacle1[Z].x = 2000;
+					obstacle1[Z].y = 2000;
+				}
 			}
 		}
 		if(STATE == 1){
-			for(Z in obstacle2){
-				obstacle2[Z].width = 32;
-				obstacle2[Z].x = (Math.floor(Math.random() * 18) + 4)*32;
-				obstacle2[Z].y = (Math.floor(Math.random() * 12) + 4)*32;
-				obstacle2[Z].hp = 3;
-				if(obstacle2[Z].x >= 336 && obstacle2[Z].x <= 464 && obstacle2[Z].y >= 192 && obstacle2[Z].y <= 320){
-					obstacle2[Z].x = 2000;
-					obstacle2[Z].y = 2000;
+			if(player.number != "2"){
+				for(Z in obstacle2){
+					obstacle2[Z].width = 32;
+					obstacle2[Z].x = (Math.floor(Math.random() * 18) + 4)*32;
+					obstacle2[Z].y = (Math.floor(Math.random() * 12) + 4)*32;
+					obstacle2[Z].hp = 3;
+					if(obstacle2[Z].x >= 336 && obstacle2[Z].x <= 464 && obstacle2[Z].y >= 192 && obstacle2[Z].y <= 320){
+						obstacle2[Z].x = 2000;
+						obstacle2[Z].y = 2000;
+					}
+				}
+				for(Z in obstacle3){
+					obstacle3[Z].width = 32;
+					obstacle3[Z].x = (Math.floor(Math.random() * 18) + 4)*32;
+					obstacle3[Z].y = (Math.floor(Math.random() * 12) + 4)*32;
+					obstacle3[Z].hp = 3;
+					if(obstacle3[Z].x >= 336 && obstacle3[Z].x <= 464 && obstacle3[Z].y >= 192 && obstacle3[Z].y <= 320){
+						obstacle3[Z].x = 2000;
+						obstacle3[Z].y = 2000;
+					}
 				}
 			}
-			for(Z in obstacle3){
-				obstacle3[Z].width = 32;
-				obstacle3[Z].x = (Math.floor(Math.random() * 18) + 4)*32;
-				obstacle3[Z].y = (Math.floor(Math.random() * 12) + 4)*32;
-				obstacle3[Z].hp = 3;
-				if(obstacle3[Z].x >= 336 && obstacle3[Z].x <= 464 && obstacle3[Z].y >= 192 && obstacle3[Z].y <= 320){
-					obstacle3[Z].x = 2000;
-					obstacle3[Z].y = 2000;
-				}
+			if(player.number == "1"){
+				send_obstacles();
 			}
 		}
 		else{
@@ -667,42 +746,48 @@ function rePlant(){
 		}
 		planted = true;
 	}
-	if(STATE == "Jungle" && planted == false){
+	if(STATE == "Jungle" && !planted){
 		for(Z in obstacle1){
-			obstacle1[Z].x = (Math.floor(Math.random() * 9) + 2)*64;
-			obstacle1[Z].y = (Math.floor(Math.random() * 7) + 2)*64;
-			for(A in obstacle1){
-				if((obstacle1[Z].x == obstacle1[A].x || obstacle1[Z].y == obstacle1[A].y) && obstacle1[A] != obstacle1[Z]){
-					obstacle1[Z].x = (Math.floor(Math.random() * 9) + 2)*64;
-					obstacle1[Z].y = (Math.floor(Math.random() * 7) + 2)*64;
-					for(B in obstacle1){
-						if((obstacle1[Z].x == obstacle1[B].x || obstacle1[Z].y == obstacle1[B].y) && obstacle1[B] != obstacle1[Z]){
-							obstacle1[Z].x = 2000;
-							obstacle1[Z].y = 2000;
+			if(parseInt(Z) % 2 == 0){
+				obstacle1[Z].x = (Math.floor(Math.random() * 9) + 2)*72;
+				obstacle1[Z].y = (Math.floor(Math.random() * 7) + 2)*64;
+				for(A in obstacle1){
+					if((obstacle1[Z].x == obstacle1[A].x || obstacle1[Z].y == obstacle1[A].y) && obstacle1[A] != obstacle1[Z]){
+						obstacle1[Z].x = (Math.floor(Math.random() * 9) + 2)*72;
+						obstacle1[Z].y = (Math.floor(Math.random() * 7) + 2)*64;
+						for(B in obstacle1){
+							if((obstacle1[Z].x == obstacle1[B].x || obstacle1[Z].y == obstacle1[B].y) && obstacle1[B] != obstacle1[Z]){
+								obstacle1[Z].x = 2000;
+								obstacle1[Z].y = 2000;
+							}
+							if(obstacle1[Z].x >= player.x-64 && obstacle1[Z].x <= player.x+64 && obstacle1[Z].y >= player.y-64 && obstacle1[Z].y <= player.y+64){
+								obstacle1[Z].x = 2000;
+								obstacle1[Z].y = 2000;
+							}
 						}
-						if(obstacle1[Z].x >= player.x-64 && obstacle1[Z].x <= player.x+64 && obstacle1[Z].y >= player.y-64 && obstacle1[Z].y <= player.y+64){
-							obstacle1[Z].x = 2000;
-							obstacle1[Z].y = 2000;
+					}
+					if(obstacle1[Z].x >= player.x-64 && obstacle1[Z].x <= player.x+64 && obstacle1[Z].y >= player.y-64 && obstacle1[Z].y <= player.y+64){
+						obstacle1[Z].x = (Math.floor(Math.random() * 9) + 2)*72;
+						obstacle1[Z].y = (Math.floor(Math.random() * 7) + 2)*64;
+						for(B in obstacle1){
+							if((obstacle1[Z].x == obstacle1[B].x || obstacle1[Z].y == obstacle1[B].y) && obstacle1[B] != obstacle1[Z]){
+								obstacle1[Z].x = 2000;
+								obstacle1[Z].y = 2000;
+							}
+							if(obstacle1[Z].x >= player.x-64 && obstacle1[Z].x <= player.x+64 && obstacle1[Z].y >= player.y-64 && obstacle1[Z].y <= player.y+64){
+								obstacle1[Z].x = 2000;
+								obstacle1[Z].y = 2000;
+							}
 						}
 					}
 				}
-				if(obstacle1[Z].x >= player.x-64 && obstacle1[Z].x <= player.x+64 && obstacle1[Z].y >= player.y-64 && obstacle1[Z].y <= player.y+64){
-					obstacle1[Z].x = (Math.floor(Math.random() * 9) + 2)*64;
-					obstacle1[Z].y = (Math.floor(Math.random() * 7) + 2)*64;
-					for(B in obstacle1){
-						if((obstacle1[Z].x == obstacle1[B].x || obstacle1[Z].y == obstacle1[B].y) && obstacle1[B] != obstacle1[Z]){
-							obstacle1[Z].x = 2000;
-							obstacle1[Z].y = 2000;
-						}
-						if(obstacle1[Z].x >= player.x-64 && obstacle1[Z].x <= player.x+64 && obstacle1[Z].y >= player.y-64 && obstacle1[Z].y <= player.y+64){
-							obstacle1[Z].x = 2000;
-							obstacle1[Z].y = 2000;
-						}
-					}
-				}
+				obstacle1[Z].width = 72;
+				obstacle1[Z].hp = 9999;
 			}
-			obstacle1[Z].width = 72;
-			obstacle1[Z].hp = 9999;
+			else{
+				obstacle1[Z].x = 2000;
+				obstacle1[Z].y = 2000;
+			}
 		}
 		for(Z in obstacle2){
 			obstacle2[Z].x = 2000;
@@ -725,7 +810,7 @@ function rePlant(){
 		}
 		planted = true;
 	}
-	if((STATE == "Scorched" || STATE == "Desert") && planted == false){
+	if((STATE == "Scorched" || STATE == "Desert") && !planted){
 		for(Z in obstacle1){
 			obstacle1[Z].x = 2000;
 			obstacle1[Z].y = 2000;
@@ -749,7 +834,113 @@ function rePlant(){
 		}
 		planted = true;
 	}
+	else if(STATE == "Graveyard" && !planted){
+		var LightsColors = {1: "Blue", 2: "Red"}; 
+		for(Z in obstacle1){
+			obstacle1[Z].x = 2000;
+			obstacle1[Z].y = 2000;
+			obstacle1[Z].hp = 3;
+			obstacle1[Z].width = 32;
+			obstacle1[Z].height = 32;
+		}
+		for(Z in obstacle2){
+			obstacle2[Z].x = 2000;
+			obstacle2[Z].y = 2000;
+			obstacle2[Z].hp = 3;
+			obstacle2[Z].width = 32;
+			obstacle2[Z].height = 32;
+		}
+		for(Z in obstacle3){
+			obstacle3[Z].x = 2000;
+			obstacle3[Z].y = 2000;
+			obstacle3[Z].hp = 3;
+			obstacle3[Z].width = 32;
+			obstacle3[Z].height = 32;
+		}
+		obstacle11.color = LightsColors[randomInt(1,2)];
+		obstacle11.hp = 900;
+		obstacle11.x = 256;
+		obstacle11.y = 160;
+		obstacle11.type = 4;
+		obstacle11.isNextTo = {1: obstacle12, 2: obstacle15};
+		obstacle12.color = LightsColors[randomInt(1,2)];
+		obstacle12.hp = 900;
+		obstacle12.x = 392;
+		obstacle12.y = 160;
+		obstacle12.type = 4;
+		obstacle12.isNextTo = {1: obstacle11, 2: obstacle13, 3: obstacle16};
+		obstacle13.color = LightsColors[randomInt(1,2)];
+		obstacle13.hp = 900;
+		obstacle13.x = 520;
+		obstacle13.y = 168;
+		obstacle13.type = 2;
+		obstacle13.isNextTo = {1: obstacle12, 3: obstacle17};
+		obstacle14.color = "Blue";
+		obstacle15.color = LightsColors[randomInt(1,2)];
+		obstacle15.hp = 900;
+		obstacle15.x = 244;
+		obstacle15.y = 292;
+		obstacle15.type = 1;
+		obstacle15.isNextTo = {1: obstacle11, 2: obstacle16, 3: obstacle21};
+		obstacle16.color = LightsColors[randomInt(1,2)];
+		obstacle16.hp = 900;
+		obstacle16.x = 400;
+		obstacle16.y = 288;
+		obstacle16.type = 3;
+		obstacle16.isNextTo = {1: obstacle15, 2: obstacle17, 3: obstacle12, 4: obstacle22};
+		obstacle17.color = LightsColors[randomInt(1,2)];
+		obstacle17.hp = 900;
+		obstacle17.x = 528;
+		obstacle17.y = 290;
+		obstacle17.type = 1;
+		obstacle17.isNextTo = {1: obstacle16, 3: obstacle13, 4: obstacle23};
+		obstacle18.color = "Blue";
+		obstacle21.color = LightsColors[randomInt(1,2)];
+		obstacle21.hp = 900;
+		obstacle21.x = 256;
+		obstacle21.y = 406;
+		obstacle21.type = 1;
+		obstacle21.isNextTo = {1: obstacle15, 2: obstacle22};
+		obstacle22.color = LightsColors[randomInt(1,2)];
+		obstacle22.hp = 900;
+		obstacle22.x = 384;
+		obstacle22.y = 400;
+		obstacle22.type = 2;
+		obstacle22.isNextTo = {1: obstacle21, 2: obstacle16, 3: obstacle23};
+		obstacle23.color = LightsColors[randomInt(1,2)];
+		obstacle23.hp = 900;
+		obstacle23.x = 528;
+		obstacle23.y = 400;
+		obstacle23.isNextTo = {1: obstacle22, 2: obstacle17};
+		obstacle23.type = 4;
+		obstacle24.color = "Blue";
+		planted = true;
+		//top
+		obstacle34.width = 800;
+		obstacle34.height = 96;
+		obstacle34.x = 400;
+		obstacle34.color = "Blue";
+		obstacle34.y = 54;
+		//tree
+		obstacle33.width = 100;
+		obstacle33.height = 100;
+		obstacle33.x = 50;
+		obstacle33.y = 150;
+		obstacle33.color = "Blue";
+		//mountains
+		obstacle31.width = 200;
+		obstacle31.height = 48;
+		obstacle31.x = 704;
+		obstacle31.color = "Blue";
+		obstacle31.y = 94;
+		obstacle24.width = 40;
+		obstacle24.height = 48;
+		obstacle24.x = 776;
+		obstacle24.y = 118;
+		obstacle24.color = "Blue";
+	}
 }
+
 //-------------------------------------------------------- Jungle Level Fog ---------------------------------------------------------//
 var EnvFog1 = {
 	x: -1600,
@@ -1208,6 +1399,22 @@ var SandStorm = {
 		else{
 			rainsound.currentTime = 0;
 			rainsound.pause();
+		}
+	}
+};
+
+//flip gravestone colors
+function flipColors(O){
+	if(GraveNight){
+		O.color = "Blue";
+		return;
+	}
+	for(E in O.isNextTo){
+		if(O.isNextTo[E].color == "Red"){
+			O.isNextTo[E].color = "Blue";
+		}
+		else{
+			O.isNextTo[E].color = "Red";
 		}
 	}
 };

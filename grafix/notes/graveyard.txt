@@ -1,0 +1,66 @@
+GRAVEYARD
+
+skele: 48x52
+vamp: 48x48
+
+trees:
+Y: 1268
+140x152
+
+fence:
+Y: 1420
+276x212
+
+
+tree placement: (0,4)
+
+fence placement: (0,364)
+
+
+skulls:
+y: 960
+24x20
+
+transition bkg:
+x:800 y:576
+
+grave dogger:
+y:1632
+64x44
+
+
+dawg:
+y:1676
+64x56
+
+TRANZ SKYZ:
+nite: (800,1152) 800x156
+day: (800,1308) ""
+half day: (800,1464) ""
+half night: (800,1620) ""
+
+nite2day: nite-halfnite-halfday-day
+day2nite: day-halfday-halfnite-nite
+
+sun: (800, 1776) 56x44
+moon: (856, 1776) 52x44
+
+sun/moon pos: (386, 37) end: (386, 122)
+
+How am I ever going to polish all these graves?
+
+Could you help me polish these graves, lad?
+
+Textbox:
+y: 620 588x80
+
+mouths:
+(588,628) 24x12
+
+text box: 124,31
+mouths: 624,87
+
+topleft: 211,149
+topright: 585,151
+botright: 612,447
+botleft: 206,447

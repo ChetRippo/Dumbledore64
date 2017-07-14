@@ -692,38 +692,38 @@ function spikeDraw(S){
 		}
 		if(S.dark1){
 			if(S.active){
-				ctx.drawImage(darkTrapActive[Math.ceil((S.timeLeft/30)*4)], S.x-S.width*0.5, S.y-S.height*0.5 - 16);
+				ctx.drawImage(trapSheet, 160-(Math.ceil((S.timeLeft/30)*4))*32,0,32,64, S.x-S.width*0.5, S.y-S.height*0.5 - 16,32,64);
 			}
 			else{
-				ctx.drawImage(darkTrap, S.x-S.width*0.5, S.y-S.height*0.5 - 16);
+				ctx.drawImage(trapSheet, 0,0,32,64,S.x-S.width*0.5, S.y-S.height*0.5 - 16,32,64);
 			}
 		}
 		else if(S.arrIndex){
 			if(S.frame < 4){
-				ctx.drawImage(dark2img[1], S.x-S.width*0.5, S.y-S.height*0.5);
+				ctx.drawImage(trapSheet, 0, 192, 32, 32, S.x-S.width*0.5, S.y-S.height*0.5, 32, 32);
 			}
 			else if(S.frame < 7){
-				ctx.drawImage(dark2img[2], S.x-S.width*0.5, S.y-S.height*0.5);
+				ctx.drawImage(trapSheet, 32, 192, 32, 32, S.x-S.width*0.5, S.y-S.height*0.5, 32, 32);
 			}
 			else if(S.frame < 10){
-				ctx.drawImage(dark2img[3], S.x-S.width*0.5, S.y-S.height*0.5);
+				ctx.drawImage(trapSheet, 64, 192, 32, 32, S.x-S.width*0.5, S.y-S.height*0.5, 32, 32);
 			}
 			else if(S.frame < 13){
-				ctx.drawImage(dark2img[4], S.x-S.width*0.5, S.y-S.height*0.5);
+				ctx.drawImage(trapSheet, 96, 192, 32, 32, S.x-S.width*0.5, S.y-S.height*0.5, 32, 32);
 			}
 			else{
-				ctx.drawImage(dark2img[5], S.x-S.width*0.5, S.y-S.height*0.5);
+				ctx.drawImage(trapSheet, 128, 192, 32, 32, S.x-S.width*0.5, S.y-S.height*0.5, 32, 32);
 			}
 		}
 		else if(!S.ice && !S.light){
-			ctx.drawImage(darkfireimg[Math.floor(S.index*0.5)], S.x-S.width*0.5, S.y-S.height*0.5);
+			ctx.drawImage(trapSheet, 32*(Math.floor(S.index*0.5)),64,32,64, S.x-S.width*0.5, S.y-S.height*0.5,32,64);
 			S.index++;
 			if(S.index > 7){
 				S.index = 0;
 			}
 		}
 		else if(S.ice){
-			ctx.drawImage(darkiceimg[Math.floor(S.index*0.5)], S.x-S.width*0.5, S.y-S.height*0.5);
+			ctx.drawImage(trapSheet, 32*(Math.floor(S.index*0.5)), 128,32,64,S.x-S.width*0.5, S.y-S.height*0.5,32,64);
 			S.index++;
 			if(S.index > 10){
 				S.index = 0;

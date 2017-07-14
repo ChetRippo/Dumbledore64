@@ -1,0 +1,12 @@
+How to use Dave's magic graphics flipper:
+
+1. Download Python 2.6 or 7
+2. Download the Python Imaging Library (PIL) for whichever version you have
+3. from terminal or python command line cd into directory with imgFlip.py
+4. type "python imgFlip.py" (no quotes)
+5. It will ask for the folder. This will loop through all folders inside the specified folder, so be careful.
+	Starting folder is the current directory, so if run from grafix you could type "garf"
+6. Type the file type
+7. Enter the text to append to the name. It will add this to the original name, so for instance if you make an "anubis.png"
+	You can add ".r" and it will output an anubis.r.png.
+8. eat dicks

@@ -18,7 +18,6 @@ var mystic = {
 	frame: 0,
 	cast: 0,
 	used: 0,
-	
 	draw: function(){
 		if(this.draaw == 1 && this.cast <= 0){
 			ctx.fillStyle = this.color;
@@ -91,13 +90,19 @@ var mystic = {
 					}
 				}
 				for(Z in obstacle2){
-					if(contained(this, obstacle2[Z])){
-						this.mult2 +=1;
-					}
+					if(STATE != "Graveyard" || obstacle2[Z] != obstacle24){
+						if(contained(this, obstacle2[Z])){
+							this.mult2 +=1;
+						}
+					}else if(obstacle2[Z] == obstacle24){
+					this.mult2-=1;
 				}
-				for(Z in obstacle3){
-					if(contained(this, obstacle3[Z])){
-						this.mult2 +=1;
+				}
+				if(STATE != "Graveyard"){
+					for(Z in obstacle3){
+						if(contained(this, obstacle3[Z])){
+							this.mult2 +=1;
+						}
 					}
 				}
 			}
@@ -113,13 +118,19 @@ var mystic = {
 					}
 				}
 				for(Z in obstacle2){
+					if(STATE != "Graveyard" || obstacle2[Z] != obstacle24){
 					if(contained(this, obstacle2[Z])){
 						this.mult2 +=1;
 					}
+					}else if(obstacle2[Z] == obstacle24){
+					this.mult2-=1;
 				}
-				for(Z in obstacle3){
-					if(contained(this, obstacle3[Z])){
-						this.mult2 +=1;
+				}
+				if(STATE != "Graveyard"){
+					for(Z in obstacle3){
+						if(contained(this, obstacle3[Z])){
+							this.mult2 +=1;
+						}
 					}
 				}
 			}
@@ -135,13 +146,18 @@ var mystic = {
 					}
 				}
 				for(Z in obstacle2){
+					if(STATE != "Graveyard" || obstacle2[Z] != obstacle24){
 					if(contained(this, obstacle2[Z])){
 						this.mult2 +=1;
-					}
+					}}else if(obstacle2[Z] == obstacle24){
+					this.mult2-=1;
 				}
-				for(Z in obstacle3){
-					if(contained(this, obstacle3[Z])){
-						this.mult2 +=1;
+				}
+				if(STATE != "Graveyard"){
+					for(Z in obstacle3){
+						if(contained(this, obstacle3[Z])){
+							this.mult2 +=1;
+						}
 					}
 				}
 			}
@@ -157,13 +173,18 @@ var mystic = {
 					}
 				}
 				for(Z in obstacle2){
+					if(STATE != "Graveyard" || obstacle2[Z] != obstacle24){
 					if(contained(this, obstacle2[Z])){
 						this.mult2 +=1;
-					}
+					}}else if(obstacle2[Z] == obstacle24){
+					this.mult2-=1;
 				}
-				for(Z in obstacle3){
-					if(contained(this, obstacle3[Z])){
-						this.mult2 +=1;
+				}
+				if(STATE != "Graveyard"){
+					for(Z in obstacle3){
+						if(contained(this, obstacle3[Z])){
+							this.mult2 +=1;
+						}
 					}
 				}
 			}
@@ -274,13 +295,18 @@ var mystic2 = {
 				}
 			}
 			for(Z in obstacle2){
+				if(STATE != "Graveyard" || obstacle2[Z] != obstacle24){
 				if(contained(this, obstacle2[Z])){
 					this.mult2 +=1;
+				}}else if(obstacle2[Z] == obstacle24){
+					this.mult2-=1;
 				}
 			}
-			for(Z in obstacle3){
-				if(contained(this, obstacle3[Z])){
-					this.mult2 +=1;
+			if(STATE != "Graveyard"){
+				for(Z in obstacle3){
+					if(contained(this, obstacle3[Z])){
+						this.mult2 +=1;
+					}
 				}
 			}
 			this.y = this.y - 32*this.mult2;			
@@ -294,13 +320,18 @@ var mystic2 = {
 				}
 			}
 			for(Z in obstacle2){
+				if(STATE != "Graveyard" || obstacle2[Z] != obstacle24){
 				if(contained(this, obstacle2[Z])){
 					this.mult2 +=1;
+				}}else if(obstacle2[Z] == obstacle24){
+					this.mult2-=1;
 				}
 			}
-			for(Z in obstacle3){
-				if(contained(this, obstacle3[Z])){
-					this.mult2 +=1;
+			if(STATE != "Graveyard"){
+				for(Z in obstacle3){
+					if(contained(this, obstacle3[Z])){
+						this.mult2 +=1;
+					}
 				}
 			}
 			this.x = this.x - 32*this.mult2;			
@@ -314,13 +345,18 @@ var mystic2 = {
 				}
 			}
 			for(Z in obstacle2){
+				if(STATE != "Graveyard" || obstacle2[Z] != obstacle24){
 				if(contained(this, obstacle2[Z])){
 					this.mult2 +=1;
+				}}else if(obstacle2[Z] == obstacle24){
+					this.mult2-=1;
 				}
 			}
-			for(Z in obstacle3){
-				if(contained(this, obstacle3[Z])){
-					this.mult2 +=1;
+			if(STATE != "Graveyard"){
+				for(Z in obstacle3){
+					if(contained(this, obstacle3[Z])){
+						this.mult2 +=1;
+					}
 				}
 			}
 			this.y = this.y + 32*this.mult2;			
@@ -334,13 +370,18 @@ var mystic2 = {
 				}
 			}
 			for(Z in obstacle2){
+				if(STATE != "Graveyard" || obstacle2[Z] != obstacle24){
 				if(contained(this, obstacle2[Z])){
 					this.mult2 +=1;
+				}}else if(obstacle2[Z] == obstacle24){
+					this.mult2-=1;
 				}
 			}
-			for(Z in obstacle3){
-				if(contained(this, obstacle3[Z])){
-					this.mult2 +=1;
+			if(STATE != "Graveyard"){
+				for(Z in obstacle3){
+					if(contained(this, obstacle3[Z])){
+						this.mult2 +=1;
+					}
 				}
 			}
 			this.x = this.x + 32*this.mult2;	
@@ -403,8 +444,8 @@ var Illusion = {
 	
 	draw: function(){
 	if(this.onScreen == 1){
-		ctx.drawImage(MonoWizzurd, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
-		ctx.drawImage(MonoWizzurd, this.x-16, this.y-16, 32, 32);
+		ctx.drawImage(Wiz_Sheet, 0, 256, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, this.width, this.height);
+		ctx.drawImage(Wiz_Sheet, 0, 256, 32, 32, this.x-16, this.y-16, 32, 32);
 		this.frame++;
 		if(this.frame<=5){
 			this.width=32-this.frame*2;
@@ -534,4 +575,4 @@ var IllusionBlast = {
 	}
 };
 //------------------------------------------ Import Arrays --------------------------------------------------------------------------//
-var Ticks = {1: iceheal, 2: fireheal, 3: lightningheal, 4: airearth, 5: mysticearth, 6: icelightning, 7: waterearth, 8: waterlightning, 9: dark2};
+var Ticks = {1: iceheal, 2: fireheal, 3: lightningheal, 4: airearth, 5: mysticearth, 6: icelightning, 7: waterearth, 8: waterlightning, 9: dark2/*, 10: p2dark2, 11: p2fireheal, 12: p2iceheal, 13: p2lightningheal, 14: p2icelightning, 15: p2airearth, 16: p2mysticearth, 17: p2waterearth, 18: p2waterlightning*/};

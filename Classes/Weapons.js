@@ -601,124 +601,124 @@ function drawBullet(B){
 		}
 		else if(spell == "Explosive Beam"){
 			if(B.dir == "W" || B.dir == "S"){
-				ctx.drawImage(RDBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,36, 0, 4, 32, B.x - B.width * 0.5, B.y - B.height * 0.5, 4, 32);
 			}
 			else if(B.dir == "A" || B.dir == "D"){
-				ctx.drawImage(RDBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,0, 4, 32, 4, B.x - B.width * 0.5, B.y - B.height * 0.5, 32, 4);
 			}
 			else if(B.dir == "WA" || B.dir == "SD"){
-					ctx.drawImage(RDBeamWA, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 32, 36, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "WD" || B.dir == "AS"){
-					ctx.drawImage(RDBeamWD, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 32, 64, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 		}
 		else if(spell == "Ice Beam"){
 			if(B.dir == "W" || B.dir == "S"){
-				ctx.drawImage(TDBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,40, 0, 4, 32, B.x - B.width * 0.5, B.y - B.height * 0.5, 4, 32);
 			}
 			else if(B.dir == "A" || B.dir == "D"){
-				ctx.drawImage(TDBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,0, 8, 32, 4, B.x - B.width * 0.5, B.y - B.height * 0.5, 32, 4);
 			}
 			else if(B.dir == "WA" || B.dir == "SD"){
-					ctx.drawImage(TDBeamWA, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 64, 36, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "WD" || B.dir == "AS"){
-					ctx.drawImage(TDBeamWD, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 64, 64, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 		}
 		else if(spell == "Conductive Beam"){
 			if(B.dir == "W"){
-				ctx.drawImage(YDBeamW, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet, 92, 0, 4, 32, B.x - B.width * 0.5, B.y - B.height * 0.5, 4, 32);
 			}
 			else if(B.dir == "S"){
-				ctx.drawImage(YDBeamS, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet, 96, 0, 4, 32, B.x - B.width * 0.5, B.y - B.height * 0.5, 4, 32);
 			}
 			else if(B.dir == "A"){
-				ctx.drawImage(YDBeamA, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet, 60, 0, 32, 4, B.x - B.width * 0.5, B.y - B.height * 0.5, 32, 4);
 			}
 			else if(B.dir == "D"){
-				ctx.drawImage(YDBeamD, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet, 60, 4, 32, 4, B.x - B.width * 0.5, B.y - B.height * 0.5, 32, 4);
 			}
 			else if(B.dir == "WA"){
-				ctx.drawImage(YDBeamWA, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 108, 0, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "SD"){
-				ctx.drawImage(YDBeamSD, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 172, 0, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "AS"){
-				ctx.drawImage(YDBeamAS, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 140, 0, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "WD"){
-				ctx.drawImage(YDBeamWD, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 204, 0, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 		}
 		else if(spell == "Light Beam"){
 			if(B.dir == "W"){
-				ctx.drawImage(WDBeamW, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet, 100, 0, 4, 32, B.x - B.width * 0.5, B.y - B.height * 0.5, 4, 32);
 			}
 			else if(B.dir == "S"){
-				ctx.drawImage(WDBeamS, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet, 104, 0, 4, 32, B.x - B.width * 0.5, B.y - B.height * 0.5, 4, 32);
 			}
 			else if(B.dir == "A"){
-				ctx.drawImage(WDBeamA, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet, 60, 8, 32, 4, B.x - B.width * 0.5, B.y - B.height * 0.5, 32, 4);
 			}
 			else if(B.dir == "D"){
-				ctx.drawImage(WDBeamD, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet, 60, 12, 32, 4, B.x - B.width * 0.5, B.y - B.height * 0.5, 32, 4);
 			}
 			else if(B.dir == "WA"){
-				ctx.drawImage(WDBeamWA, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 236, 0, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "SD"){
-				ctx.drawImage(WDBeamSD, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 236, 32, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "AS"){
-				ctx.drawImage(WDBeamAS, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 268, 0, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "WD"){
-				ctx.drawImage(WDBeamWD, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 268, 32, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 		}
 		else if(spell == "Homing Beam" || spell == "Confusion Beam"){
 			if(B.dir == "W" || B.dir == "S"){
-				ctx.drawImage(PDBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,48, 0, 4, 32, B.x - B.width * 0.5, B.y - B.height * 0.5, 4, 32);
 			}
 			else if(B.dir == "A" || B.dir == "D"){
-				ctx.drawImage(PDBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,0, 16, 32, 4, B.x - B.width * 0.5, B.y - B.height * 0.5, 32, 4);
 			}
 			else if(B.dir == "WA" || B.dir == "SD"){
-				ctx.drawImage(PDBeamWA, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 128, 36, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "WD" || B.dir == "AS"){
-				ctx.drawImage(PDBeamWD, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 128, 64, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 		}
 		else if(spell == "Piercing Beam"){
 			if(B.dir == "W" || B.dir == "S"){
-				ctx.drawImage(BDBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,52, 0, 4, 32, B.x - B.width * 0.5, B.y - B.height * 0.5, 4, 32);
 			}
 			else if(B.dir == "A" || B.dir == "D"){
-				ctx.drawImage(BDBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,0, 20, 32, 4, B.x - B.width * 0.5, B.y - B.height * 0.5, 32, 4);
 			}
 			else if(B.dir == "WA" || B.dir == "SD"){
-				ctx.drawImage(BDBeamWA, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 160, 36, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "WD" || B.dir == "AS"){
-				ctx.drawImage(BDBeamWD, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 160, 64, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 		}
 		else{
 			if(B.dir == "W" || B.dir == "S"){
-				ctx.drawImage(DBeamV, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,32, 0, 4, 32, B.x - B.width * 0.5, B.y - B.height * 0.5, 4, 32);
 			}
 			else if(B.dir == "A" || B.dir == "D"){
-				ctx.drawImage(DBeamH, B.x - B.width * 0.5, B.y - B.height * 0.5);
+				ctx.drawImage(BeamSheet,0, 0, 32, 4, B.x - B.width * 0.5, B.y - B.height * 0.5, 32, 4);
 			}
 			else if(B.dir == "WA" || B.dir == "SD"){
-				ctx.drawImage(DBeamWA, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 0, 36, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 			else if(B.dir == "WD" || B.dir == "AS"){
-				ctx.drawImage(DBeamWD, B.x - 16, B.y - 16);
+				ctx.drawImage(BeamSheet, 0, 64, 32, 32, B.x - 16, B.y - 16, 32, 32);
 			}
 		}
 	}
@@ -745,7 +745,7 @@ function Bulletmove(B){
 		var closest = "";
 		var cdist = 2000;
 		for (E in AllEnemies){
-			if(AllEnemies[E].onTree == 0){
+			if(AllEnemies[E].onTree == 0 && (STATE != "Graveyard" || GraveNight)){
 				var distance = Math.sqrt(((B.x - AllEnemies[E].x)*(B.x - AllEnemies[E].x)) + ((B.y - AllEnemies[E].y)*(B.y - AllEnemies[E].y)));
 				if(distance < cdist){
 					cdist = distance;
@@ -802,7 +802,7 @@ function Bulletmove(B){
 			
 		}
 	}
-	if(spell != "Homing Beam" && STATE != "Swamp"){
+	if((spell != "Homing Beam" || STATE == "Graveyard") && STATE != "Swamp"){
 		for(O in obstacle1){
 			if(obstacle1[O].fallIndex != 46){
 				if(collision(B.dir, B, obstacle1[O])){
@@ -2107,7 +2107,7 @@ var firelightningf1 = {
 			this.height = 32 + (16*this.frame);
 			this.frame++;
 			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
 				}
 			}
@@ -2179,7 +2179,7 @@ var firelightningf2 = {
 			this.height = 32 + (16*this.frame);
 			this.frame++;
 			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
 				}
 			}
@@ -2252,7 +2252,7 @@ var firelightningf3 = {
 			this.height = 32 + (16*this.frame);
 			this.frame++;
 			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
 				}
 			}
@@ -2324,7 +2324,7 @@ var firelightningf4 = {
 			this.height = 32 + (16*this.frame);
 			this.frame++;
 			for (E in AllEnemies){
-				if(collision(AllEnemies[E].dir, AllEnemies[E], this)){
+				if(contained(AllEnemies[E], this)){
 					onHit(AllEnemies[E]);
 				}
 			}
@@ -7711,35 +7711,35 @@ var darkair = {
 	},
 	draw: function(){
 		if(this.onScreen == 1){
-			ctx.drawImage(darkairimg[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(trapSheet, 32*this.index - 32, 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			this.index++;
 			if(this.index > 4){
 				this.index = 1;
 			}
 		}
 		if(darkair2.onScreen == 1){
-			ctx.drawImage(darkairimg[darkair2.index], darkair2.x-darkair2.width*0.5, darkair2.y-darkair2.height*0.5);
+			ctx.drawImage(trapSheet, 32*darkair2.index - 32,224,32,32, darkair2.x-darkair2.width*0.5, darkair2.y-darkair2.height*0.5, 32, 32);
 			darkair2.index++;
 			if(darkair2.index > 4){
 				darkair2.index = 1;
 			}
 		}
 		if(darkair3.onScreen == 1){
-			ctx.drawImage(darkairimg[darkair3.index], darkair3.x-darkair3.width*0.5, darkair3.y-darkair3.height*0.5);
+			ctx.drawImage(trapSheet, 32*darkair3.index - 32,224,32,32, darkair3.x-darkair3.width*0.5, darkair3.y-darkair3.height*0.5, 32, 32);
 			darkair3.index++;
 			if(darkair3.index > 4){
 				darkair3.index = 1;
 			}
 		}
 		if(darkair4.onScreen == 1){
-			ctx.drawImage(darkairimg[darkair4.index], darkair4.x-darkair4.width*0.5, darkair4.y-darkair4.height*0.5);
+			ctx.drawImage(trapSheet, 32*darkair4.index - 32,224,32,32, darkair4.x-darkair4.width*0.5, darkair4.y-darkair4.height*0.5, 32, 32);
 			darkair4.index++;
 			if(darkair4.index > 4){
 				darkair4.index = 1;
 			}
 		}
 		if(darkair5.onScreen == 1){
-			ctx.drawImage(darkairimg[darkair5.index], darkair5.x-darkair5.width*0.5, darkair5.y-darkair5.height*0.5);
+			ctx.drawImage(trapSheet, 32*darkair5.index - 32,224,32,32, darkair5.x-darkair5.width*0.5, darkair5.y-darkair5.height*0.5, 32, 32);
 			darkair5.index++;
 			if(darkair5.index > 4){
 				darkair5.index = 1;
@@ -7941,13 +7941,13 @@ var darkwater = {
 			}
 			else{
 				if(this.hp == 1){
-					ctx.drawImage(darksheildimg1[this.index], player.x-this.width*0.5, player.y-this.height*0.5);
+					ctx.drawImage(darkwaterSheet, (this.index-1)*48, 0, 48, 48, player.x-this.width*0.5, player.y-this.height*0.5, 48, 48);
 				}
 				else if(this.hp == 2){
-					ctx.drawImage(darksheildimg2[this.index], player.x-this.width*0.5, player.y-this.height*0.5);
+					ctx.drawImage(darkwaterSheet, (this.index-1)*64, 48, 64, 64, player.x-this.width*0.5, player.y-this.height*0.5, 64, 64);
 				}
 				else if(this.hp == 3){
-					ctx.drawImage(darksheildimg3[this.index], player.x-this.width*0.5, player.y-this.height*0.5);
+					ctx.drawImage(darkwaterSheet, (this.index-1)*80, 112, 80, 80, player.x-this.width*0.5, player.y-this.height*0.5, 80, 80);
 				}
 				this.index++;
 				if(this.index > 4){
@@ -8097,8 +8097,8 @@ var flameBreath1 = {
 			}
 		}
 		if(this.timeLeft == 0){
-			this.x = -100;
-			this.y = -200;
+			this.x = -9000;
+			this.y = -400;
 			this.width = 16;
 			this.height = 16;
 			this.frame = 0;
@@ -8170,8 +8170,8 @@ var flameBreath2 = {
 			}
 		}
 		if(this.timeLeft == 0){
-			this.x = -100;
-			this.y = -200;
+			this.x = -9000;
+			this.y = -400;
 			this.width = 16;
 			this.height = 16;
 			this.frame = 0;
@@ -8243,8 +8243,8 @@ var flameBreath3 = {
 			}
 		}
 		if(this.timeLeft == 0){
-			this.x = -100;
-			this.y = -200;
+			this.x = -9000;
+			this.y = -400;
 			this.width = 16;
 			this.height = 16;
 			this.frame = 0;
@@ -8316,8 +8316,8 @@ var flameBreath4 = {
 			}
 		}
 		if(this.timeLeft == 0){
-			this.x = -100;
-			this.y = -200;
+			this.x = -9000;
+			this.y = -400;
 			this.width = 16;
 			this.height = 16;
 			this.frame = 0;
@@ -8389,8 +8389,8 @@ var flameBreath5 = {
 			}
 		}
 		if(this.timeLeft == 0){
-			this.x = -100;
-			this.y = -200;
+			this.x = -9000;
+			this.y = -400;
 			this.width = 16;
 			this.height = 16;
 			this.frame = 0;
@@ -8845,12 +8845,6 @@ var lightlightning = {
 	draw: function(){
 		if(this.onScreen){
 			ctx.fillStyle = LightningColor;
-			/*if(this.LR == "Left"){
-				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
-			}
-			else{
-				ctx.fillRect(this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
-			}*/
 			ctx.drawImage(darklightningimg[Math.floor(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 			this.index++;
 			if(this.index > 5){
@@ -9003,84 +8997,7 @@ var lightlightning = {
 				}
 			}
 			if(this.movement){
-				if(this.dir == "D"){
-					if(this.slope == "Vertical"){
-						var ymove = this.speed;
-						this.y+=ymove;
-						this.y = Math.floor(this.y);
-					}
-					else if(this.slope > 0 && this.slope < 1){
-						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-						var ymove = xmove*this.slope;
-						this.x+=xmove;
-						this.y+=ymove;
-						this.x = Math.ceil(this.x);
-						this.y = Math.floor(this.y);
-					}
-					else if(this.slope >= 0){
-						//get x distance, speed = total diag distance
-						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-						var ymove = xmove*this.slope;
-						this.x+=xmove;
-						this.y+=ymove;
-						this.x = Math.ceil(this.x);
-						this.y = Math.floor(this.y);
-					}
-					else if(this.slope <= -1){
-						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-						var ymove = xmove*this.slope;
-						this.x+=xmove;
-						this.y+=ymove;
-						this.x = Math.ceil(this.x);
-						this.y = Math.ceil(this.y);
-					}
-					else{
-						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-						var ymove = xmove*this.slope;
-						this.x+=xmove;
-						this.y+=ymove;
-					}
-				}
-				else{
-					if(this.slope == "Vertical"){
-						var ymove = this.speed;
-						this.y-=ymove;
-						this.y = Math.floor(this.y);
-					}
-					else if(this.slope > 0 && this.slope < 1){
-						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-						var ymove = xmove*this.slope;
-						this.x-=xmove;
-						this.y-=ymove;
-						this.x = Math.floor(this.x);
-						this.y = Math.ceil(this.y);
-					}
-					else if(this.slope >= 0){
-						//get x distance, speed = total diag distance
-						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-						var ymove = xmove*this.slope;
-						this.x-=xmove;
-						this.y-=ymove;
-						this.x = Math.ceil(this.x);
-						this.y = Math.floor(this.y);
-					}
-					else if(this.slope <= -1){
-						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-						var ymove = xmove*this.slope;
-						this.x-=xmove;
-						this.y-=ymove;
-						this.x = Math.floor(this.x);
-						this.y = Math.ceil(this.y);
-					}
-					else{
-						var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-						var ymove = xmove*this.slope;
-						this.x-=xmove;
-						this.y-=ymove;
-						this.x = Math.ceil(this.x);
-						this.y = Math.floor(this.y);
-					}
-				}
+				move_particle_AI(this);
 			}
 			this.Shoot_AI();
 		}
@@ -9150,157 +9067,157 @@ var lightair = {
 			ctx.fillStyle = AirColor;
 			if(this.dir == "W"){
 				if(this.LR == "Left"){
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.5;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)], this.x-this.width*0.5, this.y-this.height*0.5 + 8, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 8, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.5;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 24, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 24, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.25;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 40, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 40, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.25;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 56, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 56, this.width, this.height);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 72, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 72, this.width, this.height);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 88, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 88, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.5;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 8, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 8, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.5;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 24, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 24, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.25;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 40, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 40, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.25;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 56, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 56, this.width, this.height);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 72, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 72, this.width, this.height);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 + 88, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 + 88, this.width, this.height);
 				}
 			}
 			else if(this.dir == "S"){
 				if(this.LR == "Left"){
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.5;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 8, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 8, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.5;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 24, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 24, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.25;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 40, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 40, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.25;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 56, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 56, this.width, this.height);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 72, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 72, this.width, this.height);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 88, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 88, this.width, this.height);
 				}
 				else{
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.5;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 8, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 8, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.5;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 24, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 24, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.25;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 40, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 40, this.width, this.height);
 					ctx.globalAlpha = Alpha*0.25;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 56, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 56, this.width, this.height);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 72, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 72, this.width, this.height);
 					ctx.globalAlpha = Alpha/6;
-					ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5 - 88, this.width, this.height);
+					ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5 - 88, this.width, this.height);
 				}
 			}
 			else if(this.dir == "A"){
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 8, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 8, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 24, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 24, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 40, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 40, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 56, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 56, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 72, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 72, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 88, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 88, this.y-this.height*0.5, this.width, this.height);
 			}
 			else if(this.dir == "D"){
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 8, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 8, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 24, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 24, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 40, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 40, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 56, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 56, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 72, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 72, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 88, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 88, this.y-this.height*0.5, this.width, this.height);
 			}
 			else if(this.dir == "WA"){
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 4, this.y-this.height*0.5 + 4, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 4, this.y-this.height*0.5 + 4, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 12, this.y-this.height*0.5 + 12, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 12, this.y-this.height*0.5 + 12, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 20, this.y-this.height*0.5 + 20, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 20, this.y-this.height*0.5 + 20, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 28, this.y-this.height*0.5 + 28, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 28, this.y-this.height*0.5 + 28, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 36, this.y-this.height*0.5 + 36, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 36, this.y-this.height*0.5 + 36, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 44, this.y-this.height*0.5 + 44, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 44, this.y-this.height*0.5 + 44, this.width, this.height);
 			}
 			else if(this.dir == "WD"){
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 4, this.y-this.height*0.5 + 4, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 4, this.y-this.height*0.5 + 4, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 12, this.y-this.height*0.5 + 12, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 12, this.y-this.height*0.5 + 12, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 20, this.y-this.height*0.5 + 20, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 20, this.y-this.height*0.5 + 20, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 28, this.y-this.height*0.5 + 28, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 28, this.y-this.height*0.5 + 28, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 36, this.y-this.height*0.5 + 36, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 36, this.y-this.height*0.5 + 36, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 44, this.y-this.height*0.5 + 44, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 44, this.y-this.height*0.5 + 44, this.width, this.height);
 			}
 			else if(this.dir == "AS"){
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 4, this.y-this.height*0.5 - 4, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 4, this.y-this.height*0.5 - 4, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 12, this.y-this.height*0.5 - 12, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 12, this.y-this.height*0.5 - 12, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 20, this.y-this.height*0.5 - 20, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 20, this.y-this.height*0.5 - 20, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 28, this.y-this.height*0.5 - 28, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 28, this.y-this.height*0.5 - 28, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 36, this.y-this.height*0.5 - 36, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 36, this.y-this.height*0.5 - 36, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 + 44, this.y-this.height*0.5 - 44, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 + 44, this.y-this.height*0.5 - 44, this.width, this.height);
 			}
 			else if(this.dir == "SD"){
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 4, this.y-this.height*0.5 - 4, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 4, this.y-this.height*0.5 - 4, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.5;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 12, this.y-this.height*0.5 - 12, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 12, this.y-this.height*0.5 - 12, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 20, this.y-this.height*0.5 - 20, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 20, this.y-this.height*0.5 - 20, this.width, this.height);
 				ctx.globalAlpha = Alpha*0.25;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 28, this.y-this.height*0.5 - 28, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 28, this.y-this.height*0.5 - 28, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 36, this.y-this.height*0.5 - 36, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 36, this.y-this.height*0.5 - 36, this.width, this.height);
 				ctx.globalAlpha = Alpha/6;
-				ctx.drawImage(darkairimg[Math.ceil(this.index*0.5)],this.x-this.width*0.5 - 44, this.y-this.height*0.5 - 44, this.width, this.height);
+				ctx.drawImage(trapSheet, 32*(Math.ceil(this.index*0.5) - 1), 224, 32, 32, this.x-this.width*0.5 - 44, this.y-this.height*0.5 - 44, this.width, this.height);
 			}
 			this.index++;
 			if(this.index > 8){
@@ -9579,7 +9496,7 @@ var lightwater = {
 			}
 			//if off screen, remove
 			if(this.timeLeft <= 0){
-				this.x = 9000;
+				this.x = -9000;
 				this.y = -400;
 				this.width = 16;
 				this.height = 16;
@@ -9687,84 +9604,7 @@ var lightwater = {
 					}
 				}
 			}
-			if(this.dir == "D"){
-				if(this.slope == "Vertical"){
-					var ymove = this.speed;
-					this.y+=ymove;
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope > 0 && this.slope < 1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope >= 0){
-					//get x distance, speed = total diag distance
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope <= -1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.ceil(this.y);
-				}
-				else{
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-				}
-			}
-			else{
-				if(this.slope == "Vertical"){
-					var ymove = this.speed;
-					this.y-=ymove;
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope > 0 && this.slope < 1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.floor(this.x);
-					this.y = Math.ceil(this.y);
-				}
-				else if(this.slope >= 0){
-					//get x distance, speed = total diag distance
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope <= -1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.floor(this.x);
-					this.y = Math.ceil(this.y);
-				}
-				else{
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-			}
+			move_particle_AI(this);
 			this.Shoot_AI();
 		}
 	},
@@ -10022,84 +9862,7 @@ var lightdark = {
 					}
 				}
 			}
-			if(this.dir == "D"){
-				if(this.slope == "Vertical"){
-					var ymove = this.speed;
-					this.y+=ymove;
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope > 0 && this.slope < 1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope >= 0){
-					//get x distance, speed = total diag distance
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope <= -1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.ceil(this.y);
-				}
-				else{
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-				}
-			}
-			else{
-				if(this.slope == "Vertical"){
-					var ymove = this.speed;
-					this.y-=ymove;
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope > 0 && this.slope < 1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.floor(this.x);
-					this.y = Math.ceil(this.y);
-				}
-				else if(this.slope >= 0){
-					//get x distance, speed = total diag distance
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope <= -1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.floor(this.x);
-					this.y = Math.ceil(this.y);
-				}
-				else{
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-			}
+			move_particle_AI(this);
 			this.Shoot_AI();
 		}
 	},

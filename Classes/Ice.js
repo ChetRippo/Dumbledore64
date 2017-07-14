@@ -21,9 +21,11 @@ var ice = {
 				Frozen.play();
 				this.used = 1;
 			}
-			Alpha = 0.15;
+			ctx.globalAlpha = Alpha*0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
+			Alpha = 0.5;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	
@@ -99,9 +101,11 @@ var ice2 = {
 	
 	draw: function(){
 		if(this.onScreen == 1){
-			Alpha = 0.15;
+			ctx.globalAlpha = Alpha*0.15;
 			ctx.fillStyle = this.color;
 			ctx.fillRect(this.x - this.width * 0.5, this.y - this.height * 0.5,	this.width, this.height);
+			Alpha = 0.5;
+			ctx.globalAlpha = Alpha;
 		}
 	},
 	

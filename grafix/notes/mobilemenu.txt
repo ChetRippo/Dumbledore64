@@ -1,0 +1,160 @@
+#title_light {
+	position:absolute;
+	left:800px;
+	top:0px;
+	width:704px;
+	height:240px;
+	place:x48,y88
+}
+
+#title_dark {
+	position:absolute;
+	left:800px;
+	top:240px;
+	width:704px;
+	height:228px;
+	place:x48,y88
+}
+
+#music_light {
+	position:absolute;
+	left:800px;
+	top:468px;
+	width:44px;
+	height:44px;
+	place:x616,y20
+}
+
+#sound_light {
+	position:absolute;
+	left:844px;
+	top:468px;
+	width:44px;
+	height:44px;
+	place:x676,y20
+}
+
+#tutorial_light {
+	position:absolute;
+	left:888px;
+	top:468px;
+	width:44px;
+	height:44px;
+	place:x736,y20
+}
+
+#music_dark {
+	position:absolute;
+	left:932px;
+	top:468px;
+	width:44px;
+	height:44px;
+	place:x616,y20
+}
+
+#sound_dark {
+	position:absolute;
+	left:976px;
+	top:468px;
+	width:44px;
+	height:44px;
+	place:x676,y20
+}
+
+#tutorial_dark {
+	position:absolute;
+	left:1020px;
+	top:468px;
+	width:44px;
+	height:44px;
+	place:x736,y20
+}
+
+#scores_light {
+	position:absolute;
+	left:1224px;
+	top:468px;
+	width:212px;
+	height:60px;
+	place:x400,y492
+}
+
+#sixtyfour {
+	position:absolute;
+	left:1436px;
+	top:468px;
+	width:96px;
+	height:44px;
+	place:x616,y316
+}
+
+#levels_scores_button_back {
+	position:absolute;
+	left:800px;
+	top:512px;
+	width:424px;
+	height:60px;
+	place:x188,y492
+}
+
+#levels_light {
+	position:absolute;
+	left:1224px;
+	top:528px;
+	width:216px;
+	height:60px;
+	place:x188,y492
+}
+
+#levels {
+	position:absolute;
+	left:0px;
+	top:576px;
+	width:164px;
+	height:20px;
+	place:x210,y512
+}
+
+#scores {
+	position:absolute;
+	left:164px;
+	top:576px;
+	width:164px;
+	height:20px;
+	place:x430,y512
+}
+
+#tap_to_play {
+	position:absolute;
+	left:328px;
+	top:576px;
+	width:316px;
+	height:20px;
+	place:x242,y360
+}
+
+#credits_dark016 {
+	position:absolute;
+	left:644px;
+	top:576px;
+	width:192px;
+	height:20px;
+	place:x30,y24
+}
+
+#credits_light {
+	position:absolute;
+	left:836px;
+	top:576px;
+	width:194px;
+	height:20px;
+	place:x30,y24
+}
+
+#loading {
+	position:absolute;
+	left:1030;
+	top:576px;
+	width:194px;
+	height:20px;
+}

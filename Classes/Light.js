@@ -121,7 +121,7 @@ var light = {
 			}
 			//if off screen, remove
 			if(this.timeLeft <= 0){
-				this.x = 9000;
+				this.x = -9000;
 				this.y = -400;
 				this.width = 16;
 				this.height = 16;
@@ -229,84 +229,7 @@ var light = {
 					}
 				}
 			}
-			if(this.dir == "D"){
-				if(this.slope == "Vertical"){
-					var ymove = this.speed;
-					this.y+=ymove;
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope > 0 && this.slope < 1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope >= 0){
-					//get x distance, speed = total diag distance
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope <= -1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.ceil(this.y);
-				}
-				else{
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x+=xmove;
-					this.y+=ymove;
-				}
-			}
-			else{
-				if(this.slope == "Vertical"){
-					var ymove = this.speed;
-					this.y-=ymove;
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope > 0 && this.slope < 1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.floor(this.x);
-					this.y = Math.ceil(this.y);
-				}
-				else if(this.slope >= 0){
-					//get x distance, speed = total diag distance
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-				else if(this.slope <= -1){
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.floor(this.x);
-					this.y = Math.ceil(this.y);
-				}
-				else{
-					var xmove = Math.sqrt((this.speed*this.speed)/(this.slope*this.slope+1));
-					var ymove = xmove*this.slope;
-					this.x-=xmove;
-					this.y-=ymove;
-					this.x = Math.ceil(this.x);
-					this.y = Math.floor(this.y);
-				}
-			}
+			move_particle_AI(this);
 			this.Shoot_AI();
 		}
 	},
@@ -659,7 +582,7 @@ function AllLightFns(L){
 		}
 		//if off screen, remove
 		if(L.timeLeft <= 0){
-			L.x = 9000;
+			L.x = -9000;
 			L.y = -400;
 			L.width = 16;
 			L.height = 16;
@@ -767,84 +690,7 @@ function AllLightFns(L){
 				}
 			}
 		}
-		if(L.dir == "D"){
-			if(L.slope == "Vertical"){
-				var ymove = L.speed;
-				L.y+=ymove;
-				L.y = Math.floor(L.y);
-			}
-			else if(L.slope > 0 && L.slope < 1){
-				var xmove = Math.sqrt((L.speed*L.speed)/(L.slope*L.slope+1));
-				var ymove = xmove*L.slope;
-				L.x+=xmove;
-				L.y+=ymove;
-				L.x = Math.ceil(L.x);
-				L.y = Math.floor(L.y);
-			}
-			else if(L.slope >= 0){
-				//get x distance, speed = total diag distance
-				var xmove = Math.sqrt((L.speed*L.speed)/(L.slope*L.slope+1));
-				var ymove = xmove*L.slope;
-				L.x+=xmove;
-				L.y+=ymove;
-				L.x = Math.ceil(L.x);
-				L.y = Math.floor(L.y);
-			}
-			else if(L.slope <= -1){
-				var xmove = Math.sqrt((L.speed*L.speed)/(L.slope*L.slope+1));
-				var ymove = xmove*L.slope;
-				L.x+=xmove;
-				L.y+=ymove;
-				L.x = Math.ceil(L.x);
-				L.y = Math.ceil(L.y);
-			}
-			else{
-				var xmove = Math.sqrt((L.speed*L.speed)/(L.slope*L.slope+1));
-				var ymove = xmove*L.slope;
-				L.x+=xmove;
-				L.y+=ymove;
-			}
-		}
-		else{
-			if(L.slope == "Vertical"){
-				var ymove = L.speed;
-				L.y-=ymove;
-				L.y = Math.floor(L.y);
-			}
-			else if(L.slope > 0 && L.slope < 1){
-				var xmove = Math.sqrt((L.speed*L.speed)/(L.slope*L.slope+1));
-				var ymove = xmove*L.slope;
-				L.x-=xmove;
-				L.y-=ymove;
-				L.x = Math.floor(L.x);
-				L.y = Math.ceil(L.y);
-			}
-			else if(L.slope >= 0){
-				//get x distance, speed = total diag distance
-				var xmove = Math.sqrt((L.speed*L.speed)/(L.slope*L.slope+1));
-				var ymove = xmove*L.slope;
-				L.x-=xmove;
-				L.y-=ymove;
-				L.x = Math.ceil(L.x);
-				L.y = Math.floor(L.y);
-			}
-			else if(L.slope <= -1){
-				var xmove = Math.sqrt((L.speed*L.speed)/(L.slope*L.slope+1));
-				var ymove = xmove*L.slope;
-				L.x-=xmove;
-				L.y-=ymove;
-				L.x = Math.floor(L.x);
-				L.y = Math.ceil(L.y);
-			}
-			else{
-				var xmove = Math.sqrt((L.speed*L.speed)/(L.slope*L.slope+1));
-				var ymove = xmove*L.slope;
-				L.x-=xmove;
-				L.y-=ymove;
-				L.x = Math.ceil(L.x);
-				L.y = Math.floor(L.y);
-			}
-		}
+		move_particle_AI(L);
 		var shoots = Math.floor(Math.random() * 4);
 		if(shoots > 2){
 			if(!Light2Arrows[L.arrownum-1].timeLeft){

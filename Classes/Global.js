@@ -1,18 +1,19 @@
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
-var VersionNumb = "0.9.3.Santa ";
-var upDate = "Nov 22 2012";
+var VersionNumb = "0.9.8.5 ";
+var upDate = "Jan 12 2014";
 // Canvas, Frames per Second, KeysDown, Global vars
 var canvas = document.createElement("canvas");
 canvas.width = 800;
 canvas.height = 576;
 canvas.tabIndex = 1;
-document.body.appendChild(canvas);
+document.getElementById('canvas_wrapper').appendChild(canvas);
 var ctx = canvas.getContext("2d");
 var cX = new Number();
 var cY = new Number();
 var hX = new Number();
 var hY = new Number();
 var STATE = 0;
+var GODMODE = false;
 //Pause menu
 var preSTATE = 0;
 var keytimer = 0;
@@ -29,6 +30,8 @@ var cdTop = 20;
 var hptimer = 0;
 var spell1 = "N/A";
 var spell2 = "N/A";
+var spell1Fade = 0;
+var spell2Fade = 0;
 var spell = "N/A";
 var spell1pic = "N/A";
 var spell2pic = "N/A";
@@ -37,9 +40,7 @@ var ErrorLogs = "Error Count: 0";
 var Error = Aes.Ctr.encrypt("0", ErrorLogs, 256);
 var staticm = 1;
 var multtimer = 0;
-//colors
-var colorz = {1: "#D0D0D0", 2: "#CC0000", 3: "#00FFFF", 4: "yellow", 5: "#33FF00", 6: "#663399"};
-var colorNum = 1;
+var penalty = 1;
 //elecolors
 var FireColor = "#bd2023";
 var IceColor = "#5ea89f";
@@ -64,6 +65,7 @@ addEventListener("keyup", function (e) {delete keysDown[e.keyCode];}, false);
 // Environment
 var planted = false;
 var jungleAni = false;
+var levelSelectSwamp = false;
 //put fallen trees on top
 var treeFall = 1;
 // Alpha
@@ -83,8 +85,8 @@ var firebkgIndex = 1;
 //keep track of fog # in jungle
 var fogNum = 1;
 //Achievements: 3D, 
-var AList = {0: true, 1: false, 2: false, 3: false, 4: false, 5: false};
-var maxAchiev = 5;
+var AList = {0: true, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false};
+var maxAchiev = 7;
 var Achiev = 0;
 //Tutorial
 var moved = false;
@@ -95,25 +97,32 @@ var TutFadeIndex = 0;
 var FadeIn = false;
 //path for map
 var levelorder = 0;
+
+//multiplayer
+var refresh = 0;
+
+//graveyard
+var GraveNight = 0;
+var GraveNum = 0;
+var dayShift = 0;
+var nightShift = 0;
+var nightTimer = 900;
+var dayone = 1;
 //------------------------------------------------------- Graphics ------------------------------------------------------------------//
 //---------------------------------------------------- Menu Graphics ----------------------------------------------------------------//
 //menu
-//not menu SANTA
-var santaL = new Image();
-santaL.src = "grafix/effects/santhat/sant.l.png";
-santaL.onload = LoadingBar;
-var santaR = new Image();
-santaR.src = "grafix/effects/santhat/sant.r.png";
-santaR.onload = LoadingBar;
 var menuBack = new Image();
-menuBack.src = "grafix/menu/festive/xmas.bkg.png";
+menuBack.src = "grafix/menu/menu.png";
 menuBack.onload = LoadingBar;
+var GraveyardSheet = new Image();
+GraveyardSheet.src = "grafix/background/graveyard.png";
+GraveyardSheet.onload = LoadingBar;
 var Title = new Image();
-Title.src = "grafix/menu/festive/xmas.title.png";
+Title.src = "grafix/menu/mobilemenu.png";
 Title.onload = LoadingBar;
-var festivehatTitle = new Image();
-festivehatTitle.src = "grafix/menu/festive/xmas.newgamehat.png";
-festivehatTitle.onload = LoadingBar;
+var TitleReal = new Image();
+TitleReal.src = "grafix/menu/title-real.png";
+TitleReal.onload = LoadingBar;
 var creditsmenu = new Image();
 creditsmenu.src = "grafix/menu/mainmenu.compressed/credits.png";
 creditsmenu.onload = LoadingBar;
@@ -132,14 +141,25 @@ optionsmenu.onload = LoadingBar;
 var scoremenu = new Image();
 scoremenu.src = "grafix/menu/mainmenu.compressed/score.png";
 scoremenu.onload = LoadingBar;
+var levelmenu = new Image();
+levelmenu.src = "grafix/menu/mainmenu.compressed/levelselect.png";
+levelmenu.onload = LoadingBar;
+var creditsScreen = new Image();
+creditsScreen.src = "grafix/menu/creditsScreen.png";
+creditsScreen.onload = LoadingBar;
 var glasses3d = new Image();
 glasses3d.src = "grafix/menu/3dglass.png";
 glasses3d.onload = LoadingBar;
+var multCoin = new Image();
+multCoin.src = "grafix/objects/coin/red.1.png";
+multCoin.onload = LoadingBar;
 //high scores
-//bkg
 var highscoreBack = new Image();
 highscoreBack.src = "grafix/menu/scores/bkg.png";
 highscoreBack.onload = LoadingBar;
+var levelSelectBkg = new Image();
+levelSelectBkg.src = "grafix/menu/scores/bkgmapselect.png";
+levelSelectBkg.onload = LoadingBar;
 //ranks
 var rank15 = new Image();
 rank15.src = "grafix/menu/scores/rank.15.png";
@@ -154,91 +174,10 @@ HighScoreTitle.onload = LoadingBar;
 var EnterName = new Image();
 EnterName.src = "grafix/menu/scores/enter.name.png";
 EnterName.onload = LoadingBar;
-var PopupBlocker = new Image();
-PopupBlocker.src = "grafix/menu/scores/popup.png";
-PopupBlocker.onload = LoadingBar;
 //letters
-var letterA = new Image();
-letterA.src = "grafix/menu/scores/name/a.png";
-letterA.onload = LoadingBar;
-var letterB = new Image();
-letterB.src = "grafix/menu/scores/name/b.png";
-letterB.onload = LoadingBar;
-var letterC = new Image();
-letterC.src = "grafix/menu/scores/name/c.png";
-letterC.onload = LoadingBar;
-var letterD = new Image();
-letterD.src = "grafix/menu/scores/name/d.png";
-letterD.onload = LoadingBar;
-var letterE = new Image();
-letterE.src = "grafix/menu/scores/name/e.png";
-letterE.onload = LoadingBar;
-var letterF = new Image();
-letterF.src = "grafix/menu/scores/name/f.png";
-letterF.onload = LoadingBar;
-var letterG = new Image();
-letterG.src = "grafix/menu/scores/name/g.png";
-letterG.onload = LoadingBar;
-var letterH = new Image();
-letterH.src = "grafix/menu/scores/name/h.png";
-letterH.onload = LoadingBar;
-var letterI = new Image();
-letterI.src = "grafix/menu/scores/name/i.png";
-letterI.onload = LoadingBar;
-var letterJ = new Image();
-letterJ.src = "grafix/menu/scores/name/j.png";
-letterJ.onload = LoadingBar;
-var letterK = new Image();
-letterK.src = "grafix/menu/scores/name/k.png";
-letterK.onload = LoadingBar;
-var letterL = new Image();
-letterL.src = "grafix/menu/scores/name/l.png";
-letterL.onload = LoadingBar;
-var letterM = new Image();
-letterM.src = "grafix/menu/scores/name/m.png";
-letterM.onload = LoadingBar;
-var letterN = new Image();
-letterN.src = "grafix/menu/scores/name/n.png";
-letterN.onload = LoadingBar;
-var letterO = new Image();
-letterO.src = "grafix/menu/scores/name/o.png";
-letterO.onload = LoadingBar;
-var letterP = new Image();
-letterP.src = "grafix/menu/scores/name/p.png";
-letterP.onload = LoadingBar;
-var letterQ = new Image();
-letterQ.src = "grafix/menu/scores/name/q.png";
-letterQ.onload = LoadingBar;
-var letterR = new Image();
-letterR.src = "grafix/menu/scores/name/r.png";
-letterR.onload = LoadingBar;
-var letterS = new Image();
-letterS.src = "grafix/menu/scores/name/s.png";
-letterS.onload = LoadingBar;
-var letterT = new Image();
-letterT.src = "grafix/menu/scores/name/t.png";
-letterT.onload = LoadingBar;
-var letterU = new Image();
-letterU.src = "grafix/menu/scores/name/u.png";
-letterU.onload = LoadingBar;
-var letterV = new Image();
-letterV.src = "grafix/menu/scores/name/v.png";
-letterV.onload = LoadingBar;
-var letterW = new Image();
-letterW.src = "grafix/menu/scores/name/w.png";
-letterW.onload = LoadingBar;
-var letterX = new Image();
-letterX.src = "grafix/menu/scores/name/x.png";
-letterX.onload = LoadingBar;
-var letterY = new Image();
-letterY.src = "grafix/menu/scores/name/y.png";
-letterY.onload = LoadingBar;
-var letterZ = new Image();
-letterZ.src = "grafix/menu/scores/name/z.png";
-letterZ.onload = LoadingBar;
-var letterCursor = new Image();
-letterCursor.src = "grafix/menu/scores/name/cursor.png";
-letterCursor.onload = LoadingBar;
+var letterSheet = new Image();
+letterSheet.src = "grafix/menu/scores/name/name.png";
+letterSheet.onload = LoadingBar;
 //title scores
 var titlescoreZeroT = new Image();
 titlescoreZeroT.src = "grafix/menu/scores/titlescore/0.hold.png";
@@ -327,18 +266,9 @@ var HSsubmitArrow = new Image();
 HSsubmitArrow.src = "grafix/menu/scores/submitarrow.1.png";
 HSsubmitArrow.onload = LoadingBar;
 //Hp up
-var maxUP = new Image();
-maxUP.src = "grafix/powers/heartup/treeheart.png";
-maxUP.onload = LoadingBar;
-var DragonmaxUP = new Image();
-DragonmaxUP.src = "grafix/powers/heartup/fireheart.png";
-DragonmaxUP.onload = LoadingBar;
-var ThiefLuckUP = new Image();
-ThiefLuckUP.src = "grafix/powers/heartup/thiefheart.png";
-ThiefLuckUP.onload = LoadingBar;
-var GenieUp = new Image();
-GenieUp.src = "grafix/powers/heartup/genieheart.png";
-GenieUp.onload = LoadingBar;
+var heartUp_sheet = new Image();
+heartUp_sheet.src = "grafix/powers/heartup.png";
+heartUp_sheet.onload = LoadingBar;
 //Map Graphics
 var MeadowMap = new Image();
 MeadowMap.src = "grafix/menu/scores/map/1.grass.png";
@@ -355,9 +285,31 @@ SwampMap.onload = LoadingBar;
 var DesertMap = new Image();
 DesertMap.src = "grafix/menu/scores/map/3.desert.png";
 DesertMap.onload = LoadingBar;
+var GraveMap = new Image();
+GraveMap.src = "grafix/menu/scores/map/3.graveyard.png";
+GraveMap.onload = LoadingBar;
 var MapBkg = new Image();
 MapBkg.src = "grafix/menu/scores/map/mapbkg.png";
 MapBkg.onload = LoadingBar;
+//levelselect dumbles
+var grassdumble = new Image();
+grassdumble.src = "grafix/menu/scores/map/dumbles/grass.png";
+grassdumble.onload = LoadingBar;
+var firedumble = new Image();
+firedumble.src = "grafix/menu/scores/map/dumbles/fire.png";
+firedumble.onload = LoadingBar;
+var jungledumble = new Image();
+jungledumble.src = "grafix/menu/scores/map/dumbles/jungle.png";
+jungledumble.onload = LoadingBar;
+var swampdumble = new Image();
+swampdumble.src = "grafix/menu/scores/map/dumbles/swamp.png";
+swampdumble.onload = LoadingBar;
+var desertdumble = new Image();
+desertdumble.src = "grafix/menu/scores/map/dumbles/desert.png";
+desertdumble.onload = LoadingBar;
+var gravedumble = new Image();
+gravedumble.src = "grafix/menu/scores/map/dumbles/graveyard.png";
+gravedumble.onload = LoadingBar;
 //paths
 var GrassFire = new Image();
 GrassFire.src = "grafix/menu/scores/map/path.self/1.grass-fire.png";
@@ -371,6 +323,9 @@ JungleSwamp.onload = LoadingBar;
 var FireDesert = new Image();
 FireDesert.src = "grafix/menu/scores/map/path.self/2.fire-desert.png";
 FireDesert.onload = LoadingBar;
+var FireGrave = new Image();
+FireGrave.src = "grafix/menu/scores/map/path.self/2.fire-graveyard.png";
+FireGrave.onload = LoadingBar;
 //highlights
 var GrassFireH = new Image();
 GrassFireH.src = "grafix/menu/scores/map/path.highlight/1.grass-fire.png";
@@ -384,192 +339,48 @@ JungleSwampH.onload = LoadingBar;
 var FireDesertH = new Image();
 FireDesertH.src = "grafix/menu/scores/map/path.highlight/2.fire-desert.png";
 FireDesertH.onload = LoadingBar;
+var FireGraveH = new Image();
+FireGraveH.src = "grafix/menu/scores/map/path.highlight/2.fire-graveyard.png";
+FireGraveH.onload = LoadingBar;
+//multiplayer
+var logospinSheet = new Image();
+logospinSheet.src = "grafix/connecting/logospin.png";
+logospinSheet.onload = LoadingBar;
+var textWait = new Image();
+textWait.src = "grafix/connecting/text.players.png";
+textWait.onload = LoadingBar;
+var textFull = new Image();
+textFull.src = "grafix/connecting/text.FULL.png";
+textFull.onload = LoadingBar;
+var textPlayers = new Image();
+textPlayers.src = "grafix/connecting/text.wait.png";
+textPlayers.onload = LoadingBar;
 //score highlight hover
 var scoreHighlightHover = new Image();
 scoreHighlightHover.src = "grafix/menu/scores/highlight.png";
 scoreHighlightHover.onload = LoadingBar;
-var YScoreBurst0 = new Image();
-YScoreBurst0.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/0.png";
-YScoreBurst0.onload = LoadingBar;
-var YScoreBurst1 = new Image();
-YScoreBurst1.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/1.png";
-YScoreBurst1.onload = LoadingBar;
-var YScoreBurst2 = new Image();
-YScoreBurst2.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/2.png";
-YScoreBurst2.onload = LoadingBar;
-var YScoreBurst3 = new Image();
-YScoreBurst3.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/3.png";
-YScoreBurst3.onload = LoadingBar;
-var YScoreBurst4 = new Image();
-YScoreBurst4.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/4.png";
-YScoreBurst4.onload = LoadingBar;
-var YScoreBurst5 = new Image();
-YScoreBurst5.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/5.png";
-YScoreBurst5.onload = LoadingBar;
-var YScoreBurst6 = new Image();
-YScoreBurst6.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/6.png";
-YScoreBurst6.onload = LoadingBar;
-var YScoreBurst7 = new Image();
-YScoreBurst7.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/7.png";
-YScoreBurst7.onload = LoadingBar;
-var YScoreBurst8 = new Image();
-YScoreBurst8.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/8.png";
-YScoreBurst8.onload = LoadingBar;
-var YScoreBurst9 = new Image();
-YScoreBurst9.src = "grafix/menu/HUD/SCOREBURSTS/1 yellow/9.png";
-YScoreBurst9.onload = LoadingBar;
-var YellowScore = {0: YScoreBurst0, 1: YScoreBurst1, 2: YScoreBurst2, 3: YScoreBurst3, 4: YScoreBurst4, 5: YScoreBurst5, 6: YScoreBurst6, 7: YScoreBurst7, 8: YScoreBurst8, 9: YScoreBurst9};
-var OScoreBurst0 = new Image();
-OScoreBurst0.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/0.png";
-OScoreBurst0.onload = LoadingBar;
-var OScoreBurst1 = new Image();
-OScoreBurst1.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/1.png";
-OScoreBurst1.onload = LoadingBar;
-var OScoreBurst2 = new Image();
-OScoreBurst2.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/2.png";
-OScoreBurst2.onload = LoadingBar;
-var OScoreBurst3 = new Image();
-OScoreBurst3.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/3.png";
-OScoreBurst3.onload = LoadingBar;
-var OScoreBurst4 = new Image();
-OScoreBurst4.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/4.png";
-OScoreBurst4.onload = LoadingBar;
-var OScoreBurst5 = new Image();
-OScoreBurst5.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/5.png";
-OScoreBurst5.onload = LoadingBar;
-var OScoreBurst6 = new Image();
-OScoreBurst6.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/6.png";
-OScoreBurst6.onload = LoadingBar;
-var OScoreBurst7 = new Image();
-OScoreBurst7.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/7.png";
-OScoreBurst7.onload = LoadingBar;
-var OScoreBurst8 = new Image();
-OScoreBurst8.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/8.png";
-OScoreBurst8.onload = LoadingBar;
-var OScoreBurst9 = new Image();
-OScoreBurst9.src = "grafix/menu/HUD/SCOREBURSTS/2 orange/9.png";
-OScoreBurst9.onload = LoadingBar;
-var OrangeScore = {0: OScoreBurst0, 1: OScoreBurst1, 2: OScoreBurst2, 3: OScoreBurst3, 4: OScoreBurst4, 5: OScoreBurst5, 6: OScoreBurst6, 7: OScoreBurst7, 8: OScoreBurst8, 9: OScoreBurst9};
-var RScoreBurst0 = new Image();
-RScoreBurst0.src = "grafix/menu/HUD/SCOREBURSTS/3 red/0.png";
-RScoreBurst0.onload = LoadingBar;
-var RScoreBurst1 = new Image();
-RScoreBurst1.src = "grafix/menu/HUD/SCOREBURSTS/3 red/1.png";
-RScoreBurst1.onload = LoadingBar;
-var RScoreBurst2 = new Image();
-RScoreBurst2.src = "grafix/menu/HUD/SCOREBURSTS/3 red/2.png";
-RScoreBurst2.onload = LoadingBar;
-var RScoreBurst3 = new Image();
-RScoreBurst3.src = "grafix/menu/HUD/SCOREBURSTS/3 red/3.png";
-RScoreBurst3.onload = LoadingBar;
-var RScoreBurst4 = new Image();
-RScoreBurst4.src = "grafix/menu/HUD/SCOREBURSTS/3 red/4.png";
-RScoreBurst4.onload = LoadingBar;
-var RScoreBurst5 = new Image();
-RScoreBurst5.src = "grafix/menu/HUD/SCOREBURSTS/3 red/5.png";
-RScoreBurst5.onload = LoadingBar;
-var RScoreBurst6 = new Image();
-RScoreBurst6.src = "grafix/menu/HUD/SCOREBURSTS/3 red/6.png";
-RScoreBurst6.onload = LoadingBar;
-var RScoreBurst7 = new Image();
-RScoreBurst7.src = "grafix/menu/HUD/SCOREBURSTS/3 red/7.png";
-RScoreBurst7.onload = LoadingBar;
-var RScoreBurst8 = new Image();
-RScoreBurst8.src = "grafix/menu/HUD/SCOREBURSTS/3 red/8.png";
-RScoreBurst8.onload = LoadingBar;
-var RScoreBurst9 = new Image();
-RScoreBurst9.src = "grafix/menu/HUD/SCOREBURSTS/3 red/9.png";
-RScoreBurst9.onload = LoadingBar;
-var RScoreBurstEx = new Image();
-RScoreBurstEx.src = "grafix/menu/HUD/SCOREBURSTS/3 red/!.png";
-RScoreBurstEx.onload = LoadingBar;
-var RedScore = {0: RScoreBurst0, 1: RScoreBurst1, 2: RScoreBurst2, 3: RScoreBurst3, 4: RScoreBurst4, 5: RScoreBurst5, 6: RScoreBurst6, 7: RScoreBurst7, 8: RScoreBurst8, 9: RScoreBurst9};
+var Ele_Bursts = new Image();
+Ele_Bursts.src = "grafix/menu/HUD/eleburst.png";
+Ele_Bursts.onload = LoadingBar;
 //------------------------------------------------- Meadow Graphics/UI --------------------------------------------------------------//
-//dumble -- festive
-var WizzurdL = new Image();
-WizzurdL.src = "grafix/wizzurds/festive.wizard/wiz.l.png";
-WizzurdL.onload = LoadingBar;
-var WizzurdR = new Image();
-WizzurdR.src = "grafix/wizzurds/festive.wizard/wiz.r.png";
-WizzurdR.onload = LoadingBar;
-//Ondmg
-var Wizzurd2 = new Image();
-Wizzurd2.src = "grafix/wizzurds/effects.wizard/nega.wiz.l1.png";
-Wizzurd2.onload = LoadingBar;
-var Wizzurd2R = new Image();
-Wizzurd2R.src = "grafix/wizzurds/effects.wizard/nega.wiz.r1.png";
-Wizzurd2R.onload = LoadingBar;
+//dumble
+var Wiz_Sheet = new Image();
+Wiz_Sheet.src = "grafix/wizzurds/wizbiz.png";
+Wiz_Sheet.onload = LoadingBar;
 //HUD
 //Tootorial
-var MoveShoot = new Image();
-MoveShoot.src = "grafix/menu/tutorial/move.shoot.active.png";
-MoveShoot.onload = LoadingBar;
-var WPress = new Image();
-WPress.src = "grafix/menu/tutorial/m.w.press.png";
-WPress.onload = LoadingBar;
-var APress = new Image();
-APress.src = "grafix/menu/tutorial/m.a.press.png";
-APress.onload = LoadingBar;
-var SPress = new Image();
-SPress.src = "grafix/menu/tutorial/m.s.press.png";
-SPress.onload = LoadingBar;
-var DPress = new Image();
-DPress.src = "grafix/menu/tutorial/m.d.press.png";
-DPress.onload = LoadingBar;
-var WShootTut = new Image();
-WShootTut.src = "grafix/menu/tutorial/s.u.press.png";
-WShootTut.onload = LoadingBar;
-var AShootTut = new Image();
-AShootTut.src = "grafix/menu/tutorial/s.l.press.png";
-AShootTut.onload = LoadingBar;
-var SShootTut = new Image();
-SShootTut.src = "grafix/menu/tutorial/s.d.press.png";
-SShootTut.onload = LoadingBar;
-var DShootTut = new Image();
-DShootTut.src = "grafix/menu/tutorial/s.r.press.png";
-DShootTut.onload = LoadingBar;
-var WAShootTut = new Image();
-WAShootTut.src = "grafix/menu/tutorial/s.ul.press.png";
-WAShootTut.onload = LoadingBar;
-var ASShootTut = new Image();
-ASShootTut.src = "grafix/menu/tutorial/s.dl.press.png";
-ASShootTut.onload = LoadingBar;
-var SDShootTut = new Image();
-SDShootTut.src = "grafix/menu/tutorial/s.dr.press.png";
-SDShootTut.onload = LoadingBar;
-var WDShootTut = new Image();
-WDShootTut.src = "grafix/menu/tutorial/s.ur.press.png";
-WDShootTut.onload = LoadingBar;
+var WizardStaff = new Image();
+WizardStaff.src = "grafix/objects/staff.png";
+WizardStaff.onload = LoadingBar;
+var TutorialSheet = new Image();
+TutorialSheet.src = "grafix/menu/tutorial/tutorialsheet.png";
+TutorialSheet.onload = LoadingBar;
 var PickupArrow1 = new Image();
 PickupArrow1.src = "grafix/menu/tutorial/pickuparrow.1.png";
 PickupArrow1.onload = LoadingBar;
 var PickupArrow2 = new Image();
 PickupArrow2.src = "grafix/menu/tutorial/pickuparrow.2.png";
 PickupArrow2.onload = LoadingBar;
-var SpaceKey = new Image();
-SpaceKey.src = "grafix/menu/tutorial/space.png";
-SpaceKey.onload = LoadingBar;
-var SpaceKeyPress = new Image();
-SpaceKeyPress.src = "grafix/menu/tutorial/space.press.png";
-SpaceKeyPress.onload = LoadingBar;
-var DropQ1 = new Image();
-DropQ1.src = "grafix/menu/tutorial/drop.q.1.png";
-DropQ1.onload = LoadingBar;
-var DropQ2 = new Image();
-DropQ2.src = "grafix/menu/tutorial/drop.q.2.png";
-DropQ2.onload = LoadingBar;
-var DropE1 = new Image();
-DropE1.src = "grafix/menu/tutorial/drop.e.1.png";
-DropE1.onload = LoadingBar;
-var DropE2 = new Image();
-DropE2.src = "grafix/menu/tutorial/drop.e.2.png";
-DropE2.onload = LoadingBar;
-var EnterSkip = new Image();
-EnterSkip.src = "grafix/menu/tutorial/skip.png";
-EnterSkip.onload = LoadingBar;
-var EnterSkipPress = new Image();
-EnterSkipPress.src = "grafix/menu/tutorial/skip.press.png";
-EnterSkipPress.onload = LoadingBar;
 //slots
 var eleSlots = new Image();
 eleSlots.src = "grafix/menu/HUD/elesockets.png";
@@ -598,174 +409,9 @@ var CastRings = new Image();
 CastRings.src = "grafix/menu/HUD/elesockets.cast.png";
 CastRings.onload = LoadingBar;
 //spells WIDTH SUBTRACT 138
-var dumblebar = new Image();//End: 290
-dumblebar.src = "grafix/menu/HUD/SPELLS/dumblebeam.png";
-dumblebar.onload = LoadingBar;
-var firebar = new Image();//End: 110
-firebar.src = "grafix/menu/HUD/SPELLS/fire.png";
-firebar.onload = LoadingBar;
-var fire2bar = new Image();//End: 198
-fire2bar.src = "grafix/menu/HUD/SPELLS/inferno.png";
-fire2bar.onload = LoadingBar;
-var icebar = new Image();//82
-icebar.src = "grafix/menu/HUD/SPELLS/ice.png";
-icebar.onload = LoadingBar;
-var ice2bar = new Image();//366
-ice2bar.src = "grafix/menu/HUD/SPELLS/absolute.zero.png";
-ice2bar.onload = LoadingBar;
-var fireicebar = new Image();//422
-fireicebar.src = "grafix/menu/HUD/SPELLS/frozen.fireball.png";
-fireicebar.onload = LoadingBar;
-var earthbar = new Image();//282
-earthbar.src = "grafix/menu/HUD/SPELLS/earth.heal.png";
-earthbar.onload = LoadingBar;
-var earth2bar = new Image();//254
-earth2bar.src = "grafix/menu/HUD/SPELLS/synthesis.png";
-earth2bar.onload = LoadingBar;
-var fireearthbar = new Image();//254
-fireearthbar.src = "grafix/menu/HUD/SPELLS/fire.heal.png";
-fireearthbar.onload = LoadingBar;
-var iceearthbar = new Image();//230
-iceearthbar.src = "grafix/menu/HUD/SPELLS/ice.heal.png";
-iceearthbar.onload = LoadingBar;
-var lightningbar = new Image();//254
-lightningbar.src = "grafix/menu/HUD/SPELLS/lightning.png";
-lightningbar.onload = LoadingBar;
-var lightning2bar = new Image();//422
-lightning2bar.src = "grafix/menu/HUD/SPELLS/chain.lightning.png";
-lightning2bar.onload = LoadingBar;
-var firelightningbar = new Image();//228
-firelightningbar.src = "grafix/menu/HUD/SPELLS/ragnarok.png";
-firelightningbar.onload = LoadingBar;
-var icelightningbar = new Image();//286
-icelightningbar.src = "grafix/menu/HUD/SPELLS/frozen.web.png";
-icelightningbar.onload = LoadingBar;
-var earthlightningbar = new Image();//396
-earthlightningbar.src = "grafix/menu/HUD/SPELLS/lightning.heal.png";
-earthlightningbar.onload = LoadingBar;
-var airbar = new Image();//110
-airbar.src = "grafix/menu/HUD/SPELLS/dash.png";
-airbar.onload = LoadingBar;
-var air2bar = new Image();//198
-air2bar.src = "grafix/menu/HUD/SPELLS/twister.png";
-air2bar.onload = LoadingBar;
-var fireairbar = new Image();//258
-fireairbar.src = "grafix/menu/HUD/SPELLS/fire.wave.png";
-fireairbar.onload = LoadingBar;
-var iceairbar = new Image();//262
-iceairbar.src = "grafix/menu/HUD/SPELLS/maelstrom.png";
-iceairbar.onload = LoadingBar;
-var earthairbar = new Image();//254
-earthairbar.src = "grafix/menu/HUD/SPELLS/dash.heal.png";
-earthairbar.onload = LoadingBar;
-var lightningairbar = new Image();//342
-lightningairbar.src = "grafix/menu/HUD/SPELLS/thunderstorm.png";
-lightningairbar.onload = LoadingBar;
-var mysticbar = new Image();//228
-mysticbar.src = "grafix/menu/HUD/SPELLS/teleport.png";
-mysticbar.onload = LoadingBar;
-var mystic2bar = new Image();//170
-mystic2bar.src = "grafix/menu/HUD/SPELLS/mirage.png";
-mystic2bar.onload = LoadingBar;
-var firemysticbar = new Image();//398
-firemysticbar.src = "grafix/menu/HUD/SPELLS/explosive.beam.png";
-firemysticbar.onload = LoadingBar;
-var icemysticbar = new Image();//230
-icemysticbar.src = "grafix/menu/HUD/SPELLS/ice.beam.png";
-icemysticbar.onload = LoadingBar;
-var earthmysticbar = new Image();//366
-earthmysticbar.src = "grafix/menu/HUD/SPELLS/teleport.heal.png";
-earthmysticbar.onload = LoadingBar;
-var lightningmysticbar = new Image();//426
-lightningmysticbar.src = "grafix/menu/HUD/SPELLS/conductive.beam.png";
-lightningmysticbar.onload = LoadingBar;
-var airmysticbar = new Image();//318
-airmysticbar.src = "grafix/menu/HUD/SPELLS/homing.beam.png";
-airmysticbar.onload = LoadingBar;
-var waterbar = new Image();//310
-waterbar.src = "grafix/menu/HUD/SPELLS/bubble.ring.png";
-waterbar.onload = LoadingBar;
-var water2bar = new Image();//426
-water2bar.src = "grafix/menu/HUD/SPELLS/max.bubble.ring.png";
-water2bar.onload = LoadingBar;
-var firewaterbar = new Image();//394
-firewaterbar.src = "grafix/menu/HUD/SPELLS/explosive.ring.png";
-firewaterbar.onload = LoadingBar;
-var icewaterbar = new Image();//310
-icewaterbar.src = "grafix/menu/HUD/SPELLS/frozen.ring.png";
-icewaterbar.onload = LoadingBar;
-var earthwaterbar = new Image();//310
-earthwaterbar.src = "grafix/menu/HUD/SPELLS/bubble.heal.png";
-earthwaterbar.onload = LoadingBar;
-var lightningwaterbar = new Image();//226
-lightningwaterbar.src = "grafix/menu/HUD/SPELLS/zap.trap.png";
-lightningwaterbar.onload = LoadingBar;
-var airwaterbar = new Image();//338
-airwaterbar.src = "grafix/menu/HUD/SPELLS/bubble.blast.png";
-airwaterbar.onload = LoadingBar;
-var mysticwaterbar = new Image();//286
-mysticwaterbar.src = "grafix/menu/HUD/SPELLS/bubble.beam.png";
-mysticwaterbar.onload = LoadingBar;
-var darkbar = new Image();//138
-darkbar.src = "grafix/menu/HUD/SPELLS/traps.png";
-darkbar.onload = LoadingBar;
-var dark2bar = new Image();//282
-dark2bar.src = "grafix/menu/HUD/SPELLS/deathbound.png";
-dark2bar.onload = LoadingBar;
-var firedarkbar = new Image();//286
-firedarkbar.src = "grafix/menu/HUD/SPELLS/flame.trap.png";
-firedarkbar.onload = LoadingBar;
-var icedarkbar = new Image();//226
-icedarkbar.src = "grafix/menu/HUD/SPELLS/ice.trap.png";
-icedarkbar.onload = LoadingBar;
-var earthdarkbar = new Image();//258
-earthdarkbar.src = "grafix/menu/HUD/SPELLS/moonlight.png";
-earthdarkbar.onload = LoadingBar;
-var lightningdarkbar = new Image();//338
-lightningdarkbar.src = "grafix/menu/HUD/SPELLS/static.field.png";
-lightningdarkbar.onload = LoadingBar;
-var airdarkbar = new Image();//226
-airdarkbar.src = "grafix/menu/HUD/SPELLS/boosters.png";
-airdarkbar.onload = LoadingBar;
-var mysticdarkbar = new Image();//370
-mysticdarkbar.src = "grafix/menu/HUD/SPELLS/piercing.beam.png";
-mysticdarkbar.onload = LoadingBar;
-var waterdarkbar = new Image();//342
-waterdarkbar.src = "grafix/menu/HUD/SPELLS/shadow.cloak.png";
-waterdarkbar.onload = LoadingBar;
-var waterdarkbar2 = new Image();//340
-waterdarkbar2.src = "grafix/menu/HUD/SPELLS/cloak.charge.png";
-waterdarkbar2.onload = LoadingBar;
-var lightbar = new Image();//340
-lightbar.src = "grafix/menu/HUD/SPELLS/angel.png";
-lightbar.onload = LoadingBar;
-var light2bar = new Image();//340
-light2bar.src = "grafix/menu/HUD/SPELLS/army.of.god.png";
-light2bar.onload = LoadingBar;
-var firelightbar = new Image();//340
-firelightbar.src = "grafix/menu/HUD/SPELLS/fire.elemental.png";
-firelightbar.onload = LoadingBar;
-var icelightbar = new Image();//340
-icelightbar.src = "grafix/menu/HUD/SPELLS/ice.elemental.png";
-icelightbar.onload = LoadingBar;
-var earthlightbar = new Image();//340
-earthlightbar.src = "grafix/menu/HUD/SPELLS/sunlight.png";
-earthlightbar.onload = LoadingBar;
-var lightninglightbar = new Image();//340
-lightninglightbar.src = "grafix/menu/HUD/SPELLS/spark.elemental.png";
-lightninglightbar.onload = LoadingBar;
-var airlightbar = new Image();//340
-airlightbar.src = "grafix/menu/HUD/SPELLS/air.elemental.png";
-airlightbar.onload = LoadingBar;
-var mysticlightbar = new Image();//340
-mysticlightbar.src = "grafix/menu/HUD/SPELLS/light.beam.png";
-mysticlightbar.onload = LoadingBar;
-var waterlightbar = new Image();//340
-waterlightbar.src = "grafix/menu/HUD/SPELLS/water.elemental.png";
-waterlightbar.onload = LoadingBar;
-var darklightbar = new Image();//340
-darklightbar.src = "grafix/menu/HUD/SPELLS/fallen.angel.png";
-darklightbar.onload = LoadingBar;
+var SpellUISheet = new Image();//End: 290
+SpellUISheet.src = "grafix/menu/HUD/SPELLS/spellsui.png";
+SpellUISheet.onload = LoadingBar;
 //EleSymbolsforUI
 var FireSlot = new Image();
 FireSlot.src = "grafix/menu/HUD/ELEMENTS/fire.png";
@@ -818,101 +464,14 @@ Trap7HUD.src = "grafix/menu/HUD/TRAPS/7.png";
 Trap7HUD.onload = LoadingBar;
 var TrapHUDs = {1: Trap1HUD, 2: Trap2HUD, 3: Trap3HUD, 4: Trap4HUD, 5: Trap5HUD, 6: Trap6HUD, 7: Trap7HUD};
 //HP
-var HPGraphic1 = new Image();
-HPGraphic1.src = "grafix/menu/HUD/HEALTH/1.png";
-HPGraphic1.onload = LoadingBar;
-var HPGraphic2 = new Image();
-HPGraphic2.src = "grafix/menu/HUD/HEALTH/2.png";
-HPGraphic2.onload = LoadingBar;
-var HPGraphic3 = new Image();
-HPGraphic3.src = "grafix/menu/HUD/HEALTH/3.png";
-HPGraphic3.onload = LoadingBar;
-var HPGraphic4 = new Image();
-HPGraphic4.src = "grafix/menu/HUD/HEALTH/4.png";
-HPGraphic4.onload = LoadingBar;
-var HPGraphic5 = new Image();
-HPGraphic5.src = "grafix/menu/HUD/HEALTH/5.png";
-HPGraphic5.onload = LoadingBar;
-var HPGraphic6 = new Image();
-HPGraphic6.src = "grafix/menu/HUD/HEALTH/6.png";
-HPGraphic6.onload = LoadingBar;
-var HPGraphic7 = new Image();
-HPGraphic7.src = "grafix/menu/HUD/HEALTH/7.png";
-HPGraphic7.onload = LoadingBar;
-var HPGraphic8 = new Image();
-HPGraphic8.src = "grafix/menu/HUD/HEALTH/8.png";
-HPGraphic8.onload = LoadingBar;
-var HPGraphic9 = new Image();
-HPGraphic9.src = "grafix/menu/HUD/HEALTH/9.png";
-HPGraphic9.onload = LoadingBar;
-var HPGraphic10 = new Image();
-HPGraphic10.src = "grafix/menu/HUD/HEALTH/10.png";
-HPGraphic10.onload = LoadingBar;
-var HPGraphic11 = new Image();
-HPGraphic11.src = "grafix/menu/HUD/HEALTH/11.png";
-HPGraphic11.onload = LoadingBar;
-var HPGraphic12 = new Image();
-HPGraphic12.src = "grafix/menu/HUD/HEALTH/12.png";
-HPGraphic12.onload = LoadingBar;
-var HPGraphic13 = new Image();
-HPGraphic13.src = "grafix/menu/HUD/HEALTH/13.png";
-HPGraphic13.onload = LoadingBar;
-var HPGraphic14 = new Image();
-HPGraphic14.src = "grafix/menu/HUD/HEALTH/14.png";
-HPGraphic14.onload = LoadingBar;
-var HPGraphic15 = new Image();
-HPGraphic15.src = "grafix/menu/HUD/HEALTH/15.png";
-HPGraphic15.onload = LoadingBar;
-var hpBarGraphics = {1: HPGraphic1, 2: HPGraphic2, 3: HPGraphic3, 4: HPGraphic4, 5: HPGraphic5, 6: HPGraphic6, 7: HPGraphic7, 8: HPGraphic8,
-					9: HPGraphic9, 10: HPGraphic10, 11: HPGraphic11, 12: HPGraphic12, 13: HPGraphic13, 14: HPGraphic14, 15: HPGraphic15};
+var HPGraphicSheet = new Image();
+HPGraphicSheet.src = "grafix/menu/HUD/HEALTH/healthbar.png";
+HPGraphicSheet.onload = LoadingBar;
 //Score stuff
-var ScoreLeft = new Image();
-ScoreLeft.src = "grafix/menu/HUD/SCORE/cap.l.png";
-ScoreLeft.onload = LoadingBar;
-var ScoreRight = new Image();
-ScoreRight.src = "grafix/menu/HUD/SCORE/cap.r.png";
-ScoreRight.onload = LoadingBar;
-var Scorezero = new Image();
-Scorezero.src = "grafix/menu/HUD/SCORE/0.png";
-Scorezero.onload = LoadingBar;
-var Scoreone = new Image();
-Scoreone.src = "grafix/menu/HUD/SCORE/1.png";
-Scoreone.onload = LoadingBar;
-var Scoretwo = new Image();
-Scoretwo.src = "grafix/menu/HUD/SCORE/2.png";
-Scoretwo.onload = LoadingBar;
-var Scorethree = new Image();
-Scorethree.src = "grafix/menu/HUD/SCORE/3.png";
-Scorethree.onload = LoadingBar;
-var Scorefour = new Image();
-Scorefour.src = "grafix/menu/HUD/SCORE/4.png";
-Scorefour.onload = LoadingBar;
-var Scorefive = new Image();
-Scorefive.src = "grafix/menu/HUD/SCORE/5.png";
-Scorefive.onload = LoadingBar;
-var Scoresix = new Image();
-Scoresix.src = "grafix/menu/HUD/SCORE/6.png";
-Scoresix.onload = LoadingBar;
-var Scoreseven = new Image();
-Scoreseven.src = "grafix/menu/HUD/SCORE/7.png";
-Scoreseven.onload = LoadingBar;
-var Scoreeight = new Image();
-Scoreeight.src = "grafix/menu/HUD/SCORE/8.png";
-Scoreeight.onload = LoadingBar;
-var Scorenine = new Image();
-Scorenine.src = "grafix/menu/HUD/SCORE/9.png";
-Scorenine.onload = LoadingBar;
+var ScoreUISheet = new Image();
+ScoreUISheet.src = "grafix/menu/HUD/SCORE/scoreui.png";
+ScoreUISheet.onload = LoadingBar;
 //Environment
-var Tree = new Image();
-Tree.src = "grafix/objects/tree/health.3.png";
-Tree.onload = LoadingBar;
-var Tree2 = new Image();
-Tree2.src = "grafix/objects/tree/health.2.png";
-Tree2.onload = LoadingBar;
-var Tree3 = new Image();
-Tree3.src = "grafix/objects/tree/health.1.png";
-Tree3.onload = LoadingBar;
-//forest bkg
 var backGround1 = new Image();
 backGround1.src = "grafix/background/grass/grass.1.png";
 backGround1.onload = LoadingBar;
@@ -938,39 +497,15 @@ var backGround18 = new Image();
 backGround18.src = "grafix/background/grass/grass.8.png";
 backGround18.onload = LoadingBar;
 var forestbkgs = {1: backGround1, 2: backGround12, 3: backGround13, 4: backGround14, 5: backGround15, 6: backGround16, 7: backGround17, 8: backGround18};
-//Wizard Zap Trap
-var WizzurdElecL1 = new Image();
-WizzurdElecL1.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.l1.png";
-WizzurdElecL1.onload = LoadingBar;
-var WizzurdElecL2 = new Image();
-WizzurdElecL2.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.l2.png";
-WizzurdElecL2.onload = LoadingBar;
-var WizzurdElecL3 = new Image();
-WizzurdElecL3.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.l3.png";
-WizzurdElecL3.onload = LoadingBar;
-var WizzurdElecL4 = new Image();
-WizzurdElecL4.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.l4.png";
-WizzurdElecL4.onload = LoadingBar;
-var WizzurdElecL5 = new Image();
-WizzurdElecL5.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.l5.png";
-WizzurdElecL5.onload = LoadingBar;
-var ZapTrapL = {1: WizzurdElecL1, 2: WizzurdElecL2, 3: WizzurdElecL3, 4: WizzurdElecL4, 5: WizzurdElecL5}; 
-var WizzurdElecR1 = new Image();
-WizzurdElecR1.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.r1.png";
-WizzurdElecR1.onload = LoadingBar;
-var WizzurdElecR2 = new Image();
-WizzurdElecR2.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.r2.png";
-WizzurdElecR2.onload = LoadingBar;
-var WizzurdElecR3 = new Image();
-WizzurdElecR3.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.r3.png";
-WizzurdElecR3.onload = LoadingBar;
-var WizzurdElecR4 = new Image();
-WizzurdElecR4.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.r4.png";
-WizzurdElecR4.onload = LoadingBar;
-var WizzurdElecR5 = new Image();
-WizzurdElecR5.src = "grafix/wizzurds/effects.wizard/wizzurd32.elec.r5.png";
-WizzurdElecR5.onload = LoadingBar;
-var ZapTrapR = {1: WizzurdElecR1, 2: WizzurdElecR2, 3: WizzurdElecR3, 4: WizzurdElecR4, 5: WizzurdElecR5}; 
+var Tree = new Image();
+Tree.src = "grafix/objects/tree/health.3.png";
+Tree.onload = LoadingBar;
+var Tree2 = new Image();
+Tree2.src = "grafix/objects/tree/health.2.png";
+Tree2.onload = LoadingBar;
+var Tree3 = new Image();
+Tree3.src = "grafix/objects/tree/health.1.png";
+Tree3.onload = LoadingBar; 
 //Bees
 var BeeL1 = new Image();
 BeeL1.src = "grafix/creatures/bee/bee.l1.png";
@@ -997,67 +532,9 @@ var YBeeR2 = new Image();
 YBeeR2.src = "grafix/creatures/bee/eeb.r2.png";
 YBeeR2.onload = LoadingBar;
 //Flowers
-var BFlowerL = new Image();
-BFlowerL.src = "grafix/creatures/pikkit/blue/blue.l1.png";
-BFlowerL.onload = LoadingBar;
-var BFlowerR = new Image();
-BFlowerR.src = "grafix/creatures/pikkit/blue/blue.r1.png";
-BFlowerR.onload = LoadingBar;
-var BFlowerGrow1 = new Image();
-BFlowerGrow1.src = "grafix/creatures/pikkit/blue/bgrow.1.png";
-BFlowerGrow1.onload = LoadingBar;
-var BFlowerGrow2 = new Image();
-BFlowerGrow2.src = "grafix/creatures/pikkit/blue/bgrow.2.png";
-BFlowerGrow2.onload = LoadingBar;
-var BFlowerGrow3 = new Image();
-BFlowerGrow3.src = "grafix/creatures/pikkit/blue/bgrow.3.png";
-BFlowerGrow3.onload = LoadingBar;
-var BFlowerGrow4 = new Image();
-BFlowerGrow4.src = "grafix/creatures/pikkit/blue/bgrow.4.png";
-BFlowerGrow4.onload = LoadingBar;
-var RFlowerL = new Image();
-RFlowerL.src = "grafix/creatures/pikkit/red/red.l1.png";
-RFlowerL.onload = LoadingBar;
-var RFlowerR = new Image();
-RFlowerR.src = "grafix/creatures/pikkit/red/red.r1.png";
-RFlowerR.onload = LoadingBar;
-var RFlowerGrow1 = new Image();
-RFlowerGrow1.src = "grafix/creatures/pikkit/red/rgrow.1.png";
-RFlowerGrow1.onload = LoadingBar;
-var RFlowerGrow2 = new Image();
-RFlowerGrow2.src = "grafix/creatures/pikkit/red/rgrow.2.png";
-RFlowerGrow2.onload = LoadingBar;
-var RFlowerGrow3 = new Image();
-RFlowerGrow3.src = "grafix/creatures/pikkit/red/rgrow.3.png";
-RFlowerGrow3.onload = LoadingBar;
-var RFlowerGrow4 = new Image();
-RFlowerGrow4.src = "grafix/creatures/pikkit/red/rgrow.4.png";
-RFlowerGrow4.onload = LoadingBar;
-var YFlowerL = new Image();
-YFlowerL.src = "grafix/creatures/pikkit/yolo/yolo.l1.png";
-YFlowerL.onload = LoadingBar;
-var YFlowerR = new Image();
-YFlowerR.src = "grafix/creatures/pikkit/yolo/yolo.r1.png";
-YFlowerR.onload = LoadingBar;
-var YFlowerGrow1 = new Image();
-YFlowerGrow1.src = "grafix/creatures/pikkit/yolo/ygrow.1.png";
-YFlowerGrow1.onload = LoadingBar;
-var YFlowerGrow2 = new Image();
-YFlowerGrow2.src = "grafix/creatures/pikkit/yolo/ygrow.2.png";
-YFlowerGrow2.onload = LoadingBar;
-var YFlowerGrow3 = new Image();
-YFlowerGrow3.src = "grafix/creatures/pikkit/yolo/ygrow.3.png";
-YFlowerGrow3.onload = LoadingBar;
-var YFlowerGrow4 = new Image();
-YFlowerGrow4.src = "grafix/creatures/pikkit/yolo/ygrow.4.png";
-YFlowerGrow4.onload = LoadingBar;
-var YGrowArray = {1: YFlowerGrow1, 2: YFlowerGrow2, 3: YFlowerGrow3, 4: YFlowerGrow4};
-var RGrowArray = {1: RFlowerGrow1, 2: RFlowerGrow2, 3: RFlowerGrow3, 4: RFlowerGrow4};
-var BGrowArray = {1: BFlowerGrow1, 2: BFlowerGrow2, 3: BFlowerGrow3, 4: BFlowerGrow4};
-//Evil Wizzurd
-var Sorcerorpng = new Image();
-Sorcerorpng.src = "grafix/wizzurds/poison.wizard/poison.wiz.l1.png";
-Sorcerorpng.onload = LoadingBar;
+var FlowerSheet = new Image();
+FlowerSheet.src = "grafix/creatures/pikkit/pikkit.png";
+FlowerSheet.onload = LoadingBar;
 //Tree Wizzurd
 var TWizzurdL1 = new Image();
 TWizzurdL1.src = "grafix/creatures/treeson/tson.l1.png";
@@ -1075,6 +552,10 @@ FbossTotemU.onload = LoadingBar;
 var FbossTotemD = new Image();
 FbossTotemD.src = "grafix/creatures/dearyrocks/tote.d.png";
 FbossTotemD.onload = LoadingBar;
+//fall in
+var FbossEntrance = new Image();
+FbossEntrance.src = "grafix/creatures/dearyrocks/intro/intro.sheet.png";
+FbossEntrance.onload = LoadingBar;
 //Meteor
 var MeteorF0 = new Image();
 MeteorF0.src = "grafix/effects/meteor/meteor.fire0.png";
@@ -1140,95 +621,10 @@ var vlightning3 = new Image();
 vlightning3.src = "grafix/effects/lightning.self/ver.3.png";
 vlightning3.onload = LoadingBar;
 var vLightnings = {0: vlightning1, 1: vlightning2, 2: vlightning3};
-//ehlightning
-var ehlightning1 = new Image();
-ehlightning1.src = "grafix/effects/lightning.enemy/hor.1.png";
-ehlightning1.onload = LoadingBar;
-var ehlightning2 = new Image();
-ehlightning2.src = "grafix/effects/lightning.enemy/hor.2.png";
-ehlightning2.onload = LoadingBar;
-var ehlightning3 = new Image();
-ehlightning3.src = "grafix/effects/lightning.enemy/hor.3.png";
-ehlightning3.onload = LoadingBar;
-//evlightning
-var evlightning1 = new Image();
-evlightning1.src = "grafix/effects/lightning.enemy/ver.1.png";
-evlightning1.onload = LoadingBar;
-var evlightning2 = new Image();
-evlightning2.src = "grafix/effects/lightning.enemy/ver.2.png";
-evlightning2.onload = LoadingBar;
-var evlightning3 = new Image();
-evlightning3.src = "grafix/effects/lightning.enemy/ver.3.png";
-evlightning3.onload = LoadingBar;
 //Traps
-//Dark1
-var darkTrap = new Image();
-darkTrap.src = "grafix/objects/darktrap/darktrap.png";
-darkTrap.onload = LoadingBar;
-var darkTrapPoof1 = new Image();
-darkTrapPoof1.src = "grafix/objects/darktrap/darktrap.poof.1.png";
-darkTrapPoof1.onload = LoadingBar;
-var darkTrapPoof2 = new Image();
-darkTrapPoof2.src = "grafix/objects/darktrap/darktrap.poof.2.png";
-darkTrapPoof2.onload = LoadingBar;
-var darkTrapPoof3 = new Image();
-darkTrapPoof3.src = "grafix/objects/darktrap/darktrap.poof.3.png";
-darkTrapPoof3.onload = LoadingBar;
-var darkTrapPoof4 = new Image();
-darkTrapPoof4.src = "grafix/objects/darktrap/darktrap.poof.4.png";
-darkTrapPoof4.onload = LoadingBar;
-var darkTrapActive = {1: darkTrapPoof4, 2: darkTrapPoof3, 3: darkTrapPoof2, 4: darkTrapPoof1};
-//Dark2
-var dark2spike1 = new Image();
-dark2spike1.src = "grafix/objects/spikes/spike.01.png";
-dark2spike1.onload = LoadingBar;
-var dark2spike2 = new Image();
-dark2spike2.src = "grafix/objects/spikes/spike.02.png";
-dark2spike2.onload = LoadingBar;
-var dark2spike3 = new Image();
-dark2spike3.src = "grafix/objects/spikes/spike.03.png";
-dark2spike3.onload = LoadingBar;
-var dark2spike4 = new Image();
-dark2spike4.src = "grafix/objects/spikes/spike.04.png";
-dark2spike4.onload = LoadingBar;
-var dark2spike5 = new Image();
-dark2spike5.src = "grafix/objects/spikes/spike.05.png";
-dark2spike5.onload = LoadingBar;
-var dark2img = {1: dark2spike1, 2: dark2spike2, 3: dark2spike3, 4: dark2spike4, 5: dark2spike5};
-//darkfire
-var darkfireimg1 = new Image();
-darkfireimg1.src = "grafix/objects/firetrap/firetrap.01.png";
-darkfireimg1.onload = LoadingBar;
-var darkfireimg2 = new Image();
-darkfireimg2.src = "grafix/objects/firetrap/firetrap.02.png";
-darkfireimg2.onload = LoadingBar;
-var darkfireimg3 = new Image();
-darkfireimg3.src = "grafix/objects/firetrap/firetrap.03.png";
-darkfireimg3.onload = LoadingBar;
-var darkfireimg4 = new Image();
-darkfireimg4.src = "grafix/objects/firetrap/firetrap.04.png";
-darkfireimg4.onload = LoadingBar;
-var darkfireimg = {0: darkfireimg1, 1: darkfireimg2, 2: darkfireimg3, 3: darkfireimg4};
-//darkice
-var darkiceimg1 = new Image();
-darkiceimg1.src = "grafix/objects/icetrap/icetrap.01.png";
-darkiceimg1.onload = LoadingBar;
-var darkiceimg2 = new Image();
-darkiceimg2.src = "grafix/objects/icetrap/icetrap.02.png";
-darkiceimg2.onload = LoadingBar;
-var darkiceimg3 = new Image();
-darkiceimg3.src = "grafix/objects/icetrap/icetrap.03.png";
-darkiceimg3.onload = LoadingBar;
-var darkiceimg4 = new Image();
-darkiceimg4.src = "grafix/objects/icetrap/icetrap.04.png";
-darkiceimg4.onload = LoadingBar;
-var darkiceimg5 = new Image();
-darkiceimg5.src = "grafix/objects/icetrap/icetrap.05.png";
-darkiceimg5.onload = LoadingBar;
-var darkiceimg6 = new Image();
-darkiceimg6.src = "grafix/objects/icetrap/icetrap.06.png";
-darkiceimg6.onload = LoadingBar;
-var darkiceimg = {0: darkiceimg1, 1: darkiceimg2, 2: darkiceimg3, 3: darkiceimg4, 4: darkiceimg5, 5: darkiceimg6};
+var trapSheet = new Image();
+trapSheet.src = "grafix/objects/traps.png";
+trapSheet.onload = LoadingBar;
 //darklightning
 var darklightningimg1 = new Image();
 darklightningimg1.src = "grafix/objects/zaptrap/zaptrap.01.png";
@@ -1240,379 +636,60 @@ var darklightningimg3 = new Image();
 darklightningimg3.src = "grafix/objects/zaptrap/zaptrap.03.png";
 darklightningimg3.onload = LoadingBar;
 var darklightningimg = {0: darklightningimg1, 1: darklightningimg2, 2: darklightningimg3};
-//darkair
-var darkairimg1 = new Image();
-darkairimg1.src = "grafix/objects/booster/booster.01.png";
-darkairimg1.onload = LoadingBar;
-var darkairimg2 = new Image();
-darkairimg2.src = "grafix/objects/booster/booster.02.png";
-darkairimg2.onload = LoadingBar;
-var darkairimg3 = new Image();
-darkairimg3.src = "grafix/objects/booster/booster.03.png";
-darkairimg3.onload = LoadingBar;
-var darkairimg4 = new Image();
-darkairimg4.src = "grafix/objects/booster/booster.04.png";
-darkairimg4.onload = LoadingBar;
-var darkairimg = {1: darkairimg1, 2: darkairimg2, 3: darkairimg3, 4: darkairimg4};
 //darkwater
-var darkwater1img1 = new Image();
-darkwater1img1.src = "grafix/objects/darksheild/darksheild1.01.png";
-darkwater1img1.onload = LoadingBar;
-var darkwater1img2 = new Image();
-darkwater1img2.src = "grafix/objects/darksheild/darksheild1.02.png";
-darkwater1img2.onload = LoadingBar;
-var darkwater1img3 = new Image();
-darkwater1img3.src = "grafix/objects/darksheild/darksheild1.03.png";
-darkwater1img3.onload = LoadingBar;
-var darkwater1img4 = new Image();
-darkwater1img4.src = "grafix/objects/darksheild/darksheild1.04.png";
-darkwater1img4.onload = LoadingBar;
-var darksheildimg1 = {1: darkwater1img1, 2: darkwater1img2, 3: darkwater1img3, 4: darkwater1img4};
-var darkwater2img1 = new Image();
-darkwater2img1.src = "grafix/objects/darksheild/darksheild2.01.png";
-darkwater2img1.onload = LoadingBar;
-var darkwater2img2 = new Image();
-darkwater2img2.src = "grafix/objects/darksheild/darksheild2.02.png";
-darkwater2img2.onload = LoadingBar;
-var darkwater2img3 = new Image();
-darkwater2img3.src = "grafix/objects/darksheild/darksheild2.03.png";
-darkwater2img3.onload = LoadingBar;
-var darkwater2img4 = new Image();
-darkwater2img4.src = "grafix/objects/darksheild/darksheild2.04.png";
-darkwater2img4.onload = LoadingBar;
-var darksheildimg2 = {1: darkwater2img1, 2: darkwater2img2, 3: darkwater2img3, 4: darkwater2img4};
-var darkwater3img1 = new Image();
-darkwater3img1.src = "grafix/objects/darksheild/darksheild3.01.png";
-darkwater3img1.onload = LoadingBar;
-var darkwater3img2 = new Image();
-darkwater3img2.src = "grafix/objects/darksheild/darksheild3.02.png";
-darkwater3img2.onload = LoadingBar;
-var darkwater3img3 = new Image();
-darkwater3img3.src = "grafix/objects/darksheild/darksheild3.03.png";
-darkwater3img3.onload = LoadingBar;
-var darkwater3img4 = new Image();
-darkwater3img4.src = "grafix/objects/darksheild/darksheild3.04.png";
-darkwater3img4.onload = LoadingBar;
-var darksheildimg3 = {1: darkwater3img1, 2: darkwater3img2, 3: darkwater3img3, 4: darkwater3img4};
-//Monochrome Wizzurd
-var MonoWizzurd = new Image();
-MonoWizzurd.src = "grafix/wizzurds/effects.wizard/bw.wiz.l1.png";
-MonoWizzurd.onload = LoadingBar;
+var darkwaterSheet = new Image();
+darkwaterSheet.src = "grafix/objects/darksheild/darksheild.png";
+darkwaterSheet.onload = LoadingBar;
 //dumblebeam
-var DBeamH = new Image();
-DBeamH.src = "grafix/effects/beam/santa/beam.hor.png";
-DBeamH.onload = LoadingBar;
-var DBeamV = new Image();
-DBeamV.src = "grafix/effects/beam/santa/beam.ver.png";
-DBeamV.onload = LoadingBar;
-var DBeamWD = new Image();
-DBeamWD.src = "grafix/effects/beam/santa/beam.wd.png";
-DBeamWD.onload = LoadingBar;
-var DBeamWA = new Image();
-DBeamWA.src = "grafix/effects/beam/santa/beam.wa.png";
-DBeamWA.onload = LoadingBar;
-var RDBeamH = new Image();
-RDBeamH.src = "grafix/effects/beam/red/beam.hor.png";
-RDBeamH.onload = LoadingBar;
-var RDBeamV = new Image();
-RDBeamV.src = "grafix/effects/beam/red/beam.ver.png";
-RDBeamV.onload = LoadingBar;
-var RDBeamWD = new Image();
-RDBeamWD.src = "grafix/effects/beam/red/beam.wd.png";
-RDBeamWD.onload = LoadingBar;
-var RDBeamWA = new Image();
-RDBeamWA.src = "grafix/effects/beam/red/beam.wa.png";
-RDBeamWA.onload = LoadingBar;
-var TDBeamH = new Image();
-TDBeamH.src = "grafix/effects/beam/teal/beam.hor.png";
-TDBeamH.onload = LoadingBar;
-var TDBeamV = new Image();
-TDBeamV.src = "grafix/effects/beam/teal/beam.ver.png";
-TDBeamV.onload = LoadingBar;
-var TDBeamWD = new Image();
-TDBeamWD.src = "grafix/effects/beam/teal/beam.wd.png";
-TDBeamWD.onload = LoadingBar;
-var TDBeamWA = new Image();
-TDBeamWA.src = "grafix/effects/beam/teal/beam.wa.png";
-TDBeamWA.onload = LoadingBar;
-var YDBeamW = new Image();
-YDBeamW.src = "grafix/effects/beam/yellow/beam.w.png";
-YDBeamW.onload = LoadingBar;
-var YDBeamA = new Image();
-YDBeamA.src = "grafix/effects/beam/yellow/beam.a.png";
-YDBeamA.onload = LoadingBar;
-var YDBeamS = new Image();
-YDBeamS.src = "grafix/effects/beam/yellow/beam.s.png";
-YDBeamS.onload = LoadingBar;
-var YDBeamD = new Image();
-YDBeamD.src = "grafix/effects/beam/yellow/beam.d.png";
-YDBeamD.onload = LoadingBar;
-var YDBeamWA = new Image();
-YDBeamWA.src = "grafix/effects/beam/yellow/beam.wa.png";
-YDBeamWA.onload = LoadingBar;
-var YDBeamWD = new Image();
-YDBeamWD.src = "grafix/effects/beam/yellow/beam.wd.png";
-YDBeamWD.onload = LoadingBar;
-var YDBeamAS = new Image();
-YDBeamAS.src = "grafix/effects/beam/yellow/beam.as.png";
-YDBeamAS.onload = LoadingBar;
-var YDBeamSD = new Image();
-YDBeamSD.src = "grafix/effects/beam/yellow/beam.sd.png";
-YDBeamSD.onload = LoadingBar;
-var PDBeamH = new Image();
-PDBeamH.src = "grafix/effects/beam/purple/beam.hor.png";
-PDBeamH.onload = LoadingBar;
-var PDBeamV = new Image();
-PDBeamV.src = "grafix/effects/beam/purple/beam.ver.png";
-PDBeamV.onload = LoadingBar;
-var PDBeamWD = new Image();
-PDBeamWD.src = "grafix/effects/beam/purple/beam.wd.png";
-PDBeamWD.onload = LoadingBar;
-var PDBeamWA = new Image();
-PDBeamWA.src = "grafix/effects/beam/purple/beam.wa.png";
-PDBeamWA.onload = LoadingBar;
-var BDBeamH = new Image();
-BDBeamH.src = "grafix/effects/beam/black/beam.hor.png";
-BDBeamH.onload = LoadingBar;
-var BDBeamV = new Image();
-BDBeamV.src = "grafix/effects/beam/black/beam.ver.png";
-BDBeamV.onload = LoadingBar;
-var BDBeamWD = new Image();
-BDBeamWD.src = "grafix/effects/beam/black/beam.wd.png";
-BDBeamWD.onload = LoadingBar;
-var BDBeamWA = new Image();
-BDBeamWA.src = "grafix/effects/beam/black/beam.wa.png";
-BDBeamWA.onload = LoadingBar;
-var WDBeamW = new Image();
-WDBeamW.src = "grafix/effects/beam/white/beam.w.png";
-WDBeamW.onload = LoadingBar;
-var WDBeamA = new Image();
-WDBeamA.src = "grafix/effects/beam/white/beam.a.png";
-WDBeamA.onload = LoadingBar;
-var WDBeamS = new Image();
-WDBeamS.src = "grafix/effects/beam/white/beam.s.png";
-WDBeamS.onload = LoadingBar;
-var WDBeamD = new Image();
-WDBeamD.src = "grafix/effects/beam/white/beam.d.png";
-WDBeamD.onload = LoadingBar;
-var WDBeamWA = new Image();
-WDBeamWA.src = "grafix/effects/beam/white/beam.wa.png";
-WDBeamWA.onload = LoadingBar;
-var WDBeamWD = new Image();
-WDBeamWD.src = "grafix/effects/beam/white/beam.wd.png";
-WDBeamWD.onload = LoadingBar;
-var WDBeamAS = new Image();
-WDBeamAS.src = "grafix/effects/beam/white/beam.as.png";
-WDBeamAS.onload = LoadingBar;
-var WDBeamSD = new Image();
-WDBeamSD.src = "grafix/effects/beam/white/beam.sd.png";
-WDBeamSD.onload = LoadingBar;
-//Fire powerup
-var Firebox = new Image();
-Firebox.src = "grafix/powers/fire/fire1.png";
-Firebox.onload = LoadingBar;
-var Firebox2 = new Image();
-Firebox2.src = "grafix/powers/fire/fire2.png";
-Firebox2.onload = LoadingBar;
-var Firebox3 = new Image();
-Firebox3.src = "grafix/powers/fire/fire3.png";
-Firebox3.onload = LoadingBar;
-var Firebox4 = new Image();
-Firebox4.src = "grafix/powers/fire/fire4.png";
-Firebox4.onload = LoadingBar;
-var Firebox5 = new Image();
-Firebox5.src = "grafix/powers/fire/fire5.png";
-Firebox5.onload = LoadingBar;
+var BeamSheet = new Image();
+BeamSheet.src = "grafix/effects/beam/beam.png";
+BeamSheet.onload = LoadingBar;
+//powerups
+var Pickup_Elements = new Image();
+Pickup_Elements.src = "grafix/powers/elements.png";
+Pickup_Elements.onload = LoadingBar;
+var HUD_Elements = new Image();
+HUD_Elements.src = "grafix/menu/HUD/ELEMENTS/hud.elements.png";
+HUD_Elements.onload = LoadingBar;
 var FireIcon = new Image();
 FireIcon.src = "grafix/powers/fire/fire.icon.png";
 FireIcon.onload = LoadingBar;
-var Fires = {1: Firebox, 2: Firebox2, 3: Firebox3, 4: Firebox4, 5: Firebox5};
 //Ice powerup
-var Icebox = new Image();
-Icebox.src = "grafix/powers/ice/ice1.png";
-Icebox.onload = LoadingBar;
-var Icebox2 = new Image();
-Icebox2.src = "grafix/powers/ice/ice2.png";
-Icebox2.onload = LoadingBar;
-var Icebox3 = new Image();
-Icebox3.src = "grafix/powers/ice/ice3.png";
-Icebox3.onload = LoadingBar;
-var Icebox4 = new Image();
-Icebox4.src = "grafix/powers/ice/ice4.png";
-Icebox4.onload = LoadingBar;
-var Icebox5 = new Image();
-Icebox5.src = "grafix/powers/ice/ice5.png";
-Icebox5.onload = LoadingBar;
 var IceIcon = new Image();
 IceIcon.src = "grafix/powers/ice/ice.icon.png";
 IceIcon.onload = LoadingBar;
-var Ices = {1: Icebox, 2: Icebox2, 3: Icebox3, 4: Icebox4, 5: Icebox5};
 //Earth powerup
-var Earthbox = new Image();
-Earthbox.src = "grafix/powers/earth/earth1.png";
-Earthbox.onload = LoadingBar;
-var Earthbox2 = new Image();
-Earthbox2.src = "grafix/powers/earth/earth2.png";
-Earthbox2.onload = LoadingBar;
-var Earthbox3 = new Image();
-Earthbox3.src = "grafix/powers/earth/earth3.png";
-Earthbox3.onload = LoadingBar;
-var Earthbox4 = new Image();
-Earthbox4.src = "grafix/powers/earth/earth4.png";
-Earthbox4.onload = LoadingBar;
-var Earthbox5 = new Image();
-Earthbox5.src = "grafix/powers/earth/earth5.png";
-Earthbox5.onload = LoadingBar;
 var EarthIcon = new Image();
 EarthIcon.src = "grafix/powers/earth/earth.icon.png";
 EarthIcon.onload = LoadingBar;
-var Earths = {1: Earthbox, 2: Earthbox2, 3: Earthbox3, 4: Earthbox4, 5: Earthbox5};
 //lightning powerup
-var Thunderbox = new Image();
-Thunderbox.src = "grafix/powers/zap/zap1.png";
-Thunderbox.onload = LoadingBar;
-var Thunderbox2 = new Image();
-Thunderbox2.src = "grafix/powers/zap/zap2.png";
-Thunderbox2.onload = LoadingBar;
-var Thunderbox3 = new Image();
-Thunderbox3.src = "grafix/powers/zap/zap3.png";
-Thunderbox3.onload = LoadingBar;
-var Thunderbox4 = new Image();
-Thunderbox4.src = "grafix/powers/zap/zap4.png";
-Thunderbox4.onload = LoadingBar;
-var Thunderbox5 = new Image();
-Thunderbox5.src = "grafix/powers/zap/zap5.png";
-Thunderbox5.onload = LoadingBar;
 var LightningIcon = new Image();
 LightningIcon.src = "grafix/powers/zap/zap.icon.png";
 LightningIcon.onload = LoadingBar;
-var Thunders = {1: Thunderbox, 2: Thunderbox2, 3: Thunderbox3, 4: Thunderbox4, 5: Thunderbox5};
 //Air powerup
-var Windbox = new Image();
-Windbox.src = "grafix/powers/air/air1.png";
-Windbox.onload = LoadingBar;
-var Windbox2 = new Image();
-Windbox2.src = "grafix/powers/air/air2.png";
-Windbox2.onload = LoadingBar;
-var Windbox3 = new Image();
-Windbox3.src = "grafix/powers/air/air3.png";
-Windbox3.onload = LoadingBar;
-var Windbox4 = new Image();
-Windbox4.src = "grafix/powers/air/air4.png";
-Windbox4.onload = LoadingBar;
-var Windbox5 = new Image();
-Windbox5.src = "grafix/powers/air/air5.png";
-Windbox5.onload = LoadingBar;
 var AirIcon = new Image();
 AirIcon.src = "grafix/powers/air/air.icon.png";
 AirIcon.onload = LoadingBar;
-var Winds = {1: Windbox, 2: Windbox2, 3: Windbox3, 4: Windbox4, 5: Windbox5};
 //Mystic powerup
-var Mysticbox = new Image();
-Mysticbox.src = "grafix/powers/mystic/mystic1.png";
-Mysticbox.onload = LoadingBar;
-var Mysticbox2 = new Image();
-Mysticbox2.src = "grafix/powers/mystic/mystic2.png";
-Mysticbox2.onload = LoadingBar;
-var Mysticbox3 = new Image();
-Mysticbox3.src = "grafix/powers/mystic/mystic3.png";
-Mysticbox3.onload = LoadingBar;
-var Mysticbox4 = new Image();
-Mysticbox4.src = "grafix/powers/mystic/mystic4.png";
-Mysticbox4.onload = LoadingBar;
-var Mysticbox5 = new Image();
-Mysticbox5.src = "grafix/powers/mystic/mystic5.png";
-Mysticbox5.onload = LoadingBar;
 var MysticIcon = new Image();
 MysticIcon.src = "grafix/powers/mystic/mystic.icon.png";
 MysticIcon.onload = LoadingBar;
-var Mystics = {1: Mysticbox, 2: Mysticbox2, 3: Mysticbox3, 4: Mysticbox4, 5: Mysticbox5};
 //Water powerup
-var Waterbox = new Image();
-Waterbox.src = "grafix/powers/water/water1.png";
-Waterbox.onload = LoadingBar;
-var Waterbox2 = new Image();
-Waterbox2.src = "grafix/powers/water/water2.png";
-Waterbox2.onload = LoadingBar;
-var Waterbox3 = new Image();
-Waterbox3.src = "grafix/powers/water/water3.png";
-Waterbox3.onload = LoadingBar;
-var Waterbox4 = new Image();
-Waterbox4.src = "grafix/powers/water/water4.png";
-Waterbox4.onload = LoadingBar;
-var Waterbox5 = new Image();
-Waterbox5.src = "grafix/powers/water/water5.png";
-Waterbox5.onload = LoadingBar;
 var WaterIcon = new Image();
 WaterIcon.src = "grafix/powers/water/water.icon.png";
 WaterIcon.onload = LoadingBar;
-var Waters = {1: Waterbox, 2: Waterbox2, 3: Waterbox3, 4: Waterbox4, 5: Waterbox5};
 //Dark powerup
-var Darkbox = new Image();
-Darkbox.src = "grafix/powers/dark/dark1.png";
-Darkbox.onload = LoadingBar;
-var Darkbox2 = new Image();
-Darkbox2.src = "grafix/powers/dark/dark2.png";
-Darkbox2.onload = LoadingBar;
-var Darkbox3 = new Image();
-Darkbox3.src = "grafix/powers/dark/dark3.png";
-Darkbox3.onload = LoadingBar;
-var Darkbox4 = new Image();
-Darkbox4.src = "grafix/powers/dark/dark4.png";
-Darkbox4.onload = LoadingBar;
-var Darkbox5 = new Image();
-Darkbox5.src = "grafix/powers/dark/dark5.png";
-Darkbox5.onload = LoadingBar;
 var DarkIcon = new Image();
 DarkIcon.src = "grafix/powers/dark/dark.icon.png";
 DarkIcon.onload = LoadingBar;
-var Darks = {1: Darkbox, 2: Darkbox2, 3: Darkbox3, 4: Darkbox4, 5: Darkbox5};
 //Light powerup
-var Lightbox = new Image();
-Lightbox.src = "grafix/powers/light/light1.png";
-Lightbox.onload = LoadingBar;
-var Lightbox2 = new Image();
-Lightbox2.src = "grafix/powers/light/light2.png";
-Lightbox2.onload = LoadingBar;
-var Lightbox3 = new Image();
-Lightbox3.src = "grafix/powers/light/light3.png";
-Lightbox3.onload = LoadingBar;
-var Lightbox4 = new Image();
-Lightbox4.src = "grafix/powers/light/light4.png";
-Lightbox4.onload = LoadingBar;
-var Lightbox5 = new Image();
-Lightbox5.src = "grafix/powers/light/light5.png";
-Lightbox5.onload = LoadingBar;
 var LightIcon = new Image();
 LightIcon.src = "grafix/powers/light/light.icon.png";
 LightIcon.onload = LoadingBar;
-var Lights = {1: Lightbox, 2: Lightbox2, 3: Lightbox3, 4: Lightbox4, 5: Lightbox5};
 // Particle
-var particle1 = new Image();
-particle1.src = "grafix/effects/hpup/hpup1.png";
-particle1.onload = LoadingBar;
-var particle2 = new Image();
-particle2.src = "grafix/effects/hpup/hpup2.png";
-particle2.onload = LoadingBar;
-var particle3 = new Image();
-particle3.src = "grafix/effects/hpup/hpup3.png";
-particle3.onload = LoadingBar;
-var particle4 = new Image();
-particle4.src = "grafix/effects/hpup/hpup4.png";
-particle4.onload = LoadingBar;
-var particle5 = new Image();
-particle5.src = "grafix/effects/hpup/hpup5.png";
-particle5.onload = LoadingBar;
-var particle6 = new Image();
-particle6.src = "grafix/effects/hpup/hpup6.png";
-particle6.onload = LoadingBar;
-var particle7 = new Image();
-particle7.src = "grafix/effects/hpup/hpup7.png";
-particle7.onload = LoadingBar;
-var particle8 = new Image();
-particle8.src = "grafix/effects/hpup/hpup8.png";
-particle8.onload = LoadingBar;
-var colorParticles = {1: particle1, 2: particle2, 3: particle3, 4: particle4, 5: particle5, 6: particle6, 7: particle7, 8: particle8};
+var particleSheet = new Image();
+particleSheet.src = "grafix/effects/hpup/hpup.png";
+particleSheet.onload = LoadingBar;
 //Bubble
 var Bubble = new Image();
 Bubble.src = "grafix/effects/bubble/bubble.png";
@@ -1668,14 +745,6 @@ var IceMinionL1 = new Image();
 IceMinionL1.src = "grafix/creatures/minion/pikkit.l1.png";
 IceMinionL1.onload = LoadingBar;
 //--------------------------------------------------------- Jungle Graphics ---------------------------------------------------------//
-//Shadow wizz
-var shadeWizzL = new Image();
-shadeWizzL.src = "grafix/wizzurds/effects.wizard/wiz.shadow.l.png";
-shadeWizzL.onload = LoadingBar;
-var shadeWizzR = new Image();
-shadeWizzR.src = "grafix/wizzurds/effects.wizard/wiz.shadow.r.png";
-shadeWizzR.onload = LoadingBar;
-//bkg
 var backGround2 = new Image();
 backGround2.src = "grafix/background/jungle1.png";
 backGround2.onload = LoadingBar;
@@ -1967,7 +1036,6 @@ var ThiefBossFlashPrintR = new Image();
 ThiefBossFlashPrintR.src = "grafix/creatures/raoulfdatheifbaus/flashprint.r1.png";
 ThiefBossFlashPrintR.onload = LoadingBar;
 //------------------------------------------------ Fire Level -----------------------------------------------------------------------//
-//bkg
 var FireBackGround1 = new Image();
 FireBackGround1.src = "grafix/background/lava/lava.1.png";
 FireBackGround1.onload = LoadingBar;
@@ -2031,389 +1099,26 @@ GlobblyL3.onload = LoadingBar;
 var GlobblyR = {1: GlobblyR1, 2: GlobblyR2, 3: GlobblyR3};
 var GlobblyL = {1: GlobblyL1, 2: GlobblyL2, 3: GlobblyL3};
 //Spawner
-var SplavamanL1 = new Image();
-SplavamanL1.src = "grafix/creatures/winamp/winamp.l1.png";
-SplavamanL1.onload = LoadingBar;
-var SplavamanL2 = new Image();
-SplavamanL2.src = "grafix/creatures/winamp/winamp.l2.png";
-SplavamanL2.onload = LoadingBar;
-var SplavamanL3 = new Image();
-SplavamanL3.src = "grafix/creatures/winamp/winamp.l3.png";
-SplavamanL3.onload = LoadingBar;
-var SplavamanL4 = new Image();
-SplavamanL4.src = "grafix/creatures/winamp/winamp.l4.png";
-SplavamanL4.onload = LoadingBar;
-var SplavamanR1 = new Image();
-SplavamanR1.src = "grafix/creatures/winamp/winamp.r1.png";
-SplavamanR1.onload = LoadingBar;
-var SplavamanR2 = new Image();
-SplavamanR2.src = "grafix/creatures/winamp/winamp.r2.png";
-SplavamanR2.onload = LoadingBar;
-var SplavamanR3 = new Image();
-SplavamanR3.src = "grafix/creatures/winamp/winamp.r3.png";
-SplavamanR3.onload = LoadingBar;
-var SplavamanR4 = new Image();
-SplavamanR4.src = "grafix/creatures/winamp/winamp.r4.png";
-SplavamanR4.onload = LoadingBar;
-var SplavamanCastL1 = new Image();
-SplavamanCastL1.src = "grafix/creatures/winamp/cast.l1.png";
-SplavamanCastL1.onload = LoadingBar;
-var SplavamanCastL2 = new Image();
-SplavamanCastL2.src = "grafix/creatures/winamp/cast.l2.png";
-SplavamanCastL2.onload = LoadingBar;
-var SplavamanCastL3 = new Image();
-SplavamanCastL3.src = "grafix/creatures/winamp/cast.l3.png";
-SplavamanCastL3.onload = LoadingBar;
-var SplavamanCastL4 = new Image();
-SplavamanCastL4.src = "grafix/creatures/winamp/cast.l4.png";
-SplavamanCastL4.onload = LoadingBar;
-var SplavamanCastL5 = new Image();
-SplavamanCastL5.src = "grafix/creatures/winamp/cast.l5.png";
-SplavamanCastL5.onload = LoadingBar;
-var SplavamanCastL6 = new Image();
-SplavamanCastL6.src = "grafix/creatures/winamp/cast.l6.png";
-SplavamanCastL6.onload = LoadingBar;
-var SplavamanCastR1 = new Image();
-SplavamanCastR1.src = "grafix/creatures/winamp/cast.r1.png";
-SplavamanCastR1.onload = LoadingBar;
-var SplavamanCastR2 = new Image();
-SplavamanCastR2.src = "grafix/creatures/winamp/cast.r2.png";
-SplavamanCastR2.onload = LoadingBar;
-var SplavamanCastR3 = new Image();
-SplavamanCastR3.src = "grafix/creatures/winamp/cast.r3.png";
-SplavamanCastR3.onload = LoadingBar;
-var SplavamanCastR4 = new Image();
-SplavamanCastR4.src = "grafix/creatures/winamp/cast.r4.png";
-SplavamanCastR4.onload = LoadingBar;
-var SplavamanCastR5 = new Image();
-SplavamanCastR5.src = "grafix/creatures/winamp/cast.r5.png";
-SplavamanCastR5.onload = LoadingBar;
-var SplavamanCastR6 = new Image();
-SplavamanCastR6.src = "grafix/creatures/winamp/cast.r6.png";
-SplavamanCastR6.onload = LoadingBar;
-var SplavamanSpawnL1 = new Image();
-SplavamanSpawnL1.src = "grafix/creatures/winamp/spawn.l1.png";
-SplavamanSpawnL1.onload = LoadingBar;
-var SplavamanSpawnL2 = new Image();
-SplavamanSpawnL2.src = "grafix/creatures/winamp/spawn.l2.png";
-SplavamanSpawnL2.onload = LoadingBar;
-var SplavamanSpawnL3 = new Image();
-SplavamanSpawnL3.src = "grafix/creatures/winamp/spawn.l3.png";
-SplavamanSpawnL3.onload = LoadingBar;
-var SplavamanSpawnL4 = new Image();
-SplavamanSpawnL4.src = "grafix/creatures/winamp/spawn.l4.png";
-SplavamanSpawnL4.onload = LoadingBar;
-var SplavamanSpawnL5 = new Image();
-SplavamanSpawnL5.src = "grafix/creatures/winamp/spawn.l5.png";
-SplavamanSpawnL5.onload = LoadingBar;
-var SplavamanSpawnL6 = new Image();
-SplavamanSpawnL6.src = "grafix/creatures/winamp/spawn.l6.png";
-SplavamanSpawnL6.onload = LoadingBar;
-var SplavamanSpawnR1 = new Image();
-SplavamanSpawnR1.src = "grafix/creatures/winamp/spawn.r1.png";
-SplavamanSpawnR1.onload = LoadingBar;
-var SplavamanSpawnR2 = new Image();
-SplavamanSpawnR2.src = "grafix/creatures/winamp/spawn.r2.png";
-SplavamanSpawnR2.onload = LoadingBar;
-var SplavamanSpawnR3 = new Image();
-SplavamanSpawnR3.src = "grafix/creatures/winamp/spawn.r3.png";
-SplavamanSpawnR3.onload = LoadingBar;
-var SplavamanSpawnR4 = new Image();
-SplavamanSpawnR4.src = "grafix/creatures/winamp/spawn.r4.png";
-SplavamanSpawnR4.onload = LoadingBar;
-var SplavamanSpawnR5 = new Image();
-SplavamanSpawnR5.src = "grafix/creatures/winamp/spawn.r5.png";
-SplavamanSpawnR5.onload = LoadingBar;
-var SplavamanSpawnR6 = new Image();
-SplavamanSpawnR6.src = "grafix/creatures/winamp/spawn.r6.png";
-SplavamanSpawnR6.onload = LoadingBar;
-var SplavamanLWalk = {1: SplavamanL1, 2: SplavamanL2, 3: SplavamanL3, 4: SplavamanL4};
-var SplavamanRWalk = {1: SplavamanR1, 2: SplavamanR2, 3: SplavamanR3, 4: SplavamanR4};
-var SplavamanLCast = {1: SplavamanCastL1, 2: SplavamanCastL1, 3: SplavamanCastL1, 4: SplavamanCastL1, 5: SplavamanCastL1, 6: SplavamanCastL1, 7: SplavamanCastL1, 8: SplavamanCastL2, 9: SplavamanCastL2,
-						10: SplavamanCastL2, 11: SplavamanCastL3, 12: SplavamanCastL3, 13: SplavamanCastL3, 14: SplavamanCastL3, 15: SplavamanCastL4, 16: SplavamanCastL4, 17: SplavamanCastL4,
-						18: SplavamanCastL4, 19: SplavamanCastL5, 20: SplavamanCastL5, 21: SplavamanCastL5, 22: SplavamanCastL5, 23: SplavamanCastL5, 24: SplavamanCastL5,
-						25: SplavamanCastL5, 26: SplavamanCastL6, 27: SplavamanCastL6};
-var SplavamanRCast = {1: SplavamanCastR1, 2: SplavamanCastR1, 3: SplavamanCastR1, 4: SplavamanCastR1, 5: SplavamanCastR1, 6: SplavamanCastR1, 7: SplavamanCastR1, 8: SplavamanCastR2, 9: SplavamanCastR2,
-						10: SplavamanCastR2, 11: SplavamanCastR3, 12: SplavamanCastR3, 13: SplavamanCastR3, 14: SplavamanCastR3, 15: SplavamanCastR4, 16: SplavamanCastR4, 17: SplavamanCastR4,
-						18: SplavamanCastR4, 19: SplavamanCastR5, 20: SplavamanCastR5, 21: SplavamanCastR5, 22: SplavamanCastR5, 23: SplavamanCastR5, 24: SplavamanCastR5,
-						25: SplavamanCastR5, 26: SplavamanCastR6, 27: SplavamanCastR6};
-var SplavamanLSpawn = {1: SplavamanSpawnL1, 2: SplavamanSpawnL1, 3: SplavamanSpawnL1, 4: SplavamanSpawnL1, 5: SplavamanSpawnL1, 6: SplavamanSpawnL1, 7: SplavamanSpawnL1, 8: SplavamanSpawnL1, 9: SplavamanSpawnL2,
-						10: SplavamanSpawnL2, 11: SplavamanSpawnL3, 12: SplavamanSpawnL3, 13: SplavamanSpawnL4, 14: SplavamanSpawnL4, 15: SplavamanSpawnL4, 16: SplavamanSpawnL4, 17: SplavamanSpawnL4,
-						18: SplavamanSpawnL4, 19: SplavamanSpawnL5, 20: SplavamanSpawnL6, 21: SplavamanSpawnL6};
-var SplavamanRSpawn = {1: SplavamanSpawnR1, 2: SplavamanSpawnR1, 3: SplavamanSpawnR1, 4: SplavamanSpawnR1, 5: SplavamanSpawnR1, 6: SplavamanSpawnR1, 7: SplavamanSpawnR1, 8: SplavamanSpawnR1, 9: SplavamanSpawnR2,
-						10: SplavamanSpawnR2, 11: SplavamanSpawnR3, 12: SplavamanSpawnR3, 13: SplavamanSpawnR4, 14: SplavamanSpawnR4, 15: SplavamanSpawnR4, 16: SplavamanSpawnR4, 17: SplavamanSpawnR4,
-						18: SplavamanSpawnR4, 19: SplavamanSpawnR5, 20: SplavamanSpawnR6, 21: SplavamanSpawnR6};
-
-
+var SplavamanSheet = new Image();
+SplavamanSheet.src = "grafix/creatures/winamp/winamp.png";
+SplavamanSheet.onload = LoadingBar;
+var SplavamanCast = {1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 2, 9: 2,
+						10: 2, 11: 3, 12: 3, 13: 3, 14: 3, 15: 4, 16: 4, 17: 4,
+						18: 4, 19: 5, 20: 5, 21: 5, 22: 5, 23: 5, 24: 5,
+						25: 5, 26: 6, 27: 6};
+var SplavamanSpawn = {1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 2,
+						10: 2, 11: 3, 12: 3, 13: 4, 14: 4, 15: 4, 16: 4, 17: 4,
+						18: 4, 19: 5, 20: 6, 21: 6};
 //Genie
-var GenieL = new Image();
-GenieL.src = "grafix/creatures/ortizgenie/idle.l1.png";
-GenieL.onload = LoadingBar;
-var GenieR = new Image();
-GenieR.src = "grafix/creatures/ortizgenie/idle.r1.png";
-GenieR.onload = LoadingBar;
-var GenieML3 = new Image();
-GenieML3.src = "grafix/creatures/ortizgenie/mstrike.l3.png";
-GenieML3.onload = LoadingBar;
-var GenieMR3 = new Image();
-GenieMR3.src = "grafix/creatures/ortizgenie/mstrike.r3.png";
-GenieMR3.onload = LoadingBar;
-var GenieRiseL3 = new Image();
-GenieRiseL3.src = "grafix/creatures/ortizgenie/rise.l3.png";
-GenieRiseL3.onload = LoadingBar;
-var GenieRiseR3 = new Image();
-GenieRiseR3.src = "grafix/creatures/ortizgenie/rise.r3.png";
-GenieRiseR3.onload = LoadingBar;
-var GenieSpawn1 = new Image();
-GenieSpawn1.src = "grafix/creatures/ortizgenie/spawn/1.png";
-GenieSpawn1.onload = LoadingBar;
-var GenieSpawn2 = new Image();
-GenieSpawn2.src = "grafix/creatures/ortizgenie/spawn/2.png";
-GenieSpawn2.onload = LoadingBar;
-var GenieSpawn3 = new Image();
-GenieSpawn3.src = "grafix/creatures/ortizgenie/spawn/3.png";
-GenieSpawn3.onload = LoadingBar;
-var GenieSpawn4 = new Image();
-GenieSpawn4.src = "grafix/creatures/ortizgenie/spawn/4.png";
-GenieSpawn4.onload = LoadingBar;
-var GenieSpawn5 = new Image();
-GenieSpawn5.src = "grafix/creatures/ortizgenie/spawn/5.png";
-GenieSpawn5.onload = LoadingBar;
-var GenieSpawn6 = new Image();
-GenieSpawn6.src = "grafix/creatures/ortizgenie/spawn/6.png";
-GenieSpawn6.onload = LoadingBar;
-var GenieSpawn7 = new Image();
-GenieSpawn7.src = "grafix/creatures/ortizgenie/spawn/7.png";
-GenieSpawn7.onload = LoadingBar;
-var GenieSpawn8 = new Image();
-GenieSpawn8.src = "grafix/creatures/ortizgenie/spawn/8.png";
-GenieSpawn8.onload = LoadingBar;
-var GenieSpawn9 = new Image();
-GenieSpawn9.src = "grafix/creatures/ortizgenie/spawn/9.png";
-GenieSpawn9.onload = LoadingBar;
-var GenieSpawn10 = new Image();
-GenieSpawn10.src = "grafix/creatures/ortizgenie/spawn/10.png";
-GenieSpawn10.onload = LoadingBar;
-var GenieSpawn11 = new Image();
-GenieSpawn11.src = "grafix/creatures/ortizgenie/spawn/11.png";
-GenieSpawn11.onload = LoadingBar;
-var GenieSpawn12 = new Image();
-GenieSpawn12.src = "grafix/creatures/ortizgenie/spawn/12.png";
-GenieSpawn12.onload = LoadingBar;
-var GenieSpawn13 = new Image();
-GenieSpawn13.src = "grafix/creatures/ortizgenie/spawn/13.png";
-GenieSpawn13.onload = LoadingBar;
-var GenieSpawn14 = new Image();
-GenieSpawn14.src = "grafix/creatures/ortizgenie/spawn/14.png";
-GenieSpawn14.onload = LoadingBar;
-var GenieSpawn15 = new Image();
-GenieSpawn15.src = "grafix/creatures/ortizgenie/spawn/15.png";
-GenieSpawn15.onload = LoadingBar;
-var GenieSpawn16 = new Image();
-GenieSpawn16.src = "grafix/creatures/ortizgenie/spawn/16.png";
-GenieSpawn16.onload = LoadingBar;
-var GenieSpawn17 = new Image();
-GenieSpawn17.src = "grafix/creatures/ortizgenie/spawn/17.png";
-GenieSpawn17.onload = LoadingBar;
-var GenieSpawn = {1: GenieSpawn1, 2: GenieSpawn1, 3: GenieSpawn2, 4: GenieSpawn2, 5: GenieSpawn2, 6: GenieSpawn3, 7: GenieSpawn3, 8: GenieSpawn4, 9: GenieSpawn4,
-					10: GenieSpawn4, 11: GenieSpawn4, 12: GenieSpawn5, 13: GenieSpawn5, 14: GenieSpawn5, 15: GenieSpawn6, 16: GenieSpawn6, 17: GenieSpawn6, 18: GenieSpawn6,
-					19: GenieSpawn6, 20: GenieSpawn7, 21: GenieSpawn8, 22: GenieSpawn8, 23: GenieSpawn9, 24: GenieSpawn9, 25: GenieSpawn9, 26: GenieSpawn10, 27: GenieSpawn11, 
-					28: GenieSpawn12, 29: GenieSpawn13, 30: GenieSpawn14, 31: GenieSpawn14, 32: GenieSpawn15, 33: GenieSpawn15, 34: GenieSpawn16, 35: GenieSpawn17, 36: GenieSpawn17};
-var GenieLaserShootL1 = new Image();
-GenieLaserShootL1.src = "grafix/creatures/ortizgenie/laser.l3.1.png";
-GenieLaserShootL1.onload = LoadingBar;
-var GenieLaserShootL2 = new Image();
-GenieLaserShootL2.src = "grafix/creatures/ortizgenie/laser.l3.2.png";
-GenieLaserShootL2.onload = LoadingBar;
-var GenieLaserShootL3 = new Image();
-GenieLaserShootL3.src = "grafix/creatures/ortizgenie/laser.l3.3.png";
-GenieLaserShootL3.onload = LoadingBar;
-var GenieLaserLoopL = {1: GenieLaserShootL1, 2: GenieLaserShootL2, 3: GenieLaserShootL3};
-var GenieLaserShootR1 = new Image();
-GenieLaserShootR1.src = "grafix/creatures/ortizgenie/laser.r3.1.png";
-GenieLaserShootR1.onload = LoadingBar;
-var GenieLaserShootR2 = new Image();
-GenieLaserShootR2.src = "grafix/creatures/ortizgenie/laser.r3.2.png";
-GenieLaserShootR2.onload = LoadingBar;
-var GenieLaserShootR3 = new Image();
-GenieLaserShootR3.src = "grafix/creatures/ortizgenie/laser.r3.3.png";
-GenieLaserShootR3.onload = LoadingBar;
-var GenieLaserLoopR = {1: GenieLaserShootR1, 2: GenieLaserShootR2, 3: GenieLaserShootR3};
-//laser
-var LaserUp1 = new Image();
-LaserUp1.src = "grafix/creatures/ortizgenie/laser/up.l1.png";
-LaserUp1.onload = LoadingBar;
-var LaserUp2 = new Image();
-LaserUp2.src = "grafix/creatures/ortizgenie/laser/up.l2.png";
-LaserUp2.onload = LoadingBar;
-var LaserUp3 = new Image();
-LaserUp3.src = "grafix/creatures/ortizgenie/laser/up.l3.png";
-LaserUp3.onload = LoadingBar;
-var LaserUp4 = new Image();
-LaserUp4.src = "grafix/creatures/ortizgenie/laser/up.l4.png";
-LaserUp4.onload = LoadingBar;
-var LaserUp5 = new Image();
-LaserUp5.src = "grafix/creatures/ortizgenie/laser/up.l5.png";
-LaserUp5.onload = LoadingBar;
-var LaserUp6 = new Image();
-LaserUp6.src = "grafix/creatures/ortizgenie/laser/up.l6.png";
-LaserUp6.onload = LoadingBar;
-var LaserUp7 = new Image();
-LaserUp7.src = "grafix/creatures/ortizgenie/laser/up.l7.png";
-LaserUp7.onload = LoadingBar;
-var LaserUp8 = new Image();
-LaserUp8.src = "grafix/creatures/ortizgenie/laser/up.l8.png";
-LaserUp8.onload = LoadingBar;
-var LaserUp9 = new Image();
-LaserUp9.src = "grafix/creatures/ortizgenie/laser/up.l9.png";
-LaserUp9.onload = LoadingBar;
-var LaserUpsL = {1: LaserUp1, 2: LaserUp1, 3: LaserUp1, 4: LaserUp2, 5: LaserUp2, 6: LaserUp3, 7: LaserUp3, 8: LaserUp4, 9: LaserUp5,
-				10: LaserUp6, 11: LaserUp7, 12: LaserUp8, 13: LaserUp8, 14: LaserUp9, 15: LaserUp9, 16: LaserUp9};
-var LaserFdL1 = new Image();
-LaserFdL1.src = "grafix/creatures/ortizgenie/laser/fwd.l1.png";
-LaserFdL1.onload = LoadingBar;
-var LaserFdL2 = new Image();
-LaserFdL2.src = "grafix/creatures/ortizgenie/laser/fwd.l2.png";
-LaserFdL2.onload = LoadingBar;
-var LaserFdL3 = new Image();
-LaserFdL3.src = "grafix/creatures/ortizgenie/laser/fwd.l3.png";
-LaserFdL3.onload = LoadingBar;
-var LaserFdL4 = new Image();
-LaserFdL4.src = "grafix/creatures/ortizgenie/laser/fwd.l4.png";
-LaserFdL4.onload = LoadingBar;
-var LaserFdL5 = new Image();
-LaserFdL5.src = "grafix/creatures/ortizgenie/laser/fwd.l5.png";
-LaserFdL5.onload = LoadingBar;
-var LaserFdL6 = new Image();
-LaserFdL6.src = "grafix/creatures/ortizgenie/laser/fwd.l6.png";
-LaserFdL6.onload = LoadingBar;
-var LaserFdL7 = new Image();
-LaserFdL7.src = "grafix/creatures/ortizgenie/laser/fwd.l7.png";
-LaserFdL7.onload = LoadingBar;
-var LaserFdL8 = new Image();
-LaserFdL8.src = "grafix/creatures/ortizgenie/laser/fwd.l8.png";
-LaserFdL8.onload = LoadingBar;
-var LaserFdL9 = new Image();
-LaserFdL9.src = "grafix/creatures/ortizgenie/laser/fwd.l9.png";
-LaserFdL9.onload = LoadingBar;
-var LaserFdsL = {1: LaserFdL1, 2: LaserFdL1, 3: LaserFdL1, 4: LaserFdL2, 5: LaserFdL2, 6: LaserFdL3, 7: LaserFdL3, 8: LaserFdL4, 9: LaserFdL5,
-				10: LaserFdL6, 11: LaserFdL7, 12: LaserFdL8, 13: LaserFdL8, 14: LaserFdL9, 15: LaserFdL9, 16: LaserFdL9};
-var LaserDL1 = new Image();
-LaserDL1.src = "grafix/creatures/ortizgenie/laser/down.l1.png";
-LaserDL1.onload = LoadingBar;
-var LaserDL2 = new Image();
-LaserDL2.src = "grafix/creatures/ortizgenie/laser/down.l2.png";
-LaserDL2.onload = LoadingBar;
-var LaserDL3 = new Image();
-LaserDL3.src = "grafix/creatures/ortizgenie/laser/down.l3.png";
-LaserDL3.onload = LoadingBar;
-var LaserDL4 = new Image();
-LaserDL4.src = "grafix/creatures/ortizgenie/laser/down.l4.png";
-LaserDL4.onload = LoadingBar;
-var LaserDL5 = new Image();
-LaserDL5.src = "grafix/creatures/ortizgenie/laser/down.l5.png";
-LaserDL5.onload = LoadingBar;
-var LaserDL6 = new Image();
-LaserDL6.src = "grafix/creatures/ortizgenie/laser/down.l6.png";
-LaserDL6.onload = LoadingBar;
-var LaserDL7 = new Image();
-LaserDL7.src = "grafix/creatures/ortizgenie/laser/down.l7.png";
-LaserDL7.onload = LoadingBar;
-var LaserDL8 = new Image();
-LaserDL8.src = "grafix/creatures/ortizgenie/laser/down.l8.png";
-LaserDL8.onload = LoadingBar;
-var LaserDL9 = new Image();
-LaserDL9.src = "grafix/creatures/ortizgenie/laser/down.l9.png";
-LaserDL9.onload = LoadingBar;
-var LaserDsL = {1: LaserDL1, 2: LaserDL1, 3: LaserDL1, 4: LaserDL2, 5: LaserDL2, 6: LaserDL3, 7: LaserDL3, 8: LaserDL4, 9: LaserDL5,
-				10: LaserDL6, 11: LaserDL7, 12: LaserDL8, 13: LaserDL8, 14: LaserDL9, 15: LaserDL9, 16: LaserDL9};
-var LaserUpR1 = new Image();
-LaserUpR1.src = "grafix/creatures/ortizgenie/laser/up.r1.png";
-LaserUpR1.onload = LoadingBar;
-var LaserUpR2 = new Image();
-LaserUpR2.src = "grafix/creatures/ortizgenie/laser/up.r2.png";
-LaserUpR2.onload = LoadingBar;
-var LaserUpR3 = new Image();
-LaserUpR3.src = "grafix/creatures/ortizgenie/laser/up.r3.png";
-LaserUpR3.onload = LoadingBar;
-var LaserUpR4 = new Image();
-LaserUpR4.src = "grafix/creatures/ortizgenie/laser/up.r4.png";
-LaserUpR4.onload = LoadingBar;
-var LaserUpR5 = new Image();
-LaserUpR5.src = "grafix/creatures/ortizgenie/laser/up.r5.png";
-LaserUpR5.onload = LoadingBar;
-var LaserUpR6 = new Image();
-LaserUpR6.src = "grafix/creatures/ortizgenie/laser/up.r6.png";
-LaserUpR6.onload = LoadingBar;
-var LaserUpR7 = new Image();
-LaserUpR7.src = "grafix/creatures/ortizgenie/laser/up.r7.png";
-LaserUpR7.onload = LoadingBar;
-var LaserUpR8 = new Image();
-LaserUpR8.src = "grafix/creatures/ortizgenie/laser/up.r8.png";
-LaserUpR8.onload = LoadingBar;
-var LaserUpR9 = new Image();
-LaserUpR9.src = "grafix/creatures/ortizgenie/laser/up.r9.png";
-LaserUpR9.onload = LoadingBar;
-var LaserUpsR = {1: LaserUpR1, 2: LaserUpR1, 3: LaserUpR1, 4: LaserUpR2, 5: LaserUpR2, 6: LaserUpR3, 7: LaserUpR3, 8: LaserUpR4, 9: LaserUpR5,
-				10: LaserUpR6, 11: LaserUpR7, 12: LaserUpR8, 13: LaserUpR8, 14: LaserUpR9, 15: LaserUpR9, 16: LaserUpR9};
-var LaserFdR1 = new Image();
-LaserFdR1.src = "grafix/creatures/ortizgenie/laser/fwd.r1.png";
-LaserFdR1.onload = LoadingBar;
-var LaserFdR2 = new Image();
-LaserFdR2.src = "grafix/creatures/ortizgenie/laser/fwd.r2.png";
-LaserFdR2.onload = LoadingBar;
-var LaserFdR3 = new Image();
-LaserFdR3.src = "grafix/creatures/ortizgenie/laser/fwd.r3.png";
-LaserFdR3.onload = LoadingBar;
-var LaserFdR4 = new Image();
-LaserFdR4.src = "grafix/creatures/ortizgenie/laser/fwd.r4.png";
-LaserFdR4.onload = LoadingBar;
-var LaserFdR5 = new Image();
-LaserFdR5.src = "grafix/creatures/ortizgenie/laser/fwd.r5.png";
-LaserFdR5.onload = LoadingBar;
-var LaserFdR6 = new Image();
-LaserFdR6.src = "grafix/creatures/ortizgenie/laser/fwd.r6.png";
-LaserFdR6.onload = LoadingBar;
-var LaserFdR7 = new Image();
-LaserFdR7.src = "grafix/creatures/ortizgenie/laser/fwd.r7.png";
-LaserFdR7.onload = LoadingBar;
-var LaserFdR8 = new Image();
-LaserFdR8.src = "grafix/creatures/ortizgenie/laser/fwd.r8.png";
-LaserFdR8.onload = LoadingBar;
-var LaserFdR9 = new Image();
-LaserFdR9.src = "grafix/creatures/ortizgenie/laser/fwd.r9.png";
-LaserFdR9.onload = LoadingBar;
-var LaserFdsR = {1: LaserFdR1, 2: LaserFdR1, 3: LaserFdR1, 4: LaserFdR2, 5: LaserFdR2, 6: LaserFdR3, 7: LaserFdR3, 8: LaserFdR4, 9: LaserFdR5,
-				10: LaserFdR6, 11: LaserFdR7, 12: LaserFdR8, 13: LaserFdR8, 14: LaserFdR9, 15: LaserFdR9, 16: LaserFdR9};
-var LaserDR1 = new Image();
-LaserDR1.src = "grafix/creatures/ortizgenie/laser/down.r1.png";
-LaserDR1.onload = LoadingBar;
-var LaserDR2 = new Image();
-LaserDR2.src = "grafix/creatures/ortizgenie/laser/down.r2.png";
-LaserDR2.onload = LoadingBar;
-var LaserDR3 = new Image();
-LaserDR3.src = "grafix/creatures/ortizgenie/laser/down.r3.png";
-LaserDR3.onload = LoadingBar;
-var LaserDR4 = new Image();
-LaserDR4.src = "grafix/creatures/ortizgenie/laser/down.r4.png";
-LaserDR4.onload = LoadingBar;
-var LaserDR5 = new Image();
-LaserDR5.src = "grafix/creatures/ortizgenie/laser/down.r5.png";
-LaserDR5.onload = LoadingBar;
-var LaserDR6 = new Image();
-LaserDR6.src = "grafix/creatures/ortizgenie/laser/down.r6.png";
-LaserDR6.onload = LoadingBar;
-var LaserDR7 = new Image();
-LaserDR7.src = "grafix/creatures/ortizgenie/laser/down.r7.png";
-LaserDR7.onload = LoadingBar;
-var LaserDR8 = new Image();
-LaserDR8.src = "grafix/creatures/ortizgenie/laser/down.r8.png";
-LaserDR8.onload = LoadingBar;
-var LaserDR9 = new Image();
-LaserDR9.src = "grafix/creatures/ortizgenie/laser/down.r9.png";
-LaserDR9.onload = LoadingBar;
-var LaserDsR = {1: LaserDR1, 2: LaserDR1, 3: LaserDR1, 4: LaserDR2, 5: LaserDR2, 6: LaserDR3, 7: LaserDR3, 8: LaserDR4, 9: LaserDR5,
-				10: LaserDR6, 11: LaserDR7, 12: LaserDR8, 13: LaserDR8, 14: LaserDR9, 15: LaserDR9, 16: LaserDR9};				
+var GenieSheet = new Image();
+GenieSheet.src = "grafix/creatures/ortizgenie/genie.png";
+GenieSheet.onload = LoadingBar;
+var GenieSpawn = {1: 1, 2: 1, 3: 2, 4: 2, 5: 2, 6: 3, 7: 3, 8: 4, 9: 4,
+					10: 4, 11: 4, 12: 5, 13: 5, 14: 5, 15: 6, 16: 6, 17: 6, 18: 6,
+					19: 6, 20: 7, 21: 8, 22: 8, 23: 9, 24: 9, 25: 9, 26: 10, 27: 11, 
+					28: 12, 29: 13, 30: 14, 31: 14, 32: 15, 33: 15, 34: 16, 35: 17, 36: 17};
+var LaserArray = {1: 1, 2: 1, 3: 1, 4: 2, 5: 2, 6: 3, 7: 3, 8: 4, 9: 5,
+				10: 6, 11: 7, 12: 8, 13: 8, 14: 9, 15: 9, 16: 9};
 //lamp
 var Lampic = new Image();
 Lampic.src = "grafix/objects/lamp/lamp.png";
@@ -2461,20 +1166,6 @@ LampEnt9.onload = LoadingBar;
 var LampEntrance = {1: LampEnt1, 2: LampEnt1, 3: LampEnt2, 4: LampEnt2, 5: LampEnt3, 6: LampEnt3, 7: LampEnt4, 8: LampEnt4, 9: LampEnt5,
 					10: LampEnt5, 11: LampEnt5, 12: LampEnt5, 13: LampEnt5, 14: LampEnt5, 15: LampEnt6, 16: LampEnt7, 17: LampEnt8,
 					18: LampEnt8, 19: LampEnt8, 20: LampEnt8, 21: LampEnt9, 22: LampEnt9, 23: LampEnt9};
-//glowmeteors
-var MeteorGlow1 = new Image();
-MeteorGlow1.src = "grafix/objects/rock/glow.1.png";
-MeteorGlow1.onload = LoadingBar;
-var MeteorGlow2 = new Image();
-MeteorGlow2.src = "grafix/objects/rock/glow.2.png";
-MeteorGlow2.onload = LoadingBar;
-var MeteorGlow3 = new Image();
-MeteorGlow3.src = "grafix/objects/rock/glow.3.png";
-MeteorGlow3.onload = LoadingBar;
-var MeteorGlow4 = new Image();
-MeteorGlow4.src = "grafix/objects/rock/glow.4.png";
-MeteorGlow4.onload = LoadingBar;
-var MeteorGlows = {1: MeteorGlow1, 2: MeteorGlow2, 3: MeteorGlow3, 4: MeteorGlow4};
 //mummy from boss
 var BossMumSpawnL1 = new Image();
 BossMumSpawnL1.src = "grafix/creatures/minimumy/spawn.l1.png";
@@ -2527,9 +1218,6 @@ var BossMumR = new Image();
 BossMumR.src = "grafix/creatures/minimumy/mini.r1.png";
 BossMumR.onload = LoadingBar;
 //Meteor env
-var Meteorcold = new Image();
-Meteorcold.src = "grafix/objects/rock/rock.1.png";
-Meteorcold.onload = LoadingBar;
 var MeteorFallL1 = new Image();
 MeteorFallL1.src = "grafix/objects/meator/l.1.png";
 MeteorFallL1.onload = LoadingBar;
@@ -2606,6 +1294,9 @@ var FallingMeteorsL = {1: MeteorFallL1, 2: MeteorFallL2, 3: MeteorFallL3, 4: Met
 					9: MeteorFallL9, 10: MeteorFallL10, 11: MeteorFallL11, 12: MeteorFallL12};
 var FallingMeteorsR = {1: MeteorFallR1, 2: MeteorFallR2, 3: MeteorFallR3, 4: MeteorFallR4, 5: MeteorFallR5, 6: MeteorFallR6, 7: MeteorFallR7, 8: MeteorFallR8,
 					9: MeteorFallR9, 10: MeteorFallR10, 11: MeteorFallR11, 12: MeteorFallR12}; 
+var MeteorSheet = new Image();
+MeteorSheet.src = "grafix/objects/rock/meteorsheet.png";
+MeteorSheet.onload = LoadingBar;
 //steam in the fire level
 var Steam1 = new Image();
 Steam1.src = "grafix/objects/steam/1.png";
@@ -2626,15 +1317,30 @@ var Steam6 = new Image();
 Steam6.src = "grafix/objects/steam/6.png";
 Steam6.onload = LoadingBar;
 var SteamLoop = {1: Steam1, 2: Steam2, 3: Steam3, 4: Steam4, 5: Steam5, 6: Steam6};
+// ghost
+var GhostWalkSheet = new Image();
+GhostWalkSheet.src = "grafix/creatures/goats/goatwalk.png";
+GhostWalkSheet.onload = LoadingBar;
+var GhostGroundSheet = new Image();
+GhostGroundSheet.src = "grafix/creatures/goats/goatground.png";
+GhostGroundSheet.onload = LoadingBar;
+var GhostGroundAnimation = {1: 0, 2: 0, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 2, 9: 2, 10: 3, 11: 3, 12: 4, 13: 4, 14: 4, 15: 5, 16: 6, 17: 6, 18: 7, 19: 8, 20: 9, 21: 10, 22: 11, 23: 12}; 
+var GhostSpawn = {1: 0, 2: 0, 3: 0, 4: 1, 5: 1, 6: 1, 7: 2, 8: 2, 9: 2, 10: 3, 11: 3, 12: 3, 13: 3, 14: 3, 15: 4, 16: 5, 17: 6, 18: 6, 19: 6, 20: 7, 21: 7, 22: 7, 23: 8, 24: 8, 25: 9, 26: 9, 27: 10, 28: 10, 29: 11, 30: 11, 31: 11, 32: 12, 33: 12, 34: 12, 35: 13, 36: 13, 37: 14}; 
+var GhostRingSheet = new Image();
+GhostRingSheet.src = "grafix/creatures/goats/goatring.png";
+GhostRingSheet.onload = LoadingBar;
+var GhostRingEntrance = {1: 0, 2: 0, 3: 1, 4: 1, 5: 2, 6: 0, 7: 0, 8: 1, 9: 1, 10: 2, 11: 2, 12: 2}; 
+var GhostRingExit = {1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 1, 7: 2}; 
+var GhostFlameWall = new Image();
+GhostFlameWall.src = "grafix/creatures/goats/flamewall.png";
+GhostFlameWall.onload = LoadingBar;
+var GhostArrow = new Image();
+GhostArrow.src = "grafix/creatures/goats/goatarrow.png";
+GhostArrow.onload = LoadingBar;
+var GhostLight = new Image();
+GhostLight.src = "grafix/creatures/goats/lightray.png";
+GhostLight.onload = LoadingBar;
 //------------------------------------------------------- Swamp Level ---------------------------------------------------------------//
-//Swimwizz
-var swimWizzL = new Image();
-swimWizzL.src = "grafix/wizzurds/effects.wizard/wiz.pizz.l.png";
-swimWizzL.onload = LoadingBar;
-var swimWizzR = new Image();
-swimWizzR.src = "grafix/wizzurds/effects.wizard/wiz.pizz.r.png";
-swimWizzR.onload = LoadingBar;
-//swamp bkg
 var swampbkg1 = new Image();
 swampbkg1.src = "grafix/background/swampwater1.png";
 swampbkg1.onload = LoadingBar;
@@ -2648,105 +1354,13 @@ var swampbkg4 = new Image();
 swampbkg4.src = "grafix/background/swampwater4.png";
 swampbkg4.onload = LoadingBar;
 //Swamp Terrain
-var boardSq = new Image();
-boardSq.src = "grafix/objects/walkway/connect.sq.png";
-boardSq.onload = LoadingBar;
-var boardSq1 = new Image();
-boardSq1.src = "grafix/objects/walkway/connect.1.png";
-boardSq1.onload = LoadingBar;
-var boardSq2 = new Image();
-boardSq2.src = "grafix/objects/walkway/connect.2.png";
-boardSq2.onload = LoadingBar;
-var boardSq3 = new Image();
-boardSq3.src = "grafix/objects/walkway/connect.3.png";
-boardSq3.onload = LoadingBar;
-var boardSq4 = new Image();
-boardSq4.src = "grafix/objects/walkway/connect.4.png";
-boardSq4.onload = LoadingBar;
-var boardSq5 = new Image();
-boardSq5.src = "grafix/objects/walkway/connect.5.png";
-boardSq5.onload = LoadingBar;
-var boardSq6 = new Image();
-boardSq6.src = "grafix/objects/walkway/connect.6.png";
-boardSq6.onload = LoadingBar;
-var SqBoards = {0: boardSq1, 1: boardSq2, 2: boardSq3, 3: boardSq4, 4: boardSq5, 5: boardSq6, 6: boardSq};
-var boardH = new Image();
-boardH.src = "grafix/objects/walkway/hor.sq.png";
-boardH.onload = LoadingBar;
-var boardV = new Image();
-boardV.src = "grafix/objects/walkway/vert.sq.png";
-boardV.onload = LoadingBar;
-var boardV1 = new Image();
-boardV1.src = "grafix/objects/walkway/vert.1.png";
-boardV1.onload = LoadingBar;
-var boardV2 = new Image();
-boardV2.src = "grafix/objects/walkway/vert.2.png";
-boardV2.onload = LoadingBar;
-var boardV3 = new Image();
-boardV3.src = "grafix/objects/walkway/vert.3.png";
-boardV3.onload = LoadingBar;
-var boardV4 = new Image();
-boardV4.src = "grafix/objects/walkway/vert.4.png";
-boardV4.onload = LoadingBar;
-var boardV5 = new Image();
-boardV5.src = "grafix/objects/walkway/vert.5.png";
-boardV5.onload = LoadingBar;
-var boardV6 = new Image();
-boardV6.src = "grafix/objects/walkway/vert.6.png";
-boardV6.onload = LoadingBar;
-var vertBoards = {0: boardV1, 1: boardV2, 2: boardV3, 3: boardV4, 4: boardV5, 5: boardV6, 6: boardV};
-var boardH1 = new Image();
-boardH1.src = "grafix/objects/walkway/hor.1.png";
-boardH1.onload = LoadingBar;
-var boardH2 = new Image();
-boardH2.src = "grafix/objects/walkway/hor.2.png";
-boardH2.onload = LoadingBar;
-var boardH3 = new Image();
-boardH3.src = "grafix/objects/walkway/hor.3.png";
-boardH3.onload = LoadingBar;
-var boardH4 = new Image();
-boardH4.src = "grafix/objects/walkway/hor.4.png";
-boardH4.onload = LoadingBar;
-var boardH5 = new Image();
-boardH5.src = "grafix/objects/walkway/hor.5.png";
-boardH5.onload = LoadingBar;
-var boardH6 = new Image();
-boardH6.src = "grafix/objects/walkway/hor.6.png";
-boardH6.onload = LoadingBar;
-var horBoards = {0: boardH1, 1: boardH2, 2: boardH3, 3: boardH4, 4: boardH5, 5: boardH6, 6: boardH};
+var boardSheet = new Image();
+boardSheet.src = "grafix/objects/walkway/walkway.png";
+boardSheet.onload = LoadingBar;
 //Swudge
-var swudgeL = new Image();
-swudgeL.src = "grafix/creatures/swudge/swudge.l1.png";
-swudgeL.onload = LoadingBar;
-var swudgeR = new Image();
-swudgeR.src = "grafix/creatures/swudge/swudge.r1.png";
-swudgeR.onload = LoadingBar;
-var SwimswudgeL = new Image();
-SwimswudgeL.src = "grafix/creatures/swudge/swudge.swim.l1.png";
-SwimswudgeL.onload = LoadingBar;
-var SwimswudgeR = new Image();
-SwimswudgeR.src = "grafix/creatures/swudge/swudge.swim.r1.png";
-SwimswudgeR.onload = LoadingBar;
-var BoomswudgeL1 = new Image();
-BoomswudgeL1.src = "grafix/creatures/swudge/swudge.boom.l1.png";
-BoomswudgeL1.onload = LoadingBar;
-var BoomswudgeL2 = new Image();
-BoomswudgeL2.src = "grafix/creatures/swudge/swudge.boom.l2.png";
-BoomswudgeL2.onload = LoadingBar;
-var BoomswudgeL3 = new Image();
-BoomswudgeL3.src = "grafix/creatures/swudge/swudge.boom.l3.png";
-BoomswudgeL3.onload = LoadingBar;
-var BoomswudgeL = {1: BoomswudgeL1, 2: BoomswudgeL2, 3: BoomswudgeL3};
-var BoomswudgeR1 = new Image();
-BoomswudgeR1.src = "grafix/creatures/swudge/swudge.boom.r1.png";
-BoomswudgeR1.onload = LoadingBar;
-var BoomswudgeR2 = new Image();
-BoomswudgeR2.src = "grafix/creatures/swudge/swudge.boom.r2.png";
-BoomswudgeR2.onload = LoadingBar;
-var BoomswudgeR3 = new Image();
-BoomswudgeR3.src = "grafix/creatures/swudge/swudge.boom.r3.png";
-BoomswudgeR3.onload = LoadingBar;
-var BoomswudgeR = {1: BoomswudgeR1, 2: BoomswudgeR2, 3: BoomswudgeR3};
+var SwudgeSheet = new Image();
+SwudgeSheet.src = "grafix/creatures/swudge/swudge.png";
+SwudgeSheet.onload = LoadingBar;
 //Crocodile
 var crocclosel1 = new Image();
 crocclosel1.src = "grafix/creatures/crawk/close.l1.png";
@@ -2786,239 +1400,23 @@ var bugR2 = new Image();
 bugR2.src = "grafix/creatures/mosspeetoe/flight.r2.png";
 bugR2.onload = LoadingBar;
 //---------------------------------------------------------------- Desert Level -----------------------------------------------------//
-//desert bkg
 var DesertBackground = new Image();
 DesertBackground.src = "grafix/background/sand.png";
 DesertBackground.onload = LoadingBar;
 //Scorps
-var ScorpWalkL1 = new Image();
-ScorpWalkL1.src = "grafix/creatures/scopion/walk.l1.png";
-ScorpWalkL1.onload = LoadingBar;
-var ScorpWalkL2 = new Image();
-ScorpWalkL2.src = "grafix/creatures/scopion/walk.l2.png";
-ScorpWalkL2.onload = LoadingBar;
-var ScorpWalkL3 = new Image();
-ScorpWalkL3.src = "grafix/creatures/scopion/walk.l3.png";
-ScorpWalkL3.onload = LoadingBar;
-var ScorpWalkL4 = new Image();
-ScorpWalkL4.src = "grafix/creatures/scopion/walk.l4.png";
-ScorpWalkL4.onload = LoadingBar;
-var ScorpWalkL5 = new Image();
-ScorpWalkL5.src = "grafix/creatures/scopion/walk.l5.png";
-ScorpWalkL5.onload = LoadingBar;
-var ScorpWalkL6 = new Image();
-ScorpWalkL6.src = "grafix/creatures/scopion/walk.l6.png";
-ScorpWalkL6.onload = LoadingBar;
-var ScorpWalkL = {1: ScorpWalkL1, 2: ScorpWalkL2, 3: ScorpWalkL3, 4: ScorpWalkL4, 5: ScorpWalkL5, 6: ScorpWalkL6};
-var ScorpWalkR1 = new Image();
-ScorpWalkR1.src = "grafix/creatures/scopion/walk.r1.png";
-ScorpWalkR1.onload = LoadingBar;
-var ScorpWalkR2 = new Image();
-ScorpWalkR2.src = "grafix/creatures/scopion/walk.r2.png";
-ScorpWalkR2.onload = LoadingBar;
-var ScorpWalkR3 = new Image();
-ScorpWalkR3.src = "grafix/creatures/scopion/walk.r3.png";
-ScorpWalkR3.onload = LoadingBar;
-var ScorpWalkR4 = new Image();
-ScorpWalkR4.src = "grafix/creatures/scopion/walk.r4.png";
-ScorpWalkR4.onload = LoadingBar;
-var ScorpWalkR5 = new Image();
-ScorpWalkR5.src = "grafix/creatures/scopion/walk.r5.png";
-ScorpWalkR5.onload = LoadingBar;
-var ScorpWalkR6 = new Image();
-ScorpWalkR6.src = "grafix/creatures/scopion/walk.r6.png";
-ScorpWalkR6.onload = LoadingBar;
-var ScorpWalkR = {1: ScorpWalkR1, 2: ScorpWalkR2, 3: ScorpWalkR3, 4: ScorpWalkR4, 5: ScorpWalkR5, 6: ScorpWalkR6};
-var ScorpStabL1 = new Image();
-ScorpStabL1.src = "grafix/creatures/scopion/stab.l1.png";
-ScorpStabL1.onload = LoadingBar;
-var ScorpStabL2 = new Image();
-ScorpStabL2.src = "grafix/creatures/scopion/stab.l2.png";
-ScorpStabL2.onload = LoadingBar;
-var ScorpStabL3 = new Image();
-ScorpStabL3.src = "grafix/creatures/scopion/stab.l3.png";
-ScorpStabL3.onload = LoadingBar;
-var ScorpStabL4 = new Image();
-ScorpStabL4.src = "grafix/creatures/scopion/stab.l4.png";
-ScorpStabL4.onload = LoadingBar;
-var ScorpStabL5 = new Image();
-ScorpStabL5.src = "grafix/creatures/scopion/stab.l5.png";
-ScorpStabL5.onload = LoadingBar;
-var ScorpStabL6 = new Image();
-ScorpStabL6.src = "grafix/creatures/scopion/stab.l6.png";
-ScorpStabL6.onload = LoadingBar;
-var ScorpStabL = {1: ScorpStabL1, 2: ScorpStabL2, 3: ScorpStabL2, 4: ScorpStabL3, 5: ScorpStabL3, 6: ScorpStabL3, 7: ScorpStabL3,
-					8: ScorpStabL3, 9: ScorpStabL3, 10: ScorpStabL3, 11: ScorpStabL3, 12: ScorpStabL4, 13: ScorpStabL5, 14: ScorpStabL5,
-					15: ScorpStabL5, 16: ScorpStabL5, 17: ScorpStabL6};
-var ScorpStabR1 = new Image();
-ScorpStabR1.src = "grafix/creatures/scopion/stab.r1.png";
-ScorpStabR1.onload = LoadingBar;
-var ScorpStabR2 = new Image();
-ScorpStabR2.src = "grafix/creatures/scopion/stab.r2.png";
-ScorpStabR2.onload = LoadingBar;
-var ScorpStabR3 = new Image();
-ScorpStabR3.src = "grafix/creatures/scopion/stab.r3.png";
-ScorpStabR3.onload = LoadingBar;
-var ScorpStabR4 = new Image();
-ScorpStabR4.src = "grafix/creatures/scopion/stab.r4.png";
-ScorpStabR4.onload = LoadingBar;
-var ScorpStabR5 = new Image();
-ScorpStabR5.src = "grafix/creatures/scopion/stab.r5.png";
-ScorpStabR5.onload = LoadingBar;
-var ScorpStabR6 = new Image();
-ScorpStabR6.src = "grafix/creatures/scopion/stab.r6.png";
-ScorpStabR6.onload = LoadingBar;
-var ScorpStabR = {1: ScorpStabR1, 2: ScorpStabR2, 3: ScorpStabR2, 4: ScorpStabR3, 5: ScorpStabR3, 6: ScorpStabR3, 7: ScorpStabR3,
-					8: ScorpStabR3, 9: ScorpStabR3, 10: ScorpStabR3, 11: ScorpStabR3, 12: ScorpStabR4, 13: ScorpStabR5, 14: ScorpStabR5,
-					15: ScorpStabR5, 16: ScorpStabR5, 17: ScorpStabR6};
-var ScorpRollR1 = new Image();
-ScorpRollR1.src = "grafix/creatures/scopion/tumble.r1.png";
-ScorpRollR1.onload = LoadingBar;
-var ScorpRollR2 = new Image();
-ScorpRollR2.src = "grafix/creatures/scopion/tumble.r2.png";
-ScorpRollR2.onload = LoadingBar;
-var ScorpRollR3 = new Image();
-ScorpRollR3.src = "grafix/creatures/scopion/tumble.r3.png";
-ScorpRollR3.onload = LoadingBar;
-var ScorpRollR4 = new Image();
-ScorpRollR4.src = "grafix/creatures/scopion/tumble.r4.png";
-ScorpRollR4.onload = LoadingBar;
-var ScorpRollR = {1: ScorpRollR1, 2: ScorpRollR2, 3: ScorpRollR3, 4: ScorpRollR4};
-var ScorpRollL1 = new Image();
-ScorpRollL1.src = "grafix/creatures/scopion/tumble.l1.png";
-ScorpRollL1.onload = LoadingBar;
-var ScorpRollL2 = new Image();
-ScorpRollL2.src = "grafix/creatures/scopion/tumble.l2.png";
-ScorpRollL2.onload = LoadingBar;
-var ScorpRollL3 = new Image();
-ScorpRollL3.src = "grafix/creatures/scopion/tumble.l3.png";
-ScorpRollL3.onload = LoadingBar;
-var ScorpRollL4 = new Image();
-ScorpRollL4.src = "grafix/creatures/scopion/tumble.l4.png";
-ScorpRollL4.onload = LoadingBar;
-var ScorpRollL = {1: ScorpRollL1, 2: ScorpRollL2, 3: ScorpRollL3, 4: ScorpRollL4};
+var ScorpSheet = new Image();
+ScorpSheet.src = "grafix/creatures/scopion/scopion.png";
+ScorpSheet.onload = LoadingBar;
+var ScorpStab = {1: 1, 2: 2, 3: 2, 4: 3, 5: 3, 6: 3, 7: 3, 8: 3, 9: 3, 10: 3, 11: 3, 12: 4, 13: 5, 14: 5,
+					15: 5, 16: 5, 17: 6};
 //anubis
-var AnubisStandL = new Image();
-AnubisStandL.src = "grafix/creatures/anewbus/stand.l1.png";
-AnubisStandL.onload = LoadingBar;
-var AnubisStandR = new Image();
-AnubisStandR.src = "grafix/creatures/anewbus/stand.r1.png";
-AnubisStandR.onload = LoadingBar;
-var AnubisWalkL1 = new Image();
-AnubisWalkL1.src = "grafix/creatures/anewbus/walk.l1.png";
-AnubisWalkL1.onload = LoadingBar;
-var AnubisWalkL2 = new Image();
-AnubisWalkL2.src = "grafix/creatures/anewbus/walk.l2.png";
-AnubisWalkL2.onload = LoadingBar;
-var AnubisWalkL3 = new Image();
-AnubisWalkL3.src = "grafix/creatures/anewbus/walk.l3.png";
-AnubisWalkL3.onload = LoadingBar;
-var AnubisWalkL4 = new Image();
-AnubisWalkL4.src = "grafix/creatures/anewbus/walk.l4.png";
-AnubisWalkL4.onload = LoadingBar;
-var AnubisWalkL5 = new Image();
-AnubisWalkL5.src = "grafix/creatures/anewbus/walk.l5.png";
-AnubisWalkL5.onload = LoadingBar;
-var AnubisWalkL = {1: AnubisWalkL1, 2: AnubisWalkL2, 3: AnubisWalkL3, 4: AnubisWalkL4, 5: AnubisWalkL5};
-var AnubisWalkR1 = new Image();
-AnubisWalkR1.src = "grafix/creatures/anewbus/walk.r1.png";
-AnubisWalkR1.onload = LoadingBar;
-var AnubisWalkR2 = new Image();
-AnubisWalkR2.src = "grafix/creatures/anewbus/walk.r2.png";
-AnubisWalkR2.onload = LoadingBar;
-var AnubisWalkR3 = new Image();
-AnubisWalkR3.src = "grafix/creatures/anewbus/walk.r3.png";
-AnubisWalkR3.onload = LoadingBar;
-var AnubisWalkR4 = new Image();
-AnubisWalkR4.src = "grafix/creatures/anewbus/walk.r4.png";
-AnubisWalkR4.onload = LoadingBar;
-var AnubisWalkR5 = new Image();
-AnubisWalkR5.src = "grafix/creatures/anewbus/walk.r5.png";
-AnubisWalkR5.onload = LoadingBar;
-var AnubisWalkR = {1: AnubisWalkR1, 2: AnubisWalkR2, 3: AnubisWalkR3, 4: AnubisWalkR4, 5: AnubisWalkR5};
-//AnubisAttacks
-var AnubisAttackL1 = new Image();
-AnubisAttackL1.src = "grafix/creatures/anewbus/cast/cast.l1.png";
-AnubisAttackL1.onload = LoadingBar;
-var AnubisAttackL2 = new Image();
-AnubisAttackL2.src = "grafix/creatures/anewbus/cast/cast.l2.png";
-AnubisAttackL2.onload = LoadingBar;
-var AnubisAttackL3 = new Image();
-AnubisAttackL3.src = "grafix/creatures/anewbus/cast/cast.l3.png";
-AnubisAttackL3.onload = LoadingBar;
-var AnubisAttackL4 = new Image();
-AnubisAttackL4.src = "grafix/creatures/anewbus/cast/cast.l4.png";
-AnubisAttackL4.onload = LoadingBar;
-var AnubisAttackL5 = new Image();
-AnubisAttackL5.src = "grafix/creatures/anewbus/cast/cast.l5.png";
-AnubisAttackL5.onload = LoadingBar;
-var AnubisAttackL6 = new Image();
-AnubisAttackL6.src = "grafix/creatures/anewbus/cast/cast.l6.png";
-AnubisAttackL6.onload = LoadingBar;
-var AnubisAttackL7 = new Image();
-AnubisAttackL7.src = "grafix/creatures/anewbus/cast/cast.l7.png";
-AnubisAttackL7.onload = LoadingBar;
-var AnubisAttackL8 = new Image();
-AnubisAttackL8.src = "grafix/creatures/anewbus/cast/cast.l8.png";
-AnubisAttackL8.onload = LoadingBar;
-var AnubisAttackL9 = new Image();
-AnubisAttackL9.src = "grafix/creatures/anewbus/cast/cast.l9.png";
-AnubisAttackL9.onload = LoadingBar;
-var AnubisAttackL10 = new Image();
-AnubisAttackL10.src = "grafix/creatures/anewbus/cast/cast.l10.png";
-AnubisAttackL10.onload = LoadingBar;
-var AnubisAttackL11 = new Image();
-AnubisAttackL11.src = "grafix/creatures/anewbus/cast/cast.l11.png";
-AnubisAttackL11.onload = LoadingBar;
-var AnubisAttacksL = {1: AnubisAttackL1, 2: AnubisAttackL1, 3: AnubisAttackL1, 4: AnubisAttackL1, 5: AnubisAttackL1, 6: AnubisAttackL1,
-						7: AnubisAttackL2, 8: AnubisAttackL2, 9: AnubisAttackL2, 10: AnubisAttackL2, 11: AnubisAttackL2, 
-						12: AnubisAttackL2, 13: AnubisAttackL2, 14: AnubisAttackL2, 15: AnubisAttackL2, 16: AnubisAttackL3, 17: AnubisAttackL3,
-						18: AnubisAttackL4, 19: AnubisAttackL4, 20: AnubisAttackL5, 21: AnubisAttackL5, 22: AnubisAttackL6,
-						23: AnubisAttackL7, 24: AnubisAttackL7, 25: AnubisAttackL7, 26: AnubisAttackL7, 27: AnubisAttackL7, 28: AnubisAttackL8,
-						29: AnubisAttackL8, 30: AnubisAttackL8, 31: AnubisAttackL8, 32: AnubisAttackL8, 33: AnubisAttackL9, 
-						34: AnubisAttackL9, 35: AnubisAttackL9, 36: AnubisAttackL9, 37: AnubisAttackL9, 38: AnubisAttackL10, 39: AnubisAttackL11,
-						40: AnubisAttackL11, 41: AnubisAttackL11, 42: AnubisAttackL11, 43: AnubisAttackL11, 44: AnubisAttackL11, 45: AnubisAttackL11, 46: AnubisAttackL11};
-var AnubisAttackR1 = new Image();
-AnubisAttackR1.src = "grafix/creatures/anewbus/cast/cast.r1.png";
-AnubisAttackR1.onload = LoadingBar;
-var AnubisAttackR2 = new Image();
-AnubisAttackR2.src = "grafix/creatures/anewbus/cast/cast.r2.png";
-AnubisAttackR2.onload = LoadingBar;
-var AnubisAttackR3 = new Image();
-AnubisAttackR3.src = "grafix/creatures/anewbus/cast/cast.r3.png";
-AnubisAttackR3.onload = LoadingBar;
-var AnubisAttackR4 = new Image();
-AnubisAttackR4.src = "grafix/creatures/anewbus/cast/cast.r4.png";
-AnubisAttackR4.onload = LoadingBar;
-var AnubisAttackR5 = new Image();
-AnubisAttackR5.src = "grafix/creatures/anewbus/cast/cast.r5.png";
-AnubisAttackR5.onload = LoadingBar;
-var AnubisAttackR6 = new Image();
-AnubisAttackR6.src = "grafix/creatures/anewbus/cast/cast.r6.png";
-AnubisAttackR6.onload = LoadingBar;
-var AnubisAttackR7 = new Image();
-AnubisAttackR7.src = "grafix/creatures/anewbus/cast/cast.r7.png";
-AnubisAttackR7.onload = LoadingBar;
-var AnubisAttackR8 = new Image();
-AnubisAttackR8.src = "grafix/creatures/anewbus/cast/cast.r8.png";
-AnubisAttackR8.onload = LoadingBar;
-var AnubisAttackR9 = new Image();
-AnubisAttackR9.src = "grafix/creatures/anewbus/cast/cast.r9.png";
-AnubisAttackR9.onload = LoadingBar;
-var AnubisAttackR10 = new Image();
-AnubisAttackR10.src = "grafix/creatures/anewbus/cast/cast.r10.png";
-AnubisAttackR10.onload = LoadingBar;
-var AnubisAttackR11 = new Image();
-AnubisAttackR11.src = "grafix/creatures/anewbus/cast/cast.r11.png";
-AnubisAttackR11.onload = LoadingBar;
-var AnubisAttacksR = {1: AnubisAttackR1, 2: AnubisAttackR1, 3: AnubisAttackR1, 4: AnubisAttackR1, 5: AnubisAttackR1, 6: AnubisAttackR1,
-						7: AnubisAttackR2, 8: AnubisAttackR2, 9: AnubisAttackR2, 10: AnubisAttackR2, 11: AnubisAttackR2, 
-						12: AnubisAttackR2, 13: AnubisAttackR2, 14: AnubisAttackR2, 15: AnubisAttackR2, 16: AnubisAttackR3, 17: AnubisAttackR3,
-						18: AnubisAttackR4, 19: AnubisAttackR4, 20: AnubisAttackR5, 21: AnubisAttackR5, 22: AnubisAttackR6,
-						23: AnubisAttackR7, 24: AnubisAttackR7, 25: AnubisAttackR7, 26: AnubisAttackR7, 27: AnubisAttackR7, 28: AnubisAttackR8,
-						29: AnubisAttackR8, 30: AnubisAttackR8, 31: AnubisAttackR8, 32: AnubisAttackR8, 33: AnubisAttackR9, 
-						34: AnubisAttackR9, 35: AnubisAttackR9, 36: AnubisAttackR9, 37: AnubisAttackR9, 38: AnubisAttackR10, 39: AnubisAttackR11,
-						40: AnubisAttackR11, 41: AnubisAttackR11, 42: AnubisAttackR11, 43: AnubisAttackR11, 44: AnubisAttackR11, 45: AnubisAttackR11, 46: AnubisAttackR11};
+var AnubisSheet = new Image();
+AnubisSheet.src = "grafix/creatures/anewbus/anubis.png";
+AnubisSheet.onload = LoadingBar;
+var AnubisAttacks = {1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 2, 8: 2, 9: 2, 10: 2, 11: 2, 
+						12: 2, 13: 2, 14: 2, 15: 2, 16: 3, 17: 3, 18: 4, 19: 4, 20: 5, 21: 5, 22: 6,
+						23: 7, 24: 7, 25: 7, 26: 7, 27: 7, 28: 8, 29: 8, 30: 8, 31: 8, 32: 8, 33: 9, 
+						34: 9, 35: 9, 36: 9, 37: 9, 38: 10, 39: 11, 40: 11, 41: 11, 42: 11, 43: 11, 44: 11, 45: 11, 46: 11};
 //death/sandpit
 var AnubisDeath1 = new Image();
 AnubisDeath1.src = "grafix/objects/sandpit/spawn/spawn.1.png";
@@ -3094,18 +1492,6 @@ var AnubisDeath2 = {1: AnubisNoMaskDeath1, 2: AnubisNoMaskDeath1, 3: AnubisNoMas
 					7: AnubisNoMaskDeath4, 8: AnubisNoMaskDeath4, 9: AnubisNoMaskDeath5, 10: AnubisNoMaskDeath5, 11: AnubisNoMaskDeath6, 12: AnubisNoMaskDeath6, 
 					13: AnubisNoMaskDeath7, 14: AnubisNoMaskDeath7, 15: AnubisNoMaskDeath8, 16: AnubisNoMaskDeath8, 17: AnubisNoMaskDeath9,
 					18: AnubisNoMaskDeath9, 19: AnubisNoMaskDeath10, 20: AnubisNoMaskDeath10, 21: AnubisNoMaskDeath11, 22: AnubisNoMaskDeath11};
-var AnubisStatueL1 = new Image();
-AnubisStatueL1.src = "grafix/creatures/anewbus/statue.l1.png";
-AnubisStatueL1.onload = LoadingBar;
-var AnubisStatueR1 = new Image();
-AnubisStatueR1.src = "grafix/creatures/anewbus/statue.r1.png";
-AnubisStatueR1.onload = LoadingBar;
-var AnubisStatueL2 = new Image();
-AnubisStatueL2.src = "grafix/creatures/anewbus/statue.l2.png";
-AnubisStatueL2.onload = LoadingBar;
-var AnubisStatueR2 = new Image();
-AnubisStatueR2.src = "grafix/creatures/anewbus/statue.r2.png";
-AnubisStatueR2.onload = LoadingBar;		
 var SandpitPull1 = new Image();
 SandpitPull1.src = "grafix/objects/sandpit/pull.1.png";
 SandpitPull1.onload = LoadingBar;
@@ -3136,6 +1522,7 @@ SandpitGlowHead2.src = "grafix/objects/sandpit/headloop.glow2.png";
 SandpitGlowHead2.onload = LoadingBar;
 var SandpitHead = {1: SandpitHead1, 2: SandpitHead2};
 var SandpitGlowHead = {1: SandpitGlowHead1, 2: SandpitGlowHead2};
+
 var SandStormDarkL1 = new Image();
 SandStormDarkL1.src = "grafix/effects/sandstorm/front.dark.l1.png";
 SandStormDarkL1.onload = LoadingBar;
@@ -3310,182 +1697,12 @@ SandStormSpecksL12.src = "grafix/effects/sandstorm/specks.l12.png";
 SandStormSpecksL12.onload = LoadingBar;
 var SandStormSpecksL = {1: SandStormSpecksL1, 2: SandStormSpecksL2, 3: SandStormSpecksL3, 4: SandStormSpecksL4, 5: SandStormSpecksL5,
 						6: SandStormSpecksL6, 7: SandStormSpecksL7, 8: SandStormSpecksL8, 9: SandStormSpecksL9, 10: SandStormSpecksL10, 11: SandStormSpecksL11, 12:SandStormSpecksL12};
-//Anubis proj
-var AnubisProjBlue = new Image();
-AnubisProjBlue.src = "grafix/creatures/anewbus/orb/1.png";
-AnubisProjBlue.onload = LoadingBar;
-var AnubisProjRed = new Image();
-AnubisProjRed.src = "grafix/creatures/anewbus/orb/2.png";
-AnubisProjRed.onload = LoadingBar;
-var AnubisProjWhite = new Image();
-AnubisProjWhite.src = "grafix/creatures/anewbus/orb/3.png";
-AnubisProjWhite.onload = LoadingBar;
-var AnubisProjLoop = {1: AnubisProjBlue, 2: AnubisProjRed, 3: AnubisProjWhite};
+
+
 //MegaMummy
-var MegaMummy1L1 = new Image();
-MegaMummy1L1.src = "grafix/creatures/mummibus/stage1/walk.l1.png";
-MegaMummy1L1.onload = LoadingBar;
-var MegaMummy1L2 = new Image();
-MegaMummy1L2.src = "grafix/creatures/mummibus/stage1/walk.l2.png";
-MegaMummy1L2.onload = LoadingBar;
-var MegaMummy1L3 = new Image();
-MegaMummy1L3.src = "grafix/creatures/mummibus/stage1/walk.l3.png";
-MegaMummy1L3.onload = LoadingBar;
-var MegaMummy1L4 = new Image();
-MegaMummy1L4.src = "grafix/creatures/mummibus/stage1/walk.l4.png";
-MegaMummy1L4.onload = LoadingBar;
-var MegaMummy1L5 = new Image();
-MegaMummy1L5.src = "grafix/creatures/mummibus/stage1/walk.l5.png";
-MegaMummy1L5.onload = LoadingBar;
-var MegaMummy1L6 = new Image();
-MegaMummy1L6.src = "grafix/creatures/mummibus/stage1/walk.l6.png";
-MegaMummy1L6.onload = LoadingBar;
-var MegaMummy1L = {1: MegaMummy1L1, 2: MegaMummy1L2, 3: MegaMummy1L3, 4: MegaMummy1L4, 5: MegaMummy1L5, 6: MegaMummy1L6};
-var MegaMummy1R1 = new Image();
-MegaMummy1R1.src = "grafix/creatures/mummibus/stage1/walk.r1.png";
-MegaMummy1R1.onload = LoadingBar;
-var MegaMummy1R2 = new Image();
-MegaMummy1R2.src = "grafix/creatures/mummibus/stage1/walk.r2.png";
-MegaMummy1R2.onload = LoadingBar;
-var MegaMummy1R3 = new Image();
-MegaMummy1R3.src = "grafix/creatures/mummibus/stage1/walk.r3.png";
-MegaMummy1R3.onload = LoadingBar;
-var MegaMummy1R4 = new Image();
-MegaMummy1R4.src = "grafix/creatures/mummibus/stage1/walk.r4.png";
-MegaMummy1R4.onload = LoadingBar;
-var MegaMummy1R5 = new Image();
-MegaMummy1R5.src = "grafix/creatures/mummibus/stage1/walk.r5.png";
-MegaMummy1R5.onload = LoadingBar;
-var MegaMummy1R6 = new Image();
-MegaMummy1R6.src = "grafix/creatures/mummibus/stage1/walk.r6.png";
-MegaMummy1R6.onload = LoadingBar;
-var MegaMummy1R = {1: MegaMummy1R1, 2: MegaMummy1R2, 3: MegaMummy1R3, 4: MegaMummy1R4, 5: MegaMummy1R5, 6: MegaMummy1R6};
-var MegaMummy2L1 = new Image();
-MegaMummy2L1.src = "grafix/creatures/mummibus/stage2/walk.l1.png";
-MegaMummy2L1.onload = LoadingBar;
-var MegaMummy2L2 = new Image();
-MegaMummy2L2.src = "grafix/creatures/mummibus/stage2/walk.l2.png";
-MegaMummy2L2.onload = LoadingBar;
-var MegaMummy2L3 = new Image();
-MegaMummy2L3.src = "grafix/creatures/mummibus/stage2/walk.l3.png";
-MegaMummy2L3.onload = LoadingBar;
-var MegaMummy2L4 = new Image();
-MegaMummy2L4.src = "grafix/creatures/mummibus/stage2/walk.l4.png";
-MegaMummy2L4.onload = LoadingBar;
-var MegaMummy2L5 = new Image();
-MegaMummy2L5.src = "grafix/creatures/mummibus/stage2/walk.l5.png";
-MegaMummy2L5.onload = LoadingBar;
-var MegaMummy2L6 = new Image();
-MegaMummy2L6.src = "grafix/creatures/mummibus/stage2/walk.l6.png";
-MegaMummy2L6.onload = LoadingBar;
-var MegaMummy2L = {1: MegaMummy2L1, 2: MegaMummy2L2, 3: MegaMummy2L3, 4: MegaMummy2L4, 5: MegaMummy2L5, 6: MegaMummy2L6};
-var MegaMummy2R1 = new Image();
-MegaMummy2R1.src = "grafix/creatures/mummibus/stage2/walk.r1.png";
-MegaMummy2R1.onload = LoadingBar;
-var MegaMummy2R2 = new Image();
-MegaMummy2R2.src = "grafix/creatures/mummibus/stage2/walk.r2.png";
-MegaMummy2R2.onload = LoadingBar;
-var MegaMummy2R3 = new Image();
-MegaMummy2R3.src = "grafix/creatures/mummibus/stage2/walk.r3.png";
-MegaMummy2R3.onload = LoadingBar;
-var MegaMummy2R4 = new Image();
-MegaMummy2R4.src = "grafix/creatures/mummibus/stage2/walk.r4.png";
-MegaMummy2R4.onload = LoadingBar;
-var MegaMummy2R5 = new Image();
-MegaMummy2R5.src = "grafix/creatures/mummibus/stage2/walk.r5.png";
-MegaMummy2R5.onload = LoadingBar;
-var MegaMummy2R6 = new Image();
-MegaMummy2R6.src = "grafix/creatures/mummibus/stage2/walk.r6.png";
-MegaMummy2R6.onload = LoadingBar;
-var MegaMummy2R = {1: MegaMummy2R1, 2: MegaMummy2R2, 3: MegaMummy2R3, 4: MegaMummy2R4, 5: MegaMummy2R5, 6: MegaMummy2R6};
-var MegaMummy3L1 = new Image();
-MegaMummy3L1.src = "grafix/creatures/mummibus/stage3/walk.l1.png";
-MegaMummy3L1.onload = LoadingBar;
-var MegaMummy3L2 = new Image();
-MegaMummy3L2.src = "grafix/creatures/mummibus/stage3/walk.l2.png";
-MegaMummy3L2.onload = LoadingBar;
-var MegaMummy3L3 = new Image();
-MegaMummy3L3.src = "grafix/creatures/mummibus/stage3/walk.l3.png";
-MegaMummy3L3.onload = LoadingBar;
-var MegaMummy3L4 = new Image();
-MegaMummy3L4.src = "grafix/creatures/mummibus/stage3/walk.l4.png";
-MegaMummy3L4.onload = LoadingBar;
-var MegaMummy3L5 = new Image();
-MegaMummy3L5.src = "grafix/creatures/mummibus/stage3/walk.l5.png";
-MegaMummy3L5.onload = LoadingBar;
-var MegaMummy3L6 = new Image();
-MegaMummy3L6.src = "grafix/creatures/mummibus/stage3/walk.l6.png";
-MegaMummy3L6.onload = LoadingBar;
-var MegaMummy3L = {1: MegaMummy3L1, 2: MegaMummy3L2, 3: MegaMummy3L3, 4: MegaMummy3L4, 5: MegaMummy3L5, 6: MegaMummy3L6};
-var MegaMummy3R1 = new Image();
-MegaMummy3R1.src = "grafix/creatures/mummibus/stage3/walk.r1.png";
-MegaMummy3R1.onload = LoadingBar;
-var MegaMummy3R2 = new Image();
-MegaMummy3R2.src = "grafix/creatures/mummibus/stage3/walk.r2.png";
-MegaMummy3R2.onload = LoadingBar;
-var MegaMummy3R3 = new Image();
-MegaMummy3R3.src = "grafix/creatures/mummibus/stage3/walk.r3.png";
-MegaMummy3R3.onload = LoadingBar;
-var MegaMummy3R4 = new Image();
-MegaMummy3R4.src = "grafix/creatures/mummibus/stage3/walk.r4.png";
-MegaMummy3R4.onload = LoadingBar;
-var MegaMummy3R5 = new Image();
-MegaMummy3R5.src = "grafix/creatures/mummibus/stage3/walk.r5.png";
-MegaMummy3R5.onload = LoadingBar;
-var MegaMummy3R6 = new Image();
-MegaMummy3R6.src = "grafix/creatures/mummibus/stage3/walk.r6.png";
-MegaMummy3R6.onload = LoadingBar;
-var MegaMummy3R = {1: MegaMummy3R1, 2: MegaMummy3R2, 3: MegaMummy3R3, 4: MegaMummy3R4, 5: MegaMummy3R5, 6: MegaMummy3R6};
-var MegaMummy4L1 = new Image();
-MegaMummy4L1.src = "grafix/creatures/mummibus/stage4/walk.l1.png";
-MegaMummy4L1.onload = LoadingBar;
-var MegaMummy4L2 = new Image();
-MegaMummy4L2.src = "grafix/creatures/mummibus/stage4/walk.l2.png";
-MegaMummy4L2.onload = LoadingBar;
-var MegaMummy4L3 = new Image();
-MegaMummy4L3.src = "grafix/creatures/mummibus/stage4/walk.l3.png";
-MegaMummy4L3.onload = LoadingBar;
-var MegaMummy4L4 = new Image();
-MegaMummy4L4.src = "grafix/creatures/mummibus/stage4/walk.l4.png";
-MegaMummy4L4.onload = LoadingBar;
-var MegaMummy4L5 = new Image();
-MegaMummy4L5.src = "grafix/creatures/mummibus/stage4/walk.l5.png";
-MegaMummy4L5.onload = LoadingBar;
-var MegaMummy4L6 = new Image();
-MegaMummy4L6.src = "grafix/creatures/mummibus/stage4/walk.l6.png";
-MegaMummy4L6.onload = LoadingBar;
-var MegaMummy4L7 = new Image();
-MegaMummy4L7.src = "grafix/creatures/mummibus/stage4/walk.l7.png";
-MegaMummy4L7.onload = LoadingBar;
-var MegaMummy4L8 = new Image();
-MegaMummy4L8.src = "grafix/creatures/mummibus/stage4/walk.l8.png";
-MegaMummy4L8.onload = LoadingBar;
-var MegaMummy4L = {1: MegaMummy4L1, 2: MegaMummy4L2, 3: MegaMummy4L3, 4: MegaMummy4L4, 5: MegaMummy4L5, 6: MegaMummy4L6, 7: MegaMummy4L7, 8: MegaMummy4L8};
-var MegaMummy4R1 = new Image();
-MegaMummy4R1.src = "grafix/creatures/mummibus/stage4/walk.r1.png";
-MegaMummy4R1.onload = LoadingBar;
-var MegaMummy4R2 = new Image();
-MegaMummy4R2.src = "grafix/creatures/mummibus/stage4/walk.r2.png";
-MegaMummy4R2.onload = LoadingBar;
-var MegaMummy4R3 = new Image();
-MegaMummy4R3.src = "grafix/creatures/mummibus/stage4/walk.r3.png";
-MegaMummy4R3.onload = LoadingBar;
-var MegaMummy4R4 = new Image();
-MegaMummy4R4.src = "grafix/creatures/mummibus/stage4/walk.r4.png";
-MegaMummy4R4.onload = LoadingBar;
-var MegaMummy4R5 = new Image();
-MegaMummy4R5.src = "grafix/creatures/mummibus/stage4/walk.r5.png";
-MegaMummy4R5.onload = LoadingBar;
-var MegaMummy4R6 = new Image();
-MegaMummy4R6.src = "grafix/creatures/mummibus/stage4/walk.r6.png";
-MegaMummy4R6.onload = LoadingBar;
-var MegaMummy4R7 = new Image();
-MegaMummy4R7.src = "grafix/creatures/mummibus/stage4/walk.r7.png";
-MegaMummy4R7.onload = LoadingBar;
-var MegaMummy4R8 = new Image();
-MegaMummy4R8.src = "grafix/creatures/mummibus/stage4/walk.r8.png";
-MegaMummy4R8.onload = LoadingBar;
-var MegaMummy4R = {1: MegaMummy4R1, 2: MegaMummy4R2, 3: MegaMummy4R3, 4: MegaMummy4R4, 5: MegaMummy4R5, 6: MegaMummy4R6, 7: MegaMummy4R7, 8: MegaMummy4R8};
+var MegaMummySheet = new Image();
+MegaMummySheet.src = "grafix/creatures/mummibus/mummibus.png";
+MegaMummySheet.onload = LoadingBar;
 var MegaMummySpawn1 = new Image();
 MegaMummySpawn1.src = "grafix/objects/sandpit/mummy.spawn/1.png";
 MegaMummySpawn1.onload = LoadingBar;
@@ -3514,28 +1731,8 @@ var MegaMummySpawn = {1: MegaMummySpawn1, 2: MegaMummySpawn1, 3: MegaMummySpawn2
 						9: MegaMummySpawn3, 10: MegaMummySpawn3, 11: MegaMummySpawn4, 12: MegaMummySpawn4, 13: MegaMummySpawn4, 14: MegaMummySpawn4, 15: MegaMummySpawn5, 16: MegaMummySpawn5,
 						17: MegaMummySpawn5, 18: MegaMummySpawn5, 19: MegaMummySpawn5, 20: MegaMummySpawn6, 21: MegaMummySpawn6, 22: MegaMummySpawn6, 23: MegaMummySpawn7, 24: MegaMummySpawn7,
 						25: MegaMummySpawn7, 26: MegaMummySpawn8, 27: MegaMummySpawn8, 28: MegaMummySpawn8, 29: MegaMummySpawn8, 30: MegaMummySpawn8};
-var MegaMummyBandagel1 = new Image();
-MegaMummyBandagel1.src = "grafix/creatures/mummibus/bandages/fall.l1.png";
-MegaMummyBandagel1.onload = LoadingBar;
-var MegaMummyBandagel2 = new Image();
-MegaMummyBandagel2.src = "grafix/creatures/mummibus/bandages/fall.l2.png";
-MegaMummyBandagel2.onload = LoadingBar;
-var MegaMummyBandagel3 = new Image();
-MegaMummyBandagel3.src = "grafix/creatures/mummibus/bandages/fall.l3.png";
-MegaMummyBandagel3.onload = LoadingBar;
-var BandagesL = {1: MegaMummyBandagel1, 2: MegaMummyBandagel2, 3: MegaMummyBandagel3};
-var MegaMummyBandager1 = new Image();
-MegaMummyBandager1.src = "grafix/creatures/mummibus/bandages/fall.r1.png";
-MegaMummyBandager1.onload = LoadingBar;
-var MegaMummyBandager2 = new Image();
-MegaMummyBandager2.src = "grafix/creatures/mummibus/bandages/fall.r2.png";
-MegaMummyBandager2.onload = LoadingBar;
-var MegaMummyBandager3 = new Image();
-MegaMummyBandager3.src = "grafix/creatures/mummibus/bandages/fall.r3.png";
-MegaMummyBandager3.onload = LoadingBar;
-var BandagesR = {1: MegaMummyBandager1, 2: MegaMummyBandager2, 3: MegaMummyBandager3};
 //Achievement pics
-var APics = {0: "N/A", 1: glasses3d, 2: maxUP, 3: DragonmaxUP, 4: ThiefLuckUP, 5: GenieUp};
+var APics = {0: "N/A", 1: glasses3d, 2: 32, 3: 0, 4: 96, 5: 64, 6: multCoin, 7: 128};
 //--------------------------------------------------- Sounds ------------------------------------------------------------------------//
 var Beam = document.getElementsByTagName("audio")[0];
 var Killed = document.getElementsByTagName("audio")[1];
@@ -3584,14 +1781,8 @@ var AllSounds = {1: Beam, 2: Killed, 3: Pickup, 4: Explosion, 5: Frozen, 6: Fwav
 				21: hum, 22: longfuzz, 23: longlaser, 24: longpew, 25: longpulse, 26: lowpulse, 27: radiofailure, 28: trailingbeeps, 29: rainsound, 30: GenieLaserSound, 31: GenieSpawnSound, 32: grit,
 				33: gritlong, 34: gritlong2, 35: gritlong3, 36: Sunlight};
 //Music
-//randomize title spell
-var titlesongrand = Math.round(Math.random() * 4) + 1;
-if(titlesongrand < 3){
-	var Spells = document.getElementsByTagName("audio")[28];
-}
-else{
-	var Spells = document.getElementsByTagName("audio")[41];
-}
+// title spell
+var Spells = document.getElementsByTagName("audio")[28];
 var OverwhelmedByGoblins = document.getElementsByTagName("audio")[29];
 var BadWizards = document.getElementsByTagName("audio")[30];
 var DumblebeatsNormal = document.getElementsByTagName("audio")[31];
@@ -3599,118 +1790,119 @@ var CaseysQuest = document.getElementsByTagName("audio")[32];
 var swampSong = document.getElementsByTagName("audio")[34];
 var DesertSong = document.getElementsByTagName("audio")[35];
 var SoothingSound = document.getElementsByTagName("audio")[40];
-var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: DumblebeatsNormal, 5: CaseysQuest, 6: swampSong, 7: DesertSong, 8: SoothingSound};
+var GraveNightSong = document.getElementsByTagName("audio")[44];
+var GraveDaySong = document.getElementsByTagName("audio")[43];
+
+var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: DumblebeatsNormal, 5: CaseysQuest, 6: swampSong, 7: DesertSong, 8: SoothingSound, 9: GraveNightSong, 10: GraveDaySong};
 for(M in AllMusic){
 	AllMusic[M].volume = 0.5;
 }
-if(titlesongrand == 2){
-	Spells.volume = 0.3;
-}
+Spells.volume = 0.8;
 DumblebeatsNormal.volume = 0.4;
 swampSong.volume = 0.2;
 DesertSong.volume = 0.4;
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 //reset by changing the strings, change in gameover() too
-var highscore1 = $.jStorage.get("v92test2highscore1");
+var highscore1 = $.jStorage.get("v98highscore1");
 if(!highscore1){
 		var highscore1 = 0;
-		$.jStorage.set("v92test2highscore1",highscore1);
+		$.jStorage.set("v98highscore1",highscore1);
 }
-var highscore2 = $.jStorage.get("v92test2highscore2");
+var highscore2 = $.jStorage.get("v98highscore2");
 if(!highscore2){
 		var highscore2 = 0;
-		$.jStorage.set("v92test2highscore2",highscore2);
+		$.jStorage.set("v98highscore2",highscore2);
 }
-var highscore3 = $.jStorage.get("v92test2highscore3");
+var highscore3 = $.jStorage.get("v98highscore3");
 if(!highscore3){
 		var highscore3 = 0;
-		$.jStorage.set("v92test2highscore3",highscore3);
+		$.jStorage.set("v98highscore3",highscore3);
 }
-var highscore4 = $.jStorage.get("v92test2highscore4");
+var highscore4 = $.jStorage.get("v98highscore4");
 if(!highscore4){
 		var highscore4 = 0;
-		$.jStorage.set("v92test2highscore4",highscore4);
+		$.jStorage.set("v98highscore4",highscore4);
 }
-var highscore5 = $.jStorage.get("v92test2highscore5");
+var highscore5 = $.jStorage.get("v98highscore5");
 if(!highscore5){
 		var highscore5 = 0;
-		$.jStorage.set("v92test2highscore5",highscore5);
+		$.jStorage.set("v98highscore5",highscore5);
 }
-var highscore6 = $.jStorage.get("v92test2highscore6");
+var highscore6 = $.jStorage.get("v98highscore6");
 if(!highscore6){
 		var highscore6 = 0;
-		$.jStorage.set("v92test2highscore6",highscore6);
+		$.jStorage.set("v98highscore6",highscore6);
 }
-var highscore7 = $.jStorage.get("v92test2highscore7");
+var highscore7 = $.jStorage.get("v98highscore7");
 if(!highscore7){
 		var highscore7 = 0;
-		$.jStorage.set("v92test2highscore7",highscore7);
+		$.jStorage.set("v98highscore7",highscore7);
 }
-var highscore8 = $.jStorage.get("v92test2highscore8");
+var highscore8 = $.jStorage.get("v98highscore8");
 if(!highscore8){
 		var highscore8 = 0;
-		$.jStorage.set("v92test2highscore8",highscore8);
+		$.jStorage.set("v98highscore8",highscore8);
 }
-var highscore9 = $.jStorage.get("v92test2highscore9");
+var highscore9 = $.jStorage.get("v98highscore9");
 if(!highscore9){
 		var highscore9 = 0;
-		$.jStorage.set("v92test2highscore9",highscore9);
+		$.jStorage.set("v98highscore9",highscore9);
 }
-var highscore10 = $.jStorage.get("v92test2highscore10");
+var highscore10 = $.jStorage.get("v98highscore10");
 if(!highscore10){
 		var highscore10 = 0;
-		$.jStorage.set("v92test2highscore10",highscore10);
+		$.jStorage.set("v98highscore10",highscore10);
 }
 //Get Initials
-var hs1init = $.jStorage.get("v92test2hs1init");
+var hs1init = $.jStorage.get("v98hs1init");
 if(!hs1init){
 		var hs1init = "        ";
-		$.jStorage.set("v92test2hs1init",hs1init);
+		$.jStorage.set("v98hs1init",hs1init);
 }
-var hs2init = $.jStorage.get("v92test2hs2init");
+var hs2init = $.jStorage.get("v98hs2init");
 if(!hs2init){
 		var hs2init = "        ";
-		$.jStorage.set("v92test2hs2init",hs2init);
+		$.jStorage.set("v98hs2init",hs2init);
 }
-var hs3init = $.jStorage.get("v92test2hs3init");
+var hs3init = $.jStorage.get("v98hs3init");
 if(!hs3init){
 		var hs3init = "        ";
-		$.jStorage.set("v92test2hs3init",hs3init);
+		$.jStorage.set("v98hs3init",hs3init);
 }
-var hs4init = $.jStorage.get("v92test2hs4init");
+var hs4init = $.jStorage.get("v98hs4init");
 if(!hs4init){
 		var hs4init = "        ";
-		$.jStorage.set("v92test2hs4init",hs4init);
+		$.jStorage.set("v98hs4init",hs4init);
 }
-var hs5init = $.jStorage.get("v92test2hs5init");
+var hs5init = $.jStorage.get("v98hs5init");
 if(!hs5init){
 		var hs5init = "        ";
-		$.jStorage.set("v92test2hs5init",hs5init);
+		$.jStorage.set("v98hs5init",hs5init);
 }
-var hs6init = $.jStorage.get("v92test2hs6init");
+var hs6init = $.jStorage.get("v98hs6init");
 if(!hs6init){
 		var hs6init = "        ";
-		$.jStorage.set("v92test2hs6init",hs6init);
+		$.jStorage.set("v98hs6init",hs6init);
 }
-var hs7init = $.jStorage.get("v92test2hs7init");
+var hs7init = $.jStorage.get("v98hs7init");
 if(!hs7init){
 		var hs7init = "        ";
-		$.jStorage.set("v92test2hs7init",hs7init);
+		$.jStorage.set("v98hs7init",hs7init);
 }
-var hs8init = $.jStorage.get("v92test2hs8init");
+var hs8init = $.jStorage.get("v98hs8init");
 if(!hs8init){
 		var hs8init = "        ";
-		$.jStorage.set("v92test2hs8init",hs8init);
+		$.jStorage.set("v98hs8init",hs8init);
 }
-var hs9init = $.jStorage.get("v92test2hs9init");
+var hs9init = $.jStorage.get("v98hs9init");
 if(!hs9init){
 		var hs9init = "        ";
-		$.jStorage.set("v92test2hs9init",hs9init);
+		$.jStorage.set("v98hs9init",hs9init);
 }
-var hs10init = $.jStorage.get("v92test2hs10init");
+var hs10init = $.jStorage.get("v98hs10init");
 if(!hs10init){
 		var hs10init = "        ";
-		$.jStorage.set("v92test2hs10init",hs10init);
+		$.jStorage.set("v98hs10init",hs10init);
 }
 //Remove _ in initials
 var chars = hs1init.split('');
@@ -3784,55 +1976,55 @@ for(C in chars){
 }
 hs10init = chars[0] + chars[1] + chars[2] + chars[3] + chars[4] + chars[5] + chars[6] + chars[7];
 //3d glasses
-var achievement1 = $.jStorage.get("v92test2achievement1");
+var achievement1 = $.jStorage.get("v98achievement1");
 if(!achievement1){
 		var achievement1 = 0;
-		$.jStorage.set("v92test2achievement1",achievement1);
+		$.jStorage.set("v98achievement1",achievement1);
 }
-var achievement2 = $.jStorage.get("v92test2achievement2");
+var achievement2 = $.jStorage.get("v98achievement2");
 if(!achievement2){
 		var achievement2 = 0;
-		$.jStorage.set("v92test2achievement2",achievement2);
+		$.jStorage.set("v98achievement2",achievement2);
 }
-var achievement3 = $.jStorage.get("v92test2achievement3");
+var achievement3 = $.jStorage.get("v98achievement3");
 if(!achievement3){
 		var achievement3 = 0;
-		$.jStorage.set("v92test2achievement3",achievement3);
+		$.jStorage.set("v98achievement3",achievement3);
 }
-var achievement4 = $.jStorage.get("v92test2achievement4");
+var achievement4 = $.jStorage.get("v98achievement4");
 if(!achievement4){
 		var achievement4 = 0;
-		$.jStorage.set("v92test2achievement4",achievement4);
+		$.jStorage.set("v98achievement4",achievement4);
 }
-var achievement5 = $.jStorage.get("v92test2achievement5");
+var achievement5 = $.jStorage.get("v98achievement5");
 if(!achievement5){
 		var achievement5 = 0;
-		$.jStorage.set("v92test2achievement5",achievement5);
+		$.jStorage.set("v98achievement5",achievement5);
 }
-var achievement6 = $.jStorage.get("v92test2achievement6");
+var achievement6 = $.jStorage.get("v98achievement6");
 if(!achievement6){
 		var achievement6 = 0;
-		$.jStorage.set("v92test2achievement6",achievement6);
+		$.jStorage.set("v98achievement6",achievement6);
 }
-var achievement7 = $.jStorage.get("v92test2achievement7");
+var achievement7 = $.jStorage.get("v98achievement7");
 if(!achievement7){
 		var achievement7 = 0;
-		$.jStorage.set("v92test2achievement7",achievement7);
+		$.jStorage.set("v98achievement7",achievement7);
 }
-var achievement8 = $.jStorage.get("v92test2achievement8");
+var achievement8 = $.jStorage.get("v98achievement8");
 if(!achievement8){
 		var achievement8 = 0;
-		$.jStorage.set("v92test2achievement8",achievement8);
+		$.jStorage.set("v98achievement8",achievement8);
 }
-var achievement9 = $.jStorage.get("v92test2achievement9");
+var achievement9 = $.jStorage.get("v98achievement9");
 if(!achievement9){
 		var achievement9 = 0;
-		$.jStorage.set("v92test2achievement9",achievement9);
+		$.jStorage.set("v98achievement9",achievement9);
 }
-var achievement10 = $.jStorage.get("v92test2achievement10");
+var achievement10 = $.jStorage.get("v98achievement10");
 if(!achievement10){
 		var achievement10 = 0;
-		$.jStorage.set("v92test2achievement10",achievement10);
+		$.jStorage.set("v98achievement10",achievement10);
 }
 //Get options
 var dispCntrls = $.jStorage.get("tutor");
@@ -3889,57 +2081,67 @@ if(!SeenDesert){
 	var SeenDesert = 0;
 	$.jStorage.set("SeenDesert", SeenDesert);
 }
+var SeenGraveyard = $.jStorage.get("SeenGraveyard");
+if(!SeenGraveyard){
+	var SeenGraveyard = 0;
+	$.jStorage.set("SeenGraveyard", SeenGraveyard);
+}
 //map paths
-var path1 = $.jStorage.get("v92test2path1");
+var path1 = $.jStorage.get("v98path1");
 if(!path1){
 		var path1 = 0;
-		$.jStorage.set("v92test2path1",path1);
+		$.jStorage.set("v98path1",path1);
 }
-var path2 = $.jStorage.get("v92test2path2");
+var path2 = $.jStorage.get("v98path2");
 if(!path2){
 		var path2 = 0;
-		$.jStorage.set("v92test2path2",path2);
+		$.jStorage.set("v98path2",path2);
 }
-var path3 = $.jStorage.get("v92test2path3");
+var path3 = $.jStorage.get("v98path3");
 if(!path3){
 		var path3 = 0;
-		$.jStorage.set("v92test2path3",path3);
+		$.jStorage.set("v98path3",path3);
 }
-var path4 = $.jStorage.get("v92test2path4");
+var path4 = $.jStorage.get("v98path4");
 if(!path4){
 		var path4 = 0;
-		$.jStorage.set("v92test2path4",path4);
+		$.jStorage.set("v98path4",path4);
 }
-var path5 = $.jStorage.get("v92test2path5");
+var path5 = $.jStorage.get("v98path5");
 if(!path5){
 		var path5 = 0;
-		$.jStorage.set("v92test2path5",path5);
+		$.jStorage.set("v98path5",path5);
 }
-var path6 = $.jStorage.get("v92test2path6");
+var path6 = $.jStorage.get("v98path6");
 if(!path6){
 		var path6 = 0;
-		$.jStorage.set("v92test2path6",path6);
+		$.jStorage.set("v98path6",path6);
 }
-var path7 = $.jStorage.get("v92test2path7");
+var path7 = $.jStorage.get("v98path7");
 if(!path7){
 		var path7 = 0;
-		$.jStorage.set("v92test2path7",path7);
+		$.jStorage.set("v98path7",path7);
 }
-var path8 = $.jStorage.get("v92test2path8");
+var path8 = $.jStorage.get("v98path8");
 if(!path8){
 		var path8 = 0;
-		$.jStorage.set("v92test2path8",path8);
+		$.jStorage.set("v98path8",path8);
 }
-var path9 = $.jStorage.get("v92test2path9");
+var path9 = $.jStorage.get("v98path9");
 if(!path9){
 		var path9 = 0;
-		$.jStorage.set("v92test2path9",path9);
+		$.jStorage.set("v98path9",path9);
 }
-var path10 = $.jStorage.get("v92test2path10");
+var path10 = $.jStorage.get("v98path10");
 if(!path10){
 		var path10 = 0;
-		$.jStorage.set("v92test2path10",path10);
+		$.jStorage.set("v98path10",path10);
 }
+SeenFire = 1;
+SeenJungle = 1;
+SeenSwamp = 1;
+SeenDesert = 1;
+SeenGraveyard = 1;
 //---------------------------------------------------------------- Mouse Posn -------------------------------------------------------//
 function getPosition(event){
     var targ;
@@ -3958,8 +2160,19 @@ function getPosition(event){
     // jQuery normalizes the pageX and pageY
     // pageX,Y are the mouse positions relative to the document
     // offset() returns the position of the element relative to the document
-	cX = event.pageX - $(targ).offset().left;
-    cY = event.pageY - $(targ).offset().top;
+	if((typeof(document.webkitIsFullScreen) != "undefined" && document.webkitIsFullScreen) ||
+		(typeof(document.mozFullScreen) != "undefined" && document.mozFullScreen) ||
+		(typeof(document.fullScreen) != "undefined" && document.fullScreen)){
+		cX = ((event.pageX - $(targ).offset().left)*canvas.width)/screen.width;
+		cY = ((event.pageY - $(targ).offset().top)*canvas.height)/screen.height;
+	}else if(isFakeFS && canvas.style.width == "1024px") {
+		cX = (event.pageX - $(targ).offset().left)*800.00/1024.00;
+		cY = (event.pageY - $(targ).offset().top)*576.00/765.00;
+	}
+	else{
+		cX = event.pageX - $(targ).offset().left;
+		cY = event.pageY - $(targ).offset().top;
+	}
 }
 function getPositionhover(event){
 	var targ;
@@ -3978,6 +2191,19 @@ function getPositionhover(event){
     // jQuery normalizes the pageX and pageY
     // pageX,Y are the mouse positions relative to the document
     // offset() returns the position of the element relative to the document
-	hX = event.pageX - $(targ).offset().left;
-    hY = event.pageY - $(targ).offset().top;
+	if((typeof(document.webkitIsFullScreen) != "undefined" && document.webkitIsFullScreen) ||
+		(typeof(document.mozFullScreen) != "undefined" && document.mozFullScreen) ||
+		(typeof(document.fullScreen) != "undefined" && document.fullScreen)){
+		
+		hX = ((event.pageX - $(targ).offset().left)*canvas.width)/screen.width;
+		hY = ((event.pageY - $(targ).offset().top)*canvas.height)/screen.height;
+		}
+	else if(isFakeFS && canvas.style.width == "1024px") {
+		hX = (event.pageX - $(targ).offset().left)*800.00/1024.00;
+		hY = (event.pageY - $(targ).offset().top)*576.00/765.00;
+	}
+	else{
+		hX = event.pageX - $(targ).offset().left;
+		hY = event.pageY - $(targ).offset().top;
+	}
 }

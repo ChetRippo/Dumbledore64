@@ -9,3 +9,22 @@ SPECKS: at start of storm start at 0 transparency then go to 100% at frame 29
 
 DESPAWN-
 BOTH: Take transparency down to 0 over 29 frames.
+
+\/new down here
+
+
+
+specks: 24 (32 pixels per frame)
+y:0
+2784x628
+
+light: 12 {64 pixels per frame}
+R: y:628
+L: 860
+dark: 18 (44 pixels per fram)
+R: y: 744
+L: 976
+for wave loops
+1600x116
+
+A39058

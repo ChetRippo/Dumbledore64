@@ -8,7 +8,6 @@ var redCube = {
 	height: 32,
 	timeLeft: 0,
 	index: 1,
-	stage: "up",
 	faded: false,
 	fadeCounter: 0,	
 	arrowIndex: 1,
@@ -37,24 +36,14 @@ var redCube = {
 					this.arrowIndex = 1;
 				}
 			}
-			ctx.drawImage(Fires[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, (Math.floor((this.index-1)*0.5))*32, 0, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			if(STATE != "Tutorial"){
 				this.timeLeft-=1;
 			}
-			if(this.stage == "up"){
-				this.index++;
-			}
-			else{
-				this.index-=1;
-			}
-			if(this.index == 6){
-				this.index = 5;
-				this.stage = "down";
-			}
-			else if(this.index == 0){
+			this.index++;
+			if(this.index == 11){
 				this.index = 1;
-				this.stage = "up";
 			}
 		}
 		else{
@@ -123,7 +112,6 @@ var tealCube = {
 	height: 32,
 	timeLeft: 0,
 	index: 1,
-	stage: "up",
 	faded: false,
 	fadeCounter: 0,
 	draw: function(){
@@ -139,22 +127,12 @@ var tealCube = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(Ices[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, (Math.floor((this.index-1)*0.5))*32, 32, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
-			if(this.stage == "up"){
 				this.index++;
-			}
-			else{
-				this.index-=1;
-			}
-			if(this.index == 6){
-				this.index = 5;
-				this.stage = "down";
-			}
-			else if(this.index == 0){
+			if(this.index == 11){
 				this.index = 1;
-				this.stage = "up";
 			}
 		}
 		else{
@@ -223,7 +201,6 @@ var greenCube = {
 	height: 32,
 	timeLeft: 0,
 	index: 1,
-	stage: "up",
 	faded: false,
 	fadeCounter: 0,
 	draw: function(){
@@ -239,22 +216,12 @@ var greenCube = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(Earths[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, (Math.floor((this.index-1)*0.5))*32, 64, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
-			if(this.stage == "up"){
 				this.index++;
-			}
-			else{
-				this.index-=1;
-			}
-			if(this.index == 6){
-				this.index = 5;
-				this.stage = "down";
-			}
-			else if(this.index == 0){
+			if(this.index == 11){
 				this.index = 1;
-				this.stage = "up";
 			}
 		}
 		else{
@@ -326,6 +293,7 @@ var yellowCube = {
 	stage: "up",
 	faded: false,
 	fadeCounter: 0,
+	arrowIndex: 1,
 	draw: function(){
 		if(this.timeLeft > 0){
 			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
@@ -339,22 +307,24 @@ var yellowCube = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(Thunders[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			if(STATE == "Tutorial"){
+				if(this.arrowIndex < 6){
+					ctx.drawImage(PickupArrow1, this.x-this.width*0.5, this.y-this.height*0.5 - 36);
+				}
+				else{
+					ctx.drawImage(PickupArrow2, this.x-this.width*0.5, this.y-this.height*0.5 - 36);
+				}
+				this.arrowIndex++;
+				if(this.arrowIndex >= 11){
+					this.arrowIndex = 1;
+				}
+			}
+			ctx.drawImage(Pickup_Elements, (Math.floor((this.index-1)*0.5))*32, 96, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
-			if(this.stage == "up"){
-				this.index++;
-			}
-			else{
-				this.index-=1;
-			}
-			if(this.index == 6){
-				this.index = 5;
-				this.stage = "down";
-			}
-			else if(this.index == 0){
+			this.index++;
+			if(this.index == 11){
 				this.index = 1;
-				this.stage = "up";
 			}
 		}
 		else{
@@ -452,26 +422,16 @@ var greyCube = {
 					this.arrowIndex = 1;
 				}
 			}
-			ctx.drawImage(Winds[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, (Math.floor((this.index-1)*0.5))*32, 192, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			
 			if(STATE != "Tutorial"){
 				this.timeLeft-=1;
 			}
 			
-			if(this.stage == "up"){
 				this.index++;
-			}
-			else{
-				this.index-=1;
-			}
-			if(this.index == 6){
-				this.index = 5;
-				this.stage = "down";
-			}
-			else if(this.index == 0){
+			if(this.index == 11){
 				this.index = 1;
-				this.stage = "up";
 			}
 		}
 		else{
@@ -556,22 +516,12 @@ var purpleCube = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(Mystics[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, (Math.floor((this.index-1)*0.5))*32, 128, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
-			if(this.stage == "up"){
 				this.index++;
-			}
-			else{
-				this.index-=1;
-			}
-			if(this.index == 6){
-				this.index = 5;
-				this.stage = "down";
-			}
-			else if(this.index == 0){
+			if(this.index == 11){
 				this.index = 1;
-				this.stage = "up";
 			}
 		}
 		else{
@@ -642,6 +592,7 @@ var blueCube = {
 	stage: "up",
 	faded: false,
 	fadeCounter: 0,
+	arrowIndex: 0,
 	draw: function(){
 		if(this.timeLeft > 0){
 			if(this.timeLeft < 46 && this.timeLeft*0.1 == Math.round(this.timeLeft*0.1)){
@@ -655,22 +606,24 @@ var blueCube = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(Waters[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			if(STATE == "Tutorial" && (spell1 == "N/A" || spell2 == "N/A")){
+				if(this.arrowIndex < 6){
+					ctx.drawImage(PickupArrow1, this.x-this.width*0.5, this.y-this.height*0.5 - 36);
+				}
+				else{
+					ctx.drawImage(PickupArrow2, this.x-this.width*0.5, this.y-this.height*0.5 - 36);
+				}
+				this.arrowIndex++;
+				if(this.arrowIndex >= 11){
+					this.arrowIndex = 1;
+				}
+			}
+			ctx.drawImage(Pickup_Elements, (Math.floor((this.index-1)*0.5))*32, 160, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
-			if(this.stage == "up"){
 				this.index++;
-			}
-			else{
-				this.index-=1;
-			}
-			if(this.index == 6){
-				this.index = 5;
-				this.stage = "down";
-			}
-			else if(this.index == 0){
+			if(this.index == 11){
 				this.index = 1;
-				this.stage = "up";
 			}
 		}
 		else{
@@ -754,22 +707,12 @@ var blackCube = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(Darks[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, (Math.floor((this.index-1)*0.5))*32, 224, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
-			if(this.stage == "up"){
 				this.index++;
-			}
-			else{
-				this.index-=1;
-			}
-			if(this.index == 6){
-				this.index = 5;
-				this.stage = "down";
-			}
-			else if(this.index == 0){
+			if(this.index == 11){
 				this.index = 1;
-				this.stage = "up";
 			}
 		}
 		else{
@@ -855,22 +798,12 @@ var whiteCube = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(Lights[this.index], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, (Math.floor((this.index-1)*0.5))*32, 256, 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
-			if(this.stage == "up"){
 				this.index++;
-			}
-			else{
-				this.index-=1;
-			}
-			if(this.index == 6){
-				this.index = 5;
-				this.stage = "down";
-			}
-			else if(this.index == 0){
+			if(this.index == 11){
 				this.index = 1;
-				this.stage = "up";
 			}
 		}
 		else{
@@ -942,8 +875,7 @@ var RandomCube = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	Elem: {1: "Fire", 2: "Water", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Ice", 7: "Mystic", 8: "Dark", 9: "Light"},
 	faded: false,
 	fadeCounter: 0,
 	draw: function(){
@@ -959,7 +891,7 @@ var RandomCube = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, 32*(this.index2-1), 32*(this.index-1), 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
@@ -991,7 +923,13 @@ var RandomCube = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell1 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell1 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1012,7 +950,13 @@ var RandomCube = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell2 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell2 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1088,8 +1032,7 @@ var RandomCube2 = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	Elem: {1: "Fire", 2: "Water", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Ice", 7: "Mystic", 8: "Dark", 9: "Light"},
 	faded: false,
 	fadeCounter: 0,
 	draw: function(){
@@ -1105,7 +1048,7 @@ var RandomCube2 = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, 32*(this.index2-1), 32*(this.index-1), 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
@@ -1137,7 +1080,13 @@ var RandomCube2 = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell1 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell1 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1158,7 +1107,13 @@ var RandomCube2 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell2 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell2 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1234,8 +1189,7 @@ var RandomCube3 = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	Elem: {1: "Fire", 2: "Water", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Ice", 7: "Mystic", 8: "Dark", 9: "Light"},
 	faded: false,
 	fadeCounter: 0,
 	draw: function(){
@@ -1251,7 +1205,7 @@ var RandomCube3 = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, 32*(this.index2-1), 32*(this.index-1), 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
@@ -1283,7 +1237,13 @@ var RandomCube3 = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell1 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell1 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1304,7 +1264,13 @@ var RandomCube3 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell2 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell2 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1380,8 +1346,7 @@ var RandomCube4 = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	Elem: {1: "Fire", 2: "Water", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Ice", 7: "Mystic", 8: "Dark", 9: "Light"},
 	faded: false,
 	fadeCounter: 0,
 	draw: function(){
@@ -1397,7 +1362,7 @@ var RandomCube4 = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, 32*(this.index2-1), 32*(this.index-1), 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
@@ -1429,7 +1394,13 @@ var RandomCube4 = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell1 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell1 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1450,7 +1421,13 @@ var RandomCube4 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell2 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell2 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1526,8 +1503,7 @@ var RandomCube5 = {
 	index: 1,
 	index2: 1,
 	stage: "up",
-	Loop: {1: Fires, 2: Ices, 3: Earths, 4: Thunders, 5: Winds, 6: Mystics, 7: Waters, 8: Darks, 9: Lights},
-	Elem: {1: "Fire", 2: "Ice", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Mystic", 7: "Water", 8: "Dark", 9: "Light"},
+	Elem: {1: "Fire", 2: "Water", 3: "Earth", 4: "Lightning", 5: "Air", 6: "Ice", 7: "Mystic", 8: "Dark", 9: "Light"},
 	faded: false,
 	fadeCounter: 0,
 	draw: function(){
@@ -1543,7 +1519,7 @@ var RandomCube5 = {
 					this.faded = false;
 				}
 			}
-			ctx.drawImage(this.Loop[this.index][this.index2], this.x-this.width*0.5, this.y-this.height*0.5);
+			ctx.drawImage(Pickup_Elements, 32*(this.index2-1), 32*(this.index-1), 32, 32, this.x-this.width*0.5, this.y-this.height*0.5, 32, 32);
 			ctx.globalAlpha = Alpha;
 			this.timeLeft-=1;
 			this.index++;
@@ -1575,7 +1551,13 @@ var RandomCube5 = {
 	},
 	onHit: function(){
 		if(spell1 == "N/A"){
-			spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell1 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell1 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell1 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell1;
 				typemarker3.x = player.x-player.width*2;
@@ -1596,7 +1578,13 @@ var RandomCube5 = {
 			}
 		}
 		else if(spell2 == "N/A"){
-			spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			if(STATE == 1){
+				spell2 = this.Elem[Math.floor(Math.random() * 3) + 1];
+			}else if(STATE == "Scorched" || STATE == "Jungle"){
+				spell2 = this.Elem[Math.floor(Math.random() * 6) + 1];
+			}else{
+				spell2 = this.Elem[Math.floor(Math.random() * 9) + 1];
+			}
 			if(typemarker.x != -100 && typemarker2.x != -100){
 				typemarker3.text = "+ " + spell2;
 				typemarker3.x = player.x-player.width*2;
@@ -1672,22 +1660,25 @@ var hpUp = {
 	
 	draw: function(){
 		if(this.boss == "treeW"){
-			ctx.drawImage(maxUP, this.x - this.width * 0.5, this.y - this.height * 0.5);
+			ctx.drawImage(heartUp_sheet, 32, 0, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, 32, 32);
 		}
-		if(this.boss == "Dragon"){
-			ctx.drawImage(DragonmaxUP, this.x - this.width * 0.5, this.y - this.height * 0.5);
+		else if(this.boss == "Dragon"){
+			ctx.drawImage(heartUp_sheet, 0, 0, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, 32, 32);
 		}
-		if(this.boss == "MasterThief"){
-			ctx.drawImage(ThiefLuckUP, this.x - this.width * 0.5, this.y - this.height * 0.5);
+		else if(this.boss == "MasterThief"){
+			ctx.drawImage(heartUp_sheet, 96, 0, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, 32, 32);
 		}
-		if(this.boss == "Genie"){
-			ctx.drawImage(GenieUp, this.x - this.width * 0.5, this.y - this.height * 0.5);
+		else if(this.boss == "Genie"){
+			ctx.drawImage(heartUp_sheet, 64, 0, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, 32, 32);
+		}
+		else if(this.boss == "FireGhost"){
+			ctx.drawImage(heartUp_sheet, 128, 0, 32, 32, this.x - this.width * 0.5, this.y - this.height * 0.5, 32, 32);
 		}
 	},
 	onHit: function(){
 		StateTimer = 0;
 		if(typemarker.x != -100 && typemarker2.x != -100){
-			if(this.boss == "treeW"){
+			if(this.boss == "treeW" || this.boss == "FireGhost"){
 				typemarker3.text = "+ Max Hp";
 			}
 			else if(this.boss == "Dragon"){
@@ -1705,7 +1696,7 @@ var hpUp = {
 			typemarker3.timeLeft = 90;
 		}
 		else if(typemarker.x != -100){
-			if(this.boss == "treeW"){
+			if(this.boss == "treeW" || this.boss == "FireGhost"){
 				typemarker2.text = "+ Max Hp";
 			}
 			else if(this.boss == "Dragon"){
@@ -1723,7 +1714,7 @@ var hpUp = {
 			typemarker2.timeLeft = 90;
 		}
 		else{
-			if(this.boss == "treeW"){
+			if(this.boss == "treeW" || this.boss == "FireGhost"){
 				typemarker.text = "+ Max Hp";
 			}
 			else if(this.boss == "Dragon"){
@@ -1740,7 +1731,7 @@ var hpUp = {
 			typemarker.speed = 2;
 			typemarker.timeLeft = 90;
 		}
-		if(this.boss == "treeW"){
+		if(this.boss == "treeW" || this.boss == "FireGhost"){
 			player.maxhp+=3;
 			player.hp = player.maxhp;
 		}
@@ -1793,6 +1784,15 @@ var hpUp = {
 			DragonEffect2.frame = 0;
 			Alpha = 0.15;
 		}
+		if(this.boss == "FireGhost"){
+			FireGhostEffect.x = 500;
+			FireGhostEffect.y = -400;
+			FireGhostEffect.width = 0;
+			FireGhostEffect.height = 0;
+			FireGhostEffect.onScreen = 0;
+			FireGhostEffect.frame = 0;
+			Alpha = 0.15;
+		}
 		if(this.boss == "MasterThief"){
 			MasterTEffect.x = 500;
 			MasterTEffect.y = -400;
@@ -1808,6 +1808,25 @@ var hpUp = {
 			if(vol == 2){
 				rainsound.currentTime = 0;
 				rainsound.pause();
+			}
+			if(levelSelectSwamp){
+				levelSelectSwamp = false;
+				for(O in obstacle1){
+					if(!obstacle1[O].falling){
+						lowBomb.currentTime = 0;
+						lowBomb.play();
+						obstacle1[O].falling = true;
+						var randLR = Math.floor(Math.random() * 2) + 1;
+						if(randLR == 1){
+							randLR = "Left";
+						}
+						else{
+							randLR = "Right";
+						}
+						obstacle1[O].LR = randLR
+					}
+				}
+				STATE = "Swamp";
 			}
 		}
 		if(this.boss == "Genie"){
@@ -1838,7 +1857,7 @@ var hpParticleW = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			ctx.drawImage(particleSheet, 16*(this.index-1),0,16,16, this.x - this.width * 0.5, this.y - this.height * 0.5,16,16);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1870,7 +1889,7 @@ var hpParticleA = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			ctx.drawImage(particleSheet, 16*(this.index-1),0,16,16, this.x - this.width * 0.5, this.y - this.height * 0.5,16,16);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1902,7 +1921,7 @@ var hpParticleS = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			ctx.drawImage(particleSheet, 16*(this.index-1),0,16,16, this.x - this.width * 0.5, this.y - this.height * 0.5,16,16);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1934,7 +1953,7 @@ var hpParticleD = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			ctx.drawImage(particleSheet, 16*(this.index-1),0,16,16, this.x - this.width * 0.5, this.y - this.height * 0.5,16,16);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1966,7 +1985,7 @@ var hpParticleWA = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			ctx.drawImage(particleSheet, 16*(this.index-1),0,16,16, this.x - this.width * 0.5, this.y - this.height * 0.5,16,16);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -1998,7 +2017,7 @@ var hpParticleWD = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			ctx.drawImage(particleSheet, 16*(this.index-1),0,16,16, this.x - this.width * 0.5, this.y - this.height * 0.5,16,16);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -2030,7 +2049,7 @@ var hpParticleAS = {
 	
 	draw: function(){
 		if(this.x != -100){
-			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			ctx.drawImage(particleSheet, 16*(this.index-1),0,16,16, this.x - this.width * 0.5, this.y - this.height * 0.5,16,16);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -2064,7 +2083,7 @@ var hpParticleSD = {
 	draw: function(){
 		if(this.x != -100){
 			player.speed = player.speed2;
-			ctx.drawImage(colorParticles[this.index], this.x - this.width * 0.5, this.y - this.height * 0.5);
+			ctx.drawImage(particleSheet, 16*(this.index-1),0,16,16, this.x - this.width * 0.5, this.y - this.height * 0.5,16,16);
 			this.index++;
 			if(this.index > 8){
 				this.index = 1;
@@ -2177,6 +2196,39 @@ function HpAi(E){
 		E.dirct-=1;
 	}
 }
+function p2HpAi(E){
+	if(E.dirct == 0 && E.x != -100){
+		var xdiff = player2.x - E.x;
+		var ydiff = player2.y - E.y;
+		if(xdiff < 4 && ydiff < 4){
+			E.dir = "WA";
+		}
+		else if(xdiff < 4 && ydiff > 4){
+			E.dir = "AS";
+		}
+		else if(xdiff > 4 && ydiff < 4){
+			E.dir = "WD";
+		}
+		else if (xdiff > 4 && ydiff > 4){
+			E.dir = "SD";
+		}
+		else if (xdiff <= 4 && ydiff > 4){
+			E.dir = "S";
+		}
+		else if(xdiff <= 4 && ydiff < 4){
+			E.dir = "W";
+		}
+		else if(xdiff < 4 && ydiff <= 4){
+			E.dir = "A";
+		}
+		else{
+			E.dir = "D";
+		}
+	}
+	else if(E.dirct>=0 && E.x != -100){
+		E.dirct-=1;
+	}
+}
 var Boxes = {1: redCube, 2: tealCube, 3: greenCube, 4: yellowCube, 5: greyCube, 6: purpleCube, 7: blueCube, 8: hpUp, 9: RandomCube, 10: blackCube, 11: RandomCube2, 12: RandomCube3, 13: RandomCube4, 14: RandomCube5, 15: whiteCube};
 var hpParticles = {1: hpParticleW, 2: hpParticleA, 3: hpParticleS, 4: hpParticleD, 5: hpParticleWA, 6: hpParticleWD, 7: hpParticleAS, 8: hpParticleSD};
 // If you pick it up
@@ -2240,11 +2292,301 @@ function pickup(C){
 					else if(prevSpellRC[8] == "N/A"){
 						prevSpellRC[8] = spell;
 					}
+					for(P in pickup_particles){
+						if(!pickup_particles[P].onScreen){
+							pickup_particles[P].x = player.x;
+							pickup_particles[P].y = player.y;
+							pickup_particles[P].onScreen = 1;
+							pickup_particles[P].speed = 20;
+							if(spell1 == "N/A"){
+								pickup_particles[P].num = 1;
+							}else{
+								pickup_particles[P].num = 2;
+							}
+							break;
+						}
+					}
 				}
 			}
 			Pickup.currentTime=0;
 			Pickup.play();
 			C.onHit();
+		}
+	}
+}
+
+var pickup_particle = {
+	x: -50,
+	y: 0,
+	width:4,
+	height:4,
+	dirct:0,
+	dir:"A",
+	slope:1,
+	closestSlope:1,
+	slopeIndex:11,
+	dirct:0,
+	dirSwitch:false,
+	destDir:"",
+	speed:20,
+	num: 1,
+	onScreen: 0
+};
+var pickup_particle3 = {
+	x: -50,
+	y: 0,
+	width:4,
+	height:4,
+	dirct:0,
+	dir:"A",
+	slope:1,
+	closestSlope:1,
+	slopeIndex:11,
+	dirct:0,
+	dirSwitch:false,
+	destDir:"",
+	speed:20,
+	num: 1,
+	onScreen: 0
+};
+var pickup_particle2 = {
+	x: -50,
+	y: 0,
+	width:4,
+	height:4,
+	dirct:0,
+	dir:"A",
+	slope:1,
+	closestSlope:1,
+	slopeIndex:11,
+	dirct:0,
+	dirSwitch:false,
+	destDir:"",
+	speed:20,
+	num: 1,
+	onScreen: 0
+};
+var spell1Fade = 0;
+var spell2Fade = 0;
+var pickup_particles = {1: pickup_particle, 2: pickup_particle2, 3: pickup_particle3};
+function draw_pickup_particles(p){
+	if(p.onScreen){
+		p.speed+=1;
+		if(p.x <= -50){
+			element = {x: -50, y: 0, width: 1, height: 1};
+			if(p.num == 1){
+				ctx.drawImage(HUD_Elements, 0, 0, 52, 52, 20, 464, 52, 52);
+				spell1Fade++;
+			}else{
+				ctx.drawImage(HUD_Elements, 0, 0, 52, 52, 72, 504, 52, 52);
+				spell2Fade++;
+			}
+			p.onScreen = 0;
+		}
+		else if(p.num == 1){
+			var element = {x: 48, y: 488, width: 32, height: 32};
+		}else if(p.num == 2){
+			var element = {x: 96, y: 528, width: 32, height: 32};
+		}
+		if(p.dirct > 0){
+			p.dirct-=1;
+		}
+		//change direction
+		if(Math.sqrt((element.x-p.x)*(element.x- p.x) + (element.y-p.y)*(element.y-p.y)) > 30){
+			if(element.x-element.width*0.5 < p.x-p.width*0.5){
+				if(p.dir != "A"){
+					p.dirSwitch = true;
+					p.destDir = "A";
+				}
+				var playerSlope = (p.y-element.y)/(p.x-element.x);
+			}
+			else if(element.x - element.width*0.5 == p.x - p.width*0.5){
+				p.dir = p.dir;
+			}
+			else{
+				if(p.dir != "D"){
+					p.dirSwitch = true;
+					p.destDir = "D";
+				}
+				var playerSlope = (element.y-p.y)/(element.x-p.x);
+			}
+			if(p.dirSwitch){
+				if(p.slopeIndex <= 7){
+					p.slopeIndex-=1;
+					if(p.slopeIndex < 0){
+						p.slopeIndex = 14;
+						p.dir = p.destDir;
+						p.dirSwitch = false;
+					}
+					p.slope = lightSlopes[p.slopeIndex];
+				}
+				else{
+					p.slopeIndex+=1;
+					if(p.slopeIndex > 14){
+						p.slopeIndex = 0;
+						p.dir = p.destDir;
+						p.dirSwitch = false;
+					}
+					p.slope = lightSlopes[p.slopeIndex];
+				}
+			}
+			else{
+				//find ideal slope
+				for(N in lightSlopes){
+					if(Math.abs(lightSlopes[N] - playerSlope) < Math.abs(p.closestSlope - playerSlope)){
+						p.closestSlope = lightSlopes[N];
+					}
+				}
+				//change slope
+				if(p.closestSlope > p.slope){
+					if(p.closestSlope > 1 && p.slope < -1){
+						p.slopeIndex-=1;
+						p.slope = lightSlopes[p.slopeIndex];
+						if(p.slopeIndex < 0){
+							p.slopeIndex = 14;
+							p.slope = lightSlopes[p.slopeIndex];
+						}
+					}
+					else{
+						p.slopeIndex+=1;
+						p.slope = lightSlopes[p.slopeIndex];
+					}
+				}
+				if(p.closestSlope < p.slope || p.slope == "Vertical"){
+					if(p.closestSlope < -1 && p.slope > 1){
+						p.slopeIndex+=1;
+						p.slope = lightSlopes[p.slopeIndex];
+						if(p.slopeIndex > 14){
+							p.slopeIndex = 0;
+							p.slope = lightSlopes[p.slopeIndex];
+						}
+					}
+					else{
+						p.slopeIndex-=1;
+						p.slope = lightSlopes[p.slopeIndex];
+					}
+				}
+				//consider verticals
+				if(p.x >= element.x - element.width*0.5 && p.x <= element.x + element.width*0.5){
+					if(p.y-p.height*0.5 > element.y - element.height*0.5){
+						p.dir = "A";
+					}
+					else{
+						p.dir = "D";
+					}
+					p.slope = "Vertical";
+					p.slopeIndex = 15;
+				}
+			}
+		}else{
+			p.x = -98;
+			p.y = 0;
+		}
+		move_particle_AI(p);
+		if(p.num == 1){
+			var sp = spell1;
+		}else if(p.num == 2){
+			var sp = spell2;
+		}
+		if(sp == "Fire"){
+			ctx.drawImage(Pickup_Elements,0, 304, 20, 24, p.x-p.width*0.5,p.y-p.height*0.5, 20, 24);
+		}else if(sp == "Ice"){
+			ctx.drawImage(Pickup_Elements,20, 304, 20, 24, p.x-p.width*0.5,p.y-p.height*0.5, 20, 24);
+		}else if(sp == "Earth"){
+			ctx.drawImage(Pickup_Elements,40, 304, 20, 24, p.x-p.width*0.5,p.y-p.height*0.5, 20, 24);
+		}else if(sp == "Lightning"){
+			ctx.drawImage(Pickup_Elements,60, 304, 20, 24, p.x-p.width*0.5,p.y-p.height*0.5, 20, 24);
+		}else if(sp == "Mystic"){
+			ctx.drawImage(Pickup_Elements,80, 304, 20, 24, p.x-p.width*0.5,p.y-p.height*0.5, 20, 24);
+		}else if(sp == "Water"){
+			ctx.drawImage(Pickup_Elements,100, 304, 20, 24, p.x-p.width*0.5,p.y-p.height*0.5, 20, 24);
+		}else if(sp == "Air"){
+			ctx.drawImage(Pickup_Elements,120, 304, 20, 24, p.x-p.width*0.5,p.y-p.height*0.5, 20, 24);
+		}else if(sp == "Dark"){
+			ctx.drawImage(Pickup_Elements,140, 304, 20, 24, p.x-p.width*0.5,p.y-p.height*0.5, 20, 24);
+		}else{
+			ctx.drawImage(Pickup_Elements,160, 304, 20, 24, p.x-p.width*0.5,p.y-p.height*0.5, 20, 24);
+		}
+	}
+}
+
+function move_particle_AI(P){
+	if(P.dir == "D"){
+		if(P.slope == "Vertical"){
+			var ymove = P.speed;
+			P.y+=ymove;
+			P.y = Math.floor(P.y);
+		}
+		else if(P.slope > 0 && P.slope < 1){
+			var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
+			var ymove = xmove*P.slope;
+			P.x+=xmove;
+			P.y+=ymove;
+			P.x = Math.ceil(P.x);
+			P.y = Math.floor(P.y);
+		}
+		else if(P.slope >= 0){
+			//get x distance, speed = total diag distance
+			var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
+			var ymove = xmove*P.slope;
+			P.x+=xmove;
+			P.y+=ymove;
+			P.x = Math.ceil(P.x);
+			P.y = Math.floor(P.y);
+		}
+		else if(P.slope <= -1){
+			var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
+			var ymove = xmove*P.slope;
+			P.x+=xmove;
+			P.y+=ymove;
+			P.x = Math.ceil(P.x);
+			P.y = Math.ceil(P.y);
+		}
+		else{
+			var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
+			var ymove = xmove*P.slope;
+			P.x+=xmove;
+			P.y+=ymove;
+		}
+	}
+	else{
+		if(P.slope == "Vertical"){
+			var ymove = P.speed;
+			P.y-=ymove;
+			P.y = Math.floor(P.y);
+		}
+		else if(P.slope > 0 && P.slope < 1){
+			var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
+			var ymove = xmove*P.slope;
+			P.x-=xmove;
+			P.y-=ymove;
+			P.x = Math.floor(P.x);
+			P.y = Math.ceil(P.y);
+		}
+		else if(P.slope >= 0){
+			//get x distance, speed = total diag distance
+			var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
+			var ymove = xmove*P.slope;
+			P.x-=xmove;
+			P.y-=ymove;
+			P.x = Math.ceil(P.x);
+			P.y = Math.floor(P.y);
+		}
+		else if(P.slope <= -1){
+			var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
+			var ymove = xmove*P.slope;
+			P.x-=xmove;
+			P.y-=ymove;
+			P.x = Math.floor(P.x);
+			P.y = Math.ceil(P.y);
+		}
+		else{
+			var xmove = Math.sqrt((P.speed*P.speed)/(P.slope*P.slope+1));
+			var ymove = xmove*P.slope;
+			P.x-=xmove;
+			P.y-=ymove;
+			P.x = Math.ceil(P.x);
+			P.y = Math.floor(P.y);
 		}
 	}
 }
