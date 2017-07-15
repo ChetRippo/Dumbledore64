@@ -1,6 +1,6 @@
 //----------------------------------- Setup -----------------------------------------------------------------------------------------//
-var VersionNumb = "0.9.8.5 ";
-var upDate = "Jan 12 2014";
+var VersionNumb = "0.9.8.6 ";
+var upDate = "July 15 2017";
 // Canvas, Frames per Second, KeysDown, Global vars
 var canvas = document.createElement("canvas");
 canvas.width = 800;
@@ -1797,7 +1797,6 @@ var AllMusic = {1: Spells, 2: OverwhelmedByGoblins, 3: BadWizards, 4: Dumblebeat
 for(M in AllMusic){
 	AllMusic[M].volume = 0.5;
 }
-Spells.volume = 0.8;
 DumblebeatsNormal.volume = 0.4;
 swampSong.volume = 0.2;
 DesertSong.volume = 0.4;

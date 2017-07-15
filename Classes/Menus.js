@@ -147,7 +147,7 @@ var Menu = {
 				keytimer-=1;
 			}
 			//newgame
-			if((hX >= 256 && hX <=542 && hY < 320 && hY>=280) || this.newgameSelect){
+			if((hX >= 256 && hX <=542 && hY < 320 && hY>=250) || this.newgameSelect){
 				select = true;
 				this.newgameSelect = true;
 				this.howtoplaySelect = false;
@@ -156,7 +156,7 @@ var Menu = {
 				this.creditSelect = false;
 				this.levelSelect = false;
 			}		
-			if((cX >= 256 && cX <=542 && cY < 320 && cY>=280) || ((13 in keysDown || 32 in keysDown) && this.newgameSelect)){
+			if((cX >= 256 && cX <=542 && cY < 320 && cY>=250) || ((13 in keysDown || 32 in keysDown) && this.newgameSelect)){
 				fastbeepsLow.currentTime=0;
 				fastbeepsLow.play();
 				cX = 0;
@@ -424,7 +424,10 @@ var Credits = {
 		if(keytimer > 0){
 			keytimer-=1;
 		}
-		ctx.drawImage(creditsScreen, 0, 0, 800, 576, 0, 0, 800, 576);		
+		ctx.drawImage(creditsScreen, 0, 0, 800, 576, 0, 0, 800, 576);
+		if((hX >= 0 && hX <= 150 && hY <= 576 && hY>=500)){
+			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 40, this.height+10);
+		}	
 		if((cX >= 0 && cX <= 150 && cY <= 576 && cY>=500) || ((13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 			fastbeepsLow.currentTime=0;
 			fastbeepsLow.play();
@@ -525,7 +528,8 @@ var Options = {
 				AllMusic[M].volume = 0.5;
 			}
 			DumblebeatsNormal.volume = 0.4;
-			CaseysQuest.volume = 0.4;
+			swampSong.volume = 0.2;
+			DesertSong.volume = 0.4;
 		}
 		if(Music == 1){
 			ctx.fillText("Music: Off", this.x-this.width*0.5, this.y+7*this.height*0.5);
