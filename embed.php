@@ -22,7 +22,14 @@
     		font-family: 'acknowledge';
     		src: url('grafix/acknowtt.ttf');
 		}
+		.prefont {
+    	position: absolute;
+    	visibility: hidden;
+    	font-family: acknowledge;
+    	font-weight: 300;
+		}
 	</style>
+	<div class="prefont">.</div>
 	<script>
 	//LoadingBar
 	var loadbar1 = new Image();
@@ -272,7 +279,7 @@
 	$name9 = str_replace("\n",'',$name9);
 	(string) $name10 = fgets($namedoc);
 	fclose($namedoc);
-	
+
 	$achievementdoc = fopen("achievements.txt", "r") or die("Error: achievements.txt could not be opened");
 	$achievement1 = intval(fgets($achievementdoc));
 	$achievement2 = intval(fgets($achievementdoc));
@@ -285,7 +292,7 @@
 	$achievement9 = intval(fgets($achievementdoc));
 	$achievement10 = intval(fgets($achievementdoc));
 	fclose($achievementdoc);
-	
+
 	$pathdoc = fopen("paths.txt", "r") or die("Error: paths.txt could not be opened");
 	$path1 = intval(fgets($pathdoc));
 	$path2 = intval(fgets($pathdoc));

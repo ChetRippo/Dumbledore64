@@ -24,7 +24,14 @@
     		font-family: 'acknowledge';
     		src: url('grafix/acknowtt.ttf');
 		}
+		.prefont {
+    	position: absolute;
+    	visibility: hidden;
+    	font-family: acknowledge;
+    	font-weight: 300;
+		}
 	</style>
+	<div class="prefont">.</div>
 	<script>
 	//LoadingBar
 	var loadbar1 = new Image();
@@ -274,7 +281,7 @@
 	$name9 = str_replace("\n",'',$name9);
 	(string) $name10 = fgets($namedoc);
 	fclose($namedoc);
-	
+
 	$achievementdoc = fopen("achievements.txt", "r") or die("Error: achievements.txt could not be opened");
 	$achievement1 = intval(fgets($achievementdoc));
 	$achievement2 = intval(fgets($achievementdoc));
@@ -287,7 +294,7 @@
 	$achievement9 = intval(fgets($achievementdoc));
 	$achievement10 = intval(fgets($achievementdoc));
 	fclose($achievementdoc);
-	
+
 	$pathdoc = fopen("paths.txt", "r") or die("Error: paths.txt could not be opened");
 	$path1 = intval(fgets($pathdoc));
 	$path2 = intval(fgets($pathdoc));
@@ -341,9 +348,9 @@
 	var gpath7 = "<?php echo($path7);?>";
 	var gpath8 = "<?php echo($path8);?>";
 	var gpath9 = "<?php echo($path9);?>";
-	var gpath10 = "<?php echo($path10);?>";	
+	var gpath10 = "<?php echo($path10);?>";
 	var isFakeFS = true;
-	
+
 	</script>
 	<div id="canvas_wrapper">
 	<script src="Classes/Stacktrace.js"></script>
