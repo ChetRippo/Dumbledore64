@@ -3,7 +3,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Glass Knuckle - Dumble Wizard Simulation</title>
+<title>Glass Knuckle - Dumbledore64 Wizard Simulation</title>
 <link href="../CSS/main.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="../Global/Images/icon.ico" type="image/x-icon" />
 
@@ -17,7 +17,7 @@
 
 <div class="body_frame" style="text-align:center; margin-top:-16px;">
 	<link rel="icon" type="image/ico" href="grafix/iconwiz.ico" />
-	<center style="display:inline-block !important"><p><a href='../Dumble/press'>Dumble</a> is now available on iOS and Android!</p></center>
+	<center style="display:inline-block !important"><p><a href='../Dumble/press'>Dumbledore64</a> is now available on iOS and Android!</p></center>
 	<center><a href="#" onClick="fullScreen()" ><span style="display:inline-block !important" class="fs-sprite ui-state-default ui-corner-all" title=".ui-icon-arrow-4-diag"><span class="ui-icon ui-icon-arrow-4-diag"></span></span></a></center>
 	<style>
 		@font-face {
@@ -384,7 +384,7 @@
 	</div>
 </div>
 <div align="center">
-	<a href="http://www.indiedb.com/games/dumble" title="View Dumble on Indie DB" target="_blank"><img src="http://button.indiedb.com/rating/medium/games/20380.png" alt="Dumble" /></a>
+	<a href="http://www.indiedb.com/games/dumble" title="View Dumbledore64 on Indie DB" target="_blank"><img src="http://button.indiedb.com/rating/medium/games/20380.png" alt="Dumble" /></a>
 </div>
 <script>
 </script>

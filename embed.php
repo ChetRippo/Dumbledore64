@@ -3,7 +3,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Glass Knuckle - Dumble Wizard Simulation</title>
+<title>Glass Knuckle - Dumbledore64 Wizard Simulation</title>
 <link href="../CSS/main.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="../Global/Images/icon.ico" type="image/x-icon" />
 
