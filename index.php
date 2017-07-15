@@ -179,8 +179,8 @@
 		<source src="Sounds/trailingbeeps.mp3" type="audio/mpeg" />
 	</audio>
 	<audio <!--oncanplay="LoadingBar()"-->>
-		<source src="Sounds/Spells.ogg" type="audio/ogg" />
-		<source src="Sounds/Spells.mp3" type="audio/mpeg" />
+		<source src="Sounds/Fangs.ogg" type="audio/ogg" />
+		<source src="Sounds/Fangs.mp3" type="audio/mpeg" />
 	</audio>
 	<audio <!--oncanplay="LoadingBar()"-->>
 		<source src="Sounds/OverwhelmedByGoblins.ogg" type="audio/ogg" />
