@@ -1798,7 +1798,7 @@ for(M in AllMusic){
 	AllMusic[M].volume = 0.5;
 }
 DumblebeatsNormal.volume = 0.4;
-swampSong.volume = 0.2;
+swampSong.volume = 0.3;
 DesertSong.volume = 0.4;
 //-------------------------------------------------------------- Library Storage ----------------------------------------------------//
 //reset by changing the strings, change in gameover() too
