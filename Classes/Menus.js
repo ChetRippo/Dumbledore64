@@ -170,7 +170,7 @@ var Menu = {
 				keytimer = 15;
 			}
 			//levelselect
-			if((hX >= 236 && hX <=558 && hY <320  && hY>=300) || this.levelSelect){
+			if((hX >= 236 && hX <=558 && hY <330  && hY>=300) || this.levelSelect){
 				select = true;
 				this.newgameSelect = false;
 				this.howtoplaySelect = false;
@@ -179,7 +179,7 @@ var Menu = {
 				this.creditSelect = false;
 				this.levelSelect = true;
 			}		
-			if((cX >= 236 && cX <=558 && cY < 320 && cY>=300) || ((13 in keysDown || 32 in keysDown) && this.levelSelect && keytimer <=0)){
+			if((cX >= 236 && cX <=558 && cY < 330 && cY>=300) || ((13 in keysDown || 32 in keysDown) && this.levelSelect && keytimer <=0)){
 				fastbeepsLow.currentTime=0;
 				fastbeepsLow.play();
 				cX = 0;
@@ -206,7 +206,7 @@ var Menu = {
 				keytimer = 8;
 			}
 			//Score
-			if((hX >= 256 && hX <=542 && hY < 366 && hY>=326) || this.scoreSelect){
+			if((hX >= 256 && hX <=542 && hY < 366 && hY>=330) || this.scoreSelect){
 				select = true;
 				this.newgameSelect = false;
 				this.howtoplaySelect = false;
@@ -215,7 +215,7 @@ var Menu = {
 				this.creditSelect = false;
 				this.levelSelect = false;
 			}		
-			if((cX >= 256 && cX <=542 && cY < 366 && cY>=326) || (this.scoreSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
+			if((cX >= 256 && cX <=542 && cY < 366 && cY>=330) || (this.scoreSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 				fastbeepsLow.currentTime=0;
 				fastbeepsLow.play();
 				cX = 0;
@@ -426,7 +426,7 @@ var Credits = {
 		}
 		ctx.drawImage(creditsScreen, 0, 0, 800, 576, 0, 0, 800, 576);
 		if((hX >= 0 && hX <= 150 && hY <= 576 && hY>=500)){
-			ctx.strokeRect(this.bx-10, this.by-this.height*7/6, this.width * 3 + 40, this.height+10);
+			ctx.strokeRect(this.bx-322, this.by-this.height*7/6 + 2, this.width * 3 + 50, this.height+10);
 		}	
 		if((cX >= 0 && cX <= 150 && cY <= 576 && cY>=500) || ((13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 			fastbeepsLow.currentTime=0;
