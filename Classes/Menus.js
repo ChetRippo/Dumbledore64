@@ -147,7 +147,7 @@ var Menu = {
 				keytimer-=1;
 			}
 			//newgame
-			if((hX >= 256 && hX <=542 && hY < 320 && hY>=250) || this.newgameSelect){
+			if((hX >= 256 && hX <=542 && hY < 300 && hY>=250) || this.newgameSelect){
 				select = true;
 				this.newgameSelect = true;
 				this.howtoplaySelect = false;
@@ -156,7 +156,7 @@ var Menu = {
 				this.creditSelect = false;
 				this.levelSelect = false;
 			}		
-			if((cX >= 256 && cX <=542 && cY < 320 && cY>=250) || ((13 in keysDown || 32 in keysDown) && this.newgameSelect)){
+			if((cX >= 256 && cX <=542 && cY < 300 && cY>=250) || ((13 in keysDown || 32 in keysDown) && this.newgameSelect)){
 				fastbeepsLow.currentTime=0;
 				fastbeepsLow.play();
 				cX = 0;
@@ -170,7 +170,7 @@ var Menu = {
 				keytimer = 15;
 			}
 			//levelselect
-			if((hX >= 236 && hX <=558 && hY <340  && hY>=320) || this.levelSelect){
+			if((hX >= 236 && hX <=558 && hY <320  && hY>=300) || this.levelSelect){
 				select = true;
 				this.newgameSelect = false;
 				this.howtoplaySelect = false;
@@ -179,7 +179,7 @@ var Menu = {
 				this.creditSelect = false;
 				this.levelSelect = true;
 			}		
-			if((cX >= 236 && cX <=558 && cY < 340 && cY>=320) || ((13 in keysDown || 32 in keysDown) && this.levelSelect && keytimer <=0)){
+			if((cX >= 236 && cX <=558 && cY < 320 && cY>=300) || ((13 in keysDown || 32 in keysDown) && this.levelSelect && keytimer <=0)){
 				fastbeepsLow.currentTime=0;
 				fastbeepsLow.play();
 				cX = 0;
@@ -188,7 +188,7 @@ var Menu = {
 				keytimer = 15;
 			}
 			//How to Play
-			if((hX >= 256 && hX <= 542 && hY < 466 && hY>=426) || this.howtoplaySelect){
+			if((hX >= 256 && hX <= 542 && hY < 446 && hY>=406) || this.howtoplaySelect){
 				select = true;
 				this.newgameSelect = false;
 				this.howtoplaySelect = true;
@@ -197,7 +197,7 @@ var Menu = {
 				this.creditSelect = false;
 				this.levelSelect = false;
 			}		
-			if((cX >= 256 && cX <= 542 && cY < 466 && cY>=426) || (this.howtoplaySelect && (13 in keysDown || 32 in keysDown) && keytimer <=0)){
+			if((cX >= 256 && cX <= 542 && cY < 446 && cY>=406) || (this.howtoplaySelect && (13 in keysDown || 32 in keysDown) && keytimer <=0)){
 				fastbeepsLow.currentTime=0;
 				fastbeepsLow.play();
 				cX = 0;
@@ -206,7 +206,7 @@ var Menu = {
 				keytimer = 8;
 			}
 			//Score
-			if((hX >= 256 && hX <=542 && hY < 386 && hY>=346) || this.scoreSelect){
+			if((hX >= 256 && hX <=542 && hY < 366 && hY>=326) || this.scoreSelect){
 				select = true;
 				this.newgameSelect = false;
 				this.howtoplaySelect = false;
@@ -215,7 +215,7 @@ var Menu = {
 				this.creditSelect = false;
 				this.levelSelect = false;
 			}		
-			if((cX >= 256 && cX <=542 && cY < 386 && cY>=346) || (this.scoreSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
+			if((cX >= 256 && cX <=542 && cY < 366 && cY>=326) || (this.scoreSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 				fastbeepsLow.currentTime=0;
 				fastbeepsLow.play();
 				cX = 0;
@@ -224,7 +224,7 @@ var Menu = {
 				wait = 8;
 			}
 			//Options
-			if((hX >= 256 && hX <=542 && hY < 426 && hY>=386) || this.optionsSelect){
+			if((hX >= 256 && hX <=542 && hY < 406 && hY>=366) || this.optionsSelect){
 				select = true;
 				this.newgameSelect = false;
 				this.howtoplaySelect = false;
@@ -233,7 +233,7 @@ var Menu = {
 				this.creditSelect = false;
 				this.levelSelect = false;
 			}		
-			if((cX >= 256 && cX <=542 && cY < 426 && cY>=386) || (this.optionsSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
+			if((cX >= 256 && cX <=542 && cY < 406 && cY>=366) || (this.optionsSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 				fastbeepsLow.currentTime=0;
 				fastbeepsLow.play();
 				cX = 0;
@@ -242,7 +242,7 @@ var Menu = {
 				keytimer = 8;
 			}
 			//Credits
-			if((hX >= 256 && hX <=542 && hY < 506 && hY>=466) || this.creditSelect){
+			if((hX >= 256 && hX <=542 && hY < 486 && hY>=446) || this.creditSelect){
 				select = true;
 				this.newgameSelect = false;
 				this.howtoplaySelect = false;
@@ -251,7 +251,7 @@ var Menu = {
 				this.creditSelect = true;
 				this.levelSelect = false;
 			}		
-			if((cX >= 256 && cX <=542 && cY < 506 && cY>=466) || (this.creditSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
+			if((cX >= 256 && cX <=542 && cY < 486 && cY>=446) || (this.creditSelect && (13 in keysDown || 32 in keysDown) && keytimer <= 0)){
 				fastbeepsLow.currentTime=0;
 				fastbeepsLow.play();
 				cX = 0;
