@@ -528,8 +528,9 @@ var Options = {
 				AllMusic[M].volume = 0.5;
 			}
 			DumblebeatsNormal.volume = 0.4;
-			swampSong.volume = 0.3;
+			swampSong.volume = 0.4;
 			DesertSong.volume = 0.4;
+			Spells.volume = 0.4;
 		}
 		if(Music == 1){
 			ctx.fillText("Music: Off", this.x-this.width*0.5, this.y+7*this.height*0.5);
