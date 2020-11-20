@@ -3,17 +3,16 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Glass Knuckle - Dumbledore64 Wizard Simulation</title>
-<link href="../CSS/main.css" rel="stylesheet" type="text/css" />
-<link rel="shortcut icon" href="../Global/Images/icon.ico" type="image/x-icon" />
+<title>Dumbledore64 Wizard Simulation</title>
+<link href="CSS/main.css" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
 	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="../Global/Libraries/jstorage.js"></script>
-<script type="text/javascript" src="../Global/Scripts/AJAX_Post.js"></script>
-<script type="text/javascript" src="../Global/Scripts/fullScreen.js"></script>
+<script src="Global/Libraries/jstorage.js"></script>
+<script type="text/javascript" src="Global/Scripts/AJAX_Post.js"></script>
+<script type="text/javascript" src="Global/Scripts/fullScreen.js"></script>
 
 <div>
 	<link rel="icon" type="image/ico" href="grafix/iconwiz.ico" />

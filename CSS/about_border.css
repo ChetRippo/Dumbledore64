@@ -1,0 +1,12 @@
+
+.body_frame {
+	background:#363c38;
+	padding-left:18px;
+	padding-right:18px;
+	padding-top:8px;
+	padding-bottom:8px;
+	color:#1d778d !important;
+	margin-top:0px;
+	white-space:wrap;
+	border-radius: 10px 10px 10px 10px;  
+}
