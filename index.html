@@ -348,15 +348,15 @@
 	var gpath10 = "<?php echo($path10);?>";
 	var isFakeFS = true;
 	jQuery.get('https://chetrippo.github.io/Dumbledore64/ScoreArchive/latest/HighScores.txt', function(data) {
-		gscore1 = data.split("0\n")[0];
-		gscore2 = data.split("0\n")[1];
-		gscore3 = data.split("0\n")[2];
-		gscore4 = data.split("0\n")[3];
-		gscore5 = data.split("0\n")[4];
-		gscore6 = data.split("0\n")[5];
-		gscore7 = data.split("0\n")[6];
-		gscore8 = data.split("0\n")[7];
-		gscore9 = data.split("0\n")[8];
+		gscore1 = data.split("\n")[0].slice(0,-1);
+		gscore2 = data.split("\n")[1].slice(0,-1);
+		gscore3 = data.split("\n")[2].slice(0,-1);
+		gscore4 = data.split("\n")[3].slice(0,-1);
+		gscore5 = data.split("\n")[4].slice(0,-1);
+		gscore6 = data.split("\n")[5].slice(0,-1);
+		gscore7 = data.split("\n")[6].slice(0,-1);
+		gscore8 = data.split("\n")[7].slice(0,-1);
+		gscore9 = data.split("\n")[8].slice(0,-1);
 		gscore10 = data.split("\n")[9];
 	});
 	jQuery.get('https://chetrippo.github.io/Dumbledore64/ScoreArchive/latest/Names.txt', function(data) {
