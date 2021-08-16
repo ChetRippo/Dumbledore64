@@ -2140,8 +2140,10 @@ function gameOver(){
 		printScores(gname5, 664, 472, "Init");
 		if(gachievement1 !=0){
 			if(typeof(APics[gachievement1]) == "object"){
+				console.log("hewwo2");
 				ctx.drawImage(APics[gachievement1], 764, 140);
 			}else{
+				console.log("hewwo");
 				ctx.drawImage(heartUp_sheet, APics[gachievement1], 0, 32, 32, 764, 140, 32, 32);
 			}
 		}
